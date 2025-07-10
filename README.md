@@ -111,3 +111,66 @@ initialized to 1 (necessary to obtain the two's complement of the second operand
 All this is possible thanks to the two's complement encoding of signed integers.
 However, the IEEE-754 encoding of floating-point numbers is unfortunately not as flexible, and it is not possible to reproduce the same calculations with 
 floating-point operands as those shown above.
+
+As mentioned in the previous chapter, encoding floating point numbers in IEEE-754 requires scientific notation of a number to represent it within a computer.
+Furthermore, we use the binary form of a decimal number to convert it to its binary scientific notation, which goes without saying.
+A floating point number written in binary is obtained by converting that same number from its decimal form.
+Let's take the value 3.75 as an example.
+
+The integer part of 3.75, i.e. 3, is encoded in unsigned binary, while the fractional part 0.75 is also encoded in unsigned binary but with 
+negative powers of 2.
+As we can see, the sign of the number is not taken in count during conversion.
+This is why it must be added using an additional bit set to 1 for the sign - and 0 for the +.
+The result of the conversion is 0 11.11. However, I should point out that the `.` in the result is only there to make it easier to read.
+
+In fact, without the sign bit, there is no difference between two floats X and -X. For example, 3.75 and -3.75 are encoded in the same way 
+except for the sign bit, which differs from one number to another.
+In other words, it is as if each floating point number were encoded as an absolute value, so we add a bit as a sign 
+to distinguish between the number in positive and negative form.
+
+The sign bit is located in place of the MSB (most significant bit) of each floating point number, and the weight of this bit has an unjustified impact on the value 
+of the floating point number.
+This is why floating-point units (FPUs) only work with the absolute value of floating-point numbers (without taking in count 
+the sign bit), unlike an adder-subtractor for signed integers.
+
+Consequently, when an instruction that operates on floating-point numbers is executed, there are sometimes complications due to the signs 
+of each operand.
+Let's take an operation that does not pose a problem to start with, let's say (+A)+(+B), i.e. A+B.
+This calculation will require an adder that will calculate the sum |A|+|B| and add the common sign bit of the two operands to the result.
+Now let's change the sign of operand B so that it becomes -B.
+The operation will then be (+A)+(-B), which is equivalent to A-B, and the calculation will be performed in a subtractor circuit.
+
+Note: There is no adder-subtractor circuit for floating-point operations, given that IEEE-754 encoding is not compatible 
+with this calculation logic.
+
+The floating-point subtractor in question shares some similarities with integer subtractors.
+When a subtractor circuit performs a subtraction A-B of two unsigned integers, the circuit will only generate a valid result 
+if |B|<=|A|. 
+Since the floating-point subtractor works with the absolute values (without signs) of its operands, it is constrained in the same way as a 
+calculation circuit that allows subtraction between two unsigned integers.
+
+There is a universal solution to this problem: inverting the two operands of the A-B subtraction if |B|>|A|.
+The calculation then becomes B-A, and the result is both positive (and therefore valid) and the opposite of the result initially sought.
+It is then necessary to negate the result at the output of the subtractor to obtain the desired result.
+
+This solution is precisely implemented for addition and subtraction operations on floating-point numbers by the integrated circuit that I designed.
+I named this circuit the FPU Configuration Unit.
+The circuit has three functions:
+- comparison of the strict superiority of one floating-point operand over another
+- generation of the parameter bit for a demultiplexer network located upstream of the FPU
+- generation of the sign bit for the result at the FPU output
+
+Here are all the floating-point additions and subtractions that pose a problem:
+  - (+A)+(-B) -> A-B
+  - (-A)+(+B) -> (-A)+B
+  - (+A)-(+B) -> A-B
+  - (-A)-(-B) -> (-A)+B
+
+You can verify for yourself that these calculations do indeed have the potential to be problematic (we have already seen the case of the first one).
+We can see that these operations amount to either an addition or a subtraction.
+But there is a catch, because the sum (-A)+B is not possible. Remember that the floating-point adder is limited to working only with 
+the absolute value of the floating-point operands.
+Since (-A)+B is a calculation of the difference between the two operands, we can then perform the subtraction A-B and assign to the result 
+a sign bit previously calculated by the FPU configuration unit.
+
+We will see all this in detail in the next chapter.
