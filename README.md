@@ -66,3 +66,48 @@ Together, these form a 16-bit binary field.
 
 Now that we have briefly reviewed what IEEE-754 encoding is, let's move on to the next chapter by contextualizing the problem 
 that the circuit aims to solve.
+
+# ii. The problem solved by the circuit
+
+The problem with IEEE-754 floating point numbers is that it is quite difficult to perform certain simple operations such as addition or 
+subtraction.
+This problem does not apply to signed integers because they are encoded in two's complement.
+
+Two's complement encoding uses a range from -2^(n-1) to 2^(n-1)-1 to encode numbers, where n is the width of a given binary field.
+A positive number is simply encoded in unsigned binary.
+If we want to obtain a negative number, we must first write the absolute value of the underlying integer in unsigned binary, then we 
+find the complement of the number.
+The complement of a number is its opposite, and we obtain it by inverting all the bits of the number (one's complement) followed by an 
+increment of 1. 
+
+I mention this because addition and subtraction operations between signed integers can be performed with a simple adder circuit.
+An adder coupled to a controllable inverter circuit transforms the adder into an adder-subtractor, a circuit capable of adding 
+signed integers but also subtracting them.
+The controllable inverter is a small network of XOR logic gates where the first input of each gate is connected to one of the i-th bits of the second 
+operand of the adder, and the second is connected to a parameter bit.
+When executing an instruction that produces this (+A)-(+B), i.e. A-B, (+A)-(-B) equivalent to A+B, or (-A)-(-B), which corresponds 
+to (-A)+B, the instruction sequencer will set the parameter bit of the controllable inverter to 1 to obtain the one's complement of the second 
+operand B.
+
+Here is the truth table for an XOR gate:
+
+    | Bit Operand | Bit Parameter | Output  |
+    |_ _ _ _ _ _ _|_ _ _ _ _ _ _ _|_ _ _ _ _|
+    |      0      |      0        |    0    |
+    |      0      |      1        |    1    |
+    |      1      |      0        |    1    |
+    |      1      |      1        |    0    |
+
+Note that with the parameter bit set to 1, the Bit Operand input is inverted, and with 0, it is copied to the output.
+We could have used Boolean algebra, which tells us that 1 XOR A return the inverse of A, and 0 XOR A return A itself.
+
+Furthermore, when the controllable inverter is activated (parameter bit at 1), the carry input of the first full adder must be 
+initialized to 1 (necessary to obtain the two's complement of the second operand B).
+
+    Note: In the case of an instruction performing the following operation (-A)-(+B), which is equal to (-A)-B, it is possible 
+          to reverse the order of the two operands using a demultiplexer network.
+          Then, perform the two's complement of the first operand and then of the result at the output of the adder.
+
+All this is possible thanks to the two's complement encoding of signed integers.
+However, the IEEE-754 encoding of floating-point numbers is unfortunately not as flexible, and it is not possible to reproduce the same calculations with 
+floating-point operands as those shown above.
