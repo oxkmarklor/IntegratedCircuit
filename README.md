@@ -15,7 +15,7 @@ are transmission circuits.
 
 My primary intention with this project is to make the complexity of the algorithms behind our computers, as well as our favorite software and video games, more concrete (more visual).
 
-// to update
+// to update.
 The file is divided into several sections, as follows:
 - i. reminder of the IEEE-754 standard
 - ii. the problem solved by the circuit
