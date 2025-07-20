@@ -13,7 +13,8 @@ Avec cet encodage nous ne pourrions codé que des valeurs entre $0$ et $16$ incl
 Mais parmis les multiples encodage existant, le plus connu de tous porte le nom de $Binary$ $Unsigned$.
 
 Le $Binary$ $Unsigned$ utilise les mêmes primitives que la base décimale (celle que nous utilisons tous) pour représenter des nombres, `des puissances`.
-Pour représenter la valeur $103_{10}$ en décimale nous décomposons en réalité chaque chiffre du nombre pour le multiplié avec une puissance de $10$ adéquat, regardez ci-dessous.
+Pour représenter la valeur $103_{10}$ en décimale nous décomposons en réalité chaque chiffre du nombre pour le multiplié avec une puissance de $10$ adéquat, puis il faut faire la somme des résultats de chaque produit.
+Regardez ci-dessous.
 
 $$103_{10} = 1 \times 10^2 + 0 \times 10^1 + 3 \times 10^0$$
 
@@ -23,15 +24,16 @@ Remarquons que le chiffre des unités $3$ est facteur de $10$ à la puissance $0
 La valeur des puissances croix en fonction de la position du chiffre, qui plus est, elle commence à $0$.
 
 Ceci n'est pas propre à la base décimale mais à `nimporte quel base numérique`, comme la base binaire par exemple.
-La base binaire (ou base $2$) utilise des chiffres $0$ et $1$ plutôt que ceux de la base décimale allant de $0$ à $9$.
+La base binaire (ou base $2$) utilise les chiffres $0$ et $1$ plutôt que ceux de la base décimale allant de $0$ à $9$.
 Par ailleurs, un tel chiffre s'appelle un bit, ce qui est la contraction de $Binary$ $Digit$.
 Aussi, les puissances de $10$ sont remplacés par des puissances de $2$.
 Nous venons tout juste de décrire ce qu'est le $Binary$ $Unsigned$.
 
 Un champs binaire pour lequel nous utilisons un encodage $Binary$ $Unsigned$ associe un puissance de $2$ positive à chaque bit du champs.
-Les puissances vont de $0$ jusqu'à $N-1$, $N$ qui représente le nombre de bits total dans le champs.
+Les puissances vont de $0$ jusqu'à $N-1$, où $N$ représente le nombre de bits total dans le champs.
 Le bit du champs qui est facteur de $2$ à la puissance $0$ est appellé le $LSB$ pour $Least$ $Significant$ $Bit$, par ailleurs, `plus une puissance de 2 est grande` et `plus son poids est grand`.
 La notion de poids est relative à la valeur d'une puissance de $2$, naturellement le $LSB$ est le bit de poids le plus faible d'un champs binaire.
+Nous aurons compris qu'avec des puissances de $2$ positives, les nombres encodé en $Binary$ $Unsigned$ sont positifs ou nulle (pas de bit de signe).
 
 Au contraire, le bit de poids le plus fort d'un champs binaire est ce que l'ont appelle le $MSB$ pour $Most$ $Significant$ $Bit$.
 Il est aussi possible de faire référence au bit à $1$ de poids le plus faible d'un champs avec le terme $LSB1$, ou à celui de poids le plus fort avec $MSB1$.
@@ -48,7 +50,7 @@ Encore une fois, ceci n'est pas propre à la base binaire mais à nimporte quel 
 
 Le circuit a pour but principal de produire des comparaisons entre deux opérandes flottants, nous allons donc rapidement revenir sur ce que sont les nombres à virgule flottante 
 du standard IEEE-754.
-Globalement, la norme définit trois éléments qui composent chaque nombre à virgule flottante (qu'importe sa taille):
+Globalement, la norme définit trois éléments qui composent chaque nombre à virgule flottante:
 - Le bit de signe
 - Un champs binaire d'exposant
 - Un autre champs binaire pour la mantisse tronquée
@@ -56,26 +58,31 @@ Globalement, la norme définit trois éléments qui composent chaque nombre à v
 Ce sont les encodages utilisés dans les champs binaires d'exposant et de mantisse tronquée que nous allons essayés de comprendre, le comparateur base toute sa logique de comparaison sur les propriétés de ces champs là.
 
 Le champs d'exposant utilise un encodage par biais, ce dernier est assez simple à comprendre.
-Enfaite, un champs binaire pour lequel nous utilisons un encodage $Binary$ $Unsigned$ représente une valeur numérique $X$, auquel nous ajoutons un biais.
-Le biais $B$ est une constante positive ou nulle, et la valeur représenté par le champs d'exposant d'un nombre flottant est issu du calcul $X-B$.
+Enfaite, un champs binaire pour lequel nous utilisons un encodage $Binary$ $Unsigned$ code une valeur numérique $X$, auquel nous ajoutons un biais.
+Le biais $B$ est une constante positive ou négative, et la valeur représenté par le champs d'exposant d'un nombre flottant est issu du calcul $X+B$.
+A savoir que le biais du champs d'exposant d'un nombre flottant encodé en IEEE-754 est toujours négatif.
+Il est qui plus est toujours équivalent à $-\left(2^{N-1}\right)+1$ où $N$ est le nombre de bits du champs d'exposant.
+
+Etant donné que l'encodage par biais se base sur le $Binary$ $Unsigned$, le champs d'exposant partage les mêmes caractéristiques que cet encodage.
+Notamment celui qui nous dit que la valeur d'un bit à $1$ de poids $i$ est strictement supérieur à la somme des puissances inférieurs à $i$.
 
 Pour le champs de la mantisse tronquée nous avons besoin de faire un rapide rappel sur l'encodage intial d'un nombre flottant (`le standard IEEE-754 est un enrobage plus qu'autre chose`).
 La partie entière d'un nombre flottant utilise du $Binary$ $Unsigned$, tandis que la partie fractionnaire fait usage d'une version modifiée du $Binary$ $Unsigned$.
 Chaque bit de la partie fractionnaire est un `facteur d'une puissance de 2 négative` et non positive, ceci permet de représenté des valeurs entre $1$ et $0$.
-Le poids des puissances négative de $2$ décroix en fonction de la position du bit.
+Le poids des puissances négatives de $2$ décroix en fonction de la position du bit.
 Prenons l'exemple du nombre $3.75_{10}$.
 
 $$3.75_{10} = 11.11_2 = IntegerPart((1 \times 2^1) + (1 \times 2^0)) + FractionalPart((1 \times 2^{-1}) + (1 \times 2^{-2}))$$
 
-Précisons que la virgule n'est là que pour facilité la lecture du nombre, `elle n'est pas réelement présente dans le codage des nombres flottants`.
+Précisons que sous la forme binaire du nombre, le point n'est là que pour facilité sa lecture (`dans les faits, il n'est pas réelement présent dans le codage des nombres flottants`).
 Ce qu'il y a d'important à remarqué pour la partie fractionnaire, c'est que la valeur d'un bit à $1$ de poids $i$, est toujours strictement supérieur à la somme des bits de poids inférieur à $i$.
 Autrement dit, pour le nombre fractionnaire $N$ dont ont ne prête attention qu'au bit à $1$ de poids $i$, la $\sum_{weight=0}^{i-1} (N_{weight} \times 2^{weight})$ est strictement inférieur à $1 \times 2^i$.
 
-Nous verrons que le comparateur se sert de cela pour effectué les comparaisons.
 Pour en revenir au sujet de la mantisse tronquée, elle est composée des bits de la partie entière et de la partie fractionnaire d'un nombre flottant.
+Vu que la partie entière et fractionnaire d'un nombre flottant partagent les caractéristiques du $Binary$ $Unsigned$, c'est aussi le cas de la mantisse tronquée.
+Nous verrons que le comparateur se sert de cela pour effectué les comparaisons.
 
-// biais négtif champs exp
-// binary unsigned uniquement nombre entier positif
+
 
 // l'encodage de la mantisse tronquée et du champs d'exposant.
 
