@@ -72,7 +72,7 @@ Chaque bit de la partie fractionnaire est un `facteur d'une puissance de 2 néga
 Le poids des puissances négatives de $2$ décroix en fonction de la position du bit.
 Prenons l'exemple du nombre $3.75_{10}$.
 
-$$3.75_{10} = 11.11_2 = IntegerPart((1 \times 2^1) + (1 \times 2^0)) + FractionalPart((1 \times 2^{-1}) + (1 \times 2^{-2}))$$
+$$3.75_{10} = 11.11_2 = IntegerPart\left(\left(1 \times 2^1\right) + \left(1 \times 2^0\right)\right) + FractionalPart\left(\left(1 \times 2^{-1}\right) + \left(1 \times 2^{-2}\right)\right)$$
 
 Précisons que sous la forme binaire du nombre, le point n'est là que pour facilité sa lecture (`dans les faits, il n'est pas réelement présent dans le codage des nombres flottants`).
 Ce qu'il y a d'important à remarqué pour la partie fractionnaire, c'est que la valeur d'un bit à $1$ de poids $i$, est toujours strictement supérieur à la somme des bits de poids inférieur à $i$.
@@ -82,9 +82,32 @@ Pour en revenir au sujet de la mantisse tronquée, elle est composée des bits d
 Vu que la partie entière et fractionnaire d'un nombre flottant partagent les caractéristiques du $Binary$ $Unsigned$, c'est aussi le cas de la mantisse tronquée.
 Nous verrons que le comparateur se sert de cela pour effectué les comparaisons.
 
+-- -
+
+La démonstration mathématique du circuit est donc assez simple, après toutes ces explications.
+
+Nous définissons deux nombres flottants $Half$ $Precision$ ($16$ bits) $\alpha$ et $\beta$, la comparaison à produire sera $\left|\alpha\right|\gt\left|\beta\right|$.
+Les opérandes ne font alors plus que $15$ bits (omission du bit de signe).
+
+Commençons par chercher si le champs d'exposant $E$ de $\beta$ est plus grand que celui de $\alpha$.
+Nous avons vu que ce champs binaire de $5$ bits code la valeur de l'exposant avec un encodage par biais, mais aussi que cet encodage partage toutes les caractéristiques de l'encodage $Binary$ $Unsigned$.
+
+- Voici une opération logique dont nous allons nous servir $Nimply\left(X,Y\right)\mapsto X \wedge Not(Y)$
+
+Nous effectuons l'opération $Nimply\left(\beta_{\sigma},\alpha_{\sigma}\right)$ où $\sigma$ représente le poids des bits d'opérande, jusqu'à obtenir $1$ ou $\sigma = 10$.
+
+- $\sum_{\sigma=14}^{10} Nimply\left(\beta_{\sigma}, \alpha_{\sigma}\right)$
+
+En reçevant un $1$ nous savons que $E_{\beta\sigma} \gt E_{\alpha\sigma}$ et par conséquent $\left(E_{\beta\sigma}\times 2^{\sigma}\right) \gt \left(\sum_{\sigma}^{10} E_{\alpha\sigma} \times 2^{\sigma}\right)$.
+
+// Que faire si on reçoit un 1.
+
+Cependant, si $\sigma = 10$ sans avoir reçu de $1$ en résultat, alors $\left(\sum_{\sigma=14}^{10} E_{\alpha\sigma} \times 2^{\sigma}\right) \le \left(\sum_{\sigma=14}^{10} E_{\alpha\sigma} \times 2^{\sigma}\right)$.
+
+// Que faire si sigma = 10 et qu'il n'y a pas de 1.
 
 
-// l'encodage de la mantisse tronquée et du champs d'exposant.
+
 
 Plus une puissance de $2$ est grande, plus elle confère 
 
