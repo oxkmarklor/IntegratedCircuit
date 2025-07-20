@@ -38,14 +38,45 @@ Il est aussi possible de faire référence au bit à $1$ de poids le plus faible
 
 Il se trouve que le $Binary$ $Unsigned$ permet d'être certain que la valeur d'un bit à $1$ de poids $i$ est strictement supérieur à la somme des bits de poids inférieur à $i$.
 Prenons l'exemple d'un champs binaire de $8$ bits pour lequel nous allons faire attention qu'à un seul bit, celui de poids $6$ admettons (le $MSB1$).
-Ce champs ressemble à ceci $01111111_{2}$, et la valeur du nombre représenté est $1 \times 2^6 = 64_{10}$.
-La sommes des bits de poids inférieur donne un résultat lui même strictement inférieur à $1 \times 2^6$, même si l'ensemble de ces bits sont à $1$.
+Ce champs ressemble à ceci $01111111_{2}$, et la valeur du nombre représenté est $127_{10}$.
+La somme des bits de poids inférieur au bit de poids $6$ donne un résultat strictement inférieur à $1 \times 2^6 = 64_{10}$.
+Cela est systèmatiquement vrai, même lorsque les $i$ bits de poids inférieur représentent la valeur maximale encodable, comme dans cet exemple.
 
 $$(1 \times 2^6 = 64_{10}) \gt (63_{10} = (1 \times 2^5)+(1 \times 2^4)+(1 \times 2^3)+(1 \times 2^2)+(1 \times 2^1)+(1 \times 2^0))$$
 
 Encore une fois, ceci n'est pas propre à la base binaire mais à nimporte quel base numérique.
 
-// ceci est important, pourquoi ça va nous être utile?
+Le circuit a pour but principal de produire des comparaisons entre deux opérandes flottants, nous allons donc rapidement revenir sur ce que sont les nombres à virgule flottante 
+du standard IEEE-754.
+Globalement, la norme définit trois éléments qui composent chaque nombre à virgule flottante (qu'importe sa taille):
+- Le bit de signe
+- Un champs binaire d'exposant
+- Un autre champs binaire pour la mantisse tronquée
+
+Ce sont les encodages utilisés dans les champs binaires d'exposant et de mantisse tronquée que nous allons essayés de comprendre, le comparateur base toute sa logique de comparaison sur les propriétés de ces champs là.
+
+Le champs d'exposant utilise un encodage par biais, ce dernier est assez simple à comprendre.
+Enfaite, un champs binaire pour lequel nous utilisons un encodage $Binary$ $Unsigned$ représente une valeur numérique $X$, auquel nous ajoutons un biais.
+Le biais $B$ est une constante positive ou nulle, et la valeur représenté par le champs d'exposant d'un nombre flottant est issu du calcul $X-B$.
+
+Pour le champs de la mantisse tronquée nous avons besoin de faire un rapide rappel sur l'encodage intial d'un nombre flottant (`le standard IEEE-754 est un enrobage plus qu'autre chose`).
+La partie entière d'un nombre flottant utilise du $Binary$ $Unsigned$, tandis que la partie fractionnaire fait usage d'une version modifiée du $Binary$ $Unsigned$.
+Chaque bit de la partie fractionnaire est un `facteur d'une puissance de 2 négative` et non positive, ceci permet de représenté des valeurs entre $1$ et $0$.
+Le poids des puissances négative de $2$ décroix en fonction de la position du bit.
+Prenons l'exemple du nombre $3.75_{10}$.
+
+$$3.75_{10} = 11.11_2 = IntegerPart((1 \times 2^1) + (1 \times 2^0)) + FractionalPart((1 \times 2^{-1}) + (1 \times 2^{-2}))$$
+
+Précisons que la virgule n'est là que pour facilité la lecture du nombre, `elle n'est pas réelement présente dans le codage des nombres flottants`.
+Ce qu'il y a d'important à remarqué pour la partie fractionnaire, c'est que la valeur d'un bit à $1$ de poids $i$, est toujours strictement supérieur à la somme des bits de poids inférieur à $i$.
+Autrement dit, pour le nombre fractionnaire $N$ dont ont ne prête attention qu'au bit à $1$ de poids $i$, la $\sum_{weight=0}^{i-1} (N_{weight} \times 2^{weight})$ est strictement inférieur à $1 \times 2^i$.
+
+Nous verrons que le comparateur se sert de cela pour effectué les comparaisons.
+Pour en revenir au sujet de la mantisse tronquée, elle est composée des bits de la partie entière et de la partie fractionnaire d'un nombre flottant.
+
+// biais négtif champs exp
+// binary unsigned uniquement nombre entier positif
+
 // l'encodage de la mantisse tronquée et du champs d'exposant.
 
 Plus une puissance de $2$ est grande, plus elle confère 
