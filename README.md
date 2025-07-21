@@ -92,29 +92,30 @@ Les opérandes ne font alors plus que $15$ bits (omission du bit de signe).
 Commençons par chercher si le champs d'exposant $E$ de $\beta$ est plus grand que celui de $\alpha$ $\left(E_{\beta} \gt E_{\alpha}\right)$.
 Nous avons vu que ce champs binaire de $5$ bits code la valeur de l'exposant avec un encodage par biais, mais aussi que cet encodage partage toutes les caractéristiques de l'encodage $Binary$ $Unsigned$.
 
-- Définition de l'opération logique $Nimply\left(X,Y\right)\mapsto X \wedge Not(Y)$ dont nous allons nous sevrir.
+- Voici la définition de l'opération logique $Nimply\left(X,Y\right)\mapsto X \wedge Not(Y)$ dont nous allons nous sevrir.
 
 Nous effectuons l'opération $Nimply\left(E_{\beta\sigma},E_{\alpha\sigma}\right)$ où $\sigma$ est le poids des bits du champs d'exposant $E$ des opérandes $\beta$ et $\alpha$.
 
-  $$\sum_{\sigma=14}^{10} Nimply\left(\beta_{\sigma}, \alpha_{\sigma}\right)$$
+  $$\sum_{\sigma=14}^{10} Nimply\left(E_{\beta\sigma}, E_{\alpha\sigma}\right)$$
 
 Le résultat est un champs binaire composé de $5$ bits et si l'un (ou plusieurs) d'entre eux est à $1$, alors:
 
-  - Nous affectons le poids du $MSB1$ à la variable $\sigma$.
+  - Nous affectons le poids du $MSB1$ de ce champs à la variable $\sigma$.
 
-  - Nous savons que $E_{\beta\sigma} \gt E_{\alpha\sigma}$ et par conséquent $\left(E_{\beta\sigma} \times 2^{\sigma}\right) \gt \left(\sum_{\sigma}^{10} E_{\alpha\sigma} \times 2^{\sigma}\right)$.
+  - Nous savons que $\left(E_{\beta\sigma} \gt E_{\alpha\sigma}\right)$ et par conséquent $\left(E_{\beta\sigma} \times 2^{\sigma}\right) \gt \left(\sum_{\sigma}^{10} E_{\alpha\sigma} \times 2^{\sigma}\right)$.
 
-    - Dans le cas où $\sigma \neq 14$, ce qui figure ci-dessus ne prouve pas que $E_{\beta} \gt E_{\alpha}$ car $\left(\sum_{\sigma+1}^{14} E_{\beta\sigma} \times 2^{\sigma}\right) \le \left(\sum_{\sigma+1}^{14} E_{\alpha\sigma} \times 2^{\sigma}\right)$:
+    - Dans le cas où $\sigma \neq 14$, ce qui figure ci-dessus ne prouve pas que $\left(E_{\beta} \gt E_{\alpha}\right)$ car $\left(\sum_{\sigma+1}^{14} E_{\beta\sigma} \times 2^{\sigma}\right) \le \left(\sum_{\sigma+1}^{14} E_{\alpha\sigma} \times 2^{\sigma}\right)$.
 
-    - L'opération logique $Nimply$ nous permet de savoir que $\left(\sum_{\sigma+1}^{14} \left(E_{\beta\sigma} \times 2^{\sigma}\right) = 0\right)$.
+      - Nous savons que la somme des bits de poids supérieur à $\sigma$ pour $E_{\beta}$ est $\left(\sum_{\sigma+1}^{14} \left(E_{\beta\sigma} \times 2^{\sigma}\right) = r\right)$.
 
-    - Par conséquent si $\left(\sum_{\sigma+1}^{14} \left(E_{\alpha\sigma} \times 2^{\sigma}\right) = 0 \right)$ alors $\left(E_{\beta} \gt E_{\alpha}\right)$, sinon  $\left(\sum_{\sigma+1}^{14} \left(E_{\alpha\sigma} \times 2^{\sigma}\right) \gt 0 \right)$ et $\left(E_{\beta} \lt E_{\alpha}\right)$.
+      - Par conséquent si $\left(\sum_{\sigma+1}^{14} \left(E_{\alpha\sigma} \times 2^{\sigma}\right) = r \right)$ alors $\left(E_{\beta} \gt E_{\alpha}\right)$, sinon  $\left(\sum_{\sigma+1}^{14} \left(E_{\alpha\sigma} \times 2^{\sigma}\right) \gt r \right)$ et $\left(E_{\beta} \lt E_{\alpha}\right)$.
 
-  - Autrement $\sigma = 14$, et nous savons directement que $E_{\beta} \gt E_{\alpha}$ car $\sigma$ est le $MSB$ des champs d'exposant $E_{\beta}$ et $E_{\alpha}$.
+    - Autrement $\sigma = 14$, c'est à dire qu'il est le $MSB$ ainsi que le $MSB1$ du champs binaire de résultat issu du l'opération $Nimply$ sur les deux champs d'exposant $E$ des opérandes $\beta$ et $\alpha$.
+      Alors, comme $\left(E_{\beta\sigma} \gt E_{\alpha\sigma}\right)$ nous sommes certains que $\left(E_{\beta} \gt E_{\alpha}\right)$.
 
-Le circuit électronique départage le résultat $E_{\beta} \gt E_{\alpha}$ de $E_{\beta} \lt E_{\alpha}$ avec une opération logique $XOR$ entre chacun des bits de poids $\left]\sigma ; 15\right[$ des champs d'exposant $E$ des opérandes $\beta$ et $\alpha$.
+Le circuit électronique départage le résultat $\left(E_{\beta} \gt E_{\alpha}\right)$ de $\left(E_{\beta} \lt E_{\alpha}\right)$ avec une opération logique $XOR$ entre chacun des bits $E_{\beta\sigma}$, $E_{\alpha\sigma}$. Je rappelle que $\sigma$ est le poids du $MSB1$ du champs binaire de $5$ bits résultant de l'opération $Nimply$ sur chaque bit de même poids des champs d'exposant $E$ de $\beta$ et $\alpha$.
 
-$$\left(\left(\sum_{\sigma+1}^{14} \left(E_{\beta\sigma} \oplus E_{\alpha\sigma}\right) = 0 \right) = \left(E_{\beta} \gt E_{\alpha}\right)\right) \vee \left(\left(\sum_{\sigma+1}^{14} \left(E_{\beta\sigma} \oplus E_{\alpha\sigma}\right) \gt 0 \right) = \left(E_{\beta} \lt E_{\alpha}\right)\right)$$
+$$\left(\left(\sum_{\sigma}^{14} \left(E_{\beta\sigma} \oplus E_{\alpha\sigma}\right) \le 1 \right) = \left(E_{\beta} \gt E_{\alpha}\right)\right) \vee \left(\left(\sum_{\sigma}^{14} \left(E_{\beta\sigma} \oplus E_{\alpha\sigma}\right) \gt 1 \right) = \left(E_{\beta} \lt E_{\alpha}\right)\right)$$
 
 // Qu'est ce qui se passe lorsque EB > EA
 
