@@ -102,11 +102,15 @@ Avec un $1$ en résultat nous savons que $E_{\beta\sigma} \gt E_{\alpha\sigma}$ 
 
 Si $\sigma \lt 14$ alors le fait d'avoir perçu un $1$ n'assure pas pour autant que $E_{\beta} \gt E_{\alpha}$ car $\left(\sum_{\sigma+1}^{14} E_{\beta\sigma} \times 2^{\sigma}\right) \le \left(\sum_{\sigma+1}^{14} E_{\alpha\sigma} \times 2^{\sigma}\right)$.
 
-Dans le cas d'une égalité des bits de poids supérieur à $\sigma$ pour nos deux champs d'exposant $E_{\beta}$ et $E_{\alpha}$ alors nous affirmons que $E_{\beta} \gt E_{\alpha}$, mais dans le cas d'une infériorité stricte $E_{\beta} \lt E_{\alpha}$.
+L'opération logique $Nimply$ nous permet de savoir que $\left(\sum_{\sigma+1}^{14} \left(E_{\beta\sigma} \times 2^{\sigma}\right) = 0\right)$, donc:
 
-Le circuit départage ces deux cas avec une opération $XOR$ entre chaque bit de même poids compris entre $\left]\sigma ; 14\right]$ des opérandes $\beta$ et $\alpha$.
+- Si $\left(\sum_{\sigma+1}^{14} \left(E_{\alpha\sigma} \times 2^{\sigma}\right) = 0 \right)$ alors $E_{\beta} \gt E_{\alpha}$.
 
-$$\left(\left(\sum_{\sigma+1}^{14} \left(\beta_{\sigma} \oplus \alpha_{\sigma}\right) = 0 \right) = \left(E_{\beta} \gt E_{\alpha}\right)\right) \vee \left(\left(\sum_{\sigma+1}^{14} \left(\beta_{\sigma} \oplus \alpha_{\sigma}\right) \gt 0 \right) = \left(E_{\beta} \lt E_{\alpha}\right)\right)$$
+- Cependant, si $\left(\sum_{\sigma+1}^{14} \left(E_{\alpha\sigma} \times 2^{\sigma}\right) \gt 0 \right)$ alors $E_{\beta} \lt E_{\alpha}$.
+
+Le circuit départage ces deux cas avec une opération logique $XOR$ entre chacun des bits de même poids compris entre $\left]\sigma ; 14\right]$ des champs d'exposant $E$ de $\beta$ et $\alpha$.
+
+$$\left(\left(\sum_{\sigma+1}^{14} \left(E_{\beta\sigma} \oplus E_{\alpha\sigma}\right) = 0 \right) = \left(E_{\beta} \gt E_{\alpha}\right)\right) \vee \left(\left(\sum_{\sigma+1}^{14} \left(E_{\beta\sigma} \oplus E_{\alpha\sigma}\right) \gt 0 \right) = \left(E_{\beta} \lt E_{\alpha}\right)\right)$$
 
 Cependant, si $\sigma = 10$ sans avoir reçu de $1$ en résultat, alors $\left(\sum_{\sigma=14}^{10} E_{\beta\sigma} \times 2^{\sigma}\right) \le \left(\sum_{\sigma=14}^{10} E_{\alpha\sigma} \times 2^{\sigma}\right)$.
 
