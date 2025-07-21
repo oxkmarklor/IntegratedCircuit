@@ -86,7 +86,7 @@ Nous verrons que le comparateur se sert de cela pour effectué les comparaisons.
 
 La démonstration mathématique du circuit est donc assez simple, après toutes ces explications.
 
-Nous définissons deux nombres flottants $Half$ $Precision$ ($16$ bits) $\alpha$ et $\beta$, la comparaison à produire sera $\left|\alpha\right|\gt\left|\beta\right|$.
+Nous définissons deux nombres flottants $Half$ $Precision$ ($16$ bits) $\alpha$ et $\beta$, la comparaison à produire sera $\left(\left|\alpha\right| \gt \left|\beta\right|\right)$.
 Les opérandes ne font alors plus que $15$ bits (omission du bit de signe).
 
 Commençons par chercher si le champs d'exposant $E$ de $\beta$ est plus grand que celui de $\alpha$ $\left(E_{\beta} \gt E_{\alpha}\right)$.
@@ -121,17 +121,16 @@ Cependant, si le champs $\tau$ n'est composé que de $5$ bits à $0$, alors:
 
   - En reprenant en partie ce qui a été dit plus haut, la valeur du champs d'exposant $E_{\beta}$ est $\left(\sum_{\sigma=10}^{14} \left(E_{\beta\sigma} \times 2^{\sigma}\right) = r\right)$:
 
-    - Dans le cas où $\left(\sum_{\sigma=10}^{14} \left(E_{\alpha\sigma} \times 2^{\sigma}\right) = r\right)$ alors $\left(E_{\beta} = E_{\alpha}\right)$.
+    - Dans le cas où $\left(\sum_{\sigma=10}^{14} \left(E_{\alpha\sigma} \times 2^{\sigma}\right) \gt r\right)$ alors $\left(E_{\beta} \lt E_{\alpha}\right)$.
 
-    - Cependant si $\left(\sum_{\sigma=10}^{14} \left(E_{\alpha\sigma} \times 2^{\sigma}\right) \gt r\right)$ alors $\left(E_{\beta} \lt E_{\alpha}\right)$.
+    // Explication de l'expression
+   
+    $$\left(\left(\sum_{\sigma+1}^{14} \left(E_{\beta\sigma} \oplus E_{\alpha\sigma}\right) = 0 \right) = \left(E_{\beta} \gt E_{\alpha}\right)\right) \vee \left(\left(\sum_{\sigma+1}^{14} \left(E_{\beta\sigma} \oplus E_{\alpha\sigma}\right) \gt 0 \right) = \left(E_{\beta} \lt E_{\alpha}\right)\right)$$
+   
+    - Cependant si $\left(\sum_{\sigma=10}^{14} \left(E_{\alpha\sigma} \times 2^{\sigma}\right) = r\right)$ alors $\left(E_{\beta} = E_{\alpha}\right)$.
 
-  
+Mais rappellons que quand bien même $\left(E_{\beta} = E_{\alpha}\right)$, ce n'est pas pour autant que la comparaison $\left(\left|\alpha\right| \gt \left|\beta\right|\right)$ échoue.
+Les opérandes flottants $\alpha$ et $\beta$ ont aussi un champs de mantisse tronquée qui leur est propre.
+Si les champs d'exposant $E$ des deux opérandes sont égaux, il faut encore que les champs binaires de mantisse tronquée le soient aussi pour que $\left(\left|\alpha\right| = \left|\beta\right|\right)$ et que la comparaison échoue.
 
-
-Le circuit électronique départage le résultat $\left(E_{\beta} \gt E_{\alpha}\right)$ de $\left(E_{\beta} \lt E_{\alpha}\right)$ avec une opération logique $XOR$ entre chacun des bits $E_{\beta\sigma}$ et $E_{\alpha\sigma}$.
-
-$$\left(\left(\sum_{\sigma}^{14} \left(E_{\beta\sigma} \oplus E_{\alpha\sigma}\right) \le 1 \right) = \left(E_{\beta} \gt E_{\alpha}\right)\right) \vee \left(\left(\sum_{\sigma}^{14} \left(E_{\beta\sigma} \oplus E_{\alpha\sigma}\right) \gt 1 \right) = \left(E_{\beta} \lt E_{\alpha}\right)\right)$$
-
-// Explications
-
-// Qu'est ce qui se passe lorsque EB > EA
+// Expliqué que les poids des bits du champs d'exposant sont plus grands que ceux de la mantisse tronquée, d'où le fait de traité en priorité ces derniers.
