@@ -113,6 +113,21 @@ Le résultat est un champs binaire $\tau$ composé de $5$ bits, et si l'un (ou p
     - Autrement $\sigma = 14$ et $\sigma$ est le $MSB1$ ainsi que le $MSB$ du champs $\tau$.
       Comme $\left(E_{\beta\sigma} \gt E_{\alpha\sigma}\right)$ nous sommes certains que $\left(E_{\beta} \gt E_{\alpha}\right)$.
 
+Cependant, si le champs $\tau$ n'est composé que de $5$ bits à $0$, alors:
+
+  - Nous savons que l'opération $Nimply\left(E_{\beta\sigma}, E_{\alpha\sigma}\right)$ ne renvoie $0$ que si $\left(E_{\beta\sigma} = E_{\alpha\sigma}\right)$, ou si $\left(E_{\beta\sigma} = 0\right)$ alors que $\left(E_{\alpha\sigma} = 1\right)$.
+
+  - Par conséquent vu que $\tau$ n'est composé que de bits à $0$, nous savons que $\left(\sum_{\sigma=10}^{14} E_{\beta\sigma} \times 2^{\sigma}\right) \le \left(\sum_{\sigma=10}^{14} E_{\alpha\sigma} \times 2^{\sigma}\right)$.
+
+  - En reprenant en partie ce qui a été dit plus haut, la valeur du champs d'exposant $E_{\beta}$ est $\left(\sum_{\sigma=10}^{14} \left(E_{\beta\sigma} \times 2^{\sigma}\right) = r\right)$:
+
+    - Dans le cas où $\left(\sum_{\sigma=10}^{14} \left(E_{\alpha\sigma} \times 2^{\sigma}\right) = r\right)$ alors $\left(E_{\beta} = E_{\alpha}\right)$.
+
+    - Cependant si $\left(\sum_{\sigma=10}^{14} \left(E_{\alpha\sigma} \times 2^{\sigma}\right) \gt r\right)$ alors $\left(E_{\beta} \lt E_{\alpha}\right)$.
+
+  
+
+
 Le circuit électronique départage le résultat $\left(E_{\beta} \gt E_{\alpha}\right)$ de $\left(E_{\beta} \lt E_{\alpha}\right)$ avec une opération logique $XOR$ entre chacun des bits $E_{\beta\sigma}$ et $E_{\alpha\sigma}$.
 
 $$\left(\left(\sum_{\sigma}^{14} \left(E_{\beta\sigma} \oplus E_{\alpha\sigma}\right) \le 1 \right) = \left(E_{\beta} \gt E_{\alpha}\right)\right) \vee \left(\left(\sum_{\sigma}^{14} \left(E_{\beta\sigma} \oplus E_{\alpha\sigma}\right) \gt 1 \right) = \left(E_{\beta} \lt E_{\alpha}\right)\right)$$
@@ -120,13 +135,3 @@ $$\left(\left(\sum_{\sigma}^{14} \left(E_{\beta\sigma} \oplus E_{\alpha\sigma}\r
 // Explications
 
 // Qu'est ce qui se passe lorsque EB > EA
-
-Cependant, si le champs $\tau$ n'est composé que de bits à $0$, alors $\sigma = 10$:
-
-  - Il n'y a que deux possibilités pour que $\tau$ soit nulle, $\left(E_{\beta} \le E_{\alpha}\right)$ et par conséquent $\left(\sum_{\sigma}^{14} E_{\beta\sigma} \times 2^{\sigma}\right) \le \left(\sum_{\sigma}^{14} E_{\alpha\sigma} \times 2^{\sigma}\right)$.
-
-  -  $Nimply\left(E_{\beta\sigma},E_{\alpha\sigma}\right)$ génère un bit à $0$ lorsque $E_{\beta\sigma} = 1$ et que $E_{\alpha\sigma}$ aussi, ou que $E_{\beta\sigma} = 0$ tandis que $E_{\alpha\sigma} = \left(0 \vee1\right)$.
-
-// XOR pour Ealpha > Ebeta
-
-
