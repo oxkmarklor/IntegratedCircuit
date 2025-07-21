@@ -89,28 +89,34 @@ La démonstration mathématique du circuit est donc assez simple, après toutes 
 Nous définissons deux nombres flottants $Half$ $Precision$ ($16$ bits) $\alpha$ et $\beta$, la comparaison à produire sera $\left|\alpha\right|\gt\left|\beta\right|$.
 Les opérandes ne font alors plus que $15$ bits (omission du bit de signe).
 
-Commençons par chercher si le champs d'exposant $E$ de $\beta$ est plus grand que celui de $\alpha$.
+Commençons par chercher si le champs d'exposant $E$ de $\beta$ est plus grand que celui de $\alpha$ $\left(E_{\beta} \gt E_{\alpha}\right)$.
 Nous avons vu que ce champs binaire de $5$ bits code la valeur de l'exposant avec un encodage par biais, mais aussi que cet encodage partage toutes les caractéristiques de l'encodage $Binary$ $Unsigned$.
 
-- Voici une opération logique dont nous allons nous servir $Nimply\left(X,Y\right)\mapsto X \wedge Not(Y)$
+- Définition de l'opération logique $Nimply\left(X,Y\right)\mapsto X \wedge Not(Y)$ dont nous allons nous sevrir.
 
-Nous effectuons l'opération $Nimply\left(\beta_{\sigma},\alpha_{\sigma}\right)$ où $\sigma$ représente le poids des bits d'opérande, jusqu'à obtenir $1$ ou $\sigma = 10$.
+Nous effectuons l'opération $Nimply\left(E_{\beta\sigma},E_{\alpha\sigma}\right)$ où $\sigma$ est le poids des bits du champs d'exposant $E$ des opérandes $\beta$ et $\alpha$.
 
-- $\sum_{\sigma=14}^{10} Nimply\left(\beta_{\sigma}, \alpha_{\sigma}\right)$
+  $$\sum_{\sigma=14}^{10} Nimply\left(\beta_{\sigma}, \alpha_{\sigma}\right)$$
 
-Avec un $1$ en résultat nous savons que $E_{\beta\sigma} \gt E_{\alpha\sigma}$ et par conséquent $\left(E_{\beta\sigma}\times 2^{\sigma}\right) \gt \left(\sum_{\sigma}^{10} E_{\alpha\sigma} \times 2^{\sigma}\right)$.
+Le résultat est un champs binaire composé de $5$ bits et si l'un (ou plusieurs) d'entre eux est à $1$, alors:
 
-Si $\sigma \lt 14$ alors le fait d'avoir perçu un $1$ n'assure pas pour autant que $E_{\beta} \gt E_{\alpha}$ car $\left(\sum_{\sigma+1}^{14} E_{\beta\sigma} \times 2^{\sigma}\right) \le \left(\sum_{\sigma+1}^{14} E_{\alpha\sigma} \times 2^{\sigma}\right)$.
+  - Nous affectons le poids du $MSB1$ à la variable $\sigma$.
 
-L'opération logique $Nimply$ nous permet de savoir que $\left(\sum_{\sigma+1}^{14} \left(E_{\beta\sigma} \times 2^{\sigma}\right) = 0\right)$, donc:
+  - Nous savons que $E_{\beta\sigma} \gt E_{\alpha\sigma}$ et par conséquent $\left(E_{\beta\sigma} \times 2^{\sigma}\right) \gt \left(\sum_{\sigma}^{10} E_{\alpha\sigma} \times 2^{\sigma}\right)$.
 
-- Si $\left(\sum_{\sigma+1}^{14} \left(E_{\alpha\sigma} \times 2^{\sigma}\right) = 0 \right)$ alors $E_{\beta} \gt E_{\alpha}$.
+    - Dans le cas où $\sigma \neq 14$, ce qui figure ci-dessus ne prouve pas que $E_{\beta} \gt E_{\alpha}$ car $\left(\sum_{\sigma+1}^{14} E_{\beta\sigma} \times 2^{\sigma}\right) \le \left(\sum_{\sigma+1}^{14} E_{\alpha\sigma} \times 2^{\sigma}\right)$:
 
-- Cependant, si $\left(\sum_{\sigma+1}^{14} \left(E_{\alpha\sigma} \times 2^{\sigma}\right) \gt 0 \right)$ alors $E_{\beta} \lt E_{\alpha}$.
+    - L'opération logique $Nimply$ nous permet de savoir que $\left(\sum_{\sigma+1}^{14} \left(E_{\beta\sigma} \times 2^{\sigma}\right) = 0\right)$.
 
-Le circuit départage ces deux cas avec une opération logique $XOR$ entre chacun des bits de même poids compris entre $\left]\sigma ; 14\right]$ des champs d'exposant $E$ de $\beta$ et $\alpha$.
+    - Par conséquent si $\left(\sum_{\sigma+1}^{14} \left(E_{\alpha\sigma} \times 2^{\sigma}\right) = 0 \right)$ alors $\left(E_{\beta} \gt E_{\alpha}\right)$, sinon  $\left(\sum_{\sigma+1}^{14} \left(E_{\alpha\sigma} \times 2^{\sigma}\right) \gt 0 \right)$ et $\left(E_{\beta} \lt E_{\alpha}\right)$.
+
+  - Autrement $\sigma = 14$, et nous savons directement que $E_{\beta} \gt E_{\alpha}$ car $\sigma$ est le $MSB$ des champs d'exposant $E_{\beta}$ et $E_{\alpha}$.
+
+Le circuit électronique départage le résultat $E_{\beta} \gt E_{\alpha}$ de $E_{\beta} \lt E_{\alpha}$ avec une opération logique $XOR$ entre chacun des bits de poids $\left]\sigma ; 15\right[$ des champs d'exposant $E$ des opérandes $\beta$ et $\alpha$.
 
 $$\left(\left(\sum_{\sigma+1}^{14} \left(E_{\beta\sigma} \oplus E_{\alpha\sigma}\right) = 0 \right) = \left(E_{\beta} \gt E_{\alpha}\right)\right) \vee \left(\left(\sum_{\sigma+1}^{14} \left(E_{\beta\sigma} \oplus E_{\alpha\sigma}\right) \gt 0 \right) = \left(E_{\beta} \lt E_{\alpha}\right)\right)$$
+
+// Qu'est ce qui se passe lorsque EB > EA
 
 Cependant, si $\sigma = 10$ sans avoir reçu de $1$ en résultat, alors $\left(\sum_{\sigma=14}^{10} E_{\beta\sigma} \times 2^{\sigma}\right) \le \left(\sum_{\sigma=14}^{10} E_{\alpha\sigma} \times 2^{\sigma}\right)$.
 
