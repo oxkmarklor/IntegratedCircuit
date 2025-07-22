@@ -80,7 +80,7 @@ Ce qu'il y a d'important à remarqué pour la partie fractionnaire, c'est que la
 Autrement dit, pour le nombre fractionnaire $N$ dont ont ne prête attention qu'au bit à $1$ de poids $i$ alors $\left(1 \times 2^i \gt \left(\sum_{i-1}^{lsb} N_{i} \times 2^{i}\right)\right)$.
 
 Pour en revenir au sujet de la mantisse tronquée, elle est composée des bits de la partie entière et de la partie fractionnaire d'un nombre flottant.
-Vu que la partie entière et fractionnaire d'un nombre flottant partagent les caractéristiques du $Binary \ Unsigned$, c'est aussi le cas de la mantisse tronquée.
+Vu que la partie entière et fractionnaire d'un nombre flottant partagent les caractéristiques du $Binary \ Unsigned$, c'est aussi le cas de la mantisse tronquée elle même.
 Nous verrons que le comparateur se sert de cela pour effectué les comparaisons.
 
 -- -
@@ -92,7 +92,26 @@ Les opérandes ne font alors plus que $15$ bits (omission du bit de signe).
 
 Commençons par chercher si le champs d'exposant $E$ de $\beta$ est plus grand que celui de $\alpha$ $\left(E_{\beta} \gt E_{\alpha}\right)$.
 
+La raison est qu'un flottant IEEE-754 formatte la valeur d'un nombre pour qu'il puisse devenir la mantisse tronquée, ce formattage dépend cependant entièrement de la valeur codé dans le champs d'exposant.
+Je vous invite à vous renseigné sur l'écriture scientifique binaire si nécessaire, je vais ici en faire un survol.
 
+// pas nécessaire je crois
+Avec l'encodage d'un nombre flottant chaque puissance de $2$ (positive ou négative) de poids $i$ est deux fois plus grande que celle de poids $i-1$, ou autrement dit $\left(\sum_{i=msb}^{lsb+1} \left(2^i = 2 \times 2^{i-1}\right)\right)$.
+
+Si nous cherchons à écrire le nombre binaire $F$ sous sa forme scientifique:
+- Le significande s'obtient par le déplacement de la virgule du nombre $F$ pour qu'elle se situe devant le $MSB1$ du nombre (si elle n'y est pas déjà).
+  Ce déplacement peut se faire vers la gauche, ce qui divise $F$ d'un facteur $N$.
+  Il est aussi possible que le déplacement se fasse vers la droite, ce qui engendre une multiplication de $F$ d'un facteur $N$.
+  En bref, le facteur $N$ est le coefficient diviseur ou multiplicateur de $F$, c'est une puissance de $2$ égale à $2^x$ où $x = log_2\left(N\right)$. 
+  En déplaçant la virgule de $log_2\left(N\right)$ rangs vers la gauche ou la droite, nous divisons ou multiplions $F$ par $2^{log_2\left(N\right)}$.
+  
+
+
+
+Voici un exemple avec le nombre $3.75_{10} = 11.11_{2}$ que nous avons utilisés plus haut.
+De base, la virgule ne se situe pas devant le $MSB1$ du nombre $11.11_{2}$, cela veut dire qu'il faut induire un décalage vers la gauche, un décalage de $1$ qui plus est.
+
+// pourquoi traité E avec T
 
 Nous avons vu que ce champs binaire de $5$ bits code la valeur de l'exposant avec un encodage par biais, mais aussi que cet encodage partage toutes les caractéristiques de l'encodage $Binary$ $Unsigned$.
 
@@ -101,6 +120,8 @@ Nous avons vu que ce champs binaire de $5$ bits code la valeur de l'exposant ave
 Nous effectuons l'opération $Nimply\left(E_{\beta\sigma},E_{\alpha\sigma}\right)$ où $\sigma$ est le poids des bits du champs d'exposant $E$ des opérandes $\beta$ et $\alpha$.
 
   $$\sum_{\sigma=14}^{10} Nimply\left(E_{\beta\sigma}, E_{\alpha\sigma}\right) = \tau$$
+
+// plus d'explication sur les résultats terminaux
 
 Le résultat est un champs binaire $\tau$ composé de $5$ bits, et si l'un (ou plusieurs) d'entre eux est à $1$, alors:
 
@@ -126,11 +147,14 @@ Cependant, si le champs $\tau$ n'est composé que de $5$ bits à $0$, alors:
   - En reprenant en partie ce qui a été dit plus haut, la valeur du champs d'exposant $E_{\beta}$ est $\left(\sum_{\sigma=10}^{14} \left(E_{\beta\sigma} \times 2^{\sigma}\right) = r\right)$:
 
     - Dans le cas où $\left(\sum_{\sigma=10}^{14} \left(E_{\alpha\sigma} \times 2^{\sigma}\right) \gt r\right)$ alors $\left(E_{\beta} \lt E_{\alpha}\right)$.
-   
+
     - Cependant si $\left(\sum_{\sigma=10}^{14} \left(E_{\alpha\sigma} \times 2^{\sigma}\right) = r\right)$ alors $\left(E_{\beta} = E_{\alpha}\right)$.
+
+// Explication sur le cas non terminal Ealpha = Ebeta
 
 Pour résumer, si les champs $E_{\beta} \neq E_{\alpha}$ alors soit $\left(E_{\beta} \gt E_{\alpha}\right)$ et nous savons que $\left(\left|\alpha\right| \lt \left|\beta\right|\right)$, ou alors $\left(E_{\beta} \lt E_{\alpha}\right)$ et $\left(\left|\alpha\right| \gt \left|\beta\right|\right)$.
 
+// Explication du traitement de la mantisse tronquée?
 
 Mais rappellons que quand bien même $\left(E_{\beta} = E_{\alpha}\right)$, ce n'est pas pour autant que la comparaison $\left(\left|\alpha\right| \gt \left|\beta\right|\right)$ échoue.
 Les opérandes flottants $\alpha$ et $\beta$ ont aussi un champs de mantisse tronquée $T$ de $10$ bits.
