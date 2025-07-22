@@ -113,12 +113,22 @@ Plus particulièrement sur $2^c$ car ce terme là est notre coefficient $N$ dont
 Dans ce terme nous avons l'exposant $c$ qui je le rappelle représente le nombre de rang de décalage à induire sur la virgule, mais aussi l'information de la direction du décalage.
 Décalage vers la gauche pour $\left(c \lt 0\right)$ et décalage vers la droite avec $\left(c \gt 0\right)$.
 Par conséquent, si $c$ est négatif le décalage se fera vers la gauche et nous diviserons alors le nombre $F$ d'un coefficient diviseur $N$ où $\left(N = 2^c\right)$.
-Ceci expliquerai pourquoi $N$ est toujours une puissance de $2$.
+Ceci explique pourquoi $N$ est toujours une puissance de $2$.
 De plus, nous divisons $F$ par $N$ lorsque nous déplaçons la virgule du nombre $F$ de $log_2\left(N\right)$ rangs vers la gauche, ou autrement dit de $log_2\left(2^c\right) = c$ rangs vers la gauche.
 D'où le lien mentionné plus haut entre l'unité de décalage de la virgule $c$, et le coefficient diviseur ou multiplicateur $N$.
-Mais nous ne savons pas pourquoi $N = 2^c$, alors tâchons de comprendre avec ce qui suit.
+Mais nous ne savons pas pourquoi $\left(N = 2^c\right)$, alors tâchons de le comprendre avec ce qui suit.
+
+Dans les faits si nous prenons la base décimale comme référence, déplacé la virgule d'un nombre $F = 103.5_{10}$ de $c$ rangs vers la gauche revient à divisé $F$ par $10^c$.
+Prenons $c = 2$ comme exemple, alors $\left(F \div 10^c\right) = 1.035_{10}$ et nous voyons bien que la virgule a bel et bien été décalé de deux rangs vers la gauche, comme attendu.
+En base binaire il se passe la même chose, mais les puissances de $10_{10}$ sont remplacés par des puissances de $2$.
+Le nombre $103.5_{10}$ vaut $1100111.1_2$ en binaire et si $c$ est toujours égale à $2$ alors $\left(F \div 2^c\right) = 11001.111_2 = 25.875_{10}$.
+Comme prévu nous avons déplacés la virgule de deux rangs vers la gauche en divisant notre nombre $F$ par une puissance de $2$, qui est $4$.
+
 
 // évoquer le décalage de la virgule en décimale qui est similaire à celui en binaire (dans les effets)
+
+// faire passé c -> C
+// supprimer les indices de base numérique lorsqu'ils ne sont pas nécessaire
 
 // raison fondamentale derrière le fait qu'un décalage de la virgule de log2(N) vers la gauche induise une divison de F par N
 
