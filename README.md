@@ -87,23 +87,30 @@ Nous verrons que le comparateur se sert de cela pour effectué les comparaisons.
 
 La démonstration mathématique du circuit est donc assez simple, après toutes ces explications.
 
-Nous définissons deux nombres flottants $Half$ $Precision$ ($16$ bits) $\alpha$ et $\beta$, la comparaison à produire sera $\left(\left|\alpha\right| \gt \left|\beta\right|\right)$.
+Nous définissons deux nombres flottants $Half$ $Precision$ ($16$ bits) $\alpha$ et $\beta$, la comparaison à produire sera $\left(\vert\alpha\vert \gt \vert\beta\vert\right)$.
 Les opérandes ne font alors plus que $15$ bits (omission du bit de signe).
 
-Commençons par chercher si le champs d'exposant $E$ de $\beta$ est plus grand que celui de $\alpha$ $\left(E_{\beta} \gt E_{\alpha}\right)$.
+Nous allons commencé par chercher si le champs d'exposant $E$ de $\beta$ est plus grand que celui de $\alpha$ e.g, $\left(E_{\beta} \gt E_{\alpha}\right)$.
+Pour comprendre pourquoi nous traitons le champs d'exposant $E_{\alpha}$ et $E_{\beta}$ avant le champs de mantisse tronquée $T$ de nos opérandes, il faut se penché sur l'écriture scientifique binaire sur lequel l'encodage IEEE-754 des nombres flottants se base.
 
-La raison est qu'un flottant IEEE-754 formatte la valeur d'un nombre pour qu'il puisse devenir la mantisse tronquée, ce formattage dépend cependant entièrement de la valeur codé dans le champs d'exposant.
-Je vous invite à vous renseigné sur l'écriture scientifique binaire si nécessaire, je vais ici en faire un survol.
+Pour transformé le nombre flottant $F$ codé classiquement en binaire, il faut convertir le nombre en un significande ou mantisse binaire.
+Le significande est un nombre dont la valeur est compris dans l'intervalle suivante $\left[1;2\right[$, ça veut que que la partie entière du nombre ne peut pas être égale ou supérieur à $2$, et en même temps supérieur ou égale à $1$.
+Qui plus est, le significande s'obtient en déplaçant la virgule du nombre $F$ de sa position initial jusque devant le $MSB1$ du nombre, ce qui a pour effet de modifié la valeur de $F$.
+Une exception est faite pour $F = 0$ et le significande peut exceptionellement être nulle.
+Si le $MSB1$ est dans la partie entière de $F$ ça veut dire que $\left(F \ge 1\right)$ et que la virgule devra être déplacé vers la gauche, au contraire si le $MSB1$ est dans la partie fractionnaire alors $\left(F \lt 1\right)$ et la virgule sera déplacé vers la droite.
+Mais le déplacement de la virgule engendre en binaire les même choses qu'en décimale.
+Une division par $N$ de $F$ dans le cas d'un déplacement de la virgule de $log_2\left(N\right)$ rangs vers la gauche, et une multiplication de $F$ d'un même facteur pour un même nombre de rang de décalage, décalage vers la droite cependant.
+Une explication au fait que le coefficient $N$ est systèmatiquement une puissance de $2$ est la suivante.
 
-// pas nécessaire je crois
-Avec l'encodage d'un nombre flottant chaque puissance de $2$ (positive ou négative) de poids $i$ est deux fois plus grande que celle de poids $i-1$, ou autrement dit $\left(\sum_{i=msb}^{lsb+1} \left(2^i = 2 \times 2^{i-1}\right)\right)$.
+Admettons que le nombre flottant $F$ soit codé sur un champs de $10$ bits, où la partie entière et fractionnaire sont toutes deux de $5$ bits.
+Nous savons que la virgule d'un nombre binaire se trouve toujours entre le $LSB$ de la partie entière (le bit de poids $0$), et le $MSB$ de la partie fractionnaire (bit de poids $-1).
+Par conséquent, un déplacement de la virgule d'un rang vers la gauche force le bit de poids $0$ à devenir le bit de poids $-1$, le bit de poids $1$ devient celui de poids $0$, et celui de poids $-1$ devient le bit de poids $-2$, etc.
+Pour le dire autrement, chaque bit de la partie entière comme fractionnaire de $F$ voit son poids être décrémenter de $1$, et c'est pourquoi après le déplacement de la virgule $F$ vaut $\left(\sum_{i=msb}^{lsb} \left(F_i \times 2^{i-1}\right) = \left(F\div 2\right)\right)$.
 
-Si nous cherchons à écrire le nombre binaire $F$ sous sa forme scientifique:
-- Le significande s'obtient par le déplacement de la virgule du nombre $F$ pour qu'elle se situe devant le $MSB1$ du nombre (si elle n'y est pas déjà).
-  Ce déplacement peut se faire vers la gauche, ce qui divise $F$ d'un facteur $N$.
-  Il est aussi possible que le déplacement se fasse vers la droite, ce qui engendre une multiplication de $F$ d'un facteur $N$.
-  En bref, le facteur $N$ est le coefficient diviseur ou multiplicateur de $F$, c'est une puissance de $2$ égale à $2^x$ où $x = log_2\left(N\right)$. 
-  En déplaçant la virgule de $log_2\left(N\right)$ rangs vers la gauche ou la droite, nous divisons ou multiplions $F$ par $2^{log_2\left(N\right)}$.
+
+Si le nombre $F$ change pour devenir un significande licite, il est nécessaire de compensé exactement ces transformations, nous faisons ceci à l'aide du multiplicande.
+Le multiplicande élève $2$ à la puissance $N$.
+
   
 
 
