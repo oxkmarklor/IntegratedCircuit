@@ -90,24 +90,29 @@ La démonstration mathématique du circuit est donc assez simple, après toutes 
 Nous définissons deux nombres flottants $Half$ $Precision$ ($16$ bits) $\alpha$ et $\beta$, la comparaison à produire sera $\left(\vert\alpha\vert \gt \vert\beta\vert\right)$.
 Les opérandes ne font alors plus que $15$ bits (omission du bit de signe).
 
-Nous allons commencé par chercher si le champs d'exposant $E$ de $\beta$ est plus grand que celui de $\alpha$ e.g, $\left(E_{\beta} \gt E_{\alpha}\right)$.
-Pour comprendre pourquoi nous traitons le champs d'exposant $E_{\alpha}$ et $E_{\beta}$ avant le champs de mantisse tronquée $T$ de nos opérandes, il faut se penché sur l'écriture scientifique binaire sur lequel l'encodage IEEE-754 des nombres flottants se base.
+Nous allons commencé par chercher si le champs d'exposant $E$ de $\beta$ est plus grand que celui de $\alpha$ $\left(E_{\beta} \gt E_{\alpha}\right)$.
+Pour comprendre pourquoi nous traitons les champs d'exposants $E_{\alpha}$ et $E_{\beta}$ avant ceux des mantisses tronquées $T$ de nos opérandes, il faut se penché sur l'écriture scientifique binaire sur lequel repose l'encodage IEEE-754 des nombres flottants.
 
 Pour transformé le nombre flottant $F$ codé classiquement en binaire, il faut convertir le nombre en un significande ou mantisse binaire.
 Le significande est un nombre dont la valeur est compris dans l'intervalle suivante $\left[1;2\right[$, ça veut dire que la partie entière du nombre doit être strictement inférieur à $2$, tout en étant supérieur ou égale à $1$.
 Qui plus est, le significande s'obtient en déplaçant la virgule du nombre $F$ de sa position initial jusque devant le $MSB1$ du nombre, ce qui a pour effet de modifié la valeur de $F$.
 Une exception est faite pour $F = 0$ et le significande peut exceptionellement être nulle.
-Si le $MSB1$ est dans la partie entière de $F$ ça veut dire que $\left(F \ge 1\right)$ et que la virgule devra être déplacé vers la gauche, au contraire si le $MSB1$ est dans la partie fractionnaire alors $\left(F \lt 1\right)$ et la virgule sera déplacé vers la droite.
+Si le $MSB1$ est dans la partie entière de $F$, ça veut dire que $\left(F \ge 1\right)$ et que la virgule devra être déplacé vers la gauche, au contraire si le $MSB1$ est dans la partie fractionnaire alors $\left(F \lt 1\right)$ et la virgule sera déplacé vers la droite.
 Mais le déplacement de la virgule engendre en binaire les même choses qu'en décimale.
 Une division par $N$ de $F$ dans le cas d'un déplacement de la virgule de $log_2\left(N\right)$ rangs vers la gauche, et une multiplication de $F$ d'un même facteur pour un même nombre de rang de décalage, c'est à dire $log_2\left(N\right)$ décalage vers la droite.
-Une explication au fait que le coefficient $N$ est systèmatiquement une puissance de $2$ est la suivante.
+Le coefficient $N$ est systèmatiquement une puissance de $2$, une explication à cela serait la suivante.
 
-Admettons que le nombre flottant $F$ soit codé sur un champs de $10$ bits, où la partie entière et fractionnaire sont toutes deux de $5$ bits.
-Nous savons que la virgule d'un nombre binaire se trouve toujours entre le $LSB$ de la partie entière (le bit de poids $0$), et le $MSB$ de la partie fractionnaire (bit de poids $-1$).
-Par conséquent, un déplacement de la virgule d'un rang vers la gauche force le bit de poids $0$ à devenir le bit de poids $-1$, le bit de poids $1$ devient celui de poids $0$, et celui de poids $-1$ devient le bit de poids $-2$, etc.
+Pour tout nombre flottant $F$, nous savons que la virgule se trouve entre le $LSB$ de la partie entière (le bit de poids $0$), et le $MSB$ de la partie fractionnaire (bit de poids $-1$).
+Par conséquent, un déplacement de la virgule d'un rang vers la gauche force le bit de poids $1$ à devenir le bit de poids $0$, le bit de poids $0$ devient celui de poids $-1$, et celui de poids $-1$ devient le bit de poids $-2$, etc.
 Pour le dire autrement, chaque bit de la partie entière comme fractionnaire de $F$ voit son poids être décrémenter de $1$. 
-C'est pourquoi après le déplacement de la virgule d'un rang vers la gauche, le nombre $F$ vaut $\left(\sum_{i=msb}^{lsb} \left(F_i \times 2^{\left(i-c\right)}\right) = \left(F\div 2\right)\right)$ où $c = 1$.
+C'est pourquoi après le déplacement de la virgule d'un rang vers la gauche, le nombre $F$ vaut $\left(\sum_{i=msb}^{lsb} \left(F_i \times 2^{\left(i+c\right)}\right) = \left(F\times 2^c\right)\right)$ où $c = -1$.
+Par ailleurs, lorsque $\left(c \lt 0\right)$ c'est que la virgule doit être décalée vers la gauche, et inversement quand $\left(c \ge 0\right)$ c'est que le décalage est nulle ou vers la droite.
 
+Par exemple, si $F = 5.25_{10} = 101.01_2$ alors nous procédons à $c = -2$ décalages vers la gauche, le résultat selon l'équation ci-dessus est $1.3125_{10} \quad = \quad 5.25_{10} \times 2^c\quad = \quad 5.25_{10} \div 2^{\left(-c\right)}\quad = \quad 1.0101_2$.
+Dans cet exemple nous avons eu besoin de déplacé la virgule de $F$ de deux rangs vers la gauche, nous divisons donc $F$ par $2^2$ en le multipliant par $2^{-2}$ comme le montre  $5.25_{10} \times 2^c$ qui est égale à $5.25_{10} \div 2^{\left(-c\right)}$.
+Remarquons que notre coefficient diviseur $N$ est donc $2^{-c} = 2^{-\left(-2\right)} = 4_{10}$ et que le nombre de rang de décalage vers la gauche est de $log_2\left(N\right) = 2_{10}$.
+Finalement, le déplacement de la virgule a globalement le même effet en binaire qu'en décimale.
+Un décalage de la virgule de $F$ engendre une division ou une multiplication de $F$ par une puissance de $2$ (et non de $10$), en fonction de la direction du décalage.
 
 Si le nombre $F$ change pour devenir un significande licite, il est nécessaire de compensé exactement ces transformations, nous faisons ceci à l'aide du multiplicande.
 Le multiplicande élève $2$ à la puissance $N$.
