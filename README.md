@@ -10,10 +10,10 @@ Il y a cependant plein de façon de représenté des nombres dans un champs bina
 Tout les encodages ne se valent pas car il y en a des plus efficasse que d'autre en fonction des besoins, prenons un exemple.
 Pour un champs de $16$ bits nous pourrions calculé la somme des bits pour représenter un nombre.
 Avec cet encodage nous ne pourrions codé que des valeurs entre $0$ et $16$ inclus, ce qui n'est pas optimal pour bien des situations.
-Mais parmis les multiples encodage existant, le plus connu de tous porte le nom de $Binary$ $Unsigned$.
+Mais parmis les multiples encodage existant, le plus connu de tous porte le nom de $Binary \ Unsigned$.
 
-Le $Binary$ $Unsigned$ utilise les mêmes primitives que la base décimale (celle que nous utilisons tous) pour représenter des nombres, `des puissances`.
-Pour représenter la valeur $103_{10}$ en décimale nous décomposons en réalité chaque chiffre du nombre pour le multiplié avec une puissance de $10$ adéquat, puis il faut faire la somme des résultats de chaque produit.
+Le $Binary \ Unsigned$ utilise les mêmes primitives que la base décimale (celle que nous utilisons tous) pour représenter des nombres, `des puissances`.
+Pour représenter la valeur $103$ en décimale nous décomposons en réalité chaque chiffre du nombre pour les multipliés avec une puissance de $10$ adéquat, puis il faut faire la somme des résultats de chaque produit.
 Regardez ci-dessous.
 
 $$103_{10} = 1 \times 10^2 + 0 \times 10^1 + 3 \times 10^0$$
@@ -27,24 +27,24 @@ Ceci n'est pas propre à la base décimale mais à `nimporte quel base numériqu
 La base binaire (ou base $2$) utilise les chiffres $0$ et $1$ plutôt que ceux de la base décimale allant de $0$ à $9$.
 Par ailleurs, un tel chiffre s'appelle un bit, ce qui est la contraction de $Binary$ $Digit$.
 Aussi, les puissances de $10$ sont remplacés par des puissances de $2$.
-Nous venons tout juste de décrire ce qu'est le $Binary$ $Unsigned$.
+Nous venons tout juste de décrire ce qu'est le $Binary \ Unsigned$.
 
-Un champs binaire pour lequel nous utilisons un encodage $Binary$ $Unsigned$ associe un puissance de $2$ positive à chaque bit du champs.
+Un champs binaire pour lequel nous utilisons un encodage $Binary \ Unsigned$ associe une puissance de $2$ positive à chaque bit du champs.
 Les puissances vont de $0$ jusqu'à $N-1$, où $N$ représente le nombre de bits total dans le champs.
-Le bit du champs qui est facteur de $2$ à la puissance $0$ est appellé le $LSB$ pour $Least$ $Significant$ $Bit$, par ailleurs, `plus une puissance de 2 est grande` et `plus son poids est grand`.
+Le bit du champs qui est facteur de $2$ à la puissance $0$ est appellé le $LSB$ pour $Least \ Significant \ Bit$, par ailleurs, `plus une puissance de 2 est grande` et `plus son poids est grand`.
 La notion de poids est relative à la valeur d'une puissance de $2$, naturellement le $LSB$ est le bit de poids le plus faible d'un champs binaire.
-Nous aurons compris qu'avec des puissances de $2$ positives, les nombres encodé en $Binary$ $Unsigned$ sont positifs ou nulle (pas de bit de signe).
+Nous aurons compris qu'avec des puissances de $2$ positives, les nombres encodé en $Binary \ Unsigned$ sont positifs ou nulle.
 
-Au contraire, le bit de poids le plus fort d'un champs binaire est ce que l'ont appelle le $MSB$ pour $Most$ $Significant$ $Bit$.
+Au contraire, le bit de poids le plus fort d'un champs binaire est ce que l'ont appelle le $MSB$ pour $Most \ Significant \ Bit$.
 Il est aussi possible de faire référence au bit à $1$ de poids le plus faible d'un champs avec le terme $LSB1$, ou à celui de poids le plus fort avec $MSB1$.
 
-Il se trouve que le $Binary$ $Unsigned$ permet d'être certain que la valeur d'un bit à $1$ de poids $i$ est strictement supérieur à la somme des bits de poids inférieur à $i$.
+Il se trouve que le $Binary \ Unsigned$ permet d'être certain que la valeur d'un bit à $1$ de poids $i$ est strictement supérieur à la somme des bits de poids inférieur à $i$.
 Prenons l'exemple d'un champs binaire de $8$ bits pour lequel nous allons faire attention qu'à un seul bit, celui de poids $6$ admettons (le $MSB1$).
 Ce champs ressemble à ceci $01111111_{2}$, et la valeur du nombre représenté est $127_{10}$.
 La somme des bits de poids inférieur au bit de poids $6$ donne un résultat strictement inférieur à $1 \times 2^6 = 64_{10}$.
 Cela est systèmatiquement vrai, même lorsque les $i$ bits de poids inférieur représentent la valeur maximale encodable, comme dans cet exemple.
 
-$$(1 \times 2^6 = 64_{10}) \gt (63_{10} = (1 \times 2^5)+(1 \times 2^4)+(1 \times 2^3)+(1 \times 2^2)+(1 \times 2^1)+(1 \times 2^0))$$
+$$\left(1 \times 2^6 = 64_{10}\right) \gt \left(63_{10} = \left(1 \times 2^5\right)+\left(1 \times 2^4\right)+\left(1 \times 2^3\right)+\left(1 \times 2^2\right)+\left(1 \times 2^1\right)+\left(1 \times 2^0\right)\right)$$
 
 Encore une fois, ceci n'est pas propre à la base binaire mais à nimporte quel base numérique.
 
@@ -55,31 +55,32 @@ Globalement, la norme définit trois éléments qui composent chaque nombre à v
 - Un champs binaire d'exposant
 - Un autre champs binaire pour la mantisse tronquée
 
-Ce sont les encodages utilisés dans les champs binaires d'exposant et de mantisse tronquée que nous allons essayés de comprendre, le comparateur base toute sa logique de comparaison sur les propriétés de ces champs là.
+Ce sont les encodages utilisés dans les champs binaires d'exposant et de la mantisse tronquée que nous allons essayés de comprendre, le comparateur base toute sa logique de comparaison sur les propriétés de ces champs là.
 
 Le champs d'exposant utilise un encodage par biais, ce dernier est assez simple à comprendre.
-Enfaite, un champs binaire pour lequel nous utilisons un encodage $Binary$ $Unsigned$ code une valeur numérique $X$, auquel nous ajoutons un biais.
+Enfaite, un champs binaire pour lequel nous utilisons un encodage $Binary \ Unsigned$ code une valeur numérique $X$, auquel nous ajoutons un biais.
 Le biais $B$ est une constante positive ou négative, et la valeur représenté par le champs d'exposant d'un nombre flottant est issu du calcul $X+B$.
-A savoir que le biais du champs d'exposant d'un nombre flottant encodé en IEEE-754 est toujours négatif.
+A savoir que le biais du champs d'exposant d'un nombre flottant IEEE-754 est toujours négatif.
 Il est qui plus est toujours équivalent à $-\left(2^{N-1}\right)+1$ où $N$ est le nombre de bits du champs d'exposant.
 
-Etant donné que l'encodage par biais se base sur le $Binary$ $Unsigned$, le champs d'exposant partage les mêmes caractéristiques que cet encodage.
+Etant donné que l'encodage par biais se base sur le $Binary \ Unsigned$, le champs d'exposant partage les mêmes caractéristiques que cet encodage.
 Notamment celui qui nous dit que la valeur d'un bit à $1$ de poids $i$ est strictement supérieur à la somme des puissances inférieurs à $i$.
+Ce qui est normal vu que nous ne faisons qu'ajouté un biais constant à chaque nombre encodé en $Binary \ Unsigned$.
 
 Pour le champs de la mantisse tronquée nous avons besoin de faire un rapide rappel sur l'encodage intial d'un nombre flottant (`le standard IEEE-754 est un enrobage plus qu'autre chose`).
-La partie entière d'un nombre flottant utilise du $Binary$ $Unsigned$, tandis que la partie fractionnaire fait usage d'une version modifiée du $Binary$ $Unsigned$.
-Chaque bit de la partie fractionnaire est un `facteur d'une puissance de 2 négative` et non positive, ceci permet de représenté des valeurs entre $1$ et $0$.
+La partie entière d'un nombre flottant utilise du $Binary \ Unsigned$ pour être codé, tandis que la partie fractionnaire fait usage d'une version modifiée du $Binary \ Unsigned$.
+Chaque bit de la partie fractionnaire est un `facteur d'une puissance de 2 négative` et non positive, ceci permet de représenté des valeurs dans l'intervalle $\left]1;0\right]$.
 Le poids des puissances négatives de $2$ décroix en fonction de la position du bit.
 Prenons l'exemple du nombre $3.75_{10}$.
 
-$$3.75_{10} = 11.11_2 = IntegerPart\left(\left(1 \times 2^1\right) + \left(1 \times 2^0\right)\right) + FractionalPart\left(\left(1 \times 2^{-1}\right) + \left(1 \times 2^{-2}\right)\right)$$
+$$3.75_{10} = 11.11_2 = Integer \ Part\left(\left(1 \times 2^1\right) + \left(1 \times 2^0\right)\right) + Fractional \ Part\left(\left(1 \times 2^{-1}\right) + \left(1 \times 2^{-2}\right)\right)$$
 
 Précisons que sous la forme binaire du nombre, le point n'est là que pour facilité sa lecture (`dans les faits, il n'est pas réelement présent dans le codage des nombres flottants`).
 Ce qu'il y a d'important à remarqué pour la partie fractionnaire, c'est que la valeur d'un bit à $1$ de poids $i$, est toujours strictement supérieur à la somme des bits de poids inférieur à $i$.
-Autrement dit, pour le nombre fractionnaire $N$ dont ont ne prête attention qu'au bit à $1$ de poids $i$, la $\sum_{weight=0}^{i-1} (N_{weight} \times 2^{weight})$ est strictement inférieur à $1 \times 2^i$.
+Autrement dit, pour le nombre fractionnaire $N$ dont ont ne prête attention qu'au bit à $1$ de poids $i$ alors $\left(1 \times 2^i \gt \left(\sum_{i-1}^{lsb} N_{i} \times 2^{i}\right)\right)$.
 
 Pour en revenir au sujet de la mantisse tronquée, elle est composée des bits de la partie entière et de la partie fractionnaire d'un nombre flottant.
-Vu que la partie entière et fractionnaire d'un nombre flottant partagent les caractéristiques du $Binary$ $Unsigned$, c'est aussi le cas de la mantisse tronquée.
+Vu que la partie entière et fractionnaire d'un nombre flottant partagent les caractéristiques du $Binary \ Unsigned$, c'est aussi le cas de la mantisse tronquée.
 Nous verrons que le comparateur se sert de cela pour effectué les comparaisons.
 
 -- -
@@ -90,6 +91,9 @@ Nous définissons deux nombres flottants $Half$ $Precision$ ($16$ bits) $\alpha$
 Les opérandes ne font alors plus que $15$ bits (omission du bit de signe).
 
 Commençons par chercher si le champs d'exposant $E$ de $\beta$ est plus grand que celui de $\alpha$ $\left(E_{\beta} \gt E_{\alpha}\right)$.
+
+
+
 Nous avons vu que ce champs binaire de $5$ bits code la valeur de l'exposant avec un encodage par biais, mais aussi que cet encodage partage toutes les caractéristiques de l'encodage $Binary$ $Unsigned$.
 
 - Voici la définition de l'opération logique $Nimply\left(X,Y\right)\mapsto X \wedge Not(Y)$ dont nous allons nous sevrir.
@@ -122,15 +126,19 @@ Cependant, si le champs $\tau$ n'est composé que de $5$ bits à $0$, alors:
   - En reprenant en partie ce qui a été dit plus haut, la valeur du champs d'exposant $E_{\beta}$ est $\left(\sum_{\sigma=10}^{14} \left(E_{\beta\sigma} \times 2^{\sigma}\right) = r\right)$:
 
     - Dans le cas où $\left(\sum_{\sigma=10}^{14} \left(E_{\alpha\sigma} \times 2^{\sigma}\right) \gt r\right)$ alors $\left(E_{\beta} \lt E_{\alpha}\right)$.
-
-    // Explication de l'expression
-   
-    $$\left(\left(\sum_{\sigma+1}^{14} \left(E_{\beta\sigma} \oplus E_{\alpha\sigma}\right) = 0 \right) = \left(E_{\beta} \gt E_{\alpha}\right)\right) \vee \left(\left(\sum_{\sigma+1}^{14} \left(E_{\beta\sigma} \oplus E_{\alpha\sigma}\right) \gt 0 \right) = \left(E_{\beta} \lt E_{\alpha}\right)\right)$$
    
     - Cependant si $\left(\sum_{\sigma=10}^{14} \left(E_{\alpha\sigma} \times 2^{\sigma}\right) = r\right)$ alors $\left(E_{\beta} = E_{\alpha}\right)$.
 
+Pour résumer, si les champs $E_{\beta} \neq E_{\alpha}$ alors soit $\left(E_{\beta} \gt E_{\alpha}\right)$ et nous savons que $\left(\left|\alpha\right| \lt \left|\beta\right|\right)$, ou alors $\left(E_{\beta} \lt E_{\alpha}\right)$ et $\left(\left|\alpha\right| \gt \left|\beta\right|\right)$.
+
+
 Mais rappellons que quand bien même $\left(E_{\beta} = E_{\alpha}\right)$, ce n'est pas pour autant que la comparaison $\left(\left|\alpha\right| \gt \left|\beta\right|\right)$ échoue.
-Les opérandes flottants $\alpha$ et $\beta$ ont aussi un champs de mantisse tronquée qui leur est propre.
-Si les champs d'exposant $E$ des deux opérandes sont égaux, il faut encore que les champs binaires de mantisse tronquée le soient aussi pour que $\left(\left|\alpha\right| = \left|\beta\right|\right)$ et que la comparaison échoue.
+Les opérandes flottants $\alpha$ et $\beta$ ont aussi un champs de mantisse tronquée $T$ de $10$ bits.
+Si les champs d'exposant $E$ des deux opérandes sont égaux, il faut encore que les champs binaires $T_{\beta}$ et $T_{\alpha}$ le soient aussi pour que $\left(\left|\alpha\right| = \left|\beta\right|\right)$ et que la comparaison échoue.
+
 
 // Expliqué que les poids des bits du champs d'exposant sont plus grands que ceux de la mantisse tronquée, d'où le fait de traité en priorité ces derniers.
+
+// Explication de l'expression
+   
+$$\left(\left(\sum_{\sigma+1}^{14} \left(E_{\beta\sigma} \oplus E_{\alpha\sigma}\right) = 0 \right) = \left(E_{\beta} \gt E_{\alpha}\right)\right) \vee \left(\left(\sum_{\sigma+1}^{14} \left(E_{\beta\sigma} \oplus E_{\alpha\sigma}\right) \gt 0 \right) = \left(E_{\beta} \lt E_{\alpha}\right)\right)$$
