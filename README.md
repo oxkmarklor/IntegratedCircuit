@@ -106,13 +106,31 @@ Pour tout nombre flottant $F$, nous savons que la virgule se trouve entre le $LS
 Par conséquent, un déplacement de la virgule d'un rang vers la gauche force le bit de poids $1$ à devenir le bit de poids $0$, le bit de poids $0$ devient celui de poids $-1$, et celui de poids $-1$ devient le bit de poids $-2$, etc.
 Pour le dire autrement, chaque bit de la partie entière comme fractionnaire de $F$ voit son poids être décrémenter de $1$. 
 C'est pourquoi après le déplacement de la virgule d'un rang vers la gauche, le nombre $F$ vaut $\left(\sum_{i=msb}^{lsb} \left(F_i \times 2^{\left(i+c\right)}\right) = \left(F\times 2^c\right)\right)$ où $c = -1$.
-Par ailleurs, lorsque $\left(c \lt 0\right)$ c'est que la virgule doit être décalée vers la gauche, et inversement quand $\left(c \ge 0\right)$ c'est que le décalage est nulle ou vers la droite.
+Par ailleurs, lorsque $\left(c \lt 0\right)$ c'est que la virgule doit être décalée vers la gauche, et inversement quand $\left(c \gt 0\right)$ c'est que le décalage est vers la droite.
 
+Je tient à attirer l'attention sur le terme de droite de l'équation qui précède $\left(F \times 2^c\right)$.
+Plus particulièrement sur $2^c$ car ce terme là est notre coefficient $N$ dont je parlais plus haut.
+Dans ce terme nous avons l'exposant $c$ qui je le rappelle représente le nombre de rang de décalage à induire sur la virgule, mais aussi l'information de la direction du décalage.
+Décalage vers la gauche pour $\left(c \lt 0\right)$ et décalage vers la droite avec $\left(c \gt 0\right)$.
+Par conséquent, si $c$ est négatif le décalage se fera vers la gauche et nous diviserons alors le nombre $F$ d'un coefficient diviseur $N$ où $\left(N = 2^c\right)$.
+Ceci expliquerai pourquoi $N$ est toujours une puissance de $2$.
+De plus, nous divisons $F$ par $N$ lorsque nous déplaçons la virgule du nombre $F$ de $log_2\left(N\right)$ rangs vers la gauche, ou autrement dit de $log_2\left(2^c\right) = c$ rangs vers la gauche.
+D'où le lien mentionné plus haut entre l'unité de décalage de la virgule $c$, et le coefficient diviseur ou multiplicateur $N$.
+Mais nous ne savons pas pourquoi $N = 2^c$, alors tâchons de comprendre avec ce qui suit.
+
+// évoquer le décalage de la virgule en décimale qui est similaire à celui en binaire (dans les effets)
+
+// raison fondamentale derrière le fait qu'un décalage de la virgule de log2(N) vers la gauche induise une divison de F par N
+
+
+/*
 Par exemple, si $F = 5.25_{10} = 101.01_2$ alors nous procédons à $c = -2$ décalages vers la gauche, le résultat selon l'équation ci-dessus est $1.3125_{10} \quad = \quad 5.25_{10} \times 2^c\quad = \quad 5.25_{10} \div 2^{\left(-c\right)}\quad = \quad 1.0101_2$.
 Dans cet exemple nous avons eu besoin de déplacé la virgule de $F$ de deux rangs vers la gauche, nous divisons donc $F$ par $2^2$ en le multipliant par $2^{-2}$ comme le montre  $5.25_{10} \times 2^c$ qui est égale à $5.25_{10} \div 2^{\left(-c\right)}$.
 Remarquons que notre coefficient diviseur $N$ est donc $2^{-c} = 2^{-\left(-2\right)} = 4_{10}$ et que le nombre de rang de décalage vers la gauche est de $log_2\left(N\right) = 2_{10}$.
 Finalement, le déplacement de la virgule a globalement le même effet en binaire qu'en décimale.
 Un décalage de la virgule de $F$ engendre une division ou une multiplication de $F$ par une puissance de $2$ (et non de $10$), en fonction de la direction du décalage.
+*/
+
 
 Si le nombre $F$ change pour devenir un significande licite, il est nécessaire de compensé exactement ces transformations, nous faisons ceci à l'aide du multiplicande.
 Le multiplicande élève $2$ à la puissance $N$.
