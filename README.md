@@ -94,18 +94,19 @@ Nous allons commencé par chercher si le champs d'exposant $E$ de $\beta$ est pl
 Pour comprendre pourquoi nous traitons le champs d'exposant $E_{\alpha}$ et $E_{\beta}$ avant le champs de mantisse tronquée $T$ de nos opérandes, il faut se penché sur l'écriture scientifique binaire sur lequel l'encodage IEEE-754 des nombres flottants se base.
 
 Pour transformé le nombre flottant $F$ codé classiquement en binaire, il faut convertir le nombre en un significande ou mantisse binaire.
-Le significande est un nombre dont la valeur est compris dans l'intervalle suivante $\left[1;2\right[$, ça veut que que la partie entière du nombre ne peut pas être égale ou supérieur à $2$, et en même temps supérieur ou égale à $1$.
+Le significande est un nombre dont la valeur est compris dans l'intervalle suivante $\left[1;2\right[$, ça veut dire que la partie entière du nombre doit être strictement inférieur à $2$, tout en étant supérieur ou égale à $1$.
 Qui plus est, le significande s'obtient en déplaçant la virgule du nombre $F$ de sa position initial jusque devant le $MSB1$ du nombre, ce qui a pour effet de modifié la valeur de $F$.
 Une exception est faite pour $F = 0$ et le significande peut exceptionellement être nulle.
 Si le $MSB1$ est dans la partie entière de $F$ ça veut dire que $\left(F \ge 1\right)$ et que la virgule devra être déplacé vers la gauche, au contraire si le $MSB1$ est dans la partie fractionnaire alors $\left(F \lt 1\right)$ et la virgule sera déplacé vers la droite.
 Mais le déplacement de la virgule engendre en binaire les même choses qu'en décimale.
-Une division par $N$ de $F$ dans le cas d'un déplacement de la virgule de $log_2\left(N\right)$ rangs vers la gauche, et une multiplication de $F$ d'un même facteur pour un même nombre de rang de décalage, décalage vers la droite cependant.
+Une division par $N$ de $F$ dans le cas d'un déplacement de la virgule de $log_2\left(N\right)$ rangs vers la gauche, et une multiplication de $F$ d'un même facteur pour un même nombre de rang de décalage, c'est à dire $log_2\left(N\right)$ décalage vers la droite.
 Une explication au fait que le coefficient $N$ est systèmatiquement une puissance de $2$ est la suivante.
 
 Admettons que le nombre flottant $F$ soit codé sur un champs de $10$ bits, où la partie entière et fractionnaire sont toutes deux de $5$ bits.
-Nous savons que la virgule d'un nombre binaire se trouve toujours entre le $LSB$ de la partie entière (le bit de poids $0$), et le $MSB$ de la partie fractionnaire (bit de poids $-1).
+Nous savons que la virgule d'un nombre binaire se trouve toujours entre le $LSB$ de la partie entière (le bit de poids $0$), et le $MSB$ de la partie fractionnaire (bit de poids $-1$).
 Par conséquent, un déplacement de la virgule d'un rang vers la gauche force le bit de poids $0$ à devenir le bit de poids $-1$, le bit de poids $1$ devient celui de poids $0$, et celui de poids $-1$ devient le bit de poids $-2$, etc.
-Pour le dire autrement, chaque bit de la partie entière comme fractionnaire de $F$ voit son poids être décrémenter de $1$, et c'est pourquoi après le déplacement de la virgule $F$ vaut $\left(\sum_{i=msb}^{lsb} \left(F_i \times 2^{i-1}\right) = \left(F\div 2\right)\right)$.
+Pour le dire autrement, chaque bit de la partie entière comme fractionnaire de $F$ voit son poids être décrémenter de $1$. 
+C'est pourquoi après le déplacement de la virgule d'un rang vers la gauche, le nombre $F$ vaut $\left(\sum_{i=msb}^{lsb} \left(F_i \times 2^{\left(i-c\right)}\right) = \left(F\div 2\right)\right)$ où $c = 1$.
 
 
 Si le nombre $F$ change pour devenir un significande licite, il est nécessaire de compensé exactement ces transformations, nous faisons ceci à l'aide du multiplicande.
