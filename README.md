@@ -126,11 +126,19 @@ Il n'empêche que dans notre nombre flottant $F$, n'importe quel bit de poids $i
 Par exemple $\left(2^0 = 1\right)$ et $\left(2^{-1} = 0.5\right)$ ou autrement dit, pour tout nombre flottant $F$ alors $\sum_{i=msb}^{lsb} \left(2^i = 2 \times 2^\left(i-1\right)\right)$.
 Nous avons vus plus haut qu'avec un décalage d'un rang vers la gauche de la virgule de $F$, je cite "chaque bit de la partie entière comme de la partie fractionnaire de $F$ voit son poids être décrémenter de $1$".
 Ce qui veut dire que tout bit de $F$ passe de facteur de $2^i$ à $2^\left(i-1\right)$, et chaque bit voit donc sa valeur être divisé par $2$.
-Le calcul de la valeur de $F$ passe de la somme des bits de poids $i$ à $1$ qui multiplient $2^i$, au résultat de la somme des bits de poids $i$ à $1$ qui multiplient $2^\left(i-1\right)$.
+Le calcul de la valeur de $F$ passe de la somme des bits de poids $i$ à $1$ qui multiplient $2^i$, à la somme des bits de poids $i$ à $1$ qui multiplient $2^\left(i-1\right)$.
 Pour le dire autrement, nous faisons la somme de tous les bits de $F$ après que leur valeur ait été divisé par $2$ avec le décalage, c'est pourquoi $F$ est divisé par $2$.
 Exactement comme le démontre notre équation avec $c = -1$. 
 
 $$\left(\sum_{i=msb}^{lsb} \left(F_i \times 2^{\left(i+c\right)}\right) = \left(F\times 2^c\right)\right)$$
+
+Mais j'ai bien dit que le coefficient $N$ est `toujours` une puissance de $2$.
+Utilisons alors notre équation ci-dessus pour calculer la valeur de $F = 37.25 = 100101.01_2$ pour un décalage de la vrigule de $3$ rangs vers la gauche $c = -3$.
+Alors nous effectuons le calcul $\left(F \times 2^c\right)$ et nous obtenons $100.10101_2$ ou $4.65625$, nous voyons que la virgule a bien été déplacée de $3$ rangs vers la gauche et que la valeur de $F$ a été divisé par $8$.
+
+
+
+
 
 // décalage côté droit
 
