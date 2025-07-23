@@ -13,20 +13,20 @@ Avec cet encodage nous ne pourrions codé que des valeurs entre $0$ et $16$ incl
 Mais parmis les multiples encodage existant, le plus connu de tous porte le nom de $Binary \ Unsigned$.
 
 Le $Binary \ Unsigned$ utilise les mêmes primitives que la base décimale (celle que nous utilisons tous) pour représenter des nombres, `des puissances`.
-Pour représenter la valeur $103$ en décimale nous décomposons en réalité chaque chiffre du nombre pour les multipliés avec une puissance de $10$ adéquat, puis il faut faire la somme des résultats de chaque produit.
+Pour représenter la valeur $103$ en décimale nous décomposons en réalité chaque chiffre du nombre pour les multipliés avec une puissance de $10_{10}$ adéquat, puis il faut faire la somme des résultats de chaque produit.
 Regardez ci-dessous.
 
 $$103_{10} = 1 \times 10^2 + 0 \times 10^1 + 3 \times 10^0$$
 
 Veuillez noté que l'indice $X_{10}$ représente la base numérique dans laquelle le nombre $X$ qui précède est écrit.
-Nous retrouvons chacun des chiffres du nombre entrain de multiplié une puissance de $10$.
-Remarquons que le chiffre des unités $3$ est facteur de $10$ à la puissance $0$, le chiffre d'un ordre plus grand (celui des dizaines) est le facteur de $10$ à la puissance $1$ et enfin le chiffre des centaines multiplie $10$ à la puissance $2$.
+Nous retrouvons chacun des chiffres du nombre entrain de multiplié une puissance de $10_{10}$.
+Remarquons que le chiffre des unités $3$ est facteur de $10_{10}$ à la puissance $0$, le chiffre d'un ordre plus grand (celui des dizaines) est le facteur de $10_{10}$ à la puissance $1$ et enfin le chiffre des centaines multiplie $10_{10}$ à la puissance $2$.
 La valeur des puissances croix en fonction de la position du chiffre, qui plus est, elle commence à $0$.
 
 Ceci n'est pas propre à la base décimale mais à `nimporte quel base numérique`, comme la base binaire par exemple.
 La base binaire (ou base $2$) utilise les chiffres $0$ et $1$ plutôt que ceux de la base décimale allant de $0$ à $9$.
 Par ailleurs, un tel chiffre s'appelle un bit, ce qui est la contraction de $Binary$ $Digit$.
-Aussi, les puissances de $10$ sont remplacés par des puissances de $2$.
+Aussi, les puissances de $10_{10}$ sont remplacés par des puissances de $2$.
 Nous venons tout juste de décrire ce qu'est le $Binary \ Unsigned$.
 
 Un champs binaire pour lequel nous utilisons un encodage $Binary \ Unsigned$ associe une puissance de $2$ positive à chaque bit du champs.
@@ -40,11 +40,11 @@ Il est aussi possible de faire référence au bit à $1$ de poids le plus faible
 
 Il se trouve que le $Binary \ Unsigned$ permet d'être certain que la valeur d'un bit à $1$ de poids $i$ est strictement supérieur à la somme des bits de poids inférieur à $i$.
 Prenons l'exemple d'un champs binaire de $8$ bits pour lequel nous allons faire attention qu'à un seul bit, celui de poids $6$ admettons (le $MSB1$).
-Ce champs ressemble à ceci $01111111_{2}$, et la valeur du nombre représenté est $127_{10}$.
-La somme des bits de poids inférieur au bit de poids $6$ donne un résultat strictement inférieur à $1 \times 2^6 = 64_{10}$.
+Disons que ce champs ressemble à ceci $01111111_{2}$, la valeur du nombre représenté est $127$.
+La somme des bits de poids inférieur au bit de poids $6$ donne un résultat strictement inférieur à $1 \times 2^6 = 64$.
 Cela est systèmatiquement vrai, même lorsque les $i$ bits de poids inférieur représentent la valeur maximale encodable, comme dans cet exemple.
 
-$$\left(1 \times 2^6 = 64_{10}\right) \gt \left(63_{10} = \left(1 \times 2^5\right)+\left(1 \times 2^4\right)+\left(1 \times 2^3\right)+\left(1 \times 2^2\right)+\left(1 \times 2^1\right)+\left(1 \times 2^0\right)\right)$$
+$$\left(1 \times 2^6 = 64\right) \gt \left(63 = \left(1 \times 2^5\right)+\left(1 \times 2^4\right)+\left(1 \times 2^3\right)+\left(1 \times 2^2\right)+\left(1 \times 2^1\right)+\left(1 \times 2^0\right)\right)$$
 
 Encore une fois, ceci n'est pas propre à la base binaire mais à nimporte quel base numérique.
 
@@ -71,13 +71,13 @@ Pour le champs de la mantisse tronquée nous avons besoin de faire un rapide rap
 La partie entière d'un nombre flottant utilise du $Binary \ Unsigned$ pour être codé, tandis que la partie fractionnaire fait usage d'une version modifiée du $Binary \ Unsigned$.
 Chaque bit de la partie fractionnaire est un `facteur d'une puissance de 2 négative` et non positive, ceci permet de représenté des valeurs dans l'intervalle $\left]1;0\right]$.
 Le poids des puissances négatives de $2$ décroix en fonction de la position du bit.
-Prenons l'exemple du nombre $3.75_{10}$.
+Prenons l'exemple du nombre $3.75$.
 
-$$3.75_{10} = 11.11_2 = Integer \ Part\left(\left(1 \times 2^1\right) + \left(1 \times 2^0\right)\right) + Fractional \ Part\left(\left(1 \times 2^{-1}\right) + \left(1 \times 2^{-2}\right)\right)$$
+$$3.75 = 11.11_2 = Integer \ Part\left(\left(1 \times 2^1\right) + \left(1 \times 2^0\right)\right) + Fractional \ Part\left(\left(1 \times 2^{-1}\right) + \left(1 \times 2^{-2}\right)\right)$$
 
 Précisons que sous la forme binaire du nombre, le point n'est là que pour facilité sa lecture (`dans les faits, il n'est pas réelement présent dans le codage des nombres flottants`).
 Ce qu'il y a d'important à remarqué pour la partie fractionnaire, c'est que la valeur d'un bit à $1$ de poids $i$, est toujours strictement supérieur à la somme des bits de poids inférieur à $i$.
-Autrement dit, pour le nombre fractionnaire $N$ dont ont ne prête attention qu'au bit à $1$ de poids $i$ alors $\left(1 \times 2^i \gt \left(\sum_{i-1}^{lsb} N_{i} \times 2^{i}\right)\right)$.
+Autrement dit, pour le nombre fractionnaire $N$ dont ont ne prête attention qu'au bit à $1$ de poids $i$ alors $\left(1 \times 2^i \gt \left(\sum_{i-1}^{lsb} N_i \times 2^i\right)\right)$.
 
 Pour en revenir au sujet de la mantisse tronquée, elle est composée des bits de la partie entière et de la partie fractionnaire d'un nombre flottant.
 Vu que la partie entière et fractionnaire d'un nombre flottant partagent les caractéristiques du $Binary \ Unsigned$, c'est aussi le cas de la mantisse tronquée elle même.
@@ -118,8 +118,8 @@ De plus, nous divisons $F$ par $N$ lorsque nous déplaçons la virgule du nombre
 D'où le lien mentionné plus haut entre l'unité de décalage de la virgule $c$, et le coefficient diviseur ou multiplicateur $N$.
 Mais nous ne savons pas pourquoi $\left(N = 2^c\right)$, alors tâchons de le comprendre avec ce qui suit.
 
-Dans les faits si nous prenons la base décimale comme référence, déplacé la virgule d'un nombre $F = 103.5_{10}$ de $\vert c \vert$ rangs vers la gauche revient à divisé $F$ par $10^{\vert c \vert}$.
-Prenons $c = -2$ comme exemple, alors $\left(F \div 10^{\vert c \vert}\right) = 1.035_{10}$ et nous voyons bien que la virgule a été décalé de deux rangs vers la gauche, comme attendu.
+Dans les faits si nous prenons la base décimale comme référence, déplacé la virgule d'un nombre $F = 103.5$ de $\vert c \vert$ rangs vers la gauche revient à divisé $F$ par $10^{\vert c \vert}$.
+Prenons $c = -2$ comme exemple, alors $\left(F \div 10^{\vert c \vert}\right) = 1.035$ et nous voyons bien que la virgule a été décalé de deux rangs vers la gauche, comme attendu.
 En base binaire il se passe la même chose, mais les puissances de $10_{10}$ sont remplacés par des puissances de $2$.
 Le nombre $103.5$ vaut $1100111.1_2$ en binaire et si $c$ est toujours égale à $-2$ alors $\left(F \div 2^{\vert c \vert}\right) = 11001.111_2 = 25.875$.
 Comme prévu nous avons déplacés la virgule de deux rangs vers la gauche en divisant notre nombre $F$ par $2^{\vert c \vert}$, ou autrement dit en multipliant $F$ par $2^c$ tel que le terme droit $\left(F \times 2^c\right)$ de l'équation précédente.
@@ -142,19 +142,10 @@ Nous comprenons alors que $N = 2^c$ car un décalage de la virgule de $\vert c \
 En parallèle, un décalage de $c$ rangs vers la droite engendre aussi une multiplication de $F$ par $N$.
 Voilà pourquoi un décalage de la virgule de $log_2 \left(N\right)$ qui est égale à $\ log_2 \left(2^c\right) = \ c$ engendre une division ou une multiplication de $F$ par $N$.
 
-// faire passé c -> C
-// supprimer les indices de base numérique lorsqu'ils ne sont pas nécessaire
 
 // raison fondamentale derrière le fait qu'un décalage de la virgule de log2(N) vers la gauche induise une divison de F par N
 
 
-/*
-Par exemple, si $F = 5.25_{10} = 101.01_2$ alors nous procédons à $c = -2$ décalages vers la gauche, le résultat selon l'équation ci-dessus est $1.3125_{10} \quad = \quad 5.25_{10} \times 2^c\quad = \quad 5.25_{10} \div 2^{\left(-c\right)}\quad = \quad 1.0101_2$.
-Dans cet exemple nous avons eu besoin de déplacé la virgule de $F$ de deux rangs vers la gauche, nous divisons donc $F$ par $2^2$ en le multipliant par $2^{-2}$ comme le montre  $5.25_{10} \times 2^c$ qui est égale à $5.25_{10} \div 2^{\left(-c\right)}$.
-Remarquons que notre coefficient diviseur $N$ est donc $2^{-c} = 2^{-\left(-2\right)} = 4_{10}$ et que le nombre de rang de décalage vers la gauche est de $log_2\left(N\right) = 2_{10}$.
-Finalement, le déplacement de la virgule a globalement le même effet en binaire qu'en décimale.
-Un décalage de la virgule de $F$ engendre une division ou une multiplication de $F$ par une puissance de $2$ (et non de $10$), en fonction de la direction du décalage.
-*/
 
 
 Si le nombre $F$ change pour devenir un significande licite, il est nécessaire de compensé exactement ces transformations, nous faisons ceci à l'aide du multiplicande.
@@ -164,10 +155,10 @@ Le multiplicande élève $2$ à la puissance $N$.
 
 
 
-Voici un exemple avec le nombre $3.75_{10} = 11.11_{2}$ que nous avons utilisés plus haut.
+Voici un exemple avec le nombre $3.75 = 11.11_{2}$ que nous avons utilisés plus haut.
 De base, la virgule ne se situe pas devant le $MSB1$ du nombre $11.11_{2}$, cela veut dire qu'il faut induire un décalage vers la gauche, un décalage de $1$ qui plus est.
 
-// pourquoi traité E avec T
+// pourquoi traité E avant T
 
 Nous avons vu que ce champs binaire de $5$ bits code la valeur de l'exposant avec un encodage par biais, mais aussi que cet encodage partage toutes les caractéristiques de l'encodage $Binary$ $Unsigned$.
 
@@ -213,7 +204,7 @@ Pour résumer, si les champs $E_{\beta} \neq E_{\alpha}$ alors soit $\left(E_{\b
 // Explication du traitement de la mantisse tronquée?
 
 Mais rappellons que quand bien même $\left(E_{\beta} = E_{\alpha}\right)$, ce n'est pas pour autant que la comparaison $\left(\left|\alpha\right| \gt \left|\beta\right|\right)$ échoue.
-Les opérandes flottants $\alpha$ et $\beta$ ont aussi un champs de mantisse tronquée $T$ de $10$ bits.
+Les opérandes flottants $\alpha$ et $\beta$ ont aussi un champs de mantisse tronquée $T$ de $10_{10}$ bits.
 Si les champs d'exposant $E$ des deux opérandes sont égaux, il faut encore que les champs binaires $T_{\beta}$ et $T_{\alpha}$ le soient aussi pour que $\left(\left|\alpha\right| = \left|\beta\right|\right)$ et que la comparaison échoue.
 
 
