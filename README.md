@@ -106,7 +106,7 @@ Pour tout nombre flottant $F$, nous savons que la virgule se trouve entre le $LS
 Par conséquent, un déplacement de la virgule d'un rang vers la gauche force le bit de poids $1$ à devenir le bit de poids $0$, le bit de poids $0$ devient celui de poids $-1$, et celui de poids $-1$ devient le bit de poids $-2$, etc.
 Pour le dire autrement, chaque bit de la partie entière comme de la partie fractionnaire de $F$ voit son poids être décrémenter de $1$. 
 C'est pourquoi après le déplacement de la virgule d'un rang vers la gauche, le nombre $F$ vaut $\left(\sum_{i=msb}^{lsb} \left(F_i \times 2^{\left(i+c\right)}\right) = \left(F\times 2^c\right)\right)$ où $c = -1$.
-Par ailleurs, lorsque $\left(c \lt 0\right)$ c'est que la virgule doit être décalée vers la gauche, et inversement quand $\left(c \gt 0\right)$ c'est que le décalage est vers la droite.
+Par ailleurs, lorsque $\left(c \lt 0\right)$ c'est que la virgule doit être décalée vers la gauche, et inversement quand $\left(c \gt 0\right)$, c'est que le décalage est vers la droite.
 
 Je tient à attirer l'attention sur le terme de droite de l'équation qui précède $\left(F \times 2^c\right)$.
 Plus particulièrement sur $2^c$ car ce terme là est notre coefficient $N$ dont je parlais plus haut.
@@ -118,29 +118,29 @@ De plus, nous divisons $F$ par $N$ lorsque nous déplaçons la virgule du nombre
 D'où le lien mentionné plus haut entre l'unité de décalage de la virgule $c$, et le coefficient diviseur ou multiplicateur $N$.
 Mais nous ne savons pas pourquoi $\left(N = 2^c\right)$, alors tâchons de le comprendre avec ce qui suit.
 
-Dans les faits si nous prenons la base décimale comme référence, déplacé la virgule d'un nombre $F = 103.5_{10}$ de $c$ rangs vers la gauche revient à divisé $F$ par $10^c$.
-Prenons $c = 2$ comme exemple, alors $\left(F \div 10^c\right) = 1.035_{10}$ et nous voyons bien que la virgule a été décalé de deux rangs vers la gauche, comme attendu.
+Dans les faits si nous prenons la base décimale comme référence, déplacé la virgule d'un nombre $F = 103.5_{10}$ de $\vert c \vert$ rangs vers la gauche revient à divisé $F$ par $10^{\vert c \vert}$.
+Prenons $c = -2$ comme exemple, alors $\left(F \div 10^{\vert c \vert}\right) = 1.035_{10}$ et nous voyons bien que la virgule a été décalé de deux rangs vers la gauche, comme attendu.
 En base binaire il se passe la même chose, mais les puissances de $10_{10}$ sont remplacés par des puissances de $2$.
-Le nombre $103.5_{10}$ vaut $1100111.1_2$ en binaire et si $c$ est toujours égale à $2$ alors $\left(F \div 2^c\right) = 11001.111_2 = 25.875_{10}$.
-Comme prévu nous avons déplacés la virgule de deux rangs vers la gauche en divisant notre nombre $F$ par $2^c$.
+Le nombre $103.5$ vaut $1100111.1_2$ en binaire et si $c$ est toujours égale à $-2$ alors $\left(F \div 2^{\vert c \vert}\right) = 11001.111_2 = 25.875$.
+Comme prévu nous avons déplacés la virgule de deux rangs vers la gauche en divisant notre nombre $F$ par $2^{\vert c \vert}$, ou autrement dit en multipliant $F$ par $2^c$ tel que le terme droit $\left(F \times 2^c\right)$ de l'équation précédente.
 
-Maintenant, quel est la raison fondamentale derrière le fait qu'un décalage de $log_2\left(N\right)$ rangs vers la gauche de la virgule de $F$, engendre une division de $F$ par $N$.
+Maintenant, quel est la raison fondamentale derrière le fait qu'un décalage de la virgule de $F$ de $log_2\left(N\right)$ rangs vers la gauche, engendre une division de $F$ par $N$.
 Nous savons que les nombres flottants ont une partie entière et une autre fractionnaire.
 Ces deux parties utilisent chaque bit comme un facteur d'une puissance de $2$, des puissances positives pour la partie entière et négatives pour la partie fractionnaire.
 Il n'empêche que dans notre nombre flottant $F$, n'importe quel bit de poids $i$ est facteur d'une puissance de $2$, deux fois plus grande que le bit de poids $\left(i-1\right)$.
 Par exemple $\left(2^0 = 1\right)$ et $\left(2^{\left(-1\right)} = 0.5\right)$ ou autrement dit, pour tout nombre flottant $F$ alors $\sum_{i=msb}^{lsb} \left(2^i = 2 \times 2^\left(i-1\right)\right)$.
 Nous avons vus plus haut qu'avec un décalage d'un rang vers la gauche de la virgule de $F$, je cite "chaque bit de la partie entière comme de la partie fractionnaire de $F$ voit son poids être décrémenter de $1$".
-Ce qui veut dire que tout bit à $1$ de $F$ passe de facteur de $2^i$ à $2^\left(i-1\right)$, et voit donc sa valeur être divisé par $2$.
-La valeur de $F$ qui est je le rappelle, la somme des bits de poids $i$ à $1$ qui multiplient $2^i$, est donc divisé par $2$ suite au décalage de la virgule, exactement comme le démontre notre équation $\left(\sum_{i=msb}^{lsb} \left(F_i \times 2^{\left(i+c\right)}\right) = \left(F\times 2^c\right)\right)$ avec $c = -1$.
+Ce qui veut dire que tout bit de $F$ passe de facteur de $2^i$ à $2^\left(i-1\right)$, et chaque bit voit donc sa valeur être divisé par $2$.
+La valeur de $F$ qui est je le rappelle, la somme des bits de poids $i$ à $1$ qui multiplient $2^i$, est donc divisé par $2$ suite au décalage de la virgule.
+Exactement comme le démontre notre équation $\left(\sum_{i=msb}^{lsb} \left(F_i \times 2^{\left(i+c\right)}\right) = \left(F\times 2^c\right)\right)$ avec $c = -1$.
 
-Cependant si après cette première opération de décalage d'un rang vers la gauche nous ré-itérons l'opération.
+Cependant, si après cette première opération de décalage d'un rang vers la gauche nous ré-itérons l'opération.
 Alors la valeur initial de $F$ aura été divisé par $2$, deux fois, ou autrement dit divisé par $4$.
 Si nous ré-itérons une troisième fois cette opération, nous diviserons par $2$ la valeur de $F$ déjà divisé par $4$, ce qui donne $\left(F \div 8\right)$.
-En bref vous l'aurez compris.
-Pour un décalage vers la droite c'est exactement l'inverse qui se produit, l'ensemble des bits de $F$ voit leur poids être incrémenté du nombre de rang de décalage $c$ et $F$ est multiplié par $N$.
+En bref vous aurez compris que pour un décalage vers la droite c'est exactement l'inverse qui se produit, l'ensemble des bits de $F$ voit leur poids être incrémenté du nombre de rang de décalage $c$ et $F$ est multiplié par $N$.
 Nous comprenons alors que $N = 2^c$ car un décalage de la virgule de $\vert c \vert$ rangs vers la gauche engendre une multiplication de $F$ par $N$, équivalent à $F \ \div \left(1 \div N\right)$.
 En parallèle, un décalage de $c$ rangs vers la droite engendre aussi une multiplication de $F$ par $N$.
-Voici la raison derrière le fait qu'un décalage de la virgule de $log_2 \left(N\right) = \ log_2 \left(2^c\right) = \ c$ engendre une division ou une multiplication de $F$ par $N$.
+Voilà pourquoi un décalage de la virgule de $log_2 \left(N\right)$ qui est égale à $\ log_2 \left(2^c\right) = \ c$ engendre une division ou une multiplication de $F$ par $N$.
 
 // faire passé c -> C
 // supprimer les indices de base numérique lorsqu'ils ne sont pas nécessaire
