@@ -102,6 +102,8 @@ Mais le déplacement de la virgule engendre en binaire les même choses qu'en d�
 Une division par $N$ de $F$ dans le cas d'un déplacement de la virgule de $log_2\left(N\right)$ rangs vers la gauche, et une multiplication de $F$ par le même facteur $N$ pour un décalage de la virgule de $log_2\left(N\right)$ rangs vers la droite.
 Le coefficient $N$ est systèmatiquement une puissance de $2$, ce qui suit explique pourquoi.
 
+// à potentiellement modif
+
 Pour tout nombre flottant $F$, nous savons que la virgule se trouve entre le $LSB$ de la partie entière (le bit de poids $0$), et le $MSB$ de la partie fractionnaire (bit de poids $-1$).
 Par conséquent, un déplacement de la virgule d'un rang vers la gauche force le bit de poids $1$ à devenir le bit de poids $0$, le bit de poids $0$ devient celui de poids $-1$, et celui de poids $-1$ devient le bit de poids $-2$, etc.
 Pour le dire autrement, chaque bit de la partie entière comme de la partie fractionnaire de $F$ voit son poids être décrémenter de $1$. 
@@ -123,18 +125,43 @@ Le calcul de la valeur de $F$ passe de la somme des bits de poids $i$ à $1$ qui
 Pour le dire autrement, nous faisons la somme de tous les bits de $F$ après que leur valeur ait été divisé par $2$ avec le décalage.
 C'est pourquoi $F$ est divisé par $2$ avec un décalage d'un rang vers la gauche de la virgule.
 
-Nous avons compris pourquoi un décalage de la virgule de $F$ d'un rang vers la gauche engendre une division par $2$ de $F$.
-Penchons nous désormais sur les effets qu'un décalage d'un rang vers la droite a, pour la valeur de $F$.
+Nous avons compris pourquoi un décalage d'un rang vers la gauche de la virgule de $F$, engendre une division par $2$ de $F$.
+Découvrons désormais les effets d'un décalage d'un rang vers la droite de la virgule de $F$, sur la valeur du nombre lui même.
 Dans le cas d'un tel décalage, chaque bit de la partie entière comme fractionnaire de $F$ voit son poids être incrémenter de $1$.
-Ou autrement dit pour tout $F$ alors $\sum_{i=lsb\left(F\right)}^{msb\left(F\right)} \left(2 \times 2^i = 2^{i+1}\right)$.
-Par conséquent, nous calculons la valeur de $F$ après décalage comme la somme des bits de poids $i$ à $1$ qui multiplient $2^{i+1}$, exactement comme le fait l'équation plus haut pour un décalage $c = 1$.
+Par conséquent, chaque bit voit sa valeur doublé car $\left(2^{\left(i+1\right)} = 2 \times 2^i\right)$.
+Nous calculons la valeur de $F$ après décalage comme la somme des bits de poids $i$ à $1$ qui multiplient $2^{\left(i+1\right)}$.
+Exactement comme le fait la partie gauche de l'équation ci-dessus pour un décalage $c = 1$.
+Le côté droit de cette équation nous informe que cette opération revient à multiplié le nombre $F$ par $2$.
+
+Maintenant, nous sommes en capacité de comprendre les implications de n'importe quel décalage de la virgule d'un nombre flottant $F$, comme un décalage $c = x$ par exemple.
+Si $\left(c \gt 0\right)$ alors nous n'avons qu'à décalé la virgule de $c$ fois $1$ rang vers la droite.
+Vu que nous savons qu'un décalage de $1$ rang vers la droite engendre une multiplication par $2$ du nombre $F$, alors après $c$ décalages de $1$ rang, nous aurons multiplié $F$ par $2^c$.
+Au contraire si $\left(c \lt 0\right)$ alors nous devrons décalé la virgule de $\vert c \vert$ fois $1$ rang vers la gauche, ce décalage d'un rang vers la gauche qui revient à divisé par $2$ la valeur de $F$.
+Par conséquent, après $\vert c \vert$ décalages de $1$ rang vers la gauche nous aurons divisé $\vert c \vert$ fois la valeur de $F$ par $2$.
+Ou autrement dit, $F$ aura été divisé par $2^{\vert c \vert}$.
+
+Voilà pourquoi n'importe quel décalage de la virgule d'un nombre flottant $F$, engendre une multiplication ou une division du nombre par une puissance de $2$.
+
+C'est la raison derrière le fait que déplacé la virgule d'un nombre de $c$ rangs vers la gauche le divise par $N = 2^c$, ce qui explique les propos ayant été tenus plus tôt.
+Pour un nombre $F$, un déplacement de la virgule vers la gauche engendre une division par $N = 2^c$ de $F$, due au décalage de la virgule de $log_2\left(N\right)$ rangs vers la gauche.
+
+// à verif
+
+Cependant, je parle de divisé par une puissance de $2$ un nombre flottant $F$ dans le cas d'un décalage de sa virgule vers la gauche, mais malgré que l'équation précédente fonctionne elle ne fait pas usage de division, comprenons pourquoi.
+Le côté droit de cette équation $\left(F\times 2^c\right)$ est approprié pour un décalage de la virgule vers la droite.
+Car après un déplacement de la virgule de $c$ rangs vers la droite, le nombre flottant $F$ est mulitplié par $2$ l'équivalent de $c$ fois.
+En repartant de zéro, pour $c$ décalages de la virgule vers la gauche, nous dervions divisé $c$ fois le nombre $F$ par $2$, ou autrement dit divisé $F$ par $2^c$.
+C'est pour cela que nous aurions besoin d'une seconde équation ressemblant à $\left(\sum_{i=msb\left(F\right)}^{lsb\left(F\right)} \left(F_i \times 2^{\left(i-c\right)}\right)\right) = \left(F\div 2^c\right)$.
+J'attire l'attention sur le fait que côté droit de l'équation peut être modifié pour $\left(F\times \left(1\div 2^c\right)\right)$.
+Mais ce n'est pas fini car pour trouver l'inverse d'une puissance de $2$ tel que $2^c$, nous pouvons simplement appliqué l'opposé de l'exposant $c$ à la base $2$.
+En gros, $\left(1\div 2^c\right) = \ 2^{-c}$.
+Alors le côté droit de l'équation peut même ce transformé en $\left(F\times 2^c\right)$, à la condition que pour un nombre entier naturel de $x$ décalages vers la gauche, nous puissions affecté l'opposé du nombre de décalage $x$ à la variable $c$.
+
+C'est pourquoi $\left(c \lt 0\right)$ lorsque nous souhaitons produire un décalage vers la gauche de la virgule d'un nombre flottant $F$, et c'est aussi ce qui nous permet de n'avoir besoin que d'une seule équation et non de deux.
 
 
-// décalage de 1 vers la droite
 
-// décalage plus complexe de N
 
-// pourquoi la veur de F est toujours divisé ou multiplié par une puissance de 2, comment fonctionne l'équation à ce niveau là?
 
 // le rôle du multiplicande
 
