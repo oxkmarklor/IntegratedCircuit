@@ -107,27 +107,34 @@ Par conséquent, un déplacement de la virgule d'un rang vers la gauche force le
 Pour le dire autrement, chaque bit de la partie entière comme de la partie fractionnaire de $F$ voit son poids être décrémenter de $1$. 
 C'est pourquoi après le déplacement de la virgule d'un rang vers la gauche, le nombre $F$ vaut ce qui suit pour $c = -1$:
 
-$$\left(\sum_{i=msb}^{lsb} \left(F_i \times 2^{\left(i+c\right)}\right) = \left(F\times 2^c\right)\right)$$
+$$\left(\sum_{i=msb\left(F\right)}^{lsb\left(F\right)} \left(F_i \times 2^{\left(i+c\right)}\right)\right) = \left(F\times 2^c\right)$$
 
 Le terme $c$ représente le nombre de rang de décalage à induire sur la virgule du nombre $F$.
 Qui plus est, lorsque $\left(c \lt 0\right)$ c'est que la virgule doit être décalée vers la gauche, et inversement quand $\left(c \gt 0\right)$, c'est que le décalage doit se produire vers la droite.
 
-Essayons de comprendre la raison fondamentale qui se cache derrière le fait qu'un simple décalage d'un rang vers la gauche de la virgule de $F$, engendre une divison de $F$ par $N = 2$, comme nous le démontre l'équation ci-dessus.
+Essayons de comprendre pourquoi est ce qu'un décalage d'un rang vers la gauche de la virgule de $F$ divise la valeur de $F$ par $N = 2$, comme nous le démontre l'équation ci-dessus.
 Nous savons que les nombres flottants ont une partie entière et une autre fractionnaire.
 Ces deux parties utilisent chaque bit comme un facteur d'une puissance de $2$, des puissances positives pour la partie entière et négatives pour la partie fractionnaire.
 Il n'empêche que dans notre nombre flottant $F$, n'importe quel bit de poids $i$ est facteur d'une puissance de $2$, deux fois plus grande que le bit de poids $\left(i-1\right)$.
-Par exemple $\left(2^0 = 1\right)$ et $\left(2^{-1} = 0.5\right)$ ou autrement dit, pour tout nombre flottant $F$ alors $\sum_{i=msb}^{lsb} \left(2^i = 2 \times 2^\left(i-1\right)\right)$.
+Par exemple $\left(2^0 = 1\right)$ et $\left(2^{-1} = 0.5\right)$ ou autrement dit, pour tout nombre flottant $F$ alors $\sum_{i=msb\left(F\right)}^{lsb\left(F\right)} \left(2^i \div 2 = 2^\left(i-1\right)\right)$.
 Nous avons vus plus haut qu'avec un décalage d'un rang vers la gauche de la virgule de $F$, je cite "chaque bit de la partie entière comme de la partie fractionnaire de $F$ voit son poids être décrémenter de $1$".
 Ce qui veut dire que tout bit de $F$ passe de facteur de $2^i$ à $2^\left(i-1\right)$, et chaque bit voit donc sa valeur être divisé par $2$.
 Le calcul de la valeur de $F$ passe de la somme des bits de poids $i$ à $1$ qui multiplient $2^i$, à la somme des bits de poids $i$ à $1$ qui multiplient $2^\left(i-1\right)$.
 Pour le dire autrement, nous faisons la somme de tous les bits de $F$ après que leur valeur ait été divisé par $2$ avec le décalage.
 C'est pourquoi $F$ est divisé par $2$ avec un décalage d'un rang vers la gauche de la virgule.
 
-// pourquoi pour un décalage à gauche F/N = F*(1/N) + pourquoi le diviseur N est toujours une puissance de 2
+Nous avons compris pourquoi un décalage de la virgule de $F$ d'un rang vers la gauche engendre une division par $2$ de $F$.
+Penchons nous désormais sur les effets qu'un décalage d'un rang vers la droite a, pour la valeur de $F$.
+Dans le cas d'un tel décalage, chaque bit de la partie entière comme fractionnaire de $F$ voit son poids être incrémenter de $1$.
+Ou autrement dit pour tout $F$ alors $\sum_{i=lsb\left(F\right)}^{msb\left(F\right)} \left(2 \times 2^i = 2^{i+1}\right)$.
+Par conséquent, nous calculons la valeur de $F$ après décalage comme la somme des bits de poids $i$ à $1$ qui multiplient $2^{i+1}$, exactement comme le fait l'équation plus haut pour un décalage $c = 1$.
 
-// explication d'un décalage vers la gauche de -n < -1
 
-// décalage côté droit
+// décalage de 1 vers la droite
+
+// décalage plus complexe de N
+
+// pourquoi la veur de F est toujours divisé ou multiplié par une puissance de 2, comment fonctionne l'équation à ce niveau là?
 
 // le rôle du multiplicande
 
