@@ -170,6 +170,29 @@ Le problème c'est que tout nombre flottant $F$ dont la valeur n'est pas compris
 Pour contrecarrer ce problème l'écriture scientifique binaire définit ce qui s'appelle un multiplicande, son rôle est de nous permettre de retrouver la valeur initial de $F$ après qu'il ait été transformé en significande.
 Voyons comment.
 
+Pour commencer, le nombre flottant $F$ est transformé en un significande $S$.
+Cette transformation passe peut être par un décalage de la virgule de $F$ vers la droite ou vers la gauche.
+Admettons que ce soit le cas, alors la valeur de $F$ est divisé ou multiplé par une puissance de $2$.
+Imaginons que pour la transformation de $F$ en un significiande nous ayons définit $\left(c \lt 0\right)$, alors la virgule du nombre $F$ a été déplacé vers la gauche et donc le nombre divisé.
+Pour retrouver $F$, il suffit alors de multiplié $S$ par la puissance de $2$ qui a divisé le nombre $F$.
+Mais rappellons que la division de $F$ s'effectue comme ceci $\left(F\times 2^c\right)$ ce qui est équivalent à $\left(F\div \left(1\div 2^c\right)\right)$.
+Il faut donc multiplié le significande $S$ de la manière suivante afin de retrouver le nombre $F$ d'origine $\left(S\times \left(1\div 2^c\right)\right)$, soit $\left(S\times 2^{-c}\right)$.
+Mais dans le cas inverse où la transformation du nombre $F$ en significande $S$ engendre $\left(c \gt 0\right)$.
+La virgule de $F$ est déplacé vers la droite et le nombre a alors été multiplié par une puissance de $2$.
+Ce coup ci, pour retrouver $F$, il faudra divisé la valeur de $S$ par la puissance de $2$ qui a multiplié $F$.
+Nous savons que $S = \left(F\times 2^c\right)$, alors nous divisons $S$ par $2^c$ comme ceci $\left(S\div 2^c\right)$ et nous tombons une nouvelle fois sur $\left(S\times 2^{-c}\right)$.
+
+Le multiplicande est le terme $2^{-c}$, ou autrement dit, c'est l'inverse de la puissance de $2$ qui est utilisé pour transformé $F$ et obtenir le significande $S$.
+
+
+
+
+Nous comprenons donc que le multiplicande doit plus particulièrement permettre deux choses. 
+Recenser le nombre de rang de décalage de la virgule ainsi que la direction du décalage de la virgule, deux informations qui ont été nécessaire pour que $F$ se tranforme en un significande licite.
+La direction du décalage permet de savoir quelle opération a été utilisée (division ou multiplication).
+Le nombre de rang de décalage permet de prendre connaissance de la puissance de $2$ qui a donc divisé ou multiplié $F$.
+
+// à supp je pense
 
 
 
