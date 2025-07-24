@@ -151,28 +151,36 @@ Je rappelle ici que pour un décalage vers la droite $\left(c \gt 0\right)$.
 Nous avons jusqu'ici utilisé des valeurs négatives de $c$ lors des décalages de virgule vers la gauche.
 Pourtant le plus intuitif aurait été de définir les même valeurs de $c$ peu importe la direction des décalages, alors faisons comme si c'était le cas depuis le début.
 Dans ce qui suit je vais donc faire usage de $\left(c \gt 0\right)$ pour des décalages vers la gauche.
-Les explications suivantes vont nous permettre de comprendre pourquoi dans les faits il vaut que $c$ soit négatif pour les décalages vers la gauche.
+Les explications suivantes vont nous permettre de comprendre pourquoi, dans les faits, il vaut mieux que $c$ soit négatif pour les décalages vers la gauche.
 
-Pour un décalage de la virgule de $c$ rangs vers la gauche, nous dervions divisé $c$ fois le nombre $F$ par $2$, ou autrement dit, divisé $F$ par $2^c$.
+Pour un décalage de la virgule de $c$ rangs vers la gauche, nous devrions divisé $c$ fois le nombre $F$ par $2$, ou autrement dit, divisé $F$ par $2^c$.
 Initialement, nous pourrions penser avoir besoin d'une équation ressemblant à celle-ci $\left(\sum_{i=msb\left(F\right)}^{lsb\left(F\right)} \left(F_i \times 2^{\left(i-c\right)}\right)\right) = \left(F\div 2^c\right)$.
 J'attire l'attention sur le fait que côté droit de l'équation peut être modifié pour $\left(F\times \left(1\div 2^c\right)\right)$.
 Mais ce n'est pas fini car pour trouver l'inverse d'une puissance de $2$ tel que $2^c$, nous pouvons simplement appliqué l'opposé de l'exposant $c$ à la base $2$.
 En gros, $\left(1\div 2^c\right) = \ 2^{-c}$.
-Alors le côté droit de l'équation peut même ce transformé en $\left(F\times 2^c\right)$, à la condition que $c$ puisse être négatif pour les décalages de la virgule vers la gauche.
-D'où le fait que $\left(c \lt 0\right)$ lors d'un décalage vers la gauche.
+Je me permet de rappellé que $c$ est positif.
+Mais nous pouvons alors remplacé $\left(F\times 2^{-c}\right)$ par $\left(F\times 2^c\right)$, à la condition que $c$ puisse être négatif lors d'un décalage vers la gauche de la virgule de $F$.
 
-Ceci nous permet aussi de comprendre pourquoi le membre gauche de notre équation d'origine additionne à la valeur d'exposant $i$ notre variable $c$.
-C'est due au fait que $c$ peut être positif comme négatif suivant le décalage de la virgule.
-En somme, cela nous permet aussi de n'avoir qu'une seule équation pour n'importe quel type de décalage, c'est cool.
+Voici la raison pour laquelle il vaut mieux que $c$ soit négatif lors d'un décalage vers la gauche d'une virgule, ceci nous permet de ne faire usage que d'une seule équation pour tout type de décalage, c'est cool.
+
+-- -
+
+Nous savons désormais comment obtenir un significande.
+Le problème c'est que tout nombre flottant $F$ dont la valeur n'est pas comprise dans l'intervalle $\left[1;2\right[$ doit forcémment subir un décalage de sa virgule, et donc voir sa valeur être multiplié ou divisé par une puissance de $2$.
+Pour contrecarrer ce problème l'écriture scientifique binaire définit ce qui s'appelle un multiplicande, son rôle est de nous permettre de retrouver la valeur initial de $F$ après qu'il ait été transformé en significande.
+Voyons comment.
 
 
 
 
 
-// le rôle du multiplicande
 
-Si le nombre $F$ change pour devenir un significande licite, il est nécessaire de compensé exactement ces transformations, nous faisons ceci à l'aide du multiplicande.
-Le multiplicande élève $2$ à la puissance $N$.
+// contextualisation du problème
+
+// explication de la solution
+
+// comment est-ce que nous résolvons le problème en pratique
+
 
   
 
