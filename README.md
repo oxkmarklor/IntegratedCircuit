@@ -94,15 +94,13 @@ Nous allons commencé par chercher si le champs d'exposant $E$ de $\beta$ est pl
 Pour comprendre pourquoi nous traitons les champs d'exposants $E_{\alpha}$ et $E_{\beta}$ avant ceux des mantisses tronquées $T$ de nos opérandes, il faut se penché sur l'écriture scientifique binaire sur lequel repose l'encodage IEEE-754 des nombres flottants.
 
 Pour transformé au format IEEE-754 le nombre flottant $F$ codé classiquement en binaire, il faut convertir le nombre en un significande ou mantisse binaire.
-Le significande est un nombre dont la valeur est compris dans l'intervalle suivante $\left[1;2\right[$, ça veut dire que la partie entière du significande doit être à $1$.
+Le significande est un nombre dont la valeur est compris dans l'intervalle suivante $\left[1;2\right[$, ce qui veut dire que la partie entière du significande doit être à $1$.
 Qui plus est, le significande s'obtient en déplaçant la virgule du nombre $F$ de sa position initial jusque devant le $MSB1$ du nombre, ce qui a pour effet de modifié la valeur de $F$.
 Une exception est faite pour $F = 0$, alors le significande peut être exceptionellement nulle.
 Si le $MSB1$ est dans la partie entière de $F$, ça veut dire que $\left(F \ge 1\right)$ et que la virgule devra être déplacé vers la gauche (si elle doit l'être), au contraire si le $MSB1$ est dans la partie fractionnaire alors $\left(F \lt 1\right)$ et la virgule sera déplacé vers la droite.
 Mais le déplacement de la virgule engendre en binaire les même choses qu'en décimale.
 Une division par $N$ de $F$ dans le cas d'un déplacement de la virgule de $log_2\left(N\right)$ rangs vers la gauche, et une multiplication de $F$ par le même facteur $N$ pour un décalage de la virgule de $log_2\left(N\right)$ rangs vers la droite.
-Le coefficient $N$ est systèmatiquement une puissance de $2$, ce qui suit explique pourquoi.
-
-// à potentiellement modif
+Le terme $N$ multiplie ou divise $F$ et est systèmatiquement une puissance de $2$, ce qui suit explique pourquoi.
 
 Pour tout nombre flottant $F$, nous savons que la virgule se trouve entre le $LSB$ de la partie entière (le bit de poids $0$), et le $MSB$ de la partie fractionnaire (bit de poids $-1$).
 Par conséquent, un déplacement de la virgule d'un rang vers la gauche force le bit de poids $1$ à devenir le bit de poids $0$, le bit de poids $0$ devient celui de poids $-1$, et celui de poids $-1$ devient le bit de poids $-2$, etc.
@@ -114,7 +112,7 @@ $$\left(\sum_{i=msb\left(F\right)}^{lsb\left(F\right)} \left(F_i \times 2^{\left
 Le terme $c$ représente le nombre de rang de décalage à induire sur la virgule du nombre $F$.
 Qui plus est, lorsque $\left(c \lt 0\right)$ c'est que la virgule doit être décalée vers la gauche, et inversement quand $\left(c \gt 0\right)$, c'est que le décalage doit se produire vers la droite.
 
-Essayons de comprendre pourquoi est ce qu'un décalage d'un rang vers la gauche de la virgule de $F$ divise la valeur de $F$ par $N = 2$, comme nous le démontre l'équation ci-dessus.
+Essayons de comprendre pourquoi est ce qu'un décalage d'un rang vers la gauche de la virgule de $F$, divise la valeur de $F$ par $N = 2$, comme nous le démontre l'équation ci-dessus.
 Nous savons que les nombres flottants ont une partie entière et une autre fractionnaire.
 Ces deux parties utilisent chaque bit comme un facteur d'une puissance de $2$, des puissances positives pour la partie entière et négatives pour la partie fractionnaire.
 Il n'empêche que dans notre nombre flottant $F$, n'importe quel bit de poids $i$ est facteur d'une puissance de $2$, deux fois plus grande que le bit de poids $\left(i-1\right)$.
@@ -133,31 +131,39 @@ Nous calculons la valeur de $F$ après décalage comme la somme des bits de poid
 Exactement comme le fait la partie gauche de l'équation ci-dessus pour un décalage $c = 1$.
 Le côté droit de cette équation nous informe que cette opération revient à multiplié le nombre $F$ par $2$.
 
-Maintenant, nous sommes en capacité de comprendre les implications de n'importe quel décalage de la virgule d'un nombre flottant $F$, comme un décalage $c = x$ par exemple.
+Nous sommes désormais capable de comprendre toutes les implications d'un décalage de la virgule du nombre $F$, sur la valeur du nombre lui même. 
+Prenons un décalage de $c = x$ comme exemple où $x \in \left[-\infty ;+\infty \right]$.
 Si $\left(c \gt 0\right)$ alors nous n'avons qu'à décalé la virgule de $c$ fois $1$ rang vers la droite.
-Vu que nous savons qu'un décalage de $1$ rang vers la droite engendre une multiplication par $2$ du nombre $F$, alors après $c$ décalages de $1$ rang, nous aurons multiplié $F$ par $2^c$.
-Au contraire si $\left(c \lt 0\right)$ alors nous devrons décalé la virgule de $\vert c \vert$ fois $1$ rang vers la gauche, ce décalage d'un rang vers la gauche qui revient à divisé par $2$ la valeur de $F$.
+Vu que nous savons qu'un décalage de la virgule de $1$ rang vers la droite engendre une multiplication par $2$ du nombre $F$, alors après $c$ décalages de $1$ rang, nous aurons multiplié $F$ par $2^c$.
+Au contraire si $\left(c \lt 0\right)$, alors nous devrons décalé la virgule de $\vert c \vert$ fois $1$ rang vers la gauche.
+Ce décalage d'un rang vers la gauche revient à divisé par $2$ la valeur de $F$.
 Par conséquent, après $\vert c \vert$ décalages de $1$ rang vers la gauche nous aurons divisé $\vert c \vert$ fois la valeur de $F$ par $2$.
 Ou autrement dit, $F$ aura été divisé par $2^{\vert c \vert}$.
 
 Voilà pourquoi n'importe quel décalage de la virgule d'un nombre flottant $F$, engendre une multiplication ou une division du nombre par une puissance de $2$.
 
-C'est la raison derrière le fait que déplacé la virgule d'un nombre de $c$ rangs vers la gauche le divise par $N = 2^c$, ce qui explique les propos ayant été tenus plus tôt.
-Pour un nombre $F$, un déplacement de la virgule vers la gauche engendre une division par $N = 2^c$ de $F$, due au décalage de la virgule de $log_2\left(N\right)$ rangs vers la gauche.
-
-// à verif
-
-Cependant, je parle de divisé par une puissance de $2$ un nombre flottant $F$ dans le cas d'un décalage de sa virgule vers la gauche, mais malgré que l'équation précédente fonctionne elle ne fait pas usage de division, comprenons pourquoi.
+Cependant, je parle de divisé par une puissance de $2$ un nombre flottant $F$ dans le cas d'un décalage de sa virgule vers la gauche, mais malgré que l'équation précédente fonctionne, elle ne fait pas usage de division.
+Comprenons pourquoi.
 Le côté droit de cette équation $\left(F\times 2^c\right)$ est approprié pour un décalage de la virgule vers la droite.
-Car après un déplacement de la virgule de $c$ rangs vers la droite, le nombre flottant $F$ est mulitplié par $2$ l'équivalent de $c$ fois.
-En repartant de zéro, pour $c$ décalages de la virgule vers la gauche, nous dervions divisé $c$ fois le nombre $F$ par $2$, ou autrement dit divisé $F$ par $2^c$.
-C'est pour cela que nous aurions besoin d'une seconde équation ressemblant à $\left(\sum_{i=msb\left(F\right)}^{lsb\left(F\right)} \left(F_i \times 2^{\left(i-c\right)}\right)\right) = \left(F\div 2^c\right)$.
+Car après un déplacement de la virgule de $c$ rangs vers la droite, le nombre flottant $F$ est mulitplié par $2^c$.
+Je rappelle ici que pour un décalage vers la droite $\left(c \gt 0\right)$.
+
+Nous avons jusqu'ici utilisé des valeurs négatives de $c$ lors des décalages de virgule vers la gauche.
+Pourtant le plus intuitif aurait été de définir les même valeurs de $c$ peu importe la direction des décalages, alors faisons comme si c'était le cas depuis le début.
+Dans ce qui suit je vais donc faire usage de $\left(c \gt 0\right)$ pour des décalages vers la gauche.
+Les explications suivantes vont nous permettre de comprendre pourquoi dans les faits il vaut que $c$ soit négatif pour les décalages vers la gauche.
+
+Pour un décalage de la virgule de $c$ rangs vers la gauche, nous dervions divisé $c$ fois le nombre $F$ par $2$, ou autrement dit, divisé $F$ par $2^c$.
+Initialement, nous pourrions penser avoir besoin d'une équation ressemblant à celle-ci $\left(\sum_{i=msb\left(F\right)}^{lsb\left(F\right)} \left(F_i \times 2^{\left(i-c\right)}\right)\right) = \left(F\div 2^c\right)$.
 J'attire l'attention sur le fait que côté droit de l'équation peut être modifié pour $\left(F\times \left(1\div 2^c\right)\right)$.
 Mais ce n'est pas fini car pour trouver l'inverse d'une puissance de $2$ tel que $2^c$, nous pouvons simplement appliqué l'opposé de l'exposant $c$ à la base $2$.
 En gros, $\left(1\div 2^c\right) = \ 2^{-c}$.
-Alors le côté droit de l'équation peut même ce transformé en $\left(F\times 2^c\right)$, à la condition que pour un nombre entier naturel de $x$ décalages vers la gauche, nous puissions affecté l'opposé du nombre de décalage $x$ à la variable $c$.
+Alors le côté droit de l'équation peut même ce transformé en $\left(F\times 2^c\right)$, à la condition que $c$ puisse être négatif pour les décalages de la virgule vers la gauche.
+D'où le fait que $\left(c \lt 0\right)$ lors d'un décalage vers la gauche.
 
-C'est pourquoi $\left(c \lt 0\right)$ lorsque nous souhaitons produire un décalage vers la gauche de la virgule d'un nombre flottant $F$, et c'est aussi ce qui nous permet de n'avoir besoin que d'une seule équation et non de deux.
+Ceci nous permet aussi de comprendre pourquoi le membre gauche de notre équation d'origine additionne à la valeur d'exposant $i$ notre variable $c$.
+C'est due au fait que $c$ peut être positif comme négatif suivant le décalage de la virgule.
+En somme, cela nous permet aussi de n'avoir qu'une seule équation pour n'importe quel type de décalage, c'est cool.
 
 
 
