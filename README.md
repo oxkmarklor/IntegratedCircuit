@@ -187,9 +187,14 @@ Mais nous pouvons exprimé les choses de manière différentes, ce qui nous serv
 
 Pour la transformation d'un nombre flottant $F$ en un significande $S$, si la virgule de $F$ a été déplacé de $c$ rangs vers la droite alors $\left(c \gt 0\right)$.
 Afin de retrouver la valeur du nombre d'origine $F$ depuis le significande, le multiplicande doit permettre de déplacé de $c$ rangs vers la gauche la virgule du significande $S$.
-Il suffit alors de négationné $c$, comme ceci $-c$.
+Il suffit alors d'inversé le signe de $c$ pour changé la direction du décalage $\left(-c\right)$.
 Le nombre de rang de décalage reste le même mais le sens de décalage passe de la droite $\left(c \gt 0\right)$, à la gauche avec $\left(c \lt 0\right)$.
+Le multiplicande sera donc de $2^{-c}$ pour pouvoir procédé à la multiplication du significande $S$ avec $\left(S\times 2^{-c}\right)$, ce qui engendre bel et bien un décalage de la virgule de $\left(\vert \ log_2\left(2^{-c}\right) \vert = \vert -c \ \vert\right)$ rangs vers la gauche.
 
+Dans le cas contraire, la transformation de $F$ en $S$ est due à un décalage vers la gauche de la virgule de $F$ de $\vert c \vert$ rangs, alors $\left(c \lt 0\right)$.
+Pour obtenir la valeur du nombre d'origine $F$, il faudra alors que le significande $S$ voit sa virgule être décalée de $\vert c \vert$ rangs vers la droite.
+Rappellons que $c$ est négatif, la négation de $c$ permettra donc d'inversé le sens de décalage $\left(-c\right)$.
+Nous retombons donc sur un multiplicande qui vaut $2^{-c}$ afin de multiplié $S$. Ce qui équivaut à $\left(log_2\left(2^{-c}\right) = -c\right)$ décalages de la virgule vers la droite.
 
 -- -
 
