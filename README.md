@@ -182,22 +182,14 @@ La virgule de $F$ est déplacé vers la droite et le nombre a alors été multip
 Ce coup ci, pour retrouver $F$, il faudra divisé la valeur de $S$ par la puissance de $2$ qui a multiplié $F$.
 Nous savons que $S = \left(F\times 2^c\right)$, alors nous divisons $S$ par $2^c$ comme ceci $\left(S\div 2^c\right)$ et nous tombons une nouvelle fois sur $\left(S\times 2^{-c}\right)$.
 
-Le multiplicande est le facteur $2^{-c}$ qui multiplie le significande $S$, ou autrement dit, c'est l'inverse de la puissance de $2$ $\left(2^c\right)$ qui est utilisé pour transformé $F$ et obtenir le significande $S$.
-Mais nous pouvons expliquer les choses de manière différentes, ce qui nous servira pour plus tard.
+Le multiplicande est le facteur $2^{-c}$ qui multiplie le significande $S$. 
+Mais nous pouvons exprimé les choses de manière différentes, ce qui nous servira pour plus tard.
 
-Partons du principe que nous avons transformé le nombre $F$ en un significande $S$, au travers d'un décalage de la virgule de $F$ de $\vert c \vert$ rangs vers la gauche. 
-Alors comme nous le savons $\left(c \lt 0\right)$.
-A partir du significande $S$ que l'on a obtenu, pour retrouver le nombre $F$ d'origine il faudra déplacé la virgule de $S$ du même nombre de rangs que lors de la transformation de $F$, mais avec le sens de décalage opposé.
-Nous devrons donc décalé la virgule du significande de $-c$ rangs.
-Il a été mentionné plus haut que $c$ est négatif.
-Sa négation $\left(-c\right)$ permet d'obtenir l'opposé de $c$, et donc de quoi produire le même décalage de celui de la transformation, mais dans le sens inverse car $\left(c \gt 0\right)$. 
+Pour la transformation d'un nombre flottant $F$ en un significande $S$, si la virgule de $F$ a été déplacé de $c$ rangs vers la droite alors $\left(c \gt 0\right)$.
+Afin de retrouver la valeur du nombre d'origine $F$ depuis le significande, le multiplicande doit permettre de déplacé de $c$ rangs vers la gauche la virgule du significande $S$.
+Il suffit alors de négationné $c$, comme ceci $-c$.
+Le nombre de rang de décalage reste le même mais le sens de décalage passe de la droite $\left(c \gt 0\right)$, à la gauche avec $\left(c \lt 0\right)$.
 
-// même chose pour le raisonnement inverse?
-
-Sachant que de base $c$ est négatif (comme mentionné plus haut), alors $c$ devient positif et le sens de décalage sera tout juste inversé, ce qui aura pour effet de décalé la virgule de $c$ rangs vers la droite.
-En bref, pour un décalage initial de la virgule de $F$ de $\left(c \gt 0\right)$ rangs vers la droite, permettant d'obtenir le significande $S$.
-Nous dervons alors effectué le décalage inverse avec $-c$ pour retrouver $F$, ça va de soit.
-La conclusion est bien évidemment la même que celle qui figure ci-dessus, il suffit de négationné la variable de décalage comme tel $-c$.
 
 -- -
 
