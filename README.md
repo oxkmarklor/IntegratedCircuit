@@ -33,7 +33,8 @@ Un champs binaire pour lequel nous utilisons un encodage $Binary \ Unsigned$ ass
 Les puissances vont de $0$ jusqu'à $N-1$, où $N$ représente le nombre de bits total dans le champs.
 Le bit du champs qui est facteur de $2$ à la puissance $0$ est appellé le $LSB$ pour $Least \ Significant \ Bit$, par ailleurs, `plus une puissance de 2 est grande` et `plus son poids est grand`.
 La notion de poids est relative à la valeur d'une puissance de $2$, naturellement le $LSB$ est le bit de poids le plus faible d'un champs binaire.
-Nous aurons compris qu'avec des puissances de $2$ positives, les nombres encodé en $Binary \ Unsigned$ sont positifs ou nulle.
+Le $Binary \ Unsigned$ représente une valeur $X$ comme la somme des poids associés aux bits à $1$ qui composent le nombre.
+Nous ne sommes donc pas surpris que nous ne puissions codé que des nombres positifs ou nulle.
 
 Au contraire, le bit de poids le plus fort d'un champs binaire est ce que l'ont appelle le $MSB$ pour $Most \ Significant \ Bit$.
 Il est aussi possible de faire référence au bit à $1$ de poids le plus faible d'un champs avec le terme $LSB1$, ou à celui de poids le plus fort avec $MSB1$.
@@ -48,6 +49,8 @@ $$\left(1 \times 2^6 = 64\right) \gt \left(63 = \left(1 \times 2^5\right)+\left(
 
 Encore une fois, ceci n'est pas propre à la base binaire mais à nimporte quel base numérique.
 
+Après cette rapide introduction à l'encodage $Binary \ Unsigned$, passons au sujet suivant qui est l'encodage IEEE-754.
+
 Le circuit a pour but principal de produire des comparaisons entre deux opérandes flottants, nous allons donc rapidement revenir sur ce que sont les nombres à virgule flottante 
 du standard IEEE-754.
 Globalement, la norme définit trois éléments qui composent chaque nombre à virgule flottante:
@@ -58,18 +61,18 @@ Globalement, la norme définit trois éléments qui composent chaque nombre à v
 Ce sont les encodages utilisés dans les champs binaires d'exposant et de la mantisse tronquée que nous allons essayés de comprendre, le comparateur base toute sa logique de comparaison sur les propriétés de ces champs là.
 
 Le champs d'exposant utilise un encodage par biais, ce dernier est assez simple à comprendre.
-Enfaite, un champs binaire pour lequel nous utilisons un encodage $Binary \ Unsigned$ code une valeur numérique $X$, auquel nous ajoutons un biais.
+Enfaite, c'est un champs binaire pour lequel nous utilisons un encodage $Binary \ Unsigned$ code une valeur numérique $X$, auquel nous ajoutons un biais.
 Le biais $B$ est une constante positive ou négative, et la valeur représenté par le champs d'exposant d'un nombre flottant est issu du calcul $X+B$.
 A savoir que le biais du champs d'exposant d'un nombre flottant IEEE-754 est toujours négatif.
 Il est qui plus est toujours équivalent à $-\left(2^{N-1}\right)+1$ où $N$ est le nombre de bits du champs d'exposant.
 
 Etant donné que l'encodage par biais se base sur le $Binary \ Unsigned$, le champs d'exposant partage les mêmes caractéristiques que cet encodage.
-Notamment celui qui nous dit que la valeur d'un bit à $1$ de poids $i$ est strictement supérieur à la somme des puissances inférieurs à $i$.
+Notamment le fait que la valeur d'un bit à $1$ de poids $i$ est strictement supérieur à la somme des poids inférieurs à $i$.
 Ce qui est normal vu que nous ne faisons qu'ajouté un biais constant à chaque nombre encodé en $Binary \ Unsigned$.
 
 Pour le champs de la mantisse tronquée nous avons besoin de faire un rapide rappel sur l'encodage intial d'un nombre flottant (`le standard IEEE-754 est un enrobage plus qu'autre chose`).
 La partie entière d'un nombre flottant utilise du $Binary \ Unsigned$ pour être codé, tandis que la partie fractionnaire fait usage d'une version modifiée du $Binary \ Unsigned$.
-Chaque bit de la partie fractionnaire est un `facteur d'une puissance de 2 négative` et non positive, ceci permet de représenté des valeurs dans l'intervalle $\left]1;0\right]$.
+Chaque bit de la partie fractionnaire est un `facteur d'une puissance de 2 négative` et non positive, ceci permet de représenté des valeurs dans l'intervalle $\left[0;1\right[$.
 Le poids des puissances négatives de $2$ décroix en fonction de la position du bit.
 Prenons l'exemple du nombre $3.75$.
 
@@ -77,7 +80,7 @@ $$3.75 = 11.11_2 = Integer \ Part\left(\left(1 \times 2^1\right) + \left(1 \time
 
 Précisons que sous la forme binaire du nombre, le point n'est là que pour facilité sa lecture (`dans les faits, il n'est pas réelement présent dans le codage des nombres flottants`).
 Ce qu'il y a d'important à remarqué pour la partie fractionnaire, c'est que la valeur d'un bit à $1$ de poids $i$, est toujours strictement supérieur à la somme des bits de poids inférieur à $i$.
-Autrement dit, pour le nombre fractionnaire $N$ dont ont ne prête attention qu'au bit à $1$ de poids $i$ alors $\left(1 \times 2^i \gt \left(\sum_{i-1}^{lsb} N_i \times 2^i\right)\right)$.
+Autrement dit, pour le nombre fractionnaire $N$ dont ont ne prête attention qu'au bit à $1$ de poids $i$ alors $\left(1 \times 2^i \gt \left(\sum_{i=i-1}^{lsb\left(N\right)} N_i \times 2^i\right)\right)$.
 
 Pour en revenir au sujet de la mantisse tronquée, elle est composée des bits de la partie entière et de la partie fractionnaire d'un nombre flottant.
 Vu que la partie entière et fractionnaire d'un nombre flottant partagent les caractéristiques du $Binary \ Unsigned$, c'est aussi le cas de la mantisse tronquée elle même.
