@@ -167,8 +167,8 @@ Voici la raison pour laquelle il vaut mieux que $c$ soit négatif lors d'un déc
 
 Nous savons désormais comment obtenir un significande.
 Le problème c'est que tout nombre flottant $F$ dont la valeur n'est pas comprise dans l'intervalle $\left[1;2\right[$ doit forcémment subir un décalage de sa virgule, et donc voir sa valeur être multiplié ou divisé par une puissance de $2$.
-Pour contrecarrer ce problème l'écriture scientifique binaire définit ce qui s'appelle un multiplicande, son rôle est de nous permettre de retrouver la valeur initial de $F$ après qu'il ait été transformé en significande.
-Voyons comment.
+Pour contrecarrer ce problème, l'écriture scientifique binaire définit ce qui s'appelle un multiplicande. 
+Le rôle du multiplicande est de nous permettre de retrouver la valeur initial de $F$ après qu'il ait été transformé en un significande $S$, voyons comment.
 
 Pour commencer, le nombre flottant $F$ est transformé en un significande $S$.
 Cette transformation passe peut être par un décalage de la virgule de $F$ vers la droite ou vers la gauche.
@@ -182,9 +182,19 @@ La virgule de $F$ est déplacé vers la droite et le nombre a alors été multip
 Ce coup ci, pour retrouver $F$, il faudra divisé la valeur de $S$ par la puissance de $2$ qui a multiplié $F$.
 Nous savons que $S = \left(F\times 2^c\right)$, alors nous divisons $S$ par $2^c$ comme ceci $\left(S\div 2^c\right)$ et nous tombons une nouvelle fois sur $\left(S\times 2^{-c}\right)$.
 
-Le multiplicande est le terme $2^{-c}$, ou autrement dit, c'est l'inverse de la puissance de $2$ qui est utilisé pour transformé $F$ et obtenir le significande $S$.
+Le multiplicande est le terme $2^{-c}$, ou autrement dit, c'est l'inverse de la puissance de $2$ $\left(2^c\right)$ qui est utilisé pour transformé $F$ et obtenir le significande $S$.
+
+Il est possible d'expliquer les choses de manière différentes.
+Si nous transformons le nombre $F$ en un significande $S$, au travers d'un décalage de la virgule de $c$ rangs vers la gauche, alors $\left(c \lt 0\right)$.
+A partir du significande $S$ pour retrouver le nombre $F$ d'origine, il faudra déplacé la virgule du même nombre de rangs que lors du premier décalage, mais dans le sens opposé.
+Nous devrons donc dacalé la virgule du significande de $-c$ rangs.
+Sachant que de base $c$ est négatif (comme mentionné plus haut), alors $c$ devient positif et le sens de décalage sera tout juste inversé, ce qui aura pour effet de décalé la virgule de $c$ rangs vers la droite.
+En bref, pour un décalage initial de la virgule de $F$ de $\left(c \gt 0\right)$ rangs vers la droite, permettant d'obtenir le significande $S$.
+Nous dervons alors effectué le décalage inverse avec $-c$ pour retrouver $F$, ça va de soit.
+La conclusion est bien évidemment la même que celle qui figure ci-dessus, il suffit de négationné la variable de décalage comme tel $-c$.
 
 
+pour retrouver $F$ nous devrons donc produire le décalage inverse sur la virgule de $S$.
 
 
 Nous comprenons donc que le multiplicande doit plus particulièrement permettre deux choses. 
