@@ -201,6 +201,26 @@ Nous retombons donc sur un multiplicande qui vaut $2^{-c}$ afin de multiplié $S
 
 -- -
 
+Nous avons déjà parler dans l'introduction des éléments qui composent l'encodage IEEE-754 d'un nombre flottant.
+Par ailleurs, nous venons d'étudier l'écriture scientifique binaire d'un nombre, et remarquons qu'il y a donc plusieurs éléments (tout comme pour l'encodage IEEE-754) qui sont nécessaire au codage scientifique d'un nombre.
+Nous avons le significande ainsi que le multiplicande dont nous avons parlé plus tôt.
+Mais il y a aussi le `signe`, qui n'est autre que le signe $+$ ou $-$ que l'on associe à un nombre pour savoir si il est positif ou négatif, nous ne nous intéresserons pas au signe.
+
+C'est intéressant de constaté que la norme IEEE-754 contient également $3$ éléments que nous avons énuméré dans le chapitre d'introduction, mais citons les à nouveau ici.
+Nous avons le champs du `bit de signe`, le `champs d'exposant` ainsi que le `champs de la mantisse tronquée`.
+Eh bien il faut savoir que l'encodage IEEE-754 se repose complétement sur l'écritures scientifique binaire des nombres, et que chaque éléments définit par le standard correspond à un élément de l'écriture scientifique d'un nombre.
+Par exemple, le champs du bit de signe de l'encodage correspond en réalité au `signe` d'un nombre. 
+Le champs d'exposant a une correspondance avec le multiplicande d'un nombre, plus particulièrement un élément bien spécifique du multiplicande, mais nous y reviendrons.
+Tandis que le champs de la mantisse tronquée correspond avec le significande, le significande qui peut également être appellé mantisse, comme je l'ai fait une fois au début du prologue.
+
+Comme dit précédemment, nous allons nous intéressés aux champs d'exposant et de mantisse tronquée et pas le reste, commençons.
+
+Comme dit dans le chapitre d'introduction, le champs d'exposant définit dans le standard IEEE-754 utilise un encodage par biais dont j'ai expliquer le fonctionnement.
+Pour autant, nous ne savons que ce qu'elle est la valeur codé dans ce champs, c'est ce que nous allons voir maintenant.
+
+
+
+
 // faire le pont entre l'écriture scientifique binaire et l'encodage IEEE-754 des nombres flottants.
 
 // expliquer pourquoi le champs d'exposant E d'un flottant IEEE-754 doit être prit en compte par le circuit avant le champs T lui même.
