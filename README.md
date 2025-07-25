@@ -182,45 +182,30 @@ La virgule de $F$ est déplacé vers la droite et le nombre a alors été multip
 Ce coup ci, pour retrouver $F$, il faudra divisé la valeur de $S$ par la puissance de $2$ qui a multiplié $F$.
 Nous savons que $S = \left(F\times 2^c\right)$, alors nous divisons $S$ par $2^c$ comme ceci $\left(S\div 2^c\right)$ et nous tombons une nouvelle fois sur $\left(S\times 2^{-c}\right)$.
 
-Le multiplicande est le terme $2^{-c}$, ou autrement dit, c'est l'inverse de la puissance de $2$ $\left(2^c\right)$ qui est utilisé pour transformé $F$ et obtenir le significande $S$.
+Le multiplicande est le facteur $2^{-c}$ qui multiplie le significande $S$, ou autrement dit, c'est l'inverse de la puissance de $2$ $\left(2^c\right)$ qui est utilisé pour transformé $F$ et obtenir le significande $S$.
+Mais nous pouvons expliquer les choses de manière différentes, ce qui nous servira pour plus tard.
 
-Il est possible d'expliquer les choses de manière différentes.
-Si nous transformons le nombre $F$ en un significande $S$, au travers d'un décalage de la virgule de $c$ rangs vers la gauche, alors $\left(c \lt 0\right)$.
-A partir du significande $S$ pour retrouver le nombre $F$ d'origine, il faudra déplacé la virgule du même nombre de rangs que lors du premier décalage, mais dans le sens opposé.
-Nous devrons donc dacalé la virgule du significande de $-c$ rangs.
+Partons du principe que nous avons transformé le nombre $F$ en un significande $S$, au travers d'un décalage de la virgule de $F$ de $\vert c \vert$ rangs vers la gauche. 
+Alors comme nous le savons $\left(c \lt 0\right)$.
+A partir du significande $S$ que l'on a obtenu, pour retrouver le nombre $F$ d'origine il faudra déplacé la virgule de $S$ du même nombre de rangs que lors de la transformation de $F$, mais avec le sens de décalage opposé.
+Nous devrons donc décalé la virgule du significande de $-c$ rangs.
+Il a été mentionné plus haut que $c$ est négatif.
+Sa négation $\left(-c\right)$ permet d'obtenir l'opposé de $c$, et donc de quoi produire le même décalage de celui de la transformation, mais dans le sens inverse car $\left(c \gt 0\right)$. 
+
+// même chose pour le raisonnement inverse?
+
 Sachant que de base $c$ est négatif (comme mentionné plus haut), alors $c$ devient positif et le sens de décalage sera tout juste inversé, ce qui aura pour effet de décalé la virgule de $c$ rangs vers la droite.
 En bref, pour un décalage initial de la virgule de $F$ de $\left(c \gt 0\right)$ rangs vers la droite, permettant d'obtenir le significande $S$.
 Nous dervons alors effectué le décalage inverse avec $-c$ pour retrouver $F$, ça va de soit.
 La conclusion est bien évidemment la même que celle qui figure ci-dessus, il suffit de négationné la variable de décalage comme tel $-c$.
 
+-- -
 
-pour retrouver $F$ nous devrons donc produire le décalage inverse sur la virgule de $S$.
+// faire le pont entre l'écriture scientifique binaire et l'encodage IEEE-754 des nombres flottants.
 
+// expliquer pourquoi le champs d'exposant E d'un flottant IEEE-754 doit être prit en compte par le circuit avant le champs T lui même.
 
-Nous comprenons donc que le multiplicande doit plus particulièrement permettre deux choses. 
-Recenser le nombre de rang de décalage de la virgule ainsi que la direction du décalage de la virgule, deux informations qui ont été nécessaire pour que $F$ se tranforme en un significande licite.
-La direction du décalage permet de savoir quelle opération a été utilisée (division ou multiplication).
-Le nombre de rang de décalage permet de prendre connaissance de la puissance de $2$ qui a donc divisé ou multiplié $F$.
-
-// à supp je pense
-
-
-
-
-
-// contextualisation du problème
-
-// explication de la solution
-
-// comment est-ce que nous résolvons le problème en pratique
-
-
-  
-
-
-
-Voici un exemple avec le nombre $3.75 = 11.11_{2}$ que nous avons utilisés plus haut.
-De base, la virgule ne se situe pas devant le $MSB1$ du nombre $11.11_{2}$, cela veut dire qu'il faut induire un décalage vers la gauche, un décalage de $1$ qui plus est.
+-- -
 
 // pourquoi traité E avant T
 
