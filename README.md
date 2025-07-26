@@ -203,19 +203,38 @@ Nous retombons donc sur un multiplicande qui vaut $2^{-c}$ afin de multiplié $S
 
 Nous avons déjà parler de l'encodage IEEE-754 en introduction de ce document, plus particulièrement des éléments qui le compose.
 Je rappelle que ces $3$ éléments sont des champs binaire qui codent chacun un `bit de signe`, un `exposant` ainsi qu'une ` mantisse tronquée`.
-Par ailleurs, nous venons tout juste de voir dans le détails ce qu'est l'écriture scientifique biniaire d'un nombre.
-Ce qui nous a permis de mettre en lumière ce qu'est un `significande` (qui peut être appellé `mantisse`), ainsi qu'un `multiplicande`, comme nous l'avons vu plus haut.
-Il y a aussi un élément de l'écriture scientifique dont je n'ai pas parlé, c'est le `signe` du nombre, qui est soit $+$ soit $-$ bien entendu.
+Par ailleurs, nous venons tout juste de voir dans le détails ce qu'est l'écriture scientifique biniaire d'un nombre, ce qui nous a permis de mettre en lumière ce qu'est un `significande` (qui peut être appellé `mantisse`), ainsi qu'un `multiplicande`.
+Il y a aussi un élément de l'écriture scientifique dont je n'ai pas parlé, c'est le `signe` du nombre représenté, qui est soit $+$ soit $-$ bien entendu.
 
-Chaque champs binaire de l'encodage IEEE-754 correspond plus ou moins bien à l'un des éléments de l'écriture scientifique binaire d'un nombre.
+Chaque champs binaire de l'encodage IEEE-754 correspond plus ou moins à l'un des éléments de l'écriture scientifique binaire d'un nombre.
 Par exemple, le champs du bit de signe correspond assez logiquement au signe d'un nombre, mais nous ne nous intéresserons pas plus que ça au bit de signe dans ce qui suit.
 En revanche, nous allons parlé plus en profondeur du champs d'exposant ainsi que de la mantisse tronquée.
 Nous avons déjà abordé le sujet de l'encodage de ces champs dans l'introduction, aussi je ne vais pas y revenir.
 
 Le champs de la mantisse tronquée correspond au significande d'un nombre représenté en écriture scientifique binaire.
+Faisons un rapide rappelle sur ce qu'est le significande.
+Le significande $S$ est un nombre dont la valeur se trouve être dans l'intervalle de $\left[1;2\right[$, il est souvent le résultat d'un calcul qui se base sur le nombre d'origine $F$ à représenté en écriture scientifique.
+Si jamais $\left(F \ge 2\right) \vee \left(F \lt 1\right)$ alors le nombre $F$ sera divisé ou multiplié par une puissance de $2$ que nous nommons $N$, et qui permettra donc de généré un significande $S$ qui respecte l'intervalle stipulé ci-dessus.
 
+En somme, le significande est un nombre à virgule qui est donc composé d'une partie entière ainsi que d'une partie fractionnaire.
+Vu que la valeur du significande doit être strictement inférieur à $2$ ou $10_2$ en binaire, ça veut dire que l'encodage de la partie entière ne peut être que inférieur à $10_2$, c'est à dire $0$ ou $1$.
+Par conséquent la partie entière du significande n'est codé que sur un bit.
+Mais en soit le bit de la partie entière ne peut pas être à $0$, car il est nécessaire que la valeur du significande soit comprise dans l'intervalle mentionné ci-dessus.
+Donc le bit de la partie entière est à $1$.
+Pour résumer $\left(S \ge 1\right) \wedge \left(S \lt 2\right)$ nous force à dire que la partie entière de $S$ est à $1$.
+En plus de cela nous avons la partie fractionnaire du significande à prendre en compte, qui est logiquement strictement inférieur à $1$.
+Finalement, la valeur du significande est donc la somme de la partie entière et de la partie fractionnaire, ce qui veut dire que $\left(S \lt 2\right)$.
 
+Si j'explique cela, c'est pour mieux comprendre la raison qui pousse le standard IEEE-754 à appellé son champs `mantisse tronquée` et non simplement `mantisse` ou `significande` à la limite.
+Le champs de la mantisse tronquée correspond au significande d'un nombre écrit sous sa forme scientifique binaire, il correspond plus particulièrement à la partir fractionnaire du significande.
+Comme nous l'avons vus plus haut, la partie entière du significande est systèmatiquement représenté par un bit à $1$.
+Il n'est donc pas nécessaire de codé ce bit qui ne change jamais de valeur.
+La norme IEEE-754 code alors la partie fractionnaire sur un bit supplémentaire, ce qui permet de gagner en précision sur la représentation des nombres.
+D'où le nom de mantisse `tronquée`.
 
+// à relire
+
+// champs d'exposant
 
 
 
