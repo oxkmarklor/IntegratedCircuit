@@ -233,6 +233,17 @@ C'est pourquoi la norme ampute le significande de sa partie entière, indépende
 L'intérêt c'est que le champs reste de la même taille ($10$ bits pour un $Half \ Precision$), mais que nous gagnons un bit de précision sur le codage d'un nombre.
 C'est d'ailleurs la raison derrière le nom de mantisse tronquée.
 
+Le champs d'exposant correspond quant à lui au multiplicande d'un nombre écrit sous forme scientifique binaire.
+Je vais faire un petit rappel sur le multiplicande, comme j'ai pu le faire pour réintroduire le significande.
+Lorsqu'un nombre flottant $F$ est codé "classiquement" et que nous cherchons à le convertir au format scientifique binaire, nous avons besoin de formé un significande en utilisant ce dernier.
+Si la valeur de $F$ se retrouve comprise dans l'intervalle $\left[1;2\right[$ recquise pour la formation d'un significande, alors le nombre $F$ est déjà un significande sans même qu'il ne soit nécessaire d'y touché.
+Mais la plupart du temps ce n'est pas le cas, ce qui veut dire que la virgule de $F$ n'est pas devant le $MSB1$ de la partie entière du nombre.
+Il faut alors déplacé la virgule vers la droite ou vers la gauche, ce qui provoque respectivement une multiplication ou une division par $N$ de la valeur de $F$, où $N$ est une puissance de $2$.
+L'écriture scientifique binaire utilise un multiplicande qui permet de retrouver le nombre d'origine $F$ par le calcul inverse.
+Si $F$ a été divisé par $N$ pour obtenir $S$ alors $\left(S\times N\right)$, à l'inverse si $F$ a été multiplié par $N$ pour obtenir $S$ alors $\left(S\div N\right)$.
+
+
+
 // intro champs d'exposant
 
 // (S*2^-c), 2^i = 2*2^i-1
