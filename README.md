@@ -192,12 +192,12 @@ Pour la transformation d'un nombre flottant $F$ en un significande $S$, si la vi
 Afin de retrouver la valeur du nombre d'origine $F$ depuis le significande, le multiplicande doit permettre de déplacé de $c$ rangs vers la gauche la virgule du significande $S$.
 Il suffit alors d'inversé le signe de $c$ pour changé la direction du décalage $\left(-c\right)$.
 Le nombre de rang de décalage reste le même mais le sens de décalage passe de la droite $\left(c \gt 0\right)$, à la gauche avec $\left(c \lt 0\right)$.
-Le multiplicande sera donc de $2^{-c}$ pour pouvoir procédé à la multiplication du significande $S$ avec $\left(S\times 2^{-c}\right)$, ce qui engendre bel et bien un décalage de la virgule de $\left(\vert \ log_2\left(2^{-c}\right) \vert = \vert -c \ \vert\right)$ rangs vers la gauche.
 
 Dans le cas contraire, la transformation de $F$ en $S$ est due à un décalage vers la gauche de la virgule de $F$ de $\vert c \vert$ rangs, alors $\left(c \lt 0\right)$.
 Pour obtenir la valeur du nombre d'origine $F$, il faudra alors que le significande $S$ voit sa virgule être décalée de $\vert c \vert$ rangs vers la droite.
 Rappellons que $c$ est négatif, la négation de $c$ permettra donc d'inversé le sens de décalage $\left(-c\right)$.
-Nous retombons donc sur un multiplicande qui vaut $2^{-c}$ afin de multiplié $S$. Ce qui équivaut à $\left(log_2\left(2^{-c}\right) = -c\right)$ décalages de la virgule vers la droite.
+
+Dans ces deux cas, nous retombons donc sur un multiplicande qui vaut $2^{-c}$ afin de multiplié $S$. 
 
 -- -
 
@@ -233,20 +233,18 @@ C'est pourquoi la norme ampute le significande de sa partie entière, indépende
 L'intérêt c'est que le champs reste de la même taille ($10$ bits pour un $Half \ Precision$), mais que nous gagnons un bit de précision sur le codage d'un nombre.
 C'est d'ailleurs la raison derrière le nom de mantisse tronquée.
 
-Le champs d'exposant correspond quant à lui au multiplicande d'un nombre écrit sous forme scientifique binaire.
-Je vais faire un petit rappel sur le multiplicande, comme j'ai pu le faire pour réintroduire le significande.
-Lorsqu'un nombre flottant $F$ est codé "classiquement" et que nous cherchons à le convertir au format scientifique binaire, nous avons besoin de formé un significande en utilisant ce dernier.
-Si la valeur de $F$ se retrouve comprise dans l'intervalle $\left[1;2\right[$ recquise pour la formation d'un significande, alors le nombre $F$ est déjà un significande sans même qu'il ne soit nécessaire d'y touché.
-Mais la plupart du temps ce n'est pas le cas, ce qui veut dire que la virgule de $F$ n'est pas devant le $MSB1$ de la partie entière du nombre.
-Il faut alors déplacé la virgule vers la droite ou vers la gauche, ce qui provoque respectivement une multiplication ou une division par $N$ de la valeur de $F$, où $N$ est une puissance de $2$.
-L'écriture scientifique binaire utilise un multiplicande qui permet de retrouver le nombre d'origine $F$ par le calcul inverse.
-Si $F$ a été divisé par $N$ pour obtenir $S$ alors $\left(S\times N\right)$, à l'inverse si $F$ a été multiplié par $N$ pour obtenir $S$ alors $\left(S\div N\right)$.
+La norme IEEE-754 définit aussi un champs d'exposant qui correspond au multiplicande de l'écriture scientifique binaire d'un nombre $F$.
+Je conseille une relecture du chapitre sur le multiplicande si un rafraichissement est nécessaire.
+Je cite "Le multiplicande est le facteur $2^{-c}$ qui multiplie le significande $S$.", mais le champs d'exposant ne correspond qu'à l'exposant $-c$ du multiplicande et non à la puissance de $2$ en sa totalité. 
+Rappellons que la variable $c$ représente le nombre de rang de décalage de la virgule du nombre $F$ pour le transformé en un significande, et que lorsque $\left(c \lt 0\right)$ cela insinue un décalage vers la gauche et inversement pour $\left(c \gt 0\right)$.
+Le multiplicande se base sur ce qui a été dit dans les deux derniers paragraphes du chapitre sur le multiplicande pour déplacé la virgule du significande, du bon nombre de rang, et dans la bonne direction.
+En gros si la valeur de l'exposant codé dans le champs est négative, alors le décalage de la virgule du significande se fera vers la gauche et du nombre de rang codé par le champs.
+Au contraire, si cette valeur est positive, la virgule du significande sera décalée vers la droite et qui plus est toujours du nombre de rang codé par le champs.
+Ce champs d'exposant possède néanmoins une taille qui varie en fonction du format des nombres flottants, pour un format $Half \ Precision$ sa taille est de $5$ bits.
 
+// finir explications sur le champs d'exposant si nécessaire
 
-
-// intro champs d'exposant
-
-// (S*2^-c), 2^i = 2*2^i-1
+// pourquoi traité les champs d'exposant avant les champs de mantisse tronquée
 
 
 
