@@ -225,16 +225,19 @@ Pour résumer $\left(S \ge 1\right) \wedge \left(S \lt 2\right)$ nous force à d
 En plus de cela nous avons la partie fractionnaire du significande à prendre en compte, qui est logiquement strictement inférieur à $1$.
 Finalement, la valeur du significande est donc la somme de la partie entière et de la partie fractionnaire, ce qui veut dire que $\left(S \lt 2\right)$.
 
-Si j'explique cela, c'est pour mieux comprendre la raison qui pousse le standard IEEE-754 à appellé son champs `mantisse tronquée` et non simplement `mantisse` ou `significande` à la limite.
-Le champs de la mantisse tronquée correspond au significande d'un nombre écrit sous sa forme scientifique binaire, il correspond plus particulièrement à la partir fractionnaire du significande.
-Comme nous l'avons vus plus haut, la partie entière du significande est systèmatiquement représenté par un bit à $1$.
-Il n'est donc pas nécessaire de codé ce bit qui ne change jamais de valeur.
-La norme IEEE-754 code alors la partie fractionnaire sur un bit supplémentaire, ce qui permet de gagner en précision sur la représentation des nombres.
-D'où le nom de mantisse `tronquée`.
+La norme IEEE-754 définit un champs de mantisse tronquée de $N$ bits pour chaque format de nombre flottant. 
+Prenons pour exemple le format $Half \ Precision$ que gère le circuit électronique en cours d'étude.
+Il s'avère que le champs de mantisse tronquée de ce format est établit à une taille de $10$ bits.
+L'entièreté d'un significande $S$ pourrait être enregistré sur ces $10$ bits, mais ce n'est pas utiles car la partie entière est toujours composé d'un seul et même bit à $1$.
+C'est pourquoi la norme ampute le significande de sa partie entière, indépendemment du format de flottant.
+L'intérêt c'est que le champs reste de la même taille ($10$ bits pour un $Half \ Precision$), mais que nous gagnons un bit de précision sur le codage d'un nombre.
+C'est d'ailleurs la raison derrière le nom de mantisse tronquée.
 
-// à relire
+// intro champs d'exposant
 
-// champs d'exposant
+// (S*2^-c), 2^i = 2*2^i-1
+
+
 
 
 
