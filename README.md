@@ -64,7 +64,7 @@ Le champs d'exposant utilise un encodage par biais, ce dernier est assez simple 
 Enfaite, c'est un champs binaire pour lequel nous utilisons un encodage $Binary \ Unsigned$ code une valeur numérique $X$, auquel nous ajoutons un biais.
 Le biais $B$ est une constante positive ou négative, et la valeur représenté par le champs d'exposant d'un nombre flottant est issu du calcul $X+B$.
 A savoir que le biais du champs d'exposant d'un nombre flottant IEEE-754 est toujours négatif.
-Il est qui plus est toujours équivalent à $-\left(2^{N-1}\right)+1$ où $N$ est le nombre de bits du champs d'exposant.
+Il est qui plus est toujours équivalent à $-\left(2^{\left(N-1\right)}\right)+1$ où $N$ est le nombre de bits du champs d'exposant.
 
 Etant donné que l'encodage par biais se base sur le $Binary \ Unsigned$, le champs d'exposant partage les mêmes caractéristiques que cet encodage.
 Notamment le fait que la valeur d'un bit à $1$ de poids $i$ est strictement supérieur à la somme des poids inférieurs à $i$.
@@ -233,14 +233,16 @@ C'est pourquoi la norme ampute le significande de sa partie entière, indépende
 L'intérêt c'est que le champs reste de la même taille ($10$ bits pour un $Half \ Precision$), mais que nous gagnons un bit de précision sur le codage d'un nombre.
 C'est d'ailleurs la raison derrière le nom de mantisse tronquée.
 
-La norme IEEE-754 définit aussi un champs d'exposant qui correspond au multiplicande de l'écriture scientifique binaire d'un nombre $F$.
+Le standard IEEE-754 définit aussi un champs d'exposant qui correspond au multiplicande de l'écriture scientifique binaire d'un nombre $F$.
 Je conseille une relecture du chapitre sur le multiplicande si un rafraichissement est nécessaire.
 Je cite "Le multiplicande est le facteur $2^{-c}$ qui multiplie le significande $S$.", mais le champs d'exposant ne correspond qu'à l'exposant $-c$ du multiplicande et non à la puissance de $2$ en sa totalité. 
 Rappellons que la variable $c$ représente le nombre de rang de décalage de la virgule du nombre $F$ pour le transformé en un significande, et que lorsque $\left(c \lt 0\right)$ cela insinue un décalage vers la gauche et inversement pour $\left(c \gt 0\right)$.
-Le multiplicande se base sur ce qui a été dit dans les deux derniers paragraphes du chapitre sur le multiplicande pour déplacé la virgule du significande, du bon nombre de rang, et dans la bonne direction.
-En gros si la valeur de l'exposant codé dans le champs est négative, alors le décalage de la virgule du significande se fera vers la gauche et du nombre de rang codé par le champs.
-Au contraire, si cette valeur est positive, la virgule du significande sera décalée vers la droite et qui plus est toujours du nombre de rang codé par le champs.
-Ce champs d'exposant possède néanmoins une taille qui varie en fonction du format des nombres flottants, pour un format $Half \ Precision$ sa taille est de $5$ bits.
+Le champs d'exposant se base sur ce qui a été dit dans les deux derniers paragraphes du chapitre sur le multiplicande pour déplacé la virgule du significande, du bon nombre de rang, et dans la bonne direction.
+En gros, le champs d'exposant code le résultat de la négation de $c$, ce qui a pour effet d'inversé le sens de décalage sans touché pour autant au nombre de rang à décalé.
+Si la valeur de l'exposant codé dans le champs est négative, alors le décalage de la virgule du significande se fera vers la gauche et du nombre de rang codé par le champs.
+Au contraire, si cette valeur est positive, la virgule du significande sera décalée vers la droite et sera toujours déplacé du nombre de rang codé par le champs.
+Ce champs d'exposant possède néanmoins une taille $N$ qui varie en fonction du format des nombres flottants, pour un format $Half \ Precision$ sa taille est de $5$ bits.
+Rappellons aussi que le champs utilise un encodage par biais dont le biais équivaut à $-\left(2^{\left(N-1\right)}\right)+1$, comme mentionné dans l'introduction.
 
 // finir explications sur le champs d'exposant si nécessaire
 
