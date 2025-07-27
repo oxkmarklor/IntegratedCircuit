@@ -244,7 +244,22 @@ Au contraire, si cette valeur est positive, la virgule du significande sera déc
 Ce champs d'exposant possède néanmoins une taille $N$ qui varie en fonction du format des nombres flottants, pour un format $Half \ Precision$ sa taille est de $5$ bits.
 Rappellons aussi que le champs utilise un encodage par biais dont le biais équivaut à $-\left(2^{\left(N-1\right)}\right)+1$, comme mentionné dans l'introduction.
 
-// finir explications sur le champs d'exposant si nécessaire
+Pour finir, je vais enfin pouvoir expliqué pourquoi le circuit électronique traite les champs d'exposant $E$ des opérandes $\alpha$ et $\beta$ avant les champs de mantisse tronquée $T$ de ces même opérandes.
+
+Nous avons vus que l'encodage IEEE-754 d'un nombre flottant $F$ a un champs de mantisse tronquée $T$ qui correspond au significande de l'écriture scientifique de ce même nombre.
+Aussi, le champs d'exposant $E$ correspond à la puissance à laquelle nous élevons la base $2$ qui multiplie ou divise la valeur présente dans la mantisse tronquée $T$, au travers d'un décalage de la virgule du champs.
+Nous avons vu dans le chapitre sur le multiplicande, comment est-ce qu'en écriture scientifique binaire nous pouvions obtenir le nombre d'origine $F$ depuis le significande $S$. Précisémment au travers du calcul suivant $F = \left(S\times 2^{-c}\right)$.
+En tenant compte de ce qui a été dit plus haut, nous en déduisons que pour l'encodage IEEE-754 du nombre $F$ alors $F = \left(T\times 2^E\right)$.
+
+Mais n'oublions pas que si le significande de l'écriture scientifique du nombre $F$ est compris dans l'intervalle de valeur suivante $\left[1;2\right[$, c'est donc aussi le cas du champs de la mantisse tronquée $T$.
+
+Au travers du calcul suivant $\left(T\times 2^E\right)$ nous observons quelques chose d'intéressant.
+Par essence $\left(2^i = 2\times 2^{\left(i-1\right)}\right)$.
+Etant donné que la valeur codé dans le champs de mantisse tronquée $T$ est strictement inférieur à $2$, alors même pour $T = 1.999..999$ nous obtenons pour $\left(T\times 2^E\right)$ une valeur strictement inférieur à $\left(T\times 2^{\left(E+1\right)}\right)$.
+
+
+
+
 
 // pourquoi traité les champs d'exposant avant les champs de mantisse tronquée
 
