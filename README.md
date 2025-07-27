@@ -96,7 +96,9 @@ Les opérandes ne font alors plus que $15$ bits (omission du bit de signe).
 Nous allons commencé par chercher si le champs d'exposant $E$ de $\beta$ est plus grand que celui de $\alpha$ $\left(E_{\beta} \gt E_{\alpha}\right)$.
 Pour comprendre pourquoi nous traitons les champs d'exposants $E_{\alpha}$ et $E_{\beta}$ avant ceux des mantisses tronquées $T$ de nos opérandes, il faut se penché sur l'écriture scientifique binaire sur lequel repose l'encodage IEEE-754 des nombres flottants.
 
-Pour transformé au format IEEE-754 le nombre flottant $F$ codé classiquement en binaire, il faut convertir le nombre en un significande ou mantisse binaire.
+// peut être faire une réf à l'introduction
+
+Pour transformé le nombre flottant $F$ codé classiquement en binaire en son écriture scientifique, il faut convertir le nombre en un significande ou mantisse binaire.
 Le significande est un nombre dont la valeur est compris dans l'intervalle suivante $\left[1;2\right[$, ce qui veut dire que la partie entière du significande doit être à $1$.
 Qui plus est, le significande s'obtient en déplaçant la virgule du nombre $F$ de sa position initial jusque devant le $MSB1$ du nombre, ce qui a pour effet de modifié la valeur de $F$.
 Une exception est faite pour $F = 0$, alors le significande peut être exceptionellement nulle.
