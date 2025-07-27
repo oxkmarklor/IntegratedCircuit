@@ -244,32 +244,30 @@ Au contraire, si cette valeur est positive, la virgule du significande sera déc
 Ce champs d'exposant possède néanmoins une taille $N$ qui varie en fonction du format des nombres flottants, pour un format $Half \ Precision$ sa taille est de $5$ bits.
 Rappellons aussi que le champs utilise un encodage par biais dont le biais équivaut à $-\left(2^{\left(N-1\right)}\right)+1$, comme mentionné dans l'introduction.
 
-Pour finir, je vais enfin pouvoir expliqué pourquoi le circuit électronique traite les champs d'exposant $E$ des opérandes $\alpha$ et $\beta$ avant les champs de mantisse tronquée $T$ de ces même opérandes.
+Pour finir, je vais enfin pouvoir expliqué pourquoi le circuit électronique traite les champs d'exposant $E$ des opérandes $\alpha$ et $\beta$, avant les champs de mantisse tronquée $T$ de ces même opérandes.
 
 Nous avons vus que l'encodage IEEE-754 d'un nombre flottant $F$ a un champs de mantisse tronquée $T$ qui correspond au significande de l'écriture scientifique de ce même nombre.
-Aussi, le champs d'exposant $E$ correspond à la puissance à laquelle nous élevons la base $2$ qui multiplie ou divise la valeur présente dans la mantisse tronquée $T$, au travers d'un décalage de la virgule du champs.
+Aussi, le champs d'exposant $E$ correspond à la puissance $-c$ du multiplicande, puissance avec laquelle nous élevons la base $2$ qui multiplie ou divise la valeur présente dans la mantisse tronquée $T$.
 Nous avons vu dans le chapitre sur le multiplicande, comment est-ce qu'en écriture scientifique binaire nous pouvions obtenir le nombre d'origine $F$ depuis le significande $S$. Précisémment au travers du calcul suivant $F = \left(S\times 2^{-c}\right)$.
-En tenant compte de ce qui a été dit plus haut, nous en déduisons que pour l'encodage IEEE-754 du nombre $F$ alors $F = \left(T\times 2^E\right)$.
+En tenant compte de ce qui a été dit plus haut, nous en déduisons qu'en IEEE-754 le nombre $F$ vaut alors $\left(T\times 2^E\right)$.
 
-Mais n'oublions pas que si le significande de l'écriture scientifique du nombre $F$ est compris dans l'intervalle de valeur suivante $\left[1;2\right[$, c'est donc aussi le cas du champs de la mantisse tronquée $T$.
+Mais n'oublions pas que si le significande de l'écriture scientifique du nombre $F$ est compris dans l'intervalle de valeur suivante $\left[1;2\right[$, c'est aussi le cas du champs de la mantisse tronquée $T$.
 
 Au travers du calcul suivant $\left(T\times 2^E\right)$ nous observons quelques chose d'intéressant.
 Par essence $\left(2^i = 2\times 2^{\left(i-1\right)}\right)$.
-Etant donné que la valeur codé dans le champs de mantisse tronquée $T$ est strictement inférieur à $2$, alors même pour $T = 1.999..999$ nous obtenons pour $\left(T\times 2^E\right)$ une valeur strictement inférieur à $\left(T\times 2^{\left(E+1\right)}\right)$.
+Etant donné que la valeur codé dans le champs de la mantisse tronquée $T$ est strictement inférieur à $2$, alors même pour $T = 1.99..9$ nous obtenons pour $\left(T\times 2^E\right)$ une valeur strictement inférieur à $\left(T\times 2^{\left(E+1\right)}\right)$.
+Nous voyons ici pourquoi est ce que le champs d'exposant $E$ des opérandes sont traités avant les champs de mantisse tronquée $T$.
 
+Imaginons que pour deux opérandes $\alpha$ et $\beta$ nous voulions vérifié si $\left(\vert\beta\vert \gt \vert\alpha\vert\right)$:
+  - Si $\left(E_{\alpha} \gt E_{\beta}\right)$ alors nous savons que la comparaison échoue car $\left(T_{\alpha}\times 2^{E_{\alpha}}\right) \gt \left(T_{\beta}\times 2^{E_{\beta}}\right)$ et ce même si $T_{\alpha} = 1.0_{10}$ pendant que $T_{\beta} = 1.99..9$.
 
+  - Si $\left(E_{\beta} \gt E_{\alpha}\right)$ alors la comparaison réussie cette fois-ci, car $\left(T_{\beta}\times 2^{E_{\beta}}\right) \gt \left(T_{\alpha}\times 2^{E_{\alpha}}\right)$ et ce même si $T_{\beta} = 1.0_{10}$ pendant que $T_{\alpha} = 1.99..9$.
 
+Mais il existe une troisième possibilité bien évidemment, $\left(E_{\alpha} = E_{\beta}\right)$.
+Dans ce cas spécifique, les produits $\left(T_{\alpha}\times 2^{E_{\alpha}}\right)$ ainsi que $\left(T_{\beta}\times 2^{E_{\beta}}\right)$ ont un facteur commun qui est la puissance de $2$.
+Par conséquent tout ne dépend que des champs $T_{\alpha}$ et $T_{\beta}$ pour pouvoir départagé si $\vert\beta\vert$ est strictement supérieur à $\vert\alpha\vert$ ou non.
 
-
-// pourquoi traité les champs d'exposant avant les champs de mantisse tronquée
-
-
-
-
-
-// faire le pont entre l'écriture scientifique binaire et l'encodage IEEE-754 des nombres flottants.
-
-// expliquer pourquoi le champs d'exposant E d'un flottant IEEE-754 doit être prit en compte par le circuit avant le champs T lui même.
+Nous comprenons désormais pourquoi le circuit électronique, qui a pour but de vérifié la supériorité stricte d'un opérande envers l'autre, traite d'abord les champs d'exposant $E$ des opérandes $\alpha$ et $\beta$ puis ensuite les champs de mantisse tronquée $T$.
 
 -- -
 
