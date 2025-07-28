@@ -189,7 +189,7 @@ La virgule de $F$ est déplacé vers la droite et le nombre a alors été multip
 Ce coup ci, pour retrouver $F$, il faudra divisé la valeur de $S$ par la puissance de $2$ qui a multiplié $F$.
 Nous savons que $S = \left(F\times 2^c\right)$, alors nous divisons $S$ par $2^c$ comme ceci $\left(S\div 2^c\right)$ et nous tombons une nouvelle fois sur $\left(S\times 2^{-c}\right)$.
 
-Nous retrouvons dans tout les cas le même calcul $\left(S\times 2^{-c}\right)$ permettant de retrouver le nombre d'origine $F$, le multiplicande est le facteur $2^{-c}$. 
+Nous retombons dans tout les cas le même calcul $\left(S\times 2^{-c}\right)$ permettant de retrouver le nombre d'origine $F$, le multiplicande est le facteur $2^{-c}$. 
 Mais nous pouvons exprimé les choses de manière différentes, ce qui nous servira pour plus tard.
 
 Pour la transformation d'un nombre flottant $F$ en un significande $S$, si la virgule de $F$ a été déplacé de $c$ rangs vers la droite alors $\left(c \gt 0\right)$.
@@ -199,7 +199,7 @@ Le nombre de rang de décalage reste le même mais le sens de décalage passe de
 
 Dans le cas contraire, la transformation de $F$ en $S$ est due à un décalage de la virgule de $F$ de $\vert c \vert$ rangs vers la gauche, où $\left(c \lt 0\right)$.
 Pour obtenir la valeur du nombre d'origine $F$, il faudra alors que le significande $S$ voit sa virgule être décalée de $\vert c \vert$ rangs vers la droite.
-Rappellons que $c$ est négatif, la négation de $c$ permettra donc d'inversé le sens de décalage $\left(-c\right)$.
+Rappellons que $c$ est négatif, la négation de $c$ permettra donc une nouvelle fois d'inversé le sens de décalage $\left(-c\right)$.
 
 Nous remarquons que les deux explications donne les même conclusions, il faut négationné $c$.
 
@@ -217,7 +217,7 @@ Nous avons déjà abordé le sujet de l'encodage de ces champs dans l'introducti
 
 Le champs de la mantisse tronquée correspond au significande d'un nombre représenté en écriture scientifique binaire.
 Faisons un rapide rappelle sur ce qu'est le significande.
-Le significande $S$ est un nombre dont la valeur se trouve être dans l'intervalle de $\left[1;2\right[$, il est souvent le résultat d'un calcul qui se base sur le nombre d'origine $F$ à représenté en écriture scientifique.
+Le significande $S$ est un nombre dont la valeur se trouve être dans l'intervalle de $\left[1;2\right[$, il est souvent le résultat d'une transformation (un calcul) sur un nombre $F$ à représenté en écriture scientifique.
 Si jamais $\left(F \ge 2\right) \vee \left(F \lt 1\right)$ alors le nombre $F$ sera divisé ou multiplié par une puissance de $2$ que nous nommons $N$, et qui permettra donc de généré un significande $S$ qui respecte l'intervalle stipulé ci-dessus.
 
 En somme, le significande est un nombre à virgule qui est donc composé d'une partie entière ainsi que d'une partie fractionnaire.
@@ -225,53 +225,52 @@ Vu que la valeur du significande doit être strictement inférieur à $2$ ou $10
 Par conséquent la partie entière du significande n'est codé que sur un bit.
 Mais en soit le bit de la partie entière ne peut pas être à $0$, car il est nécessaire que la valeur du significande soit comprise dans l'intervalle mentionné ci-dessus.
 Donc le bit de la partie entière est à $1$.
-Pour résumer $\left(S \ge 1\right) \wedge \left(S \lt 2\right)$ nous force à dire que la partie entière de $S$ est à $1$.
-En plus de cela nous avons la partie fractionnaire du significande à prendre en compte, qui est logiquement strictement inférieur à $1$.
-Finalement, la valeur du significande est donc la somme de la partie entière et de la partie fractionnaire, ce qui veut dire que $\left(S \lt 2\right)$.
+Pour résumer $\left(S \ge 1\right) \wedge \left(S \lt 2\right)$ nous force à dire que la partie entière du significande $S$ est à $1$.
+En plus de cela, nous avons la partie fractionnaire du significande à prendre en compte, qui est logiquement strictement inférieur à $1$.
+Finalement, la valeur du significande est la somme de la partie entière et de la partie fractionnaire, ce qui veut dire que $\left(S \lt 2\right)$.
 
-La norme IEEE-754 définit un champs de mantisse tronquée de $N$ bits pour chaque format de nombre flottant. 
+La norme IEEE-754 définit un champs de mantisse tronquée de $X$ bits pour chaque format de nombre flottant. 
 Prenons pour exemple le format $Half \ Precision$ que gère le circuit électronique en cours d'étude.
-Il s'avère que le champs de mantisse tronquée de ce format est établit à une taille de $10$ bits.
-L'entièreté d'un significande $S$ pourrait être enregistré sur ces $10$ bits, mais ce n'est pas utiles car la partie entière est toujours composé d'un seul et même bit à $1$.
+Il s'avère que le champs de la mantisse tronquée de ce format est établit à une taille de $10$ bits.
+L'entièreté d'un significande $S$ pourrait être enregistré sur ces $10$ bits (si possible), mais ce n'est pas utiles car la partie entière est toujours composé d'un seul et même bit à $1$, comme nous venons de le voir.
 C'est pourquoi la norme ampute le significande de sa partie entière, indépendemment du format de flottant.
 L'intérêt c'est que le champs reste de la même taille ($10$ bits pour un $Half \ Precision$), mais que nous gagnons un bit de précision sur le codage d'un nombre.
 C'est d'ailleurs la raison derrière le nom de mantisse tronquée.
 
-Le standard IEEE-754 définit aussi un champs d'exposant qui correspond au multiplicande de l'écriture scientifique binaire d'un nombre $F$.
+Le standard IEEE-754 définit aussi un champs d'exposant, qui correspond en partie au multiplicande de l'écriture scientifique binaire d'un nombre $F$.
 Je conseille une relecture du chapitre sur le multiplicande si un rafraichissement est nécessaire.
-Je cite "Le multiplicande est le facteur $2^{-c}$ qui multiplie le significande $S$.", mais le champs d'exposant ne correspond qu'à l'exposant $-c$ du multiplicande et non à la puissance de $2$ en sa totalité. 
-Rappellons que la variable $c$ représente le nombre de rang de décalage de la virgule du nombre $F$ pour le transformé en un significande, et que lorsque $\left(c \lt 0\right)$ cela insinue un décalage vers la gauche et inversement pour $\left(c \gt 0\right)$.
-Le champs d'exposant se base sur ce qui a été dit dans les deux derniers paragraphes du chapitre sur le multiplicande pour déplacé la virgule du significande, du bon nombre de rang, et dans la bonne direction.
-En gros, le champs d'exposant code le résultat de la négation de $c$, ce qui a pour effet d'inversé le sens de décalage sans touché pour autant au nombre de rang à décalé.
+Je cite "le multiplicande est le facteur $2^{-c}$.", mais en réalité le champs d'exposant lui ne correspond qu'à l'exposant $-c$ du multiplicande, et non à la puissance de $2$ en sa totalité. 
+Rappellons que la variable $c$ représente le nombre de rang par lequel décalé la virgule du nombre $F$ pour le transformé en un significande, et que lorsque $\left(c \lt 0\right)$ cela témoigne d'un décalage vers la gauche, inversement pour $\left(c \gt 0\right)$.
+Le champs d'exposant se base sur ce qui a été dit dans les deux derniers paragraphes du chapitre sur le multiplicande, pour déplacé la virgule du significande du bon nombre de rang, et dans la bonne direction.
+
+En gros, le champs d'exposant code le résultat de la négation de $c$, ce qui a pour effet d'inversé le sens de décalage de la virgule, sans touché pour autant au nombre de rang à décalé.
 Si la valeur de l'exposant codé dans le champs est négative, alors le décalage de la virgule du significande se fera vers la gauche et du nombre de rang codé par le champs.
 Au contraire, si cette valeur est positive, la virgule du significande sera décalée vers la droite et sera toujours déplacé du nombre de rang codé par le champs.
-Ce champs d'exposant possède néanmoins une taille $N$ qui varie en fonction du format des nombres flottants, pour un format $Half \ Precision$ sa taille est de $5$ bits.
-Rappellons aussi que le champs utilise un encodage par biais dont le biais équivaut à $-\left(2^{\left(N-1\right)}\right)+1$, comme mentionné dans l'introduction.
+Ce champs d'exposant possède néanmoins une taille $X$ qui varie en fonction du format des nombres flottants, pour un format $Half \ Precision$ sa taille est de $5$ bits.
 
 Pour finir, je vais enfin pouvoir expliqué pourquoi le circuit électronique traite les champs d'exposant $E$ des opérandes $\alpha$ et $\beta$, avant les champs de mantisse tronquée $T$ de ces même opérandes.
 
-Nous avons vus que l'encodage IEEE-754 d'un nombre flottant $F$ a un champs de mantisse tronquée $T$ qui correspond au significande de l'écriture scientifique de ce même nombre.
-Aussi, le champs d'exposant $E$ correspond à la puissance $-c$ du multiplicande, puissance avec laquelle nous élevons la base $2$ qui multiplie ou divise la valeur présente dans la mantisse tronquée $T$.
-Nous avons vu dans le chapitre sur le multiplicande, comment est-ce qu'en écriture scientifique binaire nous pouvions obtenir le nombre d'origine $F$ depuis le significande $S$. Précisémment au travers du calcul suivant $F = \left(S\times 2^{-c}\right)$.
-En tenant compte de ce qui a été dit plus haut, nous en déduisons qu'en IEEE-754 le nombre $F$ vaut alors $\left(T\times 2^E\right)$.
+Nous avons vu dans le chapitre sur le multiplicande, comment est ce qu'en écriture scientifique binaire nous pouvions obtenir le nombre d'origine $F$ depuis le significande $S$. Précisémment au travers du calcul suivant $F = \left(S\times 2^{-c}\right)$.
+En tenant compte de tout ce qui a déjà été dit plus haut, nous en déduisons qu'en IEEE-754 le nombre $F$ vaut alors $\left(T\times 2^E\right)$.
 
-Mais n'oublions pas que si le significande de l'écriture scientifique du nombre $F$ est compris dans l'intervalle de valeur suivante $\left[1;2\right[$, c'est aussi le cas du champs de la mantisse tronquée $T$.
+N'oublions pas que si le significande de l'écriture scientifique du nombre $F$ est compris dans l'intervalle de valeur suivante $\left[1;2\right[$.
+Alors c'est aussi le cas du champs de la mantisse tronquée $T$ (en prenant en compte le bit à $1$ de la partie entière qui est rendu implicite).
 
 Au travers du calcul suivant $\left(T\times 2^E\right)$ nous observons quelques chose d'intéressant.
 Par essence $\left(2^i = 2\times 2^{\left(i-1\right)}\right)$.
-Etant donné que la valeur codé dans le champs de la mantisse tronquée $T$ est strictement inférieur à $2$, alors même pour $T = 1.99..9$ nous obtenons pour $\left(T\times 2^E\right)$ une valeur strictement inférieur à $\left(T\times 2^{\left(E+1\right)}\right)$.
-Nous voyons ici pourquoi est ce que le champs d'exposant $E$ des opérandes sont traités avant les champs de mantisse tronquée $T$.
+Etant donné que la valeur codé dans le champs de la mantisse tronquée $T$ est strictement inférieur à $2$, alors même pour $T = 1.99..9$ nous obtenons pour $\left(T\times 2^E\right)$ une valeur strictement inférieur à $\left(1\times 2^{\left(E+1\right)}\right)$.
+Nous voyons ici pourquoi est ce que les champs d'exposant $E$ des opérandes sont traités avant les champs de mantisse tronquée $T$.
 
 Imaginons que pour deux opérandes $\alpha$ et $\beta$ nous voulions vérifié si $\left(\vert\beta\vert \gt \vert\alpha\vert\right)$:
   - Si $\left(E_{\alpha} \gt E_{\beta}\right)$ alors nous savons que la comparaison échoue car $\left(T_{\alpha}\times 2^{E_{\alpha}}\right) \gt \left(T_{\beta}\times 2^{E_{\beta}}\right)$ et ce même si $T_{\alpha} = 1.0_{10}$ pendant que $T_{\beta} = 1.99..9$.
 
-  - Si $\left(E_{\beta} \gt E_{\alpha}\right)$ alors la comparaison réussie cette fois-ci, car $\left(T_{\beta}\times 2^{E_{\beta}}\right) \gt \left(T_{\alpha}\times 2^{E_{\alpha}}\right)$ et ce même si $T_{\beta} = 1.0_{10}$ pendant que $T_{\alpha} = 1.99..9$.
+  - Si $\left(E_{\alpha} \lt E_{\beta}\right)$ alors la comparaison réussie cette fois-ci, car $\left(T_{\alpha}\times 2^{E_{\alpha}}\right) \lt \left(T_{\beta}\times 2^{E_{\beta}}\right)$ et ce même si $T_{\beta} = 1.0_{10}$ pendant que $T_{\alpha} = 1.99..9$.
 
 Mais il existe une troisième possibilité bien évidemment, $\left(E_{\alpha} = E_{\beta}\right)$.
 Dans ce cas spécifique, les produits $\left(T_{\alpha}\times 2^{E_{\alpha}}\right)$ ainsi que $\left(T_{\beta}\times 2^{E_{\beta}}\right)$ ont un facteur commun qui est la puissance de $2$.
 Par conséquent tout ne dépend que des champs $T_{\alpha}$ et $T_{\beta}$ pour pouvoir départagé si $\vert\beta\vert$ est strictement supérieur à $\vert\alpha\vert$ ou non.
 
-Nous comprenons désormais pourquoi le circuit électronique, qui a pour but de vérifié la supériorité stricte d'un opérande envers l'autre, traite d'abord les champs d'exposant $E$ des opérandes $\alpha$ et $\beta$ puis ensuite les champs de mantisse tronquée $T$.
+Nous comprenons désormais pourquoi le circuit électronique, qui a pour but de vérifié la supériorité stricte d'un opérande envers l'autre, traite d'abord les champs d'exposant $E$ des opérandes $\alpha$ et $\beta$, puis ensuite les champs de mantisse tronquée $T$ si nécessaire.
 
 -- -
 
