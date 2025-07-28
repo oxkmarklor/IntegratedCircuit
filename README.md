@@ -51,9 +51,8 @@ Encore une fois, ceci n'est pas propre à la base binaire mais à nimporte quel 
 
 Après cette rapide introduction à l'encodage $Binary \ Unsigned$, passons au sujet suivant qui est l'encodage IEEE-754.
 
-Le circuit a pour but principal de produire des comparaisons entre deux opérandes flottants, nous allons donc rapidement revenir sur ce que sont les nombres à virgule flottante 
-du standard IEEE-754.
-Globalement, la norme définit trois éléments qui composent chaque nombre à virgule flottante:
+Le circuit a pour but principal de produire des comparaisons entre deux opérandes flottants encodé en IEEE-754.
+La norme IEEE-754 définit trois éléments qui composent chaque nombre à virgule flottante:
 - Le bit de signe
 - Un champs binaire d'exposant
 - Un autre champs binaire pour la mantisse tronquée
@@ -66,7 +65,7 @@ Le biais $B$ est une constante positive ou négative, et la valeur représenté 
 A savoir que le biais du champs d'exposant d'un nombre flottant IEEE-754 est toujours négatif.
 Il est qui plus est toujours équivalent à $-\left(2^{\left(N-1\right)}\right)+1$ où $N$ est le nombre de bits du champs d'exposant.
 
-Etant donné que l'encodage par biais se base sur le $Binary \ Unsigned$, le champs d'exposant partage les mêmes caractéristiques que cet encodage.
+Etant donné que l'encodage par biais se base sur le $Binary \ Unsigned$, le champs d'exposant partage les même propriétés que cet encodage.
 Notamment le fait que la valeur d'un bit à $1$ de poids $i$ est strictement supérieur à la somme des poids inférieurs à $i$.
 Ce qui est normal vu que nous ne faisons qu'ajouté un biais constant à chaque nombre encodé en $Binary \ Unsigned$.
 
@@ -83,8 +82,8 @@ Ce qu'il y a d'important à remarqué pour la partie fractionnaire, c'est que la
 Autrement dit, pour le nombre fractionnaire $N$ dont ont ne prête attention qu'au bit à $1$ de poids $i$ alors $\left(1 \times 2^i \gt \left(\sum_{i=i-1}^{lsb\left(N\right)} N_i \times 2^i\right)\right)$.
 
 Pour en revenir au sujet de la mantisse tronquée, elle est composée des bits de la partie entière et de la partie fractionnaire d'un nombre flottant.
-Vu que la partie entière et fractionnaire d'un nombre flottant partagent les caractéristiques du $Binary \ Unsigned$, c'est aussi le cas de la mantisse tronquée elle même.
-Nous verrons que le comparateur se sert de cela pour effectué les comparaisons.
+Vu que la partie entière et fractionnaire d'un nombre flottant partagent les propriétés du $Binary \ Unsigned$, c'est aussi le cas de la mantisse tronquée elle même.
+Nous verrons dans la démonstration mathématique qu'il est utile que le champs d'exposant ainsi que celui de la mantisse tronquée aient les même propriétés.
 
 -- -
 
@@ -298,8 +297,7 @@ Le résultat est un champs binaire $\tau$ composé de $5$ bits, et si l'un (ou p
 
       - Par conséquent si $\left(\sum_{\sigma+1}^{14} \left(E_{\alpha\sigma} \times 2^{\sigma}\right) = r \right)$ alors $\left(E_{\beta} \gt E_{\alpha}\right)$, sinon  $\left(\sum_{\sigma+1}^{14} \left(E_{\alpha\sigma} \times 2^{\sigma}\right) \gt r \right)$ et $\left(E_{\beta} \lt E_{\alpha}\right)$.
 
-    - Autrement $\sigma = 14$ et $\sigma$ est le $MSB1$ ainsi que le $MSB$ du champs $\tau$.
-      Comme $\left(E_{\beta\sigma} \gt E_{\alpha\sigma}\right)$ nous sommes certains que $\left(E_{\beta} \gt E_{\alpha}\right)$.
+    - Autrement $\sigma = 14$ et nous sommes certains que $\left(E_{\beta} \gt E_{\alpha}\right)$ car $Nimply\left(E_{\beta 14},E_{\alpha 14}\right) = 1$.
 
 Cependant, si le champs $\tau$ n'est composé que de $5$ bits à $0$, alors:
 
