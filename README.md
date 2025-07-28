@@ -147,11 +147,10 @@ Ou autrement dit, $F$ aura été divisé par $2^{\vert c \vert}$.
 
 Voilà pourquoi n'importe quel décalage de la virgule d'un nombre flottant $F$, engendre une multiplication ou une division du nombre par une puissance de $2$.
 
-Cependant, je parle de divisé par une puissance de $2$ un nombre flottant $F$ dans le cas d'un décalage de sa virgule vers la gauche, mais malgré que l'équation précédente fonctionne, elle ne fait pas usage de division.
+Cependant, je parle de divisé par une puissance de $2$ le nombre flottant $F$ dans le cas d'un décalage de sa virgule vers la gauche, mais malgré que l'équation précédente fonctionne, elle ne fait pas usage de division.
 Comprenons pourquoi.
 Le côté droit de cette équation $\left(F\times 2^c\right)$ est approprié pour un décalage de la virgule vers la droite.
-Car après un déplacement de la virgule de $c$ rangs vers la droite, le nombre flottant $F$ est mulitplié par $2^c$.
-Je rappelle ici que pour un décalage vers la droite $\left(c \gt 0\right)$.
+Car après un déplacement de la virgule de $c$ rangs vers la droite, le nombre flottant $F$ est mulitplié par une puissance de $2$ qui vaut $2^c$, où je rappelle que $\left(c \gt 0\right)$.
 
 Nous avons jusqu'ici utilisé des valeurs négatives de $c$ lors des décalages de virgule vers la gauche.
 Pourtant le plus intuitif aurait été de définir les même valeurs de $c$ peu importe la direction des décalages, alors faisons comme si c'était le cas depuis le début.
@@ -163,10 +162,13 @@ Initialement, nous pourrions penser avoir besoin d'une équation ressemblant à 
 J'attire l'attention sur le fait que côté droit de l'équation peut être modifié pour $\left(F\times \left(1\div 2^c\right)\right)$.
 Mais ce n'est pas fini car pour trouver l'inverse d'une puissance de $2$ tel que $2^c$, nous pouvons simplement appliqué l'opposé de l'exposant $c$ à la base $2$.
 En gros, $\left(1\div 2^c\right) = \ 2^{-c}$.
-Je me permet de rappellé que $c$ est positif.
-Mais nous pouvons alors remplacé $\left(F\times 2^{-c}\right)$ par $\left(F\times 2^c\right)$, à la condition que $c$ puisse être négatif lors d'un décalage vers la gauche de la virgule de $F$.
+Je me permet de rappellé que $\left(c \gt 0\right)$.
+Mais nous pouvons alors remplacé $\left(F\times 2^{-c}\right)$ par $\left(F\times 2^c\right)$, à la condition qu'un décalage de $x$ rangs vers la gauche de la virgule de $F$ soit représenté dans l'équation par une valeur de $c = -x$, c'est à dire négative.
 
-Voici la raison pour laquelle il vaut mieux que $c$ soit négatif lors d'un décalage vers la gauche d'une virgule, ceci nous permet de ne faire usage que d'une seule équation pour tout type de décalage, c'est cool.
+Avec $\left(F\times 2^c\right)$ nous retrouvons bien le membre droit de notre équation initial.
+De plus, nous comprenons aussi que le calcul de l'exposant $\left(i+c\right)$ du membre gauche, produit l'équivalent de $\left(i-c\right)$ dans le cas d'un décalage de la virgule de $F$ vers la gauche, car $\left(c \lt 0\right)$.
+
+Voici la raison pour laquelle il vaut mieux que $c$ soit négatif lors d'un décalage vers la gauche de la virgule, ceci nous permet de ne faire usage que d'une seule équation pour tout les sens de décalage. C'est cool.
 
 -- -
 
