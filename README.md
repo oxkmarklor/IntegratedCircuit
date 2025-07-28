@@ -125,8 +125,8 @@ Par exemple $\left(2^0 = 1\right)$ et $\left(2^{-1} = 0.5\right)$ ou autrement d
 Nous avons vus plus haut qu'avec un décalage d'un rang vers la gauche de la virgule de $F$, je cite "chaque bit de la partie entière comme de la partie fractionnaire de $F$ voit son poids être décrémenter de $1$".
 Ce qui veut dire que tout bit de $F$ passe de facteur de $2^i$ à $2^\left(i-1\right)$, et chaque bit voit donc sa valeur être divisé par $2$.
 Le calcul de la valeur de $F$ passe de la somme des bits de poids $i$ à $1$ qui multiplient $2^i$, à la somme des bits de poids $i$ à $1$ qui multiplient $2^\left(i-1\right)$.
-Pour le dire autrement, nous faisons la somme de tous les bits de $F$ après que leur valeur ait été divisé par $2$ avec le décalage.
-C'est pourquoi $F$ est divisé par $2$ avec un décalage d'un rang vers la gauche de la virgule.
+Pour le dire autrement, nous faisons la somme de tous les bits de $F$ après que leur poids (valeur) ait été divisé par $2$ avec le décalage.
+C'est pourquoi la valeur de $F$ est divisé par $2$ avec un décalage d'un rang vers la gauche de la virgule.
 
 Nous avons compris pourquoi un décalage d'un rang vers la gauche de la virgule de $F$, engendre une division par $2$ de $F$.
 Découvrons désormais les effets d'un décalage d'un rang vers la droite de la virgule de $F$, sur la valeur du nombre lui même.
@@ -137,7 +137,7 @@ Exactement comme le fait la partie gauche de l'équation ci-dessus pour un déca
 Le côté droit de cette équation nous informe que cette opération revient à multiplié le nombre $F$ par $2$.
 
 Nous sommes désormais capable de comprendre toutes les implications d'un décalage de la virgule du nombre $F$, sur la valeur du nombre lui même. 
-Prenons un décalage de $c = x$ comme exemple où $x \in \left[-\infty ;+\infty \right]$.
+Prenons un décalage de $c = x$ comme exemple, où $x \in \left[-\infty ;+\infty \right]$.
 Si $\left(c \gt 0\right)$ alors nous n'avons qu'à décalé la virgule de $c$ fois $1$ rang vers la droite.
 Vu que nous savons qu'un décalage de la virgule de $1$ rang vers la droite engendre une multiplication par $2$ du nombre $F$, alors après $c$ décalages de $1$ rang, nous aurons multiplié $F$ par $2^c$.
 Au contraire si $\left(c \lt 0\right)$, alors nous devrons décalé la virgule de $\vert c \vert$ fois $1$ rang vers la gauche.
