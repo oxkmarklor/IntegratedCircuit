@@ -1,4 +1,21 @@
-poub:  \gg \ll \in 
+Ce document contient la démonstration mathématique du circuit électronique ainsi que des explications sur les concepts les plus fondamentaux.
+
+Le document se découpe en plusieurs parties:
+  - L'encodage $Binary \ Unsigned$
+  - Le standard IEEE-754
+    - L'encodage par biais du champs d'exposant
+    - La mantisse tronquée, une historie de puissance de $2$ négative
+  - L'écriture scientifique binaire
+    - Le significande
+    - Le multiplicande
+  - Codage des informations dans un nombre flottant IEEE-754
+    - Composition du champs de mantisse tronquée et d'exposant
+  - Le circuit traite les champs d'exposant avant ceux des mantisses tronquées
+  - Démonstration mathématique
+    - Traitement des champs d'exposant
+    - Traitement des champs de mantisses tronquées
+
+# I. L'encodage $Binary \ Unsigned$
 
 Commençons par la base.
 
@@ -49,6 +66,8 @@ $$\left(1 \times 2^6 = 64\right) \gt \left(63 = \left(1 \times 2^5\right)+\left(
 
 Encore une fois, ceci n'est pas propre à la base binaire mais à nimporte quel base numérique.
 
+# II. Le standard IEEE-754
+
 Après cette rapide introduction à l'encodage $Binary \ Unsigned$, passons au sujet suivant qui est l'encodage IEEE-754.
 
 Le circuit a pour but principal de produire des comparaisons entre deux opérandes flottants encodé en IEEE-754.
@@ -59,6 +78,8 @@ La norme IEEE-754 définit trois éléments qui composent chaque nombre à virgu
 
 Ce sont les encodages utilisés dans les champs binaires d'exposant et de la mantisse tronquée que nous allons essayés de comprendre, le comparateur base toute sa logique de comparaison sur les propriétés de ces champs là.
 
+# III. L'encodage par biais du champs d'exposant
+
 Le champs d'exposant utilise un encodage par biais, ce dernier est assez simple à comprendre.
 Enfaite, c'est un champs binaire pour lequel nous utilisons un encodage $Binary \ Unsigned$ code une valeur numérique $X$, auquel nous ajoutons un biais.
 Le biais $B$ est une constante positive ou négative, et la valeur représenté par le champs d'exposant d'un nombre flottant est issu du calcul $X+B$.
@@ -68,6 +89,8 @@ Il est qui plus est toujours équivalent à $-\left(2^{\left(N-1\right)}\right)+
 Etant donné que l'encodage par biais se base sur le $Binary \ Unsigned$, le champs d'exposant partage les même propriétés que cet encodage.
 Notamment le fait que la valeur d'un bit à $1$ de poids $i$ est strictement supérieur à la somme des poids inférieurs à $i$.
 Ce qui est normal vu que nous ne faisons qu'ajouté un biais constant à chaque nombre encodé en $Binary \ Unsigned$.
+
+# IV. La mantisse tronquée, une historie de puissance de $2$ négative
 
 Pour le champs de la mantisse tronquée nous avons besoin de faire un rapide rappel sur l'encodage intial d'un nombre flottant (`le standard IEEE-754 est un enrobage plus qu'autre chose`).
 La partie entière d'un nombre flottant utilise du $Binary \ Unsigned$ pour être codé, tandis que la partie fractionnaire fait usage d'une version modifiée du $Binary \ Unsigned$.
@@ -85,7 +108,7 @@ Pour en revenir au sujet de la mantisse tronquée, elle est composée des bits d
 Vu que la partie entière et fractionnaire d'un nombre flottant partagent les propriétés du $Binary \ Unsigned$, c'est aussi le cas de la mantisse tronquée elle même.
 Nous verrons dans la démonstration mathématique qu'il est utile que le champs d'exposant ainsi que celui de la mantisse tronquée aient les même propriétés.
 
--- -
+# V. L'écriture scientifique binaire
 
 La démonstration mathématique du circuit est donc assez simple, après toutes ces explications.
 
@@ -96,6 +119,7 @@ Nous allons commencé par chercher si le champs d'exposant $E$ de $\beta$ est pl
 Pour comprendre pourquoi nous traitons les champs d'exposants $E_{\alpha}$ et $E_{\beta}$ avant ceux des mantisses tronquées $T$ de nos opérandes, il faut se penché sur l'écriture scientifique binaire sur lequel repose l'encodage IEEE-754 des nombres flottants.
 
 // peut être faire une réf à l'introduction
+# VI. Le significande
 
 Pour transformé le nombre flottant $F$ codé classiquement en binaire en son écriture scientifique, il faut convertir le nombre en un significande ou mantisse binaire.
 Le significande est un nombre dont la valeur est compris dans l'intervalle suivante $\left[1;2\right[$, ce qui veut dire que la partie entière du significande doit être à $1$.
@@ -169,7 +193,7 @@ De plus, nous comprenons aussi que le calcul de l'exposant $\left(i+c\right)$ du
 
 Voici la raison pour laquelle il vaut mieux que $c$ soit négatif lors d'un décalage vers la gauche de la virgule, ceci nous permet de ne faire usage que d'une seule équation pour tout les sens de décalage. C'est cool.
 
--- -
+# VII. Le multiplicande
 
 Nous savons désormais comment obtenir un significande.
 Le problème c'est que tout nombre flottant $F$ dont la valeur n'est pas comprise dans l'intervalle $\left[1;2\right[$ doit forcémment subir un décalage de sa virgule, et donc voir sa valeur être multiplié ou divisé par une puissance de $2$.
@@ -202,7 +226,7 @@ Rappellons que $c$ est négatif, la négation de $c$ permettra donc une nouvelle
 
 Nous remarquons que les deux explications donne les même conclusions, il faut négationné $c$.
 
--- -
+# VIII. Codage des informations dans un nombre flottant IEEE-754
 
 Nous avons déjà parler de l'encodage IEEE-754 en introduction de ce document, plus particulièrement des éléments qui le compose.
 Je rappelle que ces $3$ éléments sont des champs binaire qui codent chacun un `bit de signe`, un `exposant` ainsi qu'une ` mantisse tronquée`.
@@ -213,6 +237,8 @@ Chaque champs binaire de l'encodage IEEE-754 correspond plus ou moins à l'un de
 Par exemple, le champs du bit de signe correspond assez logiquement au signe d'un nombre, mais nous ne nous intéresserons pas plus que ça au bit de signe dans ce qui suit.
 En revanche, nous allons parlé plus en profondeur du champs d'exposant ainsi que de la mantisse tronquée.
 Nous avons déjà abordé le sujet de l'encodage de ces champs dans l'introduction, aussi je ne vais pas y revenir.
+
+# IX. Composition du champs de mantisse tronquée et du champs d'exposant
 
 Le champs de la mantisse tronquée correspond au significande d'un nombre représenté en écriture scientifique binaire.
 Faisons un rapide rappelle sur ce qu'est le significande.
@@ -247,6 +273,8 @@ Si la valeur de l'exposant codé dans le champs est négative, alors le décalag
 Au contraire, si cette valeur est positive, la virgule du significande sera décalée vers la droite et sera toujours déplacé du nombre de rang codé par le champs.
 Ce champs d'exposant possède néanmoins une taille $X$ qui varie en fonction du format des nombres flottants, pour un format $Half \ Precision$ sa taille est de $5$ bits.
 
+# X. Le circuit traite les champs d'exposant avant ceux des mantisses tronquées
+
 Pour finir, je vais enfin pouvoir expliqué pourquoi le circuit électronique traite les champs d'exposant $E$ des opérandes $\alpha$ et $\beta$, avant les champs de mantisse tronquée $T$ de ces même opérandes.
 
 Nous avons vu dans le chapitre sur le multiplicande, comment est ce qu'en écriture scientifique binaire nous pouvions obtenir le nombre d'origine $F$ depuis le significande $S$. Précisémment au travers du calcul suivant $F = \left(S\times 2^{-c}\right)$.
@@ -271,11 +299,13 @@ Par conséquent tout ne dépend que des champs $T_{\alpha}$ et $T_{\beta}$ pour 
 
 Nous comprenons désormais pourquoi le circuit électronique, qui a pour but de vérifié la supériorité stricte d'un opérande envers l'autre, traite d'abord les champs d'exposant $E$ des opérandes $\alpha$ et $\beta$, puis ensuite les champs de mantisse tronquée $T$ si nécessaire.
 
--- -
+# XI. Démonstration mathématique
 
 // pourquoi traité E avant T
 
 Nous avons vu que ce champs binaire de $5$ bits code la valeur de l'exposant avec un encodage par biais, mais aussi que cet encodage partage toutes les caractéristiques de l'encodage $Binary$ $Unsigned$.
+
+# XII. Traitement des champs d'exposant
 
 - Voici la définition de l'opération logique $Nimply\left(X,Y\right)\mapsto X \wedge Not(Y)$ dont nous allons nous sevrir.
 
@@ -316,6 +346,8 @@ Cependant, si le champs $\tau$ n'est composé que de $5$ bits à $0$, alors:
 Pour résumer, si les champs $E_{\beta} \neq E_{\alpha}$ alors soit $\left(E_{\beta} \gt E_{\alpha}\right)$ et nous savons que $\left(\left|\alpha\right| \lt \left|\beta\right|\right)$, ou alors $\left(E_{\beta} \lt E_{\alpha}\right)$ et $\left(\left|\alpha\right| \gt \left|\beta\right|\right)$.
 
 // Explication du traitement de la mantisse tronquée?
+
+# XIII. Traitement des champs des mantisses tronquées 
 
 Mais rappellons que quand bien même $\left(E_{\beta} = E_{\alpha}\right)$, ce n'est pas pour autant que la comparaison $\left(\left|\alpha\right| \gt \left|\beta\right|\right)$ échoue.
 Les opérandes flottants $\alpha$ et $\beta$ ont aussi un champs de mantisse tronquée $T$ de $10_{10}$ bits.
