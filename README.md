@@ -15,7 +15,7 @@ Le document se découpe en plusieurs parties:
     - Traitement des champs d'exposant
     - Traitement des champs de mantisses tronquées
 
-# I. L'encodage $Binary \ Unsigned$
+# I. L'encodage Binary Unsigned
 
 Commençons par la base.
 
@@ -23,13 +23,13 @@ Un bit est symboliquement représenté par un $0$ ou un $1$.
 Un champs binaire est quant à lui composé d'un ensemble de bit, c'est à dire d'un ensemble de $0$ et de $1$.
 
 Ce sont ces champs binaire qui nous permettent de représenté des nombres dans un ordinateur, faire des calculs, mémorisé des résultats.
-Il y a cependant plein de façon de représenté des nombres dans un champs binaire, nous parlons d'encodage des nombres.
+Il y a cependant plein de façon de représenté des nombres dans un champs binaire, nous parlons d'_encodage_ des nombres.
 Tout les encodages ne se valent pas car il y en a des plus efficasse que d'autre en fonction des besoins, prenons un exemple.
 Pour un champs de $16$ bits nous pourrions calculé la somme des bits pour représenter un nombre.
 Avec cet encodage nous ne pourrions codé que des valeurs entre $0$ et $16$ inclus, ce qui n'est pas optimal pour bien des situations.
-Mais parmis les multiples encodage existant, le plus connu de tous porte le nom de $Binary \ Unsigned$.
+Mais parmis les multiples encodage existant, le plus connu de tous porte le nom de __Binary Unsigned__.
 
-Le $Binary \ Unsigned$ utilise les mêmes primitives que la base décimale (celle que nous utilisons tous) pour représenter des nombres, `des puissances`.
+Le __Binary Unsigned__ utilise les mêmes primitives que la base décimale (celle que nous utilisons tous) pour représenter des nombres, _des puissances_.
 Pour représenter la valeur $103$ en décimale, nous décomposons en réalité chaque chiffre du nombre pour les multipliés avec une puissance de $10_{10}$ adéquat, ensuite nous faisons la somme des résultats de chaque produit.
 Regardez ci-dessous.
 
@@ -40,13 +40,13 @@ Nous retrouvons chacun des chiffres du nombre entrain de multiplié une puissanc
 Remarquons que le chiffre des unités $3$ est facteur de $10_{10}$ à la puissance $0$, le chiffre d'un ordre plus grand (celui des dizaines) est le facteur de $10_{10}$ à la puissance $1$ et enfin le chiffre des centaines multiplie $10_{10}$ à la puissance $2$.
 La valeur des puissances croix en fonction de la position du chiffre, qui plus est, elle commence à $0$.
 
-Ceci n'est pas propre à la base décimale mais à `nimporte quel base numérique`, comme la base binaire par exemple.
+Ceci n'est pas propre à la base décimale mais à _n'importe quel base numérique_, comme la __base binaire__ par exemple.
 La base binaire (ou base $2$) utilise les chiffres $0$ et $1$ plutôt que ceux de la base décimale allant de $0$ à $9$.
-Par ailleurs, un tel chiffre s'appelle un bit, ce qui est la contraction de $Binary$ $Digit$.
+Par ailleurs, un tel chiffre s'appelle un _bit_, ce qui est la contraction de __Binary Digit__.
 Aussi, les puissances de $10_{10}$ sont remplacés par des puissances de $2$.
-Nous venons tout juste de décrire ce sur quoi se base l'encodage $Binary \ Unsigned$.
+Nous venons tout juste de décrire ce sur quoi se base l'encodage __Binary Unsigned__.
 
-Un champs binaire pour lequel nous utilisons un encodage $Binary \ Unsigned$ associe une puissance de $2$ positive à chaque bit du champs.
+Un champs binaire pour lequel nous utilisons un encodage __Binary Unsigned__ associe une puissance de $2$ positive à chaque bit du champs.
 Le champs représente un nombre $X$ par la somme des produits entre la valeur de chaque bit et la puissance de $2$ associée.
 Techniquement, vu que dans chacun des produits la puissance de $2$ est multiplié par son bit associé, qui est à $0$ ou à $1$, soit le résultat est nulle ou soit il est équivalent à la puissance de $2$ associé au bit sous-jacent.
 C'est pourquoi vous entenderez souvent dire (ici compris), qu'un nombre $X$ est représenté par la somme des puissances de $2$ dont le bit est à $1$.
@@ -54,53 +54,53 @@ Les puissances de $2$ vont de $0$ à $N - 1$, ou la valeur de $N$ est le nombre 
 Par ailleurs, il est souvent dit que chaque bit a un "poids".
 Les poids correspondent aux exposants des puissances de $2$ associées à chacun des bits, plus cet exposant sera grand et plus un bit aura d'importance dans la représentation d'un nombre. 
 
-Il est aussi définit ce que nous qualifions de $LSB$ pour $Least \ Significant \ Bit$.
-Ce terme désigne le bit de poids le plus faible d'un champs, donc le bit de poids $0$ pour un champs dont l'encodage est en $Binary \ Unsigned$.
-Au contraire, le bit de poids le plus fort d'un champs binaire est ce que l'ont appelle le $MSB$ pour $Most \ Significant \ Bit$.
-Il est aussi possible de faire référence au bit à $1$ de poids le plus faible d'un champs avec le terme $LSB1$, ou à celui de poids le plus fort avec $MSB1$.
+Il est aussi définit ce que nous qualifions de __LSB__ pour __Least Significant Bit__.
+Ce terme désigne le bit de poids le plus faible d'un champs, donc le bit de poids $0$ pour un champs dont l'encodage est en __Binary Unsigned__.
+Au contraire, le bit de poids le plus fort d'un champs binaire est ce que l'ont appelle le __MSB__ pour __Most Significant Bit__.
+Il est aussi possible de faire référence au bit à $1$ de poids le plus faible d'un champs avec le terme __LSB1__, ou à celui de poids le plus fort avec __MSB1__.
 
-Il se trouve que le $Binary \ Unsigned$ nous donne la certitude que la valeur d'un bit à $1$ de poids $i$, est strictement supérieur à la somme des bits de poids inférieur à $i$.
+Il se trouve que le __Binary Unsigned__ nous donne la certitude que la valeur d'un bit à $1$ de poids $i$, est strictement supérieur à la somme des bits de poids inférieur à $i$.
 Autrement dit $\left(1\times 2^i\right) \gt \left(\sum_{i=i-1}^0 2^i\right)$.
 Prenons comme exemple un champs binaire de $8$ bits, pour lequel nous n'allons faire attention qu'à un seul bit, celui de poids $6$ admettons.
-Disons que ce champs ressemble à ceci $01111111_{2}$, la valeur du nombre représenté est $127$ et le bit qui nous intéresse se trouve être le $MSB1$ du champs.
+Disons que ce champs ressemble à ceci $01111111_{2}$, la valeur du nombre représenté est $127$ et le bit qui nous intéresse se trouve être le __MSB1__ du champs.
 La somme des bits de poids inférieur au bit de poids $6$ donne un résultat strictement inférieur à $1 \times 2^6 = 64$.
 Cela est systèmatiquement vrai, même lorsque les $i$ bits de poids inférieur représentent la valeur maximale encodable, comme dans cet exemple.
 
 $$\left(1 \times 2^6 = 64\right) \gt \left(63 = \left(1 \times 2^5\right)+\left(1 \times 2^4\right)+\left(1 \times 2^3\right)+\left(1 \times 2^2\right)+\left(1 \times 2^1\right)+\left(1 \times 2^0\right)\right)$$
 
-Encore une fois, ceci n'est pas propre à la base binaire mais à nimporte quel base numérique modulo quelques variation pour chaque base.
+Encore une fois, ceci n'est pas propre à la base binaire mais à _n'importe quel base numérique_ modulo quelques variation pour chaque base.
 
 # II. Le standard IEEE-754
 
-Après cette rapide introduction à l'encodage $Binary \ Unsigned$, passons au sujet suivant qui est l'encodage IEEE-754.
+Après cette rapide introduction à l'encodage __Binary Unsigned__, passons au sujet suivant qui est l'encodage __IEEE-754__.
 
-Notre circuit a pour fonction principal de produire des comparaisons entre deux opérandes flottants respectant le standard IEEE-754.
+Notre circuit a pour fonction principal de produire des comparaisons entre deux opérandes flottants respectant le standard __IEEE-754__.
 Pour plus d'information sur le circuit électronique, jetez un oeil à la documentation du circuit.
-Cette norme IEEE-754 définit trois éléments qui composent chaque nombre à virgule flottante:
-- Le bit de signe
-- Un champs binaire d'exposant
-- Un autre champs binaire pour la mantisse tronquée
+Cette norme __IEEE-754__ définit trois éléments qui composent chaque nombre à virgule flottante:
+- Le ___bit de signe___
+- Un champs binaire d'___exposant___
+- Un autre champs binaire pour la ___mantisse tronquée___
 
 Dans ce qui suit nous allons nous intéressé aux encodages utilisés dans les champs binaires d'exposant et de mantisse tronquée.
 La raison en est que bien évidemment le fonctionnement du circuit en dépend.
 
 # III. L'encodage par biais du champs d'exposant
 
-Le champs d'exposant utilise un encodage par biais, ce dernier est assez simple à comprendre.
-Enfaite, le champs d'exposant est un champs binaire pour lequel nous utilisons un encodage $Binary \ Unsigned$ qui code une valeur numérique $X$, comme nous l'avons vu précédemment.
+__Le champs d'exposant utilise un encodage par biais__, ce dernier est assez simple à comprendre.
+Enfaite, le champs d'exposant est un champs binaire pour lequel nous utilisons un encodage _Binary Unsigned_ qui code une valeur numérique $X$, comme nous l'avons vu précédemment.
 A cela, il faut ajouté un biais $B$ pour obtenir la valeur représenté par le champs d'exposant.
 Dans les faits le biais est une constante qui peut être positive ou négative.
 La valeur que représente le champs d'exposant est alors issu du calcul $X + B$, cependant, dans le cadre de ce champs le biais $B$ est une constante systèmatiquement négative.
 Elle se calcul de la manière suivante $-\left(2^{\left(N-1\right)}\right)+1$, où $N$ est le nombre de bits du champs d'exposant.
 
-Etant donné que l'encodage par biais se base sur le $Binary \ Unsigned$, le champs d'exposant partage les même propriétés que cet encodage.
+Etant donné que l'encodage par biais se base sur le _Binary Unsigned_, le champs d'exposant __partage les même propriétés__ que cet encodage.
 Notamment le fait que la valeur d'un bit à $1$ de poids $i$ est strictement supérieur à la somme des bits de poids inférieur à $i$.
 
-# IV. La mantisse tronquée, une historie de puissance de $2$ négative
+# IV. La mantisse tronquée, une historie de puissance de 2 négative
 
 Pour le champs de la mantisse tronquée nous avons besoin de faire un rapide rappel sur l'encodage intial d'un nombre flottant.
-La partie entière d'un nombre flottant utilise du $Binary \ Unsigned$ pour être codé, tandis que la partie fractionnaire fait usage d'une version modifiée du $Binary \ Unsigned$.
-Chaque bit de la partie fractionnaire est un `facteur d'une puissance de 2 négative` et non positive.
+La partie entière d'un nombre flottant utilise du _Binary Unsigned_ pour être codé, tandis que la partie fractionnaire fait usage d'une version modifiée du _Binary Unsigned_.
+Chaque bit de la partie fractionnaire est un ___facteur d'une puissance de 2 négative___ et non positive.
 Ceci permet de représenté des valeurs dans l'intervalle $\left[0;1\right[$.
 Le poids des puissances négatives de $2$ décroix en fonction de la position du bit.
 Prenons l'exemple du nombre $3.75$.
@@ -113,13 +113,15 @@ Ce qu'il y a d'important à remarqué pour la partie fractionnaire, c'est que la
 Autrement dit, pour le nombre fractionnaire $F \in \left[0;1\right[$ dont ont ne prête attention qu'au bit à $1$ de poids $i$ alors $\left(1 \times 2^i\right) \gt \left(\sum_{i=i-1}^{lsb\left(F\right)} \left(F_i \times 2^i\right)\right)$.
 
 Pour en revenir au sujet de la mantisse tronquée, elle est composée des bits de la partie entière et de la partie fractionnaire d'un nombre flottant.
-Vu que la partie entière et fractionnaire d'un nombre flottant partagent les propriétés du $Binary \ Unsigned$, c'est aussi le cas de la mantisse tronquée elle même.
+Vu que la partie entière et fractionnaire d'un nombre flottant partagent les propriétés du _Binary Unsigned_, c'est aussi le cas de la mantisse tronquée elle même.
 
 Nous verrons dans la démonstration mathématique, qu'il est utile que l'encodage des champs d'exposant et de mantisse tronquée aient les même propriétés que le $Binary \ Unsigned$, tout particulièrement.
 
 # V. L'ordre de traitement des opérandes flottantes
 
-Le circuit électronique compare la stricte supériorité de deux nombres flottants en valeur absolu, nommons ces opérandes $\alpha$ et $\beta$.
+Le circuit électronique compare deux nombres flottants __Half Precision__ $16$ bits, nous les nommerons chacun $\alpha$ et $\beta$.
+La comparaison à produire est une vérification de la supériorité stricte d'un opérande sur l'autre, admettons $\left(\vert\alpha\vert \gt \vert\beta\vert\right)$.
+Le circuit n'a besoin que de la valeur absolu des opérandes, seul les $15$ bits de poids faible sont utiles (omission du bit de signe).
 
 Il se trouve que le circuit traite les champs d'exposants $E$ de $\alpha$ ainsi que de $\beta$, avant les champs de mantisse tronquée de ces même opérandes.
 La raison en est que les champs d'exposant à eux seuls peuvent permettre au circuit d'atteindre un point terminal.
@@ -127,7 +129,7 @@ Un point terminal n'est atteint que lorsque le circuit peut être sûre du résu
 Techniquement, si $\left(E_{\alpha} \gt E_{\beta}\right)$ alors l'opérande $\alpha$ est strictement plus grand que $\beta$, nous verrons pourquoi dans les chapitres ci-bas.
 Cette conclusion permet au circuit de généré le bon résultat, en fonction de la comparaison à produire.
 
-Il existe bien un cas non terminal cependant, celui où $E_{\alpha} = E_{\beta}$.
+Cependant, il existe bien un cas non terminal, celui où $\left(E_{\alpha} = E_{\beta}\right)$.
 Dans cette situation, le circuit ne peut rien tiré des champs d'exposants des opérandes $\alpha$ et $\beta$, car ils sont égaux.
 Alors, le circuit atteindra un point terminal en traitant les champs de mantisse tronquée $T_{\alpha}$ et $T_{\beta}$ en cas de dernier recours, dans un second temps.
 
@@ -136,16 +138,30 @@ Pour cela, il va d'abord me falloir abordé le sujet de l'écriture scientifique
 
 # VI. L'écriture scientifique binaire
 
-La démonstration mathématique du circuit est donc assez simple, après toutes ces explications.
+Pour commencer, qu'est ce que l'_écriture scientifique_?
 
-Nous définissons deux nombres flottants $Half$ $Precision$ ($16$ bits) $\alpha$ et $\beta$, la comparaison à produire sera $\left(\vert\alpha\vert \gt \vert\beta\vert\right)$.
-Les opérandes ne font alors plus que $15$ bits (omission du bit de signe).
+L'écriture scientifique est une manière de représenté les nombres et qui existe pour chaque base numérique, comme pour la base binaire.
+Le but de cette notation scientifique des nombres est double, le permier objectif est de ne pouvoir représenté un nombre que d'une seule façon, le second permet de simplifier grandement la lecture de grand nombre.
+Par exemple, en ___écriture scientifique décimale___ nous pouvons représenté facilement la vitesse approchée de la lumière en km/s $+3.0\times 10^6$.
+Cela peut paraitre plus compliqué à interprété de prime abord, mais en réalité tout n'est qu'une histoire de puissance et de virgule comme nous le verrons dans les chapitres ci-dessous.
 
-Nous allons commencé par chercher si le champs d'exposant $E$ de $\beta$ est plus grand que celui de $\alpha$ $\left(E_{\beta} \gt E_{\alpha}\right)$.
-Pour comprendre pourquoi nous traitons les champs d'exposants $E_{\alpha}$ et $E_{\beta}$ avant ceux des mantisses tronquées $T$ de nos opérandes, il faut se penché sur l'écriture scientifique binaire sur lequel repose l'encodage IEEE-754 des nombres flottants.
+Le fonctionnement de l'écriture scientifique ne change que peu lorsque nous passons d'une base numérique vers une autre.
+La composition elle, reste la même peut importe la base numérique:
+  - Le ___signe___ $\pm$
+  - Un ___significande___
+  - Un ___multiplicande___
 
-// peut être faire une réf à l'introduction
-# VI. Le significande
+Dans l'exemple fournit ci-dessus, le signe est évidemment le symbole $+$ qui indique si le nombre est positif ou négatif, la valeur $3.0$ est le significande qui peut également être appellé ___mantisse___, et enfin le multiplicande qui est la base $10$ élevé à la puissance $6$.
+En notation scientifique décimale le significande ne peut être qu'une valeur comprise dans l'intervalle $\left[1;10\right[$, et le multiplicande est une puissance de $10$ positive ou négative.
+De manière général, pour une notation scientifique en base $N$.
+Le significande ne peut être compris qu'entre $\left[1;N\right[$ et le multiplicande est alors une puissance positive ou négative de $N$.
+Mais nous verrons ça plus bas.
+
+Pour terminer, si nous parlons de l'écriture scientifique ce n'est pas pour rien.
+Chaque élément de l'encodage _IEEE-754_ ayant été définit plus tôt, correspond à l'un des éléments de l'écriture scientifique binaire d'un nombre.
+Ces sujets seront aussi abordés lorsque le moment sera venu.
+
+# VII. Le significande
 
 Pour transformé le nombre flottant $F$ codé classiquement en binaire en son écriture scientifique, il faut convertir le nombre en un significande ou mantisse binaire.
 Le significande est un nombre dont la valeur est compris dans l'intervalle suivante $\left[1;2\right[$, ce qui veut dire que la partie entière du significande doit être à $1$.
@@ -219,7 +235,7 @@ De plus, nous comprenons aussi que le calcul de l'exposant $\left(i+c\right)$ du
 
 Voici la raison pour laquelle il vaut mieux que $c$ soit négatif lors d'un décalage vers la gauche de la virgule, ceci nous permet de ne faire usage que d'une seule équation pour tout les sens de décalage. C'est cool.
 
-# VII. Le multiplicande
+# VIII. Le multiplicande
 
 Nous savons désormais comment obtenir un significande.
 Le problème c'est que tout nombre flottant $F$ dont la valeur n'est pas comprise dans l'intervalle $\left[1;2\right[$ doit forcémment subir un décalage de sa virgule, et donc voir sa valeur être multiplié ou divisé par une puissance de $2$.
@@ -252,7 +268,7 @@ Rappellons que $c$ est négatif, la négation de $c$ permettra donc une nouvelle
 
 Nous remarquons que les deux explications donne les même conclusions, il faut négationné $c$.
 
-# VIII. Codage des informations dans un nombre flottant IEEE-754
+# IX. Codage des informations dans un nombre flottant IEEE-754
 
 Nous avons déjà parler de l'encodage IEEE-754 en introduction de ce document, plus particulièrement des éléments qui le compose.
 Je rappelle que ces $3$ éléments sont des champs binaire qui codent chacun un `bit de signe`, un `exposant` ainsi qu'une ` mantisse tronquée`.
@@ -264,7 +280,7 @@ Par exemple, le champs du bit de signe correspond assez logiquement au signe d'u
 En revanche, nous allons parlé plus en profondeur du champs d'exposant ainsi que de la mantisse tronquée.
 Nous avons déjà abordé le sujet de l'encodage de ces champs dans l'introduction, aussi je ne vais pas y revenir.
 
-# IX. Composition du champs de mantisse tronquée et du champs d'exposant
+# X. Composition du champs de mantisse tronquée et du champs d'exposant
 
 Le champs de la mantisse tronquée correspond au significande d'un nombre représenté en écriture scientifique binaire.
 Faisons un rapide rappelle sur ce qu'est le significande.
@@ -299,7 +315,7 @@ Si la valeur de l'exposant codé dans le champs est négative, alors le décalag
 Au contraire, si cette valeur est positive, la virgule du significande sera décalée vers la droite et sera toujours déplacé du nombre de rang codé par le champs.
 Ce champs d'exposant possède néanmoins une taille $X$ qui varie en fonction du format des nombres flottants, pour un format $Half \ Precision$ sa taille est de $5$ bits.
 
-# X. Le circuit traite les champs d'exposant avant ceux des mantisses tronquées
+# XI. Le circuit traite les champs d'exposant avant ceux des mantisses tronquées
 
 Pour finir, je vais enfin pouvoir expliqué pourquoi le circuit électronique traite les champs d'exposant $E$ des opérandes $\alpha$ et $\beta$, avant les champs de mantisse tronquée $T$ de ces même opérandes.
 
@@ -325,13 +341,13 @@ Par conséquent tout ne dépend que des champs $T_{\alpha}$ et $T_{\beta}$ pour 
 
 Nous comprenons désormais pourquoi le circuit électronique, qui a pour but de vérifié la supériorité stricte d'un opérande envers l'autre, traite d'abord les champs d'exposant $E$ des opérandes $\alpha$ et $\beta$, puis ensuite les champs de mantisse tronquée $T$ si nécessaire.
 
-# XI. Démonstration mathématique
+# XII. Démonstration mathématique
 
 // pourquoi traité E avant T
 
 Nous avons vu que ce champs binaire de $5$ bits code la valeur de l'exposant avec un encodage par biais, mais aussi que cet encodage partage toutes les caractéristiques de l'encodage $Binary$ $Unsigned$.
 
-# XII. Traitement des champs d'exposant
+# XIII. Traitement des champs d'exposant
 
 - Voici la définition de l'opération logique $Nimply\left(X,Y\right)\mapsto X \wedge Not(Y)$ dont nous allons nous sevrir.
 
@@ -373,7 +389,7 @@ Pour résumer, si les champs $E_{\beta} \neq E_{\alpha}$ alors soit $\left(E_{\b
 
 // Explication du traitement de la mantisse tronquée?
 
-# XIII. Traitement des champs des mantisses tronquées 
+# XIV. Traitement des champs des mantisses tronquées 
 
 Mais rappellons que quand bien même $\left(E_{\beta} = E_{\alpha}\right)$, ce n'est pas pour autant que la comparaison $\left(\left|\alpha\right| \gt \left|\beta\right|\right)$ échoue.
 Les opérandes flottants $\alpha$ et $\beta$ ont aussi un champs de mantisse tronquée $T$ de $10_{10}$ bits.
