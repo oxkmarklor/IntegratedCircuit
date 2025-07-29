@@ -44,15 +44,15 @@ Ceci n'est pas propre à la base décimale mais à `nimporte quel base numériqu
 La base binaire (ou base $2$) utilise les chiffres $0$ et $1$ plutôt que ceux de la base décimale allant de $0$ à $9$.
 Par ailleurs, un tel chiffre s'appelle un bit, ce qui est la contraction de $Binary$ $Digit$.
 Aussi, les puissances de $10_{10}$ sont remplacés par des puissances de $2$.
-Nous venons tout juste de décrire ce sur quoi se base l'encodage $Binary \ Unsigned$ des nombres binaire.
+Nous venons tout juste de décrire ce sur quoi se base l'encodage $Binary \ Unsigned$.
 
 Un champs binaire pour lequel nous utilisons un encodage $Binary \ Unsigned$ associe une puissance de $2$ positive à chaque bit du champs.
 Le champs représente un nombre $X$ par la somme des produits entre la valeur de chaque bit et la puissance de $2$ associée.
-Techniquement, vu que dans chacun des produits la puissance de $2$ est multiplié par son bit associé, qui est un facteur $0$ ou $1$, soit le résultat est nulle ou soit il est équivalent à la puissance de $2$ associé au bit sous-jacent.
+Techniquement, vu que dans chacun des produits la puissance de $2$ est multiplié par son bit associé, qui est à $0$ ou à $1$, soit le résultat est nulle ou soit il est équivalent à la puissance de $2$ associé au bit sous-jacent.
 C'est pourquoi vous entenderez souvent dire (ici compris), qu'un nombre $X$ est représenté par la somme des puissances de $2$ dont le bit est à $1$.
 Les puissances de $2$ vont de $0$ à $N - 1$, ou la valeur de $N$ est le nombre de bits qui compose un champs binaire.
-Par ailleurs, il est souvent dit que chaque bit a un "`poids`".
-Les poids correspondent aux exposants des puissances de $2$ associées à chacun des bits, plus cet exposant sera grand et plus la valeur d'un bit aura d'importance dans la représentation d'un nombre. 
+Par ailleurs, il est souvent dit que chaque bit a un "poids".
+Les poids correspondent aux exposants des puissances de $2$ associées à chacun des bits, plus cet exposant sera grand et plus un bit aura d'importance dans la représentation d'un nombre. 
 
 Il est aussi définit ce que nous qualifions de $LSB$ pour $Least \ Significant \ Bit$.
 Ce terme désigne le bit de poids le plus faible d'un champs, donc le bit de poids $0$ pour un champs dont l'encodage est en $Binary \ Unsigned$.
@@ -60,6 +60,7 @@ Au contraire, le bit de poids le plus fort d'un champs binaire est ce que l'ont 
 Il est aussi possible de faire référence au bit à $1$ de poids le plus faible d'un champs avec le terme $LSB1$, ou à celui de poids le plus fort avec $MSB1$.
 
 Il se trouve que le $Binary \ Unsigned$ nous donne la certitude que la valeur d'un bit à $1$ de poids $i$, est strictement supérieur à la somme des bits de poids inférieur à $i$.
+Autrement dit $\left(1\times 2^i\right) \gt \left(\sum_{i=i-1}^0 2^i\right)$.
 Prenons comme exemple un champs binaire de $8$ bits, pour lequel nous n'allons faire attention qu'à un seul bit, celui de poids $6$ admettons.
 Disons que ce champs ressemble à ceci $01111111_{2}$, la valeur du nombre représenté est $127$ et le bit qui nous intéresse se trouve être le $MSB1$ du champs.
 La somme des bits de poids inférieur au bit de poids $6$ donne un résultat strictement inférieur à $1 \times 2^6 = 64$.
@@ -67,19 +68,21 @@ Cela est systèmatiquement vrai, même lorsque les $i$ bits de poids inférieur 
 
 $$\left(1 \times 2^6 = 64\right) \gt \left(63 = \left(1 \times 2^5\right)+\left(1 \times 2^4\right)+\left(1 \times 2^3\right)+\left(1 \times 2^2\right)+\left(1 \times 2^1\right)+\left(1 \times 2^0\right)\right)$$
 
-Encore une fois, ceci n'est pas propre à la base binaire mais à nimporte quel base numérique.
+Encore une fois, ceci n'est pas propre à la base binaire mais à nimporte quel base numérique modulo quelques variation pour chaque base.
 
 # II. Le standard IEEE-754
 
 Après cette rapide introduction à l'encodage $Binary \ Unsigned$, passons au sujet suivant qui est l'encodage IEEE-754.
 
-Le circuit a pour but principal de produire des comparaisons entre deux opérandes flottants encodé en IEEE-754.
-La norme IEEE-754 définit trois éléments qui composent chaque nombre à virgule flottante:
+Notre circuit a pour fonction principal de produire des comparaisons entre deux opérandes flottants respectant le standard IEEE-754.
+Pour plus d'information sur le circuit électronique, jetez un oeil à la documentation du circuit.
+Cette norme IEEE-754 définit trois éléments qui composent chaque nombre à virgule flottante:
 - Le bit de signe
 - Un champs binaire d'exposant
 - Un autre champs binaire pour la mantisse tronquée
 
-Ce sont les encodages utilisés dans les champs binaires d'exposant et de la mantisse tronquée que nous allons essayés de comprendre, le comparateur base toute sa logique de comparaison sur les propriétés de ces champs là.
+Dans ce qui suit nous allons nous intéressé aux encodages utilisés dans les champs binaires d'exposant et de mantisse tronquée.
+La raison est que le fonctionnement du circuit dépend évidemment de ceux-ci.
 
 # III. L'encodage par biais du champs d'exposant
 
