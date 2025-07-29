@@ -98,21 +98,24 @@ Notamment le fait que la valeur d'un bit à $1$ de poids $i$ est strictement sup
 
 # IV. La mantisse tronquée, une historie de puissance de $2$ négative
 
-Pour le champs de la mantisse tronquée nous avons besoin de faire un rapide rappel sur l'encodage intial d'un nombre flottant (`le standard IEEE-754 est un enrobage plus qu'autre chose`).
+Pour le champs de la mantisse tronquée nous avons besoin de faire un rapide rappel sur l'encodage intial d'un nombre flottant.
 La partie entière d'un nombre flottant utilise du $Binary \ Unsigned$ pour être codé, tandis que la partie fractionnaire fait usage d'une version modifiée du $Binary \ Unsigned$.
-Chaque bit de la partie fractionnaire est un `facteur d'une puissance de 2 négative` et non positive, ceci permet de représenté des valeurs dans l'intervalle $\left[0;1\right[$.
+Chaque bit de la partie fractionnaire est un `facteur d'une puissance de 2 négative` et non positive.
+Ceci permet de représenté des valeurs dans l'intervalle $\left[0;1\right[$.
 Le poids des puissances négatives de $2$ décroix en fonction de la position du bit.
 Prenons l'exemple du nombre $3.75$.
 
 $$3.75 = 11.11_2 = Integer \ Part\left(\left(1 \times 2^1\right) + \left(1 \times 2^0\right)\right) + Fractional \ Part\left(\left(1 \times 2^{-1}\right) + \left(1 \times 2^{-2}\right)\right)$$
 
-Précisons que sous la forme binaire du nombre, le point n'est là que pour facilité sa lecture (`dans les faits, il n'est pas réelement présent dans le codage des nombres flottants`).
+Précisons que sous la forme binaire du nombre $3.75$, le point n'est là que pour facilité sa lecture.
+Dans les faits le point n'est pas réelement présent dans le codage des nombres flottants.
 Ce qu'il y a d'important à remarqué pour la partie fractionnaire, c'est que la valeur d'un bit à $1$ de poids $i$, est toujours strictement supérieur à la somme des bits de poids inférieur à $i$.
-Autrement dit, pour le nombre fractionnaire $N$ dont ont ne prête attention qu'au bit à $1$ de poids $i$ alors $\left(1 \times 2^i \gt \left(\sum_{i=i-1}^{lsb\left(N\right)} N_i \times 2^i\right)\right)$.
+Autrement dit, pour le nombre fractionnaire $F \in \left[0;1\right[$ dont ont ne prête attention qu'au bit à $1$ de poids $i$ alors $\left(1 \times 2^i\right) \gt \left(\sum_{i=i-1}^{lsb\left(F\right)} \left(F_i \times 2^i\right)\right)$.
 
 Pour en revenir au sujet de la mantisse tronquée, elle est composée des bits de la partie entière et de la partie fractionnaire d'un nombre flottant.
 Vu que la partie entière et fractionnaire d'un nombre flottant partagent les propriétés du $Binary \ Unsigned$, c'est aussi le cas de la mantisse tronquée elle même.
-Nous verrons dans la démonstration mathématique qu'il est utile que le champs d'exposant ainsi que celui de la mantisse tronquée aient les même propriétés.
+
+Nous verrons dans la démonstration mathématique, qu'il est utile que l'encodage des champs d'exposant et de mantisse tronquée aient les même propriétés que le $Binary \ Unsigned$, tout particulièrement.
 
 # V. L'écriture scientifique binaire
 
