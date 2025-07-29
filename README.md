@@ -119,17 +119,17 @@ Nous verrons dans la démonstration mathématique, qu'il est utile que l'encodag
 
 # V. L'ordre de traitement des opérandes flottantes
 
-Le circuit électronique compare la stricte supériorité des nombres flottants entre eux, nommons ces opérandes $\alpha$ et $\beta$.
+Le circuit électronique compare la stricte supériorité de deux nombres flottants en valeur absolu, nommons ces opérandes $\alpha$ et $\beta$.
 
-Il se trouve que le circuit traite les champs d'exposants de $\alpha$ ainsi que de $\beta$, avant les champs de mantisse tronquée de ces même opérandes.
-La raison en est que les champs d'exposant seul, peuvent permettre au circuit d'atteindre un point terminal.
+Il se trouve que le circuit traite les champs d'exposants $E$ de $\alpha$ ainsi que de $\beta$, avant les champs de mantisse tronquée de ces même opérandes.
+La raison en est que les champs d'exposant à eux seuls peuvent permettre au circuit d'atteindre un point terminal.
 Un point terminal n'est atteint que lorsque le circuit peut être sûre du résultat qu'il génère.
-Techniquement, si $\left(E_{\alpha} \gt E_{\beta}\right)$ alors l'opérande $\alpha$ est strictement plus grand que $\beta$, nous verrons pourquoi ci dessous.
-Cette conclusion permet au circuit de généré le bon résultat, en fonction de la comparaison à vérifié.
+Techniquement, si $\left(E_{\alpha} \gt E_{\beta}\right)$ alors l'opérande $\alpha$ est strictement plus grand que $\beta$, nous verrons pourquoi dans les chapitres ci-bas.
+Cette conclusion permet au circuit de généré le bon résultat, en fonction de la comparaison à produire.
 
 Il existe bien un cas non terminal cependant, celui où $E_{\alpha} = E_{\beta}$.
 Dans cette situation, le circuit ne peut rien tiré des champs d'exposants des opérandes $\alpha$ et $\beta$, car ils sont égaux.
-Alors, le circuit atteindra un point terminal en traitant les champs de mantisse tronquée $T_{\alpha}$ et $T_{\beta}$ en cas de dernier recours.
+Alors, le circuit atteindra un point terminal en traitant les champs de mantisse tronquée $T_{\alpha}$ et $T_{\beta}$ en cas de dernier recours, dans un second temps.
 
 Dans les chapitres suivant, je vais expliqué dans les fondements pourquoi est ce que les champs d'exposant sont traités en priorité par le circuit électronique.
 Pour cela, il va d'abord me falloir abordé le sujet de l'écriture scientifique binaire, commençons.
