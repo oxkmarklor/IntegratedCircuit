@@ -117,7 +117,24 @@ Vu que la partie entière et fractionnaire d'un nombre flottant partagent les pr
 
 Nous verrons dans la démonstration mathématique, qu'il est utile que l'encodage des champs d'exposant et de mantisse tronquée aient les même propriétés que le $Binary \ Unsigned$, tout particulièrement.
 
-# V. L'écriture scientifique binaire
+# V. L'ordre de traitement des opérandes flottantes
+
+Le circuit électronique compare la stricte supériorité des nombres flottants entre eux, nommons ces opérandes $\alpha$ et $\beta$.
+
+Il se trouve que le circuit traite les champs d'exposants de $\alpha$ ainsi que de $\beta$, avant les champs de mantisse tronquée de ces même opérandes.
+La raison en est que les champs d'exposant seul, peuvent permettre au circuit d'atteindre un point terminal.
+Un point terminal n'est atteint que lorsque le circuit peut être sûre du résultat qu'il génère.
+Techniquement, si $\left(E_{\alpha} \gt E_{\beta}\right)$ alors l'opérande $\alpha$ est strictement plus grand que $\beta$, nous verrons pourquoi ci dessous.
+Cette conclusion permet au circuit de généré le bon résultat, en fonction de la comparaison à vérifié.
+
+Il existe bien un cas non terminal cependant, celui où $E_{\alpha} = E_{\beta}$.
+Dans cette situation, le circuit ne peut rien tiré des champs d'exposants des opérandes $\alpha$ et $\beta$, car ils sont égaux.
+Alors, le circuit atteindra un point terminal en traitant les champs de mantisse tronquée $T_{\alpha}$ et $T_{\beta}$ en cas de dernier recours.
+
+Dans les chapitres suivant, je vais expliqué dans les fondements pourquoi est ce que les champs d'exposant sont traités en priorité par le circuit électronique.
+Pour cela, il va d'abord me falloir abordé le sujet de l'écriture scientifique binaire, commençons.
+
+# VI. L'écriture scientifique binaire
 
 La démonstration mathématique du circuit est donc assez simple, après toutes ces explications.
 
