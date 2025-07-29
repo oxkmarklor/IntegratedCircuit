@@ -82,19 +82,19 @@ Cette norme IEEE-754 définit trois éléments qui composent chaque nombre à vi
 - Un autre champs binaire pour la mantisse tronquée
 
 Dans ce qui suit nous allons nous intéressé aux encodages utilisés dans les champs binaires d'exposant et de mantisse tronquée.
-La raison est que le fonctionnement du circuit dépend évidemment de ceux-ci.
+La raison en est que bien évidemment le fonctionnement du circuit en dépend.
 
 # III. L'encodage par biais du champs d'exposant
 
 Le champs d'exposant utilise un encodage par biais, ce dernier est assez simple à comprendre.
-Enfaite, c'est un champs binaire pour lequel nous utilisons un encodage $Binary \ Unsigned$ code une valeur numérique $X$, auquel nous ajoutons un biais.
-Le biais $B$ est une constante positive ou négative, et la valeur représenté par le champs d'exposant d'un nombre flottant est issu du calcul $X+B$.
-A savoir que le biais du champs d'exposant d'un nombre flottant IEEE-754 est toujours négatif.
-Il est qui plus est toujours équivalent à $-\left(2^{\left(N-1\right)}\right)+1$ où $N$ est le nombre de bits du champs d'exposant.
+Enfaite, le champs d'exposant est un champs binaire pour lequel nous utilisons un encodage $Binary \ Unsigned$ qui code une valeur numérique $X$, comme nous l'avons vu précédemment.
+A cela, il faut ajouté un biais $B$ pour obtenir la valeur représenté par le champs d'exposant.
+Dans les faits le biais est une constante qui peut être positive ou négative.
+La valeur que représente le champs d'exposant est alors issu du calcul $X + B$, cependant, dans le cadre de ce champs le biais $B$ est une constante systèmatiquement négative.
+Elle se calcul de la manière suivante $-\left(2^{\left(N-1\right)}\right)+1$, où $N$ est le nombre de bits du champs d'exposant.
 
 Etant donné que l'encodage par biais se base sur le $Binary \ Unsigned$, le champs d'exposant partage les même propriétés que cet encodage.
-Notamment le fait que la valeur d'un bit à $1$ de poids $i$ est strictement supérieur à la somme des poids inférieurs à $i$.
-Ce qui est normal vu que nous ne faisons qu'ajouté un biais constant à chaque nombre encodé en $Binary \ Unsigned$.
+Notamment le fait que la valeur d'un bit à $1$ de poids $i$ est strictement supérieur à la somme des bits de poids inférieur à $i$.
 
 # IV. La mantisse tronquée, une historie de puissance de $2$ négative
 
