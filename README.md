@@ -280,13 +280,14 @@ Comme nous l'indique les premières explications de cette section.
 
 # IX. Codage des informations dans un nombre flottant IEEE-754
 
-Nous avons déjà parler de l'encodage IEEE-754 en introduction de ce document, plus particulièrement des éléments qui le compose.
-Je rappelle que ces $3$ éléments sont des champs binaire qui codent chacun un `bit de signe`, un `exposant` ainsi qu'une ` mantisse tronquée`.
-Par ailleurs, nous venons tout juste de voir dans le détails ce qu'est l'écriture scientifique biniaire d'un nombre, ce qui nous a permis de mettre en lumière ce qu'est un `significande` (qui peut être appellé `mantisse`), ainsi qu'un `multiplicande`.
-Il y a aussi un élément de l'écriture scientifique dont je n'ai pas parlé, c'est le `signe` du nombre représenté, qui est soit $+$ soit $-$ bien entendu.
+Nous avons déjà parler de l'encodage IEEE-754 en introduction de ce document, plus particulièrement des éléments qui le compose et de l'encodage de ces éléments.
+Je rappelle que ces $3$ éléments sont des champs binaire qui codent chacun un __bit de signe__, un __exposant__ ainsi qu'une __mantisse tronquée__.
+Par ailleurs, nous venons tout juste de voir dans le détails ce qu'est l'écriture scientifique biniaire d'un nombre, ce qui nous a permis de mettre en lumière ce qu'est un __significande__ (qui peut être appellé __mantisse__), ainsi qu'un __multiplicande__.
+Il y a aussi un élément de l'écriture scientifique dont j'ai peu parlé, c'est le __signe__ $\pm$ du nombre représenté.
 
 Chaque champs binaire de l'encodage IEEE-754 correspond plus ou moins à l'un des éléments de l'écriture scientifique binaire d'un nombre.
-Par exemple, le champs du bit de signe correspond assez logiquement au signe d'un nombre, mais nous ne nous intéresserons pas plus que ça au bit de signe dans ce qui suit.
+Par exemple, le champs du _bit de signe_ correspond assez logiquement au _signe_ de la notation scientifique d'un nombre, mais nous ne nous intéresserons pas plus que ça au bit de signe dans ce qui suit.
+Je rappelle que le circuit électronique ne travaille qu'avec la valeur absolu de ses opérandes flottants.
 En revanche, nous allons parlé plus en profondeur du champs d'exposant ainsi que de la mantisse tronquée.
 Nous avons déjà abordé le sujet de l'encodage de ces champs dans l'introduction, aussi je ne vais pas y revenir.
 
