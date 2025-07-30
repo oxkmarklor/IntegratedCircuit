@@ -10,7 +10,7 @@ Le document se découpe en plusieurs parties:
     - Le multiplicande
   - Codage des informations dans un nombre flottant IEEE-754
     - Composition du champs de mantisse tronquée et d'exposant
-  - Le circuit traite les champs d'exposant avant ceux des mantisses tronquées
+  - L'ordre de traitement des champs d'exposant et de mantisse tronquée
   - Démonstration mathématique
     - Traitement des champs d'exposant
     - Traitement des champs de mantisses tronquées
@@ -268,12 +268,12 @@ Mais nous pouvons exprimé les choses de manière différentes, ce qui nous serv
 Pour la transformation d'un nombre flottant $F$ en un significande $S$, si la virgule de $F$ a été déplacé de $c$ rangs vers la droite alors $\left(c \gt 0\right)$.
 Afin de retrouver la valeur du nombre $F$ d'origine depuis le significande, le multiplicande doit permettre de déplacé de $c$ rangs vers la gauche la virgule du significande $S$.
 Il suffit alors d'inversé le signe de $c$ pour changé la direction du décalage.
-Nous faisons cela en négationnant $c$, comme ceci $\left(-c = -c\right)$.
+Nous faisons cela en négationnant $c$, comme ceci $\left(-\left(+c\right) = -c\right)$.
 Le nombre de rang de décalage reste le même mais le sens de décalage passe de la droite $\left(c \gt 0\right)$, à la gauche avec $\left(c \lt 0\right)$.
 
 Dans le cas contraire, la transformation de $F$ en $S$ est due à un décalage de la virgule de $F$ de $\vert c \vert$ rangs vers la gauche, où $\left(c \lt 0\right)$.
 Pour obtenir la valeur du nombre $F$ d'origine, il faudra alors que le significande $S$ voit sa virgule être décalée de $\vert c \vert$ rangs vers la droite.
-Rappellons que $c$ est négatif, la négation de $c$ permettra donc une nouvelle fois d'inversé le sens de décalage $\left(-c = \vert c \vert\right)$.
+Rappellons que $c$ est négatif, la négation de $c$ permettra donc une nouvelle fois d'inversé le sens de décalage $\left(-\left(-c\right) = \vert{c}\vert\right)$.
 
 Il est donc simple de comprendre que déplacé la virgule du significande $S$ de $-c$ rangs, vers la gauche si $\left(c \lt 0\right)$ ou vers la droite si $\left(c \gt 0\right)$, est équivalent à multiplié $S$ par $2^{-c}$.
 Comme nous l'indique les premières explications de cette section.
@@ -327,29 +327,32 @@ Au contraire, si cette valeur est positive, la virgule du significande sera déc
 Ce champs d'exposant possède néanmoins une taille $X$ qui varie en fonction du format des nombres flottants.
 Pour un format _Half Precision_ sa taille est de $5$ bits.
 
-# XI. Le circuit traite les champs d'exposant avant ceux des mantisses tronquées
+# XI. L'ordre de traitement des champs d'exposant et de mantisse tronquée
 
 Pour finir, je vais enfin pouvoir expliqué pourquoi le circuit électronique traite les champs d'exposant $E$ des opérandes $\alpha$ et $\beta$, avant les champs de mantisse tronquée $T$ de ces même opérandes.
 
 Nous avons vu dans le chapitre sur le multiplicande, comment est ce qu'en écriture scientifique binaire nous pouvions obtenir le nombre d'origine $F$ depuis le significande $S$. Précisémment au travers du calcul suivant $F = \left(S\times 2^{-c}\right)$.
-En tenant compte de tout ce qui a déjà été dit plus haut, nous en déduisons qu'en IEEE-754 le nombre $F$ vaut alors $\left(T\times 2^E\right)$.
+En tenant compte de tout ce qui a déjà été dit plus haut, nous en déduisons qu'en IEEE-754 le nombre $F$ vaut alors $\left(\left(1 + T\right)\times 2^E\right)$.
 
-N'oublions pas que si le significande de l'écriture scientifique du nombre $F$ est compris dans l'intervalle de valeur suivante $\left[1;2\right[$.
-Alors c'est aussi le cas du champs de la mantisse tronquée $T$ (en prenant en compte le bit à $1$ de la partie entière qui est rendu implicite).
+N'oublions pas que si le significande $S$ de l'écriture scientifique binaire du nombre $F$ est compris dans l'intervalle de valeur suivante $\left[1;2\right[$.
+Ce n'est pas le cas du champs de mantisse tronquée $T$, __car le bit à 1 de sa partie entière est rendu implicite__.
+D'où le fait que pour représenté la valeur réel du champs, il nécessaire d'ajouté ce que vaut la partie entière à la mantisse tronquée $\left(1 + T\right)$.
 
-Au travers du calcul suivant $\left(T\times 2^E\right)$ nous observons quelques chose d'intéressant.
+Au travers du calcul suivant $\left(\left(1 + T\right)\times 2^E\right)$ nous observons quelques chose d'intéressant.
 Par essence $\left(2^i = 2\times 2^{\left(i-1\right)}\right)$.
-Etant donné que la valeur codé dans le champs de la mantisse tronquée $T$ est strictement inférieur à $2$, alors même pour $T = 1.99..9$ nous obtenons pour $\left(T\times 2^E\right)$ une valeur strictement inférieur à $\left(1\times 2^{\left(E+1\right)}\right)$.
+Etant donné que la valeur codé dans le champs de la mantisse tronquée $T$ est strictement inférieur à $1$, alors même pour $T = 0.99..9$ nous obtenons avec $\left(\left(1 + T\right)\times 2^E\right)$ une valeur __strictement inférieur__ à $\left(1\times 2^{\left(E+1\right)}\right)$.
 Nous voyons ici pourquoi est ce que les champs d'exposant $E$ des opérandes sont traités avant les champs de mantisse tronquée $T$.
 
-Imaginons que pour deux opérandes $\alpha$ et $\beta$ nous voulions vérifié si $\left(\vert\beta\vert \gt \vert\alpha\vert\right)$:
-  - Si $\left(E_{\alpha} \gt E_{\beta}\right)$ alors nous savons que la comparaison échoue car $\left(T_{\alpha}\times 2^{E_{\alpha}}\right) \gt \left(T_{\beta}\times 2^{E_{\beta}}\right)$ et ce même si $T_{\alpha} = 1.0_{10}$ pendant que $T_{\beta} = 1.99..9$.
+Imaginons que pour deux opérandes $\alpha$ et $\beta$ nous voulions vérifié $\left(\vert\alpha\vert \gt \vert\beta\vert\right)$:
+  - Si $\left(E_{\alpha} \lt E_{\beta}\right)$ alors nous savons que la comparaison __échoue__ car $\left(\left(1 + T_{\alpha}\right)\times 2^{E_{\alpha}}\right) \lt \left(\left(1 + T_{\beta}\right)\times 2^{E_{\beta}}\right)$ et ce même si $T_{\alpha} = 0.99..9$ lorsque $T_{\beta} = 0$.
 
-  - Si $\left(E_{\alpha} \lt E_{\beta}\right)$ alors la comparaison réussie cette fois-ci, car $\left(T_{\alpha}\times 2^{E_{\alpha}}\right) \lt \left(T_{\beta}\times 2^{E_{\beta}}\right)$ et ce même si $T_{\beta} = 1.0_{10}$ pendant que $T_{\alpha} = 1.99..9$.
+  - Si $\left(E_{\alpha} \gt E_{\beta}\right)$ alors la comparaison __réussie__ cette fois-ci, car $\left(\left(1 + T_{\alpha}\right)\times 2^{E_{\alpha}}\right) \gt \left(\left(1 + T_{\beta}\right)\times 2^{E_{\beta}}\right)$ et ce même si $T_{\alpha} = 0$ lorsque $T_{\beta} = 0.99..9$.
 
-Mais il existe une troisième possibilité bien évidemment, $\left(E_{\alpha} = E_{\beta}\right)$.
-Dans ce cas spécifique, les produits $\left(T_{\alpha}\times 2^{E_{\alpha}}\right)$ ainsi que $\left(T_{\beta}\times 2^{E_{\beta}}\right)$ ont un facteur commun qui est la puissance de $2$.
-Par conséquent tout ne dépend que des champs $T_{\alpha}$ et $T_{\beta}$ pour pouvoir départagé si $\vert\beta\vert$ est strictement supérieur à $\vert\alpha\vert$ ou non.
+Dans les deux cas qui figurent ci-dessus, __le circuit atteint un point terminal__.
+Mais il existe une troisième possibilité à laquelle le circuit peut être confronté $\left(E_{\alpha} = E_{\beta}\right)$.
+
+Dans ce cas spécifique, les produits $\left(\left(1 + T_{\alpha}\right)\times 2^{E_{\alpha}}\right)$ ainsi que $\left(\left(1 + T_{\beta}\right)\times 2^{E_{\beta}}\right)$ ont un facteur commun, la puissance de $2$.
+Par conséquent, tout ne repose que sur les champs $T_{\alpha}$ et $T_{\beta}$ pour pouvoir départagé si $\left(\vert\alpha\vert \gt \vert\beta\vert\right)$ ou non.
 
 Nous comprenons désormais pourquoi le circuit électronique, qui a pour but de vérifié la supériorité stricte d'un opérande envers l'autre, traite d'abord les champs d'exposant $E$ des opérandes $\alpha$ et $\beta$, puis ensuite les champs de mantisse tronquée $T$ si nécessaire.
 
