@@ -119,15 +119,16 @@ Nous verrons dans la démonstration mathématique, qu'il est utile que l'encodag
 
 # V. L'ordre de traitement des opérandes flottantes
 
-Le circuit électronique compare deux nombres flottants __Half Precision__ $16$ bits, nous les nommerons chacun $\alpha$ et $\beta$.
+Le circuit électronique compare deux nombres flottants __Half Precision__ $16$ bits, nous les nommerons $\alpha$ et $\beta$.
 La comparaison à produire est une vérification de la supériorité stricte d'un opérande sur l'autre, admettons $\left(\vert\alpha\vert \gt \vert\beta\vert\right)$.
 Le circuit n'a besoin que de la valeur absolu des opérandes, seul les $15$ bits de poids faible sont utiles (omission du bit de signe).
 
 Il se trouve que le circuit traite les champs d'exposants $E$ de $\alpha$ ainsi que de $\beta$, avant les champs de mantisse tronquée de ces même opérandes.
 La raison en est que les champs d'exposant à eux seuls peuvent permettre au circuit d'atteindre un point terminal.
 Un point terminal n'est atteint que lorsque le circuit peut être sûre du résultat qu'il génère.
-Techniquement, si $\left(E_{\alpha} \gt E_{\beta}\right)$ alors l'opérande $\alpha$ est strictement plus grand que $\beta$, nous verrons pourquoi dans les chapitres ci-bas.
-Cette conclusion permet au circuit de généré le bon résultat, en fonction de la comparaison à produire.
+Techniquement, si $\left(E_{\alpha} \gt E_{\beta}\right)$ alors l'opérande $\alpha$ est strictement plus grand que $\beta$, et inversement.
+Nous verrons pourquoi dans les chapitres ci-bas.
+Cette déduction permet au circuit de généré le bon résultat, en fonction de la comparaison à produire.
 
 Cependant, il existe bien un cas non terminal, celui où $\left(E_{\alpha} = E_{\beta}\right)$.
 Dans cette situation, le circuit ne peut rien tiré des champs d'exposants des opérandes $\alpha$ et $\beta$, car ils sont égaux.
@@ -140,19 +141,20 @@ Pour cela, il va d'abord me falloir abordé le sujet de l'écriture scientifique
 
 Pour commencer, qu'est ce que l'_écriture scientifique_?
 
-L'écriture scientifique est une manière de représenté les nombres et qui existe pour chaque base numérique, comme pour la base binaire.
+L'écriture scientifique est une manière de représenté les nombres.
+Elle existe pour chaque base numérique, comme pour la base binaire.
 Le but de cette notation scientifique des nombres est double, le permier objectif est de ne pouvoir représenté un nombre que d'une seule façon, le second permet de simplifier grandement la lecture de grand nombre.
 Par exemple, en ___écriture scientifique décimale___ nous pouvons représenté facilement la vitesse approchée de la lumière en km/s $+3.0\times 10^6$.
 Cela peut paraitre plus compliqué à interprété de prime abord, mais en réalité tout n'est qu'une histoire de puissance et de virgule comme nous le verrons dans les chapitres ci-dessous.
 
 Le fonctionnement de l'écriture scientifique ne change que peu lorsque nous passons d'une base numérique vers une autre.
 La composition elle, reste la même peut importe la base numérique:
-  - Le ___signe___ $\pm$
+  - Le ___signe___
   - Un ___significande___
   - Un ___multiplicande___
 
 Dans l'exemple fournit ci-dessus, le signe est évidemment le symbole $+$ qui indique si le nombre est positif ou négatif, la valeur $3.0$ est le significande qui peut également être appellé ___mantisse___, et enfin le multiplicande qui est la base $10$ élevé à la puissance $6$.
-En notation scientifique décimale le significande ne peut être qu'une valeur comprise dans l'intervalle $\left[1;10\right[$, et le multiplicande est une puissance de $10$ positive ou négative.
+En notation scientifique décimale, le significande ne peut être qu'une valeur comprise dans l'intervalle $\left[1;10\right[$, et le multiplicande est une puissance de $10$ positive ou négative.
 De manière général, pour une notation scientifique en base $N$.
 Le significande ne peut être compris qu'entre $\left[1;N\right[$ et le multiplicande est alors une puissance positive ou négative de $N$.
 Mais nous verrons ça plus bas.
@@ -163,54 +165,59 @@ Ces sujets seront aussi abordés lorsque le moment sera venu.
 
 # VII. Le significande
 
-Pour transformé le nombre flottant $F$ codé classiquement en binaire en son écriture scientifique, il faut convertir le nombre en un significande ou mantisse binaire.
-Le significande est un nombre dont la valeur est compris dans l'intervalle suivante $\left[1;2\right[$, ce qui veut dire que la partie entière du significande doit être à $1$.
-Qui plus est, le significande s'obtient en déplaçant la virgule du nombre $F$ de sa position initial jusque devant le $MSB1$ du nombre, ce qui a pour effet de modifié la valeur de $F$.
-Une exception est faite pour $F = 0$, alors le significande peut être exceptionellement nulle.
-Si le $MSB1$ est dans la partie entière de $F$, ça veut dire que $\left(F \ge 1\right)$ et que la virgule devra être déplacé vers la gauche (si elle doit l'être), au contraire si le $MSB1$ est dans la partie fractionnaire alors $\left(F \lt 1\right)$ et la virgule sera déplacé vers la droite.
-Mais le déplacement de la virgule engendre en binaire les même choses qu'en décimale.
-Une division par $N$ de $F$ dans le cas d'un déplacement de la virgule de $log_2\left(N\right)$ rangs vers la gauche, et une multiplication de $F$ par le même facteur $N$ pour un décalage de la virgule de $log_2\left(N\right)$ rangs vers la droite.
-Le terme $N$ multiplie ou divise $F$ et est systèmatiquement une puissance de $2$, ce qui suit explique pourquoi.
+Pour transformé un nombre flottant $F$ codé classiquement en binaire en son écriture scientifique, __il faut convertir le nombre en un significande__ (ou mantisse binaire).
 
-Pour tout nombre flottant $F$, nous savons que la virgule se trouve entre le $LSB$ de la partie entière (le bit de poids $0$), et le $MSB$ de la partie fractionnaire (bit de poids $-1$).
+Pour la notation scientifique binaire, le significande est un nombre dont la valeur est compris dans l'intervalle suivante $\left[1;2\right[$, ce qui veut dire que _la partie entière du significande doit être à_ $1$.
+Qui plus est, le significande s'obtient en _déplaçant la virgule du nombre_ $F$ de sa position initial, _jusque devant le MSB1 du nombre_.
+Ce qui a pour effet de modifié la valeur de $F$.
+Une exception est faite pour $F = 0$, alors le significande peut être _exceptionellement_ nul.
+Si le _MSB1_ est dans la partie entière de $F$, ça veut dire que $\left(F \ge 1\right)$ et que la virgule devra être déplacé vers la gauche (_si elle doit l'être_), au contraire si le _MSB1_ est dans la partie fractionnaire alors $\left(F \lt 1\right)$ et la virgule sera déplacé vers la droite.
+Mais le déplacement de la virgule engendre en binaire les même choses qu'en décimale.
+Une _division par_ $N$ de $F$ dans le cas d'un déplacement de la virgule de $log_2\left(N\right)$ rangs vers la gauche, et _une multiplication_ de $F$ par le même facteur $N$ pour un décalage de la virgule de $log_2\left(N\right)$ rangs vers la droite.
+Le terme $N$ qui multiplie ou divise $F$ est __systèmatiquement une puissance de 2__, ce qui suit explique pourquoi.
+
+Pour tout nombre flottant $F$, nous savons que la virgule se trouve entre le _LSB_ de la partie entière (le bit de poids $0$), et le _MSB_ de la partie fractionnaire (bit de poids $-1$).
 Par conséquent, un déplacement de la virgule d'un rang vers la gauche force le bit de poids $1$ à devenir le bit de poids $0$, le bit de poids $0$ devient celui de poids $-1$, et celui de poids $-1$ devient le bit de poids $-2$, etc.
-Pour le dire autrement, chaque bit de la partie entière comme de la partie fractionnaire de $F$ voit son poids être décrémenter de $1$. 
+Pour le dire autrement, chaque bit de la partie entière comme de la partie fractionnaire de $F$ voit son poids être _décrémenter_ de $1$. 
 C'est pourquoi après le déplacement de la virgule d'un rang vers la gauche, le nombre $F$ vaut ce qui suit pour $c = -1$:
 
 $$\left(\sum_{i=msb\left(F\right)}^{lsb\left(F\right)} \left(F_i \times 2^{\left(i+c\right)}\right)\right) = \left(F\times 2^c\right)$$
 
 Le terme $c$ représente le nombre de rang de décalage à induire sur la virgule du nombre $F$.
-Qui plus est, lorsque $\left(c \lt 0\right)$ c'est que la virgule doit être décalée vers la gauche, et inversement quand $\left(c \gt 0\right)$, c'est que le décalage doit se produire vers la droite.
+Qui plus est, lorsque $\left(c \lt 0\right)$ c'est que _la virgule doit être décalée vers la gauche_, et inversement quand $\left(c \gt 0\right)$, c'est que le décalage doit se produire _vers la droite_.
 
 Essayons de comprendre pourquoi est ce qu'un décalage d'un rang vers la gauche de la virgule de $F$, divise la valeur de $F$ par $N = 2$, comme nous le démontre l'équation ci-dessus.
 Nous savons que les nombres flottants ont une partie entière et une autre fractionnaire.
-Ces deux parties utilisent chaque bit comme un facteur d'une puissance de $2$, des puissances positives pour la partie entière et négatives pour la partie fractionnaire.
+Ces deux parties utilisent chaque bit comme un facteur d'une puissance de $2$, des puissances _positives_ pour la partie entière et _négatives_ pour la partie fractionnaire.
 Il n'empêche que dans notre nombre flottant $F$, n'importe quel bit de poids $i$ est facteur d'une puissance de $2$, deux fois plus grande que le bit de poids $\left(i-1\right)$.
-Par exemple $\left(2^0 = 1\right)$ et $\left(2^{-1} = 0.5\right)$ ou autrement dit, pour tout nombre flottant $F$ alors $\sum_{i=msb\left(F\right)}^{lsb\left(F\right)} \left(2^i \div 2 = 2^\left(i-1\right)\right)$.
-Nous avons vus plus haut qu'avec un décalage d'un rang vers la gauche de la virgule de $F$, je cite "chaque bit de la partie entière comme de la partie fractionnaire de $F$ voit son poids être décrémenter de $1$".
-Ce qui veut dire que tout bit de $F$ passe de facteur de $2^i$ à $2^\left(i-1\right)$, et chaque bit voit donc sa valeur être divisé par $2$.
+Par exemple $\left(2^0 = 1\right)$ et $\left(2^{-1} = 0.5\right)$. Ou autrement dit, pour tout nombre flottant $F$ alors $\left(\sum_{i=msb\left(F\right)}^{lsb\left(F\right)+1} \left(2^i \div 2 = 2^\left(i-1\right)\right)\right)$.
+
+Nous avons vus plus haut qu'avec un décalage d'un rang vers la gauche de la virgule de $F$, je cite "chaque bit de la partie entière comme de la partie fractionnaire de $F$ voit son poids être _décrémenter_ de $1$".
+Ce qui veut dire que tout bit de $F$ passe de facteur de $2^i$ à $2^\left(i-1\right)$, et _chaque bit_ voit donc sa valeur être _divisé par_ $2$.
 Le calcul de la valeur de $F$ passe de la somme des bits de poids $i$ à $1$ qui multiplient $2^i$, à la somme des bits de poids $i$ à $1$ qui multiplient $2^\left(i-1\right)$.
-Pour le dire autrement, nous faisons la somme de tous les bits de $F$ après que leur poids (valeur) ait été divisé par $2$ avec le décalage.
-C'est pourquoi la valeur de $F$ est divisé par $2$ avec un décalage d'un rang vers la gauche de la virgule.
+Pour le dire autrement, nous faisons la somme de tous les bits de $F$ __après__ que leur poids (valeur) ait été divisé par $2$ avec le décalage.
+C'est pourquoi la valeur de $F$ est _divisé par_ $2$ avec un décalage d'_un rang vers la gauche_ de la virgule.
 
 Nous avons compris pourquoi un décalage d'un rang vers la gauche de la virgule de $F$, engendre une division par $2$ de $F$.
 Découvrons désormais les effets d'un décalage d'un rang vers la droite de la virgule de $F$, sur la valeur du nombre lui même.
-Dans le cas d'un tel décalage, chaque bit de la partie entière comme fractionnaire de $F$ voit son poids être incrémenter de $1$.
-Par conséquent, chaque bit voit sa valeur doublé car $\left(2^{\left(i+1\right)} = 2 \times 2^i\right)$.
-Nous calculons la valeur de $F$ après décalage comme la somme des bits de poids $i$ à $1$ qui multiplient $2^{\left(i+1\right)}$.
+Dans le cas d'un tel décalage, chaque bit de la partie entière comme fractionnaire de $F$ voit son poids être _incrémenter_ de $1$.
+Par conséquent, chaque bit de poids $i$ voit sa valeur doublé car $\left(2^{\left(i+1\right)} = 2 \times 2^i\right)$.
+Nous calculons la valeur de $F$ __après__ décalage comme la somme des bits de poids $i$ à $1$ qui multiplient $2^{\left(i+1\right)}$.
 Exactement comme le fait la partie gauche de l'équation ci-dessus pour un décalage $c = 1$.
-Le côté droit de cette équation nous informe que cette opération revient à multiplié le nombre $F$ par $2$.
+Le côté droit de cette équation nous informe que cette opération revient à _multiplié_ le nombre $F$ par $2$.
 
 Nous sommes désormais capable de comprendre toutes les implications d'un décalage de la virgule du nombre $F$, sur la valeur du nombre lui même. 
 Prenons un décalage de $c = x$ comme exemple, où $x \in \left[-\infty ;+\infty \right]$.
-Si $\left(c \gt 0\right)$ alors nous n'avons qu'à décalé la virgule de $c$ fois $1$ rang vers la droite.
+Si $\left(c \gt 0\right)$ alors nous n'avons qu'à décalé la virgule de $c$ fois $1$ rang _vers la droite_.
 Vu que nous savons qu'un décalage de la virgule de $1$ rang vers la droite engendre une multiplication par $2$ du nombre $F$, alors après $c$ décalages de $1$ rang, nous aurons multiplié $F$ par $2^c$.
-Au contraire si $\left(c \lt 0\right)$, alors nous devrons décalé la virgule de $\vert c \vert$ fois $1$ rang vers la gauche.
+Au contraire si $\left(c \lt 0\right)$, alors nous devrons décalé la virgule de $\vert c \vert$ fois $1$ rang _vers la gauche_.
 Ce décalage d'un rang vers la gauche revient à divisé par $2$ la valeur de $F$.
-Par conséquent, après $\vert c \vert$ décalages de $1$ rang vers la gauche nous aurons divisé $\vert c \vert$ fois la valeur de $F$ par $2$.
+Par conséquent, après $\vert c \vert$ décalages de $1$ rang vers la gauche, nous aurons divisé $\vert c \vert$ fois la valeur de $F$ par $2$.
 Ou autrement dit, $F$ aura été divisé par $2^{\vert c \vert}$.
 
-Voilà pourquoi n'importe quel décalage de la virgule d'un nombre flottant $F$, engendre une multiplication ou une division du nombre par une puissance de $2$.
+Voilà pourquoi n'_importe quel décalage de la virgule_ d'un nombre flottant $F$, engendre une _multiplication_ ou une _division_ du nombre par une puissance de $2$.
+
+-- -
 
 Cependant, je parle de divisé par une puissance de $2$ le nombre flottant $F$ dans le cas d'un décalage de sa virgule vers la gauche, mais malgré que l'équation précédente fonctionne, elle ne fait pas usage de division.
 Comprenons pourquoi.
