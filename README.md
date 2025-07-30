@@ -4,7 +4,7 @@ Le document se découpe en plusieurs parties:
   - L'encodage $Binary \ Unsigned$
   - Le standard IEEE-754
     - L'encodage par biais du champs d'exposant
-    - La mantisse tronquée, une historie de puissance de $2$ négative
+    - La mantisse tronquée, une historie de puissance de $2$
   - L'écriture scientifique binaire
     - Le significande
     - Le multiplicande
@@ -96,7 +96,7 @@ Elle se calcul de la manière suivante $-\left(2^{\left(N-1\right)}\right)+1$, o
 Etant donné que l'encodage par biais se base sur le _Binary Unsigned_, le champs d'exposant __partage les même propriétés__ que cet encodage.
 Notamment le fait que la valeur d'un bit à $1$ de poids $i$ est strictement supérieur à la somme des bits de poids inférieur à $i$.
 
-# IV. La mantisse tronquée, une historie de puissance de 2 négative
+# IV. La mantisse tronquée, une historie de puissance de 2
 
 Pour le champs de la mantisse tronquée nous avons besoin de faire un rapide rappel sur l'encodage intial d'un nombre flottant.
 La partie entière d'un nombre flottant utilise du _Binary Unsigned_ pour être codé, tandis que la partie fractionnaire fait usage d'une version modifiée du _Binary Unsigned_.
@@ -220,27 +220,28 @@ Voilà pourquoi n'_importe quel décalage de la virgule_ d'un nombre flottant $F
 -- -
 
 Cependant, je parle de divisé par une puissance de $2$ le nombre flottant $F$ dans le cas d'un décalage de sa virgule vers la gauche, mais malgré que l'équation précédente fonctionne, elle ne fait pas usage de division.
-Comprenons pourquoi.
+Essayons de comprendre pourquoi.
 Le côté droit de cette équation $\left(F\times 2^c\right)$ est approprié pour un décalage de la virgule vers la droite.
-Car après un déplacement de la virgule de $c$ rangs vers la droite, le nombre flottant $F$ est mulitplié par une puissance de $2$ qui vaut $2^c$, où je rappelle que $\left(c \gt 0\right)$.
+Car je rappelle qu'après un déplacement de la virgule de $c$ rangs vers la droite, le nombre flottant $F$ est mulitplié par une puissance de $2$ qui vaut $2^c$, où $\left(c \gt 0\right)$.
 
-Nous avons jusqu'ici utilisé des valeurs négatives de $c$ lors des décalages de virgule vers la gauche.
+En outre, nous avons jusqu'ici utilisé des valeurs négatives de $c$ lors des décalages de virgule vers la gauche.
 Pourtant le plus intuitif aurait été de définir les même valeurs de $c$ peu importe la direction des décalages, alors faisons comme si c'était le cas depuis le début.
 Dans ce qui suit je vais donc faire usage de $\left(c \gt 0\right)$ pour des décalages vers la gauche.
-Les explications suivantes vont nous permettre de comprendre pourquoi, dans les faits, il vaut mieux que $c$ soit négatif pour les décalages vers la gauche.
+Les explications suivantes vont nous permettre de comprendre pourquoi, dans les faits, il vaut mieux que $c$ soit négatif pour les décalages de la virgule vers la gauche.
 
 Pour un décalage de la virgule de $c$ rangs vers la gauche, nous devrions divisé $c$ fois le nombre $F$ par $2$, ou autrement dit, divisé $F$ par $2^c$.
 Initialement, nous pourrions penser avoir besoin d'une équation ressemblant à celle-ci $\left(\sum_{i=msb\left(F\right)}^{lsb\left(F\right)} \left(F_i \times 2^{\left(i-c\right)}\right)\right) = \left(F\div 2^c\right)$.
 J'attire l'attention sur le fait que côté droit de l'équation peut être modifié pour $\left(F\times \left(1\div 2^c\right)\right)$.
-Mais ce n'est pas fini car pour trouver l'inverse d'une puissance de $2$ tel que $2^c$, nous pouvons simplement appliqué l'opposé de l'exposant $c$ à la base $2$.
+Mais ce n'est pas fini, car pour trouver l'inverse d'une puissance de $2$ tel que $2^c$, nous pouvons simplement appliqué l'opposé de l'exposant $c$ à la base $2$.
 En gros, $\left(1\div 2^c\right) = \ 2^{-c}$.
 Je me permet de rappellé que $\left(c \gt 0\right)$.
-Mais nous pouvons alors remplacé $\left(F\times 2^{-c}\right)$ par $\left(F\times 2^c\right)$, à la condition qu'un décalage de $x$ rangs vers la gauche de la virgule de $F$ soit représenté dans l'équation par une valeur de $c = -x$, c'est à dire négative.
+Finalement, nous pouvons alors remplacé $\left(F\times 2^{-c}\right)$ par $\left(F\times 2^c\right)$, à la condition qu'un décalage de $x$ rangs vers la gauche de la virgule de $F$, soit représenté dans l'équation par une valeur de $c = -x$.
 
-Avec $\left(F\times 2^c\right)$ nous retrouvons bien le membre droit de notre équation initial.
+Avec $\left(F\times 2^c\right)$ nous retrouvons bien le membre droit de notre équation initial, à la condition que $c$ puisse devenir négatif.
 De plus, nous comprenons aussi que le calcul de l'exposant $\left(i+c\right)$ du membre gauche, produit l'équivalent de $\left(i-c\right)$ dans le cas d'un décalage de la virgule de $F$ vers la gauche, car $\left(c \lt 0\right)$.
 
-Voici la raison pour laquelle il vaut mieux que $c$ soit négatif lors d'un décalage vers la gauche de la virgule, ceci nous permet de ne faire usage que d'une seule équation pour tout les sens de décalage. C'est cool.
+Voici la raison pour laquelle il vaut mieux que $c$ soit négatif lors d'un décalage vers la gauche de la virgule, ceci nous permet de ne faire usage que d'une seule équation pour tout les sens de décalage. 
+C'est cool.
 
 # VIII. Le multiplicande
 
