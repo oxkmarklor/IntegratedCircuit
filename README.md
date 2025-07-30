@@ -358,61 +358,11 @@ Nous comprenons désormais pourquoi le circuit électronique, qui a pour but de 
 
 # XII. Démonstration mathématique
 
-// pourquoi traité E avant T
-
-Nous avons vu que ce champs binaire de $5$ bits code la valeur de l'exposant avec un encodage par biais, mais aussi que cet encodage partage toutes les caractéristiques de l'encodage $Binary$ $Unsigned$.
-
-# XIII. Traitement des champs d'exposant
-
-- Voici la définition de l'opération logique $Nimply\left(X,Y\right)\mapsto X \wedge Not(Y)$ dont nous allons nous sevrir.
-
-Nous effectuons l'opération $Nimply\left(E_{\beta\sigma},E_{\alpha\sigma}\right)$ où $\sigma$ est le poids des bits du champs d'exposant $E$ des opérandes $\beta$ et $\alpha$.
-
-  $$\sum_{\sigma=14}^{10} Nimply\left(E_{\beta\sigma}, E_{\alpha\sigma}\right) = \tau$$
-
-// plus d'explication sur les résultats terminaux
-
-Le résultat est un champs binaire $\tau$ composé de $5$ bits, et si l'un (ou plusieurs) d'entre eux est à $1$, alors:
-
-  - Nous affectons le poids du $MSB1$ du champs $\tau$ à la variable $\sigma$.
-
-  - Nous savons que $\left(E_{\beta\sigma} \gt E_{\alpha\sigma}\right)$ et par conséquent $\left(E_{\beta\sigma} \times 2^{\sigma}\right) \gt \left(\sum_{\sigma}^{10} E_{\alpha\sigma} \times 2^{\sigma}\right)$.
-
-    - Dans le cas où $\sigma \neq 14$, ce qui figure ci-dessus ne prouve pas que $\left(E_{\beta} \gt E_{\alpha}\right)$ car $\left(\sum_{\sigma+1}^{14} E_{\beta\sigma} \times 2^{\sigma}\right) \le \left(\sum_{\sigma+1}^{14} E_{\alpha\sigma} \times 2^{\sigma}\right)$.
-
-      - Nous savons que la somme des bits de poids supérieur à $\sigma$ pour $E_{\beta}$ est $\left(\sum_{\sigma+1}^{14} \left(E_{\beta\sigma} \times 2^{\sigma}\right) = r\right)$.
-
-      - Par conséquent si $\left(\sum_{\sigma+1}^{14} \left(E_{\alpha\sigma} \times 2^{\sigma}\right) = r \right)$ alors $\left(E_{\beta} \gt E_{\alpha}\right)$, sinon  $\left(\sum_{\sigma+1}^{14} \left(E_{\alpha\sigma} \times 2^{\sigma}\right) \gt r \right)$ et $\left(E_{\beta} \lt E_{\alpha}\right)$.
-
-    - Autrement $\sigma = 14$ et nous sommes certains que $\left(E_{\beta} \gt E_{\alpha}\right)$ car $Nimply\left(E_{\beta 14},E_{\alpha 14}\right) = 1$.
-
-Cependant, si le champs $\tau$ n'est composé que de $5$ bits à $0$, alors:
-
-  - Nous savons que l'opération $Nimply\left(E_{\beta\sigma}, E_{\alpha\sigma}\right)$ ne renvoie $0$ que si $\left(E_{\beta\sigma} = E_{\alpha\sigma}\right)$, ou si $\left(E_{\beta\sigma} = 0\right)$ alors que $\left(E_{\alpha\sigma} = 1\right)$.
-
-  - Par conséquent vu que $\tau$ n'est composé que de bits à $0$, nous savons que $\left(\sum_{\sigma=10}^{14} E_{\beta\sigma} \times 2^{\sigma}\right) \le \left(\sum_{\sigma=10}^{14} E_{\alpha\sigma} \times 2^{\sigma}\right)$.
-
-  - En reprenant en partie ce qui a été dit plus haut, la valeur du champs d'exposant $E_{\beta}$ est $\left(\sum_{\sigma=10}^{14} \left(E_{\beta\sigma} \times 2^{\sigma}\right) = r\right)$:
-
-    - Dans le cas où $\left(\sum_{\sigma=10}^{14} \left(E_{\alpha\sigma} \times 2^{\sigma}\right) \gt r\right)$ alors $\left(E_{\beta} \lt E_{\alpha}\right)$.
-
-    - Cependant si $\left(\sum_{\sigma=10}^{14} \left(E_{\alpha\sigma} \times 2^{\sigma}\right) = r\right)$ alors $\left(E_{\beta} = E_{\alpha}\right)$.
-
-// Explication sur le cas non terminal Ealpha = Ebeta
-
-Pour résumer, si les champs $E_{\beta} \neq E_{\alpha}$ alors soit $\left(E_{\beta} \gt E_{\alpha}\right)$ et nous savons que $\left(\left|\alpha\right| \lt \left|\beta\right|\right)$, ou alors $\left(E_{\beta} \lt E_{\alpha}\right)$ et $\left(\left|\alpha\right| \gt \left|\beta\right|\right)$.
-
-// Explication du traitement de la mantisse tronquée?
-
-# XIV. Traitement des champs des mantisses tronquées 
-
-Mais rappellons que quand bien même $\left(E_{\beta} = E_{\alpha}\right)$, ce n'est pas pour autant que la comparaison $\left(\left|\alpha\right| \gt \left|\beta\right|\right)$ échoue.
-Les opérandes flottants $\alpha$ et $\beta$ ont aussi un champs de mantisse tronquée $T$ de $10_{10}$ bits.
-Si les champs d'exposant $E$ des deux opérandes sont égaux, il faut encore que les champs binaires $T_{\beta}$ et $T_{\alpha}$ le soient aussi pour que $\left(\left|\alpha\right| = \left|\beta\right|\right)$ et que la comparaison échoue.
 
 
-// Expliqué que les poids des bits du champs d'exposant sont plus grands que ceux de la mantisse tronquée, d'où le fait de traité en priorité ces derniers.
 
-// Explication de l'expression
-   
-$$\left(\left(\sum_{\sigma+1}^{14} \left(E_{\beta\sigma} \oplus E_{\alpha\sigma}\right) = 0 \right) = \left(E_{\beta} \gt E_{\alpha}\right)\right) \vee \left(\left(\sum_{\sigma+1}^{14} \left(E_{\beta\sigma} \oplus E_{\alpha\sigma}\right) \gt 0 \right) = \left(E_{\beta} \lt E_{\alpha}\right)\right)$$
+
+
+
+
+
