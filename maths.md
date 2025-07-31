@@ -50,9 +50,18 @@ $$\left(1\right) \quad \sum_{\sigma=14}^{10} \ Write\left(\tau_{\sigma}, \ Nimpl
 
 La variable $\tau$ interprète un champs binaire tampon de $15$ bits.
 
-Le résultat est un champs binaire $\tau$ composé de $5$ bits, et si l'un (ou plusieurs) d'entre eux est à $1$, alors:
+$$\left(2\right) \quad \left[\left(\sum_{\sigma=14}^{10} \ \tau_{\sigma} \gt 0\right), \ Goto\left(3\right)\right] \ \vee \ \left[\left(\sum_{\sigma=14}^{10} \ \tau_{\sigma} = 0\right), \ Goto\left(?\right)\right]$$
 
-  - Nous affectons le poids du $MSB1$ du champs $\tau$ à la variable $\sigma$.
+L'instruction __Goto__ demande simplement au lecteur de poursuivre la démonstration vers le numéro indiqué dans ses "_paramètres_".
+
+$$\left(3\right) \quad \sigma = 10, \ \left(\sum_{i=14}^{\sigma} Write\left(\sigma, \ \left[\left(\overline{\tau_i} \times 10\right) + \tau_i \times \left(11 + i \ mod \ 5\right)\right]\right)\right)$$
+
+Initialement la variable $\sigma$ vaut $10$ car nous traitons chaque bit de résultat dans $\tau$ dans l'ordre décroissant des indices.
+Qui plus est, la valeur de $\sigma$ se trouve toujours dans l'intervalle $\left[10;14\right]$ pour ne pas dépassé les bornes hautes et basses des champs d'exposant.
+L'expression enregistre dans $\sigma$ le poids immédiatement supérieur au _MSB1_ des bits de résultats.
+
+
+
 
   - Nous savons que $\left(E_{\beta\sigma} \gt E_{\alpha\sigma}\right)$ et par conséquent $\left(E_{\beta\sigma} \times 2^{\sigma}\right) \gt \left(\sum_{\sigma}^{10} E_{\alpha\sigma} \times 2^{\sigma}\right)$.
 
