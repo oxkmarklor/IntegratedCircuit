@@ -49,6 +49,7 @@ La variable $\sigma$ (sigma) servira d'indice pour accéder aux bits $\in \left[
 $$\left(1\right) \quad \sum_{\sigma=14}^{10} \ Write\left(\tau_{\sigma}, \ Nimply \ \left(E_{\beta\sigma}, \ E_{\alpha\sigma}\right)\right)$$
 
 La variable $\tau$ interprète un champs binaire tampon de $15$ bits.
+Les bits de résultats sont stockés dans $\tau$ sur les même poids que les bits d'opérande des champs d'exposant $E_{\alpha}$ et E_{\beta}.
 
 $$\left(2\right) \quad \left[\left(\sum_{\sigma=14}^{10} \ \tau_{\sigma} \gt 0\right), \ Goto\left(3\right)\right] \ \vee \ \left[\left(\sum_{\sigma=14}^{10} \ \tau_{\sigma} = 0\right), \ Goto\left(?\right)\right]$$
 
@@ -56,9 +57,22 @@ L'instruction __Goto__ demande simplement au lecteur de poursuivre la démonstra
 
 $$\left(3\right) \quad \sigma = 10, \ \left(\sum_{i=14}^{\sigma} Write\left(\sigma, \ \left[\left(\overline{\tau_i} \times 10\right) + \tau_i \times \left(11 + i \ mod \ 5\right)\right]\right)\right)$$
 
-Initialement la variable $\sigma$ vaut $10$ car nous traitons chaque bit de résultat dans $\tau$ dans l'ordre décroissant des indices.
-Qui plus est, la valeur de $\sigma$ se trouve toujours dans l'intervalle $\left[10;14\right]$ pour ne pas dépassé les bornes hautes et basses des champs d'exposant.
-L'expression enregistre dans $\sigma$ le poids immédiatement supérieur au _MSB1_ des bits de résultats.
+Cette expression fait de $\sigma$ la valeur du poids $+ 1$ du _MSB1_.
+
+Si $\left(\sigma = 15\right)$ alors nous atteingons un point terminal et $Goto\left(4\right)$, sinon $Goto\left(?\right)$.
+
+$$\left(4\right) \quad \left(E_{\beta\left(\sigma - 1\right)} \gt E_{\alpha\left(\sigma - 1\right)}\right), \ \left[\left(E_{\beta\left(\sigma - 1\right)} \times 2^{\left(\sigma - 1\right)}\right) \gt \left(\sum_{i=\left(\sigma - 1\right)}^{10} \ \left(E_{\alpha i} \times 2^i\right)\right)\right]$$
+
+Le circuit atteint un point terminal.
+
+La valeur de $\sigma - 1$ est $14$, ou autrement dit le _MSB_ des champs $E_{\alpha}$ et $E_{\beta}$.
+Nous savons désormais que les champs d'exposant $E$ des opérandes _IEEE-754_ $\alpha$ et $\beta$ utilisent un encodage par biais, pour lequel un bit à $1$ de poids $i$ est strictement supérieur à la somme des produits entre les bits de poids inférieur à $i$ et leur poids. 
+
+Par conséquent, nous savons que $\left(E_{\beta} \gt E_{\alpha}\right)$ et comme nous l'avons vus plus haut, cela permet de dire que $\left(\vert \alpha \vert \lt \vert \beta \vert\right)$.
+La comparaison échoue.
+
+
+
 
 
 
@@ -85,3 +99,4 @@ Cependant, si le champs $\tau$ n'est composé que de $5$ bits à $0$, alors:
 
     - Cependant si $\left(\sum_{\sigma=10}^{14} \left(E_{\alpha\sigma} \times 2^{\sigma}\right) = r\right)$ alors $\left(E_{\beta} = E_{\alpha}\right)$.
 
+$$\left(\left(\sum_{\sigma+1}^{14} \left(E_{\beta\sigma} \oplus E_{\alpha\sigma}\right) = 0 \right) = \left(E_{\beta} \gt E_{\alpha}\right)\right) \vee \left(\left(\sum_{\sigma+1}^{14} \left(E_{\beta\sigma} \oplus E_{\alpha\sigma}\right) \gt 0 \right) = \left(E_{\beta} \lt E_{\alpha}\right)\right)$$
