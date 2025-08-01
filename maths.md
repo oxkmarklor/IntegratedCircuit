@@ -69,13 +69,20 @@ Nous savons que $\left(4\right)$ est correct car $\tau_{14} = 1$ et où je rappe
 
 $$\left(5\right) \quad \left[\left(E_{\beta\left(\sigma - 1\right)} \times 2^{\left(\sigma - 1\right)}\right) \gt \left(\sum_{\sigma = \sigma - 1}^{10} \ \left(E_{\alpha\sigma} \times 2^{\sigma}\right)\right)\right]$$
 
-L'expression $\left(5\right)$ est elle aussi correct car nous savons que les champs d'exposant $E$ des nombres IEEE-754 utilisent un encodage par biais.
-Encodage par biais qui partage les même propriétés que l'encodage _Binary Unsigned_.
-Autrement dit, dans un tel encodage la valeur d'un bit à $1$ qui multiplie son poids $i$, est strictement supérieur à la somme des résultats des produits entre les bits de poids inférieur $i$ et leur poids respectif.
-De plus, grâce à $\left(4\right)$ nous savons que $E_{\alpha 14} = 0$, d'où le fait que sa prise en compte dans le calcul de somme en $\left(5\right)$ n'est pas un problème.
+Comme nous l'avons vus dans le chapitre "_Encodage par biais_", un bit de poids $i$ à $1$ a une valeur strictement supérieur à la somme des valeurs des bits à $1$ de poids inférieur à $i$.
+Ceci démontre que $\left(E_{\beta} \gt E_{\alpha}\right)$ étant donné que le _MSB1_ de $\tau \in \left[10;14\right]$ est $\tau_{14}$, c'est à dire le _MSB_.
+Sachant que $\left(4\right)$ démontre que si $\tau_{14} = 1$ c'est que $\left(E_{\alpha 14} = 0\right)$. 
+Alors, le calcul de la somme peu prendre en compte $\left(E_{\alpha 14} \times 2^{14}\right) = \left(0 \times 2^{14}\right)$.
+Dans le chapitre "_Ordre de traitrement des champs d'exposant et de mantisse tronquée_" nous avons aussi compris que si $\left(E_{\beta} \gt E_{\alpha}\right)$ alors $\left(\vert \alpha \vert \lt \vert \beta \vert\right)$, ___et la comparaison échoue___.
 
-Pour conclure, grâce à $\left(5\right)$ nous savons que $\left(E_{\beta} \gt E_{\alpha}\right)$ et comme nous l'avons vus plus haut, cela permet de dire que $\left(\vert \alpha \vert \lt \vert \beta \vert\right)$.
-La comparaison échoue.
+$$\left(6\right) \quad \left(\sum_{\sigma}^{14} \ \left(E_{\beta\sigma} \times 2^{\sigma}\right)\right) = \lambda$$
+
+Dans le cas où $\left(\sigma \lt 15\right)$, alors $\left(5\right)$ ne nous démontre en rien le fait que $\left(E_{\beta} \gt E_{\alpha}\right)$.
+Cela est due au fait que le poids du _MSB1_ de $\tau$ est compris dans l'intervalle $\left[10;13\right]$, et qu'il est donc d'un poids strictement inférieur à $\tau_{14}$.
+Il y a alors des bits de poids supérieur au _MSB1_, comme celui de poids $\sigma$ et même plus potentiellement, qui sont alors des zéros anonyme comme expliqué dans la documentation du circuit.
+Un zéro anonyme de poids $i$ peut être la conséquence de $\left(E_{\alpha i} = E_{\beta i}\right)$ ou encore de $\left(E_{\alpha i} \gt E_{\beta i}\right)$.
+
+$$\left(7\right) \quad \left[\left(\sum_{\sigma}^{14} \ \left(E_{\alpha\sigma} \times 2^{\sigma}\right) = \lambda\right), \ Goto\left(?\right)\right] \ \vee \ \left[\left(\sum_{\sigma}^{14} \ \left(E_{\alpha\sigma} \times 2^{\sigma}\right) > \lambda\right), \ Goto\left(?\right)\right]$$
 
 
 
@@ -83,11 +90,9 @@ La comparaison échoue.
 
 
 
-  - Dans le cas où $\sigma \neq 14$, ce qui figure ci-dessus ne prouve pas que $\left(E_{\beta} \gt E_{\alpha}\right)$ car $\left(\sum_{\sigma+1}^{14} E_{\beta\sigma} \times 2^{\sigma}\right) \le \left(\sum_{\sigma+1}^{14} E_{\alpha\sigma} \times 2^{\sigma}\right)$.
+   - Nous savons que la somme des bits de poids supérieur à $\sigma$ pour $E_{\beta}$ est $\left(\sum_{\sigma+1}^{14} \left(E_{\beta\sigma} \times 2^{\sigma}\right) = r\right)$.
 
-    - Nous savons que la somme des bits de poids supérieur à $\sigma$ pour $E_{\beta}$ est $\left(\sum_{\sigma+1}^{14} \left(E_{\beta\sigma} \times 2^{\sigma}\right) = r\right)$.
-
-    - Par conséquent si $\left(\sum_{\sigma+1}^{14} \left(E_{\alpha\sigma} \times 2^{\sigma}\right) = r \right)$ alors $\left(E_{\beta} \gt E_{\alpha}\right)$, sinon  $\left(\sum_{\sigma+1}^{14} \left(E_{\alpha\sigma} \times 2^{\sigma}\right) \gt r \right)$ et $\left(E_{\beta} \lt E_{\alpha}\right)$.
+   - Par conséquent si $\left(\sum_{\sigma+1}^{14} \left(E_{\alpha\sigma} \times 2^{\sigma}\right) = r \right)$ alors $\left(E_{\beta} \gt E_{\alpha}\right)$, sinon  $\left(\sum_{\sigma+1}^{14} \left(E_{\alpha\sigma} \times 2^{\sigma}\right) \gt r \right)$ et $\left(E_{\beta} \lt E_{\alpha}\right)$.
 
 
 Cependant, si le champs $\tau$ n'est composé que de $5$ bits à $0$, alors:
