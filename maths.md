@@ -48,12 +48,25 @@ La variable $\sigma$ (sigma) servira d'indice pour accéder aux bits $\in \left[
 
 $$\left(1\right) \quad \sum_{\sigma=14}^{10} \ Write\left(\tau_{\sigma}, \ Nimply \ \left(E_{\beta\sigma}, \ E_{\alpha\sigma}\right)\right)$$
 
-La variable $\tau$ interprète un champs binaire tampon de $15$ bits.
-Les bits de résultats sont stockés dans $\tau$ sur les même poids que les bits d'opérande des champs d'exposant $E_{\alpha}$ et $E_{\beta}$.
+La variable $\tau$ est un champs binaire de $15$ bits dont la représentation est la même que celle illustrée plus haut pour les nombres flottants _Half Precision_ (sans le bit de signe).
+Pour chacun des traitements des bits de poids $E_{\alpha i}$ et $E_{\beta i}$, les résultats sont enregistrés dans $\tau_i$.
+Ce qui veut dire que $\tau \in \left[10;14\right]$ correspond aux bits de résultat des opérations sur les bits $E_{\alpha i}$ et $E_{\beta i}$.
 
-$$\left(2\right) \quad \left[\left(\sum_{\sigma=14}^{10} \ \tau_{\sigma} \gt 0\right), \ Goto\left(3\right)\right] \ \vee \ \left[\left(\sum_{\sigma=14}^{10} \ \tau_{\sigma} = 0\right), \ Goto\left(?\right)\right]$$
+-- -
+
+$$\left(2\right) \quad \left[\left(\sum_{\sigma=14}^{10} \ \tau_{\sigma} \gt 0\right), \ Goto\left(3\right)\right] \ \vee \ \left[\left(\sum_{\sigma=14}^{10} \ \tau_{\sigma} = 0\right), \ Goto\left(10\right)\right]$$
 
 L'instruction __Goto__ demande simplement au lecteur de poursuivre la démonstration vers le numéro indiqué dans ses "_paramètres_".
+
+L'expression numéro $\left(1\right)$ effectue une opération $Nimply$ sur les bits de poids $i \in \left[10;14\right]$ des champs d'exposant $E_{\alpha}$ et $E_{\beta}$.
+Dans la documentation du circuit, un bit de résultat à $0$ sortant d'une opération $Nimply$ est appellé "__zéro anonyme__".
+La raison en est que l'opération $Nimply$ génère un $0$ dans deux situations, une égalité entre les bits d'opérandes, ou une supériorité stricte du bit sur le paramètre $y$ vis à vis de celui sur $x$.
+En bref, nous savons que $\left(E_{\alpha} \ge E_{\beta}\right)$ si l'ensemble des bits de résultats dans $\tau \in \left[10;14\right]$ sont nuls.
+Mais nous savons aussi que $\left(E_{\alpha} \gt E_{\beta}\right) \vee \left(E_{\alpha} \lt E_{\beta}\right)$ si dans $\tau$ l'un des bits mentionné dans l'intervalle ci-dessus est à $1$.
+Dans ce second cas, nous pouvons être sûre que le circuit atteindra un point terminal, au contraire du premier.
+C'est pourquoi nous commençons par vouloir savoir si la somme des bits de $\tau$ est nul ou non.
+
+-- -
 
 $$\left(3\right) \quad \sigma = 10, \ \left(\sum_{i=14}^{\sigma} Write\left(\sigma, \ \left[\left(\overline{\tau_i} \times 10\right) + \tau_i \times \left(11 + i \ mod \ 5\right)\right]\right)\right)$$
 
@@ -86,7 +99,25 @@ Cela est due au fait que le poids du _MSB1_ de $\tau$ est compris dans l'interva
 Il y a alors des bits de poids supérieur au _MSB1_, comme celui de poids $\sigma$ et même plus potentiellement, qui sont alors des zéros anonyme comme expliqué dans la documentation du circuit.
 Un zéro anonyme de poids $i$ peut être la conséquence de $\left(E_{\alpha i} = E_{\beta i}\right)$ ou encore de $\left(E_{\alpha i} \gt E_{\beta i}\right)$.
 
-$$\left(7\right) \quad \left[\left(\sum_{\sigma}^{14} \ \left(E_{\alpha\sigma} \times 2^{\sigma}\right) = \lambda\right), \ Goto\left(?\right)\right] \ \vee \ \left[\left(\sum_{\sigma}^{14} \ \left(E_{\alpha\sigma} \times 2^{\sigma}\right) > \lambda\right), \ Goto\left(?\right)\right]$$
+$$\left(7\right) \quad \left[\left(\sum_{\sigma}^{14} \ \left(E_{\alpha\sigma} \times 2^{\sigma}\right) = \lambda\right), \ Goto\left(8\right)\right] \ \vee \ \left[\left(\sum_{\sigma}^{14} \ \left(E_{\alpha\sigma} \times 2^{\sigma}\right) > \lambda\right), \ Goto\left(9\right)\right]$$
+
+-- -
+
+$$\left(8\right) \quad \left(E_{\alpha} \lt E_{\beta}\right), \ \left(\vert \alpha \vert \lt \vert \beta \vert\right)$$
+
+// point terminal
+
+-- -
+
+$$\left(9\right) \quad \left(E_{\alpha} \gt E_{\beta}\right), \ \left(\vert \alpha \vert \gt \vert \beta \vert\right)$$
+
+// point terminal
+
+-- -
+
+$$\left(10\right) \quad \left[\sum_{\sigma = 14}^{10} \ \left(\left(E_{\alpha\sigma} \times 2^{\sigma}\right) \ = \ \left(E_{\beta\sigma} \times 2^{\sigma}\right)\right)\right]$$
+
+// continuer le traitement avec T
 
 
 
@@ -94,9 +125,8 @@ $$\left(7\right) \quad \left[\left(\sum_{\sigma}^{14} \ \left(E_{\alpha\sigma} \
 
 
 
-   - Nous savons que la somme des bits de poids supérieur à $\sigma$ pour $E_{\beta}$ est $\left(\sum_{\sigma+1}^{14} \left(E_{\beta\sigma} \times 2^{\sigma}\right) = r\right)$.
 
-   - Par conséquent si $\left(\sum_{\sigma+1}^{14} \left(E_{\alpha\sigma} \times 2^{\sigma}\right) = r \right)$ alors $\left(E_{\beta} \gt E_{\alpha}\right)$, sinon  $\left(\sum_{\sigma+1}^{14} \left(E_{\alpha\sigma} \times 2^{\sigma}\right) \gt r \right)$ et $\left(E_{\beta} \lt E_{\alpha}\right)$.
+
 
 
 Cependant, si le champs $\tau$ n'est composé que de $5$ bits à $0$, alors:
