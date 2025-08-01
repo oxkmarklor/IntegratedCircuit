@@ -60,20 +60,24 @@ $$\left(3\right) \quad \sigma = 10, \ \left(\sum_{i=14}^{\sigma} Write\left(\sig
 Nous savons qu'il y a au moins un des bits de $\tau \in \left[10;14\right]$ qui est à $1$.
 Cette expression a pour but d'enregistré dans $\sigma$ la valeur du poids de ce _MSB1_, incrémenté de $1$.
 
- __Si__ $\left(\sigma = 15\right)$ __alors nous atteigons un point terminal et__ $Goto\left(4\right)$, sinon $Goto\left(?\right)$.
+ __Si__ $\left(\sigma = 15\right)$ __alors nous atteigons un point terminal et__ $Goto\left(4\right)$, sinon $Goto\left(6\right)$.
 
 $$\left(4\right) \quad \left(E_{\beta\left(\sigma - 1\right)} \gt E_{\alpha\left(\sigma - 1\right)}\right)$$
 
 Pour commencer, nous savons que $\left(\sigma - 1 = 14\right)$ est le poids du _MSB_ des champs d'exposant $E$.
-Nous savons que $\left(4\right)$ est correct car $\tau_{14} = 1$ et où je rappelle que $\tau_{14} = Nimply \ \left(E_{\beta 14}, \ E_{\alpha 14}\right)$.
+Nous savons que $\left(4\right)$ est correct car $\tau_{14} = 1$.
+Je rappelle que $\left(1\right)$ met en oeuvre $\tau_i \ = \ Nimply \ \left(E_{\beta i}, \ E_{\alpha i}\right)$.
 
 $$\left(5\right) \quad \left[\left(E_{\beta\left(\sigma - 1\right)} \times 2^{\left(\sigma - 1\right)}\right) \gt \left(\sum_{\sigma = \sigma - 1}^{10} \ \left(E_{\alpha\sigma} \times 2^{\sigma}\right)\right)\right]$$
 
-Comme nous l'avons vus dans le chapitre "_Encodage par biais_", un bit de poids $i$ à $1$ a une valeur strictement supérieur à la somme des valeurs des bits à $1$ de poids inférieur à $i$.
-Ceci démontre que $\left(E_{\beta} \gt E_{\alpha}\right)$ étant donné que le _MSB1_ de $\tau \in \left[10;14\right]$ est $\tau_{14}$, c'est à dire le _MSB_.
-Sachant que $\left(4\right)$ démontre que si $\tau_{14} = 1$ c'est que $\left(E_{\alpha 14} = 0\right)$. 
-Alors, le calcul de la somme peu prendre en compte $\left(E_{\alpha 14} \times 2^{14}\right) = \left(0 \times 2^{14}\right)$.
-Dans le chapitre "_Ordre de traitrement des champs d'exposant et de mantisse tronquée_" nous avons aussi compris que si $\left(E_{\beta} \gt E_{\alpha}\right)$ alors $\left(\vert \alpha \vert \lt \vert \beta \vert\right)$, ___et la comparaison échoue___.
+Dans le chapitre "_Encodage Par Biais_", nous avons vu que la valeur d'un bit à $1$ de poids $i$ est strictement supérieur à la somme des bits à $1$ de poids inférieur à $i$.
+Il s'avère que $\left(3\right)$ nous dit que $\sigma$ est la valeur $+ 1$ du poids du _MSB1_ de $\tau \in \left[10;14\right]$, ce qui veut dire que $\sigma \in \left[11;15\right]$.
+Mais si nous en sommes là, c'est que $\sigma = 15$ et le _MSB1_ de $\tau$ est donc de poids $14$, ou autrement dit de $\left(\sigma - 1\right)$.
+Aussi, nous savons grâce à $\left(3\right)$ que si $\left(\tau_{14} = 1\right)$ alors $\left(E_{\alpha 14} = 0\right)$.
+D'où le fait que $\left(E_{\beta 14} \times 2^{14}\right) \gt \left(\sum_{i=14}^{10} \ E_{\alpha i} \times 2^i\right)$.
+
+Cependant, rappellez vous que dans le chapitre "_Ordre de traitrement des champs d'exposant et de mantisse tronquée_" nous avions vu que $\left(E_{\alpha} \neq E_{\beta}\right)$ engendre un point terminal.
+Dans notre cas, vu que $\tau_{14} = 1$ alors $\left(E_{\beta} \gt E_{\alpha}\right)$ et donc $\left(\vert \alpha \vert \lt \vert \beta \vert\right)$, ___La comparaison échoue___.
 
 $$\left(6\right) \quad \left(\sum_{\sigma}^{14} \ \left(E_{\beta\sigma} \times 2^{\sigma}\right)\right) = \lambda$$
 
