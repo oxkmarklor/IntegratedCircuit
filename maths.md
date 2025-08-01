@@ -25,7 +25,7 @@ Tout d'abord, voici quelques définition d'opération importante pour la démons
 
 $$Write \ \left(x, \ y\right) \rightarrow \ x \ := \ y$$
 
-__Write__ est une fonction d'affectation, le bit de paramètre $y$ _est copié_ dans le bit de paramètre $x$.
+__Write__ est une fonction d'affectation, le paramètre $y$ _est copié_ dans le paramètre $x$.
 
 $$Nimply \ \left(x, \ y\right) \rightarrow \ x \ \wedge \ \overline{y}$$
 
@@ -49,7 +49,7 @@ La variable $\sigma$ (sigma) servira d'indice pour accéder aux bits $\in \left[
 $$\left(1\right) \quad \sum_{\sigma=14}^{10} \ Write\left(\tau_{\sigma}, \ Nimply \ \left(E_{\beta\sigma}, \ E_{\alpha\sigma}\right)\right)$$
 
 La variable $\tau$ interprète un champs binaire tampon de $15$ bits.
-Les bits de résultats sont stockés dans $\tau$ sur les même poids que les bits d'opérande des champs d'exposant $E_{\alpha}$ et E_{\beta}.
+Les bits de résultats sont stockés dans $\tau$ sur les même poids que les bits d'opérande des champs d'exposant $E_{\alpha}$ et $E_{\beta}$.
 
 $$\left(2\right) \quad \left[\left(\sum_{\sigma=14}^{10} \ \tau_{\sigma} \gt 0\right), \ Goto\left(3\right)\right] \ \vee \ \left[\left(\sum_{\sigma=14}^{10} \ \tau_{\sigma} = 0\right), \ Goto\left(?\right)\right]$$
 
@@ -57,18 +57,24 @@ L'instruction __Goto__ demande simplement au lecteur de poursuivre la démonstra
 
 $$\left(3\right) \quad \sigma = 10, \ \left(\sum_{i=14}^{\sigma} Write\left(\sigma, \ \left[\left(\overline{\tau_i} \times 10\right) + \tau_i \times \left(11 + i \ mod \ 5\right)\right]\right)\right)$$
 
-Cette expression fait de $\sigma$ la valeur du poids $+ 1$ du _MSB1_.
+Nous savons qu'il y a au moins un des bits de $\tau \in \left[10;14\right]$ qui est à $1$.
+Cette expression a pour but d'enregistré dans $\sigma$ la valeur du poids de ce _MSB1_, incrémenté de $1$.
 
-Si $\left(\sigma = 15\right)$ alors nous atteingons un point terminal et $Goto\left(4\right)$, sinon $Goto\left(?\right)$.
+ __Si__ $\left(\sigma = 15\right)$ __alors nous atteigons un point terminal et__ $Goto\left(4\right)$, sinon $Goto\left(?\right)$.
 
-$$\left(4\right) \quad \left(E_{\beta\left(\sigma - 1\right)} \gt E_{\alpha\left(\sigma - 1\right)}\right), \ \left[\left(E_{\beta\left(\sigma - 1\right)} \times 2^{\left(\sigma - 1\right)}\right) \gt \left(\sum_{i=\left(\sigma - 1\right)}^{10} \ \left(E_{\alpha i} \times 2^i\right)\right)\right]$$
+$$\left(4\right) \quad \left(E_{\beta\left(\sigma - 1\right)} \gt E_{\alpha\left(\sigma - 1\right)}\right)$$
 
-Le circuit atteint un point terminal.
+Pour commencer, nous savons que $\left(\sigma - 1 = 14\right)$ est le poids du _MSB_ des champs d'exposant $E$.
+Nous savons que $\left(4\right)$ est correct car $\tau_{14} = 1$ et où je rappelle que $\tau_{14} = Nimply \ \left(E_{\beta 14}, \ E_{\alpha 14}\right)$.
 
-La valeur de $\sigma - 1$ est $14$, ou autrement dit le _MSB_ des champs $E_{\alpha}$ et $E_{\beta}$.
-Nous savons désormais que les champs d'exposant $E$ des opérandes _IEEE-754_ $\alpha$ et $\beta$ utilisent un encodage par biais, pour lequel un bit à $1$ de poids $i$ est strictement supérieur à la somme des produits entre les bits de poids inférieur à $i$ et leur poids. 
+$$\left(5\right) \quad \left[\left(E_{\beta\left(\sigma - 1\right)} \times 2^{\left(\sigma - 1\right)}\right) \gt \left(\sum_{\sigma = \sigma - 1}^{10} \ \left(E_{\alpha\sigma} \times 2^{\sigma}\right)\right)\right]$$
 
-Par conséquent, nous savons que $\left(E_{\beta} \gt E_{\alpha}\right)$ et comme nous l'avons vus plus haut, cela permet de dire que $\left(\vert \alpha \vert \lt \vert \beta \vert\right)$.
+L'expression $\left(5\right)$ est elle aussi correct car nous savons que les champs d'exposant $E$ des nombres IEEE-754 utilisent un encodage par biais.
+Encodage par biais qui partage les même propriétés que l'encodage _Binary Unsigned_.
+Autrement dit, dans un tel encodage la valeur d'un bit à $1$ qui multiplie son poids $i$, est strictement supérieur à la somme des résultats des produits entre les bits de poids inférieur $i$ et leur poids respectif.
+De plus, grâce à $\left(4\right)$ nous savons que $E_{\alpha 14} = 0$, d'où le fait que sa prise en compte dans le calcul de somme en $\left(5\right)$ n'est pas un problème.
+
+Pour conclure, grâce à $\left(5\right)$ nous savons que $\left(E_{\beta} \gt E_{\alpha}\right)$ et comme nous l'avons vus plus haut, cela permet de dire que $\left(\vert \alpha \vert \lt \vert \beta \vert\right)$.
 La comparaison échoue.
 
 
@@ -77,15 +83,12 @@ La comparaison échoue.
 
 
 
-  - Nous savons que $\left(E_{\beta\sigma} \gt E_{\alpha\sigma}\right)$ et par conséquent $\left(E_{\beta\sigma} \times 2^{\sigma}\right) \gt \left(\sum_{\sigma}^{10} E_{\alpha\sigma} \times 2^{\sigma}\right)$.
+  - Dans le cas où $\sigma \neq 14$, ce qui figure ci-dessus ne prouve pas que $\left(E_{\beta} \gt E_{\alpha}\right)$ car $\left(\sum_{\sigma+1}^{14} E_{\beta\sigma} \times 2^{\sigma}\right) \le \left(\sum_{\sigma+1}^{14} E_{\alpha\sigma} \times 2^{\sigma}\right)$.
 
-    - Dans le cas où $\sigma \neq 14$, ce qui figure ci-dessus ne prouve pas que $\left(E_{\beta} \gt E_{\alpha}\right)$ car $\left(\sum_{\sigma+1}^{14} E_{\beta\sigma} \times 2^{\sigma}\right) \le \left(\sum_{\sigma+1}^{14} E_{\alpha\sigma} \times 2^{\sigma}\right)$.
+    - Nous savons que la somme des bits de poids supérieur à $\sigma$ pour $E_{\beta}$ est $\left(\sum_{\sigma+1}^{14} \left(E_{\beta\sigma} \times 2^{\sigma}\right) = r\right)$.
 
-      - Nous savons que la somme des bits de poids supérieur à $\sigma$ pour $E_{\beta}$ est $\left(\sum_{\sigma+1}^{14} \left(E_{\beta\sigma} \times 2^{\sigma}\right) = r\right)$.
+    - Par conséquent si $\left(\sum_{\sigma+1}^{14} \left(E_{\alpha\sigma} \times 2^{\sigma}\right) = r \right)$ alors $\left(E_{\beta} \gt E_{\alpha}\right)$, sinon  $\left(\sum_{\sigma+1}^{14} \left(E_{\alpha\sigma} \times 2^{\sigma}\right) \gt r \right)$ et $\left(E_{\beta} \lt E_{\alpha}\right)$.
 
-      - Par conséquent si $\left(\sum_{\sigma+1}^{14} \left(E_{\alpha\sigma} \times 2^{\sigma}\right) = r \right)$ alors $\left(E_{\beta} \gt E_{\alpha}\right)$, sinon  $\left(\sum_{\sigma+1}^{14} \left(E_{\alpha\sigma} \times 2^{\sigma}\right) \gt r \right)$ et $\left(E_{\beta} \lt E_{\alpha}\right)$.
-
-    - Autrement $\sigma = 14$ et nous sommes certains que $\left(E_{\beta} \gt E_{\alpha}\right)$ car $Nimply\left(E_{\beta 14},E_{\alpha 14}\right) = 1$.
 
 Cependant, si le champs $\tau$ n'est composé que de $5$ bits à $0$, alors:
 
