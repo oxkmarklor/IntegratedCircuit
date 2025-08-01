@@ -70,16 +70,22 @@ C'est pourquoi nous commençons par vouloir savoir si la somme des bits de $\tau
 
 $$\left(3\right) \quad \sigma = 10, \ \left(\sum_{i=14}^{\sigma} Write\left(\sigma, \ \left[\left(\overline{\tau_i} \times 10\right) + \tau_i \times \left(11 + i \ mod \ 5\right)\right]\right)\right)$$
 
-Nous savons qu'il y a au moins un des bits de $\tau \in \left[10;14\right]$ qui est à $1$.
+A ce stade il y a au moins un des bits de $\tau \in \left[10;14\right]$ qui est à $1$.
 Cette expression a pour but d'enregistré dans $\sigma$ la valeur du poids de ce _MSB1_, incrémenté de $1$.
+Ce qui veut dire que $\sigma \in \left[11;15\right]$.
 
- __Si__ $\left(\sigma = 15\right)$ __alors nous atteigons un point terminal et__ $Goto\left(4\right)$, sinon $Goto\left(6\right)$.
+ __Si__ $\left(\sigma = 15\right)$ __alors nous atteigons un point terminal et__ $Goto\left(4\right)$, __sinon__ $Goto\left(6\right)$.
+
+-- -
 
 $$\left(4\right) \quad \left(E_{\beta\left(\sigma - 1\right)} \gt E_{\alpha\left(\sigma - 1\right)}\right)$$
 
-Pour commencer, nous savons que $\left(\sigma - 1 = 14\right)$ est le poids du _MSB_ des champs d'exposant $E$.
-Nous savons que $\left(4\right)$ est correct car $\tau_{14} = 1$.
-Je rappelle que $\left(1\right)$ met en oeuvre $\tau_i \ = \ Nimply \ \left(E_{\beta i}, \ E_{\alpha i}\right)$.
+Nous savons que $\sigma = 15$, et donc que $\left(\tau_{\left(\sigma - 1\right)} = 1\right)$.
+Selon l'expression numéro $\left(1\right)$ si $\left(\tau_{14} = 1\right)$ sachant que $\tau_{14} = Nimply \ \left(E_{\beta 14}, \ E_{\alpha 14}\right)$, cela veut dire que $\left(E_{\beta 14} = 1\right)$ pendant que $\left(E_{\alpha 14} = 0\right)$.
+Etant donné que $\tau_{14}$ est le _MSB_ de $\tau \in \left[10;14\right]$ et donc des champs d'exposant $E_{\alpha}$ ainsi que $E_{\beta}$ (toujours selon l'expression $\left(1\right)$ ).
+Nous sommes alors certains que $\left(E_{\alpha} \lt E_{\beta}\right)$ comme nous le voyons ci-bas avec l'expression $\left(5\right)$.
+
+-- -
 
 $$\left(5\right) \quad \left[\left(E_{\beta\left(\sigma - 1\right)} \times 2^{\left(\sigma - 1\right)}\right) \gt \left(\sum_{\sigma = \sigma - 1}^{10} \ \left(E_{\alpha\sigma} \times 2^{\sigma}\right)\right)\right]$$
 
@@ -115,7 +121,13 @@ $$\left(9\right) \quad \left(E_{\alpha} \gt E_{\beta}\right), \ \left(\vert \alp
 
 -- -
 
-$$\left(10\right) \quad \left[\sum_{\sigma = 14}^{10} \ \left(\left(E_{\alpha\sigma} \times 2^{\sigma}\right) \ = \ \left(E_{\beta\sigma} \times 2^{\sigma}\right)\right)\right]$$
+$$\left(10\right) \quad \left[\left(\left(\sum_{\sigma = 14}^{10} \ \left(E_{\alpha\sigma} \times 2^{\sigma}\right)\right) \ \gt \ \left(\sum_{\sigma = 14}^{10} \ \left(E_{\beta\sigma} \times 2^{\sigma}\right)\right)\right), \ Goto\left(9\right)\right] \ \vee \ \left[\left(\sum_{\sigma = 14}^{10} \ \left(\left(E_{\alpha\sigma} \times 2^{\sigma}\right) \ = \ \left(E_{\beta\sigma} \times 2^{\sigma}\right)\right)\right), \ Goto\left(11\right)\right]$$
+
+-- -
+
+$$\left(11\right) \quad \left[\left(T_{\alpha} \gt T_{\beta}\right), \ \left(\vert \alpha \vert \gt \vert \beta \vert\right)\right] \ \vee \ 
+\left[\left(\left(T_{\alpha} = T_{\beta}\right) \ \vee \ \left(T_{\alpha} < T_{\beta}\right)\right), \ \left(\vert \alpha \vert \le \vert \beta \vert\right)\right]$$
+
 
 // continuer le traitement avec T
 
