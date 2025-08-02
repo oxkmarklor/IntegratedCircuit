@@ -109,14 +109,19 @@ En nous retrouvant ici nous savons que $\left(\sigma \lt 15\right)$.
 Ce qui veut dire que le _MSB1_ de $\tau$ se retrouve dans l'intervalle comprise de $\left[10 \ ;13\right]$.
 Par conséquent, il existe au moins un bit $\tau_{\sigma}$ qui est d'un poids strictement supérieur à celui du _MSB1_ de $\tau$.
 Ce ou ces bits de poids $\sigma$ et plus sont des _zéros anonyme_, ce qui veut dire que $\sum_{\sigma}^{14} \ \left(E_{\alpha\sigma} \ge E_{\beta\sigma}\right)$.
-Cette expression calcul alors la somme de la valeur de chaque bit dans $E_{\beta}$ de poids supérieur au _MSB1_ de $\tau \in \left[10;13\right]$, afin de comparé ce résultat dans les expressions numéros $\left(8\right)$ et $\left(9\right)$ avec celui obtenu par le même calcul sur $E_{\alpha}$.
-
-Par ailleurs, quoi qu'il arrive nous atteignons un point terminal car ne l'oublions pas $\left[\left(\sum_{i = 14}^{10} \ \tau_i\right) \ \gt \ 0\right]$.
-Comme nous allons le voir avec l'expression numéro $\left(7\right)$.
+Cette expression calcul alors la somme de la valeur de chaque bit dans $E_{\beta}$ de poids supérieur au _MSB1_ de $\tau \in \left[10;13\right]$, afin de comparé ce résultat $\left(\lambda\right)$ avec celui obtenu par le même calcul sur $E_{\alpha}$.
 
 -- -
 
 $$\left(7\right) \quad \left[\left(\sum_{\sigma}^{14} \ \left(E_{\alpha\sigma} \times 2^{\sigma}\right) = \lambda\right), \ Goto\left(8\right)\right] \ \vee \ \left[\left(\sum_{\sigma}^{14} \ \left(E_{\alpha\sigma} \times 2^{\sigma}\right) > \lambda\right), \ Goto\left(9\right)\right]$$
+
+A ce stade nous savons que du poids $\left(\sigma - 1\right)$ à $10$ le champs d'exposant de $\left(E_{\alpha} \lt E_{\beta}\right)$.
+Mais pour savoir si $\left(E_{\alpha} \gt E_{\beta}\right)$ ou $\left(E_{\alpha} \lt E_{\beta}\right)$, il faut alors vérifié si les bits de poids $\sigma$ (et plus) sont identiques pour $E_{\alpha}$ et $E_{\beta}$ ou non:
+
+  - Si $\left[\sum_{\sigma}^{14} \ Xor \ \left(E_{\alpha\sigma}, E_{\beta\sigma}\right) \ = \ 0\right]$, alors $\left(E_{\alpha} \lt E_{\beta}\right)$ car ...
+
+  - Sinon si $\left[\sum_{\sigma}^{14} \ Xor \ \left(E_{\alpha\sigma}, E_{\beta\sigma}\right) \ \gt \ 0\right]$, alors $\left(E_{\alpha} \gt E_{\beta}\right)$ car ...
+
 
 -- -
 
