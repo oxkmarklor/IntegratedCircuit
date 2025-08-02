@@ -103,12 +103,18 @@ Plus particulièrement, nous avons vus qu'avec $\left(E_{\alpha} \lt E_{\beta}\r
 
 -- -
 
-$$\left(6\right) \quad \lambda = \left[\sum_{\sigma}^{14} \ \left(E_{\beta\sigma} \times 2^{\sigma}\right)\right]$$
+$$\left(6\right) \quad \lambda = \sum_{\sigma}^{14} \ \left(E_{\beta\sigma} \times 2^{\sigma}\right)$$
 
-Dans le cas où $\left(\sigma \lt 15\right)$, alors $\left(5\right)$ ne nous démontre en rien le fait que $\left(E_{\beta} \gt E_{\alpha}\right)$.
-Cela est due au fait que le poids du _MSB1_ de $\tau$ est compris dans l'intervalle $\left[10;13\right]$, et qu'il est donc d'un poids strictement inférieur à $\tau_{14}$.
-Il y a alors des bits de poids supérieur au _MSB1_, comme celui de poids $\sigma$ et même plus potentiellement, qui sont alors des zéros anonyme comme expliqué dans la documentation du circuit.
-Un zéro anonyme de poids $i$ peut être la conséquence de $\left(E_{\alpha i} = E_{\beta i}\right)$ ou encore de $\left(E_{\alpha i} \gt E_{\beta i}\right)$.
+En nous retrouvant ici nous savons que $\left(\sigma \lt 15\right)$.
+Ce qui veut dire que le _MSB1_ de $\tau$ se retrouve dans l'intervalle comprise de $\left[10 \ ;13\right]$.
+Par conséquent, il existe au moins un bit $\tau_{\sigma}$ qui est d'un poids strictement supérieur à celui du _MSB1_ de $\tau$.
+Ce ou ces bits de poids $\sigma$ et plus sont des _zéros anonyme_, ce qui veut dire que $\sum_{\sigma}^{14} \ \left(E_{\alpha\sigma} \ge E_{\beta\sigma}\right)$.
+Cette expression calcul alors la somme de la valeur de chaque bit dans $E_{\beta}$ de poids supérieur au _MSB1_ de $\tau \in \left[10;13\right]$, afin de comparé ce résultat dans les expressions numéros $\left(8\right)$ et $\left(9\right)$ avec celui obtenu par le même calcul sur $E_{\alpha}$.
+
+Par ailleurs, quoi qu'il arrive nous atteignons un point terminal car ne l'oublions pas $\left[\left(\sum_{i = 14}^{10} \ \tau_i\right) \ \gt \ 0\right]$.
+Comme nous allons le voir avec l'expression numéro $\left(7\right)$.
+
+-- -
 
 $$\left(7\right) \quad \left[\left(\sum_{\sigma}^{14} \ \left(E_{\alpha\sigma} \times 2^{\sigma}\right) = \lambda\right), \ Goto\left(8\right)\right] \ \vee \ \left[\left(\sum_{\sigma}^{14} \ \left(E_{\alpha\sigma} \times 2^{\sigma}\right) > \lambda\right), \ Goto\left(9\right)\right]$$
 
