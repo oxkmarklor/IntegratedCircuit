@@ -80,25 +80,30 @@ Ce qui veut dire que $\sigma \in \left[11;15\right]$.
 
 $$\left(4\right) \quad \left(E_{\beta\left(\sigma - 1\right)} \gt E_{\alpha\left(\sigma - 1\right)}\right)$$
 
-Nous savons que $\sigma = 15$, et donc que $\left(\tau_{\left(\sigma - 1\right)} = 1\right)$.
-Selon l'expression numéro $\left(1\right)$ si $\left(\tau_{14} = 1\right)$ sachant que $\tau_{14} = Nimply \ \left(E_{\beta 14}, \ E_{\alpha 14}\right)$, cela veut dire que $\left(E_{\beta 14} = 1\right)$ pendant que $\left(E_{\alpha 14} = 0\right)$.
-Etant donné que $\tau_{14}$ est le _MSB_ de $\tau \in \left[10;14\right]$ et donc des champs d'exposant $E_{\alpha}$ ainsi que $E_{\beta}$ (toujours selon l'expression $\left(1\right)$ ).
-Nous sommes alors certains que $\left(E_{\alpha} \lt E_{\beta}\right)$ comme nous le voyons ci-bas avec l'expression $\left(5\right)$.
+Nous savons que $\left(\sigma = 15\right)$, et donc que $\left(\tau_{\left(\sigma - 1\right)} = 1\right)$.
+Dans l'expression numéro $\left(1\right)$, je cite "_Pour chacun des traitements des bits de poids_ $E_{\alpha i}$ _et_ $E_{\beta i}$ _, les résultats sont enregistrés dans_ $\tau_i$.".
+Toujours selon cette expression, si $\left(\tau_{14} = 1\right)$ sachant que $\tau_{14} = Nimply \ \left(E_{\beta 14}, \ E_{\alpha 14}\right)$, cela veut dire que $\left(E_{\beta 14} = 1\right)$ pendant que $\left(E_{\alpha 14} = 0\right)$.
 
 -- -
 
-$$\left(5\right) \quad \left[\left(E_{\beta\left(\sigma - 1\right)} \times 2^{\left(\sigma - 1\right)}\right) \gt \left(\sum_{\sigma = \sigma - 1}^{10} \ \left(E_{\alpha\sigma} \times 2^{\sigma}\right)\right)\right]$$
+$$\left(5\right) \quad \left(E_{\beta\left(\sigma - 1\right)} \times 2^{\left(\sigma - 1\right)}\right) \gt \left[\sum_{\sigma = \sigma - 1}^{10} \ \left(E_{\alpha\sigma} \times 2^{\sigma}\right)\right]$$
 
-Dans le chapitre "_Encodage Par Biais_", nous avons vu que la valeur d'un bit à $1$ de poids $i$ est strictement supérieur à la somme des bits à $1$ de poids inférieur à $i$.
-Il s'avère que $\left(3\right)$ nous dit que $\sigma$ est la valeur $+ 1$ du poids du _MSB1_ de $\tau \in \left[10;14\right]$, ce qui veut dire que $\sigma \in \left[11;15\right]$.
-Mais si nous en sommes là, c'est que $\sigma = 15$ et le _MSB1_ de $\tau$ est donc de poids $14$, ou autrement dit de $\left(\sigma - 1\right)$.
-Aussi, nous savons grâce à $\left(3\right)$ que si $\left(\tau_{14} = 1\right)$ alors $\left(E_{\alpha 14} = 0\right)$.
-D'où le fait que $\left(E_{\beta 14} \times 2^{14}\right) \gt \left(\sum_{i=14}^{10} \ E_{\alpha i} \times 2^i\right)$.
+En reprenant ce que nous venons de dire plus haut, nous constatons que $\left(E_{\beta 14} \times 2^{14}\right) \gt \left(E_{\alpha 14} \times 2^{14}\right)$.
+Mais rappellons nous du chapitre "Encodage par biais" qui vise à expliqué l'encodage du champs d'exposant d'un nombre IEEE-754.
+Nous avons appris dans ce chapitre que cet encodage partage les même propriétés que le __Binary Unsigned__.
+Ou autrement dit, _la valeur d'un bit à_ $1$ _de poids_ $i$ dans le champs d'exposant est _strictement supérieur à la somme des valeurs des bits de poids inférieur à_ $i$.
+Par conséquent, nous savons aussi que $\left(E_{\beta 14} \times 2^{14}\right) \gt \left[\sum_{i = 13}^{10} \ \left(E_{\alpha i} \times 2^i\right)\right]$, ce qui nous amène à l'expression numéro $\left(5\right)$ pour $\left(\sigma = 15\right)$ je le rappelle.
 
-Cependant, rappellez vous que dans le chapitre "_Ordre de traitrement des champs d'exposant et de mantisse tronquée_" nous avions vu que $\left(E_{\alpha} \neq E_{\beta}\right)$ engendre un point terminal.
-Dans notre cas, vu que $\tau_{14} = 1$ alors $\left(E_{\beta} \gt E_{\alpha}\right)$ et donc $\left(\vert \alpha \vert \lt \vert \beta \vert\right)$, ___La comparaison échoue___.
+De plus, nous savons que $\tau_i$ reçoit le bit de résultat issu du traitement de $E_{\alpha i}$ et $E_{\beta i}$.
+Etant donné que $\tau_{14}$ est le _MSB_ et le _MSB1_ de $\tau \in \left[10;14\right]$, alors ce bit de résultat est issu du traitement du _MSB_ des champs d'exposant $E_{\alpha}$ et $E_{\beta}$.
+Nous en déduisons alors que $\left(E_{\alpha} \lt E_{\beta}\right)$.
 
-$$\left(6\right) \quad \left(\sum_{\sigma}^{14} \ \left(E_{\beta\sigma} \times 2^{\sigma}\right)\right) = \lambda$$
+Mais rappellons nous que dans le chapitre "_Ordre de traitement des champs d'exposant et de mantisse tronquée_" nous avons vus qu'un ___point terminal___ était atteint si $\left(E_{\alpha} \neq E_{\beta}\right)$.
+Plus particulièrement, nous avons vus qu'avec $\left(E_{\alpha} \lt E_{\beta}\right)$ alors $\left(\vert\alpha\vert \lt \vert\beta\vert\right)$, et la comparaison __échoue__.
+
+-- -
+
+$$\left(6\right) \quad \lambda = \left[\sum_{\sigma}^{14} \ \left(E_{\beta\sigma} \times 2^{\sigma}\right)\right]$$
 
 Dans le cas où $\left(\sigma \lt 15\right)$, alors $\left(5\right)$ ne nous démontre en rien le fait que $\left(E_{\beta} \gt E_{\alpha}\right)$.
 Cela est due au fait que le poids du _MSB1_ de $\tau$ est compris dans l'intervalle $\left[10;13\right]$, et qu'il est donc d'un poids strictement inférieur à $\tau_{14}$.
