@@ -72,11 +72,20 @@ C'est pourquoi nous commençons par vouloir savoir si la somme des bits de $\tau
 
 $$\left(3\right) \quad \sigma = 10, \ \left(\sum_{i=14}^{\sigma} Write\left(\sigma, \ \left[\left(\overline{\tau_i} \times 10\right) + \tau_i \times \left(11 + i \ mod \ 5\right)\right]\right)\right)$$
 
-A ce stade il y a au moins un des bits de $\tau \in \left[10;14\right]$ qui est à $1$.
-Cette expression a pour but d'enregistré dans $\sigma$ la valeur du poids de ce _MSB1_, incrémenté de $1$.
-Ce qui veut dire que $\sigma \in \left[11;15\right]$.
+L'expression numéro $\left(1\right)$ effectue une opération $Nimply$ sur les bits de poids $i \in \left[10;14\right]$ des champs d'exposant $E_{\alpha}$ et $E_{\beta}$.
+Dans la documentation du circuit, un bit de résultat à $0$ sortant d'une opération $Nimply$ est appellé "__zéro anonyme__".
+La raison en est que l'opération $Nimply$ génère un $0$ dans deux situations, une égalité entre les bits d'opérandes, ou une supériorité stricte du bit sur le paramètre $\left(y\right)$ vis à vis de celui sur $\left(x\right)$.
+En bref, nous savons que $\left(E_{\alpha} \ge E_{\beta}\right)$ si l'ensemble des bits de résultats dans $\tau \in \left[10;14\right]$ sont à $0$.
+Mais nous savons aussi que $\left(E_{\alpha} \neq E_{\beta}\right)$ si dans $\tau$ l'un des bits mentionné dans l'intervalle ci-dessus est à $1$.
+Dans ce second cas, nous pouvons être sûre que le circuit atteindra un point terminal, au contraire du premier cas.
 
- __Si__ $\left(\sigma = 15\right)$ __alors nous atteigons un point terminal et__ $Goto\left(4\right)$, __sinon__ $Goto\left(6\right)$.
+Si tout ou partie des bits de $\tau \in \left[10;14\right]$ sont à $1$, l'expression numéro $\left(2\right)$ enregistre dans $\sigma$ la valeur du poids $+1$ du _MSB_ de $\tau$.
+Cependant, si l'ensemble des bits de $\tau \in \left[10;14\right]$ sont à $0$, alors $\left(\sigma = 10\right)$.
+
+Ceci nous permet ainsi de faire la différenciation entre une situation qui mène quoi qu'il arrive vers un point terminal, d'une situation pour laquelle ce n'est pas forcé d'être le cas:
+  - Si $\left(\sigma = 10\right)$ alors $Goto\left(3\right)$.
+  - Sinon si $\left(\sigma \in \left[11;15\right]\right)$ alors $Goto\left(6\right)$.
+
 
 // revoir ceci avec (2)
 
