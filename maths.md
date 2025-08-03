@@ -54,23 +54,7 @@ Ce qui veut dire que $\tau \in \left[10;14\right]$ correspond aux bits de résul
 
 -- -
 
-$$\left(2\right) \quad \left[\left(\sum_{\sigma=14}^{10} \ \tau_{\sigma} \gt 0\right), \ Goto\left(3\right)\right] \ \vee \ \left[\left(\sum_{\sigma=14}^{10} \ \tau_{\sigma} = 0\right), \ Goto\left(10\right)\right]$$
-
-L'instruction __Goto__ demande simplement au lecteur de poursuivre la démonstration vers le numéro indiqué dans ses "_paramètres_".
-
-L'expression numéro $\left(1\right)$ effectue une opération $Nimply$ sur les bits de poids $i \in \left[10;14\right]$ des champs d'exposant $E_{\alpha}$ et $E_{\beta}$.
-Dans la documentation du circuit, un bit de résultat à $0$ sortant d'une opération $Nimply$ est appellé "__zéro anonyme__".
-La raison en est que l'opération $Nimply$ génère un $0$ dans deux situations, une égalité entre les bits d'opérandes, ou une supériorité stricte du bit sur le paramètre $\left(y\right)$ vis à vis de celui sur $\left(x\right)$.
-En bref, nous savons que $\left(E_{\alpha} \ge E_{\beta}\right)$ si l'ensemble des bits de résultats dans $\tau \in \left[10;14\right]$ sont nuls.
-Mais nous savons aussi que $\left(E_{\alpha} \gt E_{\beta}\right) \vee \left(E_{\alpha} \lt E_{\beta}\right)$ si dans $\tau$ l'un des bits mentionné dans l'intervalle ci-dessus est à $1$.
-Dans ce second cas, nous pouvons être sûre que le circuit atteindra un point terminal, au contraire du premier.
-C'est pourquoi nous commençons par vouloir savoir si la somme des bits de $\tau$ est nul ou non.
-
-// revoir ceci avec (3)
-
--- -
-
-$$\left(3\right) \quad \sigma = 10, \ \left(\sum_{i=14}^{\sigma} Write\left(\sigma, \ \left[\left(\overline{\tau_i} \times 10\right) + \tau_i \times \left(11 + i \ mod \ 5\right)\right]\right)\right)$$
+$$\left(2\right) \quad \sigma = 10, \ \left(\sum_{i=14}^{\sigma} Write\left(\sigma, \ \left[\left(\overline{\tau_i} \times 10\right) + \tau_i \times \left(11 + i \ mod \ 5\right)\right]\right)\right)$$
 
 L'expression numéro $\left(1\right)$ effectue une opération $Nimply$ sur les bits de poids $i \in \left[10;14\right]$ des champs d'exposant $E_{\alpha}$ et $E_{\beta}$.
 Dans la documentation du circuit, un bit de résultat à $0$ sortant d'une opération $Nimply$ est appellé "__zéro anonyme__".
@@ -79,19 +63,18 @@ En bref, nous savons que $\left(E_{\alpha} \ge E_{\beta}\right)$ si l'ensemble d
 Mais nous savons aussi que $\left(E_{\alpha} \neq E_{\beta}\right)$ si dans $\tau$ l'un des bits mentionné dans l'intervalle ci-dessus est à $1$.
 Dans ce second cas, nous pouvons être sûre que le circuit atteindra un point terminal, au contraire du premier cas.
 
-Si tout ou partie des bits de $\tau \in \left[10;14\right]$ sont à $1$, l'expression numéro $\left(2\right)$ enregistre dans $\sigma$ la valeur du poids $+1$ du _MSB_ de $\tau$.
+Si tout ou partie des bits de $\tau \in \left[10;14\right]$ sont à $1$, l'expression numéro $\left(2\right)$ enregistre dans $\sigma$ la valeur du poids $+1$ du _MSB1_ de $\tau$.
 Cependant, si l'ensemble des bits de $\tau \in \left[10;14\right]$ sont à $0$, alors $\left(\sigma = 10\right)$.
 
 Ceci nous permet ainsi de faire la différenciation entre une situation qui mène quoi qu'il arrive vers un point terminal, d'une situation pour laquelle ce n'est pas forcé d'être le cas:
-  - Si $\left(\sigma = 10\right)$ alors $Goto\left(3\right)$.
-  - Sinon si $\left(\sigma \in \left[11;15\right]\right)$ alors $Goto\left(6\right)$.
+  - Si $\left(\sigma = 10\right)$ alors $Goto\left(?\right)$.
+  - Sinon si $\left(\sigma \in \left[11;15\right]\right)$ alors $Goto\left(?\right)$.
 
-
-// revoir ceci avec (2)
+L'instruction ___Goto___ demande simplement au lecteur de poursuivre la démonstration vers le numéro de l'expression indiqué dans ses "_paramètres_".
 
 -- -
 
-$$\left(4\right) \quad \left(E_{\beta\left(\sigma - 1\right)} \gt E_{\alpha\left(\sigma - 1\right)}\right)$$
+$$\left(3\right) \quad \left(E_{\beta\left(\sigma - 1\right)} \gt E_{\alpha\left(\sigma - 1\right)}\right)$$
 
 Nous savons que $\left(\sigma = 15\right)$, et donc que $\left(\tau_{\left(\sigma - 1\right)} = 1\right)$.
 Dans l'expression numéro $\left(1\right)$, je cite "_Pour chacun des traitements des bits de poids_ $E_{\alpha i}$ _et_ $E_{\beta i}$ _, les résultats sont enregistrés dans_ $\tau_i$.".
@@ -99,7 +82,7 @@ Toujours selon cette expression, si $\left(\tau_{14} = 1\right)$ sachant que $\t
 
 -- -
 
-$$\left(5\right) \quad \left(E_{\beta\left(\sigma - 1\right)} \times 2^{\left(\sigma - 1\right)}\right) \gt \left[\sum_{\sigma = \sigma - 1}^{10} \ \left(E_{\alpha\sigma} \times 2^{\sigma}\right)\right]$$
+$$\left(4\right) \quad \left(E_{\beta\left(\sigma - 1\right)} \times 2^{\left(\sigma - 1\right)}\right) \gt \left[\sum_{\sigma = \sigma - 1}^{10} \ \left(E_{\alpha\sigma} \times 2^{\sigma}\right)\right]$$
 
 En reprenant ce que nous venons de dire plus haut, nous constatons que $\left(E_{\beta 14} \times 2^{14}\right) \gt \left(E_{\alpha 14} \times 2^{14}\right)$.
 Mais rappellons nous du chapitre "Encodage par biais" qui vise à expliqué l'encodage du champs d'exposant d'un nombre IEEE-754.
@@ -116,7 +99,7 @@ Plus particulièrement, nous avons vus qu'avec $\left(E_{\alpha} \lt E_{\beta}\r
 
 -- -
 
-$$\left(6\right) \quad \lambda = \sum_{\sigma}^{14} \ \left(E_{\beta\sigma} \times 2^{\sigma}\right)$$
+$$\left(5\right) \quad \lambda = \sum_{\sigma}^{14} \ \left(E_{\beta\sigma} \times 2^{\sigma}\right)$$
 
 En nous retrouvant ici nous savons que $\left(\sigma \lt 15\right)$.
 Ce qui veut dire que le _MSB1_ de $\tau$ se retrouve dans l'intervalle comprise de $\left[10 \ ;13\right]$.
@@ -127,7 +110,7 @@ Ou autrement dit, $\left[\lambda \ = \ \left(E_{\beta} \in \left[\sigma;14\right
 
 -- -
 
-$$\left(7\right) \quad \left[\left(\sum_{\sigma}^{14} \ \left(E_{\alpha\sigma} \times 2^{\sigma}\right) = \lambda\right), \ Goto\left(8\right)\right] \ \vee \ \left[\left(\sum_{\sigma}^{14} \ \left(E_{\alpha\sigma} \times 2^{\sigma}\right) > \lambda\right), \ Goto\left(9\right)\right]$$
+$$\left(6\right) \quad \left[\left(\sum_{\sigma}^{14} \ \left(E_{\alpha\sigma} \times 2^{\sigma}\right) = \lambda\right), \ Goto\left(8\right)\right] \ \vee \ \left[\left(\sum_{\sigma}^{14} \ \left(E_{\alpha\sigma} \times 2^{\sigma}\right) > \lambda\right), \ Goto\left(9\right)\right]$$
 
 A ce stade nous savons que $\left(E_{\alpha} \in \left[10; \left(\sigma - 1\right)\right]\right) \ \lt \ \left(E_{\beta} \in \left[10; \left(\sigma - 1\right)\right]\right)$.
 Nous savons donc que sur une partie des bits de poids faible de $E_{\alpha}$ et $E_{\beta}$, le champs d'exposant $\left(E_{\alpha} \lt E_{\beta}\right)$.
@@ -140,7 +123,7 @@ L'expression calcul $E_{\alpha} \in \left[\sigma;14\right]$ de la même manière
 
 -- -
 
-$$\left(8\right) \quad \left(E_{\alpha} \lt E_{\beta}\right)$$
+$$\left(7\right) \quad \left(E_{\alpha} \lt E_{\beta}\right)$$
 
 Nous venons de voir plus haut dans l'expression $\left(7\right)$, que $\left(E_{\alpha} \lt E_{\beta}\right)$ si jamais je cite "_la valeur de_ $E_{\alpha}$ _compris dans l'intervalle de_ $\left[\sigma;14\right]$ _est égale à_ $\left(E_{\beta} \in \left[\sigma;14\right]\right)$".
 Mais comme nous l'avons vus dans le chapitre du nom de "_Ordre de traitement des champs d'exposant et de mantisse tronquée_", lorsque $\left(E_{\alpha} \neq E_{\beta}\right)$ alors nous sommes obligatoirement face à un point terminal.
@@ -149,7 +132,7 @@ Ce qui consiste alors en un ___point terminal___ possible, et la condition $\lef
 
 -- -
 
-$$\left(9\right) \quad \left(E_{\alpha} \gt E_{\beta}\right), \ \left(\vert \alpha \vert \gt \vert \beta \vert\right)$$
+$$\left(8\right) \quad \left(E_{\alpha} \gt E_{\beta}\right), \ \left(\vert \alpha \vert \gt \vert \beta \vert\right)$$
 
 Nous venons de voir plus haut dans l'expression $\left(7\right)$, que $\left(E_{\alpha} \gt E_{\beta}\right)$ si la valeur de $E_{\alpha}$ compris dans l'intervalle $\left[\sigma;14\right]$ est strictement supérieur à $\left(E_{\beta} \in \left[\sigma;14\right]\right)$.
 Mais comme nous l'avons vus dans le chapitre du nom de "_Ordre de traitement des champs d'exposant et de mantisse tronquée_", lorsque $\left(E_{\alpha} \neq E_{\beta}\right)$ alors nous sommes obligatoirement face à un point terminal.
@@ -161,12 +144,12 @@ Ce qui consiste alors en un ___point terminal___ possible, et la condition $\lef
 $$\left(6\right) \quad \lambda = \sum_{\sigma=10}^{14} \ \left(E_{\beta\sigma} \times 2^{\sigma}\right)$$
 
 
-$$\left(10\right) \quad \left[\left(\left(\sum_{\sigma = 14}^{10} \ \left(E_{\alpha\sigma} \times 2^{\sigma}\right)\right) \ \gt \ \left(\sum_{\sigma = 14}^{10} \ \left(E_{\beta\sigma} \times 2^{\sigma}\right)\right)\right), \ Goto\left(9\right)\right] \ \vee \ \left[\left(\sum_{\sigma = 14}^{10} \ \left(\left(E_{\alpha\sigma} \times 2^{\sigma}\right) \ = \ \left(E_{\beta\sigma} \times 2^{\sigma}\right)\right)\right), \ Goto\left(11\right)\right]$$
+$$\left(9\right) \quad \left[\left(\left(\sum_{\sigma = 14}^{10} \ \left(E_{\alpha\sigma} \times 2^{\sigma}\right)\right) \ \gt \ \left(\sum_{\sigma = 14}^{10} \ \left(E_{\beta\sigma} \times 2^{\sigma}\right)\right)\right), \ Goto\left(9\right)\right] \ \vee \ \left[\left(\sum_{\sigma = 14}^{10} \ \left(\left(E_{\alpha\sigma} \times 2^{\sigma}\right) \ = \ \left(E_{\beta\sigma} \times 2^{\sigma}\right)\right)\right), \ Goto\left(11\right)\right]$$
 
 
 -- -
 
-$$\left(11\right) \quad \left[\left(T_{\alpha} \gt T_{\beta}\right), \ \left(\vert \alpha \vert \gt \vert \beta \vert\right)\right] \ \vee \ 
+$$\left(10\right) \quad \left[\left(T_{\alpha} \gt T_{\beta}\right), \ \left(\vert \alpha \vert \gt \vert \beta \vert\right)\right] \ \vee \ 
 \left[\left(\left(T_{\alpha} = T_{\beta}\right) \ \vee \ \left(T_{\alpha} < T_{\beta}\right)\right), \ \left(\vert \alpha \vert \le \vert \beta \vert\right)\right]$$
 
 
