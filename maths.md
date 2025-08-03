@@ -66,6 +66,8 @@ Mais nous savons aussi que $\left(E_{\alpha} \gt E_{\beta}\right) \vee \left(E_{
 Dans ce second cas, nous pouvons être sûre que le circuit atteindra un point terminal, au contraire du premier.
 C'est pourquoi nous commençons par vouloir savoir si la somme des bits de $\tau$ est nul ou non.
 
+// revoir ceci avec (3)
+
 -- -
 
 $$\left(3\right) \quad \sigma = 10, \ \left(\sum_{i=14}^{\sigma} Write\left(\sigma, \ \left[\left(\overline{\tau_i} \times 10\right) + \tau_i \times \left(11 + i \ mod \ 5\right)\right]\right)\right)$$
@@ -75,6 +77,8 @@ Cette expression a pour but d'enregistré dans $\sigma$ la valeur du poids de ce
 Ce qui veut dire que $\sigma \in \left[11;15\right]$.
 
  __Si__ $\left(\sigma = 15\right)$ __alors nous atteigons un point terminal et__ $Goto\left(4\right)$, __sinon__ $Goto\left(6\right)$.
+
+// revoir ceci avec (2)
 
 -- -
 
@@ -145,7 +149,11 @@ Ce qui consiste alors en un ___point terminal___ possible, et la condition $\lef
 
 -- -
 
+$$\left(6\right) \quad \lambda = \sum_{\sigma=10}^{14} \ \left(E_{\beta\sigma} \times 2^{\sigma}\right)$$
+
+
 $$\left(10\right) \quad \left[\left(\left(\sum_{\sigma = 14}^{10} \ \left(E_{\alpha\sigma} \times 2^{\sigma}\right)\right) \ \gt \ \left(\sum_{\sigma = 14}^{10} \ \left(E_{\beta\sigma} \times 2^{\sigma}\right)\right)\right), \ Goto\left(9\right)\right] \ \vee \ \left[\left(\sum_{\sigma = 14}^{10} \ \left(\left(E_{\alpha\sigma} \times 2^{\sigma}\right) \ = \ \left(E_{\beta\sigma} \times 2^{\sigma}\right)\right)\right), \ Goto\left(11\right)\right]$$
+
 
 -- -
 
