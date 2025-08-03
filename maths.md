@@ -60,7 +60,7 @@ L'instruction __Goto__ demande simplement au lecteur de poursuivre la démonstra
 
 L'expression numéro $\left(1\right)$ effectue une opération $Nimply$ sur les bits de poids $i \in \left[10;14\right]$ des champs d'exposant $E_{\alpha}$ et $E_{\beta}$.
 Dans la documentation du circuit, un bit de résultat à $0$ sortant d'une opération $Nimply$ est appellé "__zéro anonyme__".
-La raison en est que l'opération $Nimply$ génère un $0$ dans deux situations, une égalité entre les bits d'opérandes, ou une supériorité stricte du bit sur le paramètre $y$ vis à vis de celui sur $x$.
+La raison en est que l'opération $Nimply$ génère un $0$ dans deux situations, une égalité entre les bits d'opérandes, ou une supériorité stricte du bit sur le paramètre $\left(y\right)$ vis à vis de celui sur $\left(x\right)$.
 En bref, nous savons que $\left(E_{\alpha} \ge E_{\beta}\right)$ si l'ensemble des bits de résultats dans $\tau \in \left[10;14\right]$ sont nuls.
 Mais nous savons aussi que $\left(E_{\alpha} \gt E_{\beta}\right) \vee \left(E_{\alpha} \lt E_{\beta}\right)$ si dans $\tau$ l'un des bits mentionné dans l'intervalle ci-dessus est à $1$.
 Dans ce second cas, nous pouvons être sûre que le circuit atteindra un point terminal, au contraire du premier.
@@ -110,30 +110,38 @@ Ce qui veut dire que le _MSB1_ de $\tau$ se retrouve dans l'intervalle comprise 
 Par conséquent, il existe au moins un bit $\tau_{\sigma}$ qui est d'un poids strictement supérieur à celui du _MSB1_ de $\tau$.
 Ce ou ces bits de poids $\sigma$ et plus sont des _zéros anonyme_, ce qui veut dire que $\sum_{\sigma}^{14} \ \left(E_{\alpha\sigma} \ge E_{\beta\sigma}\right)$.
 Cette expression calcul alors la somme de la valeur de chaque bit dans $E_{\beta}$ de poids supérieur au _MSB1_ de $\tau \in \left[10;13\right]$, afin de comparé ce résultat $\left(\lambda\right)$ avec celui obtenu par le même calcul sur $E_{\alpha}$.
+Ou autrement dit, $\left[\lambda \ = \ \left(E_{\beta} \in \left[\sigma;14\right]\right)\right]$.
 
 -- -
 
 $$\left(7\right) \quad \left[\left(\sum_{\sigma}^{14} \ \left(E_{\alpha\sigma} \times 2^{\sigma}\right) = \lambda\right), \ Goto\left(8\right)\right] \ \vee \ \left[\left(\sum_{\sigma}^{14} \ \left(E_{\alpha\sigma} \times 2^{\sigma}\right) > \lambda\right), \ Goto\left(9\right)\right]$$
 
-A ce stade nous savons que du poids $\left(\sigma - 1\right)$ à $10$ le champs d'exposant de $\left(E_{\alpha} \lt E_{\beta}\right)$.
-Mais pour savoir si $\left(E_{\alpha} \gt E_{\beta}\right)$ ou $\left(E_{\alpha} \lt E_{\beta}\right)$, il faut alors vérifié si les bits de poids $\sigma$ (et plus) sont identiques pour $E_{\alpha}$ et $E_{\beta}$ ou non:
+A ce stade nous savons que $\left(E_{\alpha} \in \left[10; \left(\sigma - 1\right)\right]\right) \ \lt \ \left(E_{\beta} \in \left[10; \left(\sigma - 1\right)\right]\right)$.
+Nous savons donc que sur une partie des bits de poids faible de $E_{\alpha}$ et $E_{\beta}$, le champs d'exposant $\left(E_{\alpha} \lt E_{\beta}\right)$.
 
-  - Si $\left[\sum_{\sigma}^{14} \ Xor \ \left(E_{\alpha\sigma}, E_{\beta\sigma}\right) \ = \ 0\right]$, alors $\left(E_{\alpha} \lt E_{\beta}\right)$ car ...
+Il y a maintenant deux possibilités vis à vis des _zéros anonymes_ de poids $\sigma$ et plus. 
+En bref, si la valeur de $E_{\alpha}$ compris dans l'intervalle de $\left[\sigma;14\right]$ est égale à $\left(E_{\beta} \in \left[\sigma;14\right]\right)$ alors nous sommes certains que $\left(E_{\alpha} \lt E_{\beta}\right)$.
+Dans le cas contraitre, si $\left(E_{\alpha} \in \left[\sigma;14\right]\right) \ \gt \ \left(E_{\beta} \in \left[\sigma;14\right]\right)$ nous savons alors que $\left(E_{\alpha} \gt E_{\beta}\right)$.
 
-  - Sinon si $\left[\sum_{\sigma}^{14} \ Xor \ \left(E_{\alpha\sigma}, E_{\beta\sigma}\right) \ \gt \ 0\right]$, alors $\left(E_{\alpha} \gt E_{\beta}\right)$ car ...
-
+L'expression calcul $E_{\alpha} \in \left[\sigma;14\right]$ de la même manière que ne le fait l'expression $\left(6\right)$ pour $E_{\beta}$.
 
 -- -
 
-$$\left(8\right) \quad \left(E_{\alpha} \lt E_{\beta}\right), \ \left(\vert \alpha \vert \lt \vert \beta \vert\right)$$
+$$\left(8\right) \quad \left(E_{\alpha} \lt E_{\beta}\right)$$
 
-// point terminal
+Nous venons de voir plus haut dans l'expression $\left(7\right)$, que $\left(E_{\alpha} \lt E_{\beta}\right)$ si jamais je cite "_la valeur de_ $E_{\alpha}$ _compris dans l'intervalle de_ $\left[\sigma;14\right]$ _est égale à_ $\left(E_{\beta} \in \left[\sigma;14\right]\right)$".
+Mais comme nous l'avons vus dans le chapitre du nom de "_Ordre de traitement des champs d'exposant et de mantisse tronquée_", lorsque $\left(E_{\alpha} \neq E_{\beta}\right)$ alors nous sommes obligatoirement face à un point terminal.
+En l'occurence, nous avons vu dans ce chapitre que si $\left(E_{\alpha} \lt E_{\beta}\right)$ alors $\left(\vert\alpha\vert \ \lt \ \vert\beta\vert\right)$.
+Ce qui consiste alors en un ___point terminal___ possible, et la condition $\left(\vert\alpha\vert \ \gt \ \vert\beta\vert\right)$ __échoue__.
 
 -- -
 
 $$\left(9\right) \quad \left(E_{\alpha} \gt E_{\beta}\right), \ \left(\vert \alpha \vert \gt \vert \beta \vert\right)$$
 
-// point terminal
+Nous venons de voir plus haut dans l'expression $\left(7\right)$, que $\left(E_{\alpha} \gt E_{\beta}\right)$ si la valeur de $E_{\alpha}$ compris dans l'intervalle $\left[\sigma;14\right]$ est strictement supérieur à $\left(E_{\beta} \in \left[\sigma;14\right]\right)$.
+Mais comme nous l'avons vus dans le chapitre du nom de "_Ordre de traitement des champs d'exposant et de mantisse tronquée_", lorsque $\left(E_{\alpha} \neq E_{\beta}\right)$ alors nous sommes obligatoirement face à un point terminal.
+En l'occurence, nous avons vu dans ce chapitre que si $\left(E_{\alpha} \gt E_{\beta}\right)$ alors $\left(\vert\alpha\vert \ \gt \ \vert\beta\vert\right)$.
+Ce qui consiste alors en un ___point terminal___ possible, et la condition $\left(\vert\alpha\vert \ \gt \ \vert\beta\vert\right)$ __réussie__.
 
 -- -
 
