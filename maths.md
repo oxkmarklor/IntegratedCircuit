@@ -68,7 +68,7 @@ Cependant, si l'ensemble des bits de $\tau \in \left[10;14\right]$ sont à $0$, 
 
 Ceci nous permet ainsi de faire la différenciation entre une situation qui mène quoi qu'il arrive vers un point terminal, d'une situation pour laquelle ce n'est pas forcé d'être le cas:
   - Si $\left(\sigma = 10\right)$ alors $Goto\left(?\right)$.
-  - Sinon si $\left(\sigma \in \left[11;15\right]\right)$ alors $Goto\left(?\right)$.
+  - Sinon si $\left(\sigma \in \left[11;15\right]\right)$ alors $Goto\left(3\right)$.
 
 L'instruction ___Goto___ demande simplement au lecteur de poursuivre la démonstration vers le numéro de l'expression indiqué dans ses "_paramètres_".
 
@@ -76,9 +76,19 @@ L'instruction ___Goto___ demande simplement au lecteur de poursuivre la démonst
 
 $$\left(3\right) \quad \left(E_{\beta\left(\sigma - 1\right)} \gt E_{\alpha\left(\sigma - 1\right)}\right)$$
 
-Nous savons que $\left(\sigma = 15\right)$, et donc que $\left(\tau_{\left(\sigma - 1\right)} = 1\right)$.
+Nous savons que $\left(\sum_{\sigma = 14}^{10} \ \tau_{\sigma} \gt 0\right)$, et donc que $\left(\tau_{\left(\sigma - 1\right)} = 1\right)$.
 Dans l'expression numéro $\left(1\right)$, je cite "_Pour chacun des traitements des bits de poids_ $E_{\alpha i}$ _et_ $E_{\beta i}$ _, les résultats sont enregistrés dans_ $\tau_i$.".
-Toujours selon cette expression, si $\left(\tau_{14} = 1\right)$ sachant que $\tau_{14} = Nimply \ \left(E_{\beta 14}, \ E_{\alpha 14}\right)$, cela veut dire que $\left(E_{\beta 14} = 1\right)$ pendant que $\left(E_{\alpha 14} = 0\right)$.
+Toujours selon cette expression, si $\left(\tau_{\left(\sigma - 1\right)} = 1\right)$ sachant que $\tau_i = Nimply \ \left(E_{\beta i}, \ E_{\alpha i}\right)$, cela veut dire que $\left(E_{\beta\left(\sigma - 1\right)} = 1\right)$ pendant que $\left(E_{\alpha\left(\sigma - 1\right)} = 0\right)$.
+
+Dans le cas où $\left(\sigma = 15\right)$ alors $\left(\tau_{\left(\sigma - 1\right)} = \tau_{14} = 1\right)$.
+Nous savons que $\tau_{14}$ est le _MSB_ (et le _MSB1_) de $\tau \in \left[10;14\right]$, ce qui veut dire que les _MSB_ des champs d'exposant $E_{\alpha}$ et $E_{\beta}$ valent chacun ceci $\left(E_{\beta 14} = 1\right)$ ainsi que $\left(E_{\alpha 14} = 0\right)$.
+Auquel cas, $Goto\left(4\right)$.
+
+Si $\left(\sigma \neq 15\right)$ alors $\sigma \in \left[11;14\right]$. 
+Ceci veut dire que le poids du _MSB1_ dans $\tau \in \left[10;13\right]$ et il y a donc au moins un bit (celui de poids $\sigma$, ou plus) dont le poids est strictement supérieur à celui du _MSB1_.
+Les bits de poids supérieur au _MSB1_ de $\tau$ ($\sigma$ et plus) sont des zéros anonymes, il nous faut alors savoir à quoi est ce qu'ils sont due.
+Par conséquent $Goto\left(5\right)$.
+
 
 -- -
 
@@ -88,56 +98,54 @@ En reprenant ce que nous venons de dire plus haut, nous constatons que $\left(E_
 Mais rappellons nous du chapitre "Encodage par biais" qui vise à expliqué l'encodage du champs d'exposant d'un nombre IEEE-754.
 Nous avons appris dans ce chapitre que cet encodage partage les même propriétés que le __Binary Unsigned__.
 Ou autrement dit, _la valeur d'un bit à_ $1$ _de poids_ $i$ dans le champs d'exposant est _strictement supérieur à la somme des valeurs des bits de poids inférieur à_ $i$.
-Par conséquent, nous savons aussi que $\left(E_{\beta 14} \times 2^{14}\right) \gt \left[\sum_{i = 13}^{10} \ \left(E_{\alpha i} \times 2^i\right)\right]$, ce qui nous amène à l'expression numéro $\left(5\right)$ pour $\left(\sigma = 15\right)$ je le rappelle.
+Par conséquent, nous savons aussi que $\left(E_{\beta 14} \times 2^{14}\right) \gt \left[\sum_{\sigma = 13}^{10} \ \left(E_{\alpha\sigma} \times 2^{\sigma}\right)\right]$, ce qui nous amène à l'expression numéro $\left(5\right)$ pour $\left(\sigma = 15\right)$ je le rappelle.
 
-De plus, nous savons que $\tau_i$ reçoit le bit de résultat issu du traitement de $E_{\alpha i}$ et $E_{\beta i}$.
-Etant donné que $\tau_{14}$ est le _MSB_ et le _MSB1_ de $\tau \in \left[10;14\right]$, alors ce bit de résultat est issu du traitement du _MSB_ des champs d'exposant $E_{\alpha}$ et $E_{\beta}$.
+Etant donné que $\tau_{14}$ est le _MSB_ (et le _MSB1_) de $\tau \in \left[10;14\right]$, alors ce bit de résultat est issu du traitement du _MSB_ des champs d'exposant $E_{\alpha}$ et $E_{\beta}$.
 Nous en déduisons alors que $\left(E_{\alpha} \lt E_{\beta}\right)$.
 
 Mais rappellons nous que dans le chapitre "_Ordre de traitement des champs d'exposant et de mantisse tronquée_" nous avons vus qu'un ___point terminal___ était atteint si $\left(E_{\alpha} \neq E_{\beta}\right)$.
-Plus particulièrement, nous avons vus qu'avec $\left(E_{\alpha} \lt E_{\beta}\right)$ alors $\left(\vert\alpha\vert \lt \vert\beta\vert\right)$, et la comparaison __échoue__.
+Plus particulièrement, nous avons vus qu'avec $\left(E_{\alpha} \lt E_{\beta}\right)$ alors $\left(\vert\alpha\vert \lt \vert\beta\vert\right)$, et la condition initial $\left(\vert\alpha\vert \gt \vert\beta\vert\right)$ __échoue__.
 
 -- -
 
 $$\left(5\right) \quad \lambda = \sum_{\sigma}^{14} \ \left(E_{\beta\sigma} \times 2^{\sigma}\right)$$
 
-En nous retrouvant ici nous savons que $\left(\sigma \lt 15\right)$.
-Ce qui veut dire que le _MSB1_ de $\tau$ se retrouve dans l'intervalle comprise de $\left[10 \ ;13\right]$.
-Par conséquent, il existe au moins un bit $\tau_{\sigma}$ qui est d'un poids strictement supérieur à celui du _MSB1_ de $\tau$.
-Ce ou ces bits de poids $\sigma$ et plus sont des _zéros anonyme_, ce qui veut dire que $\sum_{\sigma}^{14} \ \left(E_{\alpha\sigma} \ge E_{\beta\sigma}\right)$.
-Cette expression calcul alors la somme de la valeur de chaque bit dans $E_{\beta}$ de poids supérieur au _MSB1_ de $\tau \in \left[10;13\right]$, afin de comparé ce résultat $\left(\lambda\right)$ avec celui obtenu par le même calcul sur $E_{\alpha}$.
-Ou autrement dit, $\left[\lambda \ = \ \left(E_{\beta} \in \left[\sigma;14\right]\right)\right]$.
+En nous retrouvant ici nous savons que $\left(\sigma \in \left[11;14\right]\right)$.
+Comme nous l'avons vu plus haut dans l'expression $\left(3\right)$, il existe au moins un bit $\tau_{\sigma}$ qui est d'un poids strictement supérieur à celui du _MSB1_ de $\tau \in \left[10;13\right]$.
+Ce ou ces bits de poids $\sigma$ (et plus) sont des _zéros anonymes_, ce qui veut dire que $\left(\sum_{\sigma}^{14} \ E_{\alpha\sigma}\right) \ \ge \ \left(\sum_{\sigma}^{14} \ E_{\beta\sigma}\right)$.
+Cette expression calcul alors la somme de la valeur de chaque bit dans $E_{\beta}$ de poids supérieur au _MSB1_ de $\tau$, afin de comparé ce résultat $\left(\lambda\right)$ avec celui obtenu par le même calcul sur $E_{\alpha}$.
+Ou autrement dit, $\left(\lambda \ = \ \left(E_{\beta} \in \left[\sigma;14\right]\right)\right)$.
 
 -- -
 
-$$\left(6\right) \quad \left[\left(\sum_{\sigma}^{14} \ \left(E_{\alpha\sigma} \times 2^{\sigma}\right) = \lambda\right), \ Goto\left(8\right)\right] \ \vee \ \left[\left(\sum_{\sigma}^{14} \ \left(E_{\alpha\sigma} \times 2^{\sigma}\right) > \lambda\right), \ Goto\left(9\right)\right]$$
+$$\left(6\right) \quad \left[\left(\sum_{\sigma}^{14} \ \left(E_{\alpha\sigma} \times 2^{\sigma}\right) = \lambda\right), \ Goto\left(7\right)\right] \ \vee \ \left[\left(\sum_{\sigma}^{14} \ \left(E_{\alpha\sigma} \times 2^{\sigma}\right) > \lambda\right), \ Goto\left(8\right)\right]$$
 
 A ce stade nous savons que $\left(E_{\alpha} \in \left[10; \left(\sigma - 1\right)\right]\right) \ \lt \ \left(E_{\beta} \in \left[10; \left(\sigma - 1\right)\right]\right)$.
-Nous savons donc que sur une partie des bits de poids faible de $E_{\alpha}$ et $E_{\beta}$, le champs d'exposant $\left(E_{\alpha} \lt E_{\beta}\right)$.
+Donc que sur une partie des bits de poids faible de $E_{\alpha}$ et $E_{\beta}$, le champs d'exposant $\left(E_{\alpha} \lt E_{\beta}\right)$.
 
 Il y a maintenant deux possibilités vis à vis des _zéros anonymes_ de poids $\sigma$ et plus. 
 En bref, si la valeur de $E_{\alpha}$ compris dans l'intervalle de $\left[\sigma;14\right]$ est égale à $\left(E_{\beta} \in \left[\sigma;14\right]\right)$ alors nous sommes certains que $\left(E_{\alpha} \lt E_{\beta}\right)$.
 Dans le cas contraitre, si $\left(E_{\alpha} \in \left[\sigma;14\right]\right) \ \gt \ \left(E_{\beta} \in \left[\sigma;14\right]\right)$ nous savons alors que $\left(E_{\alpha} \gt E_{\beta}\right)$.
 
-L'expression calcul $E_{\alpha} \in \left[\sigma;14\right]$ de la même manière que ne le fait l'expression $\left(6\right)$ pour $E_{\beta}$.
+L'expression calcul $E_{\alpha} \in \left[\sigma;14\right]$, de la même manière que ne le fait l'expression $\left(6\right)$ pour $E_{\beta}$.
 
 -- -
 
 $$\left(7\right) \quad \left(E_{\alpha} \lt E_{\beta}\right)$$
 
-Nous venons de voir plus haut dans l'expression $\left(7\right)$, que $\left(E_{\alpha} \lt E_{\beta}\right)$ si jamais je cite "_la valeur de_ $E_{\alpha}$ _compris dans l'intervalle de_ $\left[\sigma;14\right]$ _est égale à_ $\left(E_{\beta} \in \left[\sigma;14\right]\right)$".
+Nous venons de voir plus haut dans l'expression $\left(6\right)$, que $\left(E_{\alpha} \lt E_{\beta}\right)$ si jamais je cite "_la valeur de_ $E_{\alpha}$ _compris dans l'intervalle de_ $\left[\sigma;14\right]$ _est égale à_ $\left(E_{\beta} \in \left[\sigma;14\right]\right)$".
 Mais comme nous l'avons vus dans le chapitre du nom de "_Ordre de traitement des champs d'exposant et de mantisse tronquée_", lorsque $\left(E_{\alpha} \neq E_{\beta}\right)$ alors nous sommes obligatoirement face à un point terminal.
 En l'occurence, nous avons vu dans ce chapitre que si $\left(E_{\alpha} \lt E_{\beta}\right)$ alors $\left(\vert\alpha\vert \ \lt \ \vert\beta\vert\right)$.
-Ce qui consiste alors en un ___point terminal___ possible, et la condition $\left(\vert\alpha\vert \ \gt \ \vert\beta\vert\right)$ __échoue__.
+Ce qui consiste alors en un ___point terminal___ possible, et la condition initial $\left(\vert\alpha\vert \ \gt \ \vert\beta\vert\right)$ __échoue__.
 
 -- -
 
-$$\left(8\right) \quad \left(E_{\alpha} \gt E_{\beta}\right), \ \left(\vert \alpha \vert \gt \vert \beta \vert\right)$$
+$$\left(8\right) \quad \left(E_{\alpha} \gt E_{\beta}\right)$$
 
-Nous venons de voir plus haut dans l'expression $\left(7\right)$, que $\left(E_{\alpha} \gt E_{\beta}\right)$ si la valeur de $E_{\alpha}$ compris dans l'intervalle $\left[\sigma;14\right]$ est strictement supérieur à $\left(E_{\beta} \in \left[\sigma;14\right]\right)$.
+Nous venons de voir plus haut dans l'expression $\left(6\right)$, que $\left(E_{\alpha} \gt E_{\beta}\right)$ si la valeur de $E_{\alpha}$ compris dans l'intervalle $\left[\sigma;14\right]$ est strictement supérieur à $\left(E_{\beta} \in \left[\sigma;14\right]\right)$.
 Mais comme nous l'avons vus dans le chapitre du nom de "_Ordre de traitement des champs d'exposant et de mantisse tronquée_", lorsque $\left(E_{\alpha} \neq E_{\beta}\right)$ alors nous sommes obligatoirement face à un point terminal.
 En l'occurence, nous avons vu dans ce chapitre que si $\left(E_{\alpha} \gt E_{\beta}\right)$ alors $\left(\vert\alpha\vert \ \gt \ \vert\beta\vert\right)$.
-Ce qui consiste alors en un ___point terminal___ possible, et la condition $\left(\vert\alpha\vert \ \gt \ \vert\beta\vert\right)$ __réussie__.
+Ce qui consiste alors en un ___point terminal___ possible, et la condition initial $\left(\vert\alpha\vert \ \gt \ \vert\beta\vert\right)$ __réussie__.
 
 -- -
 
