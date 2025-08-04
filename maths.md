@@ -66,7 +66,7 @@ Enfaite, l'opération $Nimply$ génère un zéro lorsque ces deux paramètres $\
 Si les champs d'exposant $E_{\alpha}$ et $E_{\beta}$ sont égaux, avec l'expression $\left(1\right)$ nous nous attendrions à obtenir un ensemble de bits à $0$ dans $\tau \in \left[10;14\right]$.
 Mais n'oublions pas que ce sont des _zéros anonymes_.
 Par conséquent, si ne serait-ce que l'un d'entre eux cache une supériorité de $E_{\alpha i}$ sur $E_{\beta i}$, alors les champs d'exposant $E_{\alpha}$ et $E_{\beta}$ sont différent l'un de l'autre.
-Nous savons que si $\left(E_{\alpha} \neq E_{\beta}\right)$ alors un _point terminal_ est atteint, c'est pourquoi ne devons faire attention aux _zéros anonymes_.
+Nous savons que si $\left(E_{\alpha} \neq E_{\beta}\right)$ alors un _point terminal_ est atteint, c'est pourquoi nous devons faire attention aux _zéros anonymes_.
 
 Ce n'est pas pour autant que n'importe quel _zéro anonyme_ dans $\tau \in \left[10;14\right]$ est important, nous verrons pourquoi dans l'expression $\left(3\right)$.
 Le tout premier _zéro anonyme_ d'importance (si il y en a un) est toujours le bit de poids immédiatement supérieur au _MSB1_ de $\tau$.
@@ -75,12 +75,28 @@ Tout ce dont nous avons besoin de savoir actuellement, c'est que l'expression qu
 Il est possible qu'il n'y ait pas de _MSB1_ dans $\tau \in \left[10;14\right]$, alors $\sigma$ contient le poids du _zéro anonyme_ de poids faible, c'est à dire celui de poids $10$.
 
 Nous passons d'une expression à la suivante en fonction de la valeur de $\sigma$ :
-  - Si $\left(\sigma = 10\right)$ alors rendez-vous expression $\left(5\right)$.
+  - Si $\left(\sigma = 10\right)$ alors rendez-vous à l'expression $\left(5\right)$.
   - Sinon si $\left(\sigma \in \left[11;15\right]\right)$ alors rendez-vous à l'expression suivante (celle de numéro $\left(3\right)$ ).
 
 -- -
 
 $$\left(3\right) \quad \left(E_{\beta\left(\sigma - 1\right)} \gt E_{\alpha\left(\sigma - 1\right)}\right)$$
+
+A ce stade nous savons que $\sigma \in \left[11;15\right]$.
+Nous en déduisons qu'il y a un _MSB1_ dans $\tau \in \left[10;14\right]$ car l'intervalle de valeur admise pour $\sigma$ semble avoir subit un décalage par une incrémentation de $1$.
+Comme lorsque que l'on calcul la valeur de $\sigma$ avec l'expression $\left(2\right)$ quand un ou plusieurs des bits de $\tau \in \left[10;14\right]$ sont à $1$.
+
+Il a été dit dans l'expression $\left(1\right)$ que $\tau_i \ = \ Nimply \ \left(E_{\beta i}, \ E_{\alpha i}\right)$.
+Par conséquent, si $\left(\tau_{\left(\sigma - 1\right)} = 1\right)$ alors $\left(E_{\beta\left(\sigma - 1\right)} = 1\right)$ tandis que $\left(E_{\alpha\left(\sigma - 1\right)} = 0\right)$.
+Savoir cela nous sera utile pour la suite.
+
+De plus, rappellez-vous que les champs d'exposant utilisent un encodage par biais, qui partage les même propriétés que l'encodage _Binary Unsigned_.
+Ce qui nous intéresse particulièrement, c'est que la valeur d'un bit à $1$ de poids $i$ est strictement supérieur à la somme de la valeur des bits de poids inférieur à $i$.
+Nous verrons plus bas comment est ce que ceci peut nous être utile.
+
+Nous allons encore une fois passé d'une expression à la suivante en fonction de la valeur de $\sigma$ :
+  - Si $\left(\sigma \in \left[11;14\right]\right)$ alors rendez-vous à l'expression numéro $\left(5\right)$.
+  - Sinon si $\left(\sigma = 15\right)$ alors rendez-vous à l'expression numéro $\left(4\right)$.
 
 -- -
 
