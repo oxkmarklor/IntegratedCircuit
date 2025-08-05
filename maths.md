@@ -32,11 +32,6 @@ $$Nimply \ \left(x, \ y\right) \rightarrow \ x \ \wedge \ \overline{y}$$
 __Nimply__ est bien plus connu en tant que porte logique dans les circuits intégrés qu'en tant qu'opération logique en soit.
 D'où le fait qu'il n'existe pas de symbole opératoire pour cette opération.
 
-$$Xor \ \left(x, \ y\right) \rightarrow \ \left(x \ \wedge \ \overline{y}\right) \ \vee \ \left(\overline{x} \ \wedge \ y\right)$$
-
-__Xor__ est une opération logique très connu et qui a sa propre porte logique.
-L'opération possède son propre symbole opératoire attitré $\oplus$, mais j'utiliserai la fonction $Xor$ pour plus de clareté.
-
 Par ailleurs, $\overline{x}$ est l'opération logique __Not__, qui inverse un bit en son opposé $\left(1 = \overline{0}\right)$ ou $\left(0 = \overline{1}\right)$.
 Cette opération possède également sa propre porte logique, qui est d'ailleurs assez élémentaire à la conception de circuit en tout genre.
 
@@ -49,8 +44,8 @@ La variable $\sigma$ (sigma) servira d'indice pour accéder aux bits $\in \left[
 $$\left(1\right) \quad \sum_{\sigma=14}^{10} \ Write\left(\tau_{\sigma}, \ Nimply \ \left(E_{\beta\sigma}, \ E_{\alpha\sigma}\right)\right)$$
 
 La variable $\tau$ est un champs binaire de $15$ bits dont la représentation est la même que celle illustrée plus haut pour les nombres flottants _Half Precision_ (sans le bit de signe).
-Pour chacun des traitements des bits de poids $E_{\alpha i}$ et $E_{\beta i}$, les résultats sont enregistrés dans $\tau_i$.
-Ce qui veut dire que $\tau \in \left[10;14\right]$ correspond aux bits de résultat des opérations $Nimply$ sur $E_{\beta i}$ et $E_{\alpha i}$.
+Pour chacune des opérations $Nimply$ sur les bits de poids $i \in \left[10;14\right]$ des champs d'exposant $E_{\alpha}$ et $E_{\beta}$, les résultats sont enregistrés dans $\tau_i$.
+Ce qui veut dire que $\tau \in \left[10;14\right]$ correspond aux bits de résultat des opérations $Nimply$ sur $E_{\beta i}$ et $E_{\alpha i}$, comme le montre l'expression qui figure ci-dessus.
 
 -- -
 
@@ -58,25 +53,34 @@ Initialement $\sigma = 10$, mais l'expression changera d'elle même la valeur de
 
 $$\left(2\right) \quad \sum_{i=14}^{\sigma} Write\left(\sigma, \ \left[\left(\overline{\tau_i} \times 10\right) + \tau_i \times \left(11 + i \ mod \ 5\right)\right]\right)$$
 
-Le but de cette expression est de définir la valeur de $\sigma$ avec laquelle nous travaillerons par la suite.
+L'objectif de cette expression est d'inscrire dans $\sigma$ la valeur du poids du ___zéro anonyme___ de poids le plus faible, parmis tout ceux qui ont une importance.
+Pour comprendre ce que cette phrase veut dire, nous allons voir ce qu'est un _zéro anonyme_ ainsi que l'"importance" variable que l'on apporte à chacun d'eux.
 
-La documentation du circuit électronique définit un _zéro anonyme_ comme étant un bit à zéro en résultat d'une opération logique $Nimply$.
-Ce nom curieux est due au flou qui entoure une telle sortie.
-Enfaite, l'opération $Nimply$ génère un zéro lorsque ces deux paramètres $\left(x\right)$ et $\left(y\right)$ sont identiques, ou lorsque le bit sur $\left(y\right)$ est supérieur à celui sur $\left(x\right)$.
-Si les champs d'exposant $E_{\alpha}$ et $E_{\beta}$ sont égaux, avec l'expression $\left(1\right)$ nous nous attendrions à obtenir un ensemble de bits à $0$ dans $\tau \in \left[10;14\right]$.
-Mais n'oublions pas que ce sont des _zéros anonymes_.
-Par conséquent, si ne serait-ce que l'un d'entre eux cache une supériorité de $E_{\alpha i}$ sur $E_{\beta i}$, alors les champs d'exposant $E_{\alpha}$ et $E_{\beta}$ sont différent l'un de l'autre.
-Nous savons que si $\left(E_{\alpha} \neq E_{\beta}\right)$ alors un _point terminal_ est atteint, c'est entre autre pourquoi nous devons faire attention aux _zéros anonymes_.
+Commençons par dire qu'un "_zéro anonyme_" est un terme que j'ai crée dans la documentation du circuit électronique.
+Concrètement, un _zéro anonyme_ est un bit de résultat à $0$ sortant d'une opération logique $Nimply$.
+Ce nom si étrange est due au fait que l'opération $Nimply$ génère un bit de résultat à $0$ quand:
+  - Les deux bits de paramètres $\left(x\right)$ et $\left(y\right)$ sont identiques.
+  - Ou lorsque le bit sur $\left(y\right)$ est supérieur à celui sur $\left(x\right)$.
 
-Ce n'est pas pour autant que n'importe quel _zéro anonyme_ dans $\tau \in \left[10;14\right]$ est important, nous verrons pourquoi dans l'expression $\left(3\right)$.
-Le tout premier _zéro anonyme_ d'importance (si il y en a un) est toujours le bit de poids immédiatement supérieur au _MSB1_ de $\tau$.
+Maintenant, revenons un peu à l'expression $\left(1\right)$.
+Chaque bit de $\tau \in \left[10;14\right]$ est le résultat de $Nimply \ \left(E_{\beta i}, \ E_{\alpha i}\right)$ pour le poids $i \in \left[10;14\right]$.
+Si $\left(\tau_i = 1\right)$ alors cela veut dire que $\left(E_{\beta i} = 1\right)$ tandis que $\left(E_{\alpha i} = 0\right)$, ou autrement dit $\left(E_{\beta i} \times 2^i\right) \ \gt \ \left(E_{\alpha i} \times 2^i\right)$.
 
-Tout ce dont nous avons besoin de savoir actuellement, c'est que l'expression qui figure ci-dessus écrit dans $\sigma$ la valeur du poids $+1$ du _MSB1_ de $\tau$.
-Il est possible qu'il n'y ait pas de _MSB1_ dans $\tau \in \left[10;14\right]$, alors $\sigma$ contient le poids du _zéro anonyme_ de poids faible, c'est à dire celui de poids $10$.
+Mais ce n'est pas tout.
+Rappellez vous du chapitre "_Encodage par biais_" qui parle de l'encodage du champs d'exposant des nombres flottants IEEE-754.
+Nous avons appris dans ce chapitre que la valeur d'un bit à $1$ de poids $i$ dans un champs d'exposant, est strictement supérieur à la somme de la valeur de chacun des bits de poids inférieur à $i$.
+Autrement dit, ceci donne $\left(E_{\beta i} \times 2^i\right) \ \gt \ \sum_{i=i-1}^{10} \ \left(E_{\alpha i} \times 2^i\right)$.
 
-Nous passons d'une expression à la suivante en fonction de la valeur de $\sigma$ :
-  - Si $\left(\sigma \in \left[10;14\right]\right)$ alors rendez-vous à l'expression $\left(5\right)$.
-  - Sinon si $\left(\sigma = 15\right)$ alors rendez-vous à l'expression suivante (celle de numéro $\left(3\right)$ ).
+Si $\left(\tau_i = 1\right)$ nous pouvons donc en conclure que $\left(E_{\beta i} \times 2^i\right) \ \gt \ \sum_{i}^{10} \ \left(E_{\alpha i} \times 2^i\right)$, nous verrons à nouveau ceci dans l'expression $\left(3\right)$.
+
+Imaginons maintenant que $\left(\tau_i = 1\right)$ soit le _MSB1_ du champs binaire $\tau \in \left[10;14\right]$.
+Si $\left(i = 14\right)$ alors un point terminal est atteint avec $\left(E_{\beta} \gt E_{\alpha}\right)$.
+La raison en est qu'il n'y a pas de bit de poids supérieur à $14$ dans les champs d'exposant $E_{\alpha}$ et $E_{\beta}$, permettant de faire passé $E_{\alpha}$ de strictement inférieur à strictement supérieur à $E_{\beta}$.
+
+Mais si $\left(i \in \left[10;13\right]\right)$, alors c'est une autre histoire.
+Il y a alors dans $\tau$ au moins un bit de poids plus fort que son _MSB1_, ce qui pose problème car c'est un _zéro anonyme_.
+Autrement dit, la seule chose dont nous puissions être sûre c'est que $\left(E_{\alpha} \ge E_{\beta}\right)$ car si $\left(E_{\beta i} \times 2^i\right) \ \gt \ \sum_{i}^{10} \ \left(E_{\alpha i} \times 2^i\right)$ pour $i\in \left[10;13\right]$, alors $\left(\sum_{i=i+1}^{14} \ \left(E_{\alpha i} \times 2^i\right) \ \ge \ \sum_{i=i+1}^{14} \ \left(E_{\beta i} \times 2^i\right)\right)$.
+// lien avec les zéros anonymes
 
 -- -
 
