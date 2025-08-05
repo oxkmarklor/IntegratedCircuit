@@ -85,11 +85,17 @@ Le problème avec le bit $\tau_{\left(i+1\right)}$ c'est qu'il est un _zéro ano
 Le ou les _zéros anonymes_ de poids supérieur à $\tau_i$ sont décisifs car si $\left(\sum_{i=i+1}^{14} \ \left(E_{\alpha i} \times 2^i\right) \ = \ \sum_{i=i+1}^{14} \ \left(E_{\beta i} \times 2^i\right)\right)$ alors $\left(E_{\alpha} \lt E_{\beta}\right)$ car $\left(E_{\beta i} \times 2^i\right) \ \gt \ \sum_{i}^{10} \ \left(E_{\alpha i} \times 2^i\right)$.
 En revanche si $\left(\sum_{i=i+1}^{14} \ \left(E_{\alpha i} \times 2^i\right) \ \gt \ \sum_{i=i+1}^{14} \ \left(E_{\beta i} \times 2^i\right)\right)$ alors $\left(E_{\alpha} \gt E_{\beta}\right)$.
 
-Par conséquent, les _zéros anonymes_ "importants" ont un poids d'une valeur supérieur à celui de poids $i$ du _MSB1_ de $\tau \in \left[10;14\right]$, ceux qui ne le sont pas ont un poids inférieur à $\tau_i$. 
+Par conséquent, les _zéros anonymes_ "important" ont un poids d'une valeur supérieur à celui de poids $i$ du _MSB1_ de $\tau \in \left[10;14\right]$, ceux qui ne le sont pas ont un poids inférieur à $\tau_i$. 
 
-// $\tau$ nul
+Jusqu'ici nous avions un _MSB1_ dans $\tau \in \left[10;14\right]$, mais il pourrait ne pas y en avoir.
+Chacun bit des bits de $\tau_i$ sont alors des _zéros anonymes_, ce qui nous permet d'affirmé que $\left(E_{\alpha} \ge E_{\beta}\right)$.
+Si jamais $\left(E_{\alpha} \gt E_{\beta}\right)$, c'est obligatoirement que $\left(E_{\alpha i} \gt E_{\beta i}\right)$ pour $i \in \left[10;14\right]$, mais si $\left(E_{\alpha} = E_{\beta}\right)$, alors cela veut dire que tout les bits de même poids des champs d'exposant $E_{\alpha}$ et $E_{\beta}$ sont identiques.
 
-// que fait l'expression
+L'expression inscrit donc dans $\sigma$ la valeur du poids $+1$ du _MSB1_ lorsqu'il y en a un dans $\tau \in \left[10;14\right], et $10$ si il n'y a pas de _MSB1_.
+
+Pour poursuivre la démonstration, il va vous falloir passé de cette expression à la suivante en fonction de la valeur de $\sigma$ :
+  - Si $\left(\sigma = 15\right)$ alors veuillez vous rendre sur l'expression suivante (celle de numéro $\left(3\right)$ ).
+  - Sinon si $\left(\sigma \in \left[10;14\right]\right)$ alors rendez-vous vers l'expression numéro $\left(4\right)$.
 
 -- -
 
