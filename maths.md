@@ -53,49 +53,17 @@ Initialement $\sigma = 10$, mais l'expression changera d'elle même la valeur de
 
 $$\left(2\right) \quad \sum_{i=14}^{\sigma} Write\left(\sigma, \ \left[\left(\overline{\tau_i} \times 10\right) + \tau_i \times \left(11 + i \ mod \ 5\right)\right]\right)$$
 
-L'objectif de cette expression est d'inscrire dans $\sigma$ la valeur du poids du ___zéro anonyme___ de poids le plus faible, parmis tout ceux qui ont une "importance".
-Pour comprendre ce que cette phrase veut dire, nous allons voir ce qu'est un _zéro anonyme_ ainsi que l'importance variable que l'on apporte à chacun d'eux.
+L'objectif de cette expression est d'inscrire dans $\sigma$ la valeur du poids $+1$ du _MSB1_ dans $\tau \in \left[10;14\right]$.
+Si l'ensemble des bits de poids $i \in \left[10;14\right]$ de $\tau$ sont à $0$, alors $\left(\sigma = 10\right)$.
 
-Commençons par dire qu'un "_zéro anonyme_" est un terme que j'ai crée dans la documentation du circuit électronique.
-Concrètement, un _zéro anonyme_ est un bit de résultat à $0$ sortant d'une opération logique $Nimply$.
-Ce nom si étrange est due au fait que l'opération $Nimply$ génère un bit de résultat à $0$ lorsque:
-  - Les deux bits de paramètres $\left(x\right)$ et $\left(y\right)$ sont identiques.
-  - Le bit sur $\left(y\right)$ est supérieur à celui sur $\left(x\right)$.
+Autrement dit, le but de cette expression est de nous permette d'inscrire dans $\sigma$ la valeur du poids du premier ___zéro anonyme___ d'importance de poids faible.
+Les _zéros anonymes_ d'importance sont toujours d'un poids supérieur au _MSB1_ de $\tau$ lorsqu'il y en a un.
+Si il n'y a pas de _MSB1_, alors tous les bits à $0$ de $\tau \in \left[10;14\right]$ sont des _zéros anonymes_.
+La documentation du circuit électronique définit ce qu'est un _zéro anonyme_, en gros c'est un bit de résultat à $0$ renvoyé par une opération logique $Nimply$.
 
-Maintenant, revenons un peu à l'expression $\left(1\right)$.
-Chaque bit de $\tau \in \left[10;14\right]$ est le résultat de $Nimply \ \left(E_{\beta i}, \ E_{\alpha i}\right)$ pour le poids $i \in \left[10;14\right]$.
-Si $\left(\tau_i = 1\right)$ alors cela veut dire que $\left(E_{\beta i} = 1\right)$ tandis que $\left(E_{\alpha i} = 0\right)$, ou autrement dit $\left(E_{\beta i} \times 2^i\right) \ \gt \ \left(E_{\alpha i} \times 2^i\right)$.
-
-Mais ce n'est pas tout.
-Rappellez vous du chapitre "_Encodage par biais_" qui parle de l'encodage du champs d'exposant des nombres flottants IEEE-754.
-Nous avons appris dans ce chapitre que la valeur d'un bit à $1$ de poids $i$ dans un champs d'exposant, est inconditionnellement supérieur à la somme de la valeur de chacun des bits de poids inférieur à $i$.
-Autrement dit, nous pouvons en déduire que $\left(E_{\beta i} \times 2^i\right) \ \gt \ \sum_{i=i-1}^{10} \ \left(E_{\alpha i} \times 2^i\right)$.
-
-Nous pouvons donc en conclure que si $\left(\tau_i = 1\right)$ alors $\left(E_{\beta i} \times 2^i\right) \ \gt \ \sum_{i}^{10} \ \left(E_{\alpha i} \times 2^i\right)$.
-Pour autant, ceci ne veut pas dire que $\left(E_{\beta} \gt E_{\alpha}\right)$.
-
-Si $\left(\tau_{14} = 1\right)$ alors un point terminal $\left(E_{\alpha} \lt E_{\beta}\right)$ est atteint car $\left(E_{\beta 14} \times 2^{14}\right) \ \gt \ \sum_{i=14}^{10} \ \left(E_{\alpha i} \times 2^i\right)$.
-Il s'avère que les bits $E_{\alpha 14}$ et $E_{\beta 14}$ sont les _MSB_ des champs d'exposant $E_{\alpha}$ et $E_{\beta}$.
-Pour que $\left(E_{\alpha} \gt E_{\beta}\right)$ il faudrait déjà que ces champs d'exposant disposent d'un bit de poids plus fort que $14$, ce qui n'est pas le cas.
-En bref, nous comprenons que même si $\tau_{\left(i-1\right)}$ est un _zéro anonyme_ alors cela ne changera rien au fait que $\left(E_{\alpha} \lt E_{\beta}\right)$.
-
-Cependant, c'est différent dans le cas où le poids du _MSB1_ est $\tau_i$ pour $i \in \left[10;13\right]$.
-Nous pouvons donc être certain qu'il y a au moins un bit de poids plus fort que $\tau_i$ dans $\tau \in \left[10;14\right]$, mais ce ou ces bits sont des _zéros anonymes_.
-Le problème avec le bit $\tau_{\left(i+1\right)}$ c'est qu'il est un _zéro anonyme_ qui par définition ne permet pas de savoir si $\left(E_{\alpha\left(i+1\right)} = E_{\beta\left(i+1\right)}\right)$ ou si $\left(E_{\alpha\left(i+1\right)} \gt E_{\beta\left(i+1\right)}\right)$.
-Le ou les _zéros anonymes_ de poids supérieur à $\tau_i$ sont décisifs car si $\left(\sum_{i=i+1}^{14} \ \left(E_{\alpha i} \times 2^i\right) \ = \ \sum_{i=i+1}^{14} \ \left(E_{\beta i} \times 2^i\right)\right)$ alors $\left(E_{\alpha} \lt E_{\beta}\right)$ car $\left(E_{\beta i} \times 2^i\right) \ \gt \ \sum_{i}^{10} \ \left(E_{\alpha i} \times 2^i\right)$.
-En revanche si $\left(\sum_{i=i+1}^{14} \ \left(E_{\alpha i} \times 2^i\right) \ \gt \ \sum_{i=i+1}^{14} \ \left(E_{\beta i} \times 2^i\right)\right)$ alors $\left(E_{\alpha} \gt E_{\beta}\right)$.
-
-Par conséquent, les _zéros anonymes_ "important" ont un poids d'une valeur supérieur à celui de poids $i$ du _MSB1_ de $\tau \in \left[10;14\right]$, ceux qui ne le sont pas ont un poids inférieur à $\tau_i$. 
-
-Jusqu'ici nous avions un _MSB1_ dans $\tau \in \left[10;14\right]$, mais il pourrait ne pas y en avoir.
-Chacun bit des bits de $\tau_i$ sont alors des _zéros anonymes_, ce qui nous permet d'affirmé que $\left(E_{\alpha} \ge E_{\beta}\right)$.
-Si jamais $\left(E_{\alpha} \gt E_{\beta}\right)$, c'est obligatoirement que $\left(E_{\alpha i} \gt E_{\beta i}\right)$ pour $i \in \left[10;14\right]$, mais si $\left(E_{\alpha} = E_{\beta}\right)$, alors cela veut dire que tout les bits de même poids des champs d'exposant $E_{\alpha}$ et $E_{\beta}$ sont identiques.
-
-L'expression inscrit donc dans $\sigma$ la valeur du poids $+1$ du _MSB1_ lorsqu'il y en a un dans $\tau \in \left[10;14\right], et $10$ si il n'y a pas de _MSB1_.
-
-Pour poursuivre la démonstration, il va vous falloir passé de cette expression à la suivante en fonction de la valeur de $\sigma$ :
-  - Si $\left(\sigma = 15\right)$ alors veuillez vous rendre sur l'expression suivante (celle de numéro $\left(3\right)$ ).
-  - Sinon si $\left(\sigma \in \left[10;14\right]\right)$ alors rendez-vous vers l'expression numéro $\left(4\right)$.
+Le passage de cette expression à la suivante pour continué la démonstration se fait en fonction de la valeur que vous avez obtenu pour $\sigma$ :
+  - Si $\left(\sigma = 15\right)$ alors rendez-vous sur l'expression qui suit immédiatement (celle de numéro $\left(3\right)$ ).
+  - En revanche, si $\left(\sigma \in \left[10;14\right]\right)$ alors rendez-vous à l'expression $\left(4\right)$.
 
 -- -
 
