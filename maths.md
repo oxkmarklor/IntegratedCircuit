@@ -49,21 +49,80 @@ Ce qui veut dire que $\tau \in \left[10;14\right]$ correspond aux bits de résul
 
 -- -
 
-Initialement $\sigma = 10$, mais l'expression changera d'elle même la valeur de $\sigma$.
+Initialement $\left(\sigma = 10\right)$, mais l'expression changera d'elle même la valeur de $\sigma$.
 
 $$\left(2\right) \quad \sum_{i=14}^{\sigma} Write\left(\sigma, \ \left[\left(\overline{\tau_i} \times 10\right) + \tau_i \times \left(11 + i \ mod \ 5\right)\right]\right)$$
 
-L'objectif de cette expression est d'inscrire dans $\sigma$ la valeur du poids $+1$ du _MSB1_ dans $\tau \in \left[10;14\right]$.
-Si l'ensemble des bits de poids $i \in \left[10;14\right]$ de $\tau$ sont à $0$, alors $\left(\sigma = 10\right)$.
+L'objectif de cette expression est d'inscrire dans $\sigma$ la valeur du poids du ___zéro anonyme___ de poids le plus faible, parmis tout ceux qui ont une "importance".
+Pour comprendre ce que cette phrase veut dire, nous allons voir ce qu'est un _zéro anonyme_ ainsi que l'importance variable que l'on apporte à chacun d'eux.
 
-Autrement dit, le but de cette expression est de nous permette d'inscrire dans $\sigma$ la valeur du poids du premier ___zéro anonyme___ d'importance de poids faible.
-Les _zéros anonymes_ d'importance sont toujours d'un poids supérieur au _MSB1_ de $\tau$ lorsqu'il y en a un.
-Si il n'y a pas de _MSB1_, alors tous les bits à $0$ de $\tau \in \left[10;14\right]$ sont des _zéros anonymes_.
-La documentation du circuit électronique définit ce qu'est un _zéro anonyme_, en gros c'est un bit de résultat à $0$ renvoyé par une opération logique $Nimply$.
+### Qu'est ce qu'un zéro anonyme?
 
-Le passage de cette expression à la suivante pour continué la démonstration se fait en fonction de la valeur que vous avez obtenu pour $\sigma$ :
-  - Si $\left(\sigma = 15\right)$ alors rendez-vous sur l'expression qui suit immédiatement (celle de numéro $\left(3\right)$ ).
-  - En revanche, si $\left(\sigma \in \left[10;14\right]\right)$ alors rendez-vous à l'expression $\left(4\right)$.
+Commençons par dire qu'un "_zéro anonyme_" est un terme que j'ai crée dans la documentation du circuit électronique.
+Concrètement, un _zéro anonyme_ est un bit de résultat à $0$ obtenu après une opération logique $Nimply$.
+Ce nom si étrange est due au fait que l'opération $Nimply$ génère un bit de résultat à $0$ lorsque:
+  - Les deux bits de paramètres $\left(x\right)$ et $\left(y\right)$ sont identiques.
+  - Le bit sur $\left(y\right)$ est supérieur à celui sur $\left(x\right)$.
+
+## Les deux facettes des zéros anonymes (introduction)
+
+Revenons un peu à l'expression numéro $\left(1\right)$ qui figure ci-dessus.
+Chaque bit $\tau_i$ est le résultat de $Nimply \ \left(E_{\beta i}, \ E_{\alpha i}\right)$ pour le poids $i \in \left[10;14\right]$.
+Si $\left(\tau_i = 1\right)$ alors nous savons que $\left(E_{\beta i} = 1\right)$ tandis que $\left(E_{\alpha i} = 0\right)$, ou autrement dit $\left(E_{\beta i} \times 2^i\right) \ \gt \ \left(E_{\alpha i} \times 2^i\right)$.
+
+De plus, rappellez vous du chapitre "_Encodage par biais_" qui parle de l'encodage du champs d'exposant des nombres flottants IEEE-754.
+Dans ce chapitre, il est dit que la valeur d'un bit à $1$ de poids $i$ d'un champs d'exposant $E$, est _inconditionnellement_ supérieur à la somme de la valeur de chacun de ses bits de poids inférieur à $i$.
+Autrement dit, si nous prenons au pied de la lettre la phrase ci-dessus alors $\left(E_{\beta i} \times 2^i\right) \ \gt \ \sum_{i=i-1}^{10} \ \left(E_{\beta i} \times 2^i\right)$.
+Mais nous pouvons arrangé cette expression à notre champs d'exposant $E_{\alpha}$, alors $\left(E_{\beta i} \times 2^i\right) \ \gt \ \sum_{i=i-1}^{10} \ \left(E_{\alpha i} \times 2^i\right)$. 
+
+Au final, nous pouvons en conclure que si $\left(\tau_i = 1\right)$ alors $\left(E_{\beta i} \times 2^i\right) \ \gt \ \sum_{i}^{10} \ \left(E_{\alpha i} \times 2^i\right)$.
+
+Ce qui vient d'être dit ci-dessus ne démontre pas pour autant que $\left(E_{\alpha} \lt E_{\beta}\right)$.
+
+### Les zéros anonymes sans importance
+
+Prenons le cas de $\left(\tau_i = \tau_{14} = 1\right)$.
+Dans se cas très spéciale, nous avons effectivement affaire a un point terminal $\left(E_{\alpha} \lt E_{\beta}\right)$.
+Ce point terminal est atteint car $\left(E_{\beta 14} \times 2^{14}\right) \ \gt \ \sum_{i=14}^{10} \ \left(E_{\alpha i} \times 2^i\right)$, sachant que $E_{\alpha 14}$ et $E_{\beta 14}$ sont les _MSB_ des champs d'exposant $E_{\alpha}$ et $E_{\beta}$.
+En bref, nous comprenons que même si $\tau_{\left(i-1\right) = \tau_{13}}$ est un _zéro anonyme_, alors cela ne changera rien au fait que $\left(E_{\alpha} \lt E_{\beta}\right)$.
+
+Nous pouvons donc en déduire que tout _zéro anonyme_ de poids inférieur au _MSB1_ de $\tau \in \left[10;14\right]$, est sans importance.
+
+### Les zéros anonymes important
+
+Prenons désormais le cas dans lequel le poids du _MSB1_ de $\tau$ est $\tau_i$ pour $i \in \left[10;13\right]$.
+Dans cette situation, nous sommes certains qu'il y a au moins le bit $\tau_{\left(i+1\right)}$ qui est d'un poids supérieur à $\tau_i$.
+Par définition, $\tau_{\left(i+1\right)}$ (et les autres bits de poids supérieur à $\tau_i$, si il y en a) sont des _zéros anonymes_.
+Le problème de ces bits de poids supérieur à $\tau_i$ c'est que par essence ils ne permettent pas de connaitre la valeur des bits d'opérandes, par exemple pour $\tau_{\left(i+1\right)}$ nous ne savons pas si $\left(E_{\alpha\left(i+1\right)} = E_{\beta\left(i+1\right)}\right)$ ou si $\left(E_{\alpha\left(i+1\right)} \gt E_{\beta\left(i+1\right)}\right)$.
+
+Pourtant les _zéros anonymes_ de poids supérieur à $\tau_i$ sont décisifs dans la génération du point terminal du circuit.
+A ce stade nous savons que $\left(E_{\beta i} \times 2^i\right) \ \gt \ \sum_{i}^{10} \ \left(E_{\alpha i} \times 2^i\right)$, mais comme mentionné plus haut ceci ne suffit pas à dire que $\left(E_{\alpha} \lt E_{\beta}\right)$.
+La raison en est que le _MSB1_ de $\tau$ $\left(\tau_i\right)$ est d'un poids $i \in \left[10;13\right]$ qui est au moins inférieur au bit $\tau_{14}$ qui est un _zéro anonyme_.
+
+Par conséquent, si $\left(E_{\alpha 14} = E_{\beta 14}\right)$ alors le point terminal était et reste $\left(E_{\alpha} \lt E_{\beta}\right)$.
+Cependant, si $\left(E_{\alpha 14} \gt E_{\beta 14}\right)$ alors le point terminal change pour $\left(E_{\alpha} \gt E_{\beta}\right)$ car $\left(E_{\alpha} = 1\right)$ tandis que $\left(E_{\beta} = 0\right)$, alors $\left(E_{\alpha 14} \times 2^{14}\right) \ \gt \ \sum_{i=14}^{10} \ \left(E_{\beta i} \times 2^i\right)$.
+
+Nous comprenons donc que les _zéros anonymes_ de poids supérieur au _MSB1_ de $\tau \in \left[10;14\right]$ devront être traités avec attention par le circuit, ce sont des _zéros anonymes_ "important".
+
+### L'obtention d'un point non terminal
+
+Jusqu'ici nous avions un _MSB1_ dans $\tau \in \left[10;14\right]$, mais il pourrait ne pas y en avoir.
+Chacun bit des bits $\tau_i$ pour $i \in \left[10;14\right]$ sont alors des _zéros anonymes_ important, ce qui nous permet d'affirmé que $\left(E_{\alpha} \ge E_{\beta}\right)$.
+
+Nous pourrions atteindre un point terminal si jamais $\left(E_{\alpha} \gt E_{\beta}\right)$, mais ce point terminal ne pourrait s'obtenir qu'à la condition que $\left(E_{\alpha i} \gt E_{\beta i}\right)$ pour $i \in \left[10;14\right]$.
+A l'inverse, nous pourrions aussi atteindre une situation inédite de ___point non terminal___ si $\left(E_{\alpha} = E_{\beta}\right)$.
+Cette situation inédite ne pourrait se produire que dans le cas où l'ensemble des bits de même poids des champs d'exposant $E_{\alpha}$ et $E_{\beta}$ sont identiques, ou autrement dit $\left(E_{\alpha i} = E_{\beta i}\right)$ pour $i \in \left[10;14\right]$.
+
+Encore une fois, les _zéros anonymes_ qui composent l'entièreté du champs $\tau$ sont importants à prendre en compte pour le circuit, car ils ont chacun le pouvoir d'affecté la suite des opérations.
+Comme nous le verrons plus bas.
+
+### Poursuite de la démonstration
+
+L'expression inscrit donc dans $\sigma$ la valeur du poids $+1$ du _MSB1_ lorsqu'il y en a un dans $\tau \in \left[10;14\right], et $10$ si il n'y a pas de _MSB1_.
+
+Pour poursuivre la démonstration, il va vous falloir passé de cette expression à la suivante en fonction de la valeur de $\sigma$ :
+  - Si $\left(\sigma = 15\right)$ alors veuillez vous rendre sur l'expression suivante (celle de numéro $\left(3\right)$ ).
+  - Sinon si $\left(\sigma \in \left[10;14\right]\right)$ alors rendez-vous vers l'expression numéro $\left(4\right)$.
 
 -- -
 
