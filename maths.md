@@ -67,7 +67,7 @@ Ce nom si étrange est due au fait que l'opération $Nimply$ génère un bit de 
 ## Les deux facettes des zéros anonymes (introduction)
 
 Revenons un peu à l'expression numéro $\left(1\right)$ qui figure ci-dessus.
-Chaque bit $\tau_i$ est le résultat de $Nimply \ \left(E_{\beta i}, \ E_{\alpha i}\right)$ pour le poids $i \in \left[10;14\right]$.
+Chaque bit $\tau_i$ est le résultat de $\ Nimply \ \left(E_{\beta i}, \ E_{\alpha i}\right)$ pour le poids $i \in \left[10;14\right]$.
 Si $\left(\tau_i = 1\right)$ alors nous savons que $\left(E_{\beta i} = 1\right)$ tandis que $\left(E_{\alpha i} = 0\right)$, ou autrement dit $\left(E_{\beta i} \times 2^i\right) \ \gt \ \left(E_{\alpha i} \times 2^i\right)$.
 
 De plus, rappellez vous du chapitre "_Encodage par biais_" qui parle de l'encodage du champs d'exposant des nombres flottants IEEE-754.
@@ -98,20 +98,10 @@ Par exemple pour $\tau_{\left(i+1\right)}$, nous ne savons pas si $\left(E_{\alp
 
 Pourtant les _zéros anonymes_ de poids supérieur à $\tau_i$ sont décisifs dans la génération du point terminal pour le circuit.
 A ce stade nous savons que $\left(E_{\beta i} \times 2^i\right) \ \gt \ \sum_{i}^{10} \ \left(E_{\alpha i} \times 2^i\right)$, mais comme mentionné plus haut ceci ne suffit pas à dire que $\left(E_{\alpha} \lt E_{\beta}\right)$.
-La raison en est que le _MSB1_ de $\tau$ $\left(\tau_i\right)$ est d'un poids $i \in \left[10;13\right]$ qui est _au moins_ inférieur à celui du bit $\left(\tau_{\left(i+1\right)} = \tau_{14}\right)$ qui est un _zéro anonyme_.
+La raison en est que le _MSB1_ de $\tau$ $\left(\tau_i\right)$ est d'un poids $i \in \left[10;13\right]$ qui est _au moins_ inférieur au bit $\tau_{\left(i+1\right)}$ qui est un _zéro anonyme_.
 
-Par conséquent, si $\left(\sum_{i=i+1}^{14} \ \left(E_{\beta i} \times 2^i\right) \ = \lambda\right)$ et que $\left(\lambda \ = \ \sum_{i=i+1}^{14} \ \left(E_{\alpha i} \times 2^i\right)\right)$, alors le point terminal était et reste $\left(E_{\alpha} \lt E_{\beta}\right)$.
-Cependant, si $\left(\lambda \ \lt \ \sum_{i=i+1}^{14} \ \left(E_{\alpha i} \times 2^i\right)\right)$ alors le point terminal change pour $\left(E_{\alpha} \gt E_{\beta}\right)$ car $\forall \ \left(E_{\alpha w}, \ E_{\beta w}\right), \quad \exists \ \left(w \in \left[\left(i+1\right);14\right]\right), \quad \left(E_{\alpha w} \ \gt \ E_{\beta w}\right),$ $\ \left(E_{\alpha w} \times 2^w\right) \ \gt \ \sum_{i=14}^{10} \ \left(E_{\beta i} \times 2^i\right)$.
-
-
-
-
-
-
-
-
-Par conséquent, si $\left(E_{\alpha\left(i+1\right)} = E_{\beta\left(i+1\right)}\right)$ alors le point terminal était et reste $\left(E_{\alpha} \lt E_{\beta}\right)$.
-Cependant, si $\left(E_{\alpha\left(i+1\right)} \gt E_{\beta\left(i+1\right)}\right)$ alors le point terminal change pour $\left(E_{\alpha} \gt E_{\beta}\right)$ car $\left(E_{\alpha\left(i+1\right)} = 1\right)$ tandis que $\left(E_{\beta\left(i+1\right)} = 0\right)$, alors $\left(E_{\alpha\left(i+1\right)} \times 2^{\left(i+1\right)}\right) \ \gt \ \sum_{i=14}^{10} \ \left(E_{\beta i} \times 2^i\right)$.
+Par conséquent, si $\ Write \ \left(\lambda, \ \sum_{i=i+1}^{14} \ \left(E_{\beta i} \times 2^i\right)\right)$ et que $\left(\lambda \ = \ \sum_{i=i+1}^{14} \ \left(E_{\alpha i} \times 2^i\right)\right)$, alors le point terminal était et reste $\left(E_{\alpha} \lt E_{\beta}\right)$.
+Cependant, si $\left(\lambda \ \lt \ \sum_{i=i+1}^{14} \ \left(E_{\alpha i} \times 2^i\right)\right)$ alors le point terminal change pour $\left(E_{\alpha} \gt E_{\beta}\right)$ car il existe obligatoirement un poids $i \in \left[\left(i+1\right);14\right]$ tel que $\left(E_{\alpha i} \times 2^i\right) \gt \left(E_{\beta i} \times 2^i\right)$.
 
 Nous comprenons donc que les _zéros anonymes_ de poids supérieur au _MSB1_ de $\tau \in \left[10;13\right]$ devront être traités avec attention par le circuit, ce sont des _zéros anonymes_ "important".
 
@@ -122,10 +112,13 @@ Chacun bit des bits $\tau_i$ pour $i \in \left[10;14\right]$ sont alors des _zé
 
 Nous pourrions atteindre un point terminal si jamais $\left(E_{\alpha} \gt E_{\beta}\right)$, mais ce point terminal ne pourrait s'obtenir qu'à la condition que $\left(E_{\alpha i} \gt E_{\beta i}\right)$ pour $i \in \left[10;14\right]$.
 A l'inverse, nous pourrions aussi atteindre une situation inédite de ___point non terminal___ si $\left(E_{\alpha} = E_{\beta}\right)$.
-Cette situation inédite ne pourrait se produire que dans le cas où l'ensemble des bits de même poids des champs d'exposant $E_{\alpha}$ et $E_{\beta}$ sont identiques, ou autrement dit $\left(E_{\alpha i} = E_{\beta i}\right)$ pour $i \in \left[10;14\right]$.
+Cette situation inédite ne peut se produire que dans le cas où l'ensemble des bits de même poids des champs d'exposant $E_{\alpha}$ et $E_{\beta}$ sont identiques, ou autrement dit $\forall \left(i \in \left[10;14\right]\right)$ alors $\left(E_{\alpha i} = E_{\beta i}\right)$.
 
-Encore une fois, les _zéros anonymes_ qui composent l'entièreté du champs $\tau$ sont importants à prendre en compte pour le circuit, car ils ont chacun le pouvoir d'affecté la suite des opérations.
-Comme nous le verrons plus bas.
+Dans le chapitre intitulé "_Ordre de traitement des champs d'exposant et de mantisse tronquée_", nous avons vu qu'un _point non terminal_ était atteint lorsque $\left(E_{\alpha} = E_{\beta}\right)$.
+L'obtention d'un _point non terminal_ est due au fait que les exposants ne sont pas des facteurs discrimants pour nos opérandes $\alpha$ et $\beta$, si ils sont égaux.
+Donc le circuit n'a pas la possibilité de court-circuité le traitement des champs de mantisse tronquée $T_{\alpha}$ et $T_{\beta}$.
+
+Pour finir, les _zéros anonymes_ qui composent l'entièreté du champs $\tau \in \left[10;14\right]$ sont importants à prendre en compte pour le circuit, car ils ont chacun le pouvoir de faire basculé un _point non terminal_ en un _point terminal_.
 
 ### Poursuite de la démonstration
 
