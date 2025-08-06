@@ -8,24 +8,32 @@ A cette fin, le circuit reçoit deux opérandes flottants _Half Precision_ $\alp
 Il doit procédé à une comparaison de supériorité stricte de l'un de ces opérandes envers l'autre.
 La démonstration mathématique va se basé sur la condition suivante à testé $\left(\vert\alpha\vert \gt \vert\beta\vert\right)$, la comparaison inverse fonctionne exactement de la même manière.
 
-### L'organisation du document
+## Représentation des opérandes Half Precision
 
-Le document va traité la démonstration du traitement des champs d'exposant $E$ à part de celui des champs des mantisses tronquées $T$ des opérandes $\vert\alpha\vert$ et $\vert\beta\vert$.
-Les démonstrations sont verbeuses, pour plus de concision il y a un résumé composé seulement des expressions mathématiques qu'utilise une démonstration, ainsi que d'une courte description pour chaque expression.
-
-Voici où est ce que ce situe les bits de ces champs dans l'encodage d'un nombre IEEE-754 _Half Precision_:
+Je rappelle que l'encodage IEEE-754 définit trois éléments dans chacun des nombres flottants du standard, le _bit de signe_, le _champs d'exposant_ ainsi que le _champs de mantisse tronquée_.
+Voici la disposition précise de chaque bit de chacun de ces champs dans l'encodage d'un nombre _Half Precision_:
 
 $$\left[S_{15}, \quad E_{14}, \ E_{13}, \ E_{12}, \ E_{11}, \ E_{10}, \quad T_9, \ T_8, \ T_7, \ T_6, \ T_5, \ T_4, \ T_3, \ T_2, \ T_1, \ T_0\right]$$
 
 __S__: Sign bit, __E__: Exponent field, __T__: Truncated mantissa
 
-Chaque indice de l'intervalle $\left[0;15\right]$ représente le poids de chacun des bits.
-C'est en effet très commun d'indicé les bits par leur poids dans un champs binaire, cela permet d'apporté plus de précision aux propos notamment.
+Chaque indice (nombre) compris dans l'intervalle $\left[0;15\right]$ représente le poids d'un bit précis.
+C'est en effet très commun d'indicé les bits d'un champs binaire par leur poids.
 
-Cependant, nous ne considérons que les bits de l'intervalle $\left[0;14\right]$.
-Le circuit ne se soucis que de la valeur absolu de $\alpha$ et $\beta$, donc le bit de signe de poids $15$ est omis.
-De plus, nous avons vus précédemment que les champs d'exposant $E$ étaient traités avant les champs de mantisse tronquée $T$, car ces derniers peuvent engendré des points terminaux.
-C'est pourquoi nous allons commencé par ceux-ci.
+Cependant, dans les démonstrations mathématique nous ne considérerons que les bits de l'intervalle $\left[0;14\right]$.
+N'oublions pas que le circuit ne se soucis que de la valeur absolu de ses opérandes $\left(\vert\alpha\vert\right)$ et $\left(\vert\beta\vert\right)$, donc le bit de signe de poids $15$ est omis.
+De plus, nous avons vus dans le chapitre "_Ordre de traitement des champs d'exposant et de mantisse tronquée_" que les champs d'exposant $E_{\alpha}$ et $E_{\beta}$ des opérandes étaient traités avant les champs de mantisse tronquée $T$.
+Rappellons que ceci est dû au fait que les champs d'exposant $E$ permettent au circuit de profiter des *___points terminaux___ que les champs d'exposant génèrent souvent.
+C'est pourquoi le document commence par le traité le cas des champs d'exposant $E_{\alpha}$ et $E_{\beta}$.
+
+*Un ___point terminal___ est le fait que le circuit soit capable de déduire un résultat correct, sans pour autant avoir exécuté l'ensemble des calculs requis pour.
+Le circuit court-circuite les opérations de calcul suivante et génère alors simplement le résultat escompté.
+
+### L'organisation du document
+
+Le document va traité la démonstration mathématique du traitement des champs d'exposant $E$ à part de celui des champs des mantisses tronquées $T$ des opérandes $\vert\alpha\vert$ et $\vert\beta\vert$.
+Les démonstrations sont verbeuses, pour plus de concision il y a un résumé pour chacune d'entre elles.
+Les résumés sont composés seulement des expressions mathématiques, ainsi que d'une courte description de chaque expression.
 
 ## Quelques définitions
 
