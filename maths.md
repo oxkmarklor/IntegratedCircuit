@@ -6,34 +6,34 @@ Le circuit se nomme __FPU Configuration Unit__.
 Le rôle du circuit est de généré deux bits de sortie, l'un pour configuré un circuit soustracteur de nombre flottant, et l'autre pour la sortie même de cette unité de calcul.
 A cette fin, le circuit reçoit deux opérandes flottants _Half Precision_ $\alpha$ et $\beta$, en valeur absolu.
 Il doit procédé à une comparaison de supériorité stricte de l'un de ces opérandes envers l'autre.
-La démonstration mathématique va se basé sur la condition suivante à testé $\left(\vert\alpha\vert \gt \vert\beta\vert\right)$, la comparaison inverse fonctionne exactement de la même manière.
+La démonstration mathématique va se basé sur la condition suivante $\left(\vert\alpha\vert \gt \vert\beta\vert\right)$. La comparaison inverse fonctionne exactement de la même manière.
 
-## Représentation des opérandes Half Precision
+## Les opérandes Half Precision
 
 Je rappelle que l'encodage IEEE-754 définit trois éléments dans chacun des nombres flottants du standard, le _bit de signe_, le _champs d'exposant_ ainsi que le _champs de mantisse tronquée_.
-Voici la disposition précise de chaque bit de chacun de ces champs dans l'encodage d'un nombre _Half Precision_:
+Voici la disposition précise de chaque bit de chacun de ces champs pour l'encodage d'un nombre _Half Precision_ ($16$ bits):
 
 $$\left[S_{15}, \quad E_{14}, \ E_{13}, \ E_{12}, \ E_{11}, \ E_{10}, \quad T_9, \ T_8, \ T_7, \ T_6, \ T_5, \ T_4, \ T_3, \ T_2, \ T_1, \ T_0\right]$$
 
-__S__: Sign bit, __E__: Exponent field, __T__: Truncated mantissa
+__S__: Sign bit,  __E__: Exponent field,  __T__: Truncated mantissa
 
 Chaque indice (nombre) compris dans l'intervalle $\left[0;15\right]$ représente le poids d'un bit précis.
 C'est en effet très commun d'indicé les bits d'un champs binaire par leur poids.
 
 Cependant, dans les démonstrations mathématique nous ne considérerons que les bits de l'intervalle $\left[0;14\right]$.
 N'oublions pas que le circuit ne se soucis que de la valeur absolu de ses opérandes $\left(\vert\alpha\vert\right)$ et $\left(\vert\beta\vert\right)$, donc le bit de signe de poids $15$ est omis.
-De plus, nous avons vus dans le chapitre "_Ordre de traitement des champs d'exposant et de mantisse tronquée_" que les champs d'exposant $E_{\alpha}$ et $E_{\beta}$ des opérandes étaient traités avant les champs de mantisse tronquée $T$.
-Rappellons que ceci est dû au fait que les champs d'exposant $E$ permettent au circuit de profiter des *___points terminaux___ que les champs d'exposant génèrent souvent.
-C'est pourquoi le document commence par le traité le cas des champs d'exposant $E_{\alpha}$ et $E_{\beta}$.
+De plus, nous avons vus dans le chapitre "_Ordre de traitement des champs d'exposant et de mantisse tronquée_", que les champs d'exposant $E$ des opérandes étaient traités avant les champs de mantisse tronquée $T$.
+Rappellons que ceci est dû au fait que le circuit profite des *___points terminaux___ que les champs d'exposant génèrent souvent.
+C'est pourquoi le document commence par le traité le cas des champs d'exposant $E_{\alpha}$ et $E_{\beta}$, puis ensuite celui des champs de mantisse tronquée $T$.
 
-*Un ___point terminal___ est le fait que le circuit soit capable de déduire un résultat correct, sans pour autant avoir exécuté l'ensemble des calculs requis pour.
-Le circuit court-circuite les opérations de calcul suivante et génère alors simplement le résultat escompté.
+*Un ___point terminal___ est le fait que le circuit soit capable de déduire un résultat correct, par le seul traitement des champs d'exposant.
+Le circuit court-circuite alors les traitements qui concerne les champs de mantisse tronquée, et génère le résultat final plus rapidement.
 
 ### L'organisation du document
 
-Le document va traité la démonstration mathématique du traitement des champs d'exposant $E$ à part de celui des champs des mantisses tronquées $T$ des opérandes $\vert\alpha\vert$ et $\vert\beta\vert$.
+Le document commence par la démonstration mathématique du traitement des champs d'exposant $E_{\alpha}$ et $E_{\beta}$, puis enchaine avec celle des champs de mantisse tronquée $T_{\alpha}$ et $T_{\beta}$.
 Les démonstrations sont verbeuses, pour plus de concision il y a un résumé pour chacune d'entre elles.
-Les résumés sont composés seulement des expressions mathématiques, ainsi que d'une courte description de chaque expression.
+Les résumés sont composés seulement des expressions mathématique, ainsi que d'une courte description de chaque expression.
 
 ## Quelques définitions
 
@@ -51,35 +51,36 @@ Cette opération possède également sa propre porte logique, qui est d'ailleurs
 
 Pour finir, le symbole $\wedge$ est l'opération logique __And__ qui ne retourne un bit à $1$ que lorsque ses deux bits d'opérande le sont aussi (sinon $0$), et le symbole $\vee$ est l'opération logique __Or__ qui ne retourne un $0$ que si ses deux bits d'opérande le sont également (sinon $1$).
 
-// définir ce qu'est un point terminal ici?
+# Le traitement des champs d'exposant
 
-# Traitement du champs d'exposant
+La démonstration démarre par ceci:
 
-$$\sum_{\sigma=14}^{10} \ Write\left(\tau_{\sigma}, \ Nimply \ \left(E_{\beta\sigma}, \ E_{\alpha\sigma}\right)\right)$$
+$$\sum_{i=14}^{10} \ Write\left(\tau_i, \ Nimply \ \left(E_{\beta i}, \ E_{\alpha i}\right)\right)$$
 
-La variable $\sigma$ (sigma) servira d'indice pour accéder aux bits $\in \left[10;14\right]$ des champs d'exposant $E_{\alpha}$ et $E_{\beta}$.
+La variable $\tau$ est un champs binaire de $15$ bits dont la représentation est la même que celle illustrée plus haut dans "_Les opérandes Half Precision_", mais sans le bit de signe.
+Chaque résultat d'une opération $Nimply$ sur $E_{\beta i}$ et $E_{\alpha i}$ pour $i \in \left[10;14\right]$, est inscrit dans $\tau_i$.
+Ce qui veut dire que $\tau \in \left[10;14\right]$ correspond aux bits de résultat des opérations $Nimply$ sur $E_{\beta i}$ et $E_{\alpha i}$.
 
+### L'opération logique Nimply
 
-La variable $\tau$ est un champs binaire de $15$ bits dont la représentation est la même que celle illustrée plus haut pour les nombres flottants _Half Precision_ (sans le bit de signe).
-Pour chacune des opérations $Nimply$ sur les bits de poids $i \in \left[10;14\right]$ des champs d'exposant $E_{\alpha}$ et $E_{\beta}$, les résultats sont enregistrés dans $\tau_i$.
-Ce qui veut dire que $\tau \in \left[10;14\right]$ correspond aux bits de résultat des opérations $Nimply$ sur $E_{\beta i}$ et $E_{\alpha i}$, comme le montre l'expression qui figure ci-dessus.
-
--- -
-
-Initialement $\left(\sigma = 10\right)$, mais l'expression changera d'elle même la valeur de $\sigma$.
-
-$$\left(2\right) \quad \sum_{i=14}^{\sigma} Write\left(\sigma, \ \left[\left(\overline{\tau_i} \times 10\right) + \tau_i \times \left(11 + i \ mod \ 5\right)\right]\right)$$
-
-L'objectif de cette expression est d'inscrire dans $\sigma$ la valeur du poids du ___zéro anonyme___ de poids le plus faible, parmis tout ceux qui ont une importance.
-Pour comprendre ce que cette phrase veut dire, nous allons voir ce qu'est un _zéro anonyme_ ainsi que l'"importance" variable que l'on apporte à chacun d'eux.
+Plus haut a été définit l'opération $Nimply$.
+Selon cette définition, nous comprenons que le bit de résultat d'une telle opération ne peut être à $1$ que lorsque le bit sur le paramètre $\left(x\right)$ est $1$, et que celui sur $\left(y\right)$ est à $0$.
+Pour tout les autres cas, si $\left(x = y\right)$ ou $\left(x \lt y\right)$ alors le bit de résultat sera $0$.
+La documentation du circuit électronique définit le terme de "___zéro anonyme___" pour désigné tout bit de résultat à $0$, sortant d'une opération $Nimply$.
 
 ### Qu'est ce qu'un zéro anonyme?
 
-Commençons par dire qu'un "_zéro anonyme_" est un terme que j'ai crée dans la documentation du circuit électronique.
-Concrètement, un _zéro anonyme_ est un bit de résultat à $0$ obtenu après une opération logique $Nimply$.
-Ce nom si étrange est due au fait que l'opération $Nimply$ génère un bit de résultat à $0$ lorsque:
-  - Les deux bits de paramètres $\left(x\right)$ et $\left(y\right)$ sont identiques.
-  - Le bit sur $\left(y\right)$ est supérieur à celui sur $\left(x\right)$.
+Nous venons de voir à quoi correspond le terme de "_zéro anonyme_".
+
+Cependant, nous ne connaissons pas la raison d'un nom aussi bizarre.
+Le circuit se sert des sorties des portes logiques $Nimply$ pour faire des déductions sur les entrées de celle-ci, et la démonstration mathématique en fait de même.
+Mais lorsque le bit de sortie d'une opération $Nimply$ est à $0$, il nous est impossible de savoir si cette sortie a été générée par deux bits d'opérandes identique sur les paramètres $\left(x\right)$ et $\left(y\right)$, ou si le bit sur le paramètre $\left(y\right)$ est strictement supérieur à celui sur $\left(x\right)$.
+En bref, ce flou pose un problème que nous dervons géré dans la démonstration mathématique (le circuit doit lui aussi résoudre ce problème).
+
+Petite précision d'ailleurs.
+Il existe en réalité des _zéros anonymes_ ___capitaux___ et ___non capitaux___, nous définirons plus bas la différence entre ces deux types de _zéro anonyme_.
+
+// correctif sur le terme de zéro anonyme capital et non capital
 
 ## Les deux facettes des zéros anonymes (introduction)
 
