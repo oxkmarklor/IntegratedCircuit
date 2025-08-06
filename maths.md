@@ -2,11 +2,17 @@
 
 Il y a une documentation dédié au circuit pour comprendre sa raison d'être ainsi que son architecture, je conseil de la lire pour plus d'information.
 
+Le circuit se nomme __FPU Configuration Unit__.
 Le rôle du circuit est de généré deux bits de sortie, l'un pour configuré un circuit soustracteur de nombre flottant, et l'autre pour la sortie même de cette unité de calcul.
-A cette fin, le circuit nommé __FPU Configuration Unit__ reçoit deux opérandes flottants _Half Precision_ $\alpha$ et $\beta$ en valeur absolu.
-Il doit procédé à une comparaison de supériorité stricte de l'un de ces opérandes envers l'autre, admettons $\left(\vert \alpha \vert \gt \vert \beta \vert\right)$.
+A cette fin, le circuit reçoit deux opérandes flottants _Half Precision_ $\alpha$ et $\beta$, en valeur absolu.
+Il doit procédé à une comparaison de supériorité stricte de l'un de ces opérandes envers l'autre.
+La démonstration mathématique va se basé sur la condition suivante à testé $\left(\vert\alpha\vert \gt \vert\beta\vert\right)$, la comparaison inverse fonctionne exactement de la même manière.
 
-La démonstration va être scindé en deux parties, l'une pour le traitement des champs d'exposant $E$ et l'autre pour les champs de mantisse tronquée $T$.
+### L'organisation du document
+
+Le document va traité la démonstration du traitement des champs d'exposant $E$ à part de celui des champs des mantisses tronquées $T$ des opérandes $\vert\alpha\vert$ et $\vert\beta\vert$.
+Les démonstrations sont verbeuses, pour plus de concision il y a un résumé composé seulement des expressions mathématiques qu'utilise une démonstration, ainsi que d'une courte description pour chaque expression.
+
 Voici où est ce que ce situe les bits de ces champs dans l'encodage d'un nombre IEEE-754 _Half Precision_:
 
 $$\left[S_{15}, \quad E_{14}, \ E_{13}, \ E_{12}, \ E_{11}, \ E_{10}, \quad T_9, \ T_8, \ T_7, \ T_6, \ T_5, \ T_4, \ T_3, \ T_2, \ T_1, \ T_0\right]$$
@@ -21,27 +27,30 @@ Le circuit ne se soucis que de la valeur absolu de $\alpha$ et $\beta$, donc le 
 De plus, nous avons vus précédemment que les champs d'exposant $E$ étaient traités avant les champs de mantisse tronquée $T$, car ces derniers peuvent engendré des points terminaux.
 C'est pourquoi nous allons commencé par ceux-ci.
 
-Tout d'abord, voici quelques définition d'opération importante pour la démonstration.
-
-$$Write \ \left(x, \ y\right) \rightarrow \ x \ := \ y$$
+## Quelques définitions
 
 __Write__ est une fonction d'affectation, le paramètre $y$ _est copié_ dans le paramètre $x$.
 
+$$Write \ \left(x, \ y\right) \rightarrow \ x \ := \ y$$
+
+__Nimply__ est une fonction qui reproduit le comportement d'une porte logique du même nom.
+C'est une opération logique assez peu connu, d'où le fait qu'il n'existe pas de symbole opératoire qui lui est propre.
+
 $$Nimply \ \left(x, \ y\right) \rightarrow \ x \ \wedge \ \overline{y}$$
 
-__Nimply__ est bien plus connu en tant que porte logique dans les circuits intégrés qu'en tant qu'opération logique en soit.
-D'où le fait qu'il n'existe pas de symbole opératoire pour cette opération.
-
-Par ailleurs, $\overline{x}$ est l'opération logique __Not__, qui inverse un bit en son opposé $\left(1 = \overline{0}\right)$ ou $\left(0 = \overline{1}\right)$.
+De plus, $\overline{x}$ est l'opération logique __Not__ qui inverse un bit en son opposé $\left(1 = \overline{0}\right)$ ou $\left(0 = \overline{1}\right)$.
 Cette opération possède également sa propre porte logique, qui est d'ailleurs assez élémentaire à la conception de circuit en tout genre.
 
 Pour finir, le symbole $\wedge$ est l'opération logique __And__ qui ne retourne un bit à $1$ que lorsque ses deux bits d'opérande le sont aussi (sinon $0$), et le symbole $\vee$ est l'opération logique __Or__ qui ne retourne un $0$ que si ses deux bits d'opérande le sont également (sinon $1$).
 
+// définir ce qu'est un point terminal ici?
+
 # Traitement du champs d'exposant
+
+$$\sum_{\sigma=14}^{10} \ Write\left(\tau_{\sigma}, \ Nimply \ \left(E_{\beta\sigma}, \ E_{\alpha\sigma}\right)\right)$$
 
 La variable $\sigma$ (sigma) servira d'indice pour accéder aux bits $\in \left[10;14\right]$ des champs d'exposant $E_{\alpha}$ et $E_{\beta}$.
 
-$$\left(1\right) \quad \sum_{\sigma=14}^{10} \ Write\left(\tau_{\sigma}, \ Nimply \ \left(E_{\beta\sigma}, \ E_{\alpha\sigma}\right)\right)$$
 
 La variable $\tau$ est un champs binaire de $15$ bits dont la représentation est la même que celle illustrée plus haut pour les nombres flottants _Half Precision_ (sans le bit de signe).
 Pour chacune des opérations $Nimply$ sur les bits de poids $i \in \left[10;14\right]$ des champs d'exposant $E_{\alpha}$ et $E_{\beta}$, les résultats sont enregistrés dans $\tau_i$.
@@ -127,6 +136,19 @@ L'expression inscrit donc dans $\sigma$ la valeur du poids $+1$ du _MSB1_ lorsqu
 Pour poursuivre la démonstration, il va vous falloir passé de cette expression à la suivante en fonction de la valeur de $\sigma$ :
   - Si $\left(\sigma = 15\right)$ alors veuillez vous rendre sur l'expression suivante (celle de numéro $\left(3\right)$ ).
   - Sinon si $\left(\sigma \in \left[10;14\right]\right)$ alors rendez-vous vers l'expression numéro $\left(4\right)$.
+
+-- -
+
+$$\left(1\right) \quad \sum_{\sigma=14}^{10} \ Write\left(\tau_{\sigma}, \ Nimply \ \left(E_{\beta\sigma}, \ E_{\alpha\sigma}\right)\right)$$
+
+-- -
+
+Initialement $\left(\sigma = 10\right)$, mais l'expression changera d'elle même la valeur de $\sigma$.
+
+$$\left(2\right) \quad \sum_{i=14}^{\sigma} Write\left(\sigma, \ \left[\left(\overline{\tau_i} \times 10\right) + \tau_i \times \left(11 + i \ mod \ 5\right)\right]\right)$$
+
+L'objectif de cette expression est d'inscrire dans $\sigma$ la valeur du poids du ___zéro anonyme___ de poids le plus faible, parmis tout ceux qui ont une importance.
+Pour comprendre ce que cette phrase veut dire, nous allons voir ce qu'est un _zéro anonyme_ ainsi que l'"importance" variable que l'on apporte à chacun d'eux.
 
 -- -
 
