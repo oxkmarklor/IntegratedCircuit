@@ -162,16 +162,17 @@ Au début du document se trouve une définition de ce qu'est un point terminal, 
 
 Cette définition n'est pas mauvaise, mais elle ne dit pas grand chose sur l'origine des points terminaux.
 
-Il s'avère qu'un point terminal, comme le dit le chapitre "_Ordre de traitement des champs d'exposant et de mantisse tronquée_", est systèmatiquement dû au fait que les champs d'exposant $E_{\alpha}$ et $E_{\beta}$ soient différents l'un de l'autre.
+Il s'avère qu'un point terminal est systèmatiquement dû au fait que les champs d'exposant $E_{\alpha}$ et $E_{\beta}$ soient différents l'un de l'autre.
 Autrement dit, si $\left(E_{\alpha} \neq E_{\beta}\right)$ alors il y a un point terminal.
+Nous avons vu cela dans le chapitre intitulé "_Ordre de traitement des champs d'exposant et de mantisse tronquée_", consultez le si vous avez besoin d'un rafraichissement. 
 
-C'est pourquoi le circuit électronique atteint toujours un point terminal lorsque $\tau_i$ est le _MSB1_ de $\tau \in \left[10;14\right]$ (pour $i$ compris dans ce même intervalle).
-Nous savons alors que $\left(E_{\alpha i} \lt E_{\beta i}\right)$ car $\left(E_{\beta i} = 1\right)$ et $\left(E_{\alpha i} = 0\right)$, ce qui empêche toute perspective d'égalité entre les champs d'exposant $E$.
+C'est pourquoi le circuit électronique atteint toujours un point terminal lorsque $\tau_i$ est le _MSB1_ de $\tau \in \left[10;14\right]$ pour $i \in \left[10;14\right]$.
+Nous savons alors que $\left(E_{\alpha i} \lt E_{\beta i}\right)$ car $\left(E_{\beta i} = 1\right)$ et $\left(E_{\alpha i} = 0\right)$, ce qui empêche toute perspective d'égalité entre les champs d'exposant $E_{\alpha}$ et $E_{\beta}$.
 
-Par ailleurs, nous avons aussi vu que lorsque $\left(\tau_i = 0\right)$ pour $i \in \left[10;14\right]$, alors c'est un _zéro anonyme_ qui peut être à l'origine de $\left(E_{\alpha} = E_{\beta}\right)$ ou $\left(E_{\alpha} \gt E_{\beta}\right)$.
-Dans le second cas, nous savons que $\left(E_{\alpha} = 1\right)$ pendant que $\left(E_{\beta} = 0\right)$ ce qui rend impossible une nouvelle fois le fait que les champs d'exposant $E$ soient égaux.
+Par ailleurs, nous avons aussi vu que lorsque $\left(\tau_i = 0\right)$ pour $i \in \left[10;14\right]$, alors à l'origine ce _zéro anonyme_ peut être dû à $\left(E_{\alpha i} = E_{\beta i}\right)$ ou $\left(E_{\alpha i} \gt E_{\beta i}\right)$.
+Dans le second cas $\left(E_{\alpha i} \gt E_{\beta i}\right)$, nous savons que $\left(E_{\alpha i} = 1\right)$ tandis que $\left(E_{\beta i} = 0\right)$, ce qui rend une nouvelle fois impossible le fait que les champs d'exposant $E_{\alpha}$ et $E_{\beta}$ soient égaux.
 
-Voici ce qu'est pas essence un point terminal.
+
 
 // faire un lien avec le traitement des champs de mantisse tronquée
 
