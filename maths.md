@@ -118,7 +118,6 @@ Par exemple pour $\tau_{\left(i+1\right)}$, nous ne savons pas si $\left(E_{\alp
 
 Ceci pose problème car les _zéros anonymes_ de poids supérieur à $\tau_i$ sont décisifs dans le processus de génération d'un point terminal.
 A ce stade nous savons que $\left(E_{\beta i} \times 2^i\right) \ \gt \ \sum_{i}^{10} \ \left(E_{\alpha i} \times 2^i\right)$, mais comme mentionné plus haut ceci ne suffit pas à dire que $\left(E_{\alpha} \lt E_{\beta}\right)$.
-La raison en est que le _MSB1_ de $\tau$ $\left(\tau_i\right)$ est d'un poids $i \in \left[10;13\right]$ qui est _au moins_ inférieur au bit $\tau_{\left(i+1\right)}$, qui est un _zéro anonyme_.
 
 Par conséquent, si $\ Write \ \left(\lambda, \ \sum_{i=i+1}^{14} \ \left(E_{\beta i} \times 2^i\right)\right)$ et que $\left(\lambda \ = \ \sum_{i=i+1}^{14} \ \left(E_{\alpha i} \times 2^i\right)\right)$, alors le point terminal était et reste $\left(E_{\alpha} \lt E_{\beta}\right)$.
 Cependant, si $\left(\lambda \ \lt \ \sum_{i=i+1}^{14} \ \left(E_{\alpha i} \times 2^i\right)\right)$ alors le point terminal change pour $\left(E_{\alpha} \gt E_{\beta}\right)$, car $\left(\sum_{i=i+1}^{14} \ \left(E_{\alpha i} \times 2^i\right) \ \gt \ \sum_{i=14}^{10} \ \left(E_{\beta i} \times 2^i\right)\right)$.
@@ -129,25 +128,19 @@ Nous comprenons donc que les _zéros anonymes_ de poids supérieur au _MSB1_ de 
 ### L'obtention d'un point non terminal
 
 Jusqu'ici nous avions un _MSB1_ dans $\tau \in \left[10;14\right]$, mais il pourrait ne pas y en avoir.
-Chacun bit des bits $\tau_i$ pour $i \in \left[10;14\right]$ sont alors des _zéros anonymes_ important, ce qui nous permet d'affirmé que $\left(E_{\alpha} \ge E_{\beta}\right)$.
+Dans cette situation, chacun des bits de $\tau \in \left[10;14\right]$ est un _zéro anonyme_, ce qui nous permet d'affirmé que $\left(E_{\alpha} \ge E_{\beta}\right)$.
 
 Nous pourrions atteindre un point terminal si jamais $\left(E_{\alpha} \gt E_{\beta}\right)$, mais ce point terminal ne pourrait s'obtenir qu'à la condition que $\left(E_{\alpha i} \gt E_{\beta i}\right)$ pour $i \in \left[10;14\right]$.
-A l'inverse, nous pourrions aussi atteindre une situation inédite de ___point non terminal___ si $\left(E_{\alpha} = E_{\beta}\right)$.
+A l'inverse, nous pourrions aussi atteindre une situation inédite de *___point non terminal___ si $\left(E_{\alpha} = E_{\beta}\right)$.
 Cette situation inédite ne peut se produire que dans le cas où l'ensemble des bits de même poids des champs d'exposant $E_{\alpha}$ et $E_{\beta}$ sont identiques, ou autrement dit $\forall \left(i \in \left[10;14\right]\right)$ alors $\left(E_{\alpha i} = E_{\beta i}\right)$.
 
-Dans le chapitre intitulé "_Ordre de traitement des champs d'exposant et de mantisse tronquée_", nous avons vu qu'un _point non terminal_ était atteint lorsque $\left(E_{\alpha} = E_{\beta}\right)$.
-L'obtention d'un _point non terminal_ est due au fait que les exposants ne sont pas des facteurs discrimants pour nos opérandes $\alpha$ et $\beta$, si ils sont égaux.
-Donc le circuit n'a pas la possibilité de court-circuité le traitement des champs de mantisse tronquée $T_{\alpha}$ et $T_{\beta}$.
+Pour conclure, les _zéros anonymes_ qui composent l'entièreté du champs $\tau \in \left[10;14\right]$ sont capitaux à prendre en compte pour le circuit, car ils ont chacun le pouvoir de faire basculé un _point non terminal_ en un _point terminal_.
 
-Pour finir, les _zéros anonymes_ qui composent l'entièreté du champs $\tau \in \left[10;14\right]$ sont importants à prendre en compte pour le circuit, car ils ont chacun le pouvoir de faire basculé un _point non terminal_ en un _point terminal_.
-
-### Poursuite de la démonstration
-
-L'expression inscrit donc dans $\sigma$ la valeur du poids $+1$ du _MSB1_ lorsqu'il y en a un dans $\tau \in \left[10;14\right]$, et $10$ si il n'y a pas de _MSB1_.
-
-Pour poursuivre la démonstration, il va vous falloir passé de cette expression à la suivante en fonction de la valeur de $\sigma$ :
-  - Si $\left(\sigma = 15\right)$ alors veuillez vous rendre sur l'expression suivante (celle de numéro $\left(3\right)$ ).
-  - Sinon si $\left(\sigma \in \left[10;14\right]\right)$ alors rendez-vous vers l'expression numéro $\left(4\right)$.
+*Je rappelle qu'un _point terminal_ se définit comme suit: "_Un point terminal est le fait que le circuit soit capable de déduire un résultat correct, par le seul traitement des champs d'exposant._".
+Un ___point non terminal___ est tout logiquement l'inverse.
+Lorsque les champs d'exposant $E_{\alpha}$ et $E_{\beta}$ sont égaux, il n'est pas possible de généré un résultat correct avec le seul traitement de ces champs.
+Le circuit doit alors poursuivre les traitements sur les champs de mantisse tronquée $T_{\alpha}$ et $T_{\beta}$.
+Ce que nous allons faire prochainement.
 
 -- -
 
