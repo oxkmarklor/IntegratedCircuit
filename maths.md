@@ -142,6 +142,49 @@ Lorsque les champs d'exposant $E_{\alpha}$ et $E_{\beta}$ sont égaux, il n'est 
 Le circuit doit alors poursuivre les traitements sur les champs de mantisse tronquée $T_{\alpha}$ et $T_{\beta}$.
 Ce que nous allons faire prochainement.
 
+# Le traitement des champs de mantisse tronquée
+
+Voici dans un premier temps de quoi dépend le traitement des champs de mantisse tronquée $T_{\alpha}$ et $T_{\beta}$.
+Nous remarquerons que c'est la même opération (à quelques détails prêt) que pour les champs d'exposant $E$ des opérandes $\vert \ \alpha \ \vert$ et $\vert \ \beta \ \vert$.
+
+$$\sum_{i=9}^0 \ Write\left(\tau_i, \ Nimply \ \left(T_{\beta i}, \ T_{\alpha i}\right)\right)$$
+
+La variable $\tau$ est techniquement la même que celle utilisée pour la démonstration précédente.
+La seule différence, c'est que le bit de résultat de chaque opération $Nimply$ sur $T_{\beta i}$ et $T_{\alpha i}$ est inscrit dans $\tau_i$, pour $i \in \left[0;9\right]$.
+
+### Qu'est ce que réelement un point terminal
+
+Au début du document se trouve une définition de ce qu'est un point terminal, voyez par vous même:
+
+    Un point terminal est le fait que le circuit soit capable de déduire un résultat correct, par le seul traitement des champs 
+    d'exposant. Le circuit court-circuite alors les traitements qui concerne les champs de mantisse tronquée, et génère le résultat 
+    final plus rapidement.
+
+Cette définition n'est pas mauvaise, mais elle ne dit pas grand chose sur l'origine des points terminaux.
+
+Il s'avère qu'un point terminal, comme le dit le chapitre "_Ordre de traitement des champs d'exposant et de mantisse tronquée_", est systèmatiquement dû au fait que les champs d'exposant $E_{\alpha}$ et $E_{\beta}$ soient différents l'un de l'autre.
+Autrement dit, si $\left(E_{\alpha} \neq E_{\beta}\right)$ alors il y a un point terminal.
+
+C'est pourquoi le circuit électronique atteint toujours un point terminal lorsque $\tau_i$ est le _MSB1_ de $\tau \in \left[10;14\right]$ (pour $i$ compris dans ce même intervalle).
+Nous savons alors que $\left(E_{\alpha i} \lt E_{\beta i}\right)$ car $\left(E_{\beta i} = 1\right)$ et $\left(E_{\alpha i} = 0\right)$, ce qui empêche toute perspective d'égalité entre les champs d'exposant $E$.
+
+Par ailleurs, nous avons aussi vu que lorsque $\left(\tau_i = 0\right)$ pour $i \in \left[10;14\right]$, alors c'est un _zéro anonyme_ qui peut être à l'origine de $\left(E_{\alpha} = E_{\beta}\right)$ ou $\left(E_{\alpha} \gt E_{\beta}\right)$.
+Dans le second cas, nous savons que $\left(E_{\alpha} = 1\right)$ pendant que $\left(E_{\beta} = 0\right)$ ce qui rend impossible une nouvelle fois le fait que les champs d'exposant $E$ soient égaux.
+
+Voici ce qu'est pas essence un point terminal.
+
+// faire un lien avec le traitement des champs de mantisse tronquée
+
+
+
+
+
+
+
+
+
+
+
 -- -
 
 $$\left(1\right) \quad \sum_{\sigma=14}^{10} \ Write\left(\tau_{\sigma}, \ Nimply \ \left(E_{\beta\sigma}, \ E_{\alpha\sigma}\right)\right)$$
