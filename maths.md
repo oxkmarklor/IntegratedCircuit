@@ -6,9 +6,9 @@ Le circuit se nomme __FPU Configuration Unit__.
 Le rôle du circuit est de généré deux bits de sortie, l'un pour configuré un circuit soustracteur de nombre flottant, et l'autre pour la sortie même de cette unité de calcul.
 A cette fin, le circuit reçoit deux opérandes flottants _Half Precision_ $\alpha$ et $\beta$, en valeur absolu.
 Il doit procédé à une comparaison de supériorité stricte de l'un de ces opérandes envers l'autre.
-La démonstration mathématique va se basé sur la condition suivante $\left(\vert\alpha\vert \gt \vert\beta\vert\right)$. La comparaison inverse fonctionne exactement de la même manière.
+La démonstration mathématique va se basé sur le teste de la condition suivante $\left(\vert\alpha\vert \gt \vert\beta\vert\right)$.
 
-## Les opérandes Half Precision
+### Les opérandes Half Precision
 
 Je rappelle que l'encodage IEEE-754 définit trois éléments dans chacun des nombres flottants du standard, le _bit de signe_, le _champs d'exposant_ ainsi que le _champs de mantisse tronquée_.
 Voici la disposition précise de chaque bit de chacun de ces champs pour l'encodage d'un nombre _Half Precision_ ($16$ bits):
@@ -24,7 +24,7 @@ Cependant, dans les démonstrations mathématique nous ne considérerons que les
 N'oublions pas que le circuit ne se soucis que de la valeur absolu de ses opérandes $\left(\vert\alpha\vert\right)$ et $\left(\vert\beta\vert\right)$, donc le bit de signe de poids $15$ est omis.
 De plus, nous avons vus dans le chapitre "_Ordre de traitement des champs d'exposant et de mantisse tronquée_", que les champs d'exposant $E$ des opérandes étaient traités avant les champs de mantisse tronquée $T$.
 Rappellons que ceci est dû au fait que le circuit profite des *___points terminaux___ que les champs d'exposant génèrent souvent.
-C'est pourquoi le document commence par le traité le cas des champs d'exposant $E_{\alpha}$ et $E_{\beta}$, puis ensuite celui des champs de mantisse tronquée $T$.
+C'est pourquoi le document commence par traité le cas des champs d'exposant $E_{\alpha}$ et $E_{\beta}$, puis ensuite celui des champs de mantisse tronquée $T$.
 
 *Un ___point terminal___ est le fait que le circuit soit capable de déduire un résultat correct, par le seul traitement des champs d'exposant.
 Le circuit court-circuite alors les traitements qui concerne les champs de mantisse tronquée, et génère le résultat final plus rapidement.
@@ -35,9 +35,9 @@ Le document commence par la démonstration mathématique du traitement des champ
 Les démonstrations sont verbeuses, pour plus de concision il y a un résumé pour chacune d'entre elles.
 Les résumés sont composés seulement des expressions mathématique, ainsi que d'une courte description de chaque expression.
 
-## Quelques définitions
+### Quelques définitions
 
-__Write__ est une fonction d'affectation, le paramètre $y$ _est copié_ dans le paramètre $x$.
+__Write__ est une fonction d'affectation, le paramètre $\left(y\right)$ _est copié_ dans le paramètre $\left(x\right)$.
 
 $$Write \ \left(x, \ y\right) \rightarrow \ x \ := \ y$$
 
@@ -46,8 +46,8 @@ C'est une opération logique assez peu connu, d'où le fait qu'il n'existe pas d
 
 $$Nimply \ \left(x, \ y\right) \rightarrow \ x \ \wedge \ \overline{y}$$
 
-De plus, $\overline{x}$ est l'opération logique __Not__ qui inverse un bit en son opposé $\left(1 = \overline{0}\right)$ ou $\left(0 = \overline{1}\right)$.
-Cette opération possède également sa propre porte logique, qui est d'ailleurs assez élémentaire à la conception de circuit en tout genre.
+De plus, $\overline{y}$ est l'opération logique __Not__ qui inverse un bit en son opposé $\left(1 = \overline{0}\right)$ ou $\left(0 = \overline{1}\right)$.
+Cette opération possède également sa propre porte logique, qui est d'ailleurs assez élémentaire pour la conception de circuit en tout genre.
 
 Pour finir, le symbole $\wedge$ est l'opération logique __And__ qui ne retourne un bit à $1$ que lorsque ses deux bits d'opérande le sont aussi (sinon $0$), et le symbole $\vee$ est l'opération logique __Or__ qui ne retourne un $0$ que si ses deux bits d'opérande le sont également (sinon $1$).
 
@@ -63,7 +63,7 @@ Ce qui veut dire que $\tau \in \left[10;14\right]$ correspond aux bits de résul
 
 ### L'opération logique Nimply
 
-Plus haut a été définit l'opération $Nimply$.
+L'opération $Nimply$ a été définit plus haut.
 Selon cette définition, nous comprenons que le bit de résultat d'une telle opération ne peut être à $1$ que lorsque le bit sur le paramètre $\left(x\right)$ est $1$, et que celui sur $\left(y\right)$ est à $0$.
 Pour tout les autres cas, si $\left(x = y\right)$ ou $\left(x \lt y\right)$ alors le bit de résultat sera $0$.
 La documentation du circuit électronique définit le terme de "___zéro anonyme___" pour désigné tout bit de résultat à $0$, sortant d'une opération $Nimply$.
@@ -84,27 +84,28 @@ Il existe en réalité des _zéros anonymes_ ___capitaux___ et ___non capitaux__
 
 ## Les deux facettes des zéros anonymes (introduction)
 
-Revenons un peu à l'expression numéro $\left(1\right)$ qui figure ci-dessus.
+Revenons à l'expression qui figure ci-dessus.
 Chaque bit $\tau_i$ est le résultat de $\ Nimply \ \left(E_{\beta i}, \ E_{\alpha i}\right)$ pour le poids $i \in \left[10;14\right]$.
 Si $\left(\tau_i = 1\right)$ alors nous savons que $\left(E_{\beta i} = 1\right)$ tandis que $\left(E_{\alpha i} = 0\right)$, ou autrement dit $\left(E_{\beta i} \times 2^i\right) \ \gt \ \left(E_{\alpha i} \times 2^i\right)$.
 
 De plus, rappellez vous du chapitre "_Encodage par biais_" qui parle de l'encodage du champs d'exposant des nombres flottants IEEE-754.
 Dans ce chapitre, il est dit que la valeur d'un bit à $1$ de poids $i$ d'un champs d'exposant $E$, est _inconditionnellement_ supérieur à la somme de la valeur de chacun de ses bits de poids inférieur à $i$.
-Autrement dit, si nous prenons au pied de la lettre la phrase ci-dessus alors $\left(E_{\beta i} \times 2^i\right) \ \gt \ \sum_{i=i-1}^{10} \ \left(E_{\beta i} \times 2^i\right)$.
+Autrement dit, si nous prenons au pied de la lettre la phrase ci-dessus, alors $\forall \left(i \in \left[11;14\right]\right)$ nous obtenons $\left(E_{\beta i} \times 2^i\right) \ \gt \ \sum_{i=i-1}^{10} \ \left(E_{\beta i} \times 2^i\right)$.
 Mais nous pouvons arrangé cette expression à notre champs d'exposant $E_{\alpha}$, alors $\left(E_{\beta i} \times 2^i\right) \ \gt \ \sum_{i=i-1}^{10} \ \left(E_{\alpha i} \times 2^i\right)$. 
 
 Au final, nous pouvons en conclure que si $\left(\tau_i = 1\right)$ alors $\left(E_{\beta i} \times 2^i\right) \ \gt \ \sum_{i}^{10} \ \left(E_{\alpha i} \times 2^i\right)$.
 
 Ce qui vient d'être dit ci-dessus ne démontre pas pour autant que $\left(E_{\alpha} \lt E_{\beta}\right)$.
 
-### Les zéros anonymes sans importance
+### Les zéros anonymes non capitaux
 
 Prenons le cas de $\left(\tau_i = \tau_{14} = 1\right)$.
-Dans se cas très spéciale, nous avons effectivement affaire a un point terminal $\left(E_{\alpha} \lt E_{\beta}\right)$.
-Ce point terminal est atteint car $\left(E_{\beta 14} \times 2^{14}\right) \ \gt \ \sum_{i=14}^{10} \ \left(E_{\alpha i} \times 2^i\right)$, sachant que $E_{\alpha 14}$ et $E_{\beta 14}$ sont les _MSB_ des champs d'exposant $E_{\alpha}$ et $E_{\beta}$.
-En bref, nous comprenons que même si $\left(\tau_{\left(i-1\right)} = \tau_{13}\right)$ est un _zéro anonyme_, alors cela ne changera rien au fait que $\left(E_{\alpha} \lt E_{\beta}\right)$.
+Dans se cas spécifique, nous avons affaire a un point terminal car $\left(E_{\alpha} \lt E_{\beta}\right)$.
+Ce point terminal est atteint par le fait que $\left(E_{\beta 14} \times 2^{14}\right) \ \gt \ \sum_{i=14}^{10} \ \left(E_{\alpha i} \times 2^i\right)$, sachant que $E_{\alpha 14}$ et $E_{\beta 14}$ sont les _MSB_ des champs d'exposant $E_{\alpha}$ et $E_{\beta}$.
+En bref, nous comprenons que même si $\left(\tau_{\left(i-1\right)} = \tau_{13} = 0\right)$, alors ce _zéro anonyme_ ne changera rien au fait que $\left(E_{\alpha} \lt E_{\beta}\right)$.
+La raison est que l'inéquation qui figure ci-dessus est valide dans le cas où $\left(E_{\alpha 13} = 1\right)$, comme dans le cas où $\left(E_{\alpha 13} = 0\right)$.
 
-Nous pouvons donc en déduire que tout _zéro anonyme_ de poids inférieur au _MSB1_ de $\tau \in \left[11;14\right]$, est sans importance.
+De manière plus général, nous pouvons donc en déduire que tout _zéro anonyme_ de poids inférieur au _MSB1_ de $\tau \in \left[11;14\right]$, est _non capital_.
 
 ### Les zéros anonymes important
 
