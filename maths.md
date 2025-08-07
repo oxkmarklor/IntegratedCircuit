@@ -31,6 +31,7 @@ Le circuit court-circuite alors les traitements qui concerne les champs de manti
 
 ### L'organisation du document
 
+!!!!
 Le document commence par la démonstration mathématique du traitement des champs d'exposant $E_{\alpha}$ et $E_{\beta}$, puis enchaine avec celle des champs de mantisse tronquée $T_{\alpha}$ et $T_{\beta}$.
 Les démonstrations sont verbeuses, pour plus de concision il y a un résumé pour chacune d'entre elles.
 Les résumés sont composés seulement des expressions mathématique, ainsi que d'une courte description de chaque expression.
@@ -79,8 +80,6 @@ En bref, ce flou pose un problème que nous dervons géré dans la démonstratio
 
 Petite précision d'ailleurs.
 Il existe en réalité des _zéros anonymes_ ___capitaux___ et ___non capitaux___, nous définirons plus bas la différence entre ces deux types de _zéro anonyme_.
-
-// correctif sur le terme de zéro anonyme capital et non capital
 
 ## Les deux facettes des zéros anonymes (introduction)
 
@@ -152,30 +151,12 @@ $$\sum_{i=9}^0 \ Write\left(\tau_i, \ Nimply \ \left(T_{\beta i}, \ T_{\alpha i}
 La variable $\tau$ est techniquement la même que celle utilisée pour la démonstration précédente.
 La seule différence, c'est que le bit de résultat de chaque opération $Nimply$ sur $T_{\beta i}$ et $T_{\alpha i}$ est inscrit dans $\tau_i$, pour $i \in \left[0;9\right]$.
 
-### Qu'est ce que réelement un point terminal
+### Rappel sur les champs de mantisse tronquée
 
-Au début du document se trouve une définition de ce qu'est un point terminal, voyez par vous même:
+Dans le chapitre "_Une histoire de puissance de_ $2$" qui parle de l'encodage du champs de mantisse tronquée des nombres flottants IEEE-754.
+Il est dit que la valeur d'un bit à $1$ de poids $i$ d'un champs de mantisse tronquée $T$, est _inconditionnellement_ supérieur à la somme de la valeur de chacun de ses bits de poids inférieur à $i$.
 
-    Un point terminal est le fait que le circuit soit capable de déduire un résultat correct, par le seul traitement des champs 
-    d'exposant. Le circuit court-circuite alors les traitements qui concerne les champs de mantisse tronquée, et génère le résultat 
-    final plus rapidement.
-
-Cette définition n'est pas mauvaise, mais elle ne dit pas grand chose sur l'origine des points terminaux.
-
-Il s'avère qu'un point terminal est systèmatiquement dû au fait que les champs d'exposant $E_{\alpha}$ et $E_{\beta}$ soient différents l'un de l'autre.
-Autrement dit, si $\left(E_{\alpha} \neq E_{\beta}\right)$ alors il y a un point terminal.
-Nous avons vu cela dans le chapitre intitulé "_Ordre de traitement des champs d'exposant et de mantisse tronquée_", consultez le si vous avez besoin d'un rafraichissement. 
-
-C'est pourquoi le circuit électronique atteint toujours un point terminal lorsque $\tau_i$ est le _MSB1_ de $\tau \in \left[10;14\right]$ pour $i \in \left[10;14\right]$.
-Nous savons alors que $\left(E_{\alpha i} \lt E_{\beta i}\right)$ car $\left(E_{\beta i} = 1\right)$ et $\left(E_{\alpha i} = 0\right)$, ce qui empêche toute perspective d'égalité entre les champs d'exposant $E_{\alpha}$ et $E_{\beta}$.
-
-Par ailleurs, nous avons aussi vu que lorsque $\left(\tau_i = 0\right)$ pour $i \in \left[10;14\right]$, alors à l'origine ce _zéro anonyme_ peut être dû à $\left(E_{\alpha i} = E_{\beta i}\right)$ ou $\left(E_{\alpha i} \gt E_{\beta i}\right)$.
-Dans le second cas $\left(E_{\alpha i} \gt E_{\beta i}\right)$, nous savons que $\left(E_{\alpha i} = 1\right)$ tandis que $\left(E_{\beta i} = 0\right)$, ce qui rend une nouvelle fois impossible le fait que les champs d'exposant $E_{\alpha}$ et $E_{\beta}$ soient égaux.
-
-
-
-// faire un lien avec le traitement des champs de mantisse tronquée
-
+Rappellons que cette propriété est partagé avec les champs d'exposant $E$, comme cela a pu être mentionné plus haut, ou encore dans le chapitre "_Encodage par biais_".
 
 
 
