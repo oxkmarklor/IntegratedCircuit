@@ -141,6 +141,22 @@ Lorsque les champs d'exposant $E_{\alpha}$ et $E_{\beta}$ sont égaux, il n'est 
 Le circuit doit alors poursuivre les traitements sur les champs de mantisse tronquée $T_{\alpha}$ et $T_{\beta}$.
 Ce que nous allons faire prochainement.
 
+-- -
+
+## Rappel sur les champs d'exposant et de mantisse tronquée
+
+Le chapitre "_Ordre de traitement des champs d'exposant et de mantisse tronquée_" explique pourquoi est ce que les champs d'exposant $E$ sont traités avant les champs de mantisse tronquée $T$.
+Dans ce chapitre, il y a la formule mathématique $\left(\left(1+{\color{LightGreen}T}\right) \times 2^{\color{LightGreen}E}\right)$ qui explique comment est ce qu'un nombre flottant est représenté en IEEE-754.
+Nous comprenons que si deux nombres flottants $\vert \ \alpha \ \vert$ et $\vert \ \beta \ \vert$ ont des champs d'exposant égaux $\left(E_{\alpha} = E_{\beta}\right)$, alors la valeur de ces deux nombres $\left(\left(1+T_{\alpha}\right) \times 2^E_{\alpha}\right)$ et $\left(\left(1+T_{\beta}\right) \times 2^E_{\beta}\right)$ ne dépend que de $T_{\alpha}$ et $T_{\beta}$.
+C'est pourquoi la première partie de la démonstration ne génère un _point non terminal_ que lorsque $\left(E_{\alpha} = E_{\beta}\right)$, après quoi le traitement se propage aux champs de mantisse tronquée entre eux.
+
+Ce traitement des champs de mantisse tronquée $T_{\alpha}$ et $T_{\beta}$ est une comparaison de superiorité stricte de l'un envers l'autre, comme pour les champs d'exposant.
+Je vous rappelle que le champs d'exposant et de mantisse tronquée ont des points commun au niveau de leurs encodages, tout est expliqué dans le chapitre "?TBD?" pour ceux qui en ont besoin.
+En bref, l'encodage du champs de mantisse tronquée partage les même propriétés que celui d'exposant.
+Comme nous allons le voir, l'intérêt c'est que la comparaison entre les champs de mantisse tronquée, suit le même processus de traitement que celui des champs d'exposant.
+
+-- -
+
 ## Le traitement des champs de mantisse tronquée
 
 Voici dans un premier temps de quoi dépend le traitement des champs de mantisse tronquée $T_{\alpha}$ et $T_{\beta}$.
@@ -151,20 +167,17 @@ $$\sum_{i=9}^0 \ Write\left(\tau_i, \ Nimply \ \left(T_{\beta i}, \ T_{\alpha i}
 La variable $\tau$ est techniquement la même que celle utilisée pour la démonstration précédente.
 La seule différence, c'est que le bit de résultat de chaque opération $Nimply$ sur $T_{\beta i}$ et $T_{\alpha i}$ est inscrit dans $\tau_i$, pour $i \in \left[0;9\right]$.
 
-### Rappel sur les champs d'exposant et de mantisse tronquée
+
+
+
+
+
+
+
 
 Dans le chapitre "_La mantisse tronquée, une histoire de puissance de_ $2$" qui parle de l'encodage du champs de mantisse tronquée des nombres flottants IEEE-754.
 Il est dit que la valeur d'un bit à $1$ de poids $i$ d'un champs de mantisse tronquée $T$, est _inconditionnellement_ supérieur à la somme de la valeur de chacun de ses bits de poids inférieur à $i$.
 Rappellons que c'est aussi le cas des champs d'exposant, comme cela a été mentionné dans la première partie de la démonstration.
-
-En bref, l'origine de ces points communs est que les champs d'exposant et de mantisse tronquée utilisent des encodages dont les primitives sont celles du _Binary Unsigned_, c'est à dire des puissances de $2$.
-Je vous conseille une relecture du début du document si ceci n'est pas clair pour vous.
-
-Pour finir, le chapitre "_Ordre de traitement des champs d'exposant et de mantisse tronquée_" explique pourquoi est ce que les champs d'exposant $E$ sont traités avant les champs de mantisse tronquée $T$ (prise en compte des _points terminaux_).
-Dans ce chapitre, il y a la formule mathématique $\left(\left(1+{\color{LightGreen}T}\right) \times 2^{\color{LightGreen}E}\right)$ qui explique comment est ce qu'un nombre flottant est représenté en IEEE-754.
-Les termes ${\color{LightGreen}T}$ et ${\color{LightGreen}E}$ sont respectivement le champs de mantisse tronquée et d'exposant d'un nombre flottant quelconque.
-Le chapitre explique que si deux nombres flottants $\vert \ \alpha \ \vert$ et $\vert \ \beta \ \vert$ ont des champs d'exposant égaux $\left({\color{LightGreen}E_{\alpha}} = {\color{LightGreen}E_{\beta}}\right)$, alors les produits $\left(\left(1+{\color{LightGreen}T_{\alpha}}\right) \times 2^{\color{LightGreen}E_{\alpha}}\right)$ et $\left(\left(1+{\color{LightGreen}T_{\beta}}\right) \times 2^{\color{LightGreen}E_{\beta}}\right)$ ne peuvent être différent que si $\left({\color{LightGreen}T_{\alpha}} \neq {\color{LightGreen}T_{\beta}}\right)$.
-Qui plus est, si $\left({\color{LightGreen}T_{\alpha}} \gt {\color{LightGreen}T_{\beta}}\right)$ alors $\left(\vert\alpha\vert \gt \vert\beta\vert\right)$ et dans le cas inverse si $\left({\color{LightGreen}T_{\alpha}} \lt {\color{LightGreen}T_{\beta}}\right)$ alors $\left(\vert\alpha\vert \lt \vert\beta\vert\right)$.
 
 Pour comparé la stricte supériorité des champs d'exposant entre eux et détecté la présence de point terminaux, nous utilisons les même primitives communes que celle partagé avec les champs de mantisse tronquée (les primitives du _Binary Unsigned_).
 A la fin de la démonstration du traitement des champs d'exposant, nous en avons conclus qu'en cas d'égalité des champs d'exposant nous aurions besoin de traité les champs de mantisse tronquée.
