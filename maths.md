@@ -141,21 +141,17 @@ Lorsque les champs d'exposant $E_{\alpha}$ et $E_{\beta}$ sont égaux, il n'est 
 Le circuit doit alors poursuivre les traitements sur les champs de mantisse tronquée $T_{\alpha}$ et $T_{\beta}$.
 Ce que nous allons faire prochainement.
 
--- -
-
 ## Rappel sur les champs d'exposant et de mantisse tronquée
 
 Le chapitre "_Ordre de traitement des champs d'exposant et de mantisse tronquée_" explique pourquoi est ce que les champs d'exposant $E$ sont traités avant les champs de mantisse tronquée $T$.
 Dans ce chapitre, il y a la formule mathématique $\left(\left(1+{\color{LightGreen}T}\right) \times 2^{\color{LightGreen}E}\right)$ qui explique comment est ce qu'un nombre flottant est représenté en IEEE-754.
-Nous comprenons que si deux nombres flottants $\vert \ \alpha \ \vert$ et $\vert \ \beta \ \vert$ ont des champs d'exposant égaux $\left(E_{\alpha} = E_{\beta}\right)$, alors la valeur de ces deux nombres $\left(\left(1+T_{\alpha}\right) \times 2^E_{\alpha}\right)$ et $\left(\left(1+T_{\beta}\right) \times 2^E_{\beta}\right)$ ne dépend que de $T_{\alpha}$ et $T_{\beta}$.
-C'est pourquoi la première partie de la démonstration ne génère un _point non terminal_ que lorsque $\left(E_{\alpha} = E_{\beta}\right)$, après quoi le traitement se propage aux champs de mantisse tronquée entre eux.
+Nous comprenons que si deux nombres flottants $\vert \ \alpha \ \vert$ et $\vert \ \beta \ \vert$ ont des champs d'exposant égaux $\left(E_{\alpha} = E_{\beta}\right)$, alors la valeur de ces deux nombres $\left(\left(1+T_{\alpha}\right) \times 2^{E_\alpha}\right)$ et $\left(\left(1+T_{\beta}\right) \times 2^{E_\beta}\right)$ ne dépend que de $T_{\alpha}$ et $T_{\beta}$.
+C'est pourquoi la première partie de la démonstration ne génère un _point non terminal_ que lorsque $\left(E_{\alpha} = E_{\beta}\right)$, après quoi le traitement se propage aux champs de mantisse tronquée eux même.
 
-Ce traitement des champs de mantisse tronquée $T_{\alpha}$ et $T_{\beta}$ est une comparaison de superiorité stricte de l'un envers l'autre, comme pour les champs d'exposant.
-Je vous rappelle que le champs d'exposant et de mantisse tronquée ont des points commun au niveau de leurs encodages, tout est expliqué dans le chapitre "?TBD?" pour ceux qui en ont besoin.
+Les champs de mantisse tronquée $T_{\alpha}$ et $T_{\beta}$ font l'oeuvre d'une comparaison de superiorité stricte de l'un envers l'autre, comme pour les champs d'exposant.
+Je vous rappelle que le champs d'exposant et de mantisse tronquée ont des points commun au niveau de leurs encodages, tout est expliqué dans le chapitre "?TBD?" pour ceux qui ont besoin d'un rafraichissement.
 En bref, l'encodage du champs de mantisse tronquée partage les même propriétés que celui d'exposant.
-Comme nous allons le voir, l'intérêt c'est que la comparaison entre les champs de mantisse tronquée, suit le même processus de traitement que celui des champs d'exposant.
-
--- -
+Comme nous allons le voir plus bas, la comparaison entre les champs de mantisse tronquée suit le même processus de traitement que celui des champs d'exposant.
 
 ## Le traitement des champs de mantisse tronquée
 
@@ -167,25 +163,39 @@ $$\sum_{i=9}^0 \ Write\left(\tau_i, \ Nimply \ \left(T_{\beta i}, \ T_{\alpha i}
 La variable $\tau$ est techniquement la même que celle utilisée pour la démonstration précédente.
 La seule différence, c'est que le bit de résultat de chaque opération $Nimply$ sur $T_{\beta i}$ et $T_{\alpha i}$ est inscrit dans $\tau_i$, pour $i \in \left[0;9\right]$.
 
+### Un échec certain de la comparaison 
 
-
-
-
-
-
-
-
-Dans le chapitre "_La mantisse tronquée, une histoire de puissance de_ $2$" qui parle de l'encodage du champs de mantisse tronquée des nombres flottants IEEE-754.
+Dans le chapitre "_La mantisse tronquée, une histoire de puissance de 2_" qui parle de l'encodage du champs de mantisse tronquée des nombres flottants IEEE-754.
 Il est dit que la valeur d'un bit à $1$ de poids $i$ d'un champs de mantisse tronquée $T$, est _inconditionnellement_ supérieur à la somme de la valeur de chacun de ses bits de poids inférieur à $i$.
-Rappellons que c'est aussi le cas des champs d'exposant, comme cela a été mentionné dans la première partie de la démonstration.
+Rappellons que c'est aussi le cas pour les champs d'exposant, comme cela a été mentionné dans la première partie de la démonstration.
+Le calcul de comparaison entre les champs d'exposant se base sur ces primitives mathématiques, et il en va de même pour les champs de mantisse tronquée $T_{\alpha}$ et $T_{\beta}$.
 
-Pour comparé la stricte supériorité des champs d'exposant entre eux et détecté la présence de point terminaux, nous utilisons les même primitives communes que celle partagé avec les champs de mantisse tronquée (les primitives du _Binary Unsigned_).
-A la fin de la démonstration du traitement des champs d'exposant, nous en avons conclus qu'en cas d'égalité des champs d'exposant nous aurions besoin de traité les champs de mantisse tronquée.
-Nous savons désormais quel est ce traitement et comment l'effectué.
+Prenons le cas de $\left(\tau_i = \tau_9 = 1\right)$.
+En sachant que $\left(\tau_9 = 1\right)$ nous savons que $\left(T_{\beta 9} = 1\right)$ tandis que $\left(T_{\alpha 9} = 0\right)$, et par conséquent $\left(T_{\beta 9} \times 2^9\right) \gt \sum_{i=9}^0 \ \left(T_{\alpha i} \times 2^i\right)$.
+Etant donné que $T_{\alpha 9}$ ainsi que $T_{\beta 9}$ sont les _MSB_ des champs de mantisse tronquée $T$, nous pouvons alors conclure que $\left(T_{\alpha} \lt T_{\beta}\right)$. 
+La condition initial que teste le circuit $\left(\vert\alpha\vert \gt \vert\beta\vert\right)$ __échoue__.
+Sachant que $\left(E_{\alpha} = E_{\beta}\right)$, alors $\left(\left(1+T_{\alpha}\right) \times 2^{E_{\alpha}}\right) \lt \left(\left(1+T_{\beta}\right) \times 2^{E_{\beta}}\right)$, ou dit autrement $\left(\vert\alpha\vert \lt \vert\beta\vert\right)$.
 
+N'oublions pas qu'il peut il avoir des _zéros anonymes_ dans $\tau \in \left[0;8\right]$, mais ces derniers ne peuvent être que de poids inférieur au _MSB1_ de $\tau$ qui est $\tau_9$.
+Ces potentiels bit à $0$ sont alors des _zéros anonymes non capitaux_.
 
+### Lorsque les zéros anonymes rendent la génération du résultat incertain
 
+Je tient à rappellé qu'il faudra gardé en tête le fait que $\left(E_{\alpha} = E_{\beta}\right)$.
 
+Prenons désormais le cas dans lequel le poids du _MSB1_ de $\tau$ est $\tau_i$ pour $i \in \left[0;8\right]$.
+Dans cette situation, nous sommes certains qu'il y a _au moins_ le bit $\tau_{\left(i+1\right)}$ qui est d'un poids supérieur à $\tau_i$.
+Les bits de poids supérieur à $\tau_i$ sont tous des _zéros anonymes capitaux_, nous devons donc y prêté attention.
+
+Nous calculons la somme de la valeur des bits de poids supérieur à $\tau_i$ pour $T_{\beta}$ avec $\ Write \ \left(\lambda, \ \sum_{i=i+1}^9 \ \left(T_{\beta i} \times 2^i\right)\right)$, et nous enregistrons le résultat dans $\lambda$.
+Puis nous faisons le même calcul pour $T_{\alpha}$, et vérifions si le résultat obtenu est égale à ce que nous avons trouvé pour $T_{\beta}$, c'est à dire $\lambda$.
+Dans le cas où $\left(\lambda \ = \ \sum_{i=i+1}^9 \ \left(T_{\alpha i} \times 2^i\right)\right)$ alors $\left(T_{\alpha} \lt T_{\beta}\right)$ car $\left(T_{\beta i} \times 2^i\right) \gt \sum_i^0 \ \left(T_{\alpha i} \times 2^i\right)$.
+Par conséquent, la condition initial $\left(\vert\alpha\vert \gt \vert\beta\vert\right)$ __échoue__ car $\left(\left(1+T_{\alpha}\right) \times 2^{E_{\alpha}}\right) \lt \left(\left(1+T_{\beta}\right) \times 2^{E_{\beta}}\right)$, ou autrement dit $\left(\vert\alpha\vert \lt \vert\beta\vert\right)$.
+
+// continuer avec ce qui suit
+
+Cependant, si $\left(\lambda \ \lt \ \sum_{i=i+1}^{14} \ \left(E_{\alpha i} \times 2^i\right)\right)$ alors le point terminal change pour $\left(E_{\alpha} \gt E_{\beta}\right)$, car $\left(\sum_{i=i+1}^{14} \ \left(E_{\alpha i} \times 2^i\right) \ \gt \ \sum_{i=14}^{10} \ \left(E_{\beta i} \times 2^i\right)\right)$.
+Autrement dit, la somme de la valeur des bits de poids supérieur à $\tau_i$ (le _MSB1_ de $\tau$) dans $E_{\alpha}$, est strictement supérieur à la valeur totale du champs $E_{\beta}$.
 
 
 
