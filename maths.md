@@ -31,10 +31,9 @@ Le circuit court-circuite alors les traitements qui concerne les champs de manti
 
 ### L'organisation du document
 
-!!!!
 Le document commence par la démonstration mathématique du traitement des champs d'exposant $E_{\alpha}$ et $E_{\beta}$, puis enchaine avec celle des champs de mantisse tronquée $T_{\alpha}$ et $T_{\beta}$.
-Les démonstrations sont verbeuses, pour plus de concision il y a un résumé pour chacune d'entre elles.
-Les résumés sont composés seulement des expressions mathématique, ainsi que d'une courte description de chaque expression.
+Les démonstrations sont verbeuses, pour plus de concision il y a un résumé global qui suit la seconde et dernière démonstration.
+Ce résumé est seulement composé d'expression mathématique ainsi que d'une courte description pour chacune d'entre elle.
 
 ### Quelques définitions
 
@@ -219,39 +218,30 @@ Sachant que $\left(E_{\alpha} = E_{\beta}\right)$ et que $\left(T_{\alpha} = T_{
 
 -- -
 
-$$\left(1\right) \quad \sum_{\sigma=14}^{10} \ Write\left(\tau_{\sigma}, \ Nimply \ \left(E_{\beta\sigma}, \ E_{\alpha\sigma}\right)\right)$$
+$$\left(1\right) \quad \sum_{\sigma=14}^0 \ Write\left(\tau_{\sigma}, \ Nimply \ \left(\beta_{\sigma}, \ \alpha_{\sigma}\right)\right)$$
 
 -- -
 
-Initialement $\left(\sigma = 10\right)$, mais l'expression changera d'elle même la valeur de $\sigma$.
+Initialement $\left(\sigma = 0\right)$, mais l'expression changera d'elle même la valeur de $\sigma$.
 
-$$\left(2\right) \quad \sum_{i=14}^{\sigma} Write\left(\sigma, \ \left[\left(\overline{\tau_i} \times 10\right) + \tau_i \times \left(11 + i \ mod \ 5\right)\right]\right)$$
+$$\left(2\right) \quad \sum_{i=14}^{\sigma} Write\left(\sigma, \ \left[\tau_i \times \left(i + 1\right)\right]\right)$$
 
 L'objectif de cette expression est d'inscrire dans $\sigma$ la valeur du poids du ___zéro anonyme___ de poids le plus faible, parmis tout ceux qui ont une importance.
 Pour comprendre ce que cette phrase veut dire, nous allons voir ce qu'est un _zéro anonyme_ ainsi que l'"importance" variable que l'on apporte à chacun d'eux.
 
 -- -
 
-$$\left(3\right) \quad \left(E_{\beta\left(\sigma - 1\right)} \times 2^{\left(\sigma - 1\right)}\right) \gt \sum_{\sigma=\left(\sigma-1\right)}^{10} \ \left(E_{\alpha\sigma} \times 2^{\sigma}\right)$$
+$$\left(3\right) \quad \left(\beta_{\left(\sigma - 1\right)} \times 2^{\left(\sigma - 1\right)}\right) \gt \sum_{\sigma=\left(\sigma-1\right)}^0 \ \left(\alpha_{\sigma} \times 2^{\sigma}\right)$$
 
 -- -
 
-$$\left(4\right) \quad \lambda = \sum_{\sigma}^{14} \ \left(E_{\beta\sigma} \times 2^{\sigma}\right)$$
+$$\left(4\right) \quad \lambda = \sum_{\sigma}^{14} \ \left(\beta_{\sigma} \times 2^{\sigma}\right)$$
 
 -- -
 
-$$\left(5\right) \quad \left[\left(\sum_{\sigma}^{14} \ \left(E_{\alpha\sigma} \times 2^{\sigma}\right) = \lambda\right), \ Goto\left(7\right)\right] \ \vee \ \left[\left(\sum_{\sigma}^{14} \ \left(E_{\alpha\sigma} \times 2^{\sigma}\right) > \lambda\right), \ Goto\left(8\right)\right]$$
+$$\lambda = \left(\sum_{\sigma}^{14} \ \left(\beta_{\sigma} \times 2^{\sigma}\right)\right) \ mod \ 2^{14}$$
 
 -- -
 
-$$\left(6\right) \quad \left(E_{\alpha} \lt E_{\beta}\right)$$
+$$\left(5\right) \quad \left[\left(\sum_{\sigma}^{14} \ \left(\alpha_{\sigma} \times 2^{\sigma}\right) = \lambda\right), \ Goto\left(6\right)\right] \ \vee \ \left[\left(\sum_{\sigma}^{14} \ \left(\alpha_{\sigma} \times 2^{\sigma}\right) > \lambda\right), \ Goto\left(7\right)\right]$$
 
-
--- -
-
-$$\left(7\right) \quad \left(E_{\alpha} \gt E_{\beta}\right)$$
-
--- -
-
-$$\left(8\right) \quad \left[\left(T_{\alpha} \gt T_{\beta}\right), \ \left(\vert \alpha \vert \gt \vert \beta \vert\right)\right] \ \vee \ 
-\left[\left(\left(T_{\alpha} = T_{\beta}\right) \ \vee \ \left(T_{\alpha} < T_{\beta}\right)\right), \ \left(\vert \alpha \vert \le \vert \beta \vert\right)\right]$$
