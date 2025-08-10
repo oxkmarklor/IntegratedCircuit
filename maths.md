@@ -216,10 +216,12 @@ Je me dois aussi de précisé que le standard IEEE-754 définit deux types de no
   - Les nombres _normaux_
   - Les nombres ___dénormaux___
 
-Si le début du document ne fait pas allusion aux nombres dénormaux, c'est dans le but de simplifier au plus possible l'approche des concepts abordés.
-Concrètement, les nombres dénormaux servent à codé des nombres très proche de $0$, plus proche de $0$ que la valeur la plus petite encodable avec des nombres normaux.
-
-
+Commençons par définir ce qu'est un nombre "_normal_".
+Les nombres _normaux_ ont une valeur d'exposant comprise entre $-\left(2^{\left(N - 1\right)}\right) + 2$ et $2^{\left(N - 1\right)} - 1$ inclus, où $N$ représente le nombre de bits qui compose le champs.
+Rappellons que le champs d'exposant d'un flottant _Half precision_ est de $5$ bits, et que le biais de ce dernier est de $2^{N-1} - 1$.
+Un nombre _normal_ a donc un champs d'exposant biaisé dont la valeur oscille entre $\left(-\left(2^{\left(N - 1\right)}\right) + 2 + biais = 00001_2\right)$ et $\left(2^{\left(N - 1\right)} - 1 + biais = 11110_2\right)$ inclus.
+Pour le dire autrement, un nombre _normal_ a un champs d'exposant biaisé non nul et strictement inférieur à la valeur maximal encodable sur $N$ bits, c'est à dire $2^N - 1$.
+Les nombres _normaux_ sont ceux dont je parle implicitement en début de document ainsi que dans les démonstrations.
 
 
 
