@@ -205,7 +205,19 @@ A l'inverse, il est tout aussi probable que $\left(T_{\alpha} = T_{\beta}\right)
 Pour cela il faudrait que chaque bit de même poids des champs de mantisse tronquée $T_{\alpha}$ ainsi que $T_{\beta}$ soient identiques, ou pour le dire autrement $\forall \left(i \in \left[0;9\right]\right)$ alors $\left(T_{\alpha i} = T_{\beta i}\right)$.
 Sachant que $\left(E_{\alpha} = E_{\beta}\right)$ et que $\left(T_{\alpha} = T_{\beta}\right)$, alors $\left(\left(1+T_{\alpha}\right) \times 2^{E_{\alpha}}\right) \ = \ \left(\left(1+T_{\beta}\right) \times 2^{E_{\beta}}\right)$ et la condition initial $\left(\vert\alpha\vert \gt \vert\beta\vert\right)$ ___échoue___.
 
-// relire, vérifier la validité des expressions mathématique
+# Conclusion et Nombre dénormaux
+
+Les traitements des champs d'exposant ainsi que de mantisse tronquée des opérandes $\alpha$ et $\beta$ sont les même comme nous l'avons vu dans chacune des démonstrations mathématique ci-dessus.
+Le circuit électronique gère alors le traitement de ses opérandes au travers des même sous ensemble de circuit, sous ensemble de circuit dont il ets le sujet dans la documentation.
+
+### Les nombres dénormaux
+
+Je me dois aussi de précisé que le standard IEEE-754 définit deux types de nombres flottants:
+  - Les nombres _normaux_
+  - Les nombres ___dénormaux___
+
+Si le début du document ne fait pas allusion aux nombres dénormaux, c'est dans le but de simplifier au plus possible l'approche des concepts abordés.
+Concrètement, les nombres dénormaux servent à codé des nombres très proche de $0$, plus proche de $0$ que la valeur la plus petite encodable avec des nombres normaux.
 
 
 
@@ -216,32 +228,9 @@ Sachant que $\left(E_{\alpha} = E_{\beta}\right)$ et que $\left(T_{\alpha} = T_{
 
 
 
--- -
 
-$$\left(1\right) \quad \sum_{\sigma=14}^0 \ Write\left(\tau_{\sigma}, \ Nimply \ \left(\beta_{\sigma}, \ \alpha_{\sigma}\right)\right)$$
 
--- -
 
-Initialement $\left(\sigma = 0\right)$, mais l'expression changera d'elle même la valeur de $\sigma$.
 
-$$\left(2\right) \quad \sum_{i=14}^{\sigma} Write\left(\sigma, \ \left[\tau_i \times \left(i + 1\right)\right]\right)$$
 
-L'objectif de cette expression est d'inscrire dans $\sigma$ la valeur du poids du ___zéro anonyme___ de poids le plus faible, parmis tout ceux qui ont une importance.
-Pour comprendre ce que cette phrase veut dire, nous allons voir ce qu'est un _zéro anonyme_ ainsi que l'"importance" variable que l'on apporte à chacun d'eux.
-
--- -
-
-$$\left(3\right) \quad \left(\beta_{\left(\sigma - 1\right)} \times 2^{\left(\sigma - 1\right)}\right) \gt \sum_{\sigma=\left(\sigma-1\right)}^0 \ \left(\alpha_{\sigma} \times 2^{\sigma}\right)$$
-
--- -
-
-$$\left(4\right) \quad \lambda = \sum_{\sigma}^{14} \ \left(\beta_{\sigma} \times 2^{\sigma}\right)$$
-
--- -
-
-$$\lambda = \left(\sum_{\sigma}^{14} \ \left(\beta_{\sigma} \times 2^{\sigma}\right)\right) \ mod \ 2^{14}$$
-
--- -
-
-$$\left(5\right) \quad \left[\left(\sum_{\sigma}^{14} \ \left(\alpha_{\sigma} \times 2^{\sigma}\right) = \lambda\right), \ Goto\left(6\right)\right] \ \vee \ \left[\left(\sum_{\sigma}^{14} \ \left(\alpha_{\sigma} \times 2^{\sigma}\right) > \lambda\right), \ Goto\left(7\right)\right]$$
 
