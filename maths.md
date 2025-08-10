@@ -223,12 +223,22 @@ Un nombre _normal_ a donc un champs d'exposant biaisé dont la valeur oscille en
 Pour le dire autrement, un nombre _normal_ a un champs d'exposant biaisé non nul et strictement inférieur à la valeur maximal encodable sur $N$ bits, c'est à dire $2^N - 1$.
 Les nombres _normaux_ sont ceux dont je parle implicitement en début de document ainsi que dans les démonstrations.
 
+Pour autant, le standard IEEE-754 supporte différent type de nombres, comme les ___NaN___ (Not a Number), l'___infini___ positif ou négatif ou encore les nombres ___dénormaux___.
 
+Pour le standard, un ___NaN___ n'est pas un nombre valide.
+Le standard IEEE-754 génère un _NaN_ par un calcul considéré comme invalide par le standard ainsi que par les mathématiques, comme par exemple $\left(\infty - \infty\right)$, ou encore par un calcul dont l'un des opérandes est un _NaN_.
+Par exemple, le calcul $\left(3.5 - NaN\right)$ n'a aucun sens et génère un _NaN_ à son tour.
+En bref, l'encodage d'un _NaN_ nécessite que le champs d'exposant biaisé ait la valeur $2^N - 1$ (l'ensemble des bits de ce dernier sont à $1$), tandis que le champs de mantisse tronquée est de n'importe quel valeur tant qu'il est non nul.
+Comme dit plus haut, un nombre _NaN_ ne génère aucun résultat valide lorsqu'il est utilisé en tant qu'opérande pour un calcul arithmétique quel qu'il soit.
+Par conséquent, le circuit ne les prends pas en charge.
 
+Le standard IEEE-754 définit aussi les valeurs $\pm \ \infty$.
+L'encodage d'un nombre infini nécessite un champs d'exposant biaisé dont la valeur est $2^N - 1$ (la valeur maximal encodable sur $N$ bits), et dont le champs de mantisse tronquée est obligatoirement nul (uniquement composé de bits à $0$).
+Comme nous avons pu le voir avec un exemple plus haut, les calculs arithmétique avec $\infty$ comme opérande génèrent tous un _NaN_ en résultat.
+Par exemple $\left(3.5 \times \infty\right) = NaN$.
+Le circuit ne prend donc pas en charge non plus les opérandes $\pm \ \infty$.
 
-
-
-
+// les nombres dénormaux
 
 
 
