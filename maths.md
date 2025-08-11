@@ -253,27 +253,36 @@ L'unité de Configuration de la FPU ne prend donc pas en charge les opérandes i
 ### Les nombres dénormaux
 
 Les nombres _dénormaux_ sont les derniers "type" de nombre pouvant être représenté dans un flottant IEEE-754.
-Un nombre _dénormalisé_ représente un nombre dont la valeur se situe entre la plus petite valeur codable sur un nombre _normalisé_ et $0$ lui même.
+Les nombres _dénormalisés_ sont dans un intervalle de valeur se situant entre la plus petite valeur positive codable sur un nombre _normalisé_, ainsi que $\left(\vert \pm 0 \ \vert\right)$.
+Un même intervalle de nombre _dénormaux_ cette fois-ci négatif existe également, il suffit simplement de faire passé le bit de signe de $0$ à $1$.
 
-La représentation du nombre _normalisé_ le plus petit qu'il soit, utilise la valeur du champs d'exposant la plus petite qu'il soit pour un nombre _normalisé_.
-Le champs d'exposant biaisé vaut alors $1$, comme nous l'avons vu plus haut.
-De plus, le champs de mantisse tronquée est nul, l'ensemble des bits du champs sont à $0$.
+La représentation du nombre positif _normalisé_ le plus petit qu'il soit, utilise la valeur du champs d'exposant la plus petite qu'il soit pour un nombre _normalisé_.
+C'est à dire $1$, comme nous l'avons vu plus haut.
+Le codage du champs d'exposant est toujours le même qu'importe la taille du flottant (_Half Precision, Simple Precision, etc._), l'ensemble des bits du champs sont à $0$, sauf le _LSB_ qui est à $1$.
+Mais attention, la valeur que représente le champs d'exposant biaisé change bel est bien d'une taille de flottant à une autre, car le biais n'est pas le même.
 
-Illustration de la plus petite valeur codable d'un nombre normalisé _Half Precision_ :
+De plus, l'ensemble des bits du champs de mantisse tronquée sont à $0$, ce qui encore une fois ne change pas d'un flottant de taille $X$ à $Y$.
+Rappellez vous du chapitre "_Composition du champs d'exposant et de la mantisse tronquée_", où il est expliqué pourquoi est ce que la valeur réel du champs de mantisse tronquée est $\left(1 + Truncated \ Mantissa\right)$.
+Le $1$ que l'on additionne à la mantisse tronquée est la valeur du bit de la partie entière du significande, rendu implicite.
+Par conséquent, la plus petite valeur qui puisse être codé sur un nombre normalisé _Half Precision_ est $\left(\left(1 + 0\right) \times 2^{-14} = 0.00000000000001_2 = 0.00006103515625_{10}\right)$.
+
+Illustration de la représentation de la plus petite valeur (positive comme négative) codable d'un nombre normalisé, pour le champs binaire d'un _Half Precision_ :
 
 $$\left[S_{15}, \quad 0_{14}, \ 0_{13}, \ 0_{12}, \ 0_{11}, \ 1_{10}, \quad 0_9, \ 0_8, \ 0_7, \ 0_6, \ 0_5, \ 0_4, \ 0_3, \ 0_2, \ 0_1, \ 0_0\right]$$
 
 $S$ est le bit de signe qui vaut $0$ ou $1$, et qui n'est pas pris en compte par le circuit.
 
-Par ailleurs, il s'avère que la norme IEEE-754 défini un zéro positif ainsi que négatif dont le seul fautif est le bit de signe.
-Ceci engendre quelques diffculté de comparaison comme par exemple $\left(\left(+0\right) \lt \left(-0\right) = ?\right)$, mais en revanche le circuit n'est pas affecté par cela car rappellons-le il n'utilise que la valeur absolu de ses opérandes flottants.
-Le codage d'un zéro positif comme négatif, nécessite un champs d'exposant biaisé ainsi qu'un champs de mantisse tronquée tout deux nul.
+Par ailleurs, il s'avère que la norme IEEE-754 supporte un zéro positif $\left(+0\right)$ ainsi que négatif $\left(-0\right)$, en fonction de la valeur du bit de signe ($0$ ou $1$).
+Ceci engendre quelques diffculté de comparaison, par exemple quel résultat générer pour $\left(\left(+0\right) \lt \left(-0\right)\right)$?
+En revanche, le circuit n'est pas affecté par cela car rappellons-le il n'utilise que la valeur absolu de ses opérandes flottants, il est donc capable de prendre en charge des opérandes nuls.
+Pour le codage d'un zéro positif comme négatif, il est nécessaire que le champs d'exposant biaisé ainsi que celui de mantisse tronquée soient intièrement composés de bits à $0$.
+Le bit de signe fait le reste.
 
-Illustration d'un zéro positif comme négatif pour un _Half Precision_ :
+Illustration d'un zéro positif comme négatif pour le champs binaire d'un _Half Precision_ :
 
 $$\left[S_{15}, \quad 0_{14}, \ 0_{13}, \ 0_{12}, \ 0_{11}, \ 0_{10}, \quad 0_9, \ 0_8, \ 0_7, \ 0_6, \ 0_5, \ 0_4, \ 0_3, \ 0_2, \ 0_1, \ 0_0\right]$$
 
-$S$ est le bit de signe qui vaut $0$ ou $1$, mais comme dit plus haut le circuit ne prend pas en compte le bit de signe.
+$S$ est le bit de signe qui vaut $0$ ou $1$, mais comme dit ci-dessus le circuit ne prend pas en compte le bit de signe.
 
 
 
