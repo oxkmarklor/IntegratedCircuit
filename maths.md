@@ -220,9 +220,11 @@ Le circuit de comparaison est donc architecturé d'une certaine manière de sort
 L'autre bit de sortie est généré par un autre circuit (une porte logique $Xor$), qui aggrège la sortie du comparateur avec un autre bit dont il est trop difficile d'expliqué l'origine ici.
 Tout ces sujets sont abordés dans la documentation elle même.
 
-### Les nombres dénormaux
+## Les différents nombres du standard IEEE-754
 
-Je me dois aussi de précisé que le standard IEEE-754 définit plusieurs types de nombres pouvant être représenté:
+// remplacer le terme de "normal" et "dénormal" par normalisé et dénormalisé.
+
+Il me faut aussi précisé que le standard IEEE-754 peut représenté plusieurs type de nombre:
   - Les nombres _normaux_ (ceux dont il est le sujet durant tout le document)
   - Les nombres ___dénormaux___
   - Les _NaN_ (Not a Number)
@@ -249,7 +251,50 @@ Comme nous avons pu le voir avec l'exemple ci-dessus, un calcul arithmétique av
 C'est d'autant plus vrai pour n'importe quel type de calcul arithmétique, comme $\left(3.5 \times \infty\right)$ pour donné un autre exemple.
 L'unité de Configuration de la FPU ne prend donc pas en charge les opérandes infini positif ou négatif.
 
-// les nombres dénormaux
+### Les nombres dénormaux
+
+Les nombres _dénormaux_ sont les derniers "type" de nombre pouvant être représenté dans un flottant IEEE-754.
+Un nombre "_dénormal_" représente des nombres de valeur inférieur à la plus petite valeur codable sur un nombre "_normal_" ainsi que supérieur à $0$ lui même.
+
+Pour décrire la représentation de la plus petite valeur codable d'un nombre "_normal_", je vais ici me basé sur un flottant _Half Precision_.
+Le champs d'exposant biaisé représente la plus petite valeur qu'il puisse représenté pour un nombre "_normal_", c'est à dire $00001_2$ comme nous avons pu le voir plus haut.
+De plus, le champs de mantisse tronquée est nul (composé de $10_{10}$ bits à $0$).
+
+Illustration de la plus petite valeur codable d'un nombre normalisé _Half Precision_ :
+
+$$\left[S_{15}, \quad 0_{14}, \ 0_{13}, \ 0_{12}, \ 0_{11}, \ 1_{10}, \quad 0_9, \ 0_8, \ 0_7, \ 0_6, \ 0_5, \ 0_4, \ 0_3, \ 0_2, \ 0_1, \ 0_0\right]$$
+
+$S$ est le bit de signe qui vaut $0$ ou $1$, et qui n'est pas pris en compte par le circuit.
+
+Par ailleurs, il s'avère que la norme IEEE-754 défini un zéro positif ainsi que négatif dont le seul fautif est le bit de signe.
+Ceci engendre quelques diffculté de comparaison comme par exemple $\left(\left(+0\right) \lt \left(-0\right) = ?\right)$, mais en revanche le circuit n'est pas affecté par cela car rappellons-le il n'utilise que la valeur absolu de ses opérandes flottants.
+Le codage d'un zéro positif comme négatif, nécessite un champs d'exposant biaisé ainsi qu'un champs de mantisse tronquée tout deux nul.
+
+Illustration d'un zéro positif comme négatif pour un _Half Precision_ :
+
+$$\left[S_{15}, \quad 0_{14}, \ 0_{13}, \ 0_{12}, \ 0_{11}, \ 0_{10}, \quad 0_9, \ 0_8, \ 0_7, \ 0_6, \ 0_5, \ 0_4, \ 0_3, \ 0_2, \ 0_1, \ 0_0\right]$$
+
+$S$ est le bit de signe qui vaut $0$ ou $1$, mais comme dit plus haut le circuit ne prend pas en compte le bit de signe.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
