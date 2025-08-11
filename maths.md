@@ -290,13 +290,19 @@ Il y a deux différences entre les nombres _normalisés_ et _dénormalisés_ :
   - Le bit implicite de la mantisse tronquée
   - La considération de la valeur codé par le champs d'exposant
 
-Premièrement, nous avons vu pas plus tard que dans la section précédente qu'un nombre _normalisé_ a une mantisse tronquée dont la valeur réel est $\left(1 + Truncated \ Mantissa\right)$.
-Si cela n'est pas clair pour vous, veuillez relire le chapitre précédent.
-Si la représentation d'un nombre $F$ est "_normalisé_", alors elle se base sur les même règles que l'écriture scientifique binaire du nombre $F$.
-En clair, la mantisse tronquée a une valeur réel comprise entre $\left[1;2\right[$, équivalente à la valeur du significande du nombre $F$.
-Cependant, ce n'est pas le cas d'un nombre dit "_dénormalisé_", qui considère que le bit implicite de la mantisse tronquée est $0$.
+Si la représentation IEEE-754 d'un nombre $F$ est "_normalisé_", alors elle doit respecter les règles de l'écriture scientifique binaire.
+La mantisse tronquée doit notamment avoir une valeur réel comprise entre $\left[1;2\right[$, équivalente à la valeur du significande de l'écriture scientifique binaire du nombre $F$.
+Il se trouve que nous avons vu dans le chapitre précédent que les nombres _normaux_ ont une mantisse tronquée dont la valeur réel est $\left(1 + Truncated \ Mantissa\right)$.
+Ceci veut dire que le bit implicite du champs de mantisse tronquée est donc à $1$ pour tout nombre _normalisé_.
+Si cela n'est pas clair pour vous, veuillez relire la section précédente.
+
+Cependant, un nombre dit "_dénormalisé_" ne respecte pas les règles de l'écriture scientifique binaire.
+La raison est que le champs de mantisse tronquée a un bit implicite à $0$ plutôt qu'à $1$.
 La valeur réel du champs de mantisse tronquée d'un nombre _dénormalisé_ est alors directement celle du champs lui même $\left(0 + Truncated \ Mantissa\right)$.
-Alors, la représentation IEEE-754 du nombre ne suit plus les normes de l'écriture scientifique binaire, elle est _dénormalisé_.
+Par conséquent, la représentation IEEE-754 du nombre ne suit plus les normes de l'écriture scientifique binaire car le champs de mantisse tronquée ne peut pas être dans l'intervalle $\left[1;2\right[$.
+C'est pourquoi la représentation est dites _dénormalisé_.
+
+// verif
 
 Pour différencier un nombre _normalisé_ d'un nombre _dénormalisé_, nous nous servons alors du champs d'exposant.
 Lorsque le champs d'exposant est nul (l'ensemble de ses bits sont à $0$), alors le nombre codé dans le champs binaire est soit un zéro positif ou négatif $\left(\pm 0\right)$, soit un nombre _dénormalisé_.
@@ -305,6 +311,8 @@ Les nombres _dénormaux_ quant à eux sont codés par un champs d'exposant nul, 
 
 
 // 
+
+
 
 
 Dans n'importe quel format de flottant IEEE-754, un nombre _dénormalisé_ nécessite un champs d'exposant nul (l'ensemble des bits à $0$).
