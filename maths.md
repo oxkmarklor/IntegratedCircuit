@@ -222,20 +222,19 @@ Tout ces sujets sont abordés dans la documentation elle même.
 
 ## Les différents nombres du standard IEEE-754
 
-// remplacer le terme de "normal" et "dénormal" par normalisé et dénormalisé.
-
 Il me faut aussi précisé que le standard IEEE-754 peut représenté plusieurs type de nombre:
   - Les nombres _normaux_ (ceux dont il est le sujet durant tout le document)
   - Les nombres ___dénormaux___
   - Les _NaN_ (Not a Number)
   - L'_infini_ positif ou négatif
 
-Commençons par définir ce qu'est un nombre "_normal_".
+Commençons par définir ce qu'est un nombre _normalisé_.
 Les nombres _normaux_ ont une valeur d'exposant comprise entre $-\left(2^{\left(N - 1\right)}\right) + 2$ et $2^{\left(N - 1\right)} - 1$ inclus, où $N$ représente le nombre de bits qui compose le champs d'exposant $E$ d'un flottant.
 Rappellons que le champs d'exposant d'un flottant _Half precision_ est de $5$ bits, et que le biais de ce dernier est de $2^{N-1} - 1$.
-Un nombre "_normal_" a donc un champs d'exposant biaisé dont la valeur oscille entre $\left(-\left(2^{\left(N - 1\right)}\right) + 2 + biais = 00001_2\right)$ et $\left(2^{\left(N - 1\right)} - 1 + biais = 11110_2\right)$ inclus.
-Pour le dire autrement, un nombre "_normal_" a un champs d'exposant biaisé non nul et strictement inférieur à la valeur maximal encodable sur $N$ bits, c'est à dire $2^N - 1$.
-Les nombres _normaux_ sont ceux dont je parle implicitement en début de document ainsi que dans les démonstrations.
+Un nombre _normalisé_ a donc un champs d'exposant biaisé dont la valeur oscille entre $\left(-\left(2^{\left(N - 1\right)}\right) + 2 + biais = 00001_2\right)$ et $\left(2^{\left(N - 1\right)} - 1 + biais = 11110_2\right)$ inclus.
+Pour le dire autrement, un nombre _normalisé_ a un champs d'exposant biaisé non nul et strictement inférieur à la valeur maximal encodable sur $N$ bits, c'est à dire $2^N - 1$.
+Par ailleurs, le champs de mantisse tronquée peut codé n'importe quel valeur.
+Les nombres _normaux_ sont ceux dont je parle implicitement en début de document, ainsi que dans les démonstrations.
 
 Pour le standard, il existe des nombres invalides du nom de ___NaN___ pour _Not a Number_.
 Le standard IEEE-754 génère un _NaN_ depuis un calcul considéré comme invalide par le standard lui même, ainsi que par les mathématiques. 
@@ -254,11 +253,11 @@ L'unité de Configuration de la FPU ne prend donc pas en charge les opérandes i
 ### Les nombres dénormaux
 
 Les nombres _dénormaux_ sont les derniers "type" de nombre pouvant être représenté dans un flottant IEEE-754.
-Un nombre "_dénormal_" représente des nombres de valeur inférieur à la plus petite valeur codable sur un nombre "_normal_" ainsi que supérieur à $0$ lui même.
+Un nombre _dénormalisé_ représente un nombre dont la valeur se situe entre la plus petite valeur codable sur un nombre _normalisé_ et $0$ lui même.
 
-Pour décrire la représentation de la plus petite valeur codable d'un nombre "_normal_", je vais ici me basé sur un flottant _Half Precision_.
-Le champs d'exposant biaisé représente la plus petite valeur qu'il puisse représenté pour un nombre "_normal_", c'est à dire $00001_2$ comme nous avons pu le voir plus haut.
-De plus, le champs de mantisse tronquée est nul (composé de $10_{10}$ bits à $0$).
+La représentation du nombre _normalisé_ le plus petit qu'il soit, utilise la valeur du champs d'exposant la plus petite qu'il soit pour un nombre _normalisé_.
+Le champs d'exposant biaisé vaut alors $1$, comme nous l'avons vu plus haut.
+De plus, le champs de mantisse tronquée est nul, l'ensemble des bits du champs sont à $0$.
 
 Illustration de la plus petite valeur codable d'un nombre normalisé _Half Precision_ :
 
