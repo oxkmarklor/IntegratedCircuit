@@ -250,7 +250,7 @@ Comme nous avons pu le voir avec l'exemple ci-dessus, un calcul arithmétique av
 C'est d'autant plus vrai pour n'importe quel type de calcul arithmétique, comme $\left(3.5 \times \infty\right)$ pour donné un autre exemple.
 L'unité de Configuration de la FPU ne prend donc pas en charge les opérandes infini positif ou négatif.
 
-### Les nombres dénormaux
+### La plage de codage des nombres dénormaux (Nombre dénormalisé et plage de codage)
 
 Les nombres _dénormaux_ sont les derniers "type" de nombre pouvant être représenté dans un flottant IEEE-754.
 Les nombres _dénormalisés_ sont dans un intervalle de valeur se situant entre la plus petite valeur positive codable sur un nombre _normalisé_, ainsi que $\left(\vert \pm 0 \ \vert\right)$.
@@ -264,7 +264,7 @@ Mais attention, la valeur que représente le champs d'exposant biaisé change be
 De plus, l'ensemble des bits du champs de mantisse tronquée sont à $0$, ce qui encore une fois ne change pas d'un flottant de taille $X$ à $Y$.
 Rappellez vous du chapitre "_Composition du champs d'exposant et de la mantisse tronquée_", où il est expliqué pourquoi est ce que la valeur réel du champs de mantisse tronquée est $\left(1 + Truncated \ Mantissa\right)$.
 Le $1$ que l'on additionne à la mantisse tronquée est la valeur du bit de la partie entière du significande, rendu implicite.
-Par conséquent, la plus petite valeur qui puisse être codé sur un nombre normalisé _Half Precision_ est $\left(\left(1 + 0\right) \times 2^{-14} = 0.00000000000001_2 = 0.00006103515625_{10}\right)$.
+Par conséquent, la plus petite valeur positive qui puisse être codé sur un nombre normalisé _Half Precision_ est $\left(\left(1 + 0\right) \times 2^{-14} = 0.00000000000001_2 = 0.00006103515625_{10}\right)$.
 
 Illustration de la représentation de la plus petite valeur (positive comme négative) codable d'un nombre normalisé, pour le champs binaire d'un _Half Precision_ :
 
@@ -284,6 +284,36 @@ $$\left[S_{15}, \quad 0_{14}, \ 0_{13}, \ 0_{12}, \ 0_{11}, \ 0_{10}, \quad 0_9,
 
 $S$ est le bit de signe qui vaut $0$ ou $1$, mais comme dit ci-dessus le circuit ne prend pas en compte le bit de signe.
 
+### Le codage des nombres dénormaux
+
+Il y a deux différences entre les nombres _normalisés_ et _dénormalisés_ :
+  - Le bit implicite de la mantisse tronquée
+  - La considération de la valeur codé par le champs d'exposant
+
+Premièrement, nous avons vu pas plus tard que dans la section précédente qu'un nombre _normalisé_ a une mantisse tronquée dont la valeur réel est $\left(1 + Truncated \ Mantissa\right)$.
+Si cela n'est pas clair pour vous, veuillez relire le chapitre précédent.
+Si la représentation d'un nombre $F$ est "_normalisé_", alors elle se base sur les même règles que l'écriture scientifique binaire du nombre $F$.
+En clair, la mantisse tronquée a une valeur réel comprise entre $\left[1;2\right[$, équivalente à la valeur du significande du nombre $F$.
+Cependant, ce n'est pas le cas d'un nombre dit "_dénormalisé_", qui considère que le bit implicite de la mantisse tronquée est $0$.
+La valeur réel du champs de mantisse tronquée d'un nombre _dénormalisé_ est alors directement celle du champs lui même $\left(0 + Truncated \ Mantissa\right)$.
+Alors, la représentation IEEE-754 du nombre ne suit plus les normes de l'écriture scientifique binaire, elle est _dénormalisé_.
+
+Pour différencier un nombre _normalisé_ d'un nombre _dénormalisé_, nous nous servons alors du champs d'exposant.
+Lorsque le champs d'exposant est nul (l'ensemble de ses bits sont à $0$), alors le nombre codé dans le champs binaire est soit un zéro positif ou négatif $\left(\pm 0\right)$, soit un nombre _dénormalisé_.
+Comme nous l'avons vu dans la section précédente, un zéro positif comme négatif est codé avec des champs d'exposant et de mantisse tronquée nuls.
+Les nombres _dénormaux_ quant à eux sont codés par un champs d'exposant nul, tandis que le champs de mantisse tronquée est non nul (au moins un bit du champs est à $1$).
+
+
+// 
+
+
+Dans n'importe quel format de flottant IEEE-754, un nombre _dénormalisé_ nécessite un champs d'exposant nul (l'ensemble des bits à $0$).
+La raison à cela est double.
+Pour commencer, cela influe sur la valeur du bit 
+
+
+Dans la théorie le champs $E$ est nul et il est sensé représenté la valeur d'exposant $\left(0 - biais\right)$, ce qui donne $\left(0 - 15\right)$ dans le cas d'un _Half Precision_.
+Cependant, dans la pratique le champs d'ex représente 
 
 
 
