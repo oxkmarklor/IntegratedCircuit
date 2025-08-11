@@ -207,36 +207,47 @@ Sachant que $\left(E_{\alpha} = E_{\beta}\right)$ et que $\left(T_{\alpha} = T_{
 
 # Conclusion et Nombre dénormaux
 
-Les traitements des champs d'exposant ainsi que de mantisse tronquée des opérandes $\alpha$ et $\beta$ sont les même comme nous l'avons vu dans chacune des démonstrations mathématique ci-dessus.
-Le circuit électronique gère alors le traitement de ses opérandes au travers des même sous ensemble de circuit, sous ensemble de circuit dont il ets le sujet dans la documentation.
+Les processus de traitement des champs d'exposant et des mantisses tronquées pour les opérandes $\alpha$ et $\beta$ sont identiques, comme nous avons pu le voir dans les démonstrations qui figurent ci-dessus.
+Dans les faits, le circuit électronique n'est composé que d'un seul sous ensemble de circuit logique, permettant ainsi le traitement de chacun des champs des opérandes flottants.
+La documentation du circuit aborde l'architecture de ces sous ensembles de circuit logique.
+
+Je tient aussi à rappellé que tout ce que nous avons vu ici n'est qu'une démonstration de la faisabilité de la logique de comparaison du circuit.
+Pour autant, les opérations que produit réelement le circuit ne sont pas les même que celle qui sont utilisées dans la démonstration.
+Par exemple, le circuit ne contient pas d'additionneur.
+La raison est simplement qu'il est plus optimal de faire différemment.
+De plus, le circuit génère deux bits de sortie dont l'un par le biais du comparateur directement.
+Le circuit de comparaison est donc architecturé d'une certaine manière de sorte à pouvoir généré un bit à $0$ en cas d'échec de la comparaison, et $1$ pour une réussite.
+L'autre bit de sortie est généré par un autre circuit (une porte logique $Xor$), qui aggrège la sortie du comparateur avec un autre bit dont il est trop difficile d'expliqué l'origine ici.
+Tout ces sujets sont abordés dans la documentation elle même.
 
 ### Les nombres dénormaux
 
-Je me dois aussi de précisé que le standard IEEE-754 définit deux types de nombres flottants:
-  - Les nombres _normaux_
+Je me dois aussi de précisé que le standard IEEE-754 définit plusieurs types de nombres pouvant être représenté:
+  - Les nombres _normaux_ (ceux dont il est le sujet durant tout le document)
   - Les nombres ___dénormaux___
+  - Les _NaN_ (Not a Number)
+  - L'_infini_ positif ou négatif
 
 Commençons par définir ce qu'est un nombre "_normal_".
-Les nombres _normaux_ ont une valeur d'exposant comprise entre $-\left(2^{\left(N - 1\right)}\right) + 2$ et $2^{\left(N - 1\right)} - 1$ inclus, où $N$ représente le nombre de bits qui compose le champs.
+Les nombres _normaux_ ont une valeur d'exposant comprise entre $-\left(2^{\left(N - 1\right)}\right) + 2$ et $2^{\left(N - 1\right)} - 1$ inclus, où $N$ représente le nombre de bits qui compose le champs d'exposant $E$ d'un flottant.
 Rappellons que le champs d'exposant d'un flottant _Half precision_ est de $5$ bits, et que le biais de ce dernier est de $2^{N-1} - 1$.
-Un nombre _normal_ a donc un champs d'exposant biaisé dont la valeur oscille entre $\left(-\left(2^{\left(N - 1\right)}\right) + 2 + biais = 00001_2\right)$ et $\left(2^{\left(N - 1\right)} - 1 + biais = 11110_2\right)$ inclus.
-Pour le dire autrement, un nombre _normal_ a un champs d'exposant biaisé non nul et strictement inférieur à la valeur maximal encodable sur $N$ bits, c'est à dire $2^N - 1$.
+Un nombre "_normal_" a donc un champs d'exposant biaisé dont la valeur oscille entre $\left(-\left(2^{\left(N - 1\right)}\right) + 2 + biais = 00001_2\right)$ et $\left(2^{\left(N - 1\right)} - 1 + biais = 11110_2\right)$ inclus.
+Pour le dire autrement, un nombre "_normal_" a un champs d'exposant biaisé non nul et strictement inférieur à la valeur maximal encodable sur $N$ bits, c'est à dire $2^N - 1$.
 Les nombres _normaux_ sont ceux dont je parle implicitement en début de document ainsi que dans les démonstrations.
 
-Pour autant, le standard IEEE-754 supporte différent type de nombres, comme les ___NaN___ (Not a Number), l'___infini___ positif ou négatif ou encore les nombres ___dénormaux___.
+Pour le standard, il existe des nombres invalides du nom de ___NaN___ pour _Not a Number_.
+Le standard IEEE-754 génère un _NaN_ depuis un calcul considéré comme invalide par le standard lui même, ainsi que par les mathématiques. 
+Comme par exemple $\left(\infty - \infty\right)$, ou encore par un calcul dont l'un des opérandes est un _NaN_, l'opération arithmétique $\left(3.5 - NaN\right)$ n'a aucun sens et génère un _NaN_ à son tour.
+En bref, l'encodage d'un _NaN_ nécessite que le champs d'exposant biaisé ait la valeur $2^N - 1$ (les $N$ bits de ce dernier sont à $1$), tandis que le champs de mantisse tronquée est de n'importe quel valeur tant qu'il est non nul.
+Comme dit plus haut, un nombre _NaN_ ne génère jamais de résultat valide lorsqu'il est utilisé en tant qu'opérande pour un calcul arithmétique quel qu'il soit.
+Par conséquent, l'Unité de Configuration de la FPU ne les prends pas en charge.
 
-Pour le standard, un ___NaN___ n'est pas un nombre valide.
-Le standard IEEE-754 génère un _NaN_ par un calcul considéré comme invalide par le standard ainsi que par les mathématiques, comme par exemple $\left(\infty - \infty\right)$, ou encore par un calcul dont l'un des opérandes est un _NaN_.
-Par exemple, le calcul $\left(3.5 - NaN\right)$ n'a aucun sens et génère un _NaN_ à son tour.
-En bref, l'encodage d'un _NaN_ nécessite que le champs d'exposant biaisé ait la valeur $2^N - 1$ (l'ensemble des bits de ce dernier sont à $1$), tandis que le champs de mantisse tronquée est de n'importe quel valeur tant qu'il est non nul.
-Comme dit plus haut, un nombre _NaN_ ne génère aucun résultat valide lorsqu'il est utilisé en tant qu'opérande pour un calcul arithmétique quel qu'il soit.
-Par conséquent, le circuit ne les prends pas en charge.
-
-Le standard IEEE-754 définit aussi les valeurs $\pm \ \infty$.
-L'encodage d'un nombre infini nécessite un champs d'exposant biaisé dont la valeur est $2^N - 1$ (la valeur maximal encodable sur $N$ bits), et dont le champs de mantisse tronquée est obligatoirement nul (uniquement composé de bits à $0$).
-Comme nous avons pu le voir avec un exemple plus haut, les calculs arithmétique avec $\infty$ comme opérande génèrent tous un _NaN_ en résultat.
-Par exemple $\left(3.5 \times \infty\right) = NaN$.
-Le circuit ne prend donc pas en charge non plus les opérandes $\pm \ \infty$.
+Le standard IEEE-754 définit aussi un moyen de codé l'infini positif ou négatif $\left(\pm \ \infty\right)$.
+Le codage de l'infini $\left(\infty\right)$ nécessite un champs d'exposant biaisé dont la valeur est $2^N - 1$ (la valeur maximal encodable sur $N$ bits), et dont le champs de mantisse tronquée est obligatoirement nul (uniquement composé de bits à $0$).
+Seul le bit de signe permet de passé de l'infini positif à négatif $\left(\pm\right)$.
+Comme nous avons pu le voir avec l'exemple ci-dessus, un calcul arithmétique avec l'infini comme opérande génère un _NaN_ en résultat.
+C'est d'autant plus vrai pour n'importe quel type de calcul arithmétique, comme $\left(3.5 \times \infty\right)$ pour donné un autre exemple.
+L'unité de Configuration de la FPU ne prend donc pas en charge les opérandes infini positif ou négatif.
 
 // les nombres dénormaux
 
