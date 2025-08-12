@@ -289,37 +289,42 @@ $S$ est le bit de signe qui vaut $0$ ou $1$, mais comme dit ci-dessus le circuit
 
 Il y a deux différences entre les nombres _normalisés_ et _dénormalisés_ :
   - Le bit implicite de la mantisse tronquée
-  - La considération de la valeur codé par le champs d'exposant
+  - L'interprétation que l'on fait de la valeur codé par le champs d'exposant
 
-La représentation en IEEE-754 d'un nombre $F$ sous forme _normalisé_ doit respecter les règles de l'écriture scientifique binaire.
-Particulièrement, la valeur du champs de mantisse tronquée doit correspondre à celle du significande de l'écriture scientifique binaire du nombre $F$, c'est à dire $\left[1;2\right[$.
+La représentation en IEEE-754 d'un nombre _normalisé_ $F$, doit respecter les règles de l'écriture scientifique binaire.
+Particulièrement, la valeur du champs de mantisse tronquée doit correspondre à celle du significande de l'écriture scientifique binaire du nombre $F$.
 Dans les faits, nous avons vus dans le chapitre "_Composition du champs d'exposant et de la mantisse tronquée_" que la mantisse tronquée ne représente que la partie fractionnaire d'un significande.
-Le bit de la partie entière du significande étant toujours le même ($1$), il est rendu implicite pour gagner un bit de précision sur le codage des nombres.
-D'où le fait que dans la section précédente il soit dit que la valeur réel du champs de mantisse tronquée d'un nombre _normalisé_ est $\left(1 + Truncated \ Mantissa\right)$.
+Le bit de la partie entière du significande étant toujours à $1$, il est rendu implicite pour gagner un bit de précision sur le codage des nombres.
+D'où le fait que dans la section précédente il soit dit que la réel valeur du champs de mantisse tronquée d'un nombre _normalisé_ est $\left(1 + Truncated \ Mantissa\right)$.
 Le bit implicite du champs de mantisse tronquée est invariablement à $1$ pour les nombres _normalisés_.
 
 Cependant, le codage d'un nombre IEEE-754 dit "_dénormalisé_" ne respecte pas les règles de l'écriture scientifique binaire.
-Le champs de mantisse tronquée n'a plus une valeur réel qui est égale à celle du significande de l'écriture scientifique binaire du nombre.
+Le champs de mantisse tronquée n'a plus pour valeur réel celle du significande de l'écriture scientifique binaire du nombre.
 La raison à cela est que le bit implicite du champs de mantisse tronquée est $0$.
 En clair, la valeur réel du champs de mantisse tronquée d'un nombre _dénormalisé_ est alors directement celle du champs lui même $\left(0 + Truncated \ Mantissa\right)$.
 Le bit implicite continu de représenté la partie entière d'un nombre $F$ _dénormalisé_, et la mantisse tronquée la partie fractionnaire du même nombre.
 
 Jusqu'ici, la seule différence entre un nombre _normalisé_ et _dénormalisé_ est la valeur du bit implicite du champs de mantisse tronquée.
-Ce bit n'étant pas réelement codé dans le champs binaire de chacun de ces types de nombre, il faut alors trouver un autre moyen pour départagé les nombres _normaux_ et _dénormaux_.
-Pour cela, rappellons qu'un nombre _normalisé_ a un champs d'exposant biaisé dont le codage représente une valeur entre $1$ et $2^N - 2$ inclus (sans retranchement du biais). 
-Pour représenté les nombres _dénormaux_ il suffit alors de rendre la valeur du champs d'exposant nul (l'ensemble des bits sont à $0$), afin que la séparation devienne explicite.
+Ce bit n'étant pas lui même réelement codé dans le champs binaire des nombres _normaux_ comme _dénormaux_, il faut alors trouver un autre moyen pour les départagés.
+Pour cela, rappellons nous qu'un nombre _normalisé_ a un champs d'exposant biaisé dont le codage représente une valeur entre $1$ et $2^N - 2$ inclus (sans le retranchement du biais). 
+Où $N$ est le nombre de bits qui compose le champs.
+Pour représenté les nombres _dénormaux_, il suffit alors de rendre la valeur du champs d'exposant nul (l'ensemble des bits sont à $0$) afin que la séparation entre nombre _normalisé_ et _dénormalisé_ devienne explicite.
 
-// 
+Mais n'oublions pas ce que nous avons vu plus haut.
+Les nombres _dénormaux_ ont une valeur intermédiaire qui se situe entre le plus petit nombre positif et _normalisé_ pouvant être codé sur un format de flottant, et $0$.
+Il n'y a donc pas de risque de confondre un zéro positif ou négatif $\left(\pm 0\right)$ avec les nombres _dénormaux_, car ces derniers sont non nul.
+Un nombre _dénormalisé_ possède alors un champs de mantisse tronquée obligatoirement non nul, au contraire d'un zéro positif ou négatif.
 
-Dans n'importe quel format de flottant IEEE-754, un nombre _dénormalisé_ nécessite un champs d'exposant nul (l'ensemble des bits à $0$).
-La raison à cela est double.
-Pour commencer, cela influe sur la valeur du bit 
+Mais ce n'est pas tout, au delà du fait que le champs d'exposant permet de savoir si un nombre est _normalisé_ ou _dénormalisé_, il permet bien évidemment de codé un exposant dont nous nous servons. 
+Cependant, pour un nombre _dénormalisé_ la valeur que représente le champs d'exposant n'est pas interprétée comme d'habitude, voyons pourquoi.
 
+L'idéal serait d'avoir une continuité dans la représentation des nombres _normaux_ et _dénormaux_.
+Cette notion de continuité sous entend que le passage da la forme _normalisé_ à la forme _dénormalisé_ doit pouvoir représenté des nombres qui se suivent (de la forme _dénormalisé_ à _normalisé_ aussi). 
+Un exemple ci-bas va permettre de mieux comprendre tout ça. 
 
-Dans la théorie le champs $E$ est nul et il est sensé représenté la valeur d'exposant $\left(0 - biais\right)$, ce qui donne $\left(0 - 15\right)$ dans le cas d'un _Half Precision_.
-Cependant, dans la pratique le champs d'ex représente 
-
-
+En bref, cette continuité est possible au grès d'une petite modification de la manière dont nous interprétons la valeur que code le champs d'exposant biaisé d'un nombre _dénormalisé_.
+Le champs d'exposant nul d'un nombre _dénormalisé_ devrait être interprété comme la puissance $\left(0 - biais\right)$, mais dans les faits la valeur d'exposant qu'il représente est $\left(1 - biais\right)$.
+Autrement dit, un nombre _dénormalisé_ fait usage d'un exposant égale au plus petit exposant possible qu'un nombre _normalisé_ puisse utilisé.
 
 
 
