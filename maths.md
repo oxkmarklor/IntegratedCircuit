@@ -250,7 +250,7 @@ Comme nous avons pu le voir avec l'exemple ci-dessus, un calcul arithmétique av
 C'est d'autant plus vrai pour n'importe quel type de calcul arithmétique, comme $\left(3.5 \times \infty\right)$ pour donné un autre exemple.
 L'unité de Configuration de la FPU ne prend donc pas en charge les opérandes infini positif ou négatif.
 
-## La plage de codage des nombres dénormaux (Nombre dénormalisé et plage de codage)
+## La plage de codage des nombres dénormaux
 
 Les nombres _dénormaux_ sont les derniers "type" de nombre pouvant être représenté dans un flottant IEEE-754.
 Les nombres _dénormalisés_ sont dans un intervalle de valeur se situant entre la plus petite valeur positive codable sur un nombre _normalisé_, ainsi que $\left(\vert \pm 0 \ \vert\right)$.
@@ -267,11 +267,9 @@ Le $1$ que l'on additionne à la mantisse tronquée est la valeur du bit de la p
 
 Par conséquent, la plus petite valeur positive qui puisse être codé sur un nombre normalisé _Half Precision_ est $\left(\left(1 + 0\right) \times 2^{\left(1-15\right)} = 0.00000000000001_2 = 0.00006103515625_{10}\right)$.
 
-Illustration de la représentation de la plus petite valeur (positive comme négative) codable d'un nombre normalisé, pour le champs binaire d'un _Half Precision_ :
+Illustration du codage de la plus petite valeur positive codé sur un nombre normalisé en _Half Precision_ :
 
-$$\left[S_{15}, \quad 0_{14}, \ 0_{13}, \ 0_{12}, \ 0_{11}, \ 1_{10}, \quad 0_9, \ 0_8, \ 0_7, \ 0_6, \ 0_5, \ 0_4, \ 0_3, \ 0_2, \ 0_1, \ 0_0\right]$$
-
-$S$ est le bit de signe qui vaut $0$ ou $1$, et qui n'est pas pris en compte par le circuit.
+$$\left[0_{15}, \quad 0_{14}, \ 0_{13}, \ 0_{12}, \ 0_{11}, \ 1_{10}, \quad 0_9, \ 0_8, \ 0_7, \ 0_6, \ 0_5, \ 0_4, \ 0_3, \ 0_2, \ 0_1, \ 0_0\right]$$
 
 Par ailleurs, il s'avère que la norme IEEE-754 supporte un zéro positif $\left(+0\right)$ ainsi que négatif $\left(-0\right)$, en fonction de la valeur du bit de signe ($0$ ou $1$).
 Ceci engendre quelques diffculté de comparaison, par exemple quel résultat générer pour $\left(\left(+0\right) \lt \left(-0\right)\right)$?
@@ -283,7 +281,8 @@ Illustration d'un zéro positif comme négatif pour le champs binaire d'un _Half
 
 $$\left[S_{15}, \quad 0_{14}, \ 0_{13}, \ 0_{12}, \ 0_{11}, \ 0_{10}, \quad 0_9, \ 0_8, \ 0_7, \ 0_6, \ 0_5, \ 0_4, \ 0_3, \ 0_2, \ 0_1, \ 0_0\right]$$
 
-$S$ est le bit de signe qui vaut $0$ ou $1$, mais comme dit ci-dessus le circuit ne prend pas en compte le bit de signe.
+Avec $S$ le bit de signe qui vaut $0$ ou $1$.
+Mais comme dit ci-dessus, le circuit ne prend pas en compte le bit de signe.
 
 ## Le codage des nombres dénormaux
 
@@ -332,10 +331,28 @@ Normalement, pour un champs d'exposant biaisé $E$ nous calculons la valeur repr
 Cependant, dans le cas où $E$ est nul, il faut que la valeur du champs soit interprété comme celle de la plus petite valeur d'exposant pouvant être codé par un nombre _normalisé_.
 Autrement dit, si $\left(E = 0\right)$ alors le champs d'exposant représente la valeur $\left(1 - biais\right)$.
 
+Nous allons voir un exemple permettant de mieux comprendre ce qu'est ce fameux principe de continuité.
+Voici à la fois l'illustration de la plus grande valeur positive pouvant être codé sur un nombre _dénormalisé_ en _Half Precision_ :
+
+$$\left[0_{15}, \quad 0_{14}, \ 0_{13}, \ 0_{12}, \ 0_{11}, \ 0_{10}, \quad 1_9, \ 1_8, \ 1_7, \ 1_6, \ 1_5, \ 1_4, \ 1_3, \ 1_2, \ 1_1, \ 1_0\right]$$
+
+Ainsi que la copie de l'illustration de la plus petite valeur positive pouvant être codé sur un nombre _normalisé_ en _Half Precision_ :
+
+$$\left[0_{15}, \quad 0_{14}, \ 0_{13}, \ 0_{12}, \ 0_{11}, \ 1_{10}, \quad 0_9, \ 0_8, \ 0_7, \ 0_6, \ 0_5, \ 0_4, \ 0_3, \ 0_2, \ 0_1, \ 0_0\right]$$
+
+Omettons les bit de signe.
+
+1.0000000000 - 0.0000000001 = 0.1111111111
 
 
 
 
+
+
+
+
+Le champs de mantisse tronquée vaut $0.9990234375$ et rappellons que le bit implicite est alors $0$, de plus, selon ce que nous venons de dire plus haut le champs d'exposant interprète la puissance $-14$.
+Par le calcul suivant $\left(0 + 0.9990234375\right) \times 2^{-14}$ nous obtenons le résultat $0.000060975551652$.
 
 
 
