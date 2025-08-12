@@ -264,7 +264,8 @@ Mais attention, la valeur que représente le champs d'exposant biaisé change be
 De plus, l'ensemble des bits du champs de mantisse tronquée sont à $0$, ce qui encore une fois ne change pas d'un flottant de taille $X$ à $Y$.
 Rappellez vous du chapitre "_Composition du champs d'exposant et de la mantisse tronquée_", où il est expliqué pourquoi est ce que la valeur réel du champs de mantisse tronquée est $\left(1 + Truncated \ Mantissa\right)$.
 Le $1$ que l'on additionne à la mantisse tronquée est la valeur du bit de la partie entière du significande, rendu implicite.
-Par conséquent, la plus petite valeur positive qui puisse être codé sur un nombre normalisé _Half Precision_ est $\left(\left(1 + 0\right) \times 2^{-14} = 0.00000000000001_2 = 0.00006103515625_{10}\right)$.
+
+Par conséquent, la plus petite valeur positive qui puisse être codé sur un nombre normalisé _Half Precision_ est $\left(\left(1 + 0\right) \times 2^{\left(1-15\right)} = 0.00000000000001_2 = 0.00006103515625_{10}\right)$.
 
 Illustration de la représentation de la plus petite valeur (positive comme négative) codable d'un nombre normalisé, pour le champs binaire d'un _Half Precision_ :
 
@@ -290,30 +291,25 @@ Il y a deux différences entre les nombres _normalisés_ et _dénormalisés_ :
   - Le bit implicite de la mantisse tronquée
   - La considération de la valeur codé par le champs d'exposant
 
-Si la représentation IEEE-754 d'un nombre $F$ est "_normalisé_", alors elle doit respecter les règles de l'écriture scientifique binaire.
-La mantisse tronquée doit notamment avoir une valeur réel comprise entre $\left[1;2\right[$, équivalente à la valeur du significande de l'écriture scientifique binaire du nombre $F$.
-Il se trouve que nous avons vu dans le chapitre précédent que les nombres _normaux_ ont une mantisse tronquée dont la valeur réel est $\left(1 + Truncated \ Mantissa\right)$.
-Ceci veut dire que le bit implicite du champs de mantisse tronquée est donc à $1$ pour tout nombre _normalisé_.
-Si cela n'est pas clair pour vous, veuillez relire la section précédente.
+La représentation en IEEE-754 d'un nombre $F$ sous forme _normalisé_ doit respecter les règles de l'écriture scientifique binaire.
+Particulièrement, la valeur du champs de mantisse tronquée doit correspondre à celle du significande de l'écriture scientifique binaire du nombre $F$, c'est à dire $\left[1;2\right[$.
+Dans les faits, nous avons vus dans le chapitre "_Composition du champs d'exposant et de la mantisse tronquée_" que la mantisse tronquée ne représente que la partie fractionnaire d'un significande.
+Le bit de la partie entière du significande étant toujours le même ($1$), il est rendu implicite pour gagner un bit de précision sur le codage des nombres.
+D'où le fait que dans la section précédente il soit dit que la valeur réel du champs de mantisse tronquée d'un nombre _normalisé_ est $\left(1 + Truncated \ Mantissa\right)$.
+Le bit implicite du champs de mantisse tronquée est invariablement à $1$ pour les nombres _normalisés_.
 
-Cependant, un nombre dit "_dénormalisé_" ne respecte pas les règles de l'écriture scientifique binaire.
-La raison est que le champs de mantisse tronquée a un bit implicite à $0$ plutôt qu'à $1$.
-La valeur réel du champs de mantisse tronquée d'un nombre _dénormalisé_ est alors directement celle du champs lui même $\left(0 + Truncated \ Mantissa\right)$.
-Par conséquent, la représentation IEEE-754 du nombre ne suit plus les normes de l'écriture scientifique binaire car le champs de mantisse tronquée ne peut pas être dans l'intervalle $\left[1;2\right[$.
-C'est pourquoi la représentation est dites _dénormalisé_.
+Cependant, le codage d'un nombre IEEE-754 dit "_dénormalisé_" ne respecte pas les règles de l'écriture scientifique binaire.
+Le champs de mantisse tronquée n'a plus une valeur réel qui est égale à celle du significande de l'écriture scientifique binaire du nombre.
+La raison à cela est que le bit implicite du champs de mantisse tronquée est $0$.
+En clair, la valeur réel du champs de mantisse tronquée d'un nombre _dénormalisé_ est alors directement celle du champs lui même $\left(0 + Truncated \ Mantissa\right)$.
+Le bit implicite continu de représenté la partie entière d'un nombre $F$ _dénormalisé_, et la mantisse tronquée la partie fractionnaire du même nombre.
 
-// verif
-
-Pour différencier un nombre _normalisé_ d'un nombre _dénormalisé_, nous nous servons alors du champs d'exposant.
-Lorsque le champs d'exposant est nul (l'ensemble de ses bits sont à $0$), alors le nombre codé dans le champs binaire est soit un zéro positif ou négatif $\left(\pm 0\right)$, soit un nombre _dénormalisé_.
-Comme nous l'avons vu dans la section précédente, un zéro positif comme négatif est codé avec des champs d'exposant et de mantisse tronquée nuls.
-Les nombres _dénormaux_ quant à eux sont codés par un champs d'exposant nul, tandis que le champs de mantisse tronquée est non nul (au moins un bit du champs est à $1$).
-
+Jusqu'ici, la seule différence entre un nombre _normalisé_ et _dénormalisé_ est la valeur du bit implicite du champs de mantisse tronquée.
+Ce bit n'étant pas réelement codé dans le champs binaire de chacun de ces types de nombre, il faut alors trouver un autre moyen pour départagé les nombres _normaux_ et _dénormaux_.
+Pour cela, rappellons qu'un nombre _normalisé_ a un champs d'exposant biaisé dont le codage représente une valeur entre $1$ et $2^N - 2$ inclus (sans retranchement du biais). 
+Pour représenté les nombres _dénormaux_ il suffit alors de rendre la valeur du champs d'exposant nul (l'ensemble des bits sont à $0$), afin que la séparation devienne explicite.
 
 // 
-
-
-
 
 Dans n'importe quel format de flottant IEEE-754, un nombre _dénormalisé_ nécessite un champs d'exposant nul (l'ensemble des bits à $0$).
 La raison à cela est double.
