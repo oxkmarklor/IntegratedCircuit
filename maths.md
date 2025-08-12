@@ -332,15 +332,27 @@ Cependant, dans le cas où $E$ est nul, il faut que la valeur du champs soit int
 Autrement dit, si $\left(E = 0\right)$ alors le champs d'exposant représente la valeur $\left(1 - biais\right)$.
 
 Nous allons voir un exemple permettant de mieux comprendre ce qu'est ce fameux principe de continuité.
-Voici à la fois l'illustration de la plus grande valeur positive pouvant être codé sur un nombre _dénormalisé_ en _Half Precision_ :
+Voici à la fois l'illustration de la plus grande valeur positive $A$ pouvant être codé sur un nombre _dénormalisé_ en _Half Precision_ :
 
-$$\left[0_{15}, \quad 0_{14}, \ 0_{13}, \ 0_{12}, \ 0_{11}, \ 0_{10}, \quad 1_9, \ 1_8, \ 1_7, \ 1_6, \ 1_5, \ 1_4, \ 1_3, \ 1_2, \ 1_1, \ 1_0\right]$$
+$$A: \ \left[0_{15}, \quad 0_{14}, \ 0_{13}, \ 0_{12}, \ 0_{11}, \ 0_{10}, \quad 1_9, \ 1_8, \ 1_7, \ 1_6, \ 1_5, \ 1_4, \ 1_3, \ 1_2, \ 1_1, \ 1_0\right]$$
 
-Ainsi que la copie de l'illustration de la plus petite valeur positive pouvant être codé sur un nombre _normalisé_ en _Half Precision_ :
+Ainsi que la copie de l'illustration de la plus petite valeur positive $B$ pouvant être codé sur un nombre _normalisé_ en _Half Precision_ :
 
-$$\left[0_{15}, \quad 0_{14}, \ 0_{13}, \ 0_{12}, \ 0_{11}, \ 1_{10}, \quad 0_9, \ 0_8, \ 0_7, \ 0_6, \ 0_5, \ 0_4, \ 0_3, \ 0_2, \ 0_1, \ 0_0\right]$$
+$$B: \ \left[0_{15}, \quad 0_{14}, \ 0_{13}, \ 0_{12}, \ 0_{11}, \ 1_{10}, \quad 0_9, \ 0_8, \ 0_7, \ 0_6, \ 0_5, \ 0_4, \ 0_3, \ 0_2, \ 0_1, \ 0_0\right]$$
 
-Omettons les bit de signe.
+Omettons les bit de signe (ceux de poids $15$), pour nous concentrer sur les champs d'exposant ainsi que de mantisse tronquée des nombres $A$ et $B$.
+
+Pour commencer, le champs d'exposant de $A$ est nul tandis que celui de mantisse tronquée ne l'est pas, le nombre $A$ est donc bel et bien _dénormalisé_.
+Par conséquent, le bit implicite du champs de mantisse tronquée est $0$ et la valeur du champs en lui même est $1111111111_2$ en binaire, la valeur réel du champs est $0.1111111111_2$.
+La puissance que représente le champs d'exposant est alors interprété comme $\left(1 - biais\right)$, où le biais vaut je le rappelle $2^{\left(N-1\right)} - 1$.
+Avec $N$ qui vaut $5$, le nombre de bits qui compose le champs d'exposant.
+
+Passons désormais au champs d'exposant de $B$ dont la valeur se situe entre $\left[1;\left(2^N - 1\right)\right[$, ce qui veut dire que le nombre $B$ est quant à lui _normalisé_.
+Le champs de mantisse tronquée est nul et possède un bit implicite à $1$, sa valeur réel est $1.0000000000_2$ en binaire.
+Il se trouve que le biais du champs d'exposant de $B$ est logiquement le même que celui de $A$, c'est à dire $2^{\left(5-1\right)} - 1$.
+Par ailleurs, le champs d'exposant de $B$ interprète également la même puissance $\left(1 - 15\right)$ que $A$.
+
+
 
 1.0000000000 - 0.0000000001 = 0.1111111111
 
