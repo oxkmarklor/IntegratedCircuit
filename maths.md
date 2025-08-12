@@ -205,7 +205,7 @@ A l'inverse, il est tout aussi probable que $\left(T_{\alpha} = T_{\beta}\right)
 Pour cela il faudrait que chaque bit de même poids des champs de mantisse tronquée $T_{\alpha}$ ainsi que $T_{\beta}$ soient identiques, ou pour le dire autrement $\forall \left(i \in \left[0;9\right]\right)$ alors $\left(T_{\alpha i} = T_{\beta i}\right)$.
 Sachant que $\left(E_{\alpha} = E_{\beta}\right)$ et que $\left(T_{\alpha} = T_{\beta}\right)$, alors $\left(\left(1+T_{\alpha}\right) \times 2^{E_{\alpha}}\right) \ = \ \left(\left(1+T_{\beta}\right) \times 2^{E_{\beta}}\right)$ et la condition initial $\left(\vert\alpha\vert \gt \vert\beta\vert\right)$ ___échoue___.
 
-# Conclusion et Nombre dénormaux
+# Conclusion des démonstrations
 
 Les processus de traitement des champs d'exposant et des mantisses tronquées pour les opérandes $\alpha$ et $\beta$ sont identiques, comme nous avons pu le voir dans les démonstrations qui figurent ci-dessus.
 Dans les faits, le circuit électronique n'est composé que d'un seul sous ensemble de circuit logique, permettant ainsi le traitement de chacun des champs des opérandes flottants.
@@ -220,7 +220,7 @@ Le circuit de comparaison est donc architecturé d'une certaine manière de sort
 L'autre bit de sortie est généré par un autre circuit (une porte logique $Xor$), qui aggrège la sortie du comparateur avec un autre bit dont il est trop difficile d'expliqué l'origine ici.
 Tout ces sujets sont abordés dans la documentation elle même.
 
-## Les différents nombres du standard IEEE-754
+# Les différents nombres du standard IEEE-754
 
 Il me faut aussi précisé que le standard IEEE-754 peut représenté plusieurs type de nombre:
   - Les nombres _normaux_ (ceux dont il est le sujet durant tout le document)
@@ -250,7 +250,7 @@ Comme nous avons pu le voir avec l'exemple ci-dessus, un calcul arithmétique av
 C'est d'autant plus vrai pour n'importe quel type de calcul arithmétique, comme $\left(3.5 \times \infty\right)$ pour donné un autre exemple.
 L'unité de Configuration de la FPU ne prend donc pas en charge les opérandes infini positif ou négatif.
 
-### La plage de codage des nombres dénormaux (Nombre dénormalisé et plage de codage)
+## La plage de codage des nombres dénormaux (Nombre dénormalisé et plage de codage)
 
 Les nombres _dénormaux_ sont les derniers "type" de nombre pouvant être représenté dans un flottant IEEE-754.
 Les nombres _dénormalisés_ sont dans un intervalle de valeur se situant entre la plus petite valeur positive codable sur un nombre _normalisé_, ainsi que $\left(\vert \pm 0 \ \vert\right)$.
@@ -285,11 +285,15 @@ $$\left[S_{15}, \quad 0_{14}, \ 0_{13}, \ 0_{12}, \ 0_{11}, \ 0_{10}, \quad 0_9,
 
 $S$ est le bit de signe qui vaut $0$ ou $1$, mais comme dit ci-dessus le circuit ne prend pas en compte le bit de signe.
 
-### Le codage des nombres dénormaux
+## Le codage des nombres dénormaux
 
 Il y a deux différences entre les nombres _normalisés_ et _dénormalisés_ :
   - Le bit implicite de la mantisse tronquée
   - L'interprétation que l'on fait de la valeur codé par le champs d'exposant
+
+Commençons par comprendre ce qui concerne le bit implicite.
+
+### Lorsque le bit implicite de la mantisse tronquée est à 0
 
 La représentation en IEEE-754 d'un nombre _normalisé_ $F$, doit respecter les règles de l'écriture scientifique binaire.
 Particulièrement, la valeur du champs de mantisse tronquée doit correspondre à celle du significande de l'écriture scientifique binaire du nombre $F$.
@@ -315,16 +319,18 @@ Les nombres _dénormaux_ ont une valeur intermédiaire qui se situe entre le plu
 Il n'y a donc pas de risque de confondre un zéro positif ou négatif $\left(\pm 0\right)$ avec les nombres _dénormaux_, car ces derniers sont non nul.
 Un nombre _dénormalisé_ possède alors un champs de mantisse tronquée obligatoirement non nul, au contraire d'un zéro positif ou négatif.
 
-Mais ce n'est pas tout, au delà du fait que le champs d'exposant permet de savoir si un nombre est _normalisé_ ou _dénormalisé_, il permet bien évidemment de codé un exposant dont nous nous servons. 
+### L'interprétation de la valeur du champs d'exposant des nombres dénormaux
+
+Au delà du fait que le champs d'exposant permet de savoir si un nombre est _normalisé_ ou _dénormalisé_, il permet bien évidemment de codé une puissance. 
 Cependant, pour un nombre _dénormalisé_ la valeur que représente le champs d'exposant n'est pas interprétée comme d'habitude, voyons pourquoi.
 
-L'idéal serait d'avoir une continuité dans la représentation des nombres _normaux_ et _dénormaux_.
-Cette notion de continuité sous entend que le passage da la forme _normalisé_ à la forme _dénormalisé_ doit pouvoir représenté des nombres qui se suivent (de la forme _dénormalisé_ à _normalisé_ aussi). 
-Un exemple ci-bas va permettre de mieux comprendre tout ça. 
-
-En bref, cette continuité est possible au grès d'une petite modification de la manière dont nous interprétons la valeur que code le champs d'exposant biaisé d'un nombre _dénormalisé_.
-Le champs d'exposant nul d'un nombre _dénormalisé_ devrait être interprété comme la puissance $\left(0 - biais\right)$, mais dans les faits la valeur d'exposant qu'il représente est $\left(1 - biais\right)$.
-Autrement dit, un nombre _dénormalisé_ fait usage d'un exposant égale au plus petit exposant possible qu'un nombre _normalisé_ puisse utilisé.
+Les nombres _normaux_ et _dénormaux_ sont deux représentations distinctes des nombres dans un flottant IEEE-754.
+Dans l'idéal, nous voudrions assuré la continuité des nombres en passant d'une représentation à l'autre, ce que j'entend par "continuité" c'est une forme de suite logique dans le codage des nombres.
+Nous comprendrons mieux le concept de continuité avec l'exemple ci-bas.
+Mais il faut comprendre que cette continuité n'est possible que si nous modifions un peu notre manière d'interprété le champs d'exposant d'un nombre _dénormalisé_.
+Normalement, pour un champs d'exposant biaisé $E$ nous calculons la valeur représenté avec $\left(E - biais\right)$.
+Cependant, dans le cas où $E$ est nul, il faut que la valeur du champs soit interprété comme celle de la plus petite valeur d'exposant pouvant être codé par un nombre _normalisé_.
+Autrement dit, si $\left(E = 0\right)$ alors le champs d'exposant représente la valeur $\left(1 - biais\right)$.
 
 
 
