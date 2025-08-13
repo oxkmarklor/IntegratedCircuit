@@ -13,7 +13,7 @@ La démonstration mathématique va se basé sur le teste de la condition suivant
 Je rappelle que l'encodage IEEE-754 définit trois éléments dans chacun des nombres flottants du standard, le _bit de signe_, le _champs d'exposant_ ainsi que le _champs de mantisse tronquée_.
 Voici la disposition précise de chaque bit de chacun de ces champs pour l'encodage d'un nombre _Half Precision_ ($16$ bits):
 
-$$\left[S_{15}, \quad E_{14}, \ E_{13}, \ E_{12}, \ E_{11}, \ E_{10}, \quad T_9, \ T_8, \ T_7, \ T_6, \ T_5, \ T_4, \ T_3, \ T_2, \ T_1, \ T_0\right]$$
+$$\left(1\right) \quad \left[S_{15}, \quad E_{14}, \ E_{13}, \ E_{12}, \ E_{11}, \ E_{10}, \quad T_9, \ T_8, \ T_7, \ T_6, \ T_5, \ T_4, \ T_3, \ T_2, \ T_1, \ T_0\right]$$
 
 __S__: Sign bit,  __E__: Exponent field,  __T__: Truncated mantissa
 
@@ -301,7 +301,7 @@ Le champs de mantisse tronquée est nul quant à lui.
 En prenant en compte le bit implicite à $1$ de la partie entière du champs de mantisse tronquée d'un nombre _normalisé_, nous calculons la valeur réel de la mantisse qui est $\left(1 + Truncated \ Mantissa\right)$.
 Le plus petit nombre positif et _normalisé_ pouvant être codé au format _Half Precision_ est donc $\left(\left(1 + 0.0000000000_2\right) \times 2^{-14}\right)$, et voici l'illustration de son codage:
 
-$$\left[0_{15}, \quad 0_{14}, \ 0_{13}, \ 0_{12}, \ 0_{11}, \ 1_{10}, \quad 0_9, \ 0_8, \ 0_7, \ 0_6, \ 0_5, \ 0_4, \ 0_3, \ 0_2, \ 0_1, \ 0_0\right]$$
+$$\left(2\right) \quad \left[0_{15}, \quad 0_{14}, \ 0_{13}, \ 0_{12}, \ 0_{11}, \ 1_{10}, \quad 0_9, \ 0_8, \ 0_7, \ 0_6, \ 0_5, \ 0_4, \ 0_3, \ 0_2, \ 0_1, \ 0_0\right]$$
 
 ### Le codage du zéro positif ainsi que négatif
 
@@ -315,7 +315,7 @@ Quant au bit de signe, il est fautif du fait qu'il existe un zéro positif et n�
 
 Voici une illustration du codage d'un zéro positif/négatif au format _Half Precision_ :
 
-$$\left[S_{15}, \quad 0_{14}, \ 0_{13}, \ 0_{12}, \ 0_{11}, \ 0_{10}, \quad 0_9, \ 0_8, \ 0_7, \ 0_6, \ 0_5, \ 0_4, \ 0_3, \ 0_2, \ 0_1, \ 0_0\right]$$
+$$\left(3\right) \quad \left[S_{15}, \quad 0_{14}, \ 0_{13}, \ 0_{12}, \ 0_{11}, \ 0_{10}, \quad 0_9, \ 0_8, \ 0_7, \ 0_6, \ 0_5, \ 0_4, \ 0_3, \ 0_2, \ 0_1, \ 0_0\right]$$
 
 Avec $S$ le bit de signe qui vaut $0$ pour un zéro positif, et $1$ pour un zéro négatif.
 
@@ -332,12 +332,12 @@ Commençons par comprendre ce qui concerne le bit implicite.
 La représentation en IEEE-754 d'un nombre _normalisé_ $F$, doit respecter les règles de l'écriture scientifique binaire.
 Particulièrement, la valeur du champs de mantisse tronquée doit correspondre à celle du significande de l'écriture scientifique binaire du nombre $F$.
 Dans les faits, nous avons vus plus haut que la mantisse tronquée ne représente que la partie fractionnaire d'un significande.
-Le bit de la partie entière du significande étant toujours à $1$, il est rendu implicite pour gagner un bit de précision sur le codage des nombres.
+Le bit de la partie entière du significande étant toujours à $1$, il est rendu implicite pour les nombres _normaux_ afin de gagner un bit de précision sur le codage des nombres.
 
 Cependant, le codage d'un nombre IEEE-754 dit "_dénormalisé_" ne respecte pas les règles de l'écriture scientifique binaire.
 Le champs de mantisse tronquée n'a plus de lien avec un quelconque significande.
 Effectivement, les nombres _dénormaux_ définissent un bit implicite à $0$ pour le champs de mantisse tronquée.
-Le bit implicite est toujours perçu comme la partie entière d'un nombre qui est _dénormalisé_ cette fois-ci, quant au champs de mantisse tronquée il interprète la partie fractionnaire.
+Le bit implicite est toujours perçu comme la partie entière d'un nombre (qui est _dénormalisé_ cette fois-ci), quant au champs de mantisse tronquée il en interprète la partie fractionnaire.
 C'est pourquoi la valeur réel du champs de mantisse tronquée d'un nombre _dénormalisé_ est alors directement celle du champs lui même $\left(0 + Truncated \ Mantissa\right)$.
 La partie entière est nul, c'est logique.
 
@@ -347,7 +347,7 @@ Le standard IEEE-754 définit alors le champs d'exposant d'un nombre _dénormali
 Mais n'oublions pas la section "_Le codage du zéro positif et négatif_", dans laquelle il est dit que le nombre $\pm \ 0$ est codé avec un champs d'exposant et de mantisse tronquée nuls.
 Ce qui contraint le codage des nombres _dénormaux_ à avoir un champs de mantisse tronquée non nul.
 
-Mais rappelons que "_Le rôle des nombres _dénormaux_ est de pouvoir codé des nombres très proche de $0$_", et non $0$ lui même.
+Mais rappelons que "_Le rôle des nombres _dénormaux_ est de pouvoir codé des nombres très proche de_ $0$", et non $0$ lui même.
 Pour cela, il est dans tout les cas nécessaire que le champs de mantisse tronquée d'un nombre _dénormalisé_ soit différent de $0$.
 Ce qui empêche de confondre les zéros positifs ou négatifs, avec les nombres _dénormaux_.
 
@@ -358,36 +358,38 @@ Cependant, pour un nombre _dénormalisé_ la valeur que représente le champs d'
 
 Les nombres _normaux_ et _dénormaux_ sont deux représentations distinctes des nombres dans un flottant IEEE-754.
 Dans l'idéal, nous voudrions assuré la continuité des nombres en passant d'une représentation à l'autre, ce que j'entend par "continuité" c'est une forme de suite logique dans le codage des nombres.
-Nous comprendrons mieux le concept de continuité avec l'exemple ci-bas.
+Nous comprendrons mieux le concept de continuité avec la section suivante.
 Mais il faut comprendre que cette continuité n'est possible que si nous modifions un peu notre manière d'interprété le champs d'exposant d'un nombre _dénormalisé_.
 Normalement, pour un champs d'exposant biaisé $E$ nous calculons la valeur représenté avec $\left(E - biais\right)$.
-Cependant, dans le cas où $E$ est nul, il faut que la valeur du champs soit interprété comme celle de la plus petite valeur d'exposant pouvant être codé par un nombre _normalisé_.
-Autrement dit, si $\left(E = 0\right)$ alors le champs d'exposant représente la valeur $\left(1 - biais\right)$.
+Cependant, dans le cas où $E$ est nul, il faut que la valeur que représente le champs $E$ soit interprété comme celle de la plus petite valeur d'exposant pouvant être codé par un nombre _normalisé_.
+Autrement dit, pour un nombre _dénormalisé_ le champs d'exposant est nul et la puissance qu'il représente est alors équivalente à $\left(1 - biais\right)$.
 
-Nous allons voir un exemple permettant de mieux comprendre ce qu'est ce fameux principe de continuité.
-Voici à la fois l'illustration de la plus grande valeur positive $\beta$ pouvant être codé sur un nombre _dénormalisé_ en _Half Precision_ :
+### La continuité de représentation des nombres dénormaux
 
-$$A: \ \left[0_{15}, \quad 0_{14}, \ 0_{13}, \ 0_{12}, \ 0_{11}, \ 0_{10}, \quad 1_9, \ 1_8, \ 1_7, \ 1_6, \ 1_5, \ 1_4, \ 1_3, \ 1_2, \ 1_1, \ 1_0\right]$$
+Il y a une conséquence positive au fait que le standard IEEE-754 interprète le champs d'exposant des nombres _dénormaux_ différemment de celui d'un nombre _normalisé_.
+Cela permet d'avoir une continuité dans le codage des nombres _normaux_ et _dénormaux_.
+Voyons ce que cela veut réelement dire au travers d'un exemple.
 
-Ainsi que la copie de l'illustration de la plus petite valeur positive $\alpha$ pouvant être codé sur un nombre _normalisé_ en _Half Precision_ :
+Je recopie ici même l'illustration numéro $\left(2\right)$ du plus petit nombre positif et _normalisé_ pouvant être codé au format _Half Precision_.
+Ce nombre _normalisé_ sera désormais connu sous le nom de $\alpha$.
 
-$$B: \ \left[0_{15}, \quad 0_{14}, \ 0_{13}, \ 0_{12}, \ 0_{11}, \ 1_{10}, \quad 0_9, \ 0_8, \ 0_7, \ 0_6, \ 0_5, \ 0_4, \ 0_3, \ 0_2, \ 0_1, \ 0_0\right]$$
+$$\alpha: \ \left[0_{15}, \quad 0_{14}, \ 0_{13}, \ 0_{12}, \ 0_{11}, \ 1_{10}, \quad 0_9, \ 0_8, \ 0_7, \ 0_6, \ 0_5, \ 0_4, \ 0_3, \ 0_2, \ 0_1, \ 0_0\right]$$
 
-Omettons les bit de signe (ceux de poids $15$), pour nous concentrer sur les champs d'exposant ainsi que de mantisse tronquée des nombres $\alpha$ et $\beta$.
+Nous reconnaissons que le nombre $\alpha$ est _normalisé_, car son champs d'exposant biaisé $\left[ \ .., \ 0_{14}, \ 0_{13}, \ 0_{12}, \ 0_{11}, \ 1_{10}, \ .. \ \right]$ code une valeur comprise dans la plage de codage $\left[1;\left(2^N - 1\right)\right[$ appartenant aux nombres _normaux_.
+Avec $N$ le nombre de bits du champs d'exposant, ici $5$.
+Rappelons nous du fait que le biais du champs d'exposant soit $\left(2^{\left(N - 1\right)} - 1\right)$ soit $15$, nous en aurons besoin.
+De plus, comme le nombre $\alpha$ est _normalisé_ alors le bit implicite de la mantisse tronquée est $1$.
+Et vu que le champs de la mantisse tronquée est nul, sa valeur réel est $\left(1_2 + 0.0000000000_2\right)$.
 
-// faire référence aux explications de pourquoi (1 + T) avec T = 0.X....X
+Je présente également l'illustration du plus grand nombre positif et _dénormalisé_ pouvant être codé au format _Half Precision_.
+Ce nombre _dénormalisé_ sera connu sous le nom de $\beta$.
 
-Pour commencer, le champs d'exposant de $\beta$ est nul tandis que celui de mantisse tronquée ne l'est pas, le nombre $\beta$ est donc bel et bien _dénormalisé_.
-Par conséquent, le bit implicite du champs de mantisse tronquée est $0$ et la valeur du champs en lui même est $1111111111_2$ en binaire, la valeur réel du champs est $0.1111111111_2$.
-La puissance que représente le champs d'exposant est alors interprété comme $\left(1 - biais\right)$, où le biais vaut je le rappelle $2^{\left(N-1\right)} - 1$.
-Avec $N$ qui vaut $5$, le nombre de bits qui compose le champs d'exposant.
+$$\beta: \ \left[0_{15}, \quad 0_{14}, \ 0_{13}, \ 0_{12}, \ 0_{11}, \ 0_{10}, \quad 1_9, \ 1_8, \ 1_7, \ 1_6, \ 1_5, \ 1_4, \ 1_3, \ 1_2, \ 1_1, \ 1_0\right]$$
 
-// parlé de la valeur codé dans le champs d'exposant
-
-Passons désormais au champs d'exposant de $\alpha$ dont la valeur se situe entre $\left[1;\left(2^N - 1\right)\right[$, ce qui veut dire que le nombre $\alpha$ est quant à lui _normalisé_.
-Le champs de mantisse tronquée est nul et possède un bit implicite à $1$, sa valeur réel est $1.0000000000_2$ en binaire.
-Il se trouve que le biais du champs d'exposant de $\alpha$ est logiquement le même que celui de $\beta$, c'est à dire $2^{\left(5-1\right)} - 1$.
-Par ailleurs, le champs d'exposant de $\alpha$ interprète également la même puissance $\left(1 - 15\right)$ que $\beta$.
+Nous reconnaissons que le nombre $\beta$ est _dénormalisé_, car son champs d'exposant biaisé $\left[ \ .., \ 0_{14}, \ 0_{13}, \ 0_{12}, \ 0_{11}, \ 0_{10}, \ .. \ \right]$ est nul, et parce que son champs de mantisse tronquée $\left[ \ .., \ 1_9, \ 1_8, \ 1_7, \ 1_6, \ 1_5, \ 1_4, \ 1_3, \ 1_2, \ 1_1, \ 1_0\right]$ est non nul.
+Le biais du champs d'exposant est toujours de $15$, car le champs de $\beta$ est de taille identique à celui de $\alpha$.
+De plus, comme le nombre $\beta$ est _dénormalisé_ alors le bit implicite de la mantisse tronquée est $0$.
+Par ailleurs, le champs de mantisse tronquée de $10$ bits est définit à sa valeur maximal codable (composé uniquement de bits à $1$), et sa valeur réel est donc $\left(0_2 + 0.1111111111_2\right)$.
 
 // mieux introduire l'exemple
 
@@ -413,22 +415,4 @@ Cela témoigne du fait de la présence d'une continuité de codage des nombres, 
 
 Le champs de mantisse tronquée vaut $0.9990234375$ et rappellons que le bit implicite est alors $0$, de plus, selon ce que nous venons de dire plus haut le champs d'exposant interprète la puissance $-14$.
 Par le calcul suivant $\left(0 + 0.9990234375\right) \times 2^{-14}$ nous obtenons le résultat $0.000060975551652$.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
