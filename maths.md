@@ -285,61 +285,39 @@ A l'instar des nombres _NaN_, L'unité de Configuration de la FPU n'a donc aucun
 Pour finir, les nombres _dénormaux_ représentent de vrai valeur concrète, au contraire des nombres _NaN_ ou $\pm \ \infty$.
 Les nombres _dénormaux_ ont une plage de codage qu'il va être interéssante d'étudier, voyons d'abord ce qu'est un nombre _dénormalisé_.
 
-Un nombre _dénormalisé_ a une valeur qui se situe entre $0$, et le plus petit nombre positif et _normalisé_ pouvant être codé sur un format de flottant IEEE-754.
+Un nombre _dénormalisé_ a une valeur qui se situe entre $0$, et le plus petit nombre positif _normalisé_ pouvant être codé sur n'importe quel format de flottant IEEE-754.
 Le rôle des nombres _dénormaux_ est de pouvoir codé des nombres très proche de $0$, qui plus est des nombres plus proche de $0$ que ne serait capable de le faire une représentation _normalisé_.
-La plage de codage des nombres _dénormaux_ change en fonction du format de flottant, mais concentrons nous donc sur le format _Half Precision_.
+La plage de codage des nombres _dénormaux_ change en fonction du format de flottant, mais concentrons nous sur le format _Half Precision_.
 
 ### Le codage du plus petit nombre positif et normalisé au format Half Precision
 
-Commençons par définir le codage du nombre _normalisé_ positif le plus petit qu'il soit pour le format _Half Precision_.
+Commençons par définir la valeur du champs d'exposant.
 La section "_Les nombres normaux_" qui figure ci-dessus, nous dit que la plus petite valeur qui peut être codé sur le champs d'exposant d'un nombre _normalisé_ est $1$.
 Je cite "_Tout nombre normalisé a un champs d'exposant dont la plage de codage se situe entre_ $\left[1;\left(2^N - 1\right)\right[$.".
-Rappelons que le biais du champs d'exposant vaut $\left(2^{\left(N - 1\right)} - 1\right)$, où $N$ est le nombre de bits que compte le champs d'exposant, c'est à dire $5$.
+Rappelons que le biais du champs d'exposant vaut $\left(2^{\left(N - 1\right)} - 1\right)$, où $N$ est le nombre de bits qui composent le champs d'exposant au format _Half Precision_, c'est à dire $5$.
 Le champs d'exposant représente alors la puissance $\left(1 - 15\right) = -14$.
 
 Le champs de mantisse tronquée est nul quant à lui.
-En prenant en compte le bit implicite à $1$ de la mantisse tronquée d'un nombre _normalisé_, nous calculons la valeur réel de la mantisse qui est $\left(1 + Truncated \ Mantissa\right)$.
-Le plus petit nombre positif et _normalisé_ pouvant être codé au format _Half Precision_ est $\left(\left(1 + 0.0000000000\right) \times 2^{\left(1 - 15\right)}\right)$.
-Voici l'illustration du codage de la plus petite valeur positive pouvant être codé sur un nombre normalisé en _Half Precision_ :
-
-$$\left[0_{15}, \quad 0_{14}, \ 0_{13}, \ 0_{12}, \ 0_{11}, \ 1_{10}, \quad 0_9, \ 0_8, \ 0_7, \ 0_6, \ 0_5, \ 0_4, \ 0_3, \ 0_2, \ 0_1, \ 0_0\right]$$
-
--- -
-
-// delete
-
-
-La représentation du nombre positif _normalisé_ le plus petit qu'il soit, utilise la valeur du champs d'exposant la plus petite qu'il soit pour un nombre _normalisé_.
-C'est à dire $1$, comme nous l'avons vu plus haut.
-Le codage du champs d'exposant est toujours le même qu'importe la taille du flottant (_Half Precision, Simple Precision, etc._), l'ensemble des bits du champs sont à $0$, sauf le _LSB_ qui est à $1$.
-Mais attention, la valeur que représente le champs d'exposant biaisé change bel est bien d'une taille de flottant à une autre, car le biais n'est pas le même.
-
-// plus de détail sur le bit implicite
-
-De plus, l'ensemble des bits du champs de mantisse tronquée sont à $0$, ce qui encore une fois ne change pas d'un flottant de taille $X$ à $Y$.
-Rappellez vous du chapitre "_Composition du champs d'exposant et de la mantisse tronquée_", où il est expliqué pourquoi est ce que la valeur réel du champs de mantisse tronquée est $\left(1 + Truncated \ Mantissa\right)$.
-Le $1$ que l'on additionne à la mantisse tronquée est la valeur du bit de la partie entière du significande, rendu implicite.
-
-Par conséquent, la plus petite valeur positive qui puisse être codé sur un nombre normalisé _Half Precision_ est $\left(\left(1 + 0\right) \times 2^{\left(1-15\right)} = 0.00000000000001_2 = 0.00006103515625_{10}\right)$.
-
-Illustration du codage de la plus petite valeur positive codé sur un nombre normalisé en _Half Precision_ :
+En prenant en compte le bit implicite à $1$ de la partie entière du champs de mantisse tronquée d'un nombre _normalisé_, nous calculons la valeur réel de la mantisse qui est $\left(1 + Truncated \ Mantissa\right)$.
+Le plus petit nombre positif et _normalisé_ pouvant être codé au format _Half Precision_ est donc $\left(\left(1 + 0.0000000000_2\right) \times 2^{-14}\right)$, et voici l'illustration de son codage:
 
 $$\left[0_{15}, \quad 0_{14}, \ 0_{13}, \ 0_{12}, \ 0_{11}, \ 1_{10}, \quad 0_9, \ 0_8, \ 0_7, \ 0_6, \ 0_5, \ 0_4, \ 0_3, \ 0_2, \ 0_1, \ 0_0\right]$$
 
 ### Le codage du zéro positif ainsi que négatif
 
-Par ailleurs, il s'avère que la norme IEEE-754 supporte un zéro positif $\left(+0\right)$ ainsi que négatif $\left(-0\right)$, en fonction de la valeur du bit de signe ($0$ ou $1$).
-Ceci engendre quelques diffculté de comparaison, par exemple quel résultat générer pour $\left(\left(+0\right) = \left(-0\right)\right)$?
-En revanche, le circuit n'est pas affecté par cela car rappellons-le il n'utilise que la valeur absolu de ses opérandes flottants, il est donc capable de prendre en charge des opérandes nuls.
-Pour le codage d'un zéro positif comme négatif, il est nécessaire que le champs d'exposant biaisé ainsi que celui de mantisse tronquée soient intièrement composés de bits à $0$.
-Le bit de signe fait le reste.
+Il s'avère que la norme IEEE-754 supporte un zéro positif $\left(+0\right)$ ainsi que négatif $\left(-0\right)$, en fonction de la valeur du bit de signe.
+Ceci engendre quelques diffculté de comparaison, par exemple quel résultat générer pour la condition $\left(\left(+0\right) = \left(-0\right)\right)$?
+En revanche, le circuit n'est pas affecté par cela car rappellons-le, il n'utilise que la valeur absolu de ses opérandes flottants.
+L'Unité de Configuration de la FPU est donc capable de prendre en charge des opérandes nuls.
+Pour le codage d'un zéro positif comme négatif, il est nécessaire que le champs d'exposant biaisé soit nul.
+Le champs de mantisse tronquée doit aussi être nul, sous peine que le codage d'un zéro positif ou négatif se confonde avec celui d'un nombre _dénormalisé_ (comme nous le verrons dans le chapitre suivant).
+Quant au bit de signe, il est fautif du fait qu'il existe un zéro positif et négatif.
 
-Illustration d'un zéro positif comme négatif pour le champs binaire d'un _Half Precision_ :
+Voici une illustration du codage d'un zéro positif/négatif au format _Half Precision_ :
 
 $$\left[S_{15}, \quad 0_{14}, \ 0_{13}, \ 0_{12}, \ 0_{11}, \ 0_{10}, \quad 0_9, \ 0_8, \ 0_7, \ 0_6, \ 0_5, \ 0_4, \ 0_3, \ 0_2, \ 0_1, \ 0_0\right]$$
 
-Avec $S$ le bit de signe qui vaut $0$ ou $1$.
-Mais comme dit ci-dessus, le circuit ne prend pas en compte le bit de signe.
+Avec $S$ le bit de signe qui vaut $0$ pour un zéro positif, et $1$ pour un zéro négatif.
 
 ## Le codage des nombres dénormaux
 
