@@ -265,15 +265,15 @@ Premièrement, divisé par $X$ l'infini positif ne donne pas de résultat concre
 Comme autre exemple, si un calcul a un opérande qui est un _NaN_, alors il génère également _NaN_ en résultat $\left(3.5 - NaN\right)$.
 
 En bref, l'encodage d'un _NaN_ nécessite que le champs d'exposant biaisé code la valeur $\left(2^N - 1\right)$, pour $N$ le nombre de bits qui compose le champs.
-Parallèlement, le champs de mantisse tronquée peut codé n'importe quel valeur tant qu'elle est non nul (sinon, le nombre serait $\pm \ \infty$).
+Parallèlement, le champs de mantisse tronquée peut codé n'importe quel valeur tant qu'elle est non nul.
 Aussi, comme dit plus haut un nombre _NaN_ ne génère jamais de résultat valide lorsqu'il est utilisé en tant qu'opérande pour un calcul arithmétique.
 Par conséquent, il n'y a pas d'utilité à ce que l'Unité de Configuration de la FPU ne les prennent pas en charge.
 
 ### L'infini positif et négatif
 
 Il se trouve que le standard IEEE-754 définit un moyen de codé un nombre infini positif, ou négatif $\left(\pm \ \infty\right)$.
-Le codage de l'infini $\left(\infty\right)$ nécessite un champs d'exposant biaisé dont la valeur est $2^N - 1$, avec $N$ le nombre de bits qui compose le champs.
-Par ailleurs, il faut que le champs de mantisse tronquée soit nul (composé uniquement de bits à $0$).
+Le codage de l'infini $\left(\infty\right)$ nécessite un champs d'exposant biaisé dont la valeur est $\left(2^N - 1\right)$, avec $N$ le nombre de bits qui compose le champs.
+Par ailleurs, il faut que le champs de mantisse tronquée soit nul (composé uniquement de bits à $0$), sinon le nombre serait _NaN_.
 Seul le bit de signe permet de passé de l'infini positif à négatif $\left(\pm\right)$.
 
 Comme nous avons pu le voir avec l'exemple ci-dessus, un calcul arithmétique avec un opérande de valeur infini positif ou négatif génère un _NaN_ en résultat.
@@ -282,11 +282,32 @@ A l'instar des nombres _NaN_, L'unité de Configuration de la FPU n'a donc aucun
 
 ## La plage de codage des nombres dénormaux
 
-// généralisation au format half precision
+Pour finir, les nombres _dénormaux_ représentent de vrai valeur concrète, au contraire des nombres _NaN_ ou $\pm \ \infty$.
+Les nombres _dénormaux_ ont une plage de codage qu'il va être interéssante d'étudier, voyons d'abord ce qu'est un nombre _dénormalisé_.
 
-Les nombres _dénormaux_ sont les derniers "type" de nombre pouvant être représenté dans un flottant IEEE-754.
-Les nombres _dénormalisés_ sont dans un intervalle de valeur se situant entre la plus petite valeur positive codable sur un nombre _normalisé_, ainsi que $\left(\vert \pm 0 \ \vert\right)$.
-Un même intervalle de nombre _dénormaux_ cette fois-ci négatif existe également, il suffit simplement de faire passé le bit de signe de $0$ à $1$.
+Un nombre _dénormalisé_ a une valeur qui se situe entre $0$, et le plus petit nombre positif et _normalisé_ pouvant être codé sur un format de flottant IEEE-754.
+Le rôle des nombres _dénormaux_ est de pouvoir codé des nombres très proche de $0$, qui plus est des nombres plus proche de $0$ que ne serait capable de le faire une représentation _normalisé_.
+La plage de codage des nombres _dénormaux_ change en fonction du format de flottant, mais concentrons nous donc sur le format _Half Precision_.
+
+### Le codage du plus petit nombre positif et normalisé au format Half Precision
+
+Commençons par définir le codage du nombre _normalisé_ positif le plus petit qu'il soit pour le format _Half Precision_.
+La section "_Les nombres normaux_" qui figure ci-dessus, nous dit que la plus petite valeur qui peut être codé sur le champs d'exposant d'un nombre _normalisé_ est $1$.
+Je cite "_Tout nombre normalisé a un champs d'exposant dont la plage de codage se situe entre_ $\left[1;\left(2^N - 1\right)\right[$.".
+Rappelons que le biais du champs d'exposant vaut $\left(2^{\left(N - 1\right)} - 1\right)$, où $N$ est le nombre de bits que compte le champs d'exposant, c'est à dire $5$.
+Le champs d'exposant représente alors la puissance $\left(1 - 15\right) = -14$.
+
+Le champs de mantisse tronquée est nul quant à lui.
+En prenant en compte le bit implicite à $1$ de la mantisse tronquée d'un nombre _normalisé_, nous calculons la valeur réel de la mantisse qui est $\left(1 + Truncated \ Mantissa\right)$.
+Le plus petit nombre positif et _normalisé_ pouvant être codé au format _Half Precision_ est $\left(\left(1 + 0.0000000000\right) \times 2^{\left(1 - 15\right)}\right)$.
+Voici l'illustration du codage de la plus petite valeur positive pouvant être codé sur un nombre normalisé en _Half Precision_ :
+
+$$\left[0_{15}, \quad 0_{14}, \ 0_{13}, \ 0_{12}, \ 0_{11}, \ 1_{10}, \quad 0_9, \ 0_8, \ 0_7, \ 0_6, \ 0_5, \ 0_4, \ 0_3, \ 0_2, \ 0_1, \ 0_0\right]$$
+
+-- -
+
+// delete
+
 
 La représentation du nombre positif _normalisé_ le plus petit qu'il soit, utilise la valeur du champs d'exposant la plus petite qu'il soit pour un nombre _normalisé_.
 C'est à dire $1$, comme nous l'avons vu plus haut.
@@ -304,6 +325,8 @@ Par conséquent, la plus petite valeur positive qui puisse être codé sur un no
 Illustration du codage de la plus petite valeur positive codé sur un nombre normalisé en _Half Precision_ :
 
 $$\left[0_{15}, \quad 0_{14}, \ 0_{13}, \ 0_{12}, \ 0_{11}, \ 1_{10}, \quad 0_9, \ 0_8, \ 0_7, \ 0_6, \ 0_5, \ 0_4, \ 0_3, \ 0_2, \ 0_1, \ 0_0\right]$$
+
+### Le codage du zéro positif ainsi que négatif
 
 Par ailleurs, il s'avère que la norme IEEE-754 supporte un zéro positif $\left(+0\right)$ ainsi que négatif $\left(-0\right)$, en fonction de la valeur du bit de signe ($0$ ou $1$).
 Ceci engendre quelques diffculté de comparaison, par exemple quel résultat générer pour $\left(\left(+0\right) = \left(-0\right)\right)$?
