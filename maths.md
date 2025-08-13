@@ -391,7 +391,16 @@ Le biais du champs d'exposant est toujours de $15$, car le champs de $\beta$ est
 De plus, comme le nombre $\beta$ est _dénormalisé_ alors le bit implicite de la mantisse tronquée est $0$.
 Par ailleurs, le champs de mantisse tronquée de $10$ bits est définit à sa valeur maximal codable (composé uniquement de bits à $1$), et sa valeur réel est donc $\left(0_2 + 0.1111111111_2\right)$.
 
-// mieux introduire l'exemple
+Représentons la valeur de nos deux nombres $\alpha = \left(\left(1_2 + 0.0000000000_2\right) \times 2^{\left(1 - 15\right)}\right)$ et $\beta = \left(\left(0_2 + 0.1111111111_2\right) \times 2^{\left(1 - 15\right)}\right)$.
+Remarquons que la puissance $2^{-14}$ sont toutes les deux identiques dans le calcul de $\alpha$ et $\beta$.
+Ce qui veut dire que la virgule de $\alpha$ ainsi que de $\beta$ va être décalée du même nombre de rangs vers la gauche, $14 rangs vers la gauche précisément.
+Les décalages de la virgule de nos deux nombres entrainent une divison de la valeur de ceux-ci par $2^{14}$.
+Mais divisé par un même nombre $\alpha$ et $\beta$ ne nous sevrira à rien par la suite, nous les laissons donc tel quel.
+
+Maintenant, observons le résultat de ce calcul $\left(\alpha - \beta\right) = \tau$, soit $\left(1.0000000000 - 0.1111111111\right) = 0.0000000001$.
+Ici, le nombre $\tau$ représente le plus petit nombre _dénormalisé_ pouvant être codé sur un format _Half Precision_.
+
+// parler du cas dans lequel le champs d'exposant des nombres dénormaux ne sont pas interprété différemment
 
 Si $\left(\tau = \left(0.0000000001_2 \times 2^{-14}\right)\right)$ alors $\left(\alpha - \tau = \beta\right)$, essayons de comprendre pourquoi.
 Pour commencer, $\tau$ est la plus petite valeur positive pouvant être codé dans un nombre _dénormalisé_ au format _Half Precision_.
