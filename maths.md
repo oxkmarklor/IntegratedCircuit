@@ -223,15 +223,14 @@ Tout ces sujets sont abordés dans la documentation elle même.
 # Les différents nombres du standard IEEE-754
 
 Il me faut aussi précisé que le standard IEEE-754 peut représenté plusieurs "type" de nombre:
-  - Les nombres _normaux_ (ceux dont il est le sujet durant tout le document)
+  - Les nombres _normaux_ (ceux dont nous parlons implicitement depuis le début du document)
   - Les nombres ___dénormaux___
   - Les _NaN_ (Not a Number)
   - L'_infini_ positif ou négatif
 
-Chacun de ces types de nombre peut être codé dans n'importe quel format de flottant de la norme.
-Chaque type de nombre se différencie des autres en utilisant une certaine plage de codage dans le champs d'exposant et de mantisse tronquée, plage de codage qui a été fixé par le standard IEEE-754.
+Chacun de ces types de nombre peut être codé dans n'importe quel format IEEE-754.
+Chaque type de nombre se différencie des autres en utilisant une certaine plage de codage dans le champs d'exposant et de mantisse tronquée, plage de codage qui a été préfixé par le standard IEEE-754.
 
-// différencier la valeur représenté par le champs d'exposant, de la valeur codé dans le champs
 ### Les nombres normaux
 
 Comme dit plus haut, les nombres _normaux_ (ou _normalisés_) utilisent une certaine partie de la plage de codage du champs d'exposant.
@@ -239,46 +238,47 @@ Mais n'oublions pas que ce champs a un encodage quelques peu spéciale dont nous
 Je vous invite à relire ce chapitre si nécessaire.
 En bref, avec cet encodage par biais il faut faire la distinction entre la valeur codé dans le champs binaire d'exposant, et la valeur que représente le champs d'exposant lui même.
 
-Le champs d'exposant de chaque format de flottant a un biais qui se calcul de la manière suivante $\left(2^{\left(N - 1\right)} - 1\right)$, avec $N$ le nombre de bits qui compose le champs.
+Le champs d'exposant a un biais qui se calcul de la manière suivante $\left(2^{\left(N - 1\right)} - 1\right)$, avec $N$ le nombre de bits qui compose le champs.
 Ce biais est la raison pour laquelle nous devons différencié la valeur codé dans le champs d'exposant, de la valeur qu'il représente.
 Plus particulièrement, le champs d'exposant code une valeur en _Binary Unsigned_ et représente une puissance équivalente à la valeur codé dans le champs, moins le biais.
 Pour un champs d'exposant $E$, la valeur qu'il représente est $\left(E - biais\right)$.
 
 Tout nombre _normalisé_ a un champs d'exposant dont la plage de codage se situe entre $\left[1;\left(2^N - 1\right)\right[$.
 Maintenant que nous connaissons les bornes minimal et maximal pour le codage de l'exposant de tout nombre _normalisé_, nous pouvons calculé la valeur du plus petit exposant avec $\left(1 - \left(2^{\left(N - 1\right)} - 1\right)\right)$, et du plus grand exposant avec $\left(\left(2^N - 2\right) - \left(2^{\left(N - 1\right)} - 1\right)\right)$.
-En parallèle, le champs de mantisse tronquée n'a pas de plage de codage définit par le standard, car un nombre _normalisé_ peut être reconnu à la seul valeur de son champs d'exposant.
+En parallèle, le champs de mantisse tronquée n'a pas de plage de codage définit par le standard.
+Un nombre _normalisé_ peut être reconnu à la seul valeur de son champs d'exposant.
 Le bit de signe permet simplement d'indiqué si le nombre est positif ou négatif.
 
 L'encodage d'un nombre _normalisé_ $F$ se base sur l'écriture scientifique binaire du nombre $F$.
 Plus particulièrement, le champs de mantisse tronquée doit avoir une valeur équivalente au significande du nombre à représenté, même si dans les faits ce n'est pas le cas.
-Le significande en _écriture scientifique binaire_ a une valeur comprise entre $\left[1;2\right[$, la partie entière de ce dernier est donc toujours composé d'un unique bit à $1$.
-Le champs de mantisse tronquée ne code pas le bit de la partie entière du significande, car nous savons que ce dernier est à $1$ lorsque le nombre est _normalisé_.
+Le significande en _écriture scientifique binaire_ a une valeur comprise entre $\left[1;2\right[$.
+La partie entière de ce dernier est donc toujours composé d'un unique bit à $1$.
+Par conséquent, le champs de mantisse tronquée d'un nombre _normalisé_ ne code pas le bit de la partie entière du significande, car nous savons que ce dernier est à $1$.
 Le champs de mantisse tronquée ne représente donc que la partie fractionnaire du significande, et rendre la partie entière implicite permet de gagner un bit de précision dans le codage de la partie fractionnaire.
-
--- -
-
-Les nombres _normaux_ ont une valeur d'exposant comprise entre $-\left(2^{\left(N - 1\right)}\right) + 2$ et $2^{\left(N - 1\right)} - 1$ inclus, où $N$ représente le nombre de bits qui compose le champs d'exposant $E$ d'un flottant.
-Rappellons que le champs d'exposant d'un flottant _Half precision_ est de $5$ bits, et que le biais de ce dernier est de $2^{N-1} - 1$.
-Un nombre _normalisé_ a donc un champs d'exposant biaisé dont la valeur oscille entre $\left(-\left(2^{\left(N - 1\right)}\right) + 2 + biais = 00001_2\right)$ et $\left(2^{\left(N - 1\right)} - 1 + biais = 11110_2\right)$ inclus.
-Pour le dire autrement, un nombre _normalisé_ a un champs d'exposant biaisé non nul et strictement inférieur à la valeur maximal encodable sur $N$ bits, c'est à dire $2^N - 1$.
-Par ailleurs, le champs de mantisse tronquée peut codé n'importe quel valeur.
-Les nombres _normaux_ sont ceux dont je parle implicitement en début de document, ainsi que dans les démonstrations.
 
 ### Les nombres NaN
 
-Pour le standard, il existe des nombres invalides du nom de ___NaN___ pour _Not a Number_.
-Le standard IEEE-754 génère un _NaN_ depuis un calcul considéré comme invalide par le standard lui même, ainsi que par les mathématiques. 
-Comme par exemple $\left(\infty - \infty\right)$, ou encore par un calcul dont l'un des opérandes est un _NaN_, l'opération arithmétique $\left(3.5 - NaN\right)$ n'a aucun sens et génère un _NaN_ à son tour.
-En bref, l'encodage d'un _NaN_ nécessite que le champs d'exposant biaisé ait la valeur $2^N - 1$ (les $N$ bits de ce dernier sont à $1$), tandis que le champs de mantisse tronquée est de n'importe quel valeur tant qu'il est non nul.
-Comme dit plus haut, un nombre _NaN_ ne génère jamais de résultat valide lorsqu'il est utilisé en tant qu'opérande pour un calcul arithmétique quel qu'il soit.
-Par conséquent, l'Unité de Configuration de la FPU ne les prends pas en charge.
+Pour le standard IEEE-754, il existe des nombres invalides du nom de ___NaN___ (_Not a Number_).
+Un nombre _NaN_ est généré par un calcul considéré comme invalide par le standard lui même et/ou par les mathématiques, c'est en quelque sorte une alternative à la génération d'exception matériel.
+Par exemple le calcul $\left(\left(+ \ \infty\right) \div 0\right)$ génère un _NaN_ pour deux raisons.
+Premièrement, divisé par $X$ l'infini positif ne donne pas de résultat concret, de plus si $\left(X = 0\right)$ alors le calcul se retrouve soudainement à être invalide mathématiquement parlant. 
+Comme autre exemple, si un calcul a un opérande qui est un _NaN_, alors il génère également _NaN_ en résultat $\left(3.5 - NaN\right)$.
 
-Le standard IEEE-754 définit aussi un moyen de codé l'infini positif ou négatif $\left(\pm \ \infty\right)$.
-Le codage de l'infini $\left(\infty\right)$ nécessite un champs d'exposant biaisé dont la valeur est $2^N - 1$ (la valeur maximal encodable sur $N$ bits), et dont le champs de mantisse tronquée est obligatoirement nul (uniquement composé de bits à $0$).
+En bref, l'encodage d'un _NaN_ nécessite que le champs d'exposant biaisé code la valeur $\left(2^N - 1\right)$, pour $N$ le nombre de bits qui compose le champs.
+Parallèlement, le champs de mantisse tronquée peut codé n'importe quel valeur tant qu'elle est non nul (sinon, le nombre serait $\pm \ \infty$).
+Aussi, comme dit plus haut un nombre _NaN_ ne génère jamais de résultat valide lorsqu'il est utilisé en tant qu'opérande pour un calcul arithmétique.
+Par conséquent, il n'y a pas d'utilité à ce que l'Unité de Configuration de la FPU ne les prennent pas en charge.
+
+### L'infini positif et négatif
+
+Il se trouve que le standard IEEE-754 définit un moyen de codé un nombre infini positif, ou négatif $\left(\pm \ \infty\right)$.
+Le codage de l'infini $\left(\infty\right)$ nécessite un champs d'exposant biaisé dont la valeur est $2^N - 1$, avec $N$ le nombre de bits qui compose le champs.
+Par ailleurs, il faut que le champs de mantisse tronquée soit nul (composé uniquement de bits à $0$).
 Seul le bit de signe permet de passé de l'infini positif à négatif $\left(\pm\right)$.
-Comme nous avons pu le voir avec l'exemple ci-dessus, un calcul arithmétique avec l'infini comme opérande génère un _NaN_ en résultat.
-C'est d'autant plus vrai pour n'importe quel type de calcul arithmétique, comme $\left(3.5 \times \infty\right)$ pour donné un autre exemple.
-L'unité de Configuration de la FPU ne prend donc pas en charge les opérandes infini positif ou négatif.
+
+Comme nous avons pu le voir avec l'exemple ci-dessus, un calcul arithmétique avec un opérande de valeur infini positif ou négatif génère un _NaN_ en résultat.
+Ceci est vrai pour n'importe quel type de calcul arithmétique.
+A l'instar des nombres _NaN_, L'unité de Configuration de la FPU n'a donc aucun intérêt à prendre en charge les opérandes de valeur infini positif comme négatif.
 
 ## La plage de codage des nombres dénormaux
 
