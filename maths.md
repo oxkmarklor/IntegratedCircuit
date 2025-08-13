@@ -222,23 +222,49 @@ Tout ces sujets sont abordés dans la documentation elle même.
 
 # Les différents nombres du standard IEEE-754
 
-Il me faut aussi précisé que le standard IEEE-754 peut représenté plusieurs type de nombre:
+Il me faut aussi précisé que le standard IEEE-754 peut représenté plusieurs "type" de nombre:
   - Les nombres _normaux_ (ceux dont il est le sujet durant tout le document)
   - Les nombres ___dénormaux___
   - Les _NaN_ (Not a Number)
   - L'_infini_ positif ou négatif
 
-// introduction brève aux implications des différents "types" de nombre sur l'encodage ieee-754 d'un nombre.
+Chacun de ces types de nombre peut être codé dans n'importe quel format de flottant de la norme.
+Chaque type de nombre se différencie des autres en utilisant une certaine plage de codage dans le champs d'exposant et de mantisse tronquée, plage de codage qui a été fixé par le standard IEEE-754.
 
 // différencier la valeur représenté par le champs d'exposant, de la valeur codé dans le champs
+### Les nombres normaux
 
-Commençons par définir ce qu'est un nombre _normalisé_.
+Comme dit plus haut, les nombres _normaux_ (ou _normalisés_) utilisent une certaine partie de la plage de codage du champs d'exposant.
+Mais n'oublions pas que ce champs a un encodage quelques peu spéciale dont nous avons parlé en début de document, dans le chapitre du nom de "_L'encodage par biais du champs d'exposant_".
+Je vous invite à relire ce chapitre si nécessaire.
+En bref, avec cet encodage par biais il faut faire la distinction entre la valeur codé dans le champs binaire d'exposant, et la valeur que représente le champs d'exposant lui même.
+
+Le champs d'exposant de chaque format de flottant a un biais qui se calcul de la manière suivante $\left(2^{\left(N - 1\right)} - 1\right)$, avec $N$ le nombre de bits qui compose le champs.
+Ce biais est la raison pour laquelle nous devons différencié la valeur codé dans le champs d'exposant, de la valeur qu'il représente.
+Plus particulièrement, le champs d'exposant code une valeur en _Binary Unsigned_ et représente une puissance équivalente à la valeur codé dans le champs, moins le biais.
+Pour un champs d'exposant $E$, la valeur qu'il représente est $\left(E - biais\right)$.
+
+Tout nombre _normalisé_ a un champs d'exposant dont la plage de codage se situe entre $\left[1;\left(2^N - 1\right)\right[$.
+Maintenant que nous connaissons les bornes minimal et maximal pour le codage de l'exposant de tout nombre _normalisé_, nous pouvons calculé la valeur du plus petit exposant avec $\left(1 - \left(2^{\left(N - 1\right)} - 1\right)\right)$, et du plus grand exposant avec $\left(\left(2^N - 2\right) - \left(2^{\left(N - 1\right)} - 1\right)\right)$.
+En parallèle, le champs de mantisse tronquée n'a pas de plage de codage définit par le standard, car un nombre _normalisé_ peut être reconnu à la seul valeur de son champs d'exposant.
+Le bit de signe permet simplement d'indiqué si le nombre est positif ou négatif.
+
+L'encodage d'un nombre _normalisé_ $F$ se base sur l'écriture scientifique binaire du nombre $F$.
+Plus particulièrement, le champs de mantisse tronquée doit avoir une valeur équivalente au significande du nombre à représenté, même si dans les faits ce n'est pas le cas.
+Le significande en _écriture scientifique binaire_ a une valeur comprise entre $\left[1;2\right[$, la partie entière de ce dernier est donc toujours composé d'un unique bit à $1$.
+Le champs de mantisse tronquée ne code pas le bit de la partie entière du significande, car nous savons que ce dernier est à $1$ lorsque le nombre est _normalisé_.
+Le champs de mantisse tronquée ne représente donc que la partie fractionnaire du significande, et rendre la partie entière implicite permet de gagner un bit de précision dans le codage de la partie fractionnaire.
+
+-- -
+
 Les nombres _normaux_ ont une valeur d'exposant comprise entre $-\left(2^{\left(N - 1\right)}\right) + 2$ et $2^{\left(N - 1\right)} - 1$ inclus, où $N$ représente le nombre de bits qui compose le champs d'exposant $E$ d'un flottant.
 Rappellons que le champs d'exposant d'un flottant _Half precision_ est de $5$ bits, et que le biais de ce dernier est de $2^{N-1} - 1$.
 Un nombre _normalisé_ a donc un champs d'exposant biaisé dont la valeur oscille entre $\left(-\left(2^{\left(N - 1\right)}\right) + 2 + biais = 00001_2\right)$ et $\left(2^{\left(N - 1\right)} - 1 + biais = 11110_2\right)$ inclus.
 Pour le dire autrement, un nombre _normalisé_ a un champs d'exposant biaisé non nul et strictement inférieur à la valeur maximal encodable sur $N$ bits, c'est à dire $2^N - 1$.
 Par ailleurs, le champs de mantisse tronquée peut codé n'importe quel valeur.
 Les nombres _normaux_ sont ceux dont je parle implicitement en début de document, ainsi que dans les démonstrations.
+
+### Les nombres NaN
 
 Pour le standard, il existe des nombres invalides du nom de ___NaN___ pour _Not a Number_.
 Le standard IEEE-754 génère un _NaN_ depuis un calcul considéré comme invalide par le standard lui même, ainsi que par les mathématiques. 
