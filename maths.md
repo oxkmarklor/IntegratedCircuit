@@ -369,53 +369,42 @@ Autrement dit, pour un nombre _dénormalisé_ le champs d'exposant est nul et la
 Il y a une conséquence positive au fait que le standard IEEE-754 interprète le champs d'exposant des nombres _dénormaux_ différemment de celui d'un nombre _normalisé_.
 Cela permet d'avoir une continuité dans le codage des nombres _normaux_ et _dénormaux_.
 
-Néanmoins, pour comprendre les faiblesses d'une même interprétation du champs d'exposant entre les nombres _normaux_ et _dénormaux_, nous allons avoir besoin de prendre un exemple qui traite ce cas.
-Cela permettra de mettre en lumière les problèmatiques d'une interprétation mutuelle du champs d'exposant des nombres _normalisés/dénormalisés_.
-Mais avant tout, il me faut illustrer (ou réillustrer) le codage de certains nombres qui centraux aux exemples suivant.
+Mais pour comprendre ce qu'est ce principe de continuité de représentation des _dénormaux_, il faut déjà comprendre ce qui se passe lorsqu'il n'y en a pas.
+Pour cela, je vais avoir besoin de prendre des exemples.
+Les nombres dont le codage est illustrer ci-dessous sont nécessaire à ces exemples.
 
-Pour commencer, je recopie ici même l'illustration numéro $\left(2\right)$ du plus _petit_ nombre positif et _normalisé_ pouvant être codé au format _Half Precision_.
+Pour commencer, je recopie ici même l'illustration numéro $\left(2\right)$ du plus _petit_ nombre positif et ___normalisé___ pouvant être codé au format _Half Precision_.
 Ce nombre _normalisé_ sera désormais connu sous le nom de $\alpha$.
 
 $$\alpha: \ \left[0_{15}, \quad 0_{14}, \ 0_{13}, \ 0_{12}, \ 0_{11}, \ 1_{10}, \quad 0_9, \ 0_8, \ 0_7, \ 0_6, \ 0_5, \ 0_4, \ 0_3, \ 0_2, \ 0_1, \ 0_0\right]$$
 
-Nous reconnaissons que le nombre $\alpha$ est _normalisé_, car son champs d'exposant biaisé $\left[ \ .., \ 0_{14}, \ 0_{13}, \ 0_{12}, \ 0_{11}, \ 1_{10}, \ .. \ \right]$ code une valeur comprise dans la plage de codage $\left[1;\left(2^N - 1\right)\right[$ appartenant aux nombres _normaux_.
-Avec $N$ le nombre de bits du champs d'exposant, ici $5$.
-Rappelons nous du fait que le biais du champs d'exposant soit $\left(2^{\left(N - 1\right)} - 1\right)$ soit $15$.
-De plus, comme le nombre $\alpha$ est _normalisé_ alors le bit implicite du champs de mantisse tronquée est $1$, et la valeur codé dans le champs lui même est nul.
-Par conséquent, nous calculons la valeur du nombre $\alpha$ selon $\left(\left(1 + Truncated \ Mantissa\right) \times 2^{\left(Exponent - bias\right)}\right)$, soit l'équivalent de $\left(\left(1 + 0.0\right) \times 2^{\left(1 - 15\right)}\right)$.
-__Le nombre__ ${\color{LightGreen}\alpha}$ __est donc égale à__ ${\color{LightGreen}0.00006103515625}$.
-
 Je présente également l'illustration du plus _grand_ nombre positif et ___dénormalisé___ pouvant être codé au format _Half Precision_.
-Comme nous allons le voir plus bas, la valeur de ce nombre varie en fonction de l'interprétation que l'ont fait de son champs d'exposant.
-C'est pourquoi je ne peux pas définir sa valeur maintenant, en outre, ce nombre _dénormalisé_ sera connu sous le nom de $\beta$.
+Ce nombre _dénormalisé_ sera connu sous le nom de $\beta$.
 
 $$\beta: \ \left[0_{15}, \quad 0_{14}, \ 0_{13}, \ 0_{12}, \ 0_{11}, \ 0_{10}, \quad 1_9, \ 1_8, \ 1_7, \ 1_6, \ 1_5, \ 1_4, \ 1_3, \ 1_2, \ 1_1, \ 1_0\right]$$
 
 Et pour finir, voici l'illustration du plus _petit_ nombre positif et ___dénormalisé___ pouvant être codé au format _Half Precision_.
-Ce nombre positif _dénormalisé_ est par définition le plus petit qui soit possible de codé pour ce format de flottant.
-Mais une nouvelle fois, sa valeur fluctue en fonction de l'interprétation que l'ont fait de son champs d'exposant, et nous définirons la valeur de ce dernier au cas par cas.
-Ce nombre porte le nom de $\tau$.
+Ce nombre positif et _dénormalisé_ est par définition le plus petit qui soit possible de codé pour ce format de flottant.
+Ce nombre portera le nom de $\tau$.
 
 $$\tau: \ \left[0_{15}, \quad 0_{14}, \ 0_{13}, \ 0_{12}, \ 0_{11}, \ 0_{10}, \quad 0_9, \ 0_8, \ 0_7, \ 0_6, \ 0_5, \ 0_4, \ 0_3, \ 0_2, \ 0_1, \ 1_0\right]$$
 
-Passons désormais au premier exemple.
+Commençons désormais par définir la valeur de chacun de ses nombres, mais pas n'importe comment.
+Nous allons calculer la puissance que représent le champs d'exposant des _dénormaux_ $\beta$ et $\tau$, comme nous le faisons avec le nombre _normalisé_ $\alpha$ :
+  - $\alpha = \left(\left(1 + 0.0\right) \times 2^{\left(1 - 15\right)}\right) = 0.00006103515625$
+  - $\beta = \left(\left(0 + 0.9990234375\right) \times 2^{\left(0 - 15\right)}\right) = 0.0000304877758026$
+  - $\tau = \left(\left(0 + 0,0009765625\right) \times 2^{\left(0 - 15\right)}\right) = 0.0000000298023223876$
 
-### Lorsque l'interprétation du champs d'exposant est toujours la même
+Cette méthodologie de calcul fait simple, chaque nombre _normalisé_ comme _dénormalisé_ peut être représenté comme ceci $\left(\left(implicit \ bit + Truncated \ Mantissa\right) \times 2^{\left(Exponent - bias\right)}\right)$.
+Vous pouvez verifier chaque calcul par vous même à l'aide des illustrations du codage des nombres $\alpha$, $\beta$ et $\tau$ qui figurent ci-dessus.
 
-// delete
+Nous remarquons quelque chose d'intéressant ici.
+La valeur de $\beta$ représente le plus grand nombre positif et _dénormalisé_ pouvant être codé sur un flottant au format _Half Precision_, alors que ce dernier est plus de deux fois inférieur à $\alpha$ qui est quant à lui le plus petit nombre _normalisé_ codable au format _Half Precision_.
+Dans ce cas, la plage de codage des nombres _dénormalisés_ comporte une sorte de trou dans lequel il n'est pas possible de représenter certains nombres.
+Le calcul suivant $\left(\alpha - \tau\right)$ soit $\left(0.00006103515625 - 0.0000000298023223876\right)$ retranche une valeur non nul au plus petit nombre pouvant être codé sur un nombre _normalisé_.
+Nous pourrions légitimement penser que le résultat de ce calcul sera donc _dénormalisé_, mais non.
+Car le résultat de ce calcul est $0.0000610053539276$ et que cette valeur se situe dans l'intervalle $\left]\beta;\alpha\right[$ de nombre ne pouvant ni être codé par des nombres _normaux_, ni par des nombres _dénormaux_.
 
-Dans cet exemple, nous allons mettre en avant la plage de codage des nombres _dénormaux_ vis à vis de celle des nombres _normaux_, pour une même interprétation de la valeur de leurs champs d'exposant.
-
-Commençons par définir la valeur des nombres $\beta$ ainsi que $\tau$ avec la même interprétation de la valeur de leur champs d'exposant que celle des nombres _normalisés_.
-
-//
-
-Nous reconnaissons que le nombre $\beta$ est _dénormalisé_, car son champs d'exposant biaisé $\left[ \ .., \ 0_{14}, \ 0_{13}, \ 0_{12}, \ 0_{11}, \ 0_{10}, \ .. \ \right]$ est nul, et parce que son champs de mantisse tronquée $\left[ \ .., \ 1_9, \ 1_8, \ 1_7, \ 1_6, \ 1_5, \ 1_4, \ 1_3, \ 1_2, \ 1_1, \ 1_0\right]$ est non nul.
-Le biais du champs d'exposant est toujours de $15$, car le champs de $\beta$ est de taille identique à celui de $\alpha$.
-De plus, comme le nombre $\beta$ est _dénormalisé_ alors le bit implicite du champs de mantisse tronquée est $0$, et le champs lui même interprète le plus grand nombre pouvant être codé en son sein (la valeur maximal codable sur $10$ bits).
-Par conséquent, nous calculons la valeur du nombre $\beta$ selon $\left(\left(0 + Truncated \ Mantissa\right) \times 2^{\left(Exponent - bias\right)}\right)$, soit l'équivalent de $\left(\left(0 + 0.9990234375\right) \times 2^{\left(1 - 15\right)}\right)$.
-Le nombre $\beta$ est donc égale à $0.0000609755516052$.
-
-// tau
+// etc
 
 
