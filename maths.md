@@ -360,12 +360,13 @@ Les nombres _normaux_ et _dénormaux_ sont deux représentations distinctes des 
 Il s'avère que les nombres d'une même représentation sont consécutifs.
 Dans l'idéal, il faudrait qu'en passant d'une représentation à une autre les nombres de ces deux représentations le soient aussi.
 C'est ce que l'on appelle le principe de continuité, nous verrons cela plus en détails dans le chapitre qui suit "_La continuité de représentation des nombres dénormaux_".
-Avec ce que nous savons de la continuité pour l'instant, il nous faut savoir que cette dernière n'est atteignable que si la manière d'interprété le champs d'exposant d'un nombre _dénormalisé_ change.
+Il faut savoir que cette continuité est atteignable entre les nombres _normaux_ et _dénormaux_, qu'à la condition que l'interprétation de la valeur du champs d'exposant d'un nombre _dénormalisé_ ne suive pas celle d'un nombre _normalisé_.
 
-Normalement, pour un champs d'exposant biaisé $E$ nous calculons la valeur représenté avec $\left(E - biais\right)$.
+Pour un champs d'exposant biaisé $E$ d'un nombre _normalisé_, nous calculons la valeur que représente le champs avec $\left(E - biais\right)$.
 Nous soustrayons simplement le biais du champs d'exposant, à la valeur qu'il code.
-Cependant, dans le cas d'un nombre _dénormalisé_ il faut que la valeur que représente le champs $E$ soit interprété comme celle de la plus petite valeur d'exposant pouvant être codé par un nombre _normalisé_.
-Autrement dit, si $\left(E = 0\right)$ la puissance qu'interprète le champs d'exposant est alors le résultat de $\left(1 - biais\right)$.
+Cependant, dans le cas d'un nombre _dénormalisé_ le champs d'exposant est nul.
+Pour qu'une continuité soit possible entre nombres _normaux_ et _dénormaux_, il faut que la valeur que représente le champs d'exposant nul soit interprété comme celle de la plus petite puissance dont peut faire usage un nombre _normalisé_.
+Autrement dit, si $\left(E = 0\right)$ la puissance qu'interprète le champs d'exposant du nombre _dénormalisé_ est alors le résultat de $\left(1 - biais\right)$.
 
 ## La continuité de représentation des nombres dénormaux
 
