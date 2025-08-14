@@ -378,8 +378,9 @@ $$\alpha: \ \left[0_{15}, \quad 0_{14}, \ 0_{13}, \ 0_{12}, \ 0_{11}, \ 1_{10}, 
 Nous reconnaissons que le nombre $\alpha$ est _normalisé_, car son champs d'exposant biaisé $\left[ \ .., \ 0_{14}, \ 0_{13}, \ 0_{12}, \ 0_{11}, \ 1_{10}, \ .. \ \right]$ code une valeur comprise dans la plage de codage $\left[1;\left(2^N - 1\right)\right[$ appartenant aux nombres _normaux_.
 Avec $N$ le nombre de bits du champs d'exposant, ici $5$.
 Rappelons nous du fait que le biais du champs d'exposant soit $\left(2^{\left(N - 1\right)} - 1\right)$ soit $15$, nous en aurons besoin.
-De plus, comme le nombre $\alpha$ est _normalisé_ alors le bit implicite de la mantisse tronquée est $1$.
-Et vu que le champs de la mantisse tronquée est nul, sa valeur réel est $\left(1_2 + 0.0000000000_2\right)$.
+De plus, comme le nombre $\alpha$ est _normalisé_ alors le bit implicite du champs de mantisse tronquée est $1$, et la valeur codé dans le champs lui même est nul.
+Par conséquent, nous calculons la valeur du nombre $\alpha$ selon $\left(\left(1 + Truncated \ Mantissa\right) \times 2^{\left(Exponent - biais\right)}\right)$, soit l'équivalent de $\left(\left(1 + 0.0\right) \times 2^{\left(1 - 15\right)}\right)$.
+Le nombre $\alpha$ est donc égale à $0.00006103515625$.
 
 Je présente également l'illustration du plus grand nombre positif et _dénormalisé_ pouvant être codé au format _Half Precision_.
 Ce nombre _dénormalisé_ sera connu sous le nom de $\beta$.
@@ -388,40 +389,10 @@ $$\beta: \ \left[0_{15}, \quad 0_{14}, \ 0_{13}, \ 0_{12}, \ 0_{11}, \ 0_{10}, \
 
 Nous reconnaissons que le nombre $\beta$ est _dénormalisé_, car son champs d'exposant biaisé $\left[ \ .., \ 0_{14}, \ 0_{13}, \ 0_{12}, \ 0_{11}, \ 0_{10}, \ .. \ \right]$ est nul, et parce que son champs de mantisse tronquée $\left[ \ .., \ 1_9, \ 1_8, \ 1_7, \ 1_6, \ 1_5, \ 1_4, \ 1_3, \ 1_2, \ 1_1, \ 1_0\right]$ est non nul.
 Le biais du champs d'exposant est toujours de $15$, car le champs de $\beta$ est de taille identique à celui de $\alpha$.
-De plus, comme le nombre $\beta$ est _dénormalisé_ alors le bit implicite de la mantisse tronquée est $0$.
-Par ailleurs, le champs de mantisse tronquée de $10$ bits est définit à sa valeur maximal codable (composé uniquement de bits à $1$), et sa valeur réel est donc $\left(0_2 + 0.1111111111_2\right)$.
+De plus, comme le nombre $\beta$ est _dénormalisé_ alors le bit implicite du champs de mantisse tronquée est $0$, et le champs lui même interprète le plus grand nombre pouvant être codé en son sein (la valeur maximal codable sur $10$ bits).
+Par conséquent, nous calculons la valeur du nombre $\beta$ selon $\left(\left(0 + Truncated \ Mantissa\right) \times 2^{\left(Exponent - biais\right)}\right)$, soit l'équivalent de $\left(\left(0 + 0.9990234375\right) \times 2^{\left(1 - 15\right)}\right)$.
+Le nombre $\beta$ est donc égale à $0.0000609755516052$.
 
-Représentons la valeur de nos deux nombres $\alpha = \left(\left(1_2 + 0.0000000000_2\right) \times 2^{\left(1 - 15\right)}\right)$ et $\beta = \left(\left(0_2 + 0.1111111111_2\right) \times 2^{\left(1 - 15\right)}\right)$.
-Remarquons que la puissance $2^{-14}$ sont toutes les deux identiques dans le calcul de $\alpha$ et $\beta$.
-Ce qui veut dire que la virgule de $\alpha$ ainsi que de $\beta$ va être décalée du même nombre de rangs vers la gauche, $14 rangs vers la gauche précisément.
-Les décalages de la virgule de nos deux nombres entrainent une divison de la valeur de ceux-ci par $2^{14}$.
-Mais divisé par un même nombre $\alpha$ et $\beta$ ne nous sevrira à rien par la suite, nous les laissons donc tel quel.
+// tau
 
-Maintenant, observons le résultat de ce calcul $\left(\alpha - \beta\right) = \tau$, soit $\left(1.0000000000 - 0.1111111111\right) = 0.0000000001$.
-Ici, le nombre $\tau$ représente le plus petit nombre _dénormalisé_ pouvant être codé sur un format _Half Precision_.
-
-// parler du cas dans lequel le champs d'exposant des nombres dénormaux ne sont pas interprété différemment
-
-Si $\left(\tau = \left(0.0000000001_2 \times 2^{-14}\right)\right)$ alors $\left(\alpha - \tau = \beta\right)$, essayons de comprendre pourquoi.
-Pour commencer, $\tau$ est la plus petite valeur positive pouvant être codé dans un nombre _dénormalisé_ au format _Half Precision_.
-Sachant que $\left(\beta = \left(0.1111111111_2 \times 2^{-14}\right)\right)$ et que $\left(\alpha = \left(1.0000000000_2 \times 2^{-14}\right)\right)$ alors nous savons que les virgules de $\tau$, $\alpha$ et $\beta$ seront toutes invariablement décalées de $14$ rangs vers la gauche.
-// faire le pont ici. 
-Nous en concluons que $\left(1.0000000000_2 - 0.0000000001_2 = 0.1111111111_2\right)$.
-Cela témoigne du fait de la présence d'une continuité de codage des nombres, passant de nombre _normalisé_ à _dénormalisé_. 
-
-// l'exposant
-
-
-
-1.0000000000 - 0.0000000001 = 0.1111111111
-
-
-
-
-
-
-
-
-Le champs de mantisse tronquée vaut $0.9990234375$ et rappellons que le bit implicite est alors $0$, de plus, selon ce que nous venons de dire plus haut le champs d'exposant interprète la puissance $-14$.
-Par le calcul suivant $\left(0 + 0.9990234375\right) \times 2^{-14}$ nous obtenons le résultat $0.000060975551652$.
 
