@@ -413,7 +413,13 @@ La valeur de $\tau$ se calcul de la manière suivante $\left(\left(0 + 0,0009765
 Nous pouvons remarquer quelque chose d'intéressant $\left(\alpha \div \beta\right) \approx 2.0019$.
 Autrement dit, $\beta$ qui représente le plus grand nombre positif _dénormalisé_ est deux fois plus petit que $\alpha$ qui représente le plus petit nombre positif _normalisé_.
 Rappelons ce qui est dit dans le début du chapitre "_La continuité de représentation des nombres dénormaux_", je cite "_Dans la théorie, tout nombre dont la valeur se situe entre_ $0$ _et le plus petit nombre positif normalisé, devrait pouvoir être représenté sous la forme d'un nombre dénormalisé_.".
-Dans cette situation, nous nous rendons compte que ce n'est pas le cas car la plage de codage des nombres _dénormaux_ comporte un trou de valeur ne pouvant pas être représenté.
+Dans les faits, nous nous rendons compte que ce n'est pas le cas.
+La raison en est que la plage de codage des nombres _dénormaux_ comporte un trou de valeur ne pouvant pas être représenté.
+
+Par exemple, pour le calcul $\left(\alpha - \tau\right)$ aussi proche de $\alpha que puisse être le résultat il n'est pourtant pas représentable.
+Le résultat de ce calcul est $0.0000610053539276$ et figure dans l'intervalle de valeur $\left]\beta;\alpha\right[$ ne pouvant être codé ni par des nombres _normaux_, ni par des nombres _dénormaux_.
+
+
 
 // alpha - tau
 
