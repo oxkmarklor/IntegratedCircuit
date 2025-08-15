@@ -381,7 +381,8 @@ Nous allons démontrer cela mathématiquement sur les deux prochain chapitres.
 
 ### Représentation non continu des nombres dénormaux
 
--- -
+Commençons par voir les problèmes auquels nous ferions face, si le standard IEEE-754 ne considérait pas l'interprétation de la valeur du champs d'exposant d'un nombre _dénormalisé_ différemment d'un nombre _normalisé_.
+Ce chapitre et le suivant auront tout deux besoin des trois nombres $\alpha$, $\beta$ et $\tau$, dont j'ai illustré le codage au format _Half Precision_ ci-dessous.
 
 $$\alpha: \ \left[0_{15}, \quad 0_{14}, \ 0_{13}, \ 0_{12}, \ 0_{11}, \ 1_{10}, \quad 0_9, \ 0_8, \ 0_7, \ 0_6, \ 0_5, \ 0_4, \ 0_3, \ 0_2, \ 0_1, \ 0_0\right]$$
 
