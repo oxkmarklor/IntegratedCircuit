@@ -429,23 +429,22 @@ Le nombre $0.000045$ a une valeur aussi lointaine de $\alpha$ que de $\beta$ pou
 
 Voilà le problème que pose l'absence de continuité entre la représentation des nombres _normaux_ et _dénormaux_.
 
+// illustration du problème?
+
 ### Représentation continu des nombres dénormaux
 
+Dans la section précédente, nous avons pu voir le problème que pose une interprétation "classique" de la puissance que code le champs d'exposant d'un nombre _dénormalisé_.
+Dans ce chapitre, interprétons le champs d'exposant des nombres _dénormaux_ $\beta$ et $\tau$, comme le préconise le chapitre "_L'interprétation de la valeur du champs d'exposant des nombres dénormaux_".
+
+Alors, la valeur de $\beta$ se calcul comme suit $\left(\left(0 + 0.9990234375\right) \times 2^{\left(1 - 15\right)}\right) = 0.0000609755516052$.
+
+Tandis que la valeur de $\tau$ est $\left(\left(0 + 0,0009765625\right) \times 2^{\left(1 - 15\right)}\right) = 0.0000000596046447753$.
+
+Je rappelle que la valeur de $\alpha$ ne change pas car c'est un nombre _normalisé_.
+Nous pouvons remarquer la proximité de valeur entre le plus grand nombre positif _dénormalisé_ $\beta$, et le plus petit nombre positif _normalisé_ $\alpha$.
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+// refaire calcul 
 
 
 
