@@ -371,20 +371,21 @@ Autrement dit, si $\left(E = 0\right)$ la puissance qu'interprète le champs d'e
 ## La continuité de représentation des nombres dénormaux
 
 Réintroduisons en une phrase ce que sont les nombres _dénormaux_.
-Un nombre _dénormalisé_ représente une valeur qui ne peut pas être codé par un nombre _normalisé_, cette valeur se situe entre $0$ et le plus petit nombre positif pouvant être codé sur les nombres _normaux_.
+Un nombre _dénormalisé_ représente une valeur qui se situe entre $0$ et le plus petit nombre positif _normalisé_ pour un format donné.
 Dans la théorie, tout nombre dont la valeur se situe entre $0$ et le plus petit nombre positif _normalisé_, devrait pouvoir être représenté sous la forme d'un nombre _dénormalisé_.
 Dans les limites de la représentation binaire bien entendu.
 Si c'est le cas, alors les représentations des nombres _normaux_ et _dénormaux_ sont continues. 
-Cependant, pour cela il faut que le champs d'exposant des nombres _dénormaux_ soit interprété de la bonne manière, interprétation dont il est le sujet dans le chapitre précédent "_L'interprétation de la valeur du champs d'exposant des nombres dénormaux_".
+Cependant, pour cela il faut que le champs d'exposant des nombres _dénormaux_ soit interprété de la bonne manière, interprétation dont il est le sujet dans le chapitre précédent.
 
-Nous allons démontrer cela mathématiquement sur les deux prochain chapitres.
+Nous allons démontrer cela mathématiquement au travers des deux chapitres prochain.
 
 ### Représentation non continu des nombres dénormaux
 
-Commençons par voir les problèmes auquels nous ferions face, si le standard IEEE-754 ne considérait pas l'interprétation de la valeur du champs d'exposant d'un nombre _dénormalisé_ différemment d'un nombre _normalisé_.
-Ce chapitre et le suivant auront tout deux besoin des trois nombres $\alpha$, $\beta$ et $\tau$, dont j'ai illustré le codage au format _Half Precision_ ci-dessous.
+Commençons par voir les problèmes auquels nous ferions face si le standard IEEE-754 interprétait la valeur du champs d'exposant d'un nombre _dénormalisé_, comme celle d'un nombre _normalisé_.
+C'est à dire, par la soustraction du biais du champs d'exposant à la valeur qu'il code.  
+Ce chapitre et le suivant auront tout deux besoin des trois nombres $\alpha$, $\beta$ et $\tau$, qui ont chacun une illustration de leur codage au format _Half Precision_ ci-dessous.
 
-Je recopie ici même l'illustration numéro $\left(2\right)$ du plus petit nombre positif et _normalisé_ pouvant être codé au format _Half Precision_.
+Pour commencer, je recopie ici même l'illustration numéro $\left(2\right)$ du plus petit nombre positif et _normalisé_ pouvant être codé au format _Half Precision_.
 Ce nombre _normalisé_ sera désormais connu sous le nom de $\alpha$.
 
 $$\alpha: \ \left[0_{15}, \quad 0_{14}, \ 0_{13}, \ 0_{12}, \ 0_{11}, \ 1_{10}, \quad 0_9, \ 0_8, \ 0_7, \ 0_6, \ 0_5, \ 0_4, \ 0_3, \ 0_2, \ 0_1, \ 0_0\right]$$
@@ -416,22 +417,22 @@ Rappelons ce qui est dit dans le début du chapitre "_La continuité de représe
 Dans les faits, nous nous rendons compte que ce n'est pas le cas.
 La raison en est que la plage de codage des nombres _dénormaux_ comporte un trou de valeur ne pouvant pas être représenté.
 
-Par exemple, pour le calcul $\left(\alpha - \tau\right)$ aussi proche de $\alpha que puisse être le résultat il n'est pourtant pas représentable.
-Le résultat de ce calcul est $0.0000610053539276$ et figure dans l'intervalle de valeur $\left]\beta;\alpha\right[$ ne pouvant être codé ni par des nombres _normaux_, ni par des nombres _dénormaux_.
+Par exemple, pour le calcul $\left(\alpha - \tau\right)$ aussi proche de $\alpha$ que puisse être le résultat, il n'est pourtant pas représentable.
+Le résultat de ce calcul est $0.0000610053539276$ et figure dans l'intervalle de valeur $\left]\beta;\alpha\right[$ ne pouvant donc être codé ni par des nombres _normaux_, ni par des nombres _dénormaux_.
 
+Dans les faits, les calculs sur les flottants occasionnent souvent des arrondis, du fait de l'incapacité de toute base numérique à pouvoir représenté certain nombre de manière fini.
+Prenez l'exemple de $\left(1 \div 3\right)$ en base décimale, ou encore $\left(1 \div 10\right)$ en binaire pour vous en convaincre.
+Le standard IEEE-754 défini des méthodes d'arrondissement que nous ne détaillerons pas dans ce document.
+Pour autant, le résultat de $\left(\alpha - \tau\right)$ est si proche de la valeur de $\alpha$, qu'il pourrait être possible d'utiliser une méthode d'arrondi par le haut pour obtenir un résultat convenant à certains types de calcul.
+Mais si cela est vrai pour $\tau$, ça ne l'est pas pour le nombre $0.000045$.
 
+// ici
 
-// alpha - tau
+Cette valeur étant presque aussi éloignée de la valeur de $\alpha$ que de celle de $\beta$, un tel arrondi du résultat est trop impactant.
 
+Voici les problèmes que posent l'absence de continuité entre la représentation des nombres _normaux_, ainsi que _dénormaux_.
 
-Ceci démontre bien qu'il y a
-
-Nous remarquons quelque chose d'intéressant ici.
-La valeur de $\beta$ représente le plus grand nombre positif et _dénormalisé_ pouvant être codé sur un flottant au format _Half Precision_, alors que ce dernier est plus de deux fois inférieur à $\alpha$ qui est quant à lui le plus petit nombre _normalisé_ codable au format _Half Precision_.
-Dans ce cas, la plage de codage des nombres _dénormalisés_ comporte une sorte de trou dans lequel il n'est pas possible de représenter certains nombres.
-Le calcul suivant $\left(\alpha - \tau\right)$ soit $\left(0.00006103515625 - 0.0000000298023223876\right)$ retranche une valeur non nul au plus petit nombre pouvant être codé sur un nombre _normalisé_.
-Nous pourrions légitimement penser que le résultat de ce calcul sera donc _dénormalisé_, mais non.
-Car le résultat de ce calcul est $0.0000610053539276$ et que cette valeur se situe dans l'intervalle $\left]\beta;\alpha\right[$ de nombre ne pouvant ni être codé par des nombres _normaux_, ni par des nombres _dénormaux_.
+### Représentation continu des nombres dénormaux
 
 // etc
 
