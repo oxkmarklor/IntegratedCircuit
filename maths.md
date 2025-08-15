@@ -398,7 +398,7 @@ Ce nombre _dénormalisé_ sera connu sous le nom de $\beta$.
 $$\beta: \ \left[0_{15}, \quad 0_{14}, \ 0_{13}, \ 0_{12}, \ 0_{11}, \ 0_{10}, \quad 1_9, \ 1_8, \ 1_7, \ 1_6, \ 1_5, \ 1_4, \ 1_3, \ 1_2, \ 1_1, \ 1_0\right]$$
 
 Nous allons calculer la puissance que représente le champs d'exposant $E$ de $\beta$ avec $\left(E - biais\right)$, comme nous le ferions pour n'importe quel nombre _normalisé_.
-Pour calculer la valeur de $\beta$ nous avons alors besoin de la formule $\left(\left(0 + Truncated \ Mantissa\right) \times 2^{\left(Exponent - bias\right)}\right)$, ce qui donne $\left(\left(0 + 0.9990234375\right) \times 2^{\left(0 - 15\right)}\right) = 0.0000304877758026$.
+Pour calculer la valeur de $\beta$ nous avons alors besoin de la formule $\left(\left(0 + Truncated \ Mantissa\right) \times 2^{\left(Exponent - bias\right)}\right)$, ce qui donne $\left(\left(0 + 0.9990234375\right) \times 2^{\left(0 - 15\right)}\right) = 0.0000304877758026123046875$.
 
 Et pour finir, voici l'illustration du plus petit nombre positif et _dénormalisé_ pouvant être codé au format _Half Precision_.
 Par définition, ce nombre est alors le plus petit des nombres positif non nul codable sur un _Half Precision_, c'est le plus proche de $0$.
@@ -409,7 +409,7 @@ $$\tau: \ \left[0_{15}, \quad 0_{14}, \ 0_{13}, \ 0_{12}, \ 0_{11}, \ 0_{10}, \q
 Nous devons faire attention à la même chose pour $\tau$ que pour $\beta$.
 Cela veut dire que nous devons calculé la puissance que représente le champs d'exposant $E$ de $\tau$ avec $\left(E - biais\right)$, comme nous le ferions pour n'importe quel nombre _normalisé_.
 C'est un nombre _dénormalisé_ tout comme $\beta$ après tout.
-La valeur de $\tau$ se calcul de la manière suivante $\left(\left(0 + 0,0009765625\right) \times 2^{\left(0 - 15\right)}\right) = 0.0000000298023223876$.
+La valeur de $\tau$ se calcul de la manière suivante $\left(\left(0 + 0,0009765625\right) \times 2^{\left(0 - 15\right)}\right) = 0.0000000298023223876953125$.
 
 Nous pouvons remarquer quelque chose d'intéressant $\left(\alpha \div \beta\right) \approx 2.0019$.
 Autrement dit, $\beta$ qui représente le plus grand nombre positif _dénormalisé_ est deux fois plus petit que $\alpha$ qui représente le plus petit nombre positif _normalisé_.
@@ -418,7 +418,7 @@ Dans les faits, nous nous rendons compte que ce n'est pas le cas.
 La raison en est que la plage de codage des nombres _dénormaux_ comporte un trou de valeur ne pouvant pas être représenté.
 
 Par exemple, pour le calcul $\left(\alpha - \tau\right)$ aussi proche de $\alpha$ que puisse être le résultat, il n'est pourtant pas représentable.
-Le résultat de ce calcul est $0.0000610053539276$ et figure dans l'intervalle de valeur $\left]\beta;\alpha\right[$ ne pouvant donc être codé ni par des nombres _normaux_, ni par des nombres _dénormaux_.
+Le résultat de ce calcul est $0,0000610053539276123046875$ et figure dans l'intervalle de valeur $\left]\beta;\alpha\right[$ ne pouvant donc être codé ni par des nombres _normaux_, ni par des nombres _dénormaux_.
 
 Dans les faits, les calculs sur les flottants occasionnent souvent des arrondis, du fait de l'incapacité de toute base numérique à pouvoir représenté certain nombre de manière fini.
 Prenez l'exemple de $\left(1 \div 3\right)$ en base décimale, ou encore $\left(1 \div 10\right)$ en binaire pour vous en convaincre.
@@ -429,22 +429,18 @@ Le nombre $0.000045$ a une valeur aussi lointaine de $\alpha$ que de $\beta$ pou
 
 Voilà le problème que pose l'absence de continuité entre la représentation des nombres _normaux_ et _dénormaux_.
 
-// illustration du problème?
-
 ### Représentation continu des nombres dénormaux
 
 Dans la section précédente, nous avons pu voir le problème que pose une interprétation "classique" de la puissance que code le champs d'exposant d'un nombre _dénormalisé_.
 Dans ce chapitre, interprétons le champs d'exposant des nombres _dénormaux_ $\beta$ et $\tau$, comme le préconise le chapitre "_L'interprétation de la valeur du champs d'exposant des nombres dénormaux_".
 
-Alors, la valeur de $\beta$ se calcul comme suit $\left(\left(0 + 0.9990234375\right) \times 2^{\left(1 - 15\right)}\right) = 0.0000609755516052$.
+Alors, la valeur de $\beta$ se calcul comme suit $\left(\left(0 + 0.9990234375\right) \times 2^{\left(1 - 15\right)}\right) = 0,000060975551605224609375$.
 
-Tandis que la valeur de $\tau$ est $\left(\left(0 + 0,0009765625\right) \times 2^{\left(1 - 15\right)}\right) = 0.0000000596046447753$.
+Tandis que la valeur de $\tau$ est $\left(\left(0 + 0,0009765625\right) \times 2^{\left(1 - 15\right)}\right) = 0,000000059604644775390625$.
 
 Je rappelle que la valeur de $\alpha$ ne change pas car c'est un nombre _normalisé_.
 Nous pouvons remarquer la proximité de valeur entre le plus grand nombre positif _dénormalisé_ $\beta$, et le plus petit nombre positif _normalisé_ $\alpha$.
 
-
-// refaire calcul 
 
 
 
