@@ -423,17 +423,29 @@ Le résultat de ce calcul est $0.0000610053539276$ et figure dans l'intervalle d
 Dans les faits, les calculs sur les flottants occasionnent souvent des arrondis, du fait de l'incapacité de toute base numérique à pouvoir représenté certain nombre de manière fini.
 Prenez l'exemple de $\left(1 \div 3\right)$ en base décimale, ou encore $\left(1 \div 10\right)$ en binaire pour vous en convaincre.
 Le standard IEEE-754 défini des méthodes d'arrondissement que nous ne détaillerons pas dans ce document.
-Pour autant, le résultat de $\left(\alpha - \tau\right)$ est si proche de la valeur de $\alpha$, qu'il pourrait être possible d'utiliser une méthode d'arrondi par le haut pour obtenir un résultat convenant à certains types de calcul.
-Mais si cela est vrai pour $\tau$, ça ne l'est pas pour le nombre $0.000045$.
+Pour autant, le résultat de $\left(\alpha - \tau\right)$ est si proche de la valeur de $\alpha$, qu'il pourrait être possible d'utiliser une méthode d'arrondi par le haut pour obtenir un résultat suffisamment précis pour certain type de calcul.
+Mais si cela est vrai pour $\tau$, ça ne l'est pas pour un nombre comme $0.000045$.
+Le nombre $0.000045$ a une valeur aussi lointaine de $\alpha$ que de $\beta$ pour ainsi dire, alors n'importe quel méthode d'arrondi transformerait beaucoup ce nombre jusqu'à le rendre plus qu'approxiamtif.
 
-// ici
-
-Cette valeur étant presque aussi éloignée de la valeur de $\alpha$ que de celle de $\beta$, un tel arrondi du résultat est trop impactant.
-
-Voici les problèmes que posent l'absence de continuité entre la représentation des nombres _normaux_, ainsi que _dénormaux_.
+Voilà le problème que pose l'absence de continuité entre la représentation des nombres _normaux_ et _dénormaux_.
 
 ### Représentation continu des nombres dénormaux
 
-// etc
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
