@@ -410,16 +410,15 @@ Cela veut dire que nous devons calculé la puissance que représente le champs d
 C'est un nombre _dénormalisé_ tout comme $\beta$ après tout.
 La valeur de $\tau$ se calcul de la manière suivante $\left(\left(0 + 0,0009765625\right) \times 2^{\left(0 - 15\right)}\right) = 0.0000000298023223876$.
 
--- -
+Nous pouvons remarquer quelque chose d'intéressant $\left(\alpha \div \beta\right) \approx 2.0019$.
+Autrement dit, $\beta$ qui représente le plus grand nombre positif _dénormalisé_ est deux fois plus petit que $\alpha$ qui représente le plus petit nombre positif _normalisé_.
+Rappelons ce qui est dit dans le début du chapitre "_La continuité de représentation des nombres dénormaux_", je cite "_Dans la théorie, tout nombre dont la valeur se situe entre_ $0$ _et le plus petit nombre positif normalisé, devrait pouvoir être représenté sous la forme d'un nombre dénormalisé_.".
+Dans cette situation, nous nous rendons compte que ce n'est pas le cas car la plage de codage des nombres _dénormaux_ comporte un trou de valeur ne pouvant pas être représenté.
 
-Commençons désormais par définir la valeur de chacun de ses nombres, mais pas n'importe comment.
-Nous allons calculer la puissance que représent le champs d'exposant des _dénormaux_ $\beta$ et $\tau$, comme nous le faisons avec le nombre _normalisé_ $\alpha$ :
-  - $\alpha = \left(\left(1 + 0.0\right) \times 2^{\left(1 - 15\right)}\right) = $
-  - $\beta = \left(\left(0 + 0.9990234375\right) \times 2^{\left(0 - 15\right)}\right) = 0.0000304877758026$
-  - $\tau = \left(\left(0 + 0,0009765625\right) \times 2^{\left(0 - 15\right)}\right) = 0.0000000298023223876$
+// alpha - tau
 
-Cette méthodologie de calcul fait simple, chaque nombre _normalisé_ comme _dénormalisé_ peut être représenté comme ceci $\left(\left(implicit \ bit + Truncated \ Mantissa\right) \times 2^{\left(Exponent - bias\right)}\right)$.
-Vous pouvez verifier chaque calcul par vous même à l'aide des illustrations du codage des nombres $\alpha$, $\beta$ et $\tau$ qui figurent ci-dessus.
+
+Ceci démontre bien qu'il y a
 
 Nous remarquons quelque chose d'intéressant ici.
 La valeur de $\beta$ représente le plus grand nombre positif et _dénormalisé_ pouvant être codé sur un flottant au format _Half Precision_, alors que ce dernier est plus de deux fois inférieur à $\alpha$ qui est quant à lui le plus petit nombre _normalisé_ codable au format _Half Precision_.
