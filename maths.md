@@ -384,22 +384,37 @@ Nous allons démontrer cela mathématiquement sur les deux prochain chapitres.
 Commençons par voir les problèmes auquels nous ferions face, si le standard IEEE-754 ne considérait pas l'interprétation de la valeur du champs d'exposant d'un nombre _dénormalisé_ différemment d'un nombre _normalisé_.
 Ce chapitre et le suivant auront tout deux besoin des trois nombres $\alpha$, $\beta$ et $\tau$, dont j'ai illustré le codage au format _Half Precision_ ci-dessous.
 
+Je recopie ici même l'illustration numéro $\left(2\right)$ du plus petit nombre positif et _normalisé_ pouvant être codé au format _Half Precision_.
+Ce nombre _normalisé_ sera désormais connu sous le nom de $\alpha$.
+
 $$\alpha: \ \left[0_{15}, \quad 0_{14}, \ 0_{13}, \ 0_{12}, \ 0_{11}, \ 1_{10}, \quad 0_9, \ 0_8, \ 0_7, \ 0_6, \ 0_5, \ 0_4, \ 0_3, \ 0_2, \ 0_1, \ 0_0\right]$$
 
-Je présente également l'illustration du plus _grand_ nombre positif et ___dénormalisé___ pouvant être codé au format _Half Precision_.
+Pour calculer la valeur de $\alpha$ nous avons besoin de la formule $\left(\left(1 + Truncated \ Mantissa\right) \times 2^{\left(Exponent - bias\right)}\right)$, ce qui donne $\left(\left(1 + 0.0\right) \times 2^{\left(1 - 15\right)}\right) = 0.00006103515625$.
+
+Je présente également l'illustration du plus grand nombre positif et _dénormalisé_ pouvant être codé au format _Half Precision_.
 Ce nombre _dénormalisé_ sera connu sous le nom de $\beta$.
 
 $$\beta: \ \left[0_{15}, \quad 0_{14}, \ 0_{13}, \ 0_{12}, \ 0_{11}, \ 0_{10}, \quad 1_9, \ 1_8, \ 1_7, \ 1_6, \ 1_5, \ 1_4, \ 1_3, \ 1_2, \ 1_1, \ 1_0\right]$$
 
-Et pour finir, voici l'illustration du plus _petit_ nombre positif et ___dénormalisé___ pouvant être codé au format _Half Precision_.
-Ce nombre positif et _dénormalisé_ est par définition le plus petit qui soit possible de codé pour ce format de flottant.
-Ce nombre portera le nom de $\tau$.
+Nous allons calculer la puissance que représente le champs d'exposant $E$ de $\beta$ avec $\left(E - biais\right)$, comme nous le ferions pour n'importe quel nombre _normalisé_.
+Pour calculer la valeur de $\beta$ nous avons alors besoin de la formule $\left(\left(0 + Truncated \ Mantissa\right) \times 2^{\left(Exponent - bias\right)}\right)$, ce qui donne $\left(\left(0 + 0.9990234375\right) \times 2^{\left(0 - 15\right)}\right) = 0.0000304877758026$.
+
+Et pour finir, voici l'illustration du plus petit nombre positif et _dénormalisé_ pouvant être codé au format _Half Precision_.
+Par définition, ce nombre est alors le plus petit des nombres positif non nul codable sur un _Half Precision_, c'est le plus proche de $0$.
+Il portera le nom de $\tau$.
 
 $$\tau: \ \left[0_{15}, \quad 0_{14}, \ 0_{13}, \ 0_{12}, \ 0_{11}, \ 0_{10}, \quad 0_9, \ 0_8, \ 0_7, \ 0_6, \ 0_5, \ 0_4, \ 0_3, \ 0_2, \ 0_1, \ 1_0\right]$$
 
+Nous devons faire attention à la même chose pour $\tau$ que pour $\beta$.
+Cela veut dire que nous devons calculé la puissance que représente le champs d'exposant $E$ de $\tau$ avec $\left(E - biais\right)$, comme nous le ferions pour n'importe quel nombre _normalisé_.
+C'est un nombre _dénormalisé_ tout comme $\beta$ après tout.
+La valeur de $\tau$ se calcul de la manière suivante $\left(\left(0 + 0,0009765625\right) \times 2^{\left(0 - 15\right)}\right) = 0.0000000298023223876$.
+
+-- -
+
 Commençons désormais par définir la valeur de chacun de ses nombres, mais pas n'importe comment.
 Nous allons calculer la puissance que représent le champs d'exposant des _dénormaux_ $\beta$ et $\tau$, comme nous le faisons avec le nombre _normalisé_ $\alpha$ :
-  - $\alpha = \left(\left(1 + 0.0\right) \times 2^{\left(1 - 15\right)}\right) = 0.00006103515625$
+  - $\alpha = \left(\left(1 + 0.0\right) \times 2^{\left(1 - 15\right)}\right) = $
   - $\beta = \left(\left(0 + 0.9990234375\right) \times 2^{\left(0 - 15\right)}\right) = 0.0000304877758026$
   - $\tau = \left(\left(0 + 0,0009765625\right) \times 2^{\left(0 - 15\right)}\right) = 0.0000000298023223876$
 
