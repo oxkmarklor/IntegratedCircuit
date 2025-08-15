@@ -370,15 +370,18 @@ Autrement dit, si $\left(E = 0\right)$ la puissance qu'interprète le champs d'e
 
 ## La continuité de représentation des nombres dénormaux
 
-Il y a une conséquence positive au fait que le standard IEEE-754 interprète le champs d'exposant des nombres _dénormaux_ différemment de celui d'un nombre _normalisé_.
-Cela permet d'avoir une continuité dans le codage des nombres _normaux_ et _dénormaux_.
+Réintroduisons en une phrase ce que sont les nombres _dénormaux_.
+Un nombre _dénormalisé_ représente une valeur qui ne peut pas être codé par un nombre _normalisé_, cette valeur se situe entre $0$ et le plus petit nombre positif pouvant être codé sur les nombres _normaux_.
+Dans la théorie, tout nombre dont la valeur se situe entre $0$ et le plus petit nombre positif _normalisé_, devrait pouvoir être représenté sous la forme d'un nombre _dénormalisé_.
+Dans les limites de la représentation binaire bien entendu.
+Si c'est le cas, alors les représentations des nombres _normaux_ et _dénormaux_ sont continues. 
+Cependant, pour cela il faut que le champs d'exposant des nombres _dénormaux_ soit interprété de la bonne manière, interprétation dont il est le sujet dans le chapitre précédent "_L'interprétation de la valeur du champs d'exposant des nombres dénormaux_".
 
-Mais pour comprendre ce qu'est ce principe de continuité de représentation des _dénormaux_, il faut déjà comprendre ce qui se passe lorsqu'il n'y en a pas.
-Pour cela, je vais avoir besoin de prendre des exemples.
-Les nombres dont le codage est illustrer ci-dessous sont nécessaire à ces exemples.
+Nous allons démontrer cela mathématiquement sur les deux prochain chapitres.
 
-Pour commencer, je recopie ici même l'illustration numéro $\left(2\right)$ du plus _petit_ nombre positif et ___normalisé___ pouvant être codé au format _Half Precision_.
-Ce nombre _normalisé_ sera désormais connu sous le nom de $\alpha$.
+### Représentation non continu des nombres dénormaux
+
+-- -
 
 $$\alpha: \ \left[0_{15}, \quad 0_{14}, \ 0_{13}, \ 0_{12}, \ 0_{11}, \ 1_{10}, \quad 0_9, \ 0_8, \ 0_7, \ 0_6, \ 0_5, \ 0_4, \ 0_3, \ 0_2, \ 0_1, \ 0_0\right]$$
 
