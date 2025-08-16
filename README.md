@@ -52,9 +52,9 @@ Techniquement, vu que dans chacun des produits la puissance de $2$ est multipli�
 C'est pourquoi vous entenderez souvent dire (ici compris), qu'un nombre $X$ est représenté par la somme des puissances de $2$ dont le bit est à $1$.
 Les puissances de $2$ vont de $0$ à $N - 1$, ou la valeur de $N$ est le nombre de bits qui compose un champs binaire.
 Par ailleurs, il est souvent dit que chaque bit a un "poids".
-Les poids correspondent aux exposants des puissances de $2$ associées à chacun des bits, plus cet exposant sera grand et plus un bit aura d'importance dans la représentation d'un nombre. 
+Le poids correspond à la valeur de la puissance de $2$ associée à chacun des bits, plus cette puissance sera grande et plus un bit aura d'importance dans la représentation d'un nombre. 
 
-Il est aussi définit ce que nous qualifions de __LSB__ pour __Least Significant Bit__.
+Il est aussi défini ce que nous qualifions de __LSB__ pour __Least Significant Bit__.
 Ce terme désigne le bit de poids le plus faible d'un champs, donc le bit de poids $0$ pour un champs dont l'encodage est en __Binary Unsigned__.
 Au contraire, le bit de poids le plus fort d'un champs binaire est ce que l'ont appelle le __MSB__ pour __Most Significant Bit__.
 Il est aussi possible de faire référence au bit à $1$ de poids le plus faible d'un champs avec le terme __LSB1__, ou à celui de poids le plus fort avec __MSB1__.
