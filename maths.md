@@ -364,9 +364,8 @@ Il faut savoir que cette continuité est atteignable entre les nombres _normaux_
 
 Pour un champs d'exposant biaisé $E$ d'un nombre _normalisé_, nous calculons la valeur que représente le champs avec $\left(E - biais\right)$.
 Nous soustrayons simplement le biais du champs d'exposant, à la valeur qu'il code.
-Cependant, dans le cas d'un nombre _dénormalisé_ le champs d'exposant est nul.
-Pour qu'une continuité soit possible entre nombres _normaux_ et _dénormaux_, il faut que la valeur que représente le champs d'exposant nul soit interprété comme celle de la plus petite puissance dont peut faire usage un nombre _normalisé_.
-Autrement dit, si $\left(E = 0\right)$ la puissance qu'interprète le champs d'exposant du nombre _dénormalisé_ est alors le résultat de $\left(1 - biais\right)$.
+Cependant, pour qu'une continuité soit possible entre nombres _normaux_ et _dénormaux_, il faut que la valeur que représente le champs d'exposant nul d'un nombre _dénormalisé_ soit perçu comme la plus petite puissance dont peut faire usage un nombre _normalisé_.
+Autrement dit, un nombre _dénormalisé_ a un champs d'exposant $\left(E = 0\right)$ dont la puissance interprétée est équivalente à $\left(1 - biais\right)$.
 
 ## La continuité de représentation des nombres dénormaux
 
@@ -383,7 +382,7 @@ Nous allons démontrer cela mathématiquement au travers des deux chapitres proc
 
 Commençons par voir les problèmes auquels nous ferions face si le standard IEEE-754 interprétait la valeur du champs d'exposant d'un nombre _dénormalisé_, comme celle d'un nombre _normalisé_.
 C'est à dire, par la soustraction du biais du champs d'exposant à la valeur qu'il code.  
-Ce chapitre et le suivant auront tout deux besoin des trois nombres $\alpha$, $\beta$ et $\tau$, qui ont chacun une illustration de leur codage au format _Half Precision_ ci-dessous.
+Ce chapitre et le suivant auront tout deux besoin des trois nombres $\alpha$, $\beta$ et $\tau$, qui ont ci-dessous chacun une illustration de leur codage au format _Half Precision_.
 
 Pour commencer, je recopie ici même l'illustration numéro $\left(2\right)$ du plus petit nombre positif et _normalisé_ pouvant être codé au format _Half Precision_.
 Ce nombre _normalisé_ sera désormais connu sous le nom de $\alpha$.
@@ -413,9 +412,9 @@ La valeur de $\tau$ se calcul de la manière suivante $\left(\left(0 + 0,0009765
 
 Nous pouvons remarquer quelque chose d'intéressant $\left(\alpha \div \beta\right) \approx 2.0019$.
 Autrement dit, $\beta$ qui représente le plus grand nombre positif _dénormalisé_ est deux fois plus petit que $\alpha$ qui représente le plus petit nombre positif _normalisé_.
-Rappelons ce qui est dit dans le début du chapitre "_La continuité de représentation des nombres dénormaux_", je cite "_Dans la théorie, tout nombre dont la valeur se situe entre_ $0$ _et le plus petit nombre positif normalisé, devrait pouvoir être représenté sous la forme d'un nombre dénormalisé_.".
+Rappelons ce qui a été dit plus haut, je cite "_Dans la théorie, tout nombre dont la valeur se situe entre_ $0$ _et le plus petit nombre positif normalisé, devrait pouvoir être représenté sous la forme d'un nombre dénormalisé_.".
 Dans les faits, nous nous rendons compte que ce n'est pas le cas.
-La raison en est que la plage de codage des nombres _dénormaux_ comporte un trou de valeur ne pouvant pas être représenté.
+La raison en est que la plage de codage des nombres _dénormaux_ comporte un "trou" de valeur ne pouvant pas être représenté.
 
 Par exemple, pour le calcul $\left(\alpha - \tau\right)$ aussi proche de $\alpha$ que puisse être le résultat, il n'est pourtant pas représentable.
 Le résultat de ce calcul est $0,0000610053539276123046875$ et figure dans l'intervalle de valeur $\left]\beta;\alpha\right[$ ne pouvant donc être codé ni par des nombres _normaux_, ni par des nombres _dénormaux_.
@@ -425,7 +424,8 @@ Prenez l'exemple de $\left(1 \div 3\right)$ en base décimale, ou encore $\left(
 Le standard IEEE-754 défini des méthodes d'arrondissement que nous ne détaillerons pas dans ce document.
 Pour autant, le résultat de $\left(\alpha - \tau\right)$ est si proche de la valeur de $\alpha$, qu'il pourrait être possible d'utiliser une méthode d'arrondi par le haut pour obtenir un résultat suffisamment précis pour certain type de calcul.
 Mais si cela est vrai pour $\tau$, ça ne l'est pas pour un nombre comme $0.000045$.
-Le nombre $0.000045$ a une valeur aussi lointaine de $\alpha$ que de $\beta$ pour ainsi dire, alors n'importe quel méthode d'arrondi transformerait beaucoup ce nombre jusqu'à le rendre plus qu'approxiamtif.
+Le nombre $0.000045$ a une valeur aussi lointaine de $\alpha$ que de $\beta$ pour ainsi dire.
+N'importe quel méthode d'arrondi transformerait beaucoup ce nombre jusqu'à le rendre trop approximatif pour presque tout les cas d'usage.
 
 Voilà le problème que pose l'absence de continuité entre la représentation des nombres _normaux_ et _dénormaux_.
 
@@ -434,29 +434,28 @@ Voilà le problème que pose l'absence de continuité entre la représentation d
 Dans le chapitre du nom de "_L'interprétation de la valeur du champs d'exposant des nombres dénormaux_", nous avons vu comment est ce que le champs d'exposant des nombres _dénormaux_ devait être interprété.
 Un nombre _dénormalisé_ a obligatoirement un champs d'exposant nul, ce dernier interprète une puissance dont la valeur est alors équivalente au résultat de $\left(1 - biais\right)$.
 Ce qui veut dire que:
-  - $\beta = \left(\left(0 + 0.9990234375\right) \times 2^{\left(1 - 15\right)}\right) = 0,000060975551605224609375$
-  - $\tau = \left(\left(0 + 0,0009765625\right) \times 2^{\left(1 - 15\right)}\right) = 0,000000059604644775390625$
+  - $\beta = \left(\left(0 + 0.9990234375\right) \times 2^{\left(1 - 15\right)}\right) = 0,000060975551605224609375 = 0.000000000000001111111111_2$
+  - $\tau = \left(\left(0 + 0,0009765625\right) \times 2^{\left(1 - 15\right)}\right) = 0,000000059604644775390625 = 0.000000000000000000000001_2$
 
 Si nous reprenons l'exemple de $\left(\alpha - \tau\right)$, le résultat est alors $\beta$.
 Rappelons nous que $\tau$ représente le plus petit nombre pouvant être codé au format _Half Precision_.
-En obtenant $\beta$ par la soustraction de $\tau$ à $\alpha$, nous démontrons que les plages de codage des nombres _normaux_ ainsi que _dénormaux_ sont continue.
+En obtenant $\beta$ par la soustraction de $\tau$ à $\alpha$, nous démontrons que les plages de codage des nombres _normaux_ ainsi que _dénormaux_ sont continues.
 Le fait est que nous ne pourrions pas soustraire une plus petite valeur que $\tau$, au plus petit des nombres _normaux_ que représente $\alpha$.
-Malgré cela, le résultat obtenu est tout juste le plus grand des nombres _dénormaux_ pouvant être codé au format _Half Precision_.
-Il y a donc par définition aucun "trou de valeur non représentable" dans la plage de codage des nombres _dénormaux_, d'où le terme de continuité.
+Le résultat obtenu est tout juste le plus grand des nombres _dénormaux_ pouvant être codé au format _Half Precision_.
+Il n'y a donc par définition aucun "trou" de valeur non représentable dans la plage de codage des nombres _dénormaux_.
+D'où le terme de continuité.
 
 Pour voir les choses autrement.
-Le résultat de l'addition entre le bit implicite et le champs de mantisse tronquée $T$ de chaque nombre $\alpha$, $\beta$ et $\tau$, est multiplié par $2^{\left(1 - 15\right)}$.
-La puissance de $2^{14}$ déplace de $14$ rangs vers la gauche la virgule du champs de mantisse tronquée de nos trois nombres.
-Par conséquent $\left(T_{\alpha} - T_{\tau}\right) = T_{\beta}$, ce qui donne $\left(1.0000000000 - 0.0000000001\right) = 0.1111111111$.
-Nous pouvons une nouvelle fois constaté le fait que le plus petit nombre _normalisé_ $\alpha$, et le plus grand nombre _dénormalisé_ $\beta$ soient consécutifs.
-Il y a donc continuité de représentation des nombres _normaux_ et _dénormaux_.
+Le résultat $T$ de l'addition entre le bit implicite et le champs de mantisse tronquée de chaque nombre $\alpha$, $\beta$ et $\tau$, est multiplié par $2^{\left(1 - 15\right)}$.
+La puissance de $2^{-14}$ déplace de $14$ rangs vers la gauche la virgule du champs de mantisse tronquée de nos trois nombres.
+Mais nous pouvons faire le choix de ne pas effectuer ces décalages identique les uns aux autres.
+Par conséquent si $\left(\alpha - \tau\right) = \beta$ alors $\left(T_{\alpha} - T_{\tau}\right) = T_{\beta}$, ce qui donne $\left(1.0000000000 - 0.0000000001\right) = 0.1111111111$.
+Constatez le fait que le plus petit nombre _normalisé_ $\alpha$, et le plus grand nombre _dénormalisé_ $\beta$ soient consécutifs.
+Il y a donc continuité de représentation entre les nombres _normaux_ et _dénormaux_.
 
 Pour finir, l'Unité de Configuration de la FPU prend en charge les nombres _normaux_ bien évidemment, mais aussi les nombres _dénormaux_.
-Le codage des nombres dans le champs de mantisse tronquée d'un nombre _normalisé_ comme _dénormalisé_ est identique.
-La raison à cela est que l'encodage du champs ne change pas d'un nombre _normalisé_ à un nombre _dénormalisé_, l'encodage du champs de mantisse tronquée est expliqué dans le chapitre "_La mantisse tronquée, une historie de puissance de 2_".
-C'est ce qui permet au circuit de prendre en charge les comparaisons entre deux nombres _dénormaux_.
-Mais ce n'est pas tout, il est techniquement possible pour le circuit de gérer une comparaison avec un nombre _normalisé_ et un autre _dénormalisé_.
-N'oublions pas qu'un nombre _dénormalisé_ code un champs d'exposant nul, tandis que le champs d'exposant d'un nombre _normalisé_ code une valeur à $1$ ou plus.
-En bref, peu importe la condition initial nous sommes certains que le circuit génèrera un point terminal en traitant les champs d'exposant de ses deux opérandes.
+Le codage des champs de mantisse tronquée d'un nombre _normalisé_ comme _dénormalisé_ est identique, c'est ce qui permet au circuit de prendre en charge les comparaisons entre deux nombres _dénormaux_.
+Mais ce n'est pas tout, il est techniquement possible pour le circuit de traité un nombre _normalisé_ avec un nombre _dénormalisé_.
+N'oublions pas qu'un nombre _dénormalisé_ code un champs d'exposant nul, tandis que le champs d'exposant d'un nombre _normalisé_ code une valeur comprise dans $\left[1;\left(2^N - 1\right)\right[ (la valeur codé est non nul).
+En bref, peu importe la condition initial, nous sommes certains que le circuit génèrera un point terminal en traitant les champs d'exposant de ses deux opérandes.
 
-// à verif 
