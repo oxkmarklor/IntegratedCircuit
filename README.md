@@ -33,7 +33,7 @@ Le __Binary Unsigned__ utilise les mêmes primitives que la base décimale (cell
 Pour représenter la valeur $103$ en décimale, nous décomposons en réalité chaque chiffre du nombre pour les multipliés avec une puissance de $10_{10}$ adéquat, ensuite nous faisons la somme des résultats de chaque produit.
 Regardez ci-dessous.
 
-$$103_{10} = 1 \times 10^2 + 0 \times 10^1 + 3 \times 10^0$$
+$$103 = 1 \times 10^2 + 0 \times 10^1 + 3 \times 10^0$$
 
 Veuillez noté que l'indice $X_{10}$ représente la base numérique dans laquelle le nombre $X$ qui précède est écrit.
 Nous retrouvons chacun des chiffres du nombre entrain de multiplié une puissance de $10_{10}$.
@@ -59,12 +59,12 @@ Ce terme désigne le bit de poids le plus faible d'un champs, donc le bit de poi
 Au contraire, le bit de poids le plus fort d'un champs binaire est ce que l'ont appelle le __MSB__ pour __Most Significant Bit__.
 Il est aussi possible de faire référence au bit à $1$ de poids le plus faible d'un champs avec le terme __LSB1__, ou à celui de poids le plus fort avec __MSB1__.
 
-Il se trouve que le __Binary Unsigned__ nous donne la certitude que la valeur d'un bit à $1$ de poids $i$, est strictement supérieur à la somme des bits de poids inférieur à $i$.
+Il se trouve que le __Binary Unsigned__ nous donne la certitude que la valeur d'un bit à $1$ de poids $i$, est strictement supérieur à la somme des valeurs de chaque bit de poids inférieur à $i$.
 Autrement dit $\left(1\times 2^i\right) \gt \left(\sum_{i=i-1}^0 2^i\right)$.
 Prenons comme exemple un champs binaire de $8$ bits, pour lequel nous n'allons faire attention qu'à un seul bit, celui de poids $6$ admettons.
 Disons que ce champs ressemble à ceci $01111111_{2}$, la valeur du nombre représenté est $127$ et le bit qui nous intéresse se trouve être le __MSB1__ du champs.
-La somme des bits de poids inférieur au bit de poids $6$ donne un résultat strictement inférieur à $1 \times 2^6 = 64$.
-Cela est systèmatiquement vrai, même lorsque les $i$ bits de poids inférieur représentent la valeur maximale encodable, comme dans cet exemple.
+La somme des valeurs des bits de poids inférieur au bit de poids $6$ donne un résultat strictement inférieur à $1 \times 2^6 = 64$.
+Cela est systèmatiquement vrai, même lorsque les $i$ bits de poids inférieur représentent la valeur maximale codable, comme dans cet exemple.
 
 $$\left(1 \times 2^6 = 64\right) \gt \left(63 = \left(1 \times 2^5\right)+\left(1 \times 2^4\right)+\left(1 \times 2^3\right)+\left(1 \times 2^2\right)+\left(1 \times 2^1\right)+\left(1 \times 2^0\right)\right)$$
 
@@ -81,20 +81,20 @@ Cette norme __IEEE-754__ définit trois éléments qui composent chaque nombre �
 - Un champs binaire d'___exposant___
 - Un autre champs binaire pour la ___mantisse tronquée___
 
-Dans ce qui suit nous allons nous intéressé aux encodages utilisés dans les champs binaires d'exposant et de mantisse tronquée.
-La raison en est que bien évidemment le fonctionnement du circuit en dépend.
+Dans ce qui suit nous allons nous intéresser aux encodages utilisés dans les champs binaires d'exposant et de mantisse tronquée.
+Nous allons voir que les encodages des champs de mantisse tronquée et d'exposant partagent les même caractéristiques que le _Binary Unsigned_.
+Ce qui permet de prendre en charge ces deux champs par une même méthodologie calculatoire, le tout, se reflètant sur l'architecture du circuit électronique.
 
 # III. L'encodage par biais du champs d'exposant
 
 __Le champs d'exposant utilise un encodage par biais__, ce dernier est assez simple à comprendre.
 Enfaite, le champs d'exposant est un champs binaire pour lequel nous utilisons un encodage _Binary Unsigned_ qui code une valeur numérique $X$, comme nous l'avons vu précédemment.
-A cela, il faut ajouté un biais $B$ pour obtenir la valeur représenté par le champs d'exposant.
-Dans les faits le biais est une constante qui peut être positive ou négative.
-La valeur que représente le champs d'exposant est alors issu du calcul $X + B$, cependant, dans le cadre de ce champs le biais $B$ est une constante systèmatiquement négative.
-Elle se calcul de la manière suivante $-\left(2^{\left(N-1\right)}\right)+1$, où $N$ est le nombre de bits du champs d'exposant.
+A cela, il faut ajouté ou déduire un biais $B$ (un nombre entier naturel) pour obtenir la valeur représenté par le champs d'exposant.
+Dans les faits, la valeur que représente le champs d'exposant est alors issu du calcul $X - B$. 
+Voici comment se calcul le biais $B$ d'un champs d'exposant $2^{\left(N-1\right)} - 1$, où $N$ est le nombre de bits du champs d'exposant.
 
 Etant donné que l'encodage par biais se base sur le _Binary Unsigned_, le champs d'exposant __partage les même propriétés__ que cet encodage.
-Notamment le fait que la valeur d'un bit à $1$ de poids $i$ est strictement supérieur à la somme des bits de poids inférieur à $i$.
+Notamment le fait que la valeur d'un bit à $1$ de poids $i$ soit strictement supérieur à la somme des valeurs des bits de poids inférieur à $i$.
 
 # IV. La mantisse tronquée, une historie de puissance de 2
 
@@ -107,15 +107,16 @@ Prenons l'exemple du nombre $3.75$.
 
 $$3.75 = 11.11_2 = Integer \ Part\left(\left(1 \times 2^1\right) + \left(1 \times 2^0\right)\right) + Fractional \ Part\left(\left(1 \times 2^{-1}\right) + \left(1 \times 2^{-2}\right)\right)$$
 
-Précisons que sous la forme binaire du nombre $3.75$, le point n'est là que pour facilité sa lecture.
+Précisons que sous la forme binaire du nombre $3.75$, le point n'est là que pour facilité la lecture du nombre.
 Dans les faits le point n'est pas réelement présent dans le codage des nombres flottants.
-Ce qu'il y a d'important à remarqué pour la partie fractionnaire, c'est que la valeur d'un bit à $1$ de poids $i$, est toujours strictement supérieur à la somme des bits de poids inférieur à $i$.
-Autrement dit, pour le nombre fractionnaire $F \in \left[0;1\right[$ dont ont ne prête attention qu'au bit à $1$ de poids $i$ alors $\left(1 \times 2^i\right) \gt \left(\sum_{i=i-1}^{lsb\left(F\right)} \left(F_i \times 2^i\right)\right)$.
+Ce qu'il y a d'important à remarquer pour la partie fractionnaire, c'est que la valeur d'un bit à $1$ de poids $i$, est toujours strictement supérieur à la somme des valeurs des bits de poids inférieur à $i$.
+Autrement dit, pour le bit à $1$ de poids $i$ du nombre fractionnaire $F \in \left[0;1\right[$ alors $\left(1 \times 2^i\right) \gt \left(\sum_{i=i-1}^{lsb\left(F\right)} \left(F_i \times 2^i\right)\right)$.
 
 Pour en revenir au sujet de la mantisse tronquée, elle est composée des bits de la partie entière et de la partie fractionnaire d'un nombre flottant.
 Vu que la partie entière et fractionnaire d'un nombre flottant partagent les propriétés du _Binary Unsigned_, c'est aussi le cas de la mantisse tronquée elle même.
 
-Nous verrons dans la démonstration mathématique, qu'il est utile que l'encodage des champs d'exposant et de mantisse tronquée aient les même propriétés que le $Binary \ Unsigned$, tout particulièrement.
+Nous pouvons remarquer que le champs d'exposant et de mantisse tronquée partagent bel et bien les même propriétés que l'encodage _Binary Unsigned_, comme mentionné plus haut.
+C'est dans la démonstration mathématique que nous verrons à quel point cela va nous être utile.
 
 # V. L'ordre de traitement des opérandes flottantes
 
