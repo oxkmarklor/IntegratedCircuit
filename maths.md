@@ -431,16 +431,32 @@ Voilà le problème que pose l'absence de continuité entre la représentation d
 
 ### Représentation continu des nombres dénormaux
 
-Dans la section précédente, nous avons pu voir le problème que pose une interprétation "classique" de la puissance que code le champs d'exposant d'un nombre _dénormalisé_.
-Dans ce chapitre, interprétons le champs d'exposant des nombres _dénormaux_ $\beta$ et $\tau$, comme le préconise le chapitre "_L'interprétation de la valeur du champs d'exposant des nombres dénormaux_".
+Dans le chapitre du nom de "_L'interprétation de la valeur du champs d'exposant des nombres dénormaux_", nous avons vu comment est ce que le champs d'exposant des nombres _dénormaux_ devait être interprété.
+Un nombre _dénormalisé_ a obligatoirement un champs d'exposant nul, ce dernier interprète une puissance dont la valeur est alors équivalente au résultat de $\left(1 - biais\right)$.
+Ce qui veut dire que:
+  - $\beta = \left(\left(0 + 0.9990234375\right) \times 2^{\left(1 - 15\right)}\right) = 0,000060975551605224609375$
+  - $\tau = \left(\left(0 + 0,0009765625\right) \times 2^{\left(1 - 15\right)}\right) = 0,000000059604644775390625$
 
-Alors, la valeur de $\beta$ se calcul comme suit $\left(\left(0 + 0.9990234375\right) \times 2^{\left(1 - 15\right)}\right) = 0,000060975551605224609375$.
+Si nous reprenons l'exemple de $\left(\alpha - \tau\right)$, le résultat est alors $\beta$.
+Rappelons nous que $\tau$ représente le plus petit nombre pouvant être codé au format _Half Precision_.
+En obtenant $\beta$ par la soustraction de $\tau$ à $\alpha$, nous démontrons que les plages de codage des nombres _normaux_ ainsi que _dénormaux_ sont continue.
+Le fait est que nous ne pourrions pas soustraire une plus petite valeur que $\tau$, au plus petit des nombres _normaux_ que représente $\alpha$.
+Malgré cela, le résultat obtenu est tout juste le plus grand des nombres _dénormaux_ pouvant être codé au format _Half Precision_.
+Il y a donc par définition aucun "trou de valeur non représentable" dans la plage de codage des nombres _dénormaux_, d'où le terme de continuité.
 
-Tandis que la valeur de $\tau$ est $\left(\left(0 + 0,0009765625\right) \times 2^{\left(1 - 15\right)}\right) = 0,000000059604644775390625$.
+Pour voir les choses autrement.
+Le résultat de l'addition entre le bit implicite et le champs de mantisse tronquée $T$ de chaque nombre $\alpha$, $\beta$ et $\tau$, est multiplié par $2^{\left(1 - 15\right)}$.
+La puissance de $2^{14}$ déplace de $14$ rangs vers la gauche la virgule du champs de mantisse tronquée de nos trois nombres.
+Par conséquent $\left(T_{\alpha} - T_{\tau}\right) = T_{\beta}$, ce qui donne $\left(1.0000000000 - 0.0000000001\right) = 0.1111111111$.
+Nous pouvons une nouvelle fois constaté le fait que le plus petit nombre _normalisé_ $\alpha$, et le plus grand nombre _dénormalisé_ $\beta$ soient consécutifs.
+Il y a donc continuité de représentation des nombres _normaux_ et _dénormaux_.
 
-Je rappelle que la valeur de $\alpha$ ne change pas car c'est un nombre _normalisé_.
-Nous pouvons remarquer la proximité de valeur entre le plus grand nombre positif _dénormalisé_ $\beta$, et le plus petit nombre positif _normalisé_ $\alpha$.
+Pour finir, l'Unité de Configuration de la FPU prend en charge les nombres _normaux_ bien évidemment, mais aussi les nombres _dénormaux_.
+Le codage des nombres dans le champs de mantisse tronquée d'un nombre _normalisé_ comme _dénormalisé_ est identique.
+La raison à cela est que l'encodage du champs ne change pas d'un nombre _normalisé_ à un nombre _dénormalisé_, l'encodage du champs de mantisse tronquée est expliqué dans le chapitre "_La mantisse tronquée, une historie de puissance de 2_".
+C'est ce qui permet au circuit de prendre en charge les comparaisons entre deux nombres _dénormaux_.
+Mais ce n'est pas tout, il est techniquement possible pour le circuit de gérer une comparaison avec un nombre _normalisé_ et un autre _dénormalisé_.
+N'oublions pas qu'un nombre _dénormalisé_ code un champs d'exposant nul, tandis que le champs d'exposant d'un nombre _normalisé_ code une valeur à $1$ ou plus.
+En bref, peu importe la condition initial nous sommes certains que le circuit génèrera un point terminal en traitant les champs d'exposant de ses deux opérandes.
 
-
-
-
+// à verif 
