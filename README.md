@@ -120,17 +120,17 @@ Vu que la partie entière et fractionnaire d'un nombre flottant partagent les pr
 Nous pouvons remarquer que le champs d'exposant et de mantisse tronquée partagent bel et bien les même propriétés que l'encodage _Binary Unsigned_, comme mentionné plus haut.
 C'est dans la démonstration mathématique que nous verrons à quel point cela va nous être utile.
 
-## L'ordre de traitement des opérandes flottantes
+# L'ordre de traitement des opérandes flottantes
 
 La tâche primaire du circuit est de comparer deux nombres flottants ___Half Precision___ de $16$ bits, nous les nommerons $\alpha$ et $\beta$.
 La comparaison en question est une vérification de la supériorité stricte de la valeur absolu de l'un de ces deux opérandes envers l'autre, admettons $\left(\vert\alpha\vert \gt \vert\beta\vert\right)$.
-Etant donné que le circuit n'a besoin que de la valeur absolu des opérandes $\alpha$ et $\beta$, seul les $15$ bits de poids faible de ces denières sont utiles (omission du bit de signe).
+Etant donné que le circuit n'a besoin que de la valeur absolu des opérandes $\alpha$ et $\beta$, seul les $15$ bits de poids faible sont utiles (omission du bit de signe).
 
 Il se trouve que le circuit traite les champs d'exposants $E$ de $\alpha$ ainsi que de $\beta$, avant les champs de mantisse tronquée de ces même opérandes.
 La raison en est que les champs d'exposant à eux seuls peuvent permettre au circuit d'atteindre un point terminal.
 Le circuit électronique atteint un point terminal lorsqu'il est capable de générer le résultat d'une comparaison entre ses deux opérandes, sans avoir besoin d'attendre le traitement de l'entièreté de ses entrées.
-Techniquement, un point terminal est atteint si $\left(E_{\alpha} \gt E_{\beta}\right)$ car l'opérande $\alpha$ est strictement plus grand que $\beta$, et inversement avec $\left(E_{\alpha} \lt E_{\beta}\right)$.
-Nous verrons pourquoi dans le chapitre "_L'ordre de traitement des champs d'exposant et de mantisse tronquée_".
+Techniquement, un point terminal est atteint si $\left(E_{\alpha} \gt E_{\beta}\right)$ car l'opérande $\vert \ \alpha \ \vert$ est strictement plus grand que $\vert \ \beta \ \vert$, et inversement avec $\left(E_{\alpha} \lt E_{\beta}\right)$.
+Nous verrons pourquoi dans le chapitre "_?L'ordre de traitement des champs d'exposant et de mantisse tronquée?_".
 
 Cependant, il existe des points terminaux mais aussi un point non terminal.
 Le circuit atteint ce dernier lorsque $\left(E_{\alpha} = E_{\beta}\right)$.
@@ -140,16 +140,15 @@ Il faudra alors traité les champs de mantisse tronquée $T_{\alpha}$ et $T_{\be
 Dans les chapitres suivant, je vais expliqué dans les fondements pourquoi est ce que les champs d'exposant sont traités en priorité par le circuit électronique.
 Pour cela, il va d'abord me falloir abordé le sujet de l'écriture scientifique binaire, alors commençons.
 
-
-# VI. L'écriture scientifique binaire
+# L'écriture scientifique binaire
 
 Pour commencer, qu'est ce que l'_écriture scientifique_?
 
 L'écriture scientifique est une manière de représenté les nombres.
 Elle existe pour chaque base numérique, comme pour la base binaire.
-Le but de cette notation scientifique des nombres est double, le permier objectif est de ne pouvoir représenté un nombre que d'une seule façon, le second permet de simplifier grandement la lecture de grand nombre.
-Par exemple, en ___écriture scientifique décimale___ nous pouvons représenté facilement la vitesse approchée de la lumière en km/s $+3.0\times 10^6$.
-Cela peut paraitre plus compliqué à interprété de prime abord, mais en réalité tout n'est qu'une histoire de puissance et de virgule comme nous le verrons dans les chapitres ci-dessous.
+Le but de cette notation scientifique des nombres est double, le permier objectif est de ne pouvoir représenté un nombre que d'une seule façon, le second permet de simplifier la lecture des grands nombres.
+Par exemple, en ___écriture scientifique décimale___ nous pouvons représenté facilement la vitesse approchée de la lumière en km/s $+3.0 \times 10^5$.
+Cela peut paraitre plus compliqué à interprété de prime abord mais en réalité tout n'est qu'une histoire de puissance et de virgule, comme nous le verrons dans les chapitres ci-dessous.
 
 Le fonctionnement de l'écriture scientifique ne change que peu lorsque nous passons d'une base numérique vers une autre.
 La composition elle, reste la même peut importe la base numérique:
@@ -157,17 +156,16 @@ La composition elle, reste la même peut importe la base numérique:
   - Un ___significande___
   - Un ___multiplicande___
 
-Dans l'exemple fournit ci-dessus, le signe est évidemment le symbole $+$ qui indique si le nombre est positif ou négatif, la valeur $3.0$ est le significande qui peut également être appellé ___mantisse___, et enfin le multiplicande qui est la base $10$ élevé à la puissance $6$.
-En notation scientifique décimale, le significande ne peut être qu'une valeur comprise dans l'intervalle $\left[1;10\right[$, et le multiplicande est une puissance de $10$ positive ou négative.
+Dans l'exemple fournit ci-dessus, le signe est évidemment le symbole $+$ qui indique si le nombre est positif ou négatif, la valeur $3.0$ est le significande qui peut également être appellé ___mantisse___, et enfin le multiplicande qui est la base $10$ élevé à la puissance $5$.
+En notation scientifique décimale, le significande peut être toute valeur comprise dans l'intervalle $\left[1;10\right[$, et le multiplicande est une puissance de $10$ positive ou négative.
 De manière général, pour une notation scientifique en base $N$.
 Le significande ne peut être compris qu'entre $\left[1;N\right[$ et le multiplicande est alors une puissance positive ou négative de $N$.
 Mais nous verrons ça plus bas.
 
 Pour terminer, si nous parlons de l'écriture scientifique ce n'est pas pour rien.
-Chaque élément de l'encodage _IEEE-754_ ayant été définit plus tôt, correspond à l'un des éléments de l'écriture scientifique binaire d'un nombre.
-Ces sujets seront aussi abordés lorsque le moment sera venu.
+Chaque élément de l'encodage _IEEE-754_ ayant été défini plus tôt, correspond à l'un des éléments de l'écriture scientifique binaire d'un nombre.
 
-# VII. Le significande
+## Le significande
 
 Pour transformé un nombre flottant $F$ codé classiquement en binaire en son écriture scientifique, __il faut convertir le nombre en un significande__ (ou mantisse binaire).
 
@@ -247,7 +245,7 @@ De plus, nous comprenons aussi que le calcul de l'exposant $\left(i+c\right)$ du
 Voici la raison pour laquelle il vaut mieux que $c$ soit négatif lors d'un décalage vers la gauche de la virgule, ceci nous permet de ne faire usage que d'une seule équation pour tout les sens de décalage. 
 C'est cool.
 
-# VIII. Le multiplicande
+## Le multiplicande
 
 Nous savons désormais comment obtenir un significande.
 Le problème c'est que tout nombre flottant $F$ dont la valeur n'est pas comprise dans l'intervalle $\left[1;2\right[$ doit forcémment subir un décalage de sa virgule, et donc voir sa valeur être multiplié ou divisé par une puissance de $2$.
