@@ -87,18 +87,18 @@ Dans ce qui suit nous allons nous intéresser aux encodages utilisés dans les c
 Nous allons voir que les encodages des champs de mantisse tronquée et d'exposant partagent les même caractéristiques que le _Binary Unsigned_.
 Ce qui permet le traitement de ces deux champs par un même processus de calcul, ce qui se reflète sur l'architecture du circuit électronique.
 
-# III. L'encodage par biais du champs d'exposant
+### L'encodage par biais du champs d'exposant
 
 __Le champs d'exposant utilise un encodage par biais__, ce dernier est assez simple à comprendre.
 Enfaite, le champs d'exposant est un champs binaire pour lequel nous utilisons un encodage _Binary Unsigned_ qui code une valeur numérique $X$, comme nous l'avons vu précédemment.
-A cela, il faut ajouté ou déduire un biais $B$ (un nombre entier naturel) pour obtenir la valeur représenté par le champs d'exposant.
+A cela, il faut ajouté ou déduire un biais $B$ (un nombre entier naturel) pour obtenir la valeur représenté par le champs binaire.
 Dans les faits, la valeur que représente le champs d'exposant est alors issu du calcul $X - B$. 
-Voici comment se calcul le biais $B$ d'un champs d'exposant $2^{\left(N-1\right)} - 1$, où $N$ est le nombre de bits du champs d'exposant.
+Voici comment se calcul le biais $B$ d'un champs d'exposant $\left(2^{\left(N-1\right)} - 1\right)$, où $N$ est le nombre de bits du champs d'exposant.
 
 Etant donné que l'encodage par biais se base sur le _Binary Unsigned_, le champs d'exposant __partage les même propriétés__ que cet encodage.
 Notamment le fait que la valeur d'un bit à $1$ de poids $i$ soit strictement supérieur à la somme des valeurs des bits de poids inférieur à $i$.
 
-# IV. La mantisse tronquée, une historie de puissance de 2
+### La mantisse tronquée, une historie de puissance de 2
 
 Pour le champs de la mantisse tronquée nous avons besoin de faire un rapide rappel sur l'encodage intial d'un nombre flottant.
 La partie entière d'un nombre flottant utilise du _Binary Unsigned_ pour être codé, tandis que la partie fractionnaire fait usage d'une version modifiée du _Binary Unsigned_.
@@ -110,9 +110,9 @@ Prenons l'exemple du nombre $3.75$.
 $$3.75 = 11.11_2 = Integer \ Part\left(\left(1 \times 2^1\right) + \left(1 \times 2^0\right)\right) + Fractional \ Part\left(\left(1 \times 2^{-1}\right) + \left(1 \times 2^{-2}\right)\right)$$
 
 Précisons que sous la forme binaire du nombre $3.75$, le point n'est là que pour facilité la lecture du nombre.
-Dans les faits le point n'est pas réelement présent dans le codage des nombres flottants.
-Ce qu'il y a d'important à remarquer pour la partie fractionnaire, c'est que la valeur d'un bit à $1$ de poids $i$, est toujours strictement supérieur à la somme des valeurs des bits de poids inférieur à $i$.
-Autrement dit, pour le bit à $1$ de poids $i$ du nombre fractionnaire $F \in \left[0;1\right[$ alors $\left(1 \times 2^i\right) \gt \left(\sum_{i=i-1}^{lsb\left(F\right)} \left(F_i \times 2^i\right)\right)$.
+Dans les faits, le point n'est pas réelement présent dans le codage des nombres flottants.
+Ce qu'il y a d'important à remarquer pour la partie fractionnaire, c'est que la valeur d'un bit à $1$ de poids $i$ est toujours strictement supérieur à la somme des valeurs des bits de poids inférieur à $i$.
+Autrement dit, pour le bit à $1$ de poids $i$ du nombre fractionnaire $F \in \left[0;1\right[$, alors $\left(1 \times 2^i\right) \gt \left(\sum_{i=i-1}^{lsb\left(F\right)} \left(F_i \times 2^i\right)\right)$.
 
 Pour en revenir au sujet de la mantisse tronquée, elle est composée des bits de la partie entière et de la partie fractionnaire d'un nombre flottant.
 Vu que la partie entière et fractionnaire d'un nombre flottant partagent les propriétés du _Binary Unsigned_, c'est aussi le cas de la mantisse tronquée elle même.
@@ -120,25 +120,26 @@ Vu que la partie entière et fractionnaire d'un nombre flottant partagent les pr
 Nous pouvons remarquer que le champs d'exposant et de mantisse tronquée partagent bel et bien les même propriétés que l'encodage _Binary Unsigned_, comme mentionné plus haut.
 C'est dans la démonstration mathématique que nous verrons à quel point cela va nous être utile.
 
-# V. L'ordre de traitement des opérandes flottantes
+## L'ordre de traitement des opérandes flottantes
 
-Le circuit électronique compare deux nombres flottants __Half Precision__ $16$ bits, nous les nommerons $\alpha$ et $\beta$.
-La comparaison à produire est une vérification de la supériorité stricte d'un opérande sur l'autre, admettons $\left(\vert\alpha\vert \gt \vert\beta\vert\right)$.
-Le circuit n'a besoin que de la valeur absolu des opérandes, seul les $15$ bits de poids faible sont utiles (omission du bit de signe).
+La tâche primaire du circuit est de comparer deux nombres flottants ___Half Precision___ de $16$ bits, nous les nommerons $\alpha$ et $\beta$.
+La comparaison en question est une vérification de la supériorité stricte de la valeur absolu de l'un de ces deux opérandes envers l'autre, admettons $\left(\vert\alpha\vert \gt \vert\beta\vert\right)$.
+Etant donné que le circuit n'a besoin que de la valeur absolu des opérandes $\alpha$ et $\beta$, seul les $15$ bits de poids faible de ces denières sont utiles (omission du bit de signe).
 
 Il se trouve que le circuit traite les champs d'exposants $E$ de $\alpha$ ainsi que de $\beta$, avant les champs de mantisse tronquée de ces même opérandes.
 La raison en est que les champs d'exposant à eux seuls peuvent permettre au circuit d'atteindre un point terminal.
-Un point terminal n'est atteint que lorsque le circuit peut être sûre du résultat qu'il génère.
-Techniquement, si $\left(E_{\alpha} \gt E_{\beta}\right)$ alors l'opérande $\alpha$ est strictement plus grand que $\beta$, et inversement.
-Nous verrons pourquoi dans les chapitres ci-bas.
-Cette déduction permet au circuit de généré le bon résultat, en fonction de la comparaison à produire.
+Le circuit électronique atteint un point terminal lorsqu'il est capable de générer le résultat d'une comparaison entre ses deux opérandes, sans avoir besoin d'attendre le traitement de l'entièreté de ses entrées.
+Techniquement, un point terminal est atteint si $\left(E_{\alpha} \gt E_{\beta}\right)$ car l'opérande $\alpha$ est strictement plus grand que $\beta$, et inversement avec $\left(E_{\alpha} \lt E_{\beta}\right)$.
+Nous verrons pourquoi dans le chapitre "_L'ordre de traitement des champs d'exposant et de mantisse tronquée_".
 
-Cependant, il existe bien un cas non terminal, celui où $\left(E_{\alpha} = E_{\beta}\right)$.
-Dans cette situation, le circuit ne peut rien tiré des champs d'exposants des opérandes $\alpha$ et $\beta$, car ils sont égaux.
-Alors, le circuit atteindra un point terminal en traitant les champs de mantisse tronquée $T_{\alpha}$ et $T_{\beta}$ en cas de dernier recours, dans un second temps.
+Cependant, il existe des points terminaux mais aussi un point non terminal.
+Le circuit atteint ce dernier lorsque $\left(E_{\alpha} = E_{\beta}\right)$.
+Comme nous le verrons plus tard, dans cette situation il n'y a rien dans les champs d'exposant des opérandes $\alpha$ et $\beta$ qui puisse permettre au circuit de savoir quel résultat générer à l'avance.
+Il faudra alors traité les champs de mantisse tronquée $T_{\alpha}$ et $T_{\beta}$, dans un second temps.
 
 Dans les chapitres suivant, je vais expliqué dans les fondements pourquoi est ce que les champs d'exposant sont traités en priorité par le circuit électronique.
-Pour cela, il va d'abord me falloir abordé le sujet de l'écriture scientifique binaire, commençons.
+Pour cela, il va d'abord me falloir abordé le sujet de l'écriture scientifique binaire, alors commençons.
+
 
 # VI. L'écriture scientifique binaire
 
