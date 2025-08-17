@@ -15,7 +15,7 @@ Le document se découpe en plusieurs parties:
     - Traitement des champs d'exposant
     - Traitement des champs de mantisses tronquées
 
-# I. L'encodage Binary Unsigned
+# L'encodage Binary Unsigned
 
 Commençons par la base.
 
@@ -52,14 +52,16 @@ Techniquement, vu que dans chacun des produits la puissance de $2$ est multipli�
 C'est pourquoi vous entenderez souvent dire (ici compris), qu'un nombre $X$ est représenté par la somme des puissances de $2$ dont le bit est à $1$.
 Les puissances de $2$ vont de $0$ à $N - 1$, ou la valeur de $N$ est le nombre de bits qui compose un champs binaire.
 Par ailleurs, il est souvent dit que chaque bit a un "poids".
-Le poids correspond à la valeur de la puissance de $2$ associée à chacun des bits, plus cette puissance sera grande et plus un bit aura d'importance dans la représentation d'un nombre. 
+Le poids correspond à la valeur de la puissance de $2$ associée à chacun des bits d'un champs, plus cette puissance sera grande et plus un bit aura d'importance dans la représentation d'un nombre. 
 
 Il est aussi défini ce que nous qualifions de __LSB__ pour __Least Significant Bit__.
 Ce terme désigne le bit de poids le plus faible d'un champs, donc le bit de poids $0$ pour un champs dont l'encodage est en __Binary Unsigned__.
 Au contraire, le bit de poids le plus fort d'un champs binaire est ce que l'ont appelle le __MSB__ pour __Most Significant Bit__.
 Il est aussi possible de faire référence au bit à $1$ de poids le plus faible d'un champs avec le terme __LSB1__, ou à celui de poids le plus fort avec __MSB1__.
 
-Il se trouve que le __Binary Unsigned__ nous donne la certitude que la valeur d'un bit à $1$ de poids $i$, est strictement supérieur à la somme des valeurs de chaque bit de poids inférieur à $i$.
+### Une propriété importante de l'encodage Binary Unsigned
+
+Avec un champs dont l'encodage est en __Binary Unsigned__, nous donne la certitude que la valeur d'un bit à $1$ de poids $i$ est strictement supérieur à la somme des valeurs de chaque bit de poids inférieur à $i$.
 Autrement dit $\left(1\times 2^i\right) \gt \left(\sum_{i=i-1}^0 2^i\right)$.
 Prenons comme exemple un champs binaire de $8$ bits, pour lequel nous n'allons faire attention qu'à un seul bit, celui de poids $6$ admettons.
 Disons que ce champs ressemble à ceci $01111111_{2}$, la valeur du nombre représenté est $127$ et le bit qui nous intéresse se trouve être le __MSB1__ du champs.
@@ -70,20 +72,20 @@ $$\left(1 \times 2^6 = 64\right) \gt \left(63 = \left(1 \times 2^5\right)+\left(
 
 Encore une fois, ceci n'est pas propre à la base binaire mais à _n'importe quel base numérique_ modulo quelques variation pour chaque base.
 
-# II. Le standard IEEE-754
+# Le standard IEEE-754
 
 Après cette rapide introduction à l'encodage __Binary Unsigned__, passons au sujet suivant qui est l'encodage __IEEE-754__.
 
 Notre circuit a pour fonction principal de produire des comparaisons entre deux opérandes flottants respectant le standard __IEEE-754__.
 Pour plus d'information sur le circuit électronique, jetez un oeil à la documentation du circuit.
-Cette norme __IEEE-754__ définit trois éléments qui composent chaque nombre à virgule flottante:
+Cette norme __IEEE-754__ défini trois éléments qui composent chaque nombre à virgule flottante:
 - Le ___bit de signe___
 - Un champs binaire d'___exposant___
 - Un autre champs binaire pour la ___mantisse tronquée___
 
 Dans ce qui suit nous allons nous intéresser aux encodages utilisés dans les champs binaires d'exposant et de mantisse tronquée.
 Nous allons voir que les encodages des champs de mantisse tronquée et d'exposant partagent les même caractéristiques que le _Binary Unsigned_.
-Ce qui permet de prendre en charge ces deux champs par une même méthodologie calculatoire, le tout, se reflètant sur l'architecture du circuit électronique.
+Ce qui permet le traitement de ces deux champs par un même processus de calcul, ce qui se reflète sur l'architecture du circuit électronique.
 
 # III. L'encodage par biais du champs d'exposant
 
