@@ -198,11 +198,12 @@ Qui plus est, lorsque $\left(c \lt 0\right)$ c'est que _la virgule doit être d�
 Essayons de comprendre pourquoi est ce qu'un décalage d'un rang vers la gauche de la virgule de $F$, divise la valeur de $F$ par $N = 2$, comme nous le démontre l'équation ci-dessus.
 Nous savons que les nombres flottants ont une partie entière et une autre fractionnaire.
 Ces deux parties utilisent chaque bit comme un facteur d'une puissance de $2$, des puissances _positives_ pour la partie entière et _négatives_ pour la partie fractionnaire.
-Nous pouvons remarquer que dans le codage du nombre $F$, n'importe quel bit de poids $i$ est facteur d'une puissance de $2$ deux fois plus grande que le bit de poids $\left(i-1\right)$.
+Nous pouvons remarquer que dans le codage du nombre $F$, n'importe quel bit de poids $i$ est facteur d'une puissance de $2$.
+Elle même deux fois plus grande que la puissance facteur du bit de poids $i - 1$.
 Par exemple $\left(2^0 = 1\right)$ et $\left(2^{-1} = 0.5\right)$. 
 
 Nous avons vus plus haut qu'avec un décalage d'un rang vers la gauche de la virgule de $F$, je cite "chaque bit de la partie entière comme de la partie fractionnaire de $F$ voit son poids être _décrémenter_ de $1$".
-Ce qui veut dire que tout bit de $F$ passe de facteur de $2^i$ à $2^\left(i-1\right)$, et _chaque bit_ voit donc sa valeur être _divisé par_ $2$.
+Ce qui veut dire que tout bit de $F$ passe de facteur de $2^i$ à $2^\left(i-1\right)$, et _chaque bit_ voit donc son poids être _divisé par_ $2$.
 Le calcul de la valeur de $F$ passe de la somme des valeurs des bits de poids $i$ à $1$ (qui multiplient $2^i$), à la somme des valeurs des bits de poids $i$ à $1$ (qui multiplient $2^{\left(i-1\right)}$).
 C'est pourquoi la valeur de $F$ est _divisé par_ $2$ avec un décalage d'_un rang vers la gauche_ de la virgule.
 
@@ -210,7 +211,7 @@ Maintenant que nous avons compris pourquoi un décalage d'un rang vers la gauche
 Découvrons désormais les effets d'un décalage d'un rang vers la droite de la virgule de $F$, sur la valeur du nombre lui même.
 Dans le cas d'un tel décalage, chaque bit de la partie entière comme fractionnaire de $F$ voit son poids être _incrémenter_ de $1$.
 Par conséquent, chaque bit de poids $i$ voit sa valeur doublé car $\left(2^{\left(i+1\right)} = 2 \times 2^i\right)$.
-Nous calculons la valeur de $F$ __après__ décalage, comme la somme des valeurs des bits de poids $i$ à $1$ qui multiplient $2^{\left(i+1\right)}$.
+Nous calculons la valeur de $F$ après décalage, comme la somme des valeurs des bits de poids $i$ à $1$ qui multiplient $2^{\left(i+1\right)}$.
 Exactement comme le fait la partie gauche de l'équation ci-dessus pour un décalage $c = 1$.
 Le côté droit de cette équation nous informe que cette opération revient à _multiplié_ le nombre $F$ par $2$.
 
@@ -218,14 +219,14 @@ Nous sommes désormais capable de comprendre toutes les implications d'un décal
 Prenons un décalage de $c = x$ comme exemple, où $x \in \left[-\infty ;+\infty \right]$.
 Si $\left(c \gt 0\right)$ alors nous n'avons qu'à décalé la virgule de $c$ fois $1$ rang _vers la droite_.
 Vu que nous savons qu'un décalage de la virgule de $1$ rang vers la droite engendre une multiplication par $2$ du nombre $F$, alors après $c$ décalages de $1$ rang, nous aurons multiplié $F$ par $2^c$.
-Au contraire si $\left(c \lt 0\right)$, alors nous devrons décalé la virgule de $\vert c \vert$ fois $1$ rang _vers la gauche_.
+Au contraire si $\left(c \lt 0\right)$, alors nous devrons décalé la virgule de $\vert \ c \ \vert$ fois $1$ rang _vers la gauche_.
 Un décalage d'un rang vers la gauche revient à divisé par $2$ la valeur de $F$.
-Par conséquent, après $\vert c \vert$ décalages de la virgule de $1$ rang vers la gauche, nous aurons divisé $\vert c \vert$ fois la valeur de $F$ par $2$.
-Ou autrement dit, $F$ aura été divisé par $2^{\vert c \vert}$.
+Par conséquent, après $\vert \ c \ \vert$ décalages de la virgule de $1$ rang vers la gauche, nous aurons divisé $\vert \ c \ \vert$ fois la valeur de $F$ par $2$.
+Ou autrement dit, $F$ aura été divisé par $2^{\vert \ c \ \vert}$.
 
 Voilà pourquoi n'_importe quel décalage de la virgule_ d'un nombre flottant $F$, engendre une _multiplication_ ou une _division_ du nombre par une puissance de $2$.
 
--- -
+### Détail sur le fonctionnement de l'équation
 
 Cependant, je parle de divisé par une puissance de $2$ le nombre flottant $F$ dans le cas d'un décalage de sa virgule vers la gauche, mais malgré que l'équation précédente fonctionne, elle ne fait pas usage de division.
 Essayons de comprendre pourquoi.
@@ -235,7 +236,7 @@ Car je rappelle qu'après un déplacement de la virgule de $c$ rangs vers la dro
 En outre, nous avons jusqu'ici utilisé des valeurs négatives de $c$ lors des décalages de virgule vers la gauche.
 Pourtant le plus intuitif aurait été de définir les même valeurs de $c$ peu importe la direction des décalages, alors faisons comme si c'était le cas depuis le début.
 Dans ce qui suit je vais donc faire usage de $\left(c \gt 0\right)$ pour des décalages vers la gauche.
-Les explications suivantes vont nous permettre de comprendre pourquoi, dans les faits, il vaut mieux que $c$ soit négatif pour les décalages de la virgule vers la gauche.
+Les explications suivantes vont nous permettre de comprendre pourquoi, pour nos explications, il vaut mieux que $c$ soit négatif pour les décalages de la virgule vers la gauche.
 
 Pour un décalage de la virgule de $c$ rangs vers la gauche, nous devrions divisé $c$ fois le nombre $F$ par $2$, ou autrement dit, divisé $F$ par $2^c$.
 Initialement, nous pourrions penser avoir besoin d'une équation ressemblant à celle-ci $\left(\sum_{i=msb\left(F\right)}^{lsb\left(F\right)} \left(F_i \times 2^{\left(i-c\right)}\right)\right) = \left(F\div 2^c\right)$.
@@ -248,8 +249,8 @@ Finalement, nous pouvons alors remplacé $\left(F\times 2^{-c}\right)$ par $\lef
 Avec $\left(F\times 2^c\right)$ nous retrouvons bien le membre droit de notre équation initial, à la condition que $c$ puisse devenir négatif.
 De plus, nous comprenons aussi que le calcul de l'exposant $\left(i+c\right)$ du membre gauche, produit l'équivalent de $\left(i-c\right)$ dans le cas d'un décalage de la virgule de $F$ vers la gauche, car $\left(c \lt 0\right)$.
 
-Voici la raison pour laquelle il vaut mieux que $c$ soit négatif lors d'un décalage vers la gauche de la virgule, ceci nous permet de ne faire usage que d'une seule équation pour tout les sens de décalage. 
-C'est cool.
+C'est la raison pour laquelle il vaut mieux que $c$ soit négatif lors d'un décalage vers la gauche de la virgule.
+Ceci nous permet de ne faire usage que d'une seule équation pour tout les sens de décalage. 
 
 ## Le multiplicande
 
