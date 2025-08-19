@@ -254,22 +254,26 @@ Ceci nous permet de ne faire usage que d'une seule équation pour tout les sens 
 
 ## Le multiplicande
 
+// contextualisation sur le résultat que génère l'équation vu plus haut
+
+// apporté plus de contexte avec des références au chapitre qui précède
+
 Nous savons désormais comment obtenir un significande.
 Le problème c'est que tout nombre flottant $F$ dont la valeur n'est pas comprise dans l'intervalle $\left[1;2\right[$ doit forcémment subir un décalage de sa virgule, et donc voir sa valeur être multiplié ou divisé par une puissance de $2$.
-Pour contrecarrer ce problème, l'écriture scientifique définit ce qui s'appelle un multiplicande. 
+Pour contrecarrer ce problème, l'écriture scientifique défini ce qui s'appelle un multiplicande. 
 Le rôle du multiplicande est de nous permettre de retrouver la valeur initial de $F$ après qu'il ait été transformé en un significande $S$, voyons comment.
 
 Pour commencer, le nombre flottant $F$ est transformé en un significande $S$.
-Cette transformation passe peut être par un décalage de la virgule de $F$ vers la droite ou vers la gauche.
-Admettons que ce soit le cas, alors la valeur de $F$ est divisé ou multiplié par une puissance de $2$.
-Imaginons que pour la transformation de $F$ en un significande $S$ nous ayons définit $\left(c \lt 0\right)$, alors la virgule du nombre $F$ a été déplacé vers la gauche et donc le nombre divisé.
+Cette transformation passe par un décalage vers la droite ou vers la gauche de la virgule de $F$.
+Comme nous l'avons vus plus haut, alors la valeur de $F$ est divisé ou multiplié par une puissance de $2$.
+Imaginons que pour la transformation de $F$ en un significande $S$ nous ayons défini $\left(c \lt 0\right)$, alors la virgule du nombre $F$ a été déplacé vers la gauche et donc le nombre divisé.
 Pour retrouver $F$, il suffit alors de multiplié $S$ par la puissance de $2$ qui a divisé le nombre $F$.
 Mais rappellons que la division de $F$ s'effectue comme ceci $\left(F\times 2^c\right)$, ce qui est équivalent à $\left(F\div \left(1\div 2^c\right)\right)$.
 Il faut donc multiplié le significande $S$ de la manière suivante afin de retrouver le nombre $F$ d'origine $\left(S\times \left(1\div 2^c\right)\right)$, soit $\left(S\times 2^{-c}\right)$.
 Mais dans le cas inverse, pour la transformation du nombre $F$ en significande $S$ avec $\left(c \gt 0\right)$.
 La virgule de $F$ est déplacé vers la droite et le nombre a alors été multiplié par une puissance de $2$.
 Ce coup ci, pour retrouver $F$, il faudra divisé la valeur de $S$ par la puissance de $2$ qui a multiplié $F$.
-Nous savons que $S = \left(F\times 2^c\right)$, alors nous divisons $S$ par $2^c$ comme ceci $\left(S\div 2^c\right)$ et nous tombons une nouvelle fois sur $\left(S\times 2^{-c}\right)$.
+Nous savons que $S = \left(F \times 2^c\right)$, alors nous divisons $S$ par $2^c$ comme ceci $\left(S\div 2^c\right)$ et nous obtenons une nouvelle fois sur $\left(S \times 2^{-c}\right)$.
 
 Nous retombons dans tout les cas sur le même calcul $\left(S\times 2^{-c}\right)$ permettant de retrouver le nombre d'origine $F$, le multiplicande est le facteur $2^{-c}$. 
 Mais nous pouvons exprimé les choses de manière différentes, ce qui nous servira pour plus tard.
@@ -280,9 +284,9 @@ Il suffit alors d'inversé le signe de $c$ pour changé la direction du décalag
 Nous faisons cela en négationnant $c$, comme ceci $\left(-\left(+c\right) = -c\right)$.
 Le nombre de rang de décalage reste le même mais le sens de décalage passe de la droite $\left(c \gt 0\right)$, à la gauche avec $\left(c \lt 0\right)$.
 
-Dans le cas contraire, la transformation de $F$ en $S$ est due à un décalage de la virgule de $F$ de $\vert c \vert$ rangs vers la gauche, où $\left(c \lt 0\right)$.
-Pour obtenir la valeur du nombre $F$ d'origine, il faudra alors que le significande $S$ voit sa virgule être décalée de $\vert c \vert$ rangs vers la droite.
-Rappellons que $c$ est négatif, la négation de $c$ permettra donc une nouvelle fois d'inversé le sens de décalage $\left(-\left(-c\right) = \vert{c}\vert\right)$.
+Dans le cas contraire, la transformation de $F$ en $S$ est due à un décalage de la virgule de $F$ de $\vert \ c \ \vert$ rangs vers la gauche, où $\left(c \lt 0\right)$.
+Pour obtenir la valeur du nombre $F$ d'origine, il faudra alors que le significande $S$ voit sa virgule être décalée de $\vert \ c \ \vert$ rangs vers la droite.
+Rappellons que $c$ est négatif, la négation de $c$ permettra donc une nouvelle fois d'inversé le sens de décalage $\left(-\left(-c\right) = \vert \ c \ \vert\right)$.
 
 Il est donc simple de comprendre que déplacé la virgule du significande $S$ de $-c$ rangs, vers la gauche si $\left(c \lt 0\right)$ ou vers la droite si $\left(c \gt 0\right)$, est équivalent à multiplié $S$ par $2^{-c}$.
 Comme nous l'indique les premières explications de cette section.
