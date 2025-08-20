@@ -254,44 +254,40 @@ Ceci nous permet de ne faire usage que d'une seule équation pour tout les sens 
 
 ## Le multiplicande
 
-// contextualisation sur le résultat que génère l'équation vu plus haut
-
-// apporté plus de contexte avec des références au chapitre qui précède
-
 Nous savons désormais comment obtenir un significande.
 Le problème c'est que tout nombre flottant $F$ dont la valeur n'est pas comprise dans l'intervalle $\left[1;2\right[$ doit forcémment subir un décalage de sa virgule, et donc voir sa valeur être multiplié ou divisé par une puissance de $2$.
 Pour contrecarrer ce problème, l'écriture scientifique défini ce qui s'appelle un multiplicande. 
 Le rôle du multiplicande est de nous permettre de retrouver la valeur initial de $F$ après qu'il ait été transformé en un significande $S$, voyons comment.
 
-Pour commencer, le nombre flottant $F$ est transformé en un significande $S$.
-Cette transformation passe par un décalage vers la droite ou vers la gauche de la virgule de $F$.
-Comme nous l'avons vus plus haut, alors la valeur de $F$ est divisé ou multiplié par une puissance de $2$.
-Imaginons que pour la transformation de $F$ en un significande $S$ nous ayons défini $\left(c \lt 0\right)$, alors la virgule du nombre $F$ a été déplacé vers la gauche et donc le nombre divisé.
-Pour retrouver $F$, il suffit alors de multiplié $S$ par la puissance de $2$ qui a divisé le nombre $F$.
-Mais rappellons que la division de $F$ s'effectue comme ceci $\left(F\times 2^c\right)$, ce qui est équivalent à $\left(F\div \left(1\div 2^c\right)\right)$.
-Il faut donc multiplié le significande $S$ de la manière suivante afin de retrouver le nombre $F$ d'origine $\left(S\times \left(1\div 2^c\right)\right)$, soit $\left(S\times 2^{-c}\right)$.
-Mais dans le cas inverse, pour la transformation du nombre $F$ en significande $S$ avec $\left(c \gt 0\right)$.
-La virgule de $F$ est déplacé vers la droite et le nombre a alors été multiplié par une puissance de $2$.
-Ce coup ci, pour retrouver $F$, il faudra divisé la valeur de $S$ par la puissance de $2$ qui a multiplié $F$.
-Nous savons que $S = \left(F \times 2^c\right)$, alors nous divisons $S$ par $2^c$ comme ceci $\left(S\div 2^c\right)$ et nous obtenons une nouvelle fois sur $\left(S \times 2^{-c}\right)$.
+En reprenant les termes des chapitres précédents, dans le cas d'une transformation d'un nombre $F$ en un significande $S$ avec $\left(c \lt 0\right)$, nous savons que la virgule du nombre $F$ a été déplacé vers la gauche et donc sa valeur divisé.
+Pour retrouver $F$, il suffit alors de _multiplié_ le significande $S$ par la puissance de $2$ qui a divisé le nombre $F$.
+Mais rappelons que l'équation effectue la division du nombre $F$ comme ceci $\left(F \times 2^c\right)$, ce qui est équivalent à $\left(F \div \left(1 \div 2^c\right)\right)$.
+Il faut donc multiplié le significande $S$ de la manière suivante afin de retrouver le nombre $F$ d'origine $\left(S \times \left(1 \div 2^c\right)\right)$, ce qui est équivalent à $\left(S\times 2^{-c}\right)$.
 
-Nous retombons dans tout les cas sur le même calcul $\left(S\times 2^{-c}\right)$ permettant de retrouver le nombre d'origine $F$, le multiplicande est le facteur $2^{-c}$. 
-Mais nous pouvons exprimé les choses de manière différentes, ce qui nous servira pour plus tard.
+Prenons désormais le cas d'une transformation du nombre $F$ en un significande $S$ avec $\left(c \gt 0\right)$.
+La virgule du nombre $F$ est déplacé vers la droite et le nombre a alors été multiplié par une puissance de $2$.
+Ce coup ci, pour retrouver $F$ il faudra _divisé_ la valeur du significande $S$ par la puissance de $2$ qui a multiplié le nombre $F$.
+Nous savons que $S = \left(F \times 2^c\right)$, alors nous effectuons $\left(S \div 2^c\right)$, ce qui est équivalent à $\left(S \times \left(1 \div 2^c\right)\right)$ et donc à $\left(S \times 2^{-c}\right)$.
 
-Pour la transformation d'un nombre flottant $F$ en un significande $S$, si la virgule de $F$ a été déplacé de $c$ rangs vers la droite alors $\left(c \gt 0\right)$.
+Peu importe la manière dont un significande peut être obtenu, il existe un unique calcul $\left(S \times 2^{-c}\right)$ pour retrouver la valeur du nombre d'origine à partir de son significande.
+Le multiplicande est ici le facteur $2^{-c}$, c'est une puissance de $2$. 
+Mais il est possible d'exprimé les choses différemment, ce qui va nous sevrir pour plus tard.
+
+Pour la transformation d'un nombre flottant $F$ en un significande $S$, si la virgule de $F$ a été déplacé vers la droite alors $\left(c \gt 0\right)$.
 Afin de retrouver la valeur du nombre $F$ d'origine depuis le significande, le multiplicande doit permettre de déplacé de $c$ rangs vers la gauche la virgule du significande $S$.
 Il suffit alors d'inversé le signe de $c$ pour changé la direction du décalage.
 Nous faisons cela en négationnant $c$, comme ceci $\left(-\left(+c\right) = -c\right)$.
 Le nombre de rang de décalage reste le même mais le sens de décalage passe de la droite $\left(c \gt 0\right)$, à la gauche avec $\left(c \lt 0\right)$.
 
-Dans le cas contraire, la transformation de $F$ en $S$ est due à un décalage de la virgule de $F$ de $\vert \ c \ \vert$ rangs vers la gauche, où $\left(c \lt 0\right)$.
-Pour obtenir la valeur du nombre $F$ d'origine, il faudra alors que le significande $S$ voit sa virgule être décalée de $\vert \ c \ \vert$ rangs vers la droite.
-Rappellons que $c$ est négatif, la négation de $c$ permettra donc une nouvelle fois d'inversé le sens de décalage $\left(-\left(-c\right) = \vert \ c \ \vert\right)$.
+Dans le cas contraire, la transformation du nombre $F$ en un significande $S$ avec $\left(c \lt 0\right)$, engendre un déplacement de la virgule du nombre $F$ de $\vert \ c \ \vert$ rangs vers la gauche.
+Pour retrouver la valeur du nombre d'origine $F$, il faudra alors que le significande $S$ voit sa virgule être décalée de $\vert \ c \ \vert$ rangs vers la droite.
+Rappellons tout de même que $c$ est négatif.
+En négationnant une nouvelle fois $c$, cela permettra d'inversé à nouveau le sens de décalage $\left(-\left(-c\right) = +c\right)$.
 
 Il est donc simple de comprendre que déplacé la virgule du significande $S$ de $-c$ rangs, vers la gauche si $\left(c \lt 0\right)$ ou vers la droite si $\left(c \gt 0\right)$, est équivalent à multiplié $S$ par $2^{-c}$.
 Comme nous l'indique les premières explications de cette section.
 
-# IX. Codage des informations dans un nombre flottant IEEE-754
+# Le codage des informations dans un nombre flottant IEEE-754
 
 Nous avons déjà parler de l'encodage IEEE-754 en introduction de ce document, plus particulièrement des éléments qui le compose et de leur encodage propre.
 Je rappelle que ces $3$ éléments sont des champs binaire qui codent chacun un __bit de signe__, un __exposant__ ainsi qu'une __mantisse tronquée__.
