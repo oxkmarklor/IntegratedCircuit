@@ -115,23 +115,24 @@ Prenons l'exemple du nombre $3.75$.
 $$3.75 = 11.11_2 = Integer \ Part\left(\left(1 \times 2^1\right) + \left(1 \times 2^0\right)\right) + Fractional \ Part\left(\left(1 \times 2^{-1}\right) + \left(1 \times 2^{-2}\right)\right)$$
 
 Attention car dans les faits, le point dans l'écriture binaire du nombre $3.75$ n'est pas réelement présent dans le codage du nombre.
-Ce qu'il y a d'important à remarquer pour la partie fractionnaire, c'est que la valeur d'un bit à $1$ de poids $i$ est toujours strictement supérieur à la somme des valeurs des bits de poids inférieur à $i$.
+Ce qu'il y a d'important à remarquer pour la partie fractionnaire d'un nombre à virgule flottante, c'est que la valeur d'un bit à $1$ de poids $i$ est toujours strictement supérieur à la somme des valeurs des bits de poids inférieur à $i$.
 Autrement dit, pour le bit à $1$ de poids $i$ du nombre fractionnaire $F \in \left[0;1\right[$, alors $\left(1 \times 2^i\right) \gt \left(\sum_{i=i-1}^{lsb\left(F\right)} \left(F_i \times 2^i\right)\right)$.
 
 Revenons-en au sujet de la mantisse tronquée désormais.
 Plus bas, nous verrons comment le champs de mantisse tronquée code tout les bits de la partie entière ainsi que de la partie fractionnaire d'un nombre à virgule flottante (lorsque c'est possible).
 __Vu que la partie entière et fractionnaire d'un nombre à virgule flottante partagent les propriétés du _Binary Unsigned_, c'est aussi le cas de la mantisse tronquée elle même__.
+Pour l'instant, c'est tout ce qui nous importe de comprendre.
 
 Nous pouvons remarquer que le champs d'exposant et de mantisse tronquée partagent bel et bien les même propriétés que l'encodage _Binary Unsigned_, comme mentionné plus haut.
 C'est dans la démonstration mathématique que nous verrons à quel point cela va nous être utile.
 
 # Le traitement des opérandes flottants
 
-La tâche primaire du circuit est de comparer deux nombres flottants ___Half Precision___ de $16$ bits, nous les nommerons $\alpha$ et $\beta$.
+Comme dit plus haut, la tâche primaire du circuit est de comparer deux nombres flottants ___Half Precision___ (d'une taille de $16$ bits), nous les nommerons $\alpha$ et $\beta$.
 La comparaison en question est une vérification de la supériorité stricte de la valeur absolu de l'un de ces deux opérandes envers l'autre, admettons $\left(\vert\alpha\vert \gt \vert\beta\vert\right)$.
-Etant donné que le circuit n'a besoin que de la valeur absolu des opérandes $\alpha$ et $\beta$, seul les $15$ bits de poids faible sont utiles (omission du bit de signe).
+Etant donné que le circuit n'a besoin que de la valeur absolu des opérandes $\alpha$ et $\beta$, seul les $15$ bits de poids faible sont utiles (le bit de signe est omis).
 
-Il se trouve que le circuit traite les champs d'exposants $E$ de $\alpha$ ainsi que de $\beta$, avant les champs de mantisse tronquée de ces même opérandes.
+Il se trouve que le circuit traite les champs d'exposants que nous nommerons $E$ de $\alpha$ ainsi que de $\beta$, avant les champs de mantisse tronquée que nous nommerons $T$ de ces même opérandes.
 La raison en est que les champs d'exposant à eux seuls peuvent permettre au circuit d'atteindre un point terminal.
 Le circuit électronique atteint un point terminal lorsqu'il est capable de générer le résultat d'une comparaison entre ses deux opérandes, sans avoir besoin d'attendre le traitement de l'entièreté de ses entrées.
 Techniquement, un point terminal est atteint si $\left(E_{\alpha} \gt E_{\beta}\right)$ car l'opérande $\vert \ \alpha \ \vert$ est strictement plus grand que $\vert \ \beta \ \vert$, et inversement avec $\left(E_{\alpha} \lt E_{\beta}\right)$.
