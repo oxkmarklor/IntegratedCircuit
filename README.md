@@ -61,16 +61,16 @@ Il est aussi possible de faire référence au bit à $1$ de poids le plus faible
 
 ### Une propriété importante de l'encodage Binary Unsigned
 
-Avec un champs dont l'encodage est en __Binary Unsigned__, nous donne la certitude que la valeur d'un bit à $1$ de poids $i$ est strictement supérieur à la somme des valeurs de chaque bit de poids inférieur à $i$.
+Avec un champs dont l'encodage est en __Binary Unsigned__, nous avons la certitude que la valeur d'un bit à $1$ de poids $i$ est strictement supérieur à la somme des valeurs de chaque bit de poids inférieur à $i$.
 Autrement dit $\left(1\times 2^i\right) \gt \left(\sum_{i=i-1}^0 2^i\right)$.
 Prenons comme exemple un champs binaire de $8$ bits, pour lequel nous n'allons faire attention qu'à un seul bit, celui de poids $6$ admettons.
 Disons que ce champs ressemble à ceci $01111111_{2}$, la valeur du nombre représenté est $127$ et le bit qui nous intéresse se trouve être le __MSB1__ du champs.
 La somme des valeurs des bits de poids inférieur au bit de poids $6$ donne un résultat strictement inférieur à $1 \times 2^6 = 64$.
-Cela est systèmatiquement vrai, même lorsque les $i$ bits de poids inférieur représentent la valeur maximale codable, comme dans cet exemple.
+Cela est systèmatiquement vrai, même lorsque tout les bits de poids inférieur sont à $1$, comme dans cet exemple.
 
-$$\left(1 \times 2^6 = 64\right) \gt \left(63 = \left(1 \times 2^5\right)+\left(1 \times 2^4\right)+\left(1 \times 2^3\right)+\left(1 \times 2^2\right)+\left(1 \times 2^1\right)+\left(1 \times 2^0\right)\right)$$
+$$\left(1 \times 2^6 = 64\right) \gt \left(63 = 1 \times 2^5 + 1 \times 2^4 + 1 \times 2^3 + 1 \times 2^2 + 1 \times 2^1 + 1 \times 2^0\right)$$
 
-Encore une fois, ceci n'est pas propre à la base binaire mais à _n'importe quel base numérique_ modulo quelques variation pour chaque base.
+Encore une fois, ceci n'est pas propre à la base binaire mais à _n'importe quel base numérique_ (modulo quelques variation pour chaque base).
 
 # Le standard IEEE-754
 
@@ -78,14 +78,14 @@ Après cette rapide introduction à l'encodage __Binary Unsigned__, passons au s
 
 Notre circuit a pour fonction principal de produire des comparaisons entre deux opérandes flottants respectant le standard __IEEE-754__.
 Pour plus d'information sur le circuit électronique, jetez un oeil à la documentation du circuit.
-Cette norme __IEEE-754__ défini trois éléments qui composent chaque nombre à virgule flottante:
+La norme __IEEE-754__ défini trois éléments qui composent chaque nombre à virgule flottante:
 - Le ___bit de signe___
 - Un champs binaire d'___exposant___
 - Un autre champs binaire pour la ___mantisse tronquée___
 
 Dans ce qui suit nous allons nous intéresser aux encodages utilisés dans les champs binaires d'exposant et de mantisse tronquée.
 Nous allons voir que les encodages des champs de mantisse tronquée et d'exposant partagent les même caractéristiques que le _Binary Unsigned_.
-Ce qui permet le traitement de ces deux champs par un même processus de calcul, ce qui se reflète sur l'architecture du circuit électronique.
+Ce qui permet de traité ces deux champs avec un même processus de calcul, ce qui se reflète sur l'architecture du circuit électronique.
 
 ### L'encodage par biais du champs d'exposant
 
@@ -100,7 +100,12 @@ Notamment le fait que la valeur d'un bit à $1$ de poids $i$ soit strictement su
 
 ### La mantisse tronquée, une historie de puissance de 2
 
-Pour le champs de la mantisse tronquée nous avons besoin de faire un rapide rappel sur l'encodage intial d'un nombre flottant.
+Comme nous venons de le voir avec le champs d'exposant, le standard IEEE-754 se base sur des encodages eux même déjà existant.
+Je rappelle qu'il existe des nombres à virgule fixe et à virgule flottante (ou nombre flottant).
+La seule différence entre les deux est qu'un nombre à virgule flottante peut avoir une quantité variable de bit derrière sa virgule, au contraire d'un nombre à virgule fixe.
+L'encodage du champs de mantisse tronquée tel que défini par le standard IEEE-754, se base sur l'encodage des nombres à virgule flottante.
+Alors faisons un rapide rappel que cet encodage.
+
 La partie entière d'un nombre flottant utilise du _Binary Unsigned_ pour être codé, tandis que la partie fractionnaire fait usage d'une version modifiée du _Binary Unsigned_.
 Chaque bit de la partie fractionnaire est un ___facteur d'une puissance de 2 négative___ et non positive.
 Ceci permet de représenté des valeurs dans l'intervalle $\left[0;1\right[$.
@@ -109,13 +114,13 @@ Prenons l'exemple du nombre $3.75$.
 
 $$3.75 = 11.11_2 = Integer \ Part\left(\left(1 \times 2^1\right) + \left(1 \times 2^0\right)\right) + Fractional \ Part\left(\left(1 \times 2^{-1}\right) + \left(1 \times 2^{-2}\right)\right)$$
 
-Précisons que sous la forme binaire du nombre $3.75$, le point n'est là que pour facilité la lecture du nombre.
-Dans les faits, le point n'est pas réelement présent dans le codage des nombres flottants.
+Attention car dans les faits, le point dans l'écriture binaire du nombre $3.75$ n'est pas réelement présent dans le codage du nombre.
 Ce qu'il y a d'important à remarquer pour la partie fractionnaire, c'est que la valeur d'un bit à $1$ de poids $i$ est toujours strictement supérieur à la somme des valeurs des bits de poids inférieur à $i$.
 Autrement dit, pour le bit à $1$ de poids $i$ du nombre fractionnaire $F \in \left[0;1\right[$, alors $\left(1 \times 2^i\right) \gt \left(\sum_{i=i-1}^{lsb\left(F\right)} \left(F_i \times 2^i\right)\right)$.
 
-Pour en revenir au sujet de la mantisse tronquée, elle est composée des bits de la partie entière et de la partie fractionnaire d'un nombre flottant.
-Vu que la partie entière et fractionnaire d'un nombre flottant partagent les propriétés du _Binary Unsigned_, c'est aussi le cas de la mantisse tronquée elle même.
+Revenons-en au sujet de la mantisse tronquée désormais.
+Plus bas, nous verrons comment le champs de mantisse tronquée code tout les bits de la partie entière ainsi que de la partie fractionnaire d'un nombre à virgule flottante (lorsque c'est possible).
+__Vu que la partie entière et fractionnaire d'un nombre à virgule flottante partagent les propriétés du _Binary Unsigned_, c'est aussi le cas de la mantisse tronquée elle même__.
 
 Nous pouvons remarquer que le champs d'exposant et de mantisse tronquée partagent bel et bien les même propriétés que l'encodage _Binary Unsigned_, comme mentionné plus haut.
 C'est dans la démonstration mathématique que nous verrons à quel point cela va nous être utile.
