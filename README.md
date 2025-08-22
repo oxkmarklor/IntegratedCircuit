@@ -98,7 +98,7 @@ Voici comment se calcul le biais $B$ d'un champs d'exposant $\left(2^{\left(N-1\
 Etant donné que l'encodage par biais se base sur le _Binary Unsigned_, le champs d'exposant __partage les même propriétés__ que cet encodage.
 Notamment le fait que la valeur d'un bit à $1$ de poids $i$ soit strictement supérieur à la somme des valeurs des bits de poids inférieur à $i$.
 
-### La mantisse tronquée, une historie de puissance de 2
+### La mantisse tronquée, une histoire de puissance de 2
 
 Comme nous venons de le voir avec le champs d'exposant, le standard IEEE-754 se base sur des encodages eux même déjà existant.
 Je rappelle qu'il existe des nombres à virgule fixe et à virgule flottante (ou nombre flottant).
@@ -126,13 +126,13 @@ Pour l'instant, c'est tout ce qui nous importe de comprendre.
 Nous pouvons remarquer que le champs d'exposant et de mantisse tronquée partagent bel et bien les même propriétés que l'encodage _Binary Unsigned_, comme mentionné plus haut.
 C'est dans la démonstration mathématique que nous verrons à quel point cela va nous être utile.
 
-# Le traitement des opérandes flottants
+# L'ordre de traitement des champs des opérandes du circuit
 
 Comme dit plus haut, la tâche primaire du circuit est de comparer deux nombres flottants ___Half Precision___ (d'une taille de $16$ bits), nous les nommerons $\alpha$ et $\beta$.
 La comparaison en question est une vérification de la supériorité stricte de la valeur absolu de l'un de ces deux opérandes envers l'autre, admettons $\left(\vert\alpha\vert \gt \vert\beta\vert\right)$.
 Etant donné que le circuit n'a besoin que de la valeur absolu des opérandes $\alpha$ et $\beta$, seul les $15$ bits de poids faible sont utiles (le bit de signe est omis).
 
-Il se trouve que le circuit traite les champs d'exposants que nous nommerons $E$ de $\alpha$ ainsi que de $\beta$, avant les champs de mantisse tronquée que nous nommerons $T$ de ces même opérandes.
+Il se trouve que le circuit traite les champs d'exposants (que nous nommerons) $E$ de $\alpha$ ainsi que de $\beta$, avant les champs de mantisse tronquée (que nous nommerons $T$) de ces même opérandes.
 La raison en est que les champs d'exposant à eux seuls peuvent permettre au circuit d'atteindre un point terminal.
 Le circuit électronique atteint un point terminal lorsqu'il est capable de générer le résultat d'une comparaison entre ses deux opérandes, sans avoir besoin d'attendre le traitement de l'entièreté de ses entrées.
 Techniquement, un point terminal est atteint si $\left(E_{\alpha} \gt E_{\beta}\right)$ car l'opérande $\vert \ \alpha \ \vert$ est strictement plus grand que $\vert \ \beta \ \vert$, et inversement avec $\left(E_{\alpha} \lt E_{\beta}\right)$.
@@ -140,10 +140,10 @@ Nous verrons pourquoi dans le chapitre "_?L'ordre de traitement des champs d'exp
 
 Cependant, le circuit peut aussi rencontrer un point non terminal.
 Le circuit atteint ce dernier lorsque $\left(E_{\alpha} = E_{\beta}\right)$.
-Comme nous le verrons plus tard, dans cette situation il n'y a rien dans les champs d'exposant des opérandes $\alpha$ et $\beta$ qui puisse permettre au circuit de savoir quel résultat générer sans procédé à d'autre calcul.
+Comme nous le verrons plus tard, dans cette situation il n'y a rien dans les champs d'exposant des opérandes $\alpha$ et $\beta$ qui puisse permettre au circuit de déduire le résultat à générer.
 Il faudra alors traité les champs de mantisse tronquée $T_{\alpha}$ et $T_{\beta}$, dans un second temps.
 
-Dans les chapitres suivant, je vais expliqué dans les fondements pourquoi est ce que les champs d'exposant sont traités en priorité par le circuit électronique.
+__Dans les chapitres suivant, je vais expliqué dans les fondements pourquoi est ce que les champs d'exposant sont traités en priorité par le circuit électronique__.
 Pour cela, il va d'abord me falloir abordé le sujet de l'écriture scientifique binaire, alors commençons.
 
 # L'écriture scientifique binaire
@@ -154,10 +154,10 @@ L'écriture scientifique est une manière de représenté les nombres.
 Elle existe pour chaque base numérique, comme pour la base binaire.
 Le but de cette notation scientifique des nombres est double, le permier objectif est de ne pouvoir représenté un nombre que d'une seule façon, le second permet de simplifier la lecture des grands nombres.
 Par exemple, en ___écriture scientifique décimale___ nous pouvons représenté facilement la vitesse approchée de la lumière en km/s $+3.0 \times 10^5$.
-Cela peut paraitre plus compliqué à interprété de prime abord, mais comme nous le verrons dans les chapitres ci-dessous, en réalité tout n'est qu'une histoire de puissance et de virgule.
+Cela peut paraitre plus compliqué à interprété de prime abord, mais comme nous le verrons dans les chapitres ci-dessous, en réalité tout n'est qu'une histoire de vrigule et de puissance.
 
 Le fonctionnement de l'écriture scientifique ne change que peu lorsque nous passons d'une base numérique vers une autre.
-La composition elle, reste la même peut importe la base numérique:
+La composition de la notation scientifique reste cependant la même peut importe la base numérique:
   - Le ___signe___
   - Un ___significande___
   - Un ___multiplicande___
