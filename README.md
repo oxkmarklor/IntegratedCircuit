@@ -126,7 +126,7 @@ Pour l'instant, c'est tout ce qui nous importe de comprendre.
 Nous pouvons remarquer que le champs d'exposant et de mantisse tronquée partagent bel et bien les même propriétés que l'encodage _Binary Unsigned_, comme mentionné plus haut.
 C'est dans la démonstration mathématique que nous verrons à quel point cela va nous être utile.
 
-# L'ordre de traitement des champs des opérandes du circuit
+# L'ordre de traitement des champs d'opérande
 
 Comme dit plus haut, la tâche primaire du circuit est de comparer deux nombres flottants ___Half Precision___ (d'une taille de $16$ bits), nous les nommerons $\alpha$ et $\beta$.
 La comparaison en question est une vérification de la supériorité stricte de la valeur absolu de l'un de ces deux opérandes envers l'autre, admettons $\left(\vert\alpha\vert \gt \vert\beta\vert\right)$.
@@ -157,7 +157,7 @@ Par exemple, en ___écriture scientifique décimale___ nous pouvons représenté
 Cela peut paraitre plus compliqué à interprété de prime abord, mais comme nous le verrons dans les chapitres ci-dessous, en réalité tout n'est qu'une histoire de vrigule et de puissance.
 
 Le fonctionnement de l'écriture scientifique ne change que peu lorsque nous passons d'une base numérique vers une autre.
-La composition de la notation scientifique reste cependant la même peut importe la base numérique:
+La composition de la notation scientifique d'un nombre reste cependant la même peut importe la base numérique:
   - Le ___signe___
   - Un ___significande___
   - Un ___multiplicande___
@@ -166,35 +166,34 @@ Dans l'exemple fournit ci-dessus, le signe est évidemment le symbole $+$ qui in
 En notation scientifique décimale, le significande peut être toute valeur comprise dans l'intervalle $\left[1;10\right[$, et le multiplicande est une puissance de $10$.
 De manière général, pour une notation scientifique en base $N$.
 Le significande ne peut être compris qu'entre $\left[1;N\right[$, et le multiplicande est alors une puissance de $N$.
-C'est ce que nous allons repectivement voir dans les chapitres du nom de "_Le signficiande_" et "_Le multiplicande_" qui suivent.
+C'est ce que nous allons respectivement voir dans les chapitres du nom de "_Le significande_" et "_Le multiplicande_" qui suivent.
 
-Pour terminer, si nous parlons de l'écriture scientifique ce n'est pas pour rien.
-Chaque élément de l'encodage _IEEE-754_ ayant été défini plus tôt, correspond à l'un des éléments de l'écriture scientifique binaire d'un nombre.
-Nous verrons cela dans des chapitres ultérieurs.
+Pour terminer, précisons que si nous parlons de l'écriture scientifique ce n'est pas pour rien.
+Nous verrons d'ici quelques chapitre que chacun des éléments de l'encodage _IEEE-754_ ayant été défini plus tôt, correspond à l'un des éléments de l'écriture scientifique binaire d'un nombre.
 
 ## Le significande
 
-Pour écrire en notation scientifique le nombre flottant $F$, il faut partir du codage binaire "classique" du nombre $F$.
+Pour écrire en notation scientifique le nombre flottant $F$, il faut partir du codage du nombre en virgule flottante.
 
 Pour la ___notation scientifique binaire___, le significande est un nombre réel dont la valeur est compris dans l'intervalle suivante $\left[1;2\right[$.
 Ce qui veut dire que _la partie entière du significande doit être à_ $1$.
-Pour obtenir un significande, _nous déplaçons la virgule du nombre_ $F$ (codé en binaire normal) de sa position initial, _jusque devant le MSB1 du nombre_.
+Pour obtenir un significande, _nous déplaçons la virgule du nombre à virgule flottante_ $F$ de sa position initial, _jusque devant le MSB1 du nombre_.
 Ce qui tout logiquement modifie la valeur de $F$.
-Une exception est faite pour le cas où le flottant $F$ est nul, le significande peut alors lui même être nul (c'est une exception).
-La raison est qu'il n'y a pas de bit à $1$ dans le champs binaire qui code le flottant $F$ si il est nul, et donc il n'a y a pas de _MSB1_.
-Cependant, si le _MSB1_ est dans la partie entière du flottant $F$, cela insinue que $\left(F \ge 1\right)$ et que la virgule devra être déplacé vers la gauche (_si elle doit l'être_).
-Au contraire, si le _MSB1_ est dans la partie fractionnaire alors $\left(F \lt 1\right)$, et la virgule sera déplacé vers la droite.
+Une exception est faite pour le cas où le nombre à virgule flottante $F$ est nul, le significande peut alors lui même être nul (_c'est une exception_).
+La raison est qu'il n'y a pas de bit à $1$ dans le champs binaire qui code le nombre à virgule flottante $F$ si il est nul, et donc il n'a y a pas de _MSB1_.
+Cependant, si le _MSB1_ est dans la partie entière du nombre $F$, cela insinue que $\left(F \ge 1\right)$ et que la virgule devra être déplacé vers la gauche (_si elle doit l'être_).
+Au contraire, si le _MSB1_ est dans la partie fractionnaire de $F$ alors $\left(F \lt 1\right)$, et la virgule devra être déplacé vers la droite.
 
 Mais le déplacement de la virgule d'un nombre engendre en binaire les même choses qu'en décimale.
 Une _division par_ $N$ de $F$ dans le cas d'un déplacement de la virgule de $log_2\left(N\right)$ rangs vers la gauche, et _une multiplication_ de $F$ par le même facteur $N$ pour un décalage de la virgule de $log_2\left(N\right)$ rangs vers la droite.
-Le terme $N$ qui multiplie ou divise $F$ est __systèmatiquement une puissance de 2__, ce qui suit explique pourquoi.
+__Le terme__ $N$ __qui multiplie ou divise__ $F$ __est systèmatiquement une puissance de 2, ce qui suit explique pourquoi__.
 
-### Comprendre pourquoi F est multiplié/divisé par une puissance de 2 lorsque sa virgule est déplacée
+### La transformation d'un nombre à virgule flottante en un significande
 
-Pour tout nombre flottant $F$, nous savons que la virgule se trouve entre le _LSB_ de la partie entière (le bit de poids $0$), et le _MSB_ de la partie fractionnaire (bit de poids $-1$).
-Par conséquent, un déplacement de la virgule d'un rang vers la gauche force le bit de poids $1$ à devenir le bit de poids $0$, le bit de poids $0$ devient celui de poids $-1$, et celui de poids $-1$ devient le bit de poids $-2$, etc.
-Pour le dire autrement, chaque bit de la partie entière comme de la partie fractionnaire de $F$ voit son poids être _décrémenter_ de $1$. 
-C'est pourquoi après le déplacement de la virgule d'un rang vers la gauche, le nombre $F$ vaut ce qui suit pour $c = -1$:
+Pour tout nombre à virgule flottante $F$, nous savons que la virgule se trouve entre le _LSB_ de la partie entière (le bit de poids $0$), et le _MSB_ de la partie fractionnaire (bit de poids $-1$).
+Par conséquent, un déplacement de la virgule d'un rang vers la gauche force l'ancien bit de poids $1$ à devenir le bit de poids $0$, l'ancien bit de poids $0$ devient celui de poids $-1$, et celui qu'était de poids $-1$ devient le bit de poids $-2$, etc.
+Pour le dire autrement, chaque bit de la partie entière comme de la partie fractionnaire du nombre $F$ voit son poids être _décrémenter_ de $1$. 
+L'équation suivante permet de calculer la transformation du nombre à virgule flottante $F$ en un significande, pour ceci il faut définir la variable $c = -1$:
 
 $$\left(\sum_{i = msb\left(F\right)}^{lsb\left(F\right)} \ \left(F_i \times 2^{\left(i+c\right)}\right)\right) = \left(F\times 2^c\right)$$
 
