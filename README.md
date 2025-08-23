@@ -195,7 +195,7 @@ Pour le dire autrement, chaque bit de la partie entière comme de la partie frac
 
 L'équation ci-dessous permet de calculer la transformation de n'importe quel nombre à virgule flottante $F$ en un significande.
 
-$$\left(\sum_{i = msb\left(F\right)}^{lsb\left(F\right)} \ \left(F_i \times 2^{\left(i+c\right)}\right)\right) = \left(F\times 2^c\right)$$
+$$\sum_{i = msb\left(F\right)}^{lsb\left(F\right)} \ \left(F_i \times 2^{\left(i+c\right)}\right) = \ F \times 2^c$$
 
 Le terme $c$ représente le nombre de rang de décalage à induire sur la virgule du nombre $F$.
 Qui plus est, lorsque $\left(c \lt 0\right)$ c'est que _la virgule doit être décalée vers la gauche_.
@@ -233,26 +233,26 @@ Voilà pourquoi n'_importe quel décalage de la virgule_ d'un nombre flottant $F
 
 ### Détail sur le fonctionnement de l'équation
 
-Cependant, je parle de divisé par une puissance de $2$ le nombre flottant $F$ dans le cas d'un décalage de sa virgule vers la gauche, mais malgré que l'équation précédente fonctionne, elle ne fait pas usage de division.
+Je parle de divisé par une puissance de $2$ le nombre flottant $F$ dans le cas d'un décalage de sa virgule vers la gauche, mais malgré que l'équation fonctionne elle ne fait pas usage de division.
 Essayons de comprendre pourquoi.
-Le côté droit de cette équation $\left(F\times 2^c\right)$ est approprié pour un décalage de la virgule vers la droite.
-Car je rappelle qu'après un déplacement de la virgule de $c$ rangs vers la droite, le nombre flottant $F$ est mulitplié par une puissance de $2$ qui vaut $2^c$, où $\left(c \gt 0\right)$.
+Le côté droit de cette équation $\left(F \times 2^c\right)$ semble être approprié pour un décalage de la virgule vers la droite du nombre $F$.
+Je rappelle qu'après un déplacement de la virgule de $c$ rangs vers la droite, le nombre flottant $F$ est mulitplié par une puissance de $2$ qui vaut $2^c$, où $\left(c \gt 0\right)$.
 
-En outre, nous avons jusqu'ici utilisé des valeurs négatives de $c$ lors des décalages de virgule vers la gauche.
-Pourtant le plus intuitif aurait été de définir les même valeurs de $c$ peu importe la direction des décalages, alors faisons comme si c'était le cas depuis le début.
-Dans ce qui suit je vais donc faire usage de $\left(c \gt 0\right)$ pour des décalages vers la gauche.
-Les explications suivantes vont nous permettre de comprendre pourquoi, pour nos explications, il vaut mieux que $c$ soit négatif pour les décalages de la virgule vers la gauche.
+En parallèle, l'équation utilise des valeurs négatives de $c$ lors d'un décalage de virgule vers la gauche.
+Pourtant le plus intuitif aurait été de définir les même valeurs de $c$ peu importe la direction des décalages, accompagné de deux équations différentes.
+Dans ce qui suit, je vais donc faire usage de $\left(c \gt 0\right)$ pour des décalages vers la gauche.
+Les explications suivantes vont nous permettre de comprendre pourquoi il vaut mieux que $c$ soit négatif lors des décalages de la virgule vers la gauche.
 
-Pour un décalage de la virgule de $c$ rangs vers la gauche, nous devrions divisé $c$ fois le nombre $F$ par $2$, ou autrement dit, divisé $F$ par $2^c$.
-Initialement, nous pourrions penser avoir besoin d'une équation ressemblant à celle-ci $\left(\sum_{i=msb\left(F\right)}^{lsb\left(F\right)} \left(F_i \times 2^{\left(i-c\right)}\right)\right) = \left(F\div 2^c\right)$.
-J'attire l'attention sur le fait que côté droit de l'équation peut être modifié pour $\left(F\times \left(1\div 2^c\right)\right)$.
+Pour un décalage de la virgule de $c$ rangs vers la gauche, nous devrions divisé $c$ fois le nombre $F$ par $2$, ou autrement dit divisé $F$ par $2^c$.
+Initialement, nous pourrions penser avoir besoin d'une équation ressemblant à celle-ci $\sum_{i=msb\left(F\right)}^{lsb\left(F\right)} \left(F_i \times 2^{\left(i-c\right)}\right) = \ F \div 2^c$.
+J'attire l'attention sur le fait que côté droit de l'équation puisse être modifié pour $\left(F \times \left(1 \div 2^c\right)\right)$.
 Mais ce n'est pas fini, car pour trouver l'inverse d'une puissance de $2$ tel que $2^c$, nous pouvons simplement appliqué l'opposé de l'exposant $c$ à la base $2$.
-En gros, $\left(1\div 2^c\right) = \ 2^{-c}$.
+En gros, $1 \div 2^c = \ 2^{-c}$.
 Je me permet de rappellé que $\left(c \gt 0\right)$.
-Finalement, nous pouvons alors remplacé $\left(F\times 2^{-c}\right)$ par $\left(F\times 2^c\right)$, à la condition qu'un décalage de $x$ rangs vers la gauche de la virgule de $F$, soit représenté dans l'équation par une valeur de $c = -x$.
+Finalement, nous pouvons alors remplacé le membre droit $\left(F \times 2^{-c} \right)$ par $\left(F \times 2^c\right)$, à la condition qu'un décalage de $x$ rangs vers la gauche de la virgule de $F$, soit représenté dans l'équation par une valeur de $c = -x$.
 
-Avec $\left(F\times 2^c\right)$ nous retrouvons bien le membre droit de notre équation initial, à la condition que $c$ puisse devenir négatif.
-De plus, nous comprenons aussi que le calcul de l'exposant $\left(i+c\right)$ du membre gauche, produit l'équivalent de $\left(i-c\right)$ dans le cas d'un décalage de la virgule de $F$ vers la gauche, car $\left(c \lt 0\right)$.
+Avec $\left(F \times 2^c\right)$ nous retrouvons bien le membre droit de notre équation initial, à la condition que $c$ puisse devenir négatif.
+De plus, nous comprenons aussi que le calcul de l'exposant $\left(i + c\right)$ du membre gauche, produit l'équivalent de $\left(i - c\right)$ dans le cas d'un décalage de la virgule de $F$ vers la gauche, car $\left(c \lt 0\right)$.
 
 C'est la raison pour laquelle il vaut mieux que $c$ soit négatif lors d'un décalage vers la gauche de la virgule.
 Ceci nous permet de ne faire usage que d'une seule équation pour tout les sens de décalage. 
@@ -262,35 +262,32 @@ Ceci nous permet de ne faire usage que d'une seule équation pour tout les sens 
 Nous savons désormais comment obtenir un significande.
 Le problème c'est que tout nombre flottant $F$ dont la valeur n'est pas comprise dans l'intervalle $\left[1;2\right[$ doit forcémment subir un décalage de sa virgule, et donc voir sa valeur être multiplié ou divisé par une puissance de $2$.
 Pour contrecarrer ce problème, l'écriture scientifique défini ce qui s'appelle un multiplicande. 
-Le rôle du multiplicande est de nous permettre de retrouver la valeur initial de $F$ après qu'il ait été transformé en un significande $S$, voyons comment.
+Le rôle du multiplicande est de nous permettre de retrouver la valeur initial de $F$ après qu'il ait été transformé en un significande $S$.
 
-En reprenant les termes des chapitres précédents, dans le cas d'une transformation d'un nombre $F$ en un significande $S$ avec $\left(c \lt 0\right)$, nous savons que la virgule du nombre $F$ a été déplacé vers la gauche et donc sa valeur divisé.
-Pour retrouver $F$, il suffit alors de _multiplié_ le significande $S$ par la puissance de $2$ qui a divisé le nombre $F$.
-Mais rappelons que l'équation effectue la division du nombre $F$ comme ceci $\left(F \times 2^c\right)$, ce qui est équivalent à $\left(F \div \left(1 \div 2^c\right)\right)$.
-Il faut donc multiplié le significande $S$ de la manière suivante afin de retrouver le nombre $F$ d'origine $\left(S \times \left(1 \div 2^c\right)\right)$, ce qui est équivalent à $\left(S\times 2^{-c}\right)$.
+En reprenant les termes de l'aquation précédente, dans le cas d'une transformation d'un nombre $F$ en un significande $S$ avec $\left(c \lt 0\right)$, nous savons que la virgule du nombre $F$ a été déplacée vers la gauche et donc sa valeur divisé.
+Pour retrouver le nombre à virgule flottante initial $F$, il suffit alors de _multiplié_ le significande $S$ par la puissance de $2$ qui a divisé le nombre $F$.
+Comme l'explique le chapitre précédent, l'équation effectue cependant la division du nombre $F$ comme ceci $\left(F \times 2^c\right)$, ce qui est équivalent à $\left(F \div \left(1 \div 2^c\right)\right)$.
+Il faut donc multiplié le significande $S$ de la manière suivante afin de retrouver le nombre $F$ d'origine $\left(S \times \left(1 \div 2^c\right)\right)$, ce qui est équivalent à $\left(S \times 2^{-c}\right)$.
 
-Prenons désormais le cas d'une transformation du nombre $F$ en un significande $S$ avec $\left(c \gt 0\right)$.
-La virgule du nombre $F$ est déplacé vers la droite et le nombre a alors été multiplié par une puissance de $2$.
-Ce coup ci, pour retrouver $F$ il faudra _divisé_ la valeur du significande $S$ par la puissance de $2$ qui a multiplié le nombre $F$.
-Nous savons que $S = \left(F \times 2^c\right)$, alors nous effectuons $\left(S \div 2^c\right)$, ce qui est équivalent à $\left(S \times \left(1 \div 2^c\right)\right)$ et donc à $\left(S \times 2^{-c}\right)$.
+Prenons désormais le cas d'une transformation du nombre à virgule flottante $F$ en un significande $S$, avec $\left(c \gt 0\right)$.
+La virgule du nombre $F$ est déplacée vers la droite et le nombre est alors multiplié par une puissance de $2$.
+Ce coup ci, pour retrouver la valeur initial de $F$ il faudra _divisé_ la valeur du significande $S$ par la puissance de $2$ qui a multiplié le nombre $F$.
+Nous savons que $\left(F \times 2^c\right)$, alors nous effectuons $\left(S \div 2^c\right)$ ce qui est équivalent à $\left(S \times \left(1 \div 2^c\right)\right)$ et donc à $\left(S \times 2^{-c}\right)$.
 
-Peu importe la manière dont un significande peut être obtenu, il existe un unique calcul $\left(S \times 2^{-c}\right)$ pour retrouver la valeur du nombre d'origine à partir de son significande.
-Le multiplicande est ici le facteur $2^{-c}$, c'est une puissance de $2$. 
-Mais il est possible d'exprimé les choses différemment, ce qui va nous sevrir pour plus tard.
+Peu importe la manière dont un significande peut être obtenu, il existe un unique calcul $\left(S \times 2^{-c}\right)$ permettant de retrouver la valeur du flottant $F$ à partir de son significande.
+Le multiplicande est ici le facteur $2^{-c}$. 
+Mais il est possible d'exprimé les choses différemment, ce qui va nous servir pour plus tard.
 
-Pour la transformation d'un nombre flottant $F$ en un significande $S$, si la virgule de $F$ a été déplacé vers la droite alors $\left(c \gt 0\right)$.
-Afin de retrouver la valeur du nombre $F$ d'origine depuis le significande, le multiplicande doit permettre de déplacé de $c$ rangs vers la gauche la virgule du significande $S$.
-Il suffit alors d'inversé le signe de $c$ pour changé la direction du décalage.
-Nous faisons cela en négationnant $c$, comme ceci $\left(-\left(+c\right) = -c\right)$.
-Le nombre de rang de décalage reste le même mais le sens de décalage passe de la droite $\left(c \gt 0\right)$, à la gauche avec $\left(c \lt 0\right)$.
+Pour la transformation d'un nombre flottant $F$ en un significande $S$, si la virgule de $F$ a été déplacée de $c$ rangs vers la droite, alors $\left(c \gt 0\right)$.
+Pour retrouver depuis le significande $S$ la valeur du nombre flottant $F$ initial, le multiplicande doit permettre de déplacé de $c$ rangs vers la gauche la virgule du significande.
+Il suffit alors d'inversé le signe de $c$ pour changé la direction du décalage, comme ceci $\left(-\left(+c\right) = -c\right)$.
+Le nombre de rang de décalage reste le même mais le sens de décalage passe de la droite avec $\left(c \gt 0\right)$, à la gauche avec $\left(c \lt 0\right)$.
 
-Dans le cas contraire, la transformation du nombre $F$ en un significande $S$ avec $\left(c \lt 0\right)$, engendre un déplacement de la virgule du nombre $F$ de $\vert \ c \ \vert$ rangs vers la gauche.
-Pour retrouver la valeur du nombre d'origine $F$, il faudra alors que le significande $S$ voit sa virgule être décalée de $\vert \ c \ \vert$ rangs vers la droite.
-Rappellons tout de même que $c$ est négatif.
-En négationnant une nouvelle fois $c$, cela permettra d'inversé à nouveau le sens de décalage $\left(-\left(-c\right) = +c\right)$.
+Dans le cas contraire, la transformation du nombre flottant $F$ en un significande $S$ avec $\left(c \lt 0\right)$, engendre un déplacement de la virgule de $F$ de $\vert \ c \ \vert$ rangs vers la gauche.
+Pour retrouver la valeur du nombre flottant $F$ initial, il faudra alors que la virgule du significande $S$ soit décalée de $\vert \ c \ \vert$ rangs vers la droite.
+Une nouvelle fois, la négation de $c$ permettra d'inversé le sens de décalage $\left(-\left(-c\right) = +c\right)$ de la vrigule.
 
-Il est donc simple de comprendre que déplacé la virgule du significande $S$ de $-c$ rangs, vers la gauche si $\left(c \lt 0\right)$ ou vers la droite si $\left(c \gt 0\right)$, est équivalent à multiplié $S$ par $2^{-c}$.
-Comme nous l'indique les premières explications de cette section.
+Nous comprenons donc que dans les faits déplacé la virgule du significande $S$ de $-c$ rangs, est équivalent à produire le calcul $\left(S \times 2^{-c}\right)$.
 
 # Le codage des informations dans un nombre flottant IEEE-754
 
