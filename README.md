@@ -275,68 +275,64 @@ Ce coup ci, pour retrouver la valeur initial de $F$ il faudra _divisé_ la valeu
 Nous savons que $\left(F \times 2^c\right)$, alors nous effectuons $\left(S \div 2^c\right)$ ce qui est équivalent à $\left(S \times \left(1 \div 2^c\right)\right)$ et donc à $\left(S \times 2^{-c}\right)$.
 
 Peu importe la manière dont un significande peut être obtenu, il existe un unique calcul $\left(S \times 2^{-c}\right)$ permettant de retrouver la valeur du flottant $F$ à partir de son significande.
-Le multiplicande est ici le facteur $2^{-c}$. 
+Le multiplicande est le facteur $2^{-c}$. 
 Mais il est possible d'exprimé les choses différemment, ce qui va nous servir pour plus tard.
 
 Pour la transformation d'un nombre flottant $F$ en un significande $S$, si la virgule de $F$ a été déplacée de $c$ rangs vers la droite, alors $\left(c \gt 0\right)$.
-Pour retrouver depuis le significande $S$ la valeur du nombre flottant $F$ initial, le multiplicande doit permettre de déplacé de $c$ rangs vers la gauche la virgule du significande.
+Pour retrouver depuis le significande $S$ la valeur initial du nombre flottant $F$, le multiplicande doit permettre de déplacé de $c$ rangs vers la gauche la virgule du significande.
 Il suffit alors d'inversé le signe de $c$ pour changé la direction du décalage, comme ceci $\left(-\left(+c\right) = -c\right)$.
 Le nombre de rang de décalage reste le même mais le sens de décalage passe de la droite avec $\left(c \gt 0\right)$, à la gauche avec $\left(c \lt 0\right)$.
 
 Dans le cas contraire, la transformation du nombre flottant $F$ en un significande $S$ avec $\left(c \lt 0\right)$, engendre un déplacement de la virgule de $F$ de $\vert \ c \ \vert$ rangs vers la gauche.
-Pour retrouver la valeur du nombre flottant $F$ initial, il faudra alors que la virgule du significande $S$ soit décalée de $\vert \ c \ \vert$ rangs vers la droite.
-Une nouvelle fois, la négation de $c$ permettra d'inversé le sens de décalage $\left(-\left(-c\right) = +c\right)$ de la vrigule.
+Pour retrouver la valeur initial du nombre flottant $F$, il faudra alors que la virgule du significande $S$ soit décalée de $\vert \ c \ \vert$ rangs vers la droite.
+Une nouvelle fois, la négation de $c$ permettra d'inversé le sens de décalage de la vrigule $\left(-\left(-c\right) = +c\right)$.
 
-Nous comprenons donc que dans les faits déplacé la virgule du significande $S$ de $-c$ rangs, est équivalent à produire le calcul $\left(S \times 2^{-c}\right)$.
+Nous comprenons donc que dans les faits déplacé la virgule du significande $S$ de $-c$ rangs, est équivalent à produire le calcul $\left(S \times 2^{-c}\right)$ qui permet de retrouver la valeur de $F$ (comme vu plus haut).
 
-# Le codage des informations dans un nombre flottant IEEE-754
+# Le codage d'un nombre flottant IEEE-754
 
-Nous avons déjà parler de l'encodage IEEE-754 en introduction de ce document, plus particulièrement des éléments qui le compose et de leur encodage propre.
-Je rappelle que ces $3$ éléments sont des champs binaire qui codent chacun un __bit de signe__, un __exposant__ ainsi qu'une __mantisse tronquée__.
+Nous avons déjà parler de l'encodage IEEE-754 en introduction de ce document, plus particulièrement des trois éléments qui le compose ainsi que de l'encodage propre à ceux-ci.
+Je rappelle que ces trois éléments sont des champs binaire où chacun code respectivement un __bit de signe__, un __exposant__ ainsi qu'une __mantisse tronquée__.
 Par ailleurs, nous venons tout juste de voir dans le détails ce qu'est l'écriture scientifique biniaire d'un nombre, ce qui nous a permis de mettre en lumière ce qu'est un __significande__ (qui peut être appellé __mantisse__), ainsi qu'un __multiplicande__.
-Il y a aussi un élément de l'écriture scientifique dont j'ai peu parlé, c'est le __signe__ $\pm$ du nombre représenté.
+Il y a aussi le __signe__ $\pm$ du nombre représenté en écriture scientifique.
 
-Chaque champs binaire de l'encodage IEEE-754 correspond plus ou moins à l'un des éléments de l'écriture scientifique binaire d'un nombre.
-Par exemple, le champs du _bit de signe_ correspond assez logiquement au _signe_ de la notation scientifique d'un nombre, mais nous ne nous intéresserons pas plus que ça au bit de signe dans ce qui suit.
-Je rappelle que le circuit électronique ne travaille qu'avec la valeur absolu de ses opérandes flottants.
-En revanche, nous allons parlé plus en profondeur du champs d'exposant ainsi que de la mantisse tronquée.
+Chaque champs binaire de l'encodage IEEE-754, correspond (plus ou moins) à l'un des éléments de l'écriture scientifique binaire d'un nombre.
+Par exemple, le champs du _bit de signe_ en IEEE-754 correspond assez logiquement au _signe_ de la notation scientifique binaire d'un nombre.
+Nous ne reviendrons pas sur le sujet du bit de signe d'un nombre IEEE-754 car rappelons-le, le circuit électronique ne prend en charge que la valeur absolu (sans bit de signe) de ses opérandes.
+Dans ce qui suit, nous allons parlé plus en profondeur du champs d'exposant ainsi que du champs de mantisse tronquée.
 Nous avons déjà abordé le sujet de l'encodage de ces champs dans l'introduction, aussi je ne vais pas y revenir.
 
-# X. Composition du champs de mantisse tronquée et du champs d'exposant
+### Composition du champs de mantisse tronquée et du champs d'exposant
 
-En reprenant ce que nous avons dit précédemment, le champs de la mantisse tronquée correspond au significande d'un nombre représenté en écriture scientifique binaire.
-Faisons un rapide rappelle sur ce qu'est le significande.
-Le significande $S$ est un nombre dont la valeur se trouve être dans l'intervalle de $\left[1;2\right[$, il est souvent le résultat d'une transformation (un calcul) sur un nombre flottant $F$ à représenté en écriture scientifique.
-Enfaite, si $F \notin \left[1;2\right[$ alors le nombre sera divisé ou multiplié par une puissance de $2$ que nous nommons $N$, cette transformation permet l'obtention d'un significande. 
+En reprenant ce que nous avons dit précédemment, le champs de la mantisse tronquée correspond au significande (mantisse) d'un nombre représenté en écriture scientifique binaire.
+Faisons un rapide rappelle sur ce qu'est un significande.
+Le significande $S$ est un nombre dont la valeur se situe dans l'intervalle $\left[1;2\right[$, il est souvent le résultat d'une transformation (un calcul) sur un nombre codé en virgule flottante $F$.
+Enfaite, si $F \notin \left[1;2\right[$ alors le flottant sera divisé ou multiplié par une puissance de $2$ que nous nommons $N$.
+Ceci nous permet d'obtenir le significande de la notation scientifique binaire de $F$. 
 
 En somme, le significande est un nombre à virgule qui est donc composé d'une partie entière ainsi que d'une partie fractionnaire.
-Vu que la valeur du significande doit être strictement inférieur à $2$ ou $10_2$ en binaire, ça veut dire que l'encodage de la partie entière ne peut être que inférieur à $10_2$, c'est à dire $0$ ou $1$.
+Vu que la valeur du significande doit être strictement inférieur à $2$ ou $10_2$ en binaire, ça veut dire que la partie entière ne peut être que à $0$ ou $1$.
 Par conséquent la partie entière du significande n'est codé que sur un bit.
-Mais en soit le bit de la partie entière ne peut pas être à $0$, car il est nécessaire que la valeur du significande soit comprise dans l'intervalle mentionné ci-dessus.
+Mais en soit le bit de la partie entière ne peut pas être à $0$, car il est nécessaire que la valeur du significande soit au moins de $1$.
 __Donc le bit de la partie entière est à 1__.
-Pour résumer $\left(S \ge 1\right) \wedge \left(S \lt 2\right)$ nous force à dire que la partie entière du significande $S$ est à $1$.
-En plus de cela, nous avons la partie fractionnaire du significande à prendre en compte, qui est logiquement strictement inférieur à $1$.
-Finalement, la valeur du significande est la somme de la partie entière et de la partie fractionnaire, ce qui veut dire que $\left(S \lt 2\right)$.
+En plus de cela, nous avons la partie fractionnaire du significande à prendre en compte (dont la valeur est logiquement strictement inférieur à $1$).
+Finalement, la valeur du significande est la somme de la partie entière et de la partie fractionnaire et $\left(S \lt 2\right)$.
 
 La norme IEEE-754 définit un champs de mantisse tronquée de $X$ bits pour chaque format de nombre flottant. 
 Prenons pour exemple le format ___Half Precision___ que gère le circuit électronique en cours d'étude.
 Il s'avère que le champs de la mantisse tronquée de ce format est établit à une taille de $10$ bits.
-L'entièreté d'un significande $S$ pourrait être enregistré sur ces $10$ bits (si possible), mais ce n'est pas utiles car la partie entière est toujours composé d'un seul et même bit à $1$, comme nous venons de le voir.
-C'est pourquoi la norme ampute le significande de sa partie entière, indépendemment du format de flottant.
-L'intérêt c'est que le champs reste de la même taille ($10$ bits pour un _Half Precision_), mais que nous gagnons un bit de précision sur le codage d'un nombre.
-C'est d'ailleurs la raison derrière le nom de mantisse tronquée.
+L'entièreté d'un significande $S$ pourrait être enregistré sur ces $10$ bits (si possible), mais ce n'est pas utiles car sa partie entière est toujours composé d'un seul et même bit à $1$, comme nous venons de le voir.
+C'est pourquoi la norme ampute le significande (ou mantisse) de sa partie entière, indépendemment du format de flottant.
+L'intérêt c'est que le champs champs de mantisse tronquée reste de la même taille ($10$ bits pour un _Half Precision_), tout en gagnant un bit de précision sur le codage d'un significande.
+C'est d'ailleurs la raison derrière le nom de ce champs, qui représente une mantisse ___tronquée___.
 
-Le standard IEEE-754 définit aussi un champs d'exposant, qui correspond _en partie_ au multiplicande de l'écriture scientifique binaire d'un nombre $F$.
+Le standard IEEE-754 défini également un champs d'exposant qui correspond _en partie_ au multiplicande de l'écriture scientifique binaire d'un nombre à virgule flottante $F$.
 Je conseille une relecture du chapitre sur le multiplicande si un rafraichissement est nécessaire.
-Je cite "_le multiplicande est le facteur_ $2^{-c}$.", mais en réalité le champs d'exposant lui ne correspond qu'à l'exposant $-c$ du multiplicande, et non à la puissance de $2$ en sa totalité. 
-Rappellons que la variable $c$ représente le nombre de rang par lequel décalé la virgule du nombre $F$ pour le transformé en un significande, et que lorsque $\left(c \lt 0\right)$ cela témoigne d'un décalage vers la gauche, inversement pour $\left(c \gt 0\right)$.
-Le champs d'exposant se base sur ce qui a été dit dans les trois derniers paragraphes du chapitre sur le multiplicande, pour déplacé la virgule du significande du bon nombre de rang, et dans la bonne direction.
+De ce chapitre j'en tire la phrase "_Le multiplicande est le facteur_ $2^{-c}$.", même si en réalité le champs d'exposant d'un nombre IEEE-754 ne correspond qu'à l'exposant $-c$ d'un multiplicande, et non à la valeur de la puissance elle même. 
+Un champs d'exposant ne code que la valeur $-c$, car il se base sur ce qui a été dit lors des deux derniers paragraphes du chapitre "_Le multiplicande_", afin de déplacé la virgule du significande du bon nombre de rang, ainsi que dans la bonne direction.
 
-En gros, le champs d'exposant code le résultat de la négation de $c$, ce qui a pour effet d'inversé le sens de décalage de la virgule, sans touché pour autant au nombre de rang à décalé.
-Si la valeur de l'exposant codé dans le champs est négative, alors le décalage de la virgule du significande se fera vers la gauche et du nombre de rang codé par le champs.
-Au contraire, si cette valeur est positive, la virgule du significande sera décalée vers la droite et sera toujours déplacé du nombre de rang codé par le champs.
-Ce champs d'exposant possède néanmoins une taille $X$ qui varie en fonction du format des nombres flottants.
-Pour un format _Half Precision_ sa taille est de $5$ bits.
+Le standard IEEE-754 défini un taille de champs d'exposant propre à chaque format de flottant.
+Dans le cas du format _Half Precision_, la taille du champs d'exposant est de $5$ bits.
 
 # XI. L'ordre de traitement des champs d'exposant et de mantisse tronquée
 
