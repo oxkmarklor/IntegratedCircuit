@@ -10,7 +10,7 @@ Le document se découpe en plusieurs parties:
     - Le multiplicande
   - Codage des informations dans un nombre flottant IEEE-754
     - Composition du champs de mantisse tronquée et d'exposant
-  - L'ordre de traitement des champs d'exposant et de mantisse tronquée
+  - Les points terminaux et non terminaux
   - Démonstration mathématique
     - Traitement des champs d'exposant
     - Traitement des champs de mantisses tronquées
@@ -313,57 +313,61 @@ Ceci nous permet d'obtenir le significande de la notation scientifique binaire d
 En somme, le significande est un nombre à virgule qui est donc composé d'une partie entière ainsi que d'une partie fractionnaire.
 Vu que la valeur du significande doit être strictement inférieur à $2$ ou $10_2$ en binaire, ça veut dire que la partie entière ne peut être que à $0$ ou $1$.
 Par conséquent la partie entière du significande n'est codé que sur un bit.
-Mais en soit le bit de la partie entière ne peut pas être à $0$, car il est nécessaire que la valeur du significande soit au moins de $1$.
+En soit, le bit de la partie entière ne peut pas non plus être à $0$, car il est nécessaire que la valeur du significande soit au moins de $1$.
 __Donc le bit de la partie entière est à 1__.
 En plus de cela, nous avons la partie fractionnaire du significande à prendre en compte (dont la valeur est logiquement strictement inférieur à $1$).
-Finalement, la valeur du significande est la somme de la partie entière et de la partie fractionnaire et $\left(S \lt 2\right)$.
+Finalement, la valeur du significande est la somme de la partie entière et de la partie fractionnaire.
 
-La norme IEEE-754 définit un champs de mantisse tronquée de $X$ bits pour chaque format de nombre flottant. 
-Prenons pour exemple le format ___Half Precision___ que gère le circuit électronique en cours d'étude.
+La norme IEEE-754 défini un champs de mantisse tronquée de $x$ bits pour chaque format de nombre flottant. 
+Prenons pour exemple le format ___Half Precision___ que gère la FPU Configuration Unit.
 Il s'avère que le champs de la mantisse tronquée de ce format est établit à une taille de $10$ bits.
 L'entièreté d'un significande $S$ pourrait être enregistré sur ces $10$ bits (si possible), mais ce n'est pas utiles car sa partie entière est toujours composé d'un seul et même bit à $1$, comme nous venons de le voir.
 C'est pourquoi la norme ampute le significande (ou mantisse) de sa partie entière, indépendemment du format de flottant.
 L'intérêt c'est que le champs champs de mantisse tronquée reste de la même taille ($10$ bits pour un _Half Precision_), tout en gagnant un bit de précision sur le codage d'un significande.
-C'est d'ailleurs la raison derrière le nom de ce champs, qui représente une mantisse ___tronquée___.
+C'est d'ailleurs la raison derrière le nom de ce champs, qui code une mantisse ___tronquée___.
 
 Le standard IEEE-754 défini également un champs d'exposant qui correspond _en partie_ au multiplicande de l'écriture scientifique binaire d'un nombre à virgule flottante $F$.
 Je conseille une relecture du chapitre sur le multiplicande si un rafraichissement est nécessaire.
-De ce chapitre j'en tire la phrase "_Le multiplicande est le facteur_ $2^{-c}$.", même si en réalité le champs d'exposant d'un nombre IEEE-754 ne correspond qu'à l'exposant $-c$ d'un multiplicande, et non à la valeur de la puissance elle même. 
+De ce chapitre j'en tire la phrase "_Le multiplicande est le facteur_ $2^{-c}$.".
+En réalité le champs d'exposant d'un nombre IEEE-754 ne correspond qu'à l'exposant $-c$ d'un multiplicande, et non à la valeur de la puissance elle même. 
 Un champs d'exposant ne code que la valeur $-c$, car il se base sur ce qui a été dit lors des deux derniers paragraphes du chapitre "_Le multiplicande_", afin de déplacé la virgule du significande du bon nombre de rang, ainsi que dans la bonne direction.
 
-Le standard IEEE-754 défini un taille de champs d'exposant propre à chaque format de flottant.
+Le standard défini une taille de champs d'exposant propre à chaque format de flottant.
 Dans le cas du format _Half Precision_, la taille du champs d'exposant est de $5$ bits.
 
-# XI. L'ordre de traitement des champs d'exposant et de mantisse tronquée
+# Les points terminaux et non terminaux
 
 Pour finir, je vais enfin pouvoir expliqué pourquoi le circuit électronique traite les champs d'exposant $E$ des opérandes $\alpha$ et $\beta$, avant les champs de mantisse tronquée $T$ de ces même opérandes.
 
 Nous avons vu dans le chapitre sur le multiplicande, comment est ce qu'en écriture scientifique binaire nous pouvions obtenir le nombre d'origine $F$ depuis le significande $S$. Précisémment au travers du calcul suivant $F = \left(S\times 2^{-c}\right)$.
-En tenant compte de tout ce qui a déjà été dit plus haut, nous en déduisons qu'en IEEE-754 le nombre $F$ vaut alors $\left(\left(1 + T\right)\times 2^E\right)$.
+En tenant compte des correspondances entre les éléments de l'encodage IEEE-754 et de l'écriture scientifique binaire du nombre $F$, nous en déduisons que ce nombre codé en IEEE-754 vaut alors $\left(\left(1 + T\right) \times 2^E\right)$.
 
-N'oublions pas que si le significande $S$ de l'écriture scientifique binaire du nombre $F$ est compris dans l'intervalle de valeur suivante $\left[1;2\right[$.
+N'oublions pas que si le significande $S$ de la notation scientifique binaire du nombre $F$ est compris dans l'intervalle de valeur suivante $\left[1;2\right[$.
 Ce n'est pas le cas du champs de mantisse tronquée $T$, __car le bit à 1 de sa partie entière est rendu implicite__.
-D'où le fait que pour représenté la valeur réel du champs, il nécessaire d'ajouté ce que vaut la partie entière à la mantisse tronquée $\left(1 + T\right)$.
+D'où le fait que pour représenté la valeur réel du champs, il nécessaire d'ajouté ce que vaut la partie entière au champs de mantisse tronquée lui même $\left(1 + T\right)$.
 
-Au travers du calcul suivant $\left(\left(1 + T\right)\times 2^E\right)$ nous observons quelques chose d'intéressant.
+Au travers du calcul suivant $\left(\left(1 + T\right) \times 2^E\right)$ nous observons quelques chose d'intéressant.
 Par essence $\left(2^i = 2\times 2^{\left(i-1\right)}\right)$.
 Etant donné que la valeur codé dans le champs de la mantisse tronquée $T$ est strictement inférieur à $1$, alors même pour $T = 0.99..9$ nous obtenons avec $\left(\left(1 + T\right)\times 2^E\right)$ une valeur __strictement inférieur__ à $\left(1\times 2^{\left(E+1\right)}\right)$.
 Nous voyons ici pourquoi est ce que les champs d'exposant $E$ des opérandes sont traités avant les champs de mantisse tronquée $T$.
 
-Imaginons que pour deux opérandes $\alpha$ et $\beta$ nous voulions vérifié $\left(\vert\alpha\vert \gt \vert\beta\vert\right)$:
+Imaginons que pour deux opérandes $\alpha$ et $\beta$, le circuit teste la condition $\left(\vert\alpha\vert \gt \vert\beta\vert\right)$:
   - Si $\left(E_{\alpha} \lt E_{\beta}\right)$ alors nous savons que la comparaison __échoue__ car $\left(\left(1 + T_{\alpha}\right)\times 2^{E_{\alpha}}\right) \lt \left(\left(1 + T_{\beta}\right)\times 2^{E_{\beta}}\right)$ et ce même si $T_{\alpha} = 0.99..9$ lorsque $T_{\beta} = 0$.
 
   - Si $\left(E_{\alpha} \gt E_{\beta}\right)$ alors la comparaison __réussie__ cette fois-ci, car $\left(\left(1 + T_{\alpha}\right)\times 2^{E_{\alpha}}\right) \gt \left(\left(1 + T_{\beta}\right)\times 2^{E_{\beta}}\right)$ et ce même si $T_{\alpha} = 0$ lorsque $T_{\beta} = 0.99..9$.
 
 Dans les deux cas qui figurent ci-dessus, __le circuit atteint un point terminal__.
-Mais il existe une troisième possibilité à laquelle le circuit peut être confronté $\left(E_{\alpha} = E_{\beta}\right)$.
+C'est à dire qu'il est capable de générer le résultat d'une comparaison par le seul traitement des champs d'exposant de ses opérandes, il court-circuite le reste des calculs sur les champs de mantisse tronquée afin de rendre disponible le résultat le plus rapidement possible.
+En bref, un point terminal sera atteint lorsque $\left(E_{\alpha} \neq E_{\beta}\right)$.
 
-Dans ce cas spécifique, les produits $\left(\left(1 + T_{\alpha}\right)\times 2^{E_{\alpha}}\right)$ ainsi que $\left(\left(1 + T_{\beta}\right)\times 2^{E_{\beta}}\right)$ ont un facteur commun, la puissance de $2$.
-Par conséquent, tout ne repose que sur les champs $T_{\alpha}$ et $T_{\beta}$ pour pouvoir départagé si $\left(\vert\alpha\vert \gt \vert\beta\vert\right)$ ou non.
+Mais il existe une autre possibilité à laquelle le circuit peut être confronté, celle dans laquelle les champs d'exposant de ses opérandes $\alpha$ et $\beta$ sont égaux $\left(E_{\alpha} = E_{\beta}\right)$.
+Dans ce cas spécifique, les produits $\left(\left(1 + T_{\alpha}\right) \times 2^{E_{\alpha}}\right)$ ainsi que $\left(\left(1 + T_{\beta}\right) \times 2^{E_{\beta}}\right)$ ont une même puissance de $2$.
+Par conséquent, le circuit électronique se repose sur les champs $T_{\alpha}$ et $T_{\beta}$ pour pouvoir départagé si $\left(\vert\alpha\vert \gt \vert\beta\vert\right)$ ou non.
+Le circuit atteint alors un état de __point non terminal__.
 
 Nous comprenons désormais pourquoi le circuit électronique, qui a pour but de vérifié la supériorité stricte d'un opérande envers l'autre, traite d'abord les champs d'exposant $E$ des opérandes $\alpha$ et $\beta$, puis ensuite les champs de mantisse tronquée $T$ si nécessaire.
 
-# XII. Démonstration mathématique
+# Démonstration mathématique
 
 Il y a une documentation dédié au circuit pour comprendre sa raison d'être ainsi que son architecture, je conseil de la lire pour plus d'information.
 
