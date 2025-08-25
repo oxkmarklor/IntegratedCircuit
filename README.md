@@ -362,64 +362,67 @@ C'est à dire qu'il est capable de générer le résultat d'une comparaison par 
 En bref, un point terminal sera atteint lorsque $\left(E_{\alpha} \neq E_{\beta}\right)$.
 
 Mais il existe une autre possibilité à laquelle le circuit peut être confronté, celle dans laquelle les champs d'exposant de ses opérandes $\alpha$ et $\beta$ sont égaux $\left(E_{\alpha} = E_{\beta}\right)$.
+A ce moment là, le circuit atteint alors un __point non terminal__.
 Dans ce cas spécifique, les produits $\left(\left(1 + T_{\alpha}\right) \times 2^{E_{\alpha}}\right)$ ainsi que $\left(\left(1 + T_{\beta}\right) \times 2^{E_{\beta}}\right)$ ont la même puissance de $2$ en commun.
 Par conséquent, le circuit électronique se repose sur les champs $T_{\alpha}$ et $T_{\beta}$ pour pouvoir départagé si $\left(\vert\alpha\vert \gt \vert\beta\vert\right)$ ou non.
-Le circuit atteint alors un état de __point non terminal__.
 
-Nous comprenons désormais pourquoi le circuit électronique, qui a pour but de vérifié la supériorité stricte d'un opérande envers l'autre, traite d'abord les champs d'exposant $E$ des opérandes $\alpha$ et $\beta$, puis ensuite les champs de mantisse tronquée $T$ si nécessaire.
+Nous comprenons désormais pourquoi est ce que le circuit traite les champs d'exposant $E$ de ses opérandes $\alpha$ et $\beta$, avant les champs de mantisse tronquée $T_{\alpha}$ ainsi que $T_{\beta}$.
+Le résultat d'une comparaison peut être généré rapidement en cas de _point terminal_ occasionner par une non égalité entre les champs d'exposant $E$ des opérandes du circuit.
+En cas de dernier recours si $E_{\alpha}$ et $E_{\beta}$ sont égaux, le circuit ira jusqu'à comparer les champs de mantisse tronquée $T_{\alpha}$ et $T_{\beta}$ pour générer un résultat.
+Ce qui est plus long.
 
 # Démonstration mathématique
 
-Il y a une documentation dédié au circuit pour comprendre sa raison d'être ainsi que son architecture, je conseil de la lire pour plus d'information.
+Nous pouvons désormais plongé dans le coeur de ce document, la démonstration mathématique du circuit.
+Il y a une documentation dédié au circuit pour comprendre son utilité ainsi que son architecture, si vous souhaitez plus d'information concrète sur ce dernier je vous conseil d'y jeté un oeil.
 
-Le circuit se nomme __FPU Configuration Unit__.
-Le rôle du circuit est de généré deux bits de sortie, l'un pour configuré un circuit soustracteur de nombre flottant, et l'autre pour la sortie même de cette unité de calcul.
-A cette fin, le circuit reçoit deux opérandes flottants _Half Precision_ $\alpha$ et $\beta$, en valeur absolu.
+Je rappelle que le circuit se nomme __FPU Configuration Unit__.
+En bref, ce dernier génère deux bits de sortie.
+L'un pour configuré un circuit soustracteur de nombre flottant, et l'autre pour la sortie même de cette unité de calcul.
+A cette fin, le circuit reçoit deux opérandes IEEE-754 en valeur absolu et au format _Half Precision_ dans le cas du circuit schématisé, que nous nommerons $\alpha$ et $\beta$.
 Il doit procédé à une comparaison de supériorité stricte de l'un de ces opérandes envers l'autre.
 La démonstration mathématique va se basé sur le teste de la condition suivante $\left(\vert\alpha\vert \gt \vert\beta\vert\right)$.
 
-### Les opérandes Half Precision
+### Rapide survol du format de nombre flottant Half Precision
 
-Je rappelle que l'encodage IEEE-754 définit trois éléments dans chacun des nombres flottants du standard, le _bit de signe_, le _champs d'exposant_ ainsi que le _champs de mantisse tronquée_.
-Voici la disposition précise de chaque bit de chacun de ces champs pour l'encodage d'un nombre _Half Precision_ ($16$ bits):
+L'encodage IEEE-754 défini trois éléments pour chaque format de flottant pris en charge par la norme, le _bit de signe_, le _champs d'exposant_ ainsi que le _champs de mantisse tronquée_.
+Voici la disposition précise de chaque bit de chacun de ces champs pour le codage d'un nombre _Half Precision_ ($16$ bits):
 
 $$\left(1\right) \quad \left[S_{15}, \quad E_{14}, \ E_{13}, \ E_{12}, \ E_{11}, \ E_{10}, \quad T_9, \ T_8, \ T_7, \ T_6, \ T_5, \ T_4, \ T_3, \ T_2, \ T_1, \ T_0\right]$$
 
-__S__: Sign bit,  __E__: Exponent field,  __T__: Truncated mantissa
+__S__: Sign bit,  __E__: Exponent,  __T__: Truncated mantissa
 
 Chaque indice (nombre) compris dans l'intervalle $\left[0;15\right]$ représente le poids d'un bit précis.
-C'est en effet très commun d'indicé les bits d'un champs binaire par leur poids.
+En effet, il est très commun d'indicé les bits d'un champs binaire par leur poids.
 
-Cependant, dans les démonstrations mathématique nous ne considérerons que les bits de l'intervalle $\left[0;14\right]$.
-N'oublions pas que le circuit ne se soucis que de la valeur absolu de ses opérandes $\left(\vert\alpha\vert\right)$ et $\left(\vert\beta\vert\right)$, donc le bit de signe de poids $15$ est omis.
-De plus, nous avons vus dans le chapitre "_Ordre de traitement des champs d'exposant et de mantisse tronquée_", que les champs d'exposant $E$ des opérandes étaient traités avant les champs de mantisse tronquée $T$.
-Rappellons que ceci est dû au fait que le circuit profite des *___points terminaux___ que les champs d'exposant génèrent souvent.
+Cependant, dans la démonstration mathématique nous ne considérerons que les bits dont les indices sont de l'intervalle $\left[0;14\right]$.
+N'oublions pas que le circuit ne se soucis que de la valeur absolu des opérandes $\alpha$ et de $\beta$, donc le bit de signe de ces opérandes (bit de poids $15$) est omis.
+De plus, nous avons vu dans le chapitre "_les points terminaux et non terminaux_" que les champs d'exposant $E$ des opérandes étaient traités avant les champs de mantisse tronquée $T$.
+Rappelons que ceci est dû au fait que le circuit profite des _points terminaux_ que les champs d'exposant génèrent souvent.
 C'est pourquoi le document commence par traité le cas des champs d'exposant $E_{\alpha}$ et $E_{\beta}$, puis ensuite celui des champs de mantisse tronquée $T$.
 
-*Un ___point terminal___ est le fait que le circuit soit capable de déduire un résultat correct, par le seul traitement des champs d'exposant.
-Le circuit court-circuite alors les traitements qui concerne les champs de mantisse tronquée, et génère le résultat final plus rapidement.
+### Définition de quelques opérations fondamentales à la démonstration 
 
-### L'organisation du document
-
-Le document commence par la démonstration mathématique du traitement des champs d'exposant $E_{\alpha}$ et $E_{\beta}$, puis enchaine avec celle des champs de mantisse tronquée $T_{\alpha}$ et $T_{\beta}$.
-Les démonstrations sont verbeuses, pour plus de concision il y a un résumé global qui suit la seconde et dernière démonstration.
-Ce résumé est seulement composé d'expression mathématique ainsi que d'une courte description pour chacune d'entre elle.
-
-### Quelques définitions
-
-__Write__ est une fonction d'affectation, le paramètre $\left(y\right)$ _est copié_ dans le paramètre $\left(x\right)$.
+Pour commencer, l'opération __Write__ sert de fonction d'affectation.
+L'argument sur le paramètre $\left(y\right)$ est copié dans l'argument sur le paramètre $\left(x\right)$.
+Il n'y a pas de taille ni de "type" d'argument, cette fonction est abstraite et vise simplement à faire comprendre qu'il faut retenir $y$ dans $x$.
 
 $$Write \ \left(x, \ y\right) \rightarrow \ x \ := \ y$$
 
-__Nimply__ est une fonction qui reproduit le comportement d'une porte logique du même nom.
-C'est une opération logique assez peu connu, d'où le fait qu'il n'existe pas de symbole opératoire qui lui est propre.
+Passons désormais à l'opération logique __Nimply__.
+Nous formalisons cette opération en tant que fonction, cette dernière n'étant pas très connu elle ne possède pas son propre symbole calculatoire.
+Cette opération ce décline directement en une porte logique.
+C'est une opération de logique bit à bit, chaque paramètre équivaut donc à un unique bit.
+La fonction ne retourne un $1$ que si son paramètre $y$ vaut $0$ lorsque $x$ vaut $1$, autrement elle retourne $0$.
 
 $$Nimply \ \left(x, \ y\right) \rightarrow \ x \ \wedge \ \overline{y}$$
 
 De plus, $\overline{y}$ est l'opération logique __Not__ qui inverse un bit en son opposé $\left(1 = \overline{0}\right)$ ou $\left(0 = \overline{1}\right)$.
-Cette opération possède également sa propre porte logique, qui est d'ailleurs assez élémentaire pour la conception de circuit en tout genre.
+Cette opération possède également sa propre porte logique, qui est d'ailleurs assez élémentaire pour la conception de circuit électronique en tout genre.
 
-Pour finir, le symbole $\wedge$ est l'opération logique __And__ qui ne retourne un bit à $1$ que lorsque ses deux bits d'opérande le sont aussi (sinon $0$), et le symbole $\vee$ est l'opération logique __Or__ qui ne retourne un $0$ que si ses deux bits d'opérande le sont également (sinon $1$).
+Pour finir, le symbole $\wedge$ est l'opération logique __And__ qui ne retourne un bit à $1$ que lorsque ses deux bits d'opérande le sont aussi, sinon $0$.
+Tandis que le symbole $\vee$ est l'opération logique __Or__ qui ne retourne un $0$ que si ses deux bits d'opérande le sont également, autrement elle renvoie un $1$.
+Ce sont des opérations de logique bit à bit qui ne manipulent donc que des bits, je le précise une nouvelle fois.
 
 ## Le traitement des champs d'exposant
 
