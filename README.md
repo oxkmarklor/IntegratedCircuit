@@ -379,9 +379,13 @@ Il y a une documentation dédié au circuit pour comprendre son utilité ainsi q
 Je rappelle que le circuit se nomme __FPU Configuration Unit__.
 En bref, ce dernier génère deux bits de sortie.
 L'un pour configuré un circuit soustracteur de nombre flottant, et l'autre pour la sortie même de cette unité de calcul.
-A cette fin, le circuit reçoit deux opérandes IEEE-754 en valeur absolu et au format _Half Precision_ dans le cas du circuit schématisé, que nous nommerons $\alpha$ et $\beta$.
-Il doit procédé à une comparaison de supériorité stricte de l'un de ces opérandes envers l'autre.
-La démonstration mathématique va se basé sur le teste de la condition suivante $\left(\vert\alpha\vert \gt \vert\beta\vert\right)$.
+A cette fin, le circuit reçoit deux opérandes IEEE-754 en valeur absolu (au format _Half Precision_ dans le cas du circuit schématisé), que nous nommerons $\alpha$ et $\beta$.
+La génération des deux bits de sortie passe indirectement par une comparaison de supériorité stricte de l'un des opérandes envers l'autre.
+La démonstration mathématique aborde uniquement cet aspect là de la logique mère du circuit.
+En bref, toute la démonstration se base sur le test de la condition suivante $\left(\vert\alpha\vert \gt \vert\beta\vert\right)$.
+
+De plus, nous allons commencer par le traitement des champs d'exposant $E_{\alpha}$ et $E_{\beta}$, pour finir nous parlerons du traitement des champs de mantisse tronquée $T$.
+Nous avons expliqué pourquoi dans le chapitre "_Les points terminaux et non terminaux_".
 
 ### Rapide survol du format de nombre flottant Half Precision
 
@@ -390,16 +394,12 @@ Voici la disposition précise de chaque bit de chacun de ces champs pour le coda
 
 $$\left(1\right) \quad \left[S_{15}, \quad E_{14}, \ E_{13}, \ E_{12}, \ E_{11}, \ E_{10}, \quad T_9, \ T_8, \ T_7, \ T_6, \ T_5, \ T_4, \ T_3, \ T_2, \ T_1, \ T_0\right]$$
 
-__S__: Sign bit,  __E__: Exponent,  __T__: Truncated mantissa
+$S$: Sign bit,  $E$: Exponent, $T$: Truncated mantissa
 
 Chaque indice (nombre) compris dans l'intervalle $\left[0;15\right]$ représente le poids d'un bit précis.
 En effet, il est très commun d'indicé les bits d'un champs binaire par leur poids.
-
-Cependant, dans la démonstration mathématique nous ne considérerons que les bits dont les indices sont de l'intervalle $\left[0;14\right]$.
-N'oublions pas que le circuit ne se soucis que de la valeur absolu des opérandes $\alpha$ et de $\beta$, donc le bit de signe de ces opérandes (bit de poids $15$) est omis.
-De plus, nous avons vu dans le chapitre "_les points terminaux et non terminaux_" que les champs d'exposant $E$ des opérandes étaient traités avant les champs de mantisse tronquée $T$.
-Rappelons que ceci est dû au fait que le circuit profite des _points terminaux_ que les champs d'exposant génèrent souvent.
-C'est pourquoi le document commence par traité le cas des champs d'exposant $E_{\alpha}$ et $E_{\beta}$, puis ensuite celui des champs de mantisse tronquée $T$.
+Cependant, dans la démonstration mathématique nous ne considérerons que les bits dont les indices sont dans l'intervalle $\left[0;14\right]$.
+N'oublions pas que le circuit ne se soucis que de la valeur absolu des opérandes $\alpha$ et $\beta$, donc le bit de signe de ces opérandes (bit de poids $15$) est omis.
 
 ### Définition de quelques opérations fondamentales à la démonstration 
 
@@ -411,9 +411,9 @@ $$Write \ \left(x, \ y\right) \rightarrow \ x \ := \ y$$
 
 Passons désormais à l'opération logique __Nimply__.
 Nous formalisons cette opération en tant que fonction, cette dernière n'étant pas très connu elle ne possède pas son propre symbole calculatoire.
+C'est une opération de logique bit à bit, la fonction ne prend donc que deux bits d'opérande comme paramètre.
+Elle ne retourne un $1$ que si son paramètre $y$ vaut $0$ lorsque $x$ vaut $1$, autrement l'opération retourne $0$.
 Cette opération ce décline directement en une porte logique.
-C'est une opération de logique bit à bit, chaque paramètre équivaut donc à un unique bit.
-La fonction ne retourne un $1$ que si son paramètre $y$ vaut $0$ lorsque $x$ vaut $1$, autrement elle retourne $0$.
 
 $$Nimply \ \left(x, \ y\right) \rightarrow \ x \ \wedge \ \overline{y}$$
 
