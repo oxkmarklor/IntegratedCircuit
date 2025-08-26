@@ -374,18 +374,16 @@ Ce qui est plus long.
 # Démonstration mathématique
 
 Nous pouvons désormais plongé dans le coeur de ce document, la démonstration mathématique du circuit.
-Il y a une documentation dédié au circuit pour comprendre son utilité ainsi que son architecture, si vous souhaitez plus d'information concrète sur ce dernier je vous conseil d'y jeté un oeil.
+Il y a une documentation dédié au circuit pour comprendre son utilité ainsi que son architecture, si vous souhaitez plus d'information concrète sur ce dernier je vous conseille de la lire.
 
 Je rappelle que le circuit se nomme __FPU Configuration Unit__.
-En bref, ce dernier génère deux bits de sortie.
+En bref, il génère deux bits de sortie.
 L'un pour configuré un circuit soustracteur de nombre flottant, et l'autre pour la sortie même de cette unité de calcul.
 A cette fin, le circuit reçoit deux opérandes IEEE-754 en valeur absolu (au format _Half Precision_ dans le cas du circuit schématisé), que nous nommerons $\alpha$ et $\beta$.
-La génération des deux bits de sortie passe indirectement par une comparaison de la supériorité stricte de l'un des opérandes envers l'autre.
-La démonstration mathématique aborde uniquement l'aspect de la logique de comparaison du circuit, le reste se situe dans la documentation car très simple à comprendre.
-En bref, toute la démonstration se base sur la verification de la condition suivante $\left(\vert\alpha\vert \gt \vert\beta\vert\right)$.
-
-Nous allons commencer par le traitement des champs d'exposant $E_{\alpha}$ et $E_{\beta}$, pour finir nous parlerons du traitement des champs de mantisse tronquée $T$.
-Ce choix trouve une explication dans le chapitre "_Les points terminaux et non terminaux_".
+Pour le circuit, la génération de ses deux bits de sortie passe par une comparaison entre les deux opérandes $\alpha$ et $\beta$.
+La démonstration mathématique ne va abordé que la logique de comparaison du circuit, ce qui représente la plus grosse partie de la logique du circuit tout de même.
+Pour expliqué le reste de la logique, il faudrait en dire plus sur le circuit, ce qui est le cas de la documentation vers laquelle je vous renvoie une nouvelle fois.
+__En outre, tout ce qui va suivre de la démonstration se base sur la verification de la condition suivante__ $\left(\vert\alpha\vert \gt \vert\beta\vert\right)$.
 
 ### Rapide survol du format Half Precision
 
@@ -399,20 +397,20 @@ $S$: Sign bit,  $E$: Exponent, $T$: Truncated mantissa
 Chaque indice (nombre) compris dans l'intervalle $\left[0;15\right]$ représente le poids d'un bit précis.
 En effet, il est très commun d'indicé les bits d'un champs binaire par leur poids.
 Cependant, dans la démonstration mathématique nous ne considérerons que les bits dont les indices sont dans l'intervalle $\left[0;14\right]$.
-N'oublions pas que le circuit ne se soucis que de la valeur absolu des opérandes $\alpha$ et $\beta$, donc le bit de signe de ces opérandes (bit de poids $15$) est omis.
+N'oublions pas que le circuit ne se soucis que de la valeur absolu des opérandes $\alpha$ et $\beta$ qu'il reçoit en entrée, donc le bit de signe de ces opérandes (bit de poids $15$) est omis.
 
 ### Définition de quelques opérations fondamentales à la démonstration 
 
 Pour commencer, l'opération __Write__ sert de fonction d'affectation.
 L'argument sur le paramètre $\left(y\right)$ est copié dans l'argument sur le paramètre $\left(x\right)$.
-Il n'y a pas de taille ni de "type" d'argument, cette fonction est abstraite et vise simplement à faire comprendre qu'il faut retenir $y$ dans $x$.
+Il n'y a pas de taille ni de "type" d'argument, cette fonction est abstraite et vise simplement à faire comprendre qu'il faut retenir $\left(y\right)$ dans $\left(x\right)$.
 
 $$Write \ \left(x, \ y\right) \rightarrow \ x \ := \ y$$
 
 Passons désormais à l'opération logique __Nimply__.
 Nous formalisons cette opération en tant que fonction, cette dernière n'étant pas très connu elle ne possède pas son propre symbole calculatoire.
 C'est une opération de logique bit à bit, par conséquent, la fonction ne prend que deux bits d'opérande comme paramètre.
-Elle ne retourne un $1$ que si le bit sur son paramètre $y$ vaut $0$ lorsque celui sur $x$ vaut $1$, autrement l'opération retourne $0$.
+Elle ne retourne un $1$ que si le bit sur son paramètre $\left(y\right)$ vaut $0$ lorsque celui sur $\left(x\right)$ vaut $1$, autrement l'opération retourne $0$.
 Par ailleurs, en électronique cette opération ce décline directement en une porte logique.
 
 $$Nimply \ \left(x, \ y\right) \rightarrow \ x \ \wedge \ \overline{y}$$
@@ -429,28 +427,30 @@ Ce sont des opérations de logique bit à bit qui ne manipulent donc que des bit
 $$\forall \ i \in \left[10;14\right], \quad Write \ \left(\tau_i, \ Nimply \ \left(E_{\beta i}, \ E_{\alpha i}\right)\right)$$
 
 Nous effectuons l'opération logique $Nimply$ sur tout les bits de poids $i$ des champs d'exposant $E$ des opérandes $\alpha$ et $\beta$.
-La variable $\tau$ (tau) est un champs binaire de $15$ bits, dont la représentation est la même que celle illustrée plus haut dans "_Rapide survol du format Half Precision_", mais sans le bit de signe.
+La variable $\tau$ (tau) est un champs binaire de $15$ bits, dont les poids vont de $0$ à $14$.
 Chaque bit de résultat d'une opération $Nimply$ sur $E_{\beta i}$ et $E_{\alpha i}$ pour $i \in \left[10;14\right]$, est inscrit dans $\tau_i$.
 Ce qui veut dire que $\tau \in \left[10;14\right]$ correspond aux bits de résultat des opérations $Nimply$ sur $E_{\beta i}$ et $E_{\alpha i}$.
 
 ### L'opération logique Nimply
 
-L'opération $Nimply$ a été définit plus haut.
-Selon cette définition, nous comprenons que le bit de résultat d'une telle opération ne peut être à $1$ que lorsque le bit sur le paramètre $\left(x\right)$ est $1$, et que celui sur $\left(y\right)$ est à $0$.
+L'opération $Nimply$ de logique bit à bit, a déjà été défini plus haut dans la section "_Définition de quelques opérations fondamentales à la démonstration _".
+Selon cette définition, nous observons que le bit de résultat d'une telle opération ne peut être à $1$ que lorsque le bit sur le paramètre $\left(x\right)$ est lui même à $1$, et que celui sur $\left(y\right)$ est à $0$.
 Pour tout les autres cas, si $\left(x = y\right)$ ou $\left(x \lt y\right)$ alors le bit de résultat sera $0$.
-Dans la documentation du circuit électronique, nous définissons le terme de "___zéro anonyme___" pour désigné tout bit de résultat à $0$, provenant d'une opération $Nimply$.
+Dans la documentation du circuit électronique, nous définissons le terme de "___zéro anonyme___" pour désigné tout bit de résultat à $0$, provenant d'une opération logique $Nimply$.
 
 ### Qu'est ce qu'un zéro anonyme?
 
 Nous venons de voir à quoi correspond le terme de "_zéro anonyme_".
+Cependant, nous ne connaissons pas la raison derrière un nom aussi bizarre.
 
-Cependant, nous ne connaissons pas la raison d'un nom aussi bizarre.
-Le circuit se sert des sorties des portes logiques $Nimply$ pour faire des déductions sur les entrées de celle-ci, et la démonstration mathématique en fait de même.
-Mais lorsque le bit de sortie d'une opération $Nimply$ est à $0$, il nous est impossible de savoir si cette sortie a été générée par deux bits d'opérandes identique sur les paramètres $\left(x\right)$ et $\left(y\right)$, ou si le bit sur le paramètre $\left(y\right)$ est strictement supérieur à celui sur $\left(x\right)$.
-En bref, ce flou pose un problème que nous dervons géré dans la démonstration mathématique (le circuit doit lui aussi résoudre ce problème).
+Nous avons dit plus haut que l'opération logique $Nimply$ pouvait être facilement décliné en une porte logique (un petit circuit électronique).
+Dans les faits, le FPU Configuration Unit se sert des sorties de ses portes logiques $Nimply$, pour faire des déductions sur les entrées de celle-ci.
+La démonstration mathématique en fait autant.
+Pourtant, lorsqu'une opération logique $Nimply$ renvoie un bit de résultat à $0$, il nous est impossible de savoir si les deux bits d'opérandes sont identiques $\left(x = y\right)$, ou si le bit sur le paramètre $\left(y\right)$ est strictement supérieur à celui sur $\left(x\right)$.
+En bref, ce flou pose un problème que nous allons devoir prendre en charge dans la démonstration mathématique.
 
-Petite précision d'ailleurs.
-Il existe en réalité des _zéros anonymes_ ___capitaux___ et ___non capitaux___, nous définirons plus bas la différence entre ces deux types de _zéro anonyme_.
+Petite précision par ailleurs, il existe en réalité des _zéros anonymes_ ___capitaux___ et ___non capitaux___.
+Nous allons définir la différence entre les deux types de _zéro anonyme_ ci-bas.
 
 ## Les deux facettes des zéros anonymes (introduction)
 
