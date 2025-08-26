@@ -380,12 +380,12 @@ Je rappelle que le circuit se nomme __FPU Configuration Unit__.
 En bref, ce dernier génère deux bits de sortie.
 L'un pour configuré un circuit soustracteur de nombre flottant, et l'autre pour la sortie même de cette unité de calcul.
 A cette fin, le circuit reçoit deux opérandes IEEE-754 en valeur absolu (au format _Half Precision_ dans le cas du circuit schématisé), que nous nommerons $\alpha$ et $\beta$.
-La génération des deux bits de sortie passe indirectement par une comparaison de supériorité stricte de l'un des opérandes envers l'autre.
-La démonstration mathématique aborde uniquement cet aspect là de la logique mère du circuit.
-En bref, toute la démonstration se base sur le test de la condition suivante $\left(\vert\alpha\vert \gt \vert\beta\vert\right)$.
+La génération des deux bits de sortie passe indirectement par une comparaison de la supériorité stricte de l'un des opérandes envers l'autre.
+La démonstration mathématique aborde uniquement l'aspect de la logique de comparaison du circuit, le reste se situe dans la documentation car très simple à comprendre.
+En bref, toute la démonstration se base sur la verification de la condition suivante $\left(\vert\alpha\vert \gt \vert\beta\vert\right)$.
 
-De plus, nous allons commencer par le traitement des champs d'exposant $E_{\alpha}$ et $E_{\beta}$, pour finir nous parlerons du traitement des champs de mantisse tronquée $T$.
-Nous avons expliqué pourquoi dans le chapitre "_Les points terminaux et non terminaux_".
+Nous allons commencer par le traitement des champs d'exposant $E_{\alpha}$ et $E_{\beta}$, pour finir nous parlerons du traitement des champs de mantisse tronquée $T$.
+Ce choix trouve une explication dans le chapitre "_Les points terminaux et non terminaux_".
 
 ### Rapide survol du format de nombre flottant Half Precision
 
@@ -411,9 +411,9 @@ $$Write \ \left(x, \ y\right) \rightarrow \ x \ := \ y$$
 
 Passons désormais à l'opération logique __Nimply__.
 Nous formalisons cette opération en tant que fonction, cette dernière n'étant pas très connu elle ne possède pas son propre symbole calculatoire.
-C'est une opération de logique bit à bit, la fonction ne prend donc que deux bits d'opérande comme paramètre.
-Elle ne retourne un $1$ que si son paramètre $y$ vaut $0$ lorsque $x$ vaut $1$, autrement l'opération retourne $0$.
-Cette opération ce décline directement en une porte logique.
+C'est une opération de logique bit à bit, par conséquent, la fonction ne prend que deux bits d'opérande comme paramètre.
+Elle ne retourne un $1$ que si le bit sur son paramètre $y$ vaut $0$ lorsque celui sur $x$ vaut $1$, autrement l'opération retourne $0$.
+Par ailleurs, en électronique cette opération ce décline directement en une porte logique.
 
 $$Nimply \ \left(x, \ y\right) \rightarrow \ x \ \wedge \ \overline{y}$$
 
@@ -422,7 +422,7 @@ Cette opération possède également sa propre porte logique, qui est d'ailleurs
 
 Pour finir, le symbole $\wedge$ est l'opération logique __And__ qui ne retourne un bit à $1$ que lorsque ses deux bits d'opérande le sont aussi, sinon $0$.
 Tandis que le symbole $\vee$ est l'opération logique __Or__ qui ne retourne un $0$ que si ses deux bits d'opérande le sont également, autrement elle renvoie un $1$.
-Ce sont des opérations de logique bit à bit qui ne manipulent donc que des bits, je le précise une nouvelle fois.
+Ce sont des opérations de logique bit à bit qui ne manipulent donc que des bits en entrée, je le précise une nouvelle fois.
 
 ## Le traitement des champs d'exposant
 
