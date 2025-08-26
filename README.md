@@ -387,7 +387,7 @@ En bref, toute la démonstration se base sur la verification de la condition sui
 Nous allons commencer par le traitement des champs d'exposant $E_{\alpha}$ et $E_{\beta}$, pour finir nous parlerons du traitement des champs de mantisse tronquée $T$.
 Ce choix trouve une explication dans le chapitre "_Les points terminaux et non terminaux_".
 
-### Rapide survol du format de nombre flottant Half Precision
+### Rapide survol du format Half Precision
 
 L'encodage IEEE-754 défini trois éléments pour chaque format de flottant pris en charge par la norme, le _bit de signe_, le _champs d'exposant_ ainsi que le _champs de mantisse tronquée_.
 Voici la disposition précise de chaque bit de chacun de ces champs pour le codage d'un nombre _Half Precision_ ($16$ bits):
@@ -426,12 +426,11 @@ Ce sont des opérations de logique bit à bit qui ne manipulent donc que des bit
 
 ## Le traitement des champs d'exposant
 
-La démonstration démarre par ceci:
+$$\forall \ i \in \left[10;14\right], \quad Write \ \left(\tau_i, \ Nimply \ \left(E_{\beta i}, \ E_{\alpha i}\right)\right)$$
 
-$$\sum_{i=14}^{10} \ Write\left(\tau_i, \ Nimply \ \left(E_{\beta i}, \ E_{\alpha i}\right)\right)$$
-
-La variable $\tau$ est un champs binaire de $15$ bits dont la représentation est la même que celle illustrée plus haut dans "_Les opérandes Half Precision_", mais sans le bit de signe.
-Chaque résultat d'une opération $Nimply$ sur $E_{\beta i}$ et $E_{\alpha i}$ pour $i \in \left[10;14\right]$, est inscrit dans $\tau_i$.
+Nous effectuons l'opération logique $Nimply$ sur tout les bits de poids $i$ des champs d'exposant $E$ des opérandes $\alpha$ et $\beta$.
+La variable $\tau$ (tau) est un champs binaire de $15$ bits, dont la représentation est la même que celle illustrée plus haut dans "_Rapide survol du format Half Precision_", mais sans le bit de signe.
+Chaque bit de résultat d'une opération $Nimply$ sur $E_{\beta i}$ et $E_{\alpha i}$ pour $i \in \left[10;14\right]$, est inscrit dans $\tau_i$.
 Ce qui veut dire que $\tau \in \left[10;14\right]$ correspond aux bits de résultat des opérations $Nimply$ sur $E_{\beta i}$ et $E_{\alpha i}$.
 
 ### L'opération logique Nimply
@@ -439,7 +438,7 @@ Ce qui veut dire que $\tau \in \left[10;14\right]$ correspond aux bits de résul
 L'opération $Nimply$ a été définit plus haut.
 Selon cette définition, nous comprenons que le bit de résultat d'une telle opération ne peut être à $1$ que lorsque le bit sur le paramètre $\left(x\right)$ est $1$, et que celui sur $\left(y\right)$ est à $0$.
 Pour tout les autres cas, si $\left(x = y\right)$ ou $\left(x \lt y\right)$ alors le bit de résultat sera $0$.
-La documentation du circuit électronique définit le terme de "___zéro anonyme___" pour désigné tout bit de résultat à $0$, sortant d'une opération $Nimply$.
+Dans la documentation du circuit électronique, nous définissons le terme de "___zéro anonyme___" pour désigné tout bit de résultat à $0$, provenant d'une opération $Nimply$.
 
 ### Qu'est ce qu'un zéro anonyme?
 
