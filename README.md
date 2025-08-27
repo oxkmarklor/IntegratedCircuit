@@ -491,7 +491,7 @@ Ceci pose problème car les _zéros anonymes_ de poids supérieur à $\tau_i$ so
 A ce stade nous savons que $\left(\tau_i = 1\right)$, par conséquent $\left(E_{\beta i} \times 2^i\right) \ \gt \ \sum_{i}^{10} \ \left(E_{\alpha i} \times 2^i\right)$.
 Mais comme mentionné plus haut ceci ne suffit pas à dire que $\left(E_{\alpha} \lt E_{\beta}\right)$, voyons pourquoi.
 
-Pour commencer, calculons la somme $\lambda$ (lambda) de la valeur des bits de poids supérieur à $i$ (le poids du _MSB1_ de $\tau$) du champs d'exposants $E_{\alpha}$ avec $\left(\lambda_{\alpha} = \sum_{\sigma=i+1}^{14} \ \left(E_{\alpha\sigma} \times 2^{\sigma}\right)\right)$, puis de $E_{\beta}$ avec $\left(\lambda_{\beta} = \sum_{\sigma=i+1}^{14} \ \left(E_{\beta\sigma} \times 2^{\sigma}\right)\right)$.
+Pour commencer, calculons la somme $\lambda$ (lambda) de la valeur des bits de poids supérieur à $i$ du champs d'exposants $E_{\alpha}$ avec $\left(\lambda_{\alpha} = \sum_{\sigma=i+1}^{14} \ \left(E_{\alpha\sigma} \times 2^{\sigma}\right)\right)$, puis de $E_{\beta}$ avec $\left(\lambda_{\beta} = \sum_{\sigma=i+1}^{14} \ \left(E_{\beta\sigma} \times 2^{\sigma}\right)\right)$.
 Nous savons que $\left(\lambda_{\alpha} \ge \lambda_{\beta}\right)$ car pour tout $\sigma$ (sigma) compris dans l'intervalle $\left]i;14\right]$, il existe $\left(E_{\alpha\sigma} \ge E_{\beta\sigma}\right)$.
 
 Si jamais $\left(\lambda_{\alpha} = \lambda_{\beta}\right)$ alors $\left(E_{\alpha} \lt E_{\beta}\right)$ car $\left(\lambda_{\beta} + E_{\beta i} \times 2^i\right) \ \gt \ \left(\lambda_{\alpha} + \sum_{i}^{10} \ \left(E_{\alpha i} \times 2^i\right)\right)$.
@@ -508,28 +508,25 @@ Jusqu'ici nous avions un _MSB1_ dans $\tau \in \left[10;14\right]$, mais il pour
 Dans cette situation, chacun des bits de $\tau \in \left[10;14\right]$ est un _zéro anonyme_, ce qui nous permet d'affirmé que $\left(E_{\alpha} \ge E_{\beta}\right)$.
 
 Nous pourrions atteindre un point terminal si jamais $\left(E_{\alpha} \gt E_{\beta}\right)$, mais ce point terminal ne pourrait s'obtenir qu'à la condition que $\left(E_{\alpha i} \gt E_{\beta i}\right)$ pour $i \in \left[10;14\right]$.
-A l'inverse, nous pourrions aussi atteindre une situation inédite de *___point non terminal___ si $\left(E_{\alpha} = E_{\beta}\right)$.
-Cette situation inédite ne peut se produire que dans le cas où l'ensemble des bits de même poids des champs d'exposant $E_{\alpha}$ et $E_{\beta}$ sont identiques, ou autrement dit $\forall \left(i \in \left[10;14\right]\right)$ alors $\left(E_{\alpha i} = E_{\beta i}\right)$.
+A l'inverse, nous pourrions aussi atteindre une situation inédite de ___point non terminal___ si $\left(E_{\alpha} = E_{\beta}\right)$.
+Cette situation inédite ne peut se produire que dans le cas où l'ensemble des bits de même poids des champs d'exposant $E_{\alpha}$ et $E_{\beta}$ sont identiques, ou autrement dit $\forall \ i \in \left[10;14\right]$ alors $\left(E_{\alpha i} = E_{\beta i}\right)$.
+Je rappelle que nous avons vus plus tôt dans le chapitre du nom de "_Les points terminaux et non terminaux_", la signification du concept de _point terminal_ ainsi que _non terminal_.
 
-Pour conclure, les _zéros anonymes_ qui composent l'entièreté du champs $\tau \in \left[10;14\right]$ sont capitaux à prendre en compte pour le circuit, car ils ont chacun le pouvoir de faire basculé un _point non terminal_ en un _point terminal_.
-
-*Je rappelle qu'un _point terminal_ se définit comme suit: "_Un point terminal est le fait que le circuit soit capable de déduire un résultat correct, par le seul traitement des champs d'exposant._".
-Un ___point non terminal___ est tout logiquement l'inverse.
-Lorsque les champs d'exposant $E_{\alpha}$ et $E_{\beta}$ sont égaux, il n'est pas possible de généré un résultat correct avec le seul traitement de ces champs.
-Le circuit doit alors poursuivre les traitements sur les champs de mantisse tronquée $T_{\alpha}$ et $T_{\beta}$.
-Ce que nous allons faire prochainement.
+Pour conclure, les _zéros anonymes_ qui composent l'entièreté du champs $\tau \in \left[10;14\right]$ sont capitaux.
+La raison est que chacun de ces bit à le pouvoir de faire basculé le circuit d'un état de _point non terminal_, à celui de _point terminal_.
 
 ## Rappel sur les champs d'exposant et de mantisse tronquée
 
-Le chapitre "_Ordre de traitement des champs d'exposant et de mantisse tronquée_" explique pourquoi est ce que les champs d'exposant $E$ sont traités avant les champs de mantisse tronquée $T$.
-Dans ce chapitre, il y a la formule mathématique $\left(\left(1+T\right) \times 2^E\right)$ qui explique comment est ce qu'un nombre flottant est représenté en IEEE-754.
-Nous comprenons que si deux nombres flottants $\vert \ \alpha \ \vert$ et $\vert \ \beta \ \vert$ ont des champs d'exposant égaux $\left(E_{\alpha} = E_{\beta}\right)$, alors la valeur de ces deux nombres $\left(\left(1+T_{\alpha}\right) \times 2^{E_\alpha}\right)$ et $\left(\left(1+T_{\beta}\right) \times 2^{E_\beta}\right)$ ne dépend que de $T_{\alpha}$ et $T_{\beta}$.
-C'est pourquoi la première partie de la démonstration ne génère un _point non terminal_ que lorsque $\left(E_{\alpha} = E_{\beta}\right)$, après quoi le traitement se propage aux champs de mantisse tronquée eux même.
+Le chapitre "_Les points terminaux et non terminaux_" explique pourquoi est ce que les champs d'exposant $E$ des opérandes $\alpha$ et $\beta$, sont traités avant les champs de mantisse tronquée $T$ de ces même opérandes.
+Dans ce chapitre, il y a la formule mathématique $\left(\left(1+T\right) \times 2^E\right)$ qui explique comment est ce que la valeur d'un nombre à virgule flottante est représenté en IEEE-754.
+Nous y apprenons que si deux nombres flottants $\vert \ \alpha \ \vert$ et $\vert \ \beta \ \vert$ ont des champs d'exposant égaux $\left(E_{\alpha} = E_{\beta}\right)$, alors la valeur de ces deux nombres $\left(\left(1+T_{\alpha}\right) \times 2^{E_\alpha}\right)$ et $\left(\left(1+T_{\beta}\right) \times 2^{E_\beta}\right)$ ne dépend que de $T_{\alpha}$ et $T_{\beta}$.
+Dans la première partie de la démonstration "_Le traitement des champs d'exposant_", un _point non terminal_ n'est généré qu'à la condition que $\left(E_{\alpha} = E_{\beta}\right)$.
+Après quoi le circuit est forcé de basculé le traitement aux champs de mantisse tronquée $T$ eux même, due à son incapacité à pouvoir généré un résultat par le seul traitement des champs d'exposant $E$ de ses opérandes.
 
-Les champs de mantisse tronquée $T_{\alpha}$ et $T_{\beta}$ font l'oeuvre d'une comparaison de supériorité stricte de l'un envers l'autre, comme pour les champs d'exposant.
-Je vous rappelle que les champs d'exposant et de mantisse tronquée ont des points communs au niveau de leurs encodages, tout est expliqué dans le chapitre "?TBD?" pour ceux qui ont besoin d'un rafraichissement.
-En bref, l'encodage du champs de mantisse tronquée partage les même propriétés que celui d'exposant.
-Comme nous allons le voir plus bas, la comparaison entre les champs de mantisse tronquée suit le même processus de traitement que celui des champs d'exposant.
+Les champs de mantisse tronquée $T_{\alpha}$ et $T_{\beta}$ font l'oeuvre d'une comparaison de supériorité stricte de l'un envers l'autre, à l'instar des champs d'exposant.
+Je vous rappelle que les champs d'exposant et de mantisse tronquée ont des points communs au niveau de leurs encodages, tout est expliqué dans le chapitre "_Le standard IEEE-754_" pour ceux qui ont besoin d'un rafraichissement.
+En bref, l'encodage du champs de mantisse tronquée partage les même propriétés que celui du champs d'exposant.
+Grâce à cela, la comparaison entre les champs de mantisse tronquée $T$ suit la même procédure de traitement que les champs d'exposant $E$, procédure que nous venons de voir.
 
 ## Le traitement des champs de mantisse tronquée
 
