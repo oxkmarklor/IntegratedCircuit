@@ -461,8 +461,8 @@ Si $\left(\tau_i = 1\right)$ alors nous savons que $\left(E_{\beta i} = 1\right)
 
 De plus, rappellez vous du chapitre du nom de "_L'encodage par biais du champs d'exposant_".
 Dans ce chapitre, il est dit que la valeur d'un bit à $1$ de poids $i$ d'un champs d'exposant $E$, est _inconditionnellement_ supérieur à la somme de la valeur de chacun des bits de poids inférieur à $i$.
-Autrement dit, en prenant au pied de la lettre ce que nous venons de dire ci-dessus, $\forall \ i \in \left[11;14\right]$ si $\left(\beta_i = 1\right)$ nous obtenons alors $\left(E_{\beta i} \times 2^i\right) \ \gt \ \sum_{i=i-1}^{10} \ \left(E_{\beta i} \times 2^i\right)$.
-Il est également possible d'arrangé cette expression au champs d'exposant $E_{\alpha}$, alors $\left(E_{\beta i} \times 2^i\right) \ \gt \ \sum_{i=i-1}^{10} \ \left(E_{\alpha i} \times 2^i\right)$. 
+En prenant au pied de la lettre ce que nous venons tout juste de dire, pour $i \in \left[11;14\right]$ si $\left(\beta_i = 1\right)$ nous obtenons alors $\left(E_{\beta i} \times 2^i\right) \ \gt \ \sum_{i'=i-1}^{10} \ \left(E_{\beta i'} \times 2^{i'}\right)$.
+Ceci peut également être arrangé au champs d'exposant $E_{\alpha}$, alors $\left(E_{\beta i} \times 2^i\right) \ \gt \ \sum_{i'=i-1}^{10} \ \left(E_{\alpha i'} \times 2^{i'}\right)$. 
 
 Au final, nous pouvons en conclure que si $\left(\tau_i = 1\right)$ alors $\left(E_{\beta i} \times 2^i\right) \ \gt \ \sum_{i}^{10} \ \left(E_{\alpha i} \times 2^i\right)$.
 
@@ -477,18 +477,26 @@ Ce point terminal est atteint par le fait que $\left(E_{\beta 14} \times 2^{14}\
 En bref, nous comprenons que même si $\left(\tau_{\left(i-1\right)} = \tau_{13} = 0\right)$, alors ce _zéro anonyme_ ne changera rien au fait que $\left(E_{\alpha} \lt E_{\beta}\right)$.
 La raison en est que l'inéquation qui figure ci-dessus reste valide qu'importe la valeur du bit $E_{\alpha 13}$, qu'il soit à $0$ ou à $1$.
 
-De manière plus général, nous pouvons en déduire que tout _zéro anonyme_ de poids inférieur au _MSB1_ de $\tau \in \left[11;14\right]$, est _non capital_.
+De manière plus général, nous pouvons en déduire que tout _zéro anonyme_ dans l'intervalle $\left[10;14\right]$ de $\tau$, et de poids inférieur au _MSB1_ de $\tau \in \left[11;14\right]$, est _non capital_.
 
 ### Les zéros anonymes capitaux
 
 Prenons désormais le cas dans lequel le poids du _MSB1_ de $\tau$ est $\tau_i$ pour $i \in \left[10;13\right]$.
 Dans cette situation, nous sommes certains qu'il y a _au moins_ le bit $\tau_{\left(i+1\right)}$ qui est d'un poids supérieur à $\tau_i$.
-Par définition, $\tau_{\left(i+1\right)}$ (et les autres bits de poids supérieur à $\tau_i$, si il y en a) sont des _zéros anonymes_.
-Le problème des bits de poids supérieur à $\tau_i$, c'est que par essence ils ne permettent pas de déduire la valeur des bits de même poids des champs d'exposant $E_{\alpha}$ et $E_{\beta}$.
+Par définition, $\tau_{\left(i+1\right)}$ et les autres bits de poids supérieur à $\tau_i$ (si il y en a), sont des _zéros anonymes_.
 Par exemple pour $\tau_{\left(i+1\right)}$, nous ne savons pas si $\left(E_{\alpha\left(i+1\right)} = E_{\beta\left(i+1\right)}\right)$ ou si $\left(E_{\alpha\left(i+1\right)} \gt E_{\beta\left(i+1\right)}\right)$.
+Il en va de même pour tout autre bit de poids supérieur à $\tau_i$.
 
 Ceci pose problème car les _zéros anonymes_ de poids supérieur à $\tau_i$ sont décisifs dans le processus de génération d'un point terminal.
-A ce stade nous savons que $\left(E_{\beta i} \times 2^i\right) \ \gt \ \sum_{i}^{10} \ \left(E_{\alpha i} \times 2^i\right)$, mais comme mentionné plus haut ceci ne suffit pas à dire que $\left(E_{\alpha} \lt E_{\beta}\right)$.
+A ce stade nous savons que $\left(E_{\beta i} \times 2^i\right) \ \gt \ \sum_{i}^{10} \ \left(E_{\alpha i} \times 2^i\right)$.
+Mais comme mentionné plus haut, ceci ne suffit pas à dire que $\left(E_{\alpha} \lt E_{\beta}\right)$.
+
+La raison en est que si $\left(\sum_{i'=i+1}^{14} \ \left(E_{\beta i'} \times 2^{i'}\right) = \lambda_{\beta}\right)$ et que $\left(\sum_{i'=i+1}^{14} \ \left(E_{\alpha i'} \times 2^{i'}\right) = \lambda_{\alpha}\right)$, alors le point terminal était et reste $\left(E_{\alpha} \lt E_{\beta}\right)$ si jamais $\left(\lambda_{\alpha} = \lambda_{\beta}\right)$.
+Pour le dire autrement, nous calculons ici la somme $\lambda$ (lambda) de la valeur des bits de poids supérieur à $i$ (le _MSB1_ de $\tau$), pour les champs d'exposants $E$ des opérandes $\alpha$ et $\beta$.
+Cependant, si $\left(\lambda_{\alpha} = \lambda_{\beta}\right)$, n'oublions pas que $\left(E_{\beta i} \times 2^i\right) \ \gt \ \sum_{i}^{10} \ \left(E_{\alpha i} \times 2^i\right)$.
+Ce qui veut bien dire que $\left(E_{\alpha} \lt E_{\beta}\right)$ car $\left(\left(\lambda_{\beta} + E_{\beta i} \times 2^i\right) \ \gt \ \left(\lambda_{\alpha} + \sum_{i}^{10} \ \left(E_{\alpha i} \times 2^i\right)\right)\right)$.
+
+// correc
 
 Par conséquent, si $\ Write \ \left(\lambda, \ \sum_{i=i+1}^{14} \ \left(E_{\beta i} \times 2^i\right)\right)$ et que $\left(\lambda \ = \ \sum_{i=i+1}^{14} \ \left(E_{\alpha i} \times 2^i\right)\right)$, alors le point terminal était et reste $\left(E_{\alpha} \lt E_{\beta}\right)$.
 Cependant, si $\left(\lambda \ \lt \ \sum_{i=i+1}^{14} \ \left(E_{\alpha i} \times 2^i\right)\right)$ alors le point terminal change pour $\left(E_{\alpha} \gt E_{\beta}\right)$, car $\left(\sum_{i=i+1}^{14} \ \left(E_{\alpha i} \times 2^i\right) \ \gt \ \sum_{i=14}^{10} \ \left(E_{\beta i} \times 2^i\right)\right)$.
