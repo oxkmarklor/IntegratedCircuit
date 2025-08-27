@@ -91,11 +91,11 @@ Ce qui permet de traité ces deux champs avec un même processus de calcul, ce q
 
 __Le champs d'exposant utilise un encodage par biais__, ce dernier est assez simple à comprendre.
 Enfaite, le champs d'exposant est un champs binaire pour lequel nous utilisons un encodage _Binary Unsigned_ qui code une valeur numérique $X$, comme nous l'avons vu précédemment.
-A cela, il faut ajouté ou déduire un biais $B$ (un nombre entier naturel) pour obtenir la valeur représenté par le champs binaire.
+A cela, il faut __ajouté ou déduire__ un biais $B$ (un nombre entier naturel) pour obtenir la valeur représenté par le champs binaire.
 Dans les faits, la valeur que représente le champs d'exposant est alors issu du calcul $X - B$. 
-Voici comment se calcul le biais $B$ d'un champs d'exposant $\left(2^{\left(N-1\right)} - 1\right)$, où $N$ est le nombre de bits du champs d'exposant.
+Le biais $B$ se calcul toujours de la même manière, peu importe le format de flottant IEEE-754 $\left(2^{\left(N-1\right)} - 1\right)$, où $N$ est le nombre de bits du champs d'exposant.
 
-Etant donné que l'encodage par biais se base sur le _Binary Unsigned_, le champs d'exposant __partage les même propriétés__ que cet encodage.
+Etant donné la façon avec laquelle l'encodage par biais se repose sur le _Binary Unsigned_, le champs d'exposant __partage les même propriétés__ que cet encodage.
 Notamment le fait que la valeur d'un bit à $1$ de poids $i$ soit strictement supérieur à la somme des valeurs des bits de poids inférieur à $i$.
 
 ### La mantisse tronquée, une histoire de puissance de 2
@@ -422,7 +422,7 @@ Pour finir, le symbole $\wedge$ est l'opération logique __And__ qui ne retourne
 Tandis que le symbole $\vee$ est l'opération logique __Or__ qui ne retourne un $0$ que si ses deux bits d'opérande le sont également, autrement elle renvoie un $1$.
 Ce sont des opérations de logique bit à bit qui ne manipulent donc que des bits en entrée, je le précise une nouvelle fois.
 
-## Le traitement des champs d'exposant
+# Le traitement des champs d'exposant
 
 $$\forall \ i \in \left[10;14\right], \quad Write \ \left(\tau_i, \ Nimply \ \left(E_{\beta i}, \ E_{\alpha i}\right)\right)$$
 
@@ -433,7 +433,7 @@ Ce qui veut dire que $\tau \in \left[10;14\right]$ correspond aux bits de résul
 
 ### L'opération logique Nimply
 
-L'opération $Nimply$ de logique bit à bit, a déjà été défini plus haut dans la section "_Définition de quelques opérations fondamentales à la démonstration _".
+L'opération logique $Nimply$ a déjà été défini plus haut dans la section "_Définition de quelques opérations fondamentales à la démonstration_".
 Selon cette définition, nous observons que le bit de résultat d'une telle opération ne peut être à $1$ que lorsque le bit sur le paramètre $\left(x\right)$ est lui même à $1$, et que celui sur $\left(y\right)$ est à $0$.
 Pour tout les autres cas, si $\left(x = y\right)$ ou $\left(x \lt y\right)$ alors le bit de résultat sera $0$.
 Dans la documentation du circuit électronique, nous définissons le terme de "___zéro anonyme___" pour désigné tout bit de résultat à $0$, provenant d'une opération logique $Nimply$.
@@ -447,21 +447,22 @@ Nous avons dit plus haut que l'opération logique $Nimply$ pouvait être facilem
 Dans les faits, le FPU Configuration Unit se sert des sorties de ses portes logiques $Nimply$, pour faire des déductions sur les entrées de celle-ci.
 La démonstration mathématique en fait autant.
 Pourtant, lorsqu'une opération logique $Nimply$ renvoie un bit de résultat à $0$, il nous est impossible de savoir si les deux bits d'opérandes sont identiques $\left(x = y\right)$, ou si le bit sur le paramètre $\left(y\right)$ est strictement supérieur à celui sur $\left(x\right)$.
-En bref, ce flou pose un problème que nous allons devoir prendre en charge dans la démonstration mathématique.
+Autrement dit, un $0$ en guise de bit de résultat d'une opération logique $Nimply$ rend anonyme les bits d'opérande, d'où le terme de "_zéro anonyme_".
+En bref, les _zéros anonymes_ posent un problème que nous allons devoir prendre en charge dans la démonstration mathématique.
 
-Petite précision par ailleurs, il existe en réalité des _zéros anonymes_ ___capitaux___ et ___non capitaux___.
-Nous allons définir la différence entre les deux types de _zéro anonyme_ ci-bas.
+Petite précision par ailleurs, il existe en réalité des _zéros anonymes_ dit ___capitaux___, et d'autre ___non capitaux___.
+Nous allons définir ci-bas la différence entre ces deux types là.
 
 ## Les deux facettes des zéros anonymes (introduction)
 
-Revenons à l'expression qui figure ci-dessus.
+Revenons à l'expression qui figure au tout début du chapitre "_Le traitement des champs d'exposant_".
 Chaque bit $\tau_i$ est le résultat de $\ Nimply \ \left(E_{\beta i}, \ E_{\alpha i}\right)$ pour le poids $i \in \left[10;14\right]$.
 Si $\left(\tau_i = 1\right)$ alors nous savons que $\left(E_{\beta i} = 1\right)$ tandis que $\left(E_{\alpha i} = 0\right)$, ou autrement dit $\left(E_{\beta i} \times 2^i\right) \ \gt \ \left(E_{\alpha i} \times 2^i\right)$.
 
-De plus, rappellez vous du chapitre "_Encodage par biais_" qui parle de l'encodage du champs d'exposant des nombres flottants IEEE-754.
-Dans ce chapitre, il est dit que la valeur d'un bit à $1$ de poids $i$ d'un champs d'exposant $E$, est _inconditionnellement_ supérieur à la somme de la valeur de chacun de ses bits de poids inférieur à $i$.
-Autrement dit, si nous prenons au pied de la lettre la phrase ci-dessus, alors $\forall \left(i \in \left[11;14\right]\right)$ nous obtenons $\left(E_{\beta i} \times 2^i\right) \ \gt \ \sum_{i=i-1}^{10} \ \left(E_{\beta i} \times 2^i\right)$.
-Mais nous pouvons arrangé cette expression à notre champs d'exposant $E_{\alpha}$, alors $\left(E_{\beta i} \times 2^i\right) \ \gt \ \sum_{i=i-1}^{10} \ \left(E_{\alpha i} \times 2^i\right)$. 
+De plus, rappellez vous du chapitre du nom de "_L'encodage par biais du champs d'exposant_".
+Dans ce chapitre, il est dit que la valeur d'un bit à $1$ de poids $i$ d'un champs d'exposant $E$, est _inconditionnellement_ supérieur à la somme de la valeur de chacun des bits de poids inférieur à $i$.
+Autrement dit, en prenant au pied de la lettre ce que nous venons de dire ci-dessus, $\forall \ i \in \left[11;14\right]$ si $\left(\beta_i = 1\right)$ nous obtenons alors $\left(E_{\beta i} \times 2^i\right) \ \gt \ \sum_{i=i-1}^{10} \ \left(E_{\beta i} \times 2^i\right)$.
+Il est également possible d'arrangé cette expression au champs d'exposant $E_{\alpha}$, alors $\left(E_{\beta i} \times 2^i\right) \ \gt \ \sum_{i=i-1}^{10} \ \left(E_{\alpha i} \times 2^i\right)$. 
 
 Au final, nous pouvons en conclure que si $\left(\tau_i = 1\right)$ alors $\left(E_{\beta i} \times 2^i\right) \ \gt \ \sum_{i}^{10} \ \left(E_{\alpha i} \times 2^i\right)$.
 
