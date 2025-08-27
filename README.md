@@ -461,8 +461,8 @@ Si $\left(\tau_i = 1\right)$ alors nous savons que $\left(E_{\beta i} = 1\right)
 
 De plus, rappellez vous du chapitre du nom de "_L'encodage par biais du champs d'exposant_".
 Dans ce chapitre, il est dit que la valeur d'un bit à $1$ de poids $i$ d'un champs d'exposant $E$, est _inconditionnellement_ supérieur à la somme de la valeur de chacun des bits de poids inférieur à $i$.
-En prenant au pied de la lettre ce que nous venons tout juste de dire, pour $i \in \left[11;14\right]$ si $\left(\beta_i = 1\right)$ nous obtenons alors $\left(E_{\beta i} \times 2^i\right) \ \gt \ \sum_{i'=i-1}^{10} \ \left(E_{\beta i'} \times 2^{i'}\right)$.
-Ceci peut également être arrangé au champs d'exposant $E_{\alpha}$, alors $\left(E_{\beta i} \times 2^i\right) \ \gt \ \sum_{i'=i-1}^{10} \ \left(E_{\alpha i'} \times 2^{i'}\right)$. 
+En prenant au pied de la lettre ce que nous venons tout juste de dire, pour $i \in \left[11;14\right]$ si $\left(\beta_i = 1\right)$ nous obtenons alors $\left(E_{\beta i} \times 2^i\right) \ \gt \ \sum_{\sigma=i-1}^{10} \ \left(E_{\beta\sigma} \times 2^{\sigma}\right)$.
+Ceci peut également être arrangé au champs d'exposant $E_{\alpha}$, alors $\left(E_{\beta i} \times 2^i\right) \ \gt \ \sum_{\sigma=i-1}^{10} \ \left(E_{\alpha\sigma} \times 2^{\sigma}\right)$. 
 
 Au final, nous pouvons en conclure que si $\left(\tau_i = 1\right)$ alors $\left(E_{\beta i} \times 2^i\right) \ \gt \ \sum_{i}^{10} \ \left(E_{\alpha i} \times 2^i\right)$.
 
@@ -488,10 +488,13 @@ Par exemple pour $\tau_{\left(i+1\right)}$, nous ne savons pas si $\left(E_{\alp
 Il en va de même pour tout autre bit de poids supérieur à $\tau_i$.
 
 Ceci pose problème car les _zéros anonymes_ de poids supérieur à $\tau_i$ sont décisifs dans le processus de génération d'un point terminal.
-A ce stade nous savons que $\left(E_{\beta i} \times 2^i\right) \ \gt \ \sum_{i}^{10} \ \left(E_{\alpha i} \times 2^i\right)$.
-Mais comme mentionné plus haut, ceci ne suffit pas à dire que $\left(E_{\alpha} \lt E_{\beta}\right)$.
+A ce stade nous savons que $\left(\tau_i = 1\right)$, par conséquent $\left(E_{\beta i} \times 2^i\right) \ \gt \ \sum_{i}^{10} \ \left(E_{\alpha i} \times 2^i\right)$.
+Mais comme mentionné plus haut ceci ne suffit pas à dire que $\left(E_{\alpha} \lt E_{\beta}\right)$, voyons pourquoi.
 
-La raison en est que si $\left(\sum_{i'=i+1}^{14} \ \left(E_{\beta i'} \times 2^{i'}\right) = \lambda_{\beta}\right)$ et que $\left(\sum_{i'=i+1}^{14} \ \left(E_{\alpha i'} \times 2^{i'}\right) = \lambda_{\alpha}\right)$, alors le point terminal était et reste $\left(E_{\alpha} \lt E_{\beta}\right)$ si jamais $\left(\lambda_{\alpha} = \lambda_{\beta}\right)$.
+Pour commencer, calculons la somme $\lambda$ (lambda) de la valeur des bits de poids supérieur à $i$ (le poids du _MSB1_ de $\tau$) du champs d'exposants $E_{\alpha}$ avec $\left(\lambda_{\alpha} = \sum_{\sigma=i+1}^{14} \ \left(E_{\alpha\sigma} \times 2^{\sigma}\right)\right)$, puis de $E_{\beta}$ avec $\left(\lambda_{\beta} = \sum_{\sigma=i+1}^{14} \ \left(E_{\beta\sigma} \times 2^{\sigma}\right)\right)$.
+Si jamais $\left(\lambda_{\alpha} = \lambda_{\beta}\right)$ alors $\left(E_{\alpha} \lt E_{\beta}\right)$ car $\left(\lambda_{\beta} + E_{\beta i} \times 2^i\right) \ \gt \ \left(\lambda_{\alpha} + \sum_{i}^{10} \ \left(E_{\alpha i} \times 2^i\right)\right)$.
+
+La raison en est que si $\left(\lambda_{\beta} = \sum_{\sigma=i+1}^{14} \ \left(E_{\beta\sigma} \times 2^{\sigma}\right)\right)$ et que $\left(\lambda_{\alpha} = \sum_{\sigma=i+1}^{14} \ \left(E_{\alpha\sigma} \times 2^{\sigma}\right)\right)$, alors le point terminal était et reste $\left(E_{\alpha} \lt E_{\beta}\right)$ si jamais $\left(\lambda_{\alpha} = \lambda_{\beta}\right)$.
 Pour le dire autrement, nous calculons ici la somme $\lambda$ (lambda) de la valeur des bits de poids supérieur à $i$ (le _MSB1_ de $\tau$), pour les champs d'exposants $E$ des opérandes $\alpha$ et $\beta$.
 Cependant, si $\left(\lambda_{\alpha} = \lambda_{\beta}\right)$, n'oublions pas que $\left(E_{\beta i} \times 2^i\right) \ \gt \ \sum_{i}^{10} \ \left(E_{\alpha i} \times 2^i\right)$.
 Ce qui veut bien dire que $\left(E_{\alpha} \lt E_{\beta}\right)$ car $\left(\left(\lambda_{\beta} + E_{\beta i} \times 2^i\right) \ \gt \ \left(\lambda_{\alpha} + \sum_{i}^{10} \ \left(E_{\alpha i} \times 2^i\right)\right)\right)$.
