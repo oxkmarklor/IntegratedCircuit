@@ -495,15 +495,12 @@ Pour commencer, calculons la somme $\lambda$ (lambda) de la valeur des bits de p
 Nous savons que $\left(\lambda_{\alpha} \ge \lambda_{\beta}\right)$ car pour tout $\sigma$ (sigma) compris dans l'intervalle $\left]i;14\right]$, il existe $\left(E_{\alpha\sigma} \ge E_{\beta\sigma}\right)$.
 
 Si jamais $\left(\lambda_{\alpha} = \lambda_{\beta}\right)$ alors $\left(E_{\alpha} \lt E_{\beta}\right)$ car $\left(\lambda_{\beta} + E_{\beta i} \times 2^i\right) \ \gt \ \left(\lambda_{\alpha} + \sum_{i}^{10} \ \left(E_{\alpha i} \times 2^i\right)\right)$.
-Cependant, si $\left(\lambda_{\alpha} \gt \lambda_{\beta}\right)$ alors $\left(\lambda_{\alpha} \ \gt \ \sum_{\sigma=14}^{10} \ \left(E_{\beta\sigma} \times 2^{\sigma}\right)\right)$, ou pour le dire autrement $\left(E_{\alpha} \gt E_{\beta}\right)$.
 
+Cependant, si $\left(\lambda_{\alpha} \gt \lambda_{\beta}\right)$ alors cela veut dire que parmis les bits de poids $\sigma \in \left]i;14\right]$, il y a une ou plusieurs occurrence de $\left(E_{\alpha\sigma} \gt E_{\beta\sigma}\right)$.
+Par conséquent, nous savons que pour chacune de ces occurences $\left(E_{\alpha\sigma} \times 2^{\sigma}\right) \ \gt \ \sum_{\sigma}^{10} \ \left(E_{\beta\sigma} \times 2^{\sigma}\right)$.
+Sachant que si il existe des bits de poids $x$ supérieur à $\sigma$ de l'intervalle $\left]\sigma;14\right]$, alors $\left(E_{\alpha x} \times 2^x\right) \ge \left(E_{\beta x} \times 2^x\right)$ et quoi qu'il arrive $\left(E_{\alpha} \gt E_{\beta}\right)$.
 
-Nous en déduisons alors que $\left(\lambda_{\alpha} + \sum_{i}^{10} \ \left(E_{\alpha i} \times 2^i\right)\right) \ \gt \ \left(\lambda_{\beta} + E_{\beta i} \times 2^i\right)$.
-
-Cependant, si $\left(\lambda \ \lt \ \sum_{i=i+1}^{14} \ \left(E_{\alpha i} \times 2^i\right)\right)$ alors le point terminal change pour $\left(E_{\alpha} \gt E_{\beta}\right)$, car $\left(\sum_{i=i+1}^{14} \ \left(E_{\alpha i} \times 2^i\right) \ \gt \ \sum_{i=14}^{10} \ \left(E_{\beta i} \times 2^i\right)\right)$.
-Autrement dit, la somme de la valeur des bits de poids supérieur à $\tau_i$ (le _MSB1_ de $\tau$) dans $E_{\alpha}$, est strictement supérieur à la valeur totale du champs $E_{\beta}$.
-
-Nous comprenons donc que les _zéros anonymes_ de poids supérieur au _MSB1_ de $\tau \in \left[10;13\right]$ devront être traités avec attention par le circuit, ce sont des _zéros anonymes capitaux_.
+Nous comprenons donc que les _zéros anonymes_ de poids supérieur au _MSB1_ de $\tau \in \left[10;13\right]$ devront être traités avec attention par le circuit, ce sont des _zéros anonymes_ ___capitaux___.
 
 ### L'obtention d'un point non terminal
 
