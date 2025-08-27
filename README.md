@@ -492,16 +492,14 @@ A ce stade nous savons que $\left(\tau_i = 1\right)$, par conséquent $\left(E_{
 Mais comme mentionné plus haut ceci ne suffit pas à dire que $\left(E_{\alpha} \lt E_{\beta}\right)$, voyons pourquoi.
 
 Pour commencer, calculons la somme $\lambda$ (lambda) de la valeur des bits de poids supérieur à $i$ (le poids du _MSB1_ de $\tau$) du champs d'exposants $E_{\alpha}$ avec $\left(\lambda_{\alpha} = \sum_{\sigma=i+1}^{14} \ \left(E_{\alpha\sigma} \times 2^{\sigma}\right)\right)$, puis de $E_{\beta}$ avec $\left(\lambda_{\beta} = \sum_{\sigma=i+1}^{14} \ \left(E_{\beta\sigma} \times 2^{\sigma}\right)\right)$.
+Nous savons que $\left(\lambda_{\alpha} \ge \lambda_{\beta}\right)$ car pour tout $\sigma$ (sigma) compris dans l'intervalle $\left]i;14\right]$, il existe $\left(E_{\alpha\sigma} \ge E_{\beta\sigma}\right)$.
+
 Si jamais $\left(\lambda_{\alpha} = \lambda_{\beta}\right)$ alors $\left(E_{\alpha} \lt E_{\beta}\right)$ car $\left(\lambda_{\beta} + E_{\beta i} \times 2^i\right) \ \gt \ \left(\lambda_{\alpha} + \sum_{i}^{10} \ \left(E_{\alpha i} \times 2^i\right)\right)$.
+Cependant, si $\left(\lambda_{\alpha} \gt \lambda_{\beta}\right)$ alors $\left(\lambda_{\alpha} \ \gt \ \sum_{\sigma=14}^{10} \ \left(E_{\beta\sigma} \times 2^{\sigma}\right)\right)$, ou pour le dire autrement $\left(E_{\alpha} \gt E_{\beta}\right)$.
 
-La raison en est que si $\left(\lambda_{\beta} = \sum_{\sigma=i+1}^{14} \ \left(E_{\beta\sigma} \times 2^{\sigma}\right)\right)$ et que $\left(\lambda_{\alpha} = \sum_{\sigma=i+1}^{14} \ \left(E_{\alpha\sigma} \times 2^{\sigma}\right)\right)$, alors le point terminal était et reste $\left(E_{\alpha} \lt E_{\beta}\right)$ si jamais $\left(\lambda_{\alpha} = \lambda_{\beta}\right)$.
-Pour le dire autrement, nous calculons ici la somme $\lambda$ (lambda) de la valeur des bits de poids supérieur à $i$ (le _MSB1_ de $\tau$), pour les champs d'exposants $E$ des opérandes $\alpha$ et $\beta$.
-Cependant, si $\left(\lambda_{\alpha} = \lambda_{\beta}\right)$, n'oublions pas que $\left(E_{\beta i} \times 2^i\right) \ \gt \ \sum_{i}^{10} \ \left(E_{\alpha i} \times 2^i\right)$.
-Ce qui veut bien dire que $\left(E_{\alpha} \lt E_{\beta}\right)$ car $\left(\left(\lambda_{\beta} + E_{\beta i} \times 2^i\right) \ \gt \ \left(\lambda_{\alpha} + \sum_{i}^{10} \ \left(E_{\alpha i} \times 2^i\right)\right)\right)$.
 
-// correc
+Nous en déduisons alors que $\left(\lambda_{\alpha} + \sum_{i}^{10} \ \left(E_{\alpha i} \times 2^i\right)\right) \ \gt \ \left(\lambda_{\beta} + E_{\beta i} \times 2^i\right)$.
 
-Par conséquent, si $\ Write \ \left(\lambda, \ \sum_{i=i+1}^{14} \ \left(E_{\beta i} \times 2^i\right)\right)$ et que $\left(\lambda \ = \ \sum_{i=i+1}^{14} \ \left(E_{\alpha i} \times 2^i\right)\right)$, alors le point terminal était et reste $\left(E_{\alpha} \lt E_{\beta}\right)$.
 Cependant, si $\left(\lambda \ \lt \ \sum_{i=i+1}^{14} \ \left(E_{\alpha i} \times 2^i\right)\right)$ alors le point terminal change pour $\left(E_{\alpha} \gt E_{\beta}\right)$, car $\left(\sum_{i=i+1}^{14} \ \left(E_{\alpha i} \times 2^i\right) \ \gt \ \sum_{i=14}^{10} \ \left(E_{\beta i} \times 2^i\right)\right)$.
 Autrement dit, la somme de la valeur des bits de poids supérieur à $\tau_i$ (le _MSB1_ de $\tau$) dans $E_{\alpha}$, est strictement supérieur à la valeur totale du champs $E_{\beta}$.
 
