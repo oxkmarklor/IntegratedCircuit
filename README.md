@@ -520,20 +520,21 @@ La raison est que chacun de ces bits ont le pouvoir de faire basculé le circuit
 Le chapitre "_Les points terminaux et non terminaux_" explique pourquoi est ce que les champs d'exposant $E$ des opérandes $\alpha$ et $\beta$, sont traités avant les champs de mantisse tronquée $T$ de ces même opérandes.
 Dans ce chapitre, il y a la formule mathématique $\left(\left(1+T\right) \times 2^E\right)$ qui explique comment est ce que la valeur d'un nombre à virgule flottante est représenté en IEEE-754.
 Nous y apprenons que si deux nombres flottants $\vert \ \alpha \ \vert$ et $\vert \ \beta \ \vert$ ont des champs d'exposant égaux $\left(E_{\alpha} = E_{\beta}\right)$, alors la valeur de ces deux nombres $\left(\left(1+T_{\alpha}\right) \times 2^{E_\alpha}\right)$ et $\left(\left(1+T_{\beta}\right) \times 2^{E_\beta}\right)$ ne dépend que de $T_{\alpha}$ et $T_{\beta}$.
-Dès lors, la génération de la sortie du circuit comparateur du FPU Configuration Unit ne dépend plus que des champs de mantisse tronquée $T$, lorsque les champs d'exposant $E$ sont égaux (atteinte d'un point non terminal).
-Par conséquent, le circuit fait basculé le traitement sur les champs de mantisse tronquée $T$ de ses opérandes $\alpha$ et $\beta$, due à son incapacité à pouvoir généré un résultat par le seul traitement des champs d'exposant $E$.
+Le circuit atteint alors un _point non terminal_.
+C'est à dire qu'il est incapable de généré le résultat d'une comparaison entre les opérandes $\vert \ \alpha \ \vert$ et $\vert \ \beta \ \vert$, par le seul traitement de leur champs d'exposant $E$.
+Par conséquent, le circuit électronique bascule le traitement sur les champs de mantisse tronquée $T$.
 
 Qui plus est, le traitement des champs de mantisse tronquée $T_{\alpha}$ et $T_{\beta}$ est le même que celui des champs d'exposant.
 Pour ceux qui ont besoin d'un rafraichissement, je vous rappelle que l'encodage des champs d'exposant et de mantisse tronquée ont des points en commun.
 Tout a été expliquer dans le chapitre "_Le standard IEEE-754_".
-En bref, l'encodage du champs de mantisse tronquée partage les même propriétés que celui du champs d'exposant (c'est à dire les caractèristiques du _Binary Unsigned_).
+En bref, l'encodage du champs de mantisse tronquée et du champs d'exposant partagent les même propriété que le _Binary Unsigned_.
 Grâce à cela, le processus de comparaison entre les champs de mantisse tronquée $T_{\alpha}$ et $T_{\beta}$, suit la même procédure de traitement que les champs d'exposant $E$.
-Nous allons pouvoir remarqué cela dans le chapitre suivant.
+Nous allons pouvoir remarqué ça dans le chapitre suivant.
 
 # Le traitement des champs de mantisse tronquée
 
 Voici dans un premier temps de quoi dépend le traitement des champs de mantisse tronquée $T_{\alpha}$ et $T_{\beta}$.
-Nous remarquerons que c'est la même opération (à quelques détails prêt) que pour les champs d'exposant $E$ des opérandes $\alpha$ et $\beta$.
+Nous remarquerons que c'est la même opération (à quelques détails prêt), que pour les champs d'exposant $E$ des opérandes $\alpha$ et $\beta$.
 
 $$\forall \ i \in \left[0;9\right], \quad Write \ \left(\tau_i, \ Nimply \ \left(T_{\beta i}, \ T_{\alpha i}\right)\right)$$
 
@@ -541,23 +542,24 @@ La variable $\tau$ est techniquement la même que celle utilisée dans la premi�
 La seule différence, c'est que le bit de résultat de chaque opération logique $Nimply$ sur $T_{\beta i}$ et $T_{\alpha i}$ est inscrit dans $\tau_i$, pour $i \in \left[0;9\right]$.
 
 N'oublions pas que depuis le début, la démonstration mathématique du circuit se base entièrement sur la verification de la condition suivante $\left(\vert\alpha\vert \gt \vert\beta\vert\right)$.
-Dans les prochaines sections de ce chapitre, nous allons définir _tout les cas de réussite_ ainsi que d'_échec_ de cette condition, au travers du traitement des champs de mantisse tronquée $T$.
+Dans les prochaines sections de ce chapitre, nous allons définir _toutes les situations de réussite_ ainsi que d'_échec_ de cette condition, au travers du traitement des champs de mantisse tronquée $T$.
 
 ### Un échec certain de la condition 
 
-Dans le chapitre "_La mantisse tronquée, une histoire de puissance de 2_" qui parle de l'encodage du champs de mantisse tronquée des nombres à virgule flottante représenté IEEE-754.
-Il est dit que la valeur d'un bit à $1$ de poids $i$ d'un champs de mantisse tronquée $T$, est _inconditionnellement_ supérieur à la somme de la valeur de chacun de ses bits de poids inférieur à $i$.
-Rappellons que c'est aussi le cas pour les champs d'exposant, comme cela a été mentionné dans la première partie de la démonstration.
-Le calcul de comparaison entre les champs d'exposant se base sur ces primitives mathématiques, et il en va de même pour les champs de mantisse tronquée $T_{\alpha}$ et $T_{\beta}$.
+Dans le chapitre "_La mantisse tronquée, une histoire de puissance de 2_", qui introduit à l'encodage du champs de mantisse tronquée.
+Il est dit que la valeur d'un bit à $1$ de poids $i$ d'un champs de mantisse tronquée $T$, est _inconditionnellement_ supérieur à la somme de la valeur de chacun des bits de poids inférieur à $i$.
+Rappellons que c'est aussi le cas des champs d'exposant, comme cela a été mentionné dans le chapitre "_L'encodage par biais du champs d'exposant_".
+Comme nous avons pu le voir dans la première partie de la démonstration, la comparaison entre les champs d'exposant utilise ces primitives mathématiques.
+Ci-dessous, nous allons voir qu'il en va de même pour la comparaison entre les champs de mantisse tronquée $T_{\alpha}$ ainsi que $T_{\beta}$. 
 
 Prenons le cas de $\left(\tau_i = \tau_9 = 1\right)$.
 En sachant que $\left(\tau_9 = 1\right)$ nous savons que $\left(T_{\beta 9} = 1\right)$ tandis que $\left(T_{\alpha 9} = 0\right)$, et par conséquent $\left(T_{\beta 9} \times 2^9\right) \gt \sum_{i=9}^0 \ \left(T_{\alpha i} \times 2^i\right)$.
-Etant donné que $T_{\alpha 9}$ ainsi que $T_{\beta 9}$ sont les _MSB_ des champs de mantisse tronquée $T$, nous pouvons alors conclure que $\left(T_{\alpha} \lt T_{\beta}\right)$. 
-La condition initial que teste le circuit $\left(\vert\alpha\vert \gt \vert\beta\vert\right)$ __échoue__.
-Sachant que $\left(E_{\alpha} = E_{\beta}\right)$, alors $\left(\left(1+T_{\alpha}\right) \times 2^{E_{\alpha}}\right) \lt \left(\left(1+T_{\beta}\right) \times 2^{E_{\beta}}\right)$, ou dit autrement $\left(\vert\alpha\vert \lt \vert\beta\vert\right)$.
+Etant donné que $T_{\alpha 9}$ ainsi que $T_{\beta 9}$ sont les _MSB_ des champs de mantisse tronquée $T_{\alpha}$ et $T_{\beta}$ respectivement, nous pouvons alors conclure que $\left(T_{\alpha} \lt T_{\beta}\right)$. 
+Sachant que $\vert \ \alpha \ \vert$ est égale à $\left(\left(1+T_{\alpha}\right) \times 2^{E_{\alpha}}\right)$ et que $\vert \ \beta \ \vert$ vaut $\left(\left(1+T_{\beta}\right) \times 2^{E_{\beta}}\right)$, avec $\left(E_{\alpha} = E_{\beta}\right)$ nous obtenons alors le résultat $\left(\vert\alpha\vert \lt \vert\beta\vert\right)$.
+Par conséquent, la condition que teste le circuit $\left(\vert\alpha\vert \gt \vert\beta\vert\right)$ se solde en échec.
 
-N'oublions pas qu'il peut y avoir des _zéros anonymes_ dans $\tau \in \left[0;8\right]$, mais ces derniers ne peuvent être que de poids inférieur au _MSB1_ de $\tau$ qui est $\tau_9$.
-Ces potentiels bit à $0$ sont alors des _zéros anonymes non capitaux_, sans importance.
+N'oublions pas qu'il peut y avoir des _zéros anonymes_ dans $\tau \in \left[0;8\right]$, mais ces derniers ne peuvent être que de poids inférieur au _MSB1_ de $\tau$, qui est $\tau_9$.
+Ces potentiels bit à $0$ sont alors des _zéros anonymes non capitaux_, sans aucune importance.
 
 ### Lorsque les zéros anonymes rendent la génération du résultat incertain
 
