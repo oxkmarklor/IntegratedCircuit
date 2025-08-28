@@ -569,25 +569,27 @@ Prenons désormais le cas dans lequel le poids du _MSB1_ de $\tau$ est $\tau_i$ 
 Dans cette situation, nous sommes certains qu'il y a _au moins_ le bit $\tau_{\left(i+1\right)}$ qui est d'un poids supérieur à $\tau_i$.
 Les bits de poids supérieur à $\tau_i$ sont tous des _zéros anonymes capitaux_, nous devons donc y prêté attention.
 
-Calculons la somme $\varphi$ (phi) de la valeur des bits de poids supérieur à $i$ du champs d'exposants $T_{\alpha}$ avec $\left(\varphi_{\alpha} = \sum_{\sigma=i+1}^9 \ \left(T_{\alpha\sigma} \times 2^{\sigma}\right)\right)$, puis de $T_{\beta}$ avec $\left(\varphi_{\beta} = \sum_{\sigma=i+1}^9 \ \left(T_{\beta\sigma} \times 2^{\sigma}\right)\right)$.
+Calculons la somme $\varphi$ (phi) de la valeur des bits de poids supérieur à $i$ du champs de mantisse tronquée $T_{\alpha}$ avec $\left(\varphi_{\alpha} = \sum_{\sigma=i+1}^9 \ \left(T_{\alpha\sigma} \times 2^{\sigma}\right)\right)$, puis de $T_{\beta}$ avec $\left(\varphi_{\beta} = \sum_{\sigma=i+1}^9 \ \left(T_{\beta\sigma} \times 2^{\sigma}\right)\right)$.
 Dans le cas où $\left(\varphi_{\alpha} = \varphi_{\beta}\right)$ alors $\left(T_{\alpha} \lt T_{\beta}\right)$ car $\left(\varphi_{\beta} + T_{\beta i} \times 2^i\right) \gt \left(\varphi_{\alpha} + \sum_i^0 \ \left(T_{\alpha i} \times 2^i\right)\right)$.
-De plus $\left(E_{\alpha} = E_{\beta}\right)$ et le résultat obtenu est donc $\left(\vert\alpha\vert \lt \vert\beta\vert\right)$ parce que $\left(\left(1+T_{\alpha}\right) \times 2^{E_{\alpha}}\right) \lt \left(\left(1+T_{\beta}\right) \times 2^{E_{\beta}}\right)$.
+Nous savons que $\left(E_{\alpha} = E_{\beta}\right)$ alors $\left(\left(1+T_{\alpha}\right) \times 2^{E_{\alpha}}\right) \lt \left(\left(1+T_{\beta}\right) \times 2^{E_{\beta}}\right)$, ou autrement dit $\left(\vert\alpha\vert \lt \vert\beta\vert\right)$.
+Par conséquent, la condition que teste le circuit $\left(\vert\alpha\vert \gt \vert\beta\vert\right)$ se solde en échec.
 
-Par conséquent, la condition initial $\left(\vert\alpha\vert \gt \vert\beta\vert\right)$ __échoue__ car $\left(\left(1+T_{\alpha}\right) \times 2^{E_{\alpha}}\right) \lt \left(\left(1+T_{\beta}\right) \times 2^{E_{\beta}}\right)$, ou autrement dit $\left(\vert\alpha\vert \lt \vert\beta\vert\right)$.
+Cependant, nous savons que les bits de poids supérieurs à $i$ dans $\tau$ sont des _zéros anonymes capitaux_.
+Il est donc possible que $\left(\varphi_{\alpha} \gt \varphi_{\beta}\right)$, à la condition qu'il existe au moins une occurence de $\left(T_{\alpha\sigma} \gt T_{\beta\sigma}\right)$ pour $\sigma \in \left]i;9\right]$.
+Pour ces occurences alors $\left(T_{\alpha\sigma} \times 2^{\sigma}\right) \gt \sum_{\sigma}^0 \ \left(T_{\beta\sigma} \times 2^{\sigma}\right)$ et $\left(T_{\alpha} \gt T_{\beta}\right)$.
+Il est possible qu'il y ait des bits de poids supérieur à l'une de ces occurences (compris dans l'intervalle $\left]\sigma;9\right]$), mais ces bits dans $T_{\alpha}$ sont supérieurs ou égaux aux bits de même poids dans $T_{\beta}$.
+Nous savons que $\left(E_{\alpha} = E_{\beta}\right)$, mais cette fois-ci $\left(\left(1+T_{\alpha}\right) \times 2^{E_{\alpha}}\right) \gt \left(\left(1+T_{\beta}\right) \times 2^{E_{\beta}}\right)$, et la condition que teste le circuit $\left(\vert\alpha\vert \gt \vert\beta\vert\right)$ réussie.
 
-Cependant, si $\left(\lambda \ \lt \ \sum_{i=i+1}^9 \ \left(T_{\alpha i} \times 2^i\right)\right)$ alors $\left(T_{\alpha} \gt T_{\beta}\right)$ car $\left(\sum_{i=i+1}^9 \ \left(T_{\alpha i} \times 2^i\right) \ \gt \ \sum_{i=9}^0 \ \left(T_{\beta i} \times 2^i\right)\right)$.
-Autrement dit, la somme de la valeur des bits de poids supérieur à $\tau_i$ (le _MSB1_ de $\tau \in \left[0;8\right]$) dans $T_{\alpha}$, est strictement supérieur à la valeur totale du champs de mantisse tronquée $T_{\beta}$.
-La condition initial $\left(\vert\alpha\vert \gt \vert\beta\vert\right)$ ___réussie___ car $\left(\left(1+T_{\alpha}\right) \times 2^{E_{\alpha}}\right) \gt \left(\left(1+T_{\beta}\right) \times 2^{E_{\beta}}\right)$.
-
-Pour finir, il est possible qu'il n'y ait pas de _MSB1_ dans $\tau \in \left[0;9\right]$, tout les bits composant $\tau$ sont alors des _zéros anonymes capitaux_.
+Pour finir, il est possible qu'il n'y ait pas de _MSB1_ dans $\tau \in \left[0;9\right]$, alors tout ces bits à $0$ sont des _zéros anonymes capitaux_.
 Nous pouvons donc affirmé que $\left(T_{\alpha} \ge T_{\beta}\right)$.
 
-Dans le cas où $\left(T_{\alpha i} \gt T_{\beta i}\right)$ pour $i \in \left[0;9\right]$, alors $\left(T_{\alpha} \gt T_{\beta}\right)$.
-La condition initial $\left(\vert\alpha\vert \gt \vert\beta\vert\right)$ ___réussie___ car $\left(\sum_i^9 \ \left(T_{\alpha i} \times 2^i\right) \ \gt \ \sum_{i=9}^0 \ \left(T_{\beta i} \times 2^i\right)\right)$, ou autrement dit $\left(\left(1+T_{\alpha}\right) \times 2^{E_{\alpha}}\right) \gt \left(\left(1+T_{\beta}\right) \times 2^{E_{\beta}}\right)$.
+Dans le cas où il existe au moins une occurence de $\left(T_{\alpha i} \gt T_{\beta i}\right)$ pour $i \in \left[0;9\right]$, alors $\left(T_{\alpha} \gt T_{\beta}\right)$.
+Les champs d'exposant $E$ des opérandes $\alpha$ et $\beta$ sont égaux et $\left(\left(1+T_{\alpha}\right) \times 2^{E_{\alpha}}\right) \gt \left(\left(1+T_{\beta}\right) \times 2^{E_{\beta}}\right)$.
+La condition que teste le circuit $\left(\vert\alpha\vert \gt \vert\beta\vert\right)$ réussie.
 
-A l'inverse, il est tout aussi probable que $\left(T_{\alpha} = T_{\beta}\right)$.
-Pour cela il faudrait que chaque bit de même poids des champs de mantisse tronquée $T_{\alpha}$ ainsi que $T_{\beta}$ soient identiques, ou pour le dire autrement $\forall \left(i \in \left[0;9\right]\right)$ alors $\left(T_{\alpha i} = T_{\beta i}\right)$.
-Sachant que $\left(E_{\alpha} = E_{\beta}\right)$ et que $\left(T_{\alpha} = T_{\beta}\right)$, alors $\left(\left(1+T_{\alpha}\right) \times 2^{E_{\alpha}}\right) \ = \ \left(\left(1+T_{\beta}\right) \times 2^{E_{\beta}}\right)$ et la condition initial $\left(\vert\alpha\vert \gt \vert\beta\vert\right)$ ___échoue___.
+En outre, si $\left(T_{\alpha i} = T_{\beta i}\right)$ pour tout $i \in \left[0;9\right]$ alors $\left(T_{\alpha} = T_{\beta}\right)$.
+Sachant que $\left(E_{\alpha} = E_{\beta}\right)$, la valeur de $\vert \ \alpha \ \vert$ est égale à $\left(\left(1+T_{\alpha}\right) \times 2^{E_{\alpha}}\right)$ qui est équivalente à $\vert \ \beta \ \vert$ qui vaut $\left(\left(1+T_{\beta}\right) \times 2^{E_{\beta}}\right)$.
+La condition que teste le circuit $\left(\vert\alpha\vert \gt \vert\beta\vert\right)$ se solde en échec.
 
 # Conclusion des démonstrations
 
