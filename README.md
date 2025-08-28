@@ -498,22 +498,22 @@ Si jamais $\left(\lambda_{\alpha} = \lambda_{\beta}\right)$ alors $\left(E_{\alp
 
 Cependant, si $\left(\lambda_{\alpha} \gt \lambda_{\beta}\right)$ alors cela veut dire que parmis les bits de poids $\sigma \in \left]i;14\right]$, il y a une ou plusieurs occurrence de $\left(E_{\alpha\sigma} \gt E_{\beta\sigma}\right)$.
 Par conséquent, nous savons que pour chacune de ces occurences $\left(E_{\alpha\sigma} \times 2^{\sigma}\right) \ \gt \ \sum_{\sigma}^{10} \ \left(E_{\beta\sigma} \times 2^{\sigma}\right)$.
-Sachant que si il existe des bits de poids $x$ supérieur à $\sigma$ de l'intervalle $\left]\sigma;14\right]$, alors $\left(E_{\alpha x} \times 2^x\right) \ge \left(E_{\beta x} \times 2^x\right)$ et quoi qu'il arrive $\left(E_{\alpha} \gt E_{\beta}\right)$.
+Il peut y avoir des bits de poids supérieur à l'une de ces occurences (compris dans l'intervalle $\left]\sigma;14\right]$), mais ces bits dans $E_{\alpha}$ sont supérieurs ou égaux aux bits de même poids dans $E_{\beta}$.
+Ce qui confirme le fait que $\left(E_{\alpha} \gt E_{\beta}\right)$.
 
 Nous comprenons donc que les _zéros anonymes_ de poids supérieur au _MSB1_ de $\tau \in \left[10;13\right]$ devront être traités avec attention par le circuit, ce sont des _zéros anonymes_ ___capitaux___.
 
 ### L'obtention d'un point non terminal
 
 Jusqu'ici nous avions un _MSB1_ dans $\tau \in \left[10;14\right]$, mais il pourrait ne pas y en avoir.
-Dans cette situation, chacun des bits de $\tau \in \left[10;14\right]$ est un _zéro anonyme_, ce qui nous permet d'affirmé que $\left(E_{\alpha} \ge E_{\beta}\right)$.
+Dans cette situation, chaque bit de $\tau \in \left[10;14\right]$ est un _zéro anonyme_, ce qui nous permet d'affirmé que $\left(E_{\alpha} \ge E_{\beta}\right)$.
 
-Nous pourrions atteindre un point terminal si jamais $\left(E_{\alpha} \gt E_{\beta}\right)$, mais ce point terminal ne pourrait s'obtenir qu'à la condition que $\left(E_{\alpha i} \gt E_{\beta i}\right)$ pour $i \in \left[10;14\right]$.
+Nous pourrions atteindre un point terminal si jamais $\left(E_{\alpha} \gt E_{\beta}\right)$, mais ce point terminal ne pourrait s'obtenir qu'à la condition qu'au moins une occurence $\left(E_{\alpha i} \gt E_{\beta i}\right)$ existe pour $i \in \left[10;14\right]$.
 A l'inverse, nous pourrions aussi atteindre une situation inédite de ___point non terminal___ si $\left(E_{\alpha} = E_{\beta}\right)$.
-Cette situation inédite ne peut se produire que dans le cas où l'ensemble des bits de même poids des champs d'exposant $E_{\alpha}$ et $E_{\beta}$ sont identiques, ou autrement dit $\forall \ i \in \left[10;14\right]$ alors $\left(E_{\alpha i} = E_{\beta i}\right)$.
-Je rappelle que nous avons vus plus tôt dans le chapitre du nom de "_Les points terminaux et non terminaux_", la signification du concept de _point terminal_ ainsi que _non terminal_.
+Cette situation inédite ne peut se produire que dans le cas où l'ensemble des paires de bits de même poids des champs d'exposant $E_{\alpha}$ et $E_{\beta}$ sont identiques, ou autrement dit $\forall \ i \in \left[10;14\right]$ alors $\left(E_{\alpha i} = E_{\beta i}\right)$.
 
 Pour conclure, les _zéros anonymes_ qui composent l'entièreté du champs $\tau \in \left[10;14\right]$ sont capitaux.
-La raison est que chacun de ces bit à le pouvoir de faire basculé le circuit d'un état de _point non terminal_, à celui de _point terminal_.
+La raison est que chacun de ces bits ont le pouvoir de faire basculé le circuit d'un état de _point non terminal_, à celui de _point terminal_.
 
 ## Rappel sur les champs d'exposant et de mantisse tronquée
 
