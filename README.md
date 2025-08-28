@@ -542,7 +542,7 @@ La variable $\tau$ est techniquement la même que celle utilisée dans la premi�
 La seule différence, c'est que le bit de résultat de chaque opération logique $Nimply$ sur $T_{\beta i}$ et $T_{\alpha i}$ est inscrit dans $\tau_i$, pour $i \in \left[0;9\right]$.
 
 N'oublions pas que depuis le début, la démonstration mathématique du circuit se base entièrement sur la verification de la condition suivante $\left(\vert\alpha\vert \gt \vert\beta\vert\right)$.
-Dans les prochaines sections de ce chapitre, nous allons définir _toutes les situations de réussite_ ainsi que d'_échec_ de cette condition, au travers du traitement des champs de mantisse tronquée $T$.
+Dans les prochaines sections de ce chapitre, nous allons définir tout les cas de réussite et d'échec de cette condition que l'on peut rencontré au travers du traitement des champs de mantisse tronquée.
 
 ### Un échec certain de la condition 
 
@@ -553,13 +553,13 @@ Comme nous avons pu le voir dans la première partie de la démonstration, la co
 Ci-dessous, nous allons voir qu'il en va de même pour la comparaison entre les champs de mantisse tronquée $T_{\alpha}$ ainsi que $T_{\beta}$. 
 
 Prenons le cas de $\left(\tau_i = \tau_9 = 1\right)$.
-En sachant que $\left(\tau_9 = 1\right)$ nous savons que $\left(T_{\beta 9} = 1\right)$ tandis que $\left(T_{\alpha 9} = 0\right)$, et par conséquent $\left(T_{\beta 9} \times 2^9\right) \gt \sum_{i=9}^0 \ \left(T_{\alpha i} \times 2^i\right)$.
-Etant donné que $T_{\alpha 9}$ ainsi que $T_{\beta 9}$ sont les _MSB_ des champs de mantisse tronquée $T_{\alpha}$ et $T_{\beta}$ respectivement, nous pouvons alors conclure que $\left(T_{\alpha} \lt T_{\beta}\right)$. 
+Vu que $\left(\tau_9 = 1\right)$, nous savons que $\left(T_{\beta 9} = 1\right)$ tandis que $\left(T_{\alpha 9} = 0\right)$ et par conséquent $\left(T_{\beta 9} \times 2^9\right) \gt \sum_{i=9}^0 \ \left(T_{\alpha i} \times 2^i\right)$.
+Etant donné que $T_{\alpha 9}$ ainsi que $T_{\beta 9}$ sont les _MSB_ respectif des champs de mantisse tronquée $T_{\alpha}$ et $T_{\beta}$, nous pouvons alors conclure que $\left(T_{\alpha} \lt T_{\beta}\right)$. 
 Sachant que $\vert \ \alpha \ \vert$ est égale à $\left(\left(1+T_{\alpha}\right) \times 2^{E_{\alpha}}\right)$ et que $\vert \ \beta \ \vert$ vaut $\left(\left(1+T_{\beta}\right) \times 2^{E_{\beta}}\right)$, avec $\left(E_{\alpha} = E_{\beta}\right)$ nous obtenons alors le résultat $\left(\vert\alpha\vert \lt \vert\beta\vert\right)$.
 Par conséquent, la condition que teste le circuit $\left(\vert\alpha\vert \gt \vert\beta\vert\right)$ se solde en échec.
 
 N'oublions pas qu'il peut y avoir des _zéros anonymes_ dans $\tau \in \left[0;8\right]$, mais ces derniers ne peuvent être que de poids inférieur au _MSB1_ de $\tau$, qui est $\tau_9$.
-Ces potentiels bit à $0$ sont alors des _zéros anonymes non capitaux_, sans aucune importance.
+Ces potentiels bit à $0$ sont alors des _zéros anonymes non capitaux_, sans aucune importance pour le résultat.
 
 ### Lorsque les zéros anonymes rendent la génération du résultat incertain
 
@@ -569,9 +569,10 @@ Prenons désormais le cas dans lequel le poids du _MSB1_ de $\tau$ est $\tau_i$ 
 Dans cette situation, nous sommes certains qu'il y a _au moins_ le bit $\tau_{\left(i+1\right)}$ qui est d'un poids supérieur à $\tau_i$.
 Les bits de poids supérieur à $\tau_i$ sont tous des _zéros anonymes capitaux_, nous devons donc y prêté attention.
 
-Nous calculons la somme de la valeur des bits de $T_{\beta}$ d'un poids supérieur à $\tau_i$ avec $\ Write \ \left(\lambda, \ \sum_{i=i+1}^9 \ \left(T_{\beta i} \times 2^i\right)\right)$, et nous enregistrons le résultat dans $\lambda$.
-Puis nous faisons le même calcul pour $T_{\alpha}$, et vérifions si le résultat obtenu est égale à ce que nous avons trouvé pour $T_{\beta}$, c'est à dire $\lambda$.
-Dans le cas où $\left(\lambda \ = \ \sum_{i=i+1}^9 \ \left(T_{\alpha i} \times 2^i\right)\right)$ alors $\left(T_{\alpha} \lt T_{\beta}\right)$ car $\left(T_{\beta i} \times 2^i\right) \gt \sum_i^0 \ \left(T_{\alpha i} \times 2^i\right)$.
+Calculons la somme $\varphi$ (phi) de la valeur des bits de poids supérieur à $i$ du champs d'exposants $T_{\alpha}$ avec $\left(\varphi_{\alpha} = \sum_{\sigma=i+1}^9 \ \left(T_{\alpha\sigma} \times 2^{\sigma}\right)\right)$, puis de $T_{\beta}$ avec $\left(\varphi_{\beta} = \sum_{\sigma=i+1}^9 \ \left(T_{\beta\sigma} \times 2^{\sigma}\right)\right)$.
+Dans le cas où $\left(\varphi_{\alpha} = \varphi_{\beta}\right)$ alors $\left(T_{\alpha} \lt T_{\beta}\right)$ car $\left(\varphi_{\beta} + T_{\beta i} \times 2^i\right) \gt \left(\varphi_{\alpha} + \sum_i^0 \ \left(T_{\alpha i} \times 2^i\right)\right)$.
+De plus $\left(E_{\alpha} = E_{\beta}\right)$ et le résultat obtenu est donc $\left(\vert\alpha\vert \lt \vert\beta\vert\right)$ parce que $\left(\left(1+T_{\alpha}\right) \times 2^{E_{\alpha}}\right) \lt \left(\left(1+T_{\beta}\right) \times 2^{E_{\beta}}\right)$.
+
 Par conséquent, la condition initial $\left(\vert\alpha\vert \gt \vert\beta\vert\right)$ __échoue__ car $\left(\left(1+T_{\alpha}\right) \times 2^{E_{\alpha}}\right) \lt \left(\left(1+T_{\beta}\right) \times 2^{E_{\beta}}\right)$, ou autrement dit $\left(\vert\alpha\vert \lt \vert\beta\vert\right)$.
 
 Cependant, si $\left(\lambda \ \lt \ \sum_{i=i+1}^9 \ \left(T_{\alpha i} \times 2^i\right)\right)$ alors $\left(T_{\alpha} \gt T_{\beta}\right)$ car $\left(\sum_{i=i+1}^9 \ \left(T_{\alpha i} \times 2^i\right) \ \gt \ \sum_{i=9}^0 \ \left(T_{\beta i} \times 2^i\right)\right)$.
