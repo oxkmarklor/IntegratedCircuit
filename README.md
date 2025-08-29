@@ -517,7 +517,7 @@ Alors, la vérification de la condition sur laquelle se base la démonstration m
 
 Mais nous pourrions aussi atteindre une situation inédite de ___point non terminal___, si $\left(E_{\alpha} = E_{\beta}\right)$.
 Cette situation inédite ne peut se produire que dans le cas où l'ensemble des paires de bits de même poids des champs d'exposant $E_{\alpha}$ et $E_{\beta}$ sont identiques, ou autrement dit $\forall \ i \in \left[10;14\right]$ alors $\left(E_{\alpha i} = E_{\beta i}\right)$.
-A ce stade, le circuit n'est pas capable de savoir si la condition $\left(\vert\alpha\vert \gt \vert\beta\vert\right)\right)$ va réussir ou échoué, il faut encore traité les champs de mantisse tronquée $T$.
+A ce stade, le circuit n'est pas capable de savoir si la condition $\left(\vert\alpha\vert \gt \vert\beta\vert\right)$ va réussir ou échoué, il faut encore traité les champs de mantisse tronquée $T$.
 
 Pour conclure, les _zéros anonymes_ qui composent l'entièreté du champs $\tau \in \left[10;14\right]$ sont ___capitaux___.
 La raison d'une telle considération de ces _zéros anonymes_ est capacité propre de chacun d'eux, a pouvoir de faire basculé le circuit d'un état de _point non terminal_, à celui de _point terminal_.
@@ -563,14 +563,12 @@ Prenons le cas de $\left(\tau_i = \tau_9 = 1\right)$.
 Vu que $\left(\tau_9 = 1\right)$, nous savons que $\left(T_{\beta 9} = 1\right)$ tandis que $\left(T_{\alpha 9} = 0\right)$ et par conséquent $\left(T_{\beta 9} \times 2^9\right) \gt \sum_{i=9}^0 \ \left(T_{\alpha i} \times 2^i\right)$.
 Etant donné que $T_{\alpha 9}$ ainsi que $T_{\beta 9}$ sont les _MSB_ respectif des champs de mantisse tronquée $T_{\alpha}$ et $T_{\beta}$, nous pouvons alors conclure que $\left(T_{\alpha} \lt T_{\beta}\right)$. 
 Sachant que $\vert \ \alpha \ \vert$ est égale à $\left(\left(1+T_{\alpha}\right) \times 2^{E_{\alpha}}\right)$ et que $\vert \ \beta \ \vert$ vaut $\left(\left(1+T_{\beta}\right) \times 2^{E_{\beta}}\right)$, avec $\left(E_{\alpha} = E_{\beta}\right)$ nous obtenons alors le résultat $\left(\vert\alpha\vert \lt \vert\beta\vert\right)$.
-Par conséquent, la condition que teste le circuit $\left(\vert\alpha\vert \gt \vert\beta\vert\right)$ se solde par un échec.
+Par conséquent, la vérification de la condition sur laquelle repose la démonstration mathématique du circuit $\left(\vert\alpha\vert \gt \vert\beta\vert\right)$ se solde par un échec.
 
 N'oublions pas qu'il peut y avoir des _zéros anonymes_ dans $\tau \in \left[0;8\right]$, mais ces derniers ne peuvent être que de poids inférieur au _MSB1_ de $\tau$, qui est $\tau_9$.
 Ces potentiels bit à $0$ sont alors des _zéros anonymes non capitaux_, sans aucune importance pour le résultat.
 
 ### Lorsque les zéros anonymes rendent la génération du résultat incertain
-
-Je tient à rappellé qu'il faudra gardé en tête le fait que $\left(E_{\alpha} = E_{\beta}\right)$ pour toute les expressions qui figurent ci-dessous.
 
 Prenons désormais le cas dans lequel le poids du _MSB1_ de $\tau$ est $\tau_i$ pour $i \in \left[0;8\right]$.
 Dans cette situation, nous sommes certains qu'il y a _au moins_ le bit $\tau_{\left(i+1\right)}$ qui est d'un poids supérieur à $\tau_i$.
@@ -582,38 +580,41 @@ Ce qui veut dire que toute occurence de $T_{\alpha\sigma}$ est supérieur ou ég
 
 Dans le cas où $\left(\varphi_{\alpha} = \varphi_{\beta}\right)$ alors $\left(T_{\alpha} \lt T_{\beta}\right)$ car $\left(\varphi_{\beta} + T_{\beta i} \times 2^i\right) \gt \left(\varphi_{\alpha} + \sum_i^0 \ \left(T_{\alpha i} \times 2^i\right)\right)$.
 Etant donné que $\left(E_{\alpha} = E_{\beta}\right)$ alors $\left(\left(1+T_{\alpha}\right) \times 2^{E_{\alpha}}\right) \lt \left(\left(1+T_{\beta}\right) \times 2^{E_{\beta}}\right)$, ou autrement dit $\left(\vert\alpha\vert \lt \vert\beta\vert\right)$.
-Par conséquent, la condition que teste le circuit $\left(\vert\alpha\vert \gt \vert\beta\vert\right)$ se solde par un échec.
+La vérification de la condition sur laquelle se base la démonstration mathématique du circuit $\left(\vert\alpha\vert \gt \vert\beta\vert\right)$, se solde par un échec.
 
 Il est cependant possible que $\left(\varphi_{\alpha} \gt \varphi_{\beta}\right)$, à l'unique condition qu'il existe au moins une occurence de $\left(T_{\alpha\sigma} \gt T_{\beta\sigma}\right)$ pour $\sigma \in \left]i;9\right]$.
 Pour chacune de ces occurences $\left(T_{\alpha\sigma} \times 2^{\sigma}\right) \gt \sum_{\sigma}^0 \ \left(T_{\beta\sigma} \times 2^{\sigma}\right)$ et donc $\left(T_{\alpha} \gt T_{\beta}\right)$.
-Nous savons que $\left(E_{\alpha} = E_{\beta}\right)$, mais cette fois-ci $\left(\left(1+T_{\alpha}\right) \times 2^{E_{\alpha}}\right) \gt \left(\left(1+T_{\beta}\right) \times 2^{E_{\beta}}\right)$, et la condition que teste le circuit $\left(\vert\alpha\vert \gt \vert\beta\vert\right)$ réussie.
+Nous savons que $\left(E_{\alpha} = E_{\beta}\right)$, mais cette fois-ci $\left(\left(1+T_{\alpha}\right) \times 2^{E_{\alpha}}\right) \gt \left(\left(1+T_{\beta}\right) \times 2^{E_{\beta}}\right)$ et la condition sur laquelle repose la démonstration mathématique du circuit $\left(\vert\alpha\vert \gt \vert\beta\vert\right)$ réussie.
 
 Pour finir, il est possible qu'il n'y ait pas de _MSB1_ dans $\tau \in \left[0;9\right]$, tout ces bits sont alors des _zéros anonymes capitaux_.
 Nous pouvons donc affirmé que $\left(T_{\alpha} \ge T_{\beta}\right)$.
 
 Si jamais il existe au moins une occurence de $\left(T_{\alpha i} \gt T_{\beta i}\right)$ pour $i \in \left[0;9\right]$, alors $\left(T_{\alpha} \gt T_{\beta}\right)$.
 Les champs d'exposant $E$ des opérandes $\alpha$ et $\beta$ sont égaux, par conséquent $\left(\left(1+T_{\alpha}\right) \times 2^{E_{\alpha}}\right) \gt \left(\left(1+T_{\beta}\right) \times 2^{E_{\beta}}\right)$.
-Pour le dire autrement, la condition que teste le circuit $\left(\vert\alpha\vert \gt \vert\beta\vert\right)$ réussie.
+La vérification de la condition sur laquelle se base la démonstration mathématique du circuit $\left(\vert\alpha\vert \gt \vert\beta\vert\right)$ réussie.
 
 En outre, $\left(T_{\alpha} = T_{\beta}\right)$ si jamais $\forall \ i \in \left[0;9\right]$ $\left(T_{\alpha i} = T_{\beta i}\right)$.
 Sachant que $\left(E_{\alpha} = E_{\beta}\right)$.
 La valeur de $\vert \ \alpha \ \vert$ vaut $\left(\left(1+T_{\alpha}\right) \times 2^{E_{\alpha}}\right)$ et est égale à $\vert \ \beta \ \vert$ qui vaut $\left(\left(1+T_{\beta}\right) \times 2^{E_{\beta}}\right)$.
-La condition que teste le circuit $\left(\vert\alpha\vert \gt \vert\beta\vert\right)$ se solde par un nouvel échec.
+La vérification de la condition sur laquelle se repose la démonstration mathématique du circuit $\left(\vert\alpha\vert \gt \vert\beta\vert\right)$, se solde par un échec.
 
-# Conclusion des démonstrations
+# Conclusion de la démonstration
 
-Les processus de traitement des champs d'exposant et des mantisses tronquées pour les opérandes $\alpha$ et $\beta$ sont identiques, comme nous avons pu le voir dans les démonstrations qui figurent ci-dessus.
-Dans les faits, le circuit électronique n'est composé que d'un seul sous ensemble de circuit logique, permettant ainsi le traitement de chacun des champs des opérandes flottants.
-La documentation du circuit aborde l'architecture de ces sous ensembles de circuit logique.
+Comme nous avons pu le voir dans la première partie de la démonstration "_Le traitement des champs d'exposant_", ainsi que dans la seconde partie "_Le traitement des champs de mantisse tronquée_".
+Les procédures de traitement des champs d'exposant $E$ et des champs de mantisse tronquée $T$ des opérandes $\alpha$ et $\beta$ sont identiques.
+Dans les faits, le circuit électronique n'est composé que d'un seul ensemble de circuit logique, prenant ainsi en charge le traitement de chacun des champs de ses opérandes.
+La documentation du circuit électronique aborde le sujet de l'architecture de cet ensemble de circuit.
 
-Je tient aussi à rappellé que tout ce que nous avons vu ici n'est qu'une démonstration de la faisabilité de la logique de comparaison du circuit.
-Pour autant, les opérations que produit réelement le circuit ne sont pas les même que celle qui sont utilisées dans la démonstration.
-Par exemple, le circuit ne contient pas d'additionneur.
-La raison est simplement qu'il est plus optimal de faire différemment.
-De plus, le circuit génère deux bits de sortie dont l'un par le biais du comparateur directement.
-Le circuit de comparaison est donc architecturé d'une certaine manière de sorte à pouvoir généré un bit à $0$ en cas d'échec de la comparaison, et $1$ pour une réussite.
-L'autre bit de sortie est généré par un autre circuit (une porte logique $Xor$), qui aggrège la sortie du comparateur avec un autre bit dont il est trop difficile d'expliqué l'origine ici.
-Tout ces sujets sont abordés dans la documentation elle même.
+Je tient aussi à rappellé que tout ce que nous avons vu jusqu'ici, n'est qu'une preuve mathématique du bon fonctionnement de la logique de comparaison du FPU Configuration Unit.
+Cependant, les calculs que produit réelement le circuit ne sont pas les même que ceux qui ont été utilisés dans la démonstration ci-dessus.
+Par exemple, le circuit électronique ne contient pas d'unité additionneur flottante pour faire des calculs de somme.
+La raison à cela est qu'il est plus optimal de faire usage de circuit plus simple, plus rapide, moins énergivore, et nécessitant moins de câblage ainsi que de transistor pour leur fabrication.
+Par ailleurs, le FPU Configuartion Unit génère deux bits de sortie dont l'un directement par le biais de son comparateur.
+Dû à cela, le circuit comparateur doit suivre une architecture quelque peu spécifique et non n'importe laquelle.
+Quant au second bit de sortie, il est pris en charge par une porte logique _Xor_ qui l'aggrège avec un autre bit dont il est trop difficile d'expliqué l'origine ici.
+Tout ces sujets sont abordés dans la documentation du circuit électronique.
+
+Tout ça pour dire qu'il y a un réel décalage entre la démonstration mathématique et l'architecture du circuit lui même.
 
 # Les différents nombres du standard IEEE-754
 
