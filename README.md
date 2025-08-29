@@ -499,13 +499,13 @@ Pour commencer, calculons la somme $\lambda$ (lambda) de la valeur des bits de p
 Nous savons que $\left(\lambda_{\alpha} \ge \lambda_{\beta}\right)$ car pour tout $\sigma$ (sigma) compris dans l'intervalle $\left]i;14\right]$, il existe $\left(E_{\alpha\sigma} \ge E_{\beta\sigma}\right)$.
 
 Si jamais $\left(\lambda_{\alpha} = \lambda_{\beta}\right)$ alors $\left(E_{\alpha} \lt E_{\beta}\right)$ car $\left(\lambda_{\beta} + E_{\beta i} \times 2^i\right) \ \gt \ \left(\lambda_{\alpha} + \sum_{i}^{10} \ \left(E_{\alpha i} \times 2^i\right)\right)$.
-La condition que vérifie le circuit $\left(\vert\alpha\vert \gt \vert\beta\vert\right)$ se solde par un nouvel échec.
+La vérification de la condition sur laquelle se base la démonstration mathématique du circuit $\left(\vert\alpha\vert \gt \vert\beta\vert\right)$, se solde par un nouvel échec.
 
 Cependant, si $\left(\lambda_{\alpha} \gt \lambda_{\beta}\right)$ alors cela veut dire que parmis les bits de poids $\sigma \in \left]i;14\right]$, il y a une ou plusieurs occurrence de $\left(E_{\alpha\sigma} \gt E_{\beta\sigma}\right)$.
 Par conséquent, nous savons que pour chacune de ces occurences $\left(E_{\alpha\sigma} \times 2^{\sigma}\right) \ \gt \ \sum_{\sigma}^{10} \ \left(E_{\beta\sigma} \times 2^{\sigma}\right)$ et donc $\left(E_{\alpha} \gt E_{\beta}\right)$.
-Comme le démontre le chapitre "_Les points terminaux et non terminaux_", lorsque $\left(E_{\alpha} \gt E_{\beta}\right)$ alors $\left(\vert\alpha\vert \gt \vert\beta\vert\right)$ et la condition sur laquelle repose la démonstration mathématique du circuit réussie.
+Comme le démontre le chapitre "_Les points terminaux et non terminaux_", lorsque $\left(E_{\alpha} \gt E_{\beta}\right)$ alors $\left(\vert\alpha\vert \gt \vert\beta\vert\right)$ et la vérification de la condition sur laquelle repose la démonstration mathématique du circuit est réussie.
 
-Nous comprenons donc que les _zéros anonymes_ compris dans l'intervalle $\left]10;14\right]$ et de poids supérieur au _MSB1_ de $\tau \in \left[10;14\right[$ sont ___capitaux___.
+Nous comprenons donc que les _zéros anonymes_ de l'intervalle $\left]10;14\right]$ et de poids supérieur au _MSB1_ de $\tau \in \left[10;14\right[$, sont des _zéros anonymes_ ___capitaux___.
 
 ### L'obtention d'un point non terminal
 
@@ -513,11 +513,14 @@ Jusqu'ici nous avions un _MSB1_ dans $\tau \in \left[10;14\right]$, mais il pour
 Dans cette situation, chaque bit de $\tau \in \left[10;14\right]$ est un _zéro anonyme_, ce qui nous permet d'affirmé que $\left(E_{\alpha} \ge E_{\beta}\right)$.
 
 Nous pourrions atteindre un point terminal si jamais $\left(E_{\alpha} \gt E_{\beta}\right)$, mais ce point terminal ne pourrait s'obtenir qu'à la condition qu'au moins une occurence $\left(E_{\alpha i} \gt E_{\beta i}\right)$ existe pour $i \in \left[10;14\right]$.
-A l'inverse, nous pourrions aussi atteindre une situation inédite de ___point non terminal___ si $\left(E_{\alpha} = E_{\beta}\right)$.
-Cette situation inédite ne peut se produire que dans le cas où l'ensemble des paires de bits de même poids des champs d'exposant $E_{\alpha}$ et $E_{\beta}$ sont identiques, ou autrement dit $\forall \ i \in \left[10;14\right]$ alors $\left(E_{\alpha i} = E_{\beta i}\right)$.
+Alors, la vérification de la condition sur laquelle se base la démonstration mathématique du circuit $\left(\vert\alpha\vert \gt \vert\beta\vert\right)$ réussie.
 
-Pour conclure, les _zéros anonymes_ qui composent l'entièreté du champs $\tau \in \left[10;14\right]$ sont capitaux.
-La raison est que chacun de ces bits ont le pouvoir de faire basculé le circuit d'un état de _point non terminal_, à celui de _point terminal_.
+Mais nous pourrions aussi atteindre une situation inédite de ___point non terminal___, si $\left(E_{\alpha} = E_{\beta}\right)$.
+Cette situation inédite ne peut se produire que dans le cas où l'ensemble des paires de bits de même poids des champs d'exposant $E_{\alpha}$ et $E_{\beta}$ sont identiques, ou autrement dit $\forall \ i \in \left[10;14\right]$ alors $\left(E_{\alpha i} = E_{\beta i}\right)$.
+A ce stade, le circuit n'est pas capable de savoir si la condition $\left(\vert\alpha\vert \gt \vert\beta\vert\right)\right)$ va réussir ou échoué, il faut encore traité les champs de mantisse tronquée $T$.
+
+Pour conclure, les _zéros anonymes_ qui composent l'entièreté du champs $\tau \in \left[10;14\right]$ sont ___capitaux___.
+La raison d'une telle considération de ces _zéros anonymes_ est capacité propre de chacun d'eux, a pouvoir de faire basculé le circuit d'un état de _point non terminal_, à celui de _point terminal_.
 
 ## Rappel sur les champs d'exposant et de mantisse tronquée
 
