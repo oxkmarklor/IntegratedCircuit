@@ -340,7 +340,7 @@ Dans le cas du format _Half Precision_, la taille du champs d'exposant est de $5
 Pour finir, je vais enfin pouvoir expliqué pourquoi le circuit électronique traite les champs d'exposant $E$ des opérandes $\alpha$ et $\beta$, avant les champs de mantisse tronquée $T$ de ces même opérandes.
 
 Nous avons vu dans le chapitre "_Le multiplicande_", comment est ce qu'en écriture scientifique binaire nous pouvions obtenir le nombre d'origine $F$ depuis le significande $S$. Précisément au travers du calcul suivant $F \ = \left(S\times 2^{-c}\right)$.
-En tenant compte des correspondances entre les éléments de l'encodage IEEE-754 et de l'écriture scientifique binaire du nombre $F$, nous en déduisons qu'en IEEE-754 $F \ = \left(\left(1 + T\right) \times 2^E\right)$.
+En tenant compte des correspondances entre les éléments de l'encodage IEEE-754 et de l'écriture scientifique binaire du nombre $F$, nous en déduisons qu'en IEEE-754 $F \ =$ $\left(\left(1 + T\right) \times 2^E\right)$.
 
 N'oublions pas que si le significande $S$ de la notation scientifique binaire du nombre $F$, est compris dans l'intervalle de valeur suivante $\left[1;2\right[$.
 Ce n'est pas le cas du champs de mantisse tronquée $T$, __car le bit à 1 de sa partie entière est rendu implicite__.
@@ -472,12 +472,16 @@ Ce qui vient d'être dit ci-dessus ne démontre pas pour autant que $\left(E_{\a
 
 Prenons le cas de $\left(\tau_i = \tau_{14} = 1\right)$.
 Dans se cas spécifique, nous avons affaire a un point terminal car $\left(E_{\alpha} \lt E_{\beta}\right)$.
-Ce point terminal est atteint par le fait que $\left(E_{\beta 14} \times 2^{14}\right) \ \gt \ \sum_{i=14}^{10} \ \left(E_{\alpha i} \times 2^i\right)$, sachant que $E_{\alpha 14}$ et $E_{\beta 14}$ sont les _MSB_ des champs d'exposant $E_{\alpha}$ et $E_{\beta}$.
+Ce point terminal est atteint par le fait que $\left(E_{\beta 14} \times 2^{14}\right) \ \gt \ \sum_{i=14}^{10} \ \left(E_{\alpha i} \times 2^i\right)$.
+Sachant que $E_{\alpha 14}$ et $E_{\beta 14}$ sont les _MSB_ respectifs des champs d'exposant $E_{\alpha}$ et $E_{\beta}$.
 
 En bref, nous comprenons que même si $\left(\tau_{\left(i-1\right)} = \tau_{13} = 0\right)$, alors ce _zéro anonyme_ ne changera rien au fait que $\left(E_{\alpha} \lt E_{\beta}\right)$.
 La raison en est que l'inéquation qui figure ci-dessus reste valide qu'importe la valeur du bit $E_{\alpha 13}$, qu'il soit à $0$ ou à $1$.
 
-De manière plus général, nous pouvons en déduire que tout _zéro anonyme_ dans l'intervalle $\left[10;14\right]$ de $\tau$, et de poids inférieur au _MSB1_ de $\tau \in \left[11;14\right]$, est _non capital_.
+De manière plus général, nous pouvons en déduire que tout _zéro anonyme_ compris dans l'intervalle $\left[10;14\right[$ et de poids inférieur au _MSB1_ de $\tau \in \left]10;14\right]$, est ___non capital___.
+
+Grâce au chapitre "_Les points terminaux et non terminaux_", nous savons que si $\left(E_{\alpha} \lt E_{\beta}\right)$ alors $\left(\vert\alpha\vert \lt \vert\beta\vert\right)$.
+N'oublions pas que la démonstration mathématique du circuit se base sur la vérification de la condition suivante $\left(\vert\alpha\vert \gt \vert\beta\vert\right)$, qui se solde donc par un échec.
 
 ### Les zéros anonymes capitaux
 
@@ -495,13 +499,13 @@ Pour commencer, calculons la somme $\lambda$ (lambda) de la valeur des bits de p
 Nous savons que $\left(\lambda_{\alpha} \ge \lambda_{\beta}\right)$ car pour tout $\sigma$ (sigma) compris dans l'intervalle $\left]i;14\right]$, il existe $\left(E_{\alpha\sigma} \ge E_{\beta\sigma}\right)$.
 
 Si jamais $\left(\lambda_{\alpha} = \lambda_{\beta}\right)$ alors $\left(E_{\alpha} \lt E_{\beta}\right)$ car $\left(\lambda_{\beta} + E_{\beta i} \times 2^i\right) \ \gt \ \left(\lambda_{\alpha} + \sum_{i}^{10} \ \left(E_{\alpha i} \times 2^i\right)\right)$.
+La condition que vérifie le circuit $\left(\vert\alpha\vert \gt \vert\beta\vert\right)$ se solde par un nouvel échec.
 
 Cependant, si $\left(\lambda_{\alpha} \gt \lambda_{\beta}\right)$ alors cela veut dire que parmis les bits de poids $\sigma \in \left]i;14\right]$, il y a une ou plusieurs occurrence de $\left(E_{\alpha\sigma} \gt E_{\beta\sigma}\right)$.
-Par conséquent, nous savons que pour chacune de ces occurences $\left(E_{\alpha\sigma} \times 2^{\sigma}\right) \ \gt \ \sum_{\sigma}^{10} \ \left(E_{\beta\sigma} \times 2^{\sigma}\right)$.
-Il peut y avoir des bits de poids supérieur à l'une de ces occurences (compris dans l'intervalle $\left]\sigma;14\right]$), mais ces bits dans $E_{\alpha}$ sont supérieurs ou égaux aux bits de même poids dans $E_{\beta}$.
-Ce qui confirme le fait que $\left(E_{\alpha} \gt E_{\beta}\right)$.
+Par conséquent, nous savons que pour chacune de ces occurences $\left(E_{\alpha\sigma} \times 2^{\sigma}\right) \ \gt \ \sum_{\sigma}^{10} \ \left(E_{\beta\sigma} \times 2^{\sigma}\right)$ et donc $\left(E_{\alpha} \gt E_{\beta}\right)$.
+Comme le démontre le chapitre "_Les points terminaux et non terminaux_", lorsque $\left(E_{\alpha} \gt E_{\beta}\right)$ alors $\left(\vert\alpha\vert \gt \vert\beta\vert\right)$ et la condition sur laquelle repose la démonstration mathématique du circuit réussie.
 
-Nous comprenons donc que les _zéros anonymes_ de poids supérieur au _MSB1_ de $\tau \in \left[10;13\right]$ devront être traités avec attention par le circuit, ce sont des _zéros anonymes_ ___capitaux___.
+Nous comprenons donc que les _zéros anonymes_ compris dans l'intervalle $\left]10;14\right]$ et de poids supérieur au _MSB1_ de $\tau \in \left[10;14\right[$ sont ___capitaux___.
 
 ### L'obtention d'un point non terminal
 
