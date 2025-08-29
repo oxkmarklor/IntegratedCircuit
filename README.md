@@ -4,7 +4,7 @@ Le document se découpe en plusieurs parties:
   - L'encodage $Binary \ Unsigned$
   - Le standard IEEE-754
     - L'encodage par biais du champs d'exposant
-    - La mantisse tronquée, une historie de puissance de $2$
+    - La mantisse tronquée, une histoire de puissance de $2$
   - L'écriture scientifique binaire
     - Le significande
     - Le multiplicande
@@ -616,28 +616,27 @@ Tout ces sujets sont abordés dans la documentation du circuit électronique.
 
 Tout ça pour dire qu'il y a un réel décalage entre la démonstration mathématique et l'architecture du circuit lui même.
 
-# Les différents nombres du standard IEEE-754
+# Annexe: Les différents types nombres du standard IEEE-754
 
-Il me faut aussi précisé que le standard IEEE-754 peut représenté plusieurs "type" de nombre:
+Il me faut précisé que le standard IEEE-754 peut représenté plusieurs type de nombre:
   - Les nombres _normaux_ (ceux dont nous parlons implicitement depuis le début du document)
   - Les nombres ___dénormaux___
   - Les _NaN_ (Not a Number)
   - L'_infini_ positif ou négatif
 
-Chacun de ces types de nombre peut être codé dans n'importe quel format IEEE-754.
-Chaque type de nombre se différencie des autres en utilisant une certaine plage de codage dans le champs d'exposant et de mantisse tronquée, plage de codage qui a été préfixé par le standard IEEE-754.
+Chacun de ces types de nombre peut être codé dans n'importe quel format de nombre flottant IEEE-754.
+Chaque type de nombre se différencie des autres en utilisant une certaine plage de codage dans le champs d'exposant ainsi que le champs de mantisse tronquée.
+Plage de codage qui a été fixé dans le standard IEEE-754.
+Le but de cet annexe est d'évoqué le sujet des nombres _dénormaux_, ce que nous ferons après avoir brièvement défini les autres types de nombres.
 
 ### Les nombres normaux
 
-Comme dit plus haut, les nombres _normaux_ (ou _normalisés_) utilisent une certaine partie de la plage de codage du champs d'exposant.
-Mais n'oublions pas que ce champs a un encodage quelques peu spéciale dont nous avons parlé en début de document, dans le chapitre du nom de "_L'encodage par biais du champs d'exposant_".
-Je vous invite à relire ce chapitre si nécessaire.
-En bref, avec cet encodage par biais il faut faire la distinction entre la valeur codé dans le champs binaire d'exposant, et la valeur que représente le champs d'exposant lui même.
+Les nombres _normaux_ (ou nombres _normalisés_) utilisent une certaine partie de la plage de codage du champs d'exposant.
 
-Le champs d'exposant a un biais qui se calcul de la manière suivante $\left(2^{\left(N - 1\right)} - 1\right)$, avec $N$ le nombre de bits qui compose le champs.
-Ce biais est la raison pour laquelle nous devons différencié la valeur codé dans le champs d'exposant, de la valeur qu'il représente.
-Plus particulièrement, le champs d'exposant code une valeur en _Binary Unsigned_ et représente une puissance équivalente à la valeur codé dans le champs, moins le biais.
-Pour un champs d'exposant $E$, la valeur qu'il représente est $\left(E - biais\right)$.
+N'oublions pas que le champs d'exposant a un encodage quelques peu spéciale, ce qui est le sujet du chapitre "_L'encodage par biais du champs d'exposant_".
+En bref, avec l'encodage par biais du champs d'exposant il faut faire la distinction entre le nombre codé dans le champs binaire, et la valeur que représente réelement le champs d'exposant lui même.
+Le champs d'exposant $E$ code un nombre en _Binary Unsigned_ et possède un biais dont la valeur se calcul comme $\left(2^{\left(N - 1\right)} - 1\right)$, avec $N$ le nombre de bits qui compose le champs.
+La valeur que représente le champs d'exposant $E$ est un nombre issu du calcul de $\left(E - biais\right)$, qui sera interprété comme l'exposant d'une base $2$.
 
 Tout nombre _normalisé_ a un champs d'exposant dont la plage de codage se situe entre $\left[1;\left(2^N - 1\right)\right[$.
 Maintenant que nous connaissons les bornes minimal et maximal pour le codage de l'exposant de tout nombre _normalisé_, nous pouvons calculé la valeur du plus petit exposant avec $\left(1 - \left(2^{\left(N - 1\right)} - 1\right)\right)$, et du plus grand exposant avec $\left(\left(2^N - 2\right) - \left(2^{\left(N - 1\right)} - 1\right)\right)$.
