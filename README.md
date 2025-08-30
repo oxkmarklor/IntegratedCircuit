@@ -679,7 +679,7 @@ Ce qui permet de différencié efficassement un nombre $\left(\pm \ \infty\right
 Ajoutons à cela le bit de signe qui code le signe $\left(\pm\right)$.
 
 Comme nous avons pu le voir avec l'un des exemples de la section précédente "_les nombres NaN_", un calcul arithmétique ayant pour opérande l'infini positif ou négatif génère systèmatiquement un _NaN_ en résultat.
-Par conséquent, à l'instar des nombres _NaN_ la FPU Configuration Unit ne prend donc pas en charge les opérandes de valeur infini positif comme négatif.
+La FPU Configuration Unit ne prend pas non plus en charge les opérandes de valeur infini positif comme négatif.
 
 ## La plage de codage des nombres dénormaux
 
