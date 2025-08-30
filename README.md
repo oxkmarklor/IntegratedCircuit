@@ -660,26 +660,26 @@ Comme nous pouvons le remarqué, tout ceci fait échos aux notions des chapitres
 ### Les nombres NaN
 
 Pour le standard IEEE-754, il existe des nombres invalides du nom de ___NaN___ (_Not a Number_).
-Un nombre _NaN_ est généré par un calcul considéré comme invalide par le standard lui même et/ou par les mathématiques, c'est en quelque sorte une alternative à la génération d'exception matériel.
-Par exemple le calcul $\left(\left(+ \ \infty\right) \div 0\right)$ génère un _NaN_ pour deux raisons.
+Un nombre _NaN_ est généré par un calcul considéré comme invalide par le standard lui même et/ou par les mathématiques, c'est parfois une sorte d'alternative à la génération d'exception matériel.
+Par exemple, le calcul $\left(\left(+ \ \infty\right) \div 0\right)$ génère un _NaN_ pour deux raisons.
 Premièrement, divisé par $X$ l'infini positif ne donne pas de résultat concret, de plus si $\left(X = 0\right)$ alors le calcul se retrouve soudainement à être invalide mathématiquement parlant. 
-Comme autre exemple, si un calcul a un opérande qui est un _NaN_, alors il génère également _NaN_ en résultat $\left(3.5 - NaN\right)$.
+Comme autre exemple, si un calcul se base sur un opérande qui est un _NaN_, alors il génère également _NaN_ en résultat $\left(NaN - 3.5\right) = NaN$.
 
-En bref, l'encodage d'un _NaN_ nécessite que le champs d'exposant biaisé code la valeur $\left(2^N - 1\right)$, pour $N$ le nombre de bits qui compose le champs.
-Parallèlement, le champs de mantisse tronquée peut codé n'importe quel valeur tant qu'elle est non nul.
-Aussi, comme dit plus haut un nombre _NaN_ ne génère jamais de résultat valide lorsqu'il est utilisé en tant qu'opérande pour un calcul arithmétique.
-Par conséquent, il n'y a pas d'utilité à ce que l'Unité de Configuration de la FPU ne les prennent pas en charge.
+En bref, le codage d'un _NaN_ recquière que le champs d'exposant code la valeur $\left(2^N - 1\right)$, pour $N$ le nombre de bits qui compose le champs.
+Parallèlement, le champs de mantisse tronquée doit être non nul.
+Aussi, comme cela a été mentionné ci-dessus, un nombre _NaN_ utilisé en tant qu'opérande d'un calcul arithmétique ne génère jamais de résultat valide.
+Donc la FPU Configuration Unit ne prend pas en charge les nombres _NaN_.
 
 ### L'infini positif et négatif
 
-Il se trouve que le standard IEEE-754 définit un moyen de codé un nombre infini positif, ou négatif $\left(\pm \ \infty\right)$.
-Le codage de l'infini $\left(\infty\right)$ nécessite un champs d'exposant biaisé dont la valeur est $\left(2^N - 1\right)$, avec $N$ le nombre de bits qui compose le champs.
-Par ailleurs, il faut que le champs de mantisse tronquée soit nul (composé uniquement de bits à $0$), sinon le nombre serait _NaN_.
-Seul le bit de signe permet de passé de l'infini positif à négatif $\left(\pm\right)$.
+Aussi, il se trouve que le standard IEEE-754 définit un moyen de codé un nombre infini positif comme négatif $\left(\pm \ \infty\right)$.
+Premièrement, pour le codage de l'infini $\left(\infty\right)$, le champs d'exposant doit codé la valeur est $\left(2^N - 1\right)$, avec $N$ le nombre de bits qui compose le champs.
+De plus, il faut que le champs de mantisse tronquée soit nul (composé uniquement de bits à $0$), au contraire d'un nombre _NaN_.
+Ce qui permet de différencié efficassement un nombre $\left(\pm \ \infty\right)$, d'un nombre _NaN_.
+Ajoutons à cela le bit de signe qui code le signe $\left(\pm\right)$.
 
-Comme nous avons pu le voir avec l'exemple ci-dessus, un calcul arithmétique avec un opérande de valeur infini positif ou négatif génère un _NaN_ en résultat.
-Ceci est vrai pour n'importe quel type de calcul arithmétique.
-A l'instar des nombres _NaN_, L'unité de Configuration de la FPU n'a donc aucun intérêt à prendre en charge les opérandes de valeur infini positif comme négatif.
+Comme nous avons pu le voir avec l'un des exemples de la section précédente "_les nombres NaN_", un calcul arithmétique ayant pour opérande l'infini positif ou négatif génère systèmatiquement un _NaN_ en résultat.
+Par conséquent, à l'instar des nombres _NaN_ la FPU Configuration Unit ne prend donc pas en charge les opérandes de valeur infini positif comme négatif.
 
 ## La plage de codage des nombres dénormaux
 
