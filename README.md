@@ -685,20 +685,21 @@ La FPU Configuration Unit ne prend pas non plus en charge les opérandes de vale
 
 Les nombres _dénormaux_ représentent des nombres concrets, au contraire de l'_infini_ positif/négatif ou encore des nombres _NaN_ que nous avons vu ci-dessus.
 
-Les nombres _dénormaux_ permettent de représenté des nombres très proche de $0$, qui plus est, plus proche de $0$ que ne serait capable de la faire une représentation _normalisé_.
+Les nombres _dénormaux_ permettent de représenté des nombres très proche de $0$, qui plus est, plus proche de $0$ que ne serait capable de le faire une représentation _normalisé_.
 Par conséquent, il existe deux plages de codage des nombres _dénormaux_.
 La plage positive qui code des nombres supérieurs à zéro, ainsi que la plage négative des nombres inférieurs à zéro.
 La plage de codage des _dénormaux_ positifs se situe entre $0$, et le __plus petit__ nombre positif _normalisé_ pouvant être codé sur n'importe quel format de flottant IEEE-754.
 Quant à la plage de codage des _dénormaux_ négatifs, elle va de $0$ au __plus grand__ nombre négatif _normalisé_ pouvant être codé sur ce même format de flottant IEEE-754.
-Par exemple, la seule différence dans le codage d'un nombre $+X$ _dénormalisé_ positif vis à vis de son opposé ($-X$), étant le bit de signe à $0$ ou à $1$.
-Nous ne parlerons alors que de la plage de codage des _dénormaux_ positifs, qui permet intrinséquement de définir la plage négative (en mettant le bit de signe à $1$).
-Cela rendra moins verbeux et complexe les explications suivantes.
 
-Pour commencer, nous allons devoir définir le codage de la borne basse ($0$), ainsi que la borne haute (plus petit nombre positif _normalisé_) de la plage de codage des nombres _dénormaux_ positifs.
+La seule différence dans le codage d'un nombre _dénormalisé_ positif, vis à vis de son opposé (négatif), est la valeur du bit de signe.
+Au delà du bit de signe, les plages de codage des nombres _dénormaux_ positif et négatif sont les même.
+C'est pourquoi nous ne parlerons ci-bas que des nombres _dénormaux_ positif, cela rendra moins verbeux et complexe les explications suivantes.
+
+Pour commencer, nous allons devoir définir le codage de la borne basse (c'est à dire $0$), ainsi que la borne haute (le plus petit nombre positif _normalisé_) de la plage de codage des _dénormaux_ positifs.
 Evidemment, les plages de codage des nombres _dénormaux_ change en fonction du format de flottant IEEE-754.
-Ici nous allons ciblé uniquement le format _Half Precision_.
+Donc, les explications ci-dessous ne ciblerons que le format _Half Precision_.
 
-### Le codage du plus petit nombre positif normalisé au format Half Precision
+### Le codage du plus petit nombre positif normalisé au format Half Precision (borne haute)
 
 Rappelons que le champs d'exposant $E$ représente une valeur de $\left(E - biais\right)$.
 La plage de codage du champs d'exposant d'un nombre _normalisé_ est de $\left[1;\left(2^N - 1\right)\right[$, avec $N$ le nombre de bits qui compose le champs.
@@ -714,7 +715,7 @@ Voici à quoi ressemble le codage du plus petit nombre positif et _normalisé_ p
 
 $$\left(1\right) \quad \left[0_{15}, \quad 0_{14}, \ 0_{13}, \ 0_{12}, \ 0_{11}, \ 1_{10}, \quad 0_9, \ 0_8, \ 0_7, \ 0_6, \ 0_5, \ 0_4, \ 0_3, \ 0_2, \ 0_1, \ 0_0\right]$$
 
-### Le codage du zéro positif ainsi que négatif
+### Le codage du zéro positif ainsi que négatif (borne basse)
 
 Il s'avère que la norme IEEE-754 supporte un zéro positif $\left(+0\right)$ ainsi que négatif $\left(-0\right)$, en fonction de la valeur du bit de signe.
 Ceci engendre quelques diffculté pour les comparaisons.
@@ -731,15 +732,29 @@ $$\left(2\right) \quad \left[S_{15}, \quad 0_{14}, \ 0_{13}, \ 0_{12}, \ 0_{11},
 
 Avec $\left(S = 0\right)$ pour un zéro positif, et $\left(S = 1\right)$ pour un zéro négatif.
 
+// Ch. Pourquoi les nombres dénormaux existent-ils vraiment?
+
+// les nombres dénormaux codent des valeurs plus petite que les nombres normaux, pour deux raisons:
+//   - bit implicite
+//   - interprétation du champs d'exposant
+
+// Ch. L'interprétation du champs d'exposant
+
+// explication de l'interprétation nouvelle
+
+// Ch. bit implicite
+
+// exemple avec $2^{-14} = 2 \times 2^{-15}$
+
 ## Le codage des nombres dénormaux
 
 Il y a deux différences entre les nombres _normalisés_ et _dénormalisés_ :
-  - Le bit implicite de la mantisse tronquée
+  - Le bit implicite du champs de mantisse tronquée
   - L'interprétation que l'on fait de la valeur codé par le champs d'exposant
 
 Commençons par comprendre ce qui concerne le bit implicite.
 
-### Lorsque le bit implicite de la mantisse tronquée est à 0
+### Lorsque le bit implicite du champs de mantisse tronquée est nul
 
 La représentation en IEEE-754 d'un nombre _normalisé_ $F$, doit respecter les règles de l'écriture scientifique binaire.
 Particulièrement, la valeur du champs de mantisse tronquée doit correspondre à celle du significande de l'écriture scientifique binaire du nombre $F$.
