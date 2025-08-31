@@ -685,28 +685,33 @@ La FPU Configuration Unit ne prend pas non plus en charge les opérandes de vale
 
 Les nombres _dénormaux_ représentent des nombres concrets, au contraire de l'_infini_ positif/négatif ou encore des nombres _NaN_ que nous avons vu ci-dessus.
 
-Les nombres _dénormaux_ permettent de représenté des nombres très proche de $0$, qui plus est plus proche de $0$ que ne serait capable de la faire une représentation _normalisé_.
+Les nombres _dénormaux_ permettent de représenté des nombres très proche de $0$, qui plus est, plus proche de $0$ que ne serait capable de la faire une représentation _normalisé_.
 Par conséquent, il existe deux plages de codage des nombres _dénormaux_.
-La plage positive qui code des nombres supérieurs à zéro, ainsi que la plage négative pour les nombres inférieurs à zéro.
-La plage de codage des nombres positifs s'étend de $0$, jusqu'au __plus petit__ nombre positif et _normalisé_ pouvant être codé sur n'importe quel format de flottant IEEE-754.
-Tandis que la plage de codage négative va de $0$ au __plus grand__ nombre négatif et _normalisé_ d'un certain format de flottant IEEE-754.
-La seule différence dans le codage d'un nombre _dénormalisé_ positif et négatif étant le bit de signe, nous ne parlerons ici que de la plage de codage des nombres positifs.
+La plage positive qui code des nombres supérieurs à zéro, ainsi que la plage négative des nombres inférieurs à zéro.
+La plage de codage des _dénormaux_ positifs se situe entre $0$, et le __plus petit__ nombre positif _normalisé_ pouvant être codé sur n'importe quel format de flottant IEEE-754.
+Quant à la plage de codage des _dénormaux_ négatifs, elle va de $0$ au __plus grand__ nombre négatif _normalisé_ pouvant être codé sur ce même format de flottant IEEE-754.
+Par exemple, la seule différence dans le codage d'un nombre $+X$ _dénormalisé_ positif vis à vis de son opposé ($-X$), étant le bit de signe à $0$ ou à $1$.
+Nous ne parlerons alors que de la plage de codage des _dénormaux_ positifs, qui permet intrinséquement de définir la plage négative (en mettant le bit de signe à $1$).
 Cela rendra moins verbeux et complexe les explications suivantes.
 
-Pour commencer, nous allons définir le codage de la borne basse ainsi que la borne haute de la plage de codage des nombres _dénormaux_ positifs.
-Evidemment, la plage de codage des nombres _dénormaux_ change en fonction du format de flottant IEEE-754, nous nous concentrerons ici sur le format _Half Precision_.
+Pour commencer, nous allons devoir définir le codage de la borne basse ($0$), ainsi que la borne haute (plus petit nombre positif _normalisé_) de la plage de codage des nombres _dénormaux_ positifs.
+Evidemment, les plages de codage des nombres _dénormaux_ change en fonction du format de flottant IEEE-754.
+Ici nous allons ciblé uniquement le format _Half Precision_.
 
-### Le codage du plus petit nombre positif et normalisé au format Half Precision
+### Le codage du plus petit nombre positif normalisé au format Half Precision
 
-Commençons par définir la valeur du champs d'exposant.
-La section "_Les nombres normaux_" qui figure ci-dessus, nous dit que la plus petite valeur qui peut être codé sur le champs d'exposant d'un nombre _normalisé_ est $1$.
-Je cite "_Tout nombre normalisé a un champs d'exposant dont la plage de codage se situe entre_ $\left[1;\left(2^N - 1\right)\right[$.".
-Rappelons que le biais du champs d'exposant vaut $\left(2^{\left(N - 1\right)} - 1\right)$, où $N$ est le nombre de bits qui composent le champs d'exposant au format _Half Precision_, c'est à dire $5$.
-Le champs d'exposant représente alors la puissance $\left(1 - 15\right) = -14$.
+Rappelons que le champs d'exposant représente une valeur de $\left(E - biais\right)$.
+Le champs d'exposant $E$ d'un nombre _normalisé_ a une plage de codage allant de  $\left[1;\left(2^N - 1\right)\right[$, avec $N$ le nombre de bits qui compose le champs $E$.
+Quant au biais du champs, il se calcul de la manière suivante $\left(2^{\left(N - 1\right)} - 1\right)$.
+Par conséquent, pour le champs d'exposant d'un flottant au format _Half Precision_, la plus petite puissance pouvant être représentée est $\left(1 - 15\right) = -14$; car $N$ vaut $5$.
+Le plus petit nombre positif _normalisé_ code alors le chiffre $1$ dans ses cinq bits de champs d'exposant.
 
-Le champs de mantisse tronquée est nul quant à lui.
-En prenant en compte le bit implicite à $1$ de la partie entière du champs de mantisse tronquée d'un nombre _normalisé_, nous calculons la valeur réel de la mantisse qui est $\left(1 + Truncated \ Mantissa\right)$.
-Le plus petit nombre positif et _normalisé_ pouvant être codé au format _Half Precision_ est donc $\left(\left(1 + 0.0000000000_2\right) \times 2^{-14}\right)$, et voici l'illustration de son codage:
+Rappelons également que le champs de mantisse tronquée $T$ d'un nombre _normalisé_ a une valeur effective de $\left(1 + T\right)$.
+Nous voudrions alors avoir la plus petite valeur possible de $T$.
+Compris dans l'intervalle $\left[0;1\right[$, le champs de mantisse tronquée a pour plus petite valeur $0$.
+Le plus petit nombre positif _normalisé_ a donc un champs de mantisse tronquée nul (composé de dix bits à $0$).
+
+Voici à quoi ressemble le codage du plus petit nombre positif et _normalisé_ pouvant être codé sur un flottant au format _Half Precision_:
 
 $$\left(2\right) \quad \left[0_{15}, \quad 0_{14}, \ 0_{13}, \ 0_{12}, \ 0_{11}, \ 1_{10}, \quad 0_9, \ 0_8, \ 0_7, \ 0_6, \ 0_5, \ 0_4, \ 0_3, \ 0_2, \ 0_1, \ 0_0\right]$$
 
