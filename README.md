@@ -683,12 +683,18 @@ La FPU Configuration Unit ne prend pas non plus en charge les opérandes de vale
 
 ## La plage de codage des nombres dénormaux
 
-Pour finir, les nombres _dénormaux_ représentent de vrai valeur concrète, au contraire des nombres _NaN_ ou $\pm \ \infty$.
-Les nombres _dénormaux_ ont une plage de codage qu'il va être interéssante d'étudier, voyons d'abord ce qu'est un nombre _dénormalisé_.
+Les nombres _dénormaux_ représentent des nombres concrets, au contraire de l'_infini_ positif/négatif ou encore des nombres _NaN_ que nous avons vu ci-dessus.
 
-Un nombre _dénormalisé_ a une valeur qui se situe entre $0$, et le plus petit nombre positif _normalisé_ pouvant être codé sur n'importe quel format de flottant IEEE-754.
-Le rôle des nombres _dénormaux_ est de pouvoir codé des nombres très proche de $0$, qui plus est des nombres plus proche de $0$ que ne serait capable de le faire une représentation _normalisé_.
-La plage de codage des nombres _dénormaux_ change en fonction du format de flottant, mais concentrons nous sur le format _Half Precision_.
+Les nombres _dénormaux_ permettent de représenté des nombres très proche de $0$, qui plus est plus proche de $0$ que ne serait capable de la faire une représentation _normalisé_.
+Par conséquent, il existe deux plages de codage des nombres _dénormaux_.
+La plage positive qui code des nombres supérieurs à zéro, ainsi que la plage négative pour les nombres inférieurs à zéro.
+La plage de codage des nombres positifs s'étend de $0$, jusqu'au __plus petit__ nombre positif et _normalisé_ pouvant être codé sur n'importe quel format de flottant IEEE-754.
+Tandis que la plage de codage négative va de $0$ au __plus grand__ nombre négatif et _normalisé_ d'un certain format de flottant IEEE-754.
+La seule différence dans le codage d'un nombre _dénormalisé_ positif et négatif étant le bit de signe, nous ne parlerons ici que de la plage de codage des nombres positifs.
+Cela rendra moins verbeux et complexe les explications suivantes.
+
+Pour commencer, nous allons définir le codage de la borne basse ainsi que la borne haute de la plage de codage des nombres _dénormaux_ positifs.
+Evidemment, la plage de codage des nombres _dénormaux_ change en fonction du format de flottant IEEE-754, nous nous concentrerons ici sur le format _Half Precision_.
 
 ### Le codage du plus petit nombre positif et normalisé au format Half Precision
 
