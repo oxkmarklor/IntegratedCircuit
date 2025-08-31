@@ -715,7 +715,7 @@ Voici à quoi ressemble le codage du plus petit nombre positif et _normalisé_ p
 
 $$\left(1\right) \quad \left[0_{15}, \quad 0_{14}, \ 0_{13}, \ 0_{12}, \ 0_{11}, \ 1_{10}, \quad 0_9, \ 0_8, \ 0_7, \ 0_6, \ 0_5, \ 0_4, \ 0_3, \ 0_2, \ 0_1, \ 0_0\right]$$
 
-### Le codage du zéro positif ainsi que négatif (borne basse)
+### Le codage du zéro positif ainsi que négatif au format Half Precision (borne basse)
 
 Il s'avère que la norme IEEE-754 supporte un zéro positif $\left(+0\right)$ ainsi que négatif $\left(-0\right)$, en fonction de la valeur du bit de signe.
 Ceci engendre quelques diffculté pour les comparaisons.
@@ -731,18 +731,6 @@ Voici l'illustration du codage d'un zéro positif ou négatif au format _Half Pr
 $$\left(2\right) \quad \left[S_{15}, \quad 0_{14}, \ 0_{13}, \ 0_{12}, \ 0_{11}, \ 0_{10}, \quad 0_9, \ 0_8, \ 0_7, \ 0_6, \ 0_5, \ 0_4, \ 0_3, \ 0_2, \ 0_1, \ 0_0\right]$$
 
 Avec $\left(S = 0\right)$ pour un zéro positif, et $\left(S = 1\right)$ pour un zéro négatif.
-
-// les nombres dénormaux codent des valeurs plus petite que les nombres normaux, pour deux raisons:
-//   - bit implicite
-//   - interprétation du champs d'exposant
-
-// Ch. L'interprétation du champs d'exposant
-
-// explication de l'interprétation nouvelle
-
-// Ch. bit implicite
-
-// exemple avec $2^{-14} = 2 \times 2^{-15}$
 
 ## Le codage des nombres dénormaux
 
@@ -769,6 +757,14 @@ Nous verrons plus bas dans le chapitre du nom de "_La continuité de représenta
 Nous devons cette continuité de codage aux interprétations différentes que l'ont fait des champs d'exposant des nombres _normaux_ et _dénormaux_.
 
 ### Lorsque le bit implicite du champs de mantisse tronquée est nul
+
+Dans la section "_Les nombres normaux_" il est dit, je cite "_Un nombre est dit "normalisé" lorsque dans son codage, le champs de mantisse tronquée est contraint de la même manière que peut l'être un significande de la notation scientifique binaire._".
+C'est la raison qui veut que les champs de mantisse tronquée des nombres _normaux_ aient un bit implicite à $1$.
+Tout ceci est expliqué dans les trois premiers paragraphes d'une section antérieur du nom de "_Composition du champs de mantisse tronquée et du champs d'exposant_".
+
+// ref au ch. "Les nombres normaux" et au fait que le bit implicite du champs de mantisse tronquée des dénormaux ne soient pas à 1
+
+// exemple avec $2^{-14} = 2 \times 2^{-15}$
 
 La représentation en IEEE-754 d'un nombre _normalisé_ $F$, doit respecter les règles de l'écriture scientifique binaire.
 Particulièrement, la valeur du champs de mantisse tronquée doit correspondre à celle du significande de l'écriture scientifique binaire du nombre $F$.
