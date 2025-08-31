@@ -732,8 +732,6 @@ $$\left(2\right) \quad \left[S_{15}, \quad 0_{14}, \ 0_{13}, \ 0_{12}, \ 0_{11},
 
 Avec $\left(S = 0\right)$ pour un zéro positif, et $\left(S = 1\right)$ pour un zéro négatif.
 
-// Ch. Pourquoi les nombres dénormaux existent-ils vraiment?
-
 // les nombres dénormaux codent des valeurs plus petite que les nombres normaux, pour deux raisons:
 //   - bit implicite
 //   - interprétation du champs d'exposant
@@ -748,11 +746,27 @@ Avec $\left(S = 0\right)$ pour un zéro positif, et $\left(S = 1\right)$ pour un
 
 ## Le codage des nombres dénormaux
 
-Il y a deux différences entre les nombres _normalisés_ et _dénormalisés_ :
+Comme dit dans plus haut "_Les nombres dénormaux permettent de représenté des nombres très proche de_ $0$ _, qui plus est, plus proche de_ $0$ _que ne serait capable de le faire une représentation normalisé_".
+Ceci est dû a deux différences majeur entre les nombres _normaux_ et _dénormaux_:
   - Le bit implicite du champs de mantisse tronquée
   - L'interprétation que l'on fait de la valeur codé par le champs d'exposant
 
-Commençons par comprendre ce qui concerne le bit implicite.
+Nous allons voir que d'une part, le codage du champs d'exposant d'un nombre _dénormalisé_ est à la source d'une interprétation assez spécifique de la valeur qu'il code.
+Par ailleurs, nous verrons aussi que la valeur effective du champs de mantisse tronquée des nombres _dénormaux_, est différente de celle des nombres _normaux, sans pour autant que ce soit dû à l'encodage de ce champs.
+
+Avec la section suivante, commençons par parler du codage du champs d'exposant d'un nombre _dénormalisé_, ainsi que de son interprétation.
+
+### Codage et interprétation du champs d'exposant des nombres dénormaux
+
+Rappelons que la plage de codage du champs d'exposant des nombres _normaux_ est de $\left[1;\left(2^N - 1\right)\right[$, avec $N$ le nombre de bits du champs.
+Le codage d'un nombre _dénormalisé_ se démarque de celui d'un nombre _normalisé_, par le fait que le champs d'exposant doit être obligatoirement nul.
+C'est cela qui entraine une interprétation inédite de la valeur que représente le champs d'exposant.
+
+La valeur que représente le champs d'exposant $E$ d'un nombre _normalisé_ se calcul comme suit $\left(E - biais\right)$.
+En outre, la valeur qu'interprète le champs d'exposant d'un nombre _dénormalisé_ est la plus petite puissance dont peut faire usage un nombre _normalisé_.
+Autrement dit, le champs d'exposant des nombres _dénormaux_ représente la valeur $\left(1 - biais\right)$.
+Nous verrons plus bas dans le chapitre du nom de "_La continuité de représentation des nombres dénormaux_", qu'il existe une continuité de codage assez fondamentale entre les nombres _normaux_ et _dénormaux_.
+Nous devons cette continuité de codage aux interprétations différentes que l'ont fait des champs d'exposant des nombres _normaux_ et _dénormaux_.
 
 ### Lorsque le bit implicite du champs de mantisse tronquée est nul
 
@@ -777,22 +791,6 @@ Ce qui contraint le codage des nombres _dénormaux_ à avoir un champs de mantis
 Mais rappelons que "_Le rôle des nombres _dénormaux_ est de pouvoir codé des nombres très proche de_ $0$", et non $0$ lui même.
 Pour cela, il est dans tout les cas nécessaire que le champs de mantisse tronquée d'un nombre _dénormalisé_ soit différent de $0$.
 Ce qui empêche de confondre les zéros positifs ou négatifs, avec les nombres _dénormaux_.
-
-### L'interprétation de la valeur du champs d'exposant des nombres dénormaux
-
-Au delà du fait que le champs d'exposant permet de savoir si un nombre est _normalisé_ ou _dénormalisé_, il permet bien évidemment de codé une puissance. 
-Cependant, pour un nombre _dénormalisé_ la valeur que représente le champs d'exposant n'est pas interprétée comme d'habitude.
-
-Les nombres _normaux_ et _dénormaux_ sont deux représentations distinctes des nombres dans un flottant IEEE-754.
-Il s'avère que les nombres d'une même représentation sont consécutifs.
-Dans l'idéal, il faudrait qu'en passant d'une représentation à une autre les nombres de ces deux représentations le soient aussi.
-C'est ce que l'on appelle le principe de continuité, nous verrons cela plus en détails dans le chapitre qui suit "_La continuité de représentation des nombres dénormaux_".
-Il faut savoir que cette continuité est atteignable entre les nombres _normaux_ et _dénormaux_, qu'à la condition que l'interprétation de la valeur du champs d'exposant d'un nombre _dénormalisé_ ne suive pas celle d'un nombre _normalisé_.
-
-Pour un champs d'exposant biaisé $E$ d'un nombre _normalisé_, nous calculons la valeur que représente le champs avec $\left(E - biais\right)$.
-Nous soustrayons simplement le biais du champs d'exposant, à la valeur qu'il code.
-Cependant, pour qu'une continuité soit possible entre nombres _normaux_ et _dénormaux_, il faut que la valeur que représente le champs d'exposant nul d'un nombre _dénormalisé_ soit perçu comme la plus petite puissance dont peut faire usage un nombre _normalisé_.
-Autrement dit, un nombre _dénormalisé_ a un champs d'exposant $\left(E = 0\right)$ dont la puissance interprétée est équivalente à $\left(1 - biais\right)$.
 
 ## La continuité de représentation des nombres dénormaux
 
