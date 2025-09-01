@@ -817,7 +817,25 @@ Autrement dit, le plus petit nombre positif et _dénormalisé_ au format _Half P
 
 Les nombres _dénormaux_ permettent ainsi d'avoir une bien meilleur précision sur le codage des nombres proches de $0$.
 
+// Codage et interprétation du champs d'exposant des nombres dénormaux
+
 ## La continuité de représentation des nombres dénormaux
+
+Faisons un très bref rappel de ce que sont les nombres _dénormaux_.
+Concrétement, les _dénormaux_ codent des nombres non nul très proche de $0$.
+Par exemple, les nombres _dénormaux_ positifs sont censés couvrir tout les nombres dont la valeur se situe entre $0$, et le plus petit nombre positif _normalisé_ d'un certain format IEEE-754 donné.
+Dans les limites de la base binaire, bien évidemment.
+Je dit bien censé, car cela pourrait ne pas être le cas si le codage des nombres _normaux_ et _dénormaux_ ne devaient pas être continues.
+
+Le principe de la continuité de représentation des nombres _normaux_ et _dénormaux_ est assez simple.
+Tout les nombres _normaux_ ont un codage consécutif les uns aux autres (directement ou bien indirectement), il en va de même pour les nombres _dénormaux_.
+Par exemple pour le format _Half Precision_, si le plus petit nombre positif _normalisé_ a un codage directement consécutif au plus grand nombre positif _dénormalisé_, alors il y a continuité.
+Autrement dit, nous pouvons codés des nombres en passant d'une représentation à l'autre sans encombre.
+Nous verrons dans le prochain chapitre, les problèmes que nous pourrions rencontré si il n'y avait pas de continuité de représentation entre les nombres _normaux_ et _dénormaux_. 
+
+// continuité des champs de mantisse tronquée des nombres normaux et dénormaux
+
+
 
 Réintroduisons en une phrase ce que sont les nombres _dénormaux_.
 Un nombre _dénormalisé_ représente une valeur qui se situe entre $0$ et le plus petit nombre positif _normalisé_ pour un format donné.
