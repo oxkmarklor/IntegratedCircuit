@@ -761,28 +761,24 @@ Nous devons cette continuité de codage aux interprétations différentes que l'
 Comme nous avons pu le voir dans les chapitres précédents, plus particulièrement dans la section "_Les nombres normaux_", le champs de mantisse tronquée $T$ d'un nombre _normalisé_ a une valeur effective de $\left(1 + T\right)$.
 Le terme $1$ représente la valeur du bit implicite du champs.
 Dans cette section, il est dit je cite "_Le codage d'un nombre normalisé sollicte la notation scientifique binaire de ce nombre._", ce qui n'est absolument pas le cas des nombres _dénormaux_.
-
 Le bit implicite à $1$ du champs de mantisse tronquée des nombres _normaux_, est le bit de la partie entière du significande de la notation scientifique binaire sur laquelle repose le codage des nombres _normaux_.
+
 Rappelons que l'objectif des nombres _dénormaux_ est de pouvoir codé des valeurs plus proche de $0$ que ne sont capable de le faire les nombres _normaux_.
 Pour ce faire, le codage d'un nombre _dénormalisé_ ne se repose pas sur la notation scientifique binaire.
 Le champs de mantisse tronquée a toujours un bit implicite qui représente la partie entière du nombre interprété par le champs, mais ce dernier est toujours à $0$.
 Par conséquent, la valeur effective du champs de mantisse tronquée $T$ d'un nombre _dénormalisé_ est de $\left(0 + T\right)$, et ce champs code une valeur systèmatiquement comprise dans l'intervalle suivante $\left]0;1\right[$.
 
 Plus haut nous avons vu que les nombres _dénormaux_ ont un champs d'exposant nul, permettant ainsi de dissocier le codage de ces derniers vis à vis de celui des nombres _normaux_.
-Mais rappelons que dans la section "_Le codage du zéro positif ainsi que négatif au format Half Precision (borne basse)_", nous formalisons le codage des valeurs $\pm 0$ qui nécessitent un champs d'exposant ainsi que de mantisse tronquée nul.
-D'où le fait que le champs de mantisse tronquée $T$ des _dénormaux_ soit non nul, ceci afin de ne pas confondre le codage de ces derniers avec celui d'un zéro positif ou négatif.
+Mais rappelons que dans la section "_Le codage du zéro positif ainsi que négatif au format Half Precision_", nous formalisons le codage des valeurs $\pm \ 0$ qui nécessitent un champs d'exposant et de mantisse tronquée nul.
+D'où la nécessité que le champs de mantisse tronquée $T$ des nombres _dénormaux_ soit non nul.
+Ceci afin de ne pas confondre le codage d'un nombre _dénormalisé_ avec celui d'un zéro positif ou négatif.
 
+Au terme de ces explications, il est probable que vous ayez une question en tête.
+Pourquoi les nombres _dénormaux_ sont capables de codé des nombres plus proche de $0$ que les nombres _normaux_?
+En quelque mots, c'est grâce au bit implicite à $0$ des champs de mantisse tronquée des _dénormaux_.
+La section suivante démontre formellement ceci. 
 
-
-//
-
-Dans la section "_Les nombres normaux_" il est dit je cite "_Un nombre est dit "normalisé" lorsque dans son codage, le champs de mantisse tronquée est contraint de la même manière que peut l'être un significande de la notation scientifique binaire._".
-C'est la raison qui veut que les champs de mantisse tronquée des nombres _normaux_ aient un bit implicite à $1$.
-Tout ceci est expliqué dans les trois premiers paragraphes d'une section antérieur du nom de "_Composition du champs de mantisse tronquée et du champs d'exposant_".
-
-
-
-// ref au ch. "Les nombres normaux" et au fait que le bit implicite du champs de mantisse tronquée des dénormaux ne soient pas à 1
+### La précision des nombres dénormaux 
 
 // exemple avec $2^{-14} = 2 \times 2^{-15}$
 
