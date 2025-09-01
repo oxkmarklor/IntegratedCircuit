@@ -756,7 +756,7 @@ Autrement dit, le champs d'exposant des nombres _dénormaux_ représente la vale
 Nous verrons plus bas dans le chapitre du nom de "_La continuité de représentation des nombres dénormaux_", qu'il existe une continuité de codage assez fondamentale entre les nombres _normaux_ et _dénormaux_.
 Nous devons cette continuité de codage aux interprétations différentes que l'ont fait des champs d'exposant des nombres _normaux_ et _dénormaux_.
 
-### Lorsque le bit implicite du champs de mantisse tronquée est nul
+### Le bit implicite du champs de mantisse tronquée des nombres dénormaux
 
 Comme nous avons pu le voir dans les chapitres précédents, plus particulièrement dans la section "_Les nombres normaux_", le champs de mantisse tronquée $T$ d'un nombre _normalisé_ a une valeur effective de $\left(1 + T\right)$.
 Le terme $1$ représente la valeur du bit implicite du champs.
@@ -781,7 +781,7 @@ La section suivante démontre formellement ceci.
 ### La précision de codage des nombres dénormaux 
 
 Dans une représentation "classique" des nombres _normaux_, le plus petit nombre positif et _normalisé_ qui peut être codé au format _Half Precision_ est $\left(\left(1 + 0.0\right) \times 2^{\left(1 - 15\right)}\right)$ soit $2^{-14}$.
-Voici de la section "_Le codage du plus petit nombre positif normalisé au format Half Precision_" l'illustration de ce nombre:
+Tout droit tiré de la section "_Le codage du plus petit nombre positif normalisé au format Half Precision_", voici l'illustration du codage du nombre sous-jacent:
 
 $$\left[0_{15}, \quad 0_{14}, \ 0_{13}, \ 0_{12}, \ 0_{11}, \ 1_{10}, \quad 0_9, \ 0_8, \ 0_7, \ 0_6, \ 0_5, \ 0_4, \ 0_3, \ 0_2, \ 0_1, \ 0_0\right]$$
 
@@ -789,42 +789,33 @@ Je vais vous demandez un court instant d'imaginer que les nombres _dénormaux_ n
 Dans cette hypothèse, la plage de codage du champs d'exposant d'un nombre _normalisé_ pourrait être étendu à $\left[0;\left(2^N - 1\right)\right[$, avec $N$ le nombre de bits du champs.
 Si nous omettons le conflit que cela poserait avec le codage d'un zéro positif, alors le plus petit nombre positif _normalisé_ serait $\left(\left(1 + 0.0\right) \times 2^{\left(0 - 15\right)}\right)$ soit $2^{-15}$.
 
-Voici l'illustration du codage de cet hypothétique nombre:
+Voici l'illustration du codage de cet hypothétique nombre au format _Half Precision_:
 
 $$\left[0_{15}, \quad 0_{14}, \ 0_{13}, \ 0_{12}, \ 0_{11}, \ 0_{10}, \quad 0_9, \ 0_8, \ 0_7, \ 0_6, \ 0_5, \ 0_4, \ 0_3, \ 0_2, \ 0_1, \ 0_0\right]$$
 
-Nous voyons clairement que le codage de ce nombre pose un problème car le champs d'exposant et de mantisse tronquée sont tout les deux nuls, a l'instar du codage d'un zéro positif.
+Nous voyons clairement que le codage de ce nombre pose un problème car les champs d'exposant et de mantisse tronquée sont tout les deux nuls, à l'instar du codage d'un zéro positif.
 Mais tout ceci ne reste qu'une expérience de pensée, alors passons.
 
-Pour conclure, nous pouvons remarqué qu'au maximum la précision des nombres _normaux_ a été améliorer d'un facteur $2$, étant donné que $\left(2^{-15} \div 2^{-14}\right) = 0.5$.
+Pour conclure, nous pouvons remarqué que $\left(2^{-14} \div 2^{-15}\right) = 2$.
+Ce qui veut dire que si les nombres _dénormaux_ n'existaient pas, nous pourrions codé des nombres _normaux_ deux fois plus petit.
 
+Désormais, avec un nombre _dénormalisé_ essayons de codé la valeur $2^{-15}$.
+Ce nombre _dénormalisé_ a un champs d'exposant nul, mais conformément à ce qui est dit dans la section "_Codage et interprétation du champs d'exposant des nombres dénormaux_", il faudra interprété la valeur du champs comme étant la plus petite puissance dont peut faire usage un nombre _normalisé_.
+C'est à dire $\left(1 - 15\right) = -14$.
+Quant au champs de mantisse tronquée, il code la valeur $1000000000_2$. 
+Par ailleurs, n'oublions pas que le bit implicite du champs de mantisse tronquée est à $0$, comme l'explique la section "_Le bit implicite du champs de mantisse tronquée des nombres dénormaux_".
+Pour finir, la valeur effective du champs de mantisse tronquée est de $\left(0 + 0.1_2\right)$ $=$ $0.5$.
 
+Voici l'illustration du codage du nombre _dénormalisé_ sous-jacent au format _Half Precision_:
 
+$$\left[0_{15}, \quad 0_{14}, \ 0_{13}, \ 0_{12}, \ 0_{11}, \ 0_{10}, \quad 1_9, \ 0_8, \ 0_7, \ 0_6, \ 0_5, \ 0_4, \ 0_3, \ 0_2, \ 0_1, \ 0_0\right]$$
 
+La valeur du nombre est de $\left(\left(0 + 0.1_2\right) \times 2^{\left(1 - 15\right)}\right)$, ou autrement dit $\left(0.5 \times 2^{-14}\right)$ ce qui est égale à $2^{-15}$.
+Il est donc possible d'obtenir le même gain de précision avec les nombres _dénormaux_, qu'avec une extension de la plage de codage du champs d'exposant des nombres _normaux_, et même plus!
+Dans les faits, pour le plus petit nombre positif _dénormalisé_ au format _Half Precision_, le gain de précision est de $1024$.
+Autrement dit, le plus petit nombre positif et _dénormalisé_ au format _Half Precision_ $\left(\left(0 + 0.0000000001\right) \times 2^{-14}\right)$, est $1024$ fois inférieur au plus petit nombre positif _normalisé_ du même format IEEE-754.
 
-//
-
-Dans la section "_Le codage du plus petit nombre positif normalisé au format Half Precision_", nous avons illustré le codage du plus petit nombre positif normalisé pouvant être codé au format _Half Precision_.
-Le champs d'exposant $E$ code la valeur $1$ en respectant sa plage de codage qui est de $\left[1;\left(2^N - 1\right)\right[$, avec $N$ le nombre de bits du champs.
-Quant à lui, le champs de mantisse tronquée $T$ est nul et sa valeur effective est donc de $\left(1 + 0.0\right)$.
-Ce nombre vaut donc $\left(\left(1 + 0.0\right) \times 2^{\left(1 - 15\right)}\right) = 2^{-14}$.
-
-
-//
-
-Quand le champs de mantisse tronquée $T$ est déjà nul, il n'est pas possible de réduire davantage sa valeur.
-Mais théoriquement, si nous étendons la plage de codage du champs d'exposant des nombres _normaux_ a la plage suivante $\left[0;\left(2^N - 1\right)\right[$, alors nous pourrions codé des valeurs encore plus proche de $0$ que ne l'est $2^{-14}$.
-Avec cette plage de codage théorique, le plus petit nombre positif et _normalisé_ qui pourrait être codé au format _Half Precision_ serait $\left(\left(1 + 0.0\right) \times 2^{\left(0 - 15\right)}\right) = 2^{-15}$.
-Nous aurions alors améliorer par $2$ la précision des nombres _normaux_, car $\left(2^{-14} \div 2\right) = 2^{-15}$.
-
-Je parle ici au conditionel.
-En réalité le champs d'exposant et le champs de mantisse tronquée ne pourraient pas être nuls en simultané, cela engendrerait un conflit avec le codage des zéros positifs et négatifs.
-Tout ceci n'est qu'une sorte d'expérience de pensée.
-
-
-
-// exemple avec $2^{-14} = 2 \times 2^{-15}$
-
+Les nombres _dénormaux_ permettent ainsi d'avoir une bien meilleur précision sur le codage des nombres proches de $0$.
 
 ## La continuité de représentation des nombres dénormaux
 
