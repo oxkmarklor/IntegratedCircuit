@@ -775,34 +775,56 @@ Ceci afin de ne pas confondre le codage d'un nombre _dénormalisé_ avec celui d
 
 Au terme de ces explications, il est probable que vous ayez une question en tête.
 Pourquoi les nombres _dénormaux_ sont capables de codé des nombres plus proche de $0$ que les nombres _normaux_?
-En quelque mots, c'est grâce au bit implicite à $0$ des champs de mantisse tronquée des _dénormaux_.
+En quelque mots, c'est grâce au bit implicite à $0$ du champs de mantisse tronquée des _dénormaux_.
 La section suivante démontre formellement ceci. 
 
-### La précision des nombres dénormaux 
+### La précision de codage des nombres dénormaux 
+
+Dans une représentation "classique" des nombres _normaux_, le plus petit nombre positif et _normalisé_ qui peut être codé au format _Half Precision_ est $\left(\left(1 + 0.0\right) \times 2^{\left(1 - 15\right)}\right)$ soit $2^{-14}$.
+Voici de la section "_Le codage du plus petit nombre positif normalisé au format Half Precision_" l'illustration de ce nombre:
+
+$$\left[0_{15}, \quad 0_{14}, \ 0_{13}, \ 0_{12}, \ 0_{11}, \ 1_{10}, \quad 0_9, \ 0_8, \ 0_7, \ 0_6, \ 0_5, \ 0_4, \ 0_3, \ 0_2, \ 0_1, \ 0_0\right]$$
+
+Je vais vous demandez un court instant d'imaginer que les nombres _dénormaux_ n'existent pas.
+Dans cette hypothèse, la plage de codage du champs d'exposant d'un nombre _normalisé_ pourrait être étendu à $\left[0;\left(2^N - 1\right)\right[$, avec $N$ le nombre de bits du champs.
+Si nous omettons le conflit que cela poserait avec le codage d'un zéro positif, alors le plus petit nombre positif _normalisé_ serait $\left(\left(1 + 0.0\right) \times 2^{\left(0 - 15\right)}\right)$ soit $2^{-15}$.
+
+Voici l'illustration du codage de cet hypothétique nombre:
+
+$$\left[0_{15}, \quad 0_{14}, \ 0_{13}, \ 0_{12}, \ 0_{11}, \ 0_{10}, \quad 0_9, \ 0_8, \ 0_7, \ 0_6, \ 0_5, \ 0_4, \ 0_3, \ 0_2, \ 0_1, \ 0_0\right]$$
+
+Nous voyons clairement que le codage de ce nombre pose un problème car le champs d'exposant et de mantisse tronquée sont tout les deux nuls, a l'instar du codage d'un zéro positif.
+Mais tout ceci ne reste qu'une expérience de pensée, alors passons.
+
+Pour conclure, nous pouvons remarqué qu'au maximum la précision des nombres _normaux_ a été améliorer d'un facteur $2$, étant donné que $\left(2^{-15} \div 2^{-14}\right) = 0.5$.
+
+
+
+
+
+//
+
+Dans la section "_Le codage du plus petit nombre positif normalisé au format Half Precision_", nous avons illustré le codage du plus petit nombre positif normalisé pouvant être codé au format _Half Precision_.
+Le champs d'exposant $E$ code la valeur $1$ en respectant sa plage de codage qui est de $\left[1;\left(2^N - 1\right)\right[$, avec $N$ le nombre de bits du champs.
+Quant à lui, le champs de mantisse tronquée $T$ est nul et sa valeur effective est donc de $\left(1 + 0.0\right)$.
+Ce nombre vaut donc $\left(\left(1 + 0.0\right) \times 2^{\left(1 - 15\right)}\right) = 2^{-14}$.
+
+
+//
+
+Quand le champs de mantisse tronquée $T$ est déjà nul, il n'est pas possible de réduire davantage sa valeur.
+Mais théoriquement, si nous étendons la plage de codage du champs d'exposant des nombres _normaux_ a la plage suivante $\left[0;\left(2^N - 1\right)\right[$, alors nous pourrions codé des valeurs encore plus proche de $0$ que ne l'est $2^{-14}$.
+Avec cette plage de codage théorique, le plus petit nombre positif et _normalisé_ qui pourrait être codé au format _Half Precision_ serait $\left(\left(1 + 0.0\right) \times 2^{\left(0 - 15\right)}\right) = 2^{-15}$.
+Nous aurions alors améliorer par $2$ la précision des nombres _normaux_, car $\left(2^{-14} \div 2\right) = 2^{-15}$.
+
+Je parle ici au conditionel.
+En réalité le champs d'exposant et le champs de mantisse tronquée ne pourraient pas être nuls en simultané, cela engendrerait un conflit avec le codage des zéros positifs et négatifs.
+Tout ceci n'est qu'une sorte d'expérience de pensée.
+
+
 
 // exemple avec $2^{-14} = 2 \times 2^{-15}$
 
-La représentation en IEEE-754 d'un nombre _normalisé_ $F$, doit respecter les règles de l'écriture scientifique binaire.
-Particulièrement, la valeur du champs de mantisse tronquée doit correspondre à celle du significande de l'écriture scientifique binaire du nombre $F$.
-Dans les faits, nous avons vus plus haut que la mantisse tronquée ne représente que la partie fractionnaire d'un significande.
-Le bit de la partie entière du significande étant toujours à $1$, il est rendu implicite pour les nombres _normaux_ afin de gagner un bit de précision sur le codage des nombres.
-
-Cependant, le codage d'un nombre IEEE-754 dit "_dénormalisé_" ne respecte pas les règles de l'écriture scientifique binaire.
-Le champs de mantisse tronquée n'a plus de lien avec un quelconque significande.
-Effectivement, les nombres _dénormaux_ définissent un bit implicite à $0$ pour le champs de mantisse tronquée.
-Le bit implicite est toujours perçu comme la partie entière d'un nombre (qui est _dénormalisé_ cette fois-ci), quant au champs de mantisse tronquée il en interprète la partie fractionnaire.
-C'est pourquoi la valeur réel du champs de mantisse tronquée d'un nombre _dénormalisé_ est alors directement celle du champs lui même $\left(0 + Truncated \ Mantissa\right)$.
-La partie entière est nul, c'est logique.
-
-Jusqu'ici, la seule différence entre un nombre _normalisé_ et _dénormalisé_ est la valeur du bit implicite du champs de mantisse tronquée.
-Cependant, le bit implicite n'étant pas lui même réelement codé dans le champs binaire de ces deux "type" de nombre, il faut alors trouver un autre moyen pour départager les nombres _normaux_ des nombres _dénormaux_.
-Le standard IEEE-754 définit alors le champs d'exposant d'un nombre _dénormalisé_ comme devant être nul, afin que la séparation entre nombre _normalisé_ et _dénormalisé_ devienne explicite.
-Mais n'oublions pas la section "_Le codage du zéro positif et négatif_", dans laquelle il est dit que le nombre $\pm \ 0$ est codé avec un champs d'exposant et de mantisse tronquée nuls.
-Ce qui contraint le codage des nombres _dénormaux_ à avoir un champs de mantisse tronquée non nul.
-
-Mais rappelons que "_Le rôle des nombres _dénormaux_ est de pouvoir codé des nombres très proche de_ $0$", et non $0$ lui même.
-Pour cela, il est dans tout les cas nécessaire que le champs de mantisse tronquée d'un nombre _dénormalisé_ soit différent de $0$.
-Ce qui empêche de confondre les zéros positifs ou négatifs, avec les nombres _dénormaux_.
 
 ## La continuité de représentation des nombres dénormaux
 
