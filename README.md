@@ -754,7 +754,7 @@ La valeur que représente le champs d'exposant $E$ d'un nombre _normalisé_ se c
 En outre, la valeur qu'interprète le champs d'exposant d'un nombre _dénormalisé_ est la plus petite puissance dont peut faire usage un nombre _normalisé_.
 Autrement dit, le champs d'exposant des nombres _dénormaux_ représente la valeur $\left(1 - biais\right)$.
 Nous verrons plus bas dans le chapitre du nom de "_La continuité de représentation des nombres dénormaux_", qu'il existe une continuité de codage assez fondamentale entre les nombres _normaux_ et _dénormaux_.
-Nous devons cette continuité de codage aux interprétations différentes que l'ont fait des champs d'exposant des nombres _normaux_ et _dénormaux_.
+Nous devons cette continuité de codage aux interprétations distinctes que l'ont fait des champs d'exposant des nombres _normaux_ et _dénormaux_.
 
 ### Le bit implicite du champs de mantisse tronquée des nombres dénormaux
 
@@ -828,14 +828,13 @@ Je dit bien censé, car cela n'est vrai que si il y a continuité de codage entr
 Les nombres _normaux_ sont tous consécutifs les uns aux autres (directement, ou indirectement), nous pouvons donc dire qu'il y a continuité dans la représentation des nombres _normaux_.
 Il en va de même pour les nombres _dénormaux_ entre eux.
 Cependant, ce que nous cherchons à savoir c'est si il y a continuité entre les nombres _normaux_ et _dénormaux_.
-Rappelez-vous de ce que dit la section "_Codage et interprétation du champs d'exposant des nombres dénormaux_", au propos d'une continuité entre les nombres _normaux_ ainsi que _dénormaux_.
-Je cite "_Nous devons cette continuité de codage aux interprétations différentes que l'ont fait des champs d'exposant des nombres normaux et dénormaux._".
+Rappelez-vous de ce que dit la section "_Codage et interprétation du champs d'exposant des nombres dénormaux_", au propos de la continuité entre les nombres _normaux_ ainsi que _dénormaux_.
+Je cite "_Nous devons cette continuité de codage aux interprétations distinctes que l'ont fait des champs d'exposant des nombres normaux et dénormaux._".
 
-Ce qui va suivre commence par démontrer les problèmes auquels nous devrions faire face si le champs d'exposant $E$ des nombres _dénormaux_, était interprété comme le champs d'exposant des nombres _normaux_.
-C'est à dire par le calcul $\left(E - biais\right).
-Il sera alors plus simple dans un second temps, de formalisé la continuité effective entre les nombres _normaux_ et _dénormaux_.
+La section suivante va dans un premier temps nous démontrer les problèmes que pose une représentation non continu entre les nombres _normaux_ et _dénormaux_.
+Enfin, la dernière section de cet annexe formalisera ce qu'est la continuité de représentation entre les nombres _normaux_ et _dénormaux_.
 
-### Les problèmes que pose une même interprétation du champs d'exposant des nombres normaux et dénormaux
+### Représentation non continu des nombres dénormaux
 
 En cas de continuité entre les nombres _normaux_ et _dénormaux_ au format _Half Precision_, il faut que le plus petit nombre positif _normalisé_ soit consécutif au plus grand nombre positif _dénormalisé_.
 
@@ -860,38 +859,43 @@ Ces deux champs de mantisse tronquée ont une valeur consécutive $\left(0.11111
 
 ### Représentation non continu des nombres dénormaux
 
-Commençons par voir les problèmes auquels nous ferions face si le standard IEEE-754 interprétait la valeur du champs d'exposant d'un nombre _dénormalisé_, comme celle d'un nombre _normalisé_.
-C'est à dire, par la soustraction du biais du champs d'exposant à la valeur qu'il code.  
-Ce chapitre et le suivant auront tout deux besoin des trois nombres $\alpha$, $\beta$ et $\tau$, qui ont ci-dessous chacun une illustration de leur codage au format _Half Precision_.
+Commençons par voir les problèmes auquels nous ferions face si le standard IEEE-754 interprétait la valeur du champs d'exposant $E$ d'un nombre _dénormalisé_, comme celle d'un nombre _normalisé_.
+C'est à dire, par la soustraction du biais du champs d'exposant à la valeur qu'il code $\left(E - biais\right)$.
+Pour cela, nous allons avoir besoin de définir les trois nombres suivants $\alpha$, $\beta$ ainsi que $\tau$.
 
-Pour commencer, je recopie ici même l'illustration numéro $\left(2\right)$ du plus petit nombre positif et _normalisé_ pouvant être codé au format _Half Precision_.
-Ce nombre _normalisé_ sera désormais connu sous le nom de $\alpha$.
+Nous avons déjà vu l'illustration du plus petit nombre positif _normalisé_ au format _Half Precision_, ce nombre sera connu sous le nom de $\alpha$:
 
 $$\alpha: \ \left[0_{15}, \quad 0_{14}, \ 0_{13}, \ 0_{12}, \ 0_{11}, \ 1_{10}, \quad 0_9, \ 0_8, \ 0_7, \ 0_6, \ 0_5, \ 0_4, \ 0_3, \ 0_2, \ 0_1, \ 0_0\right]$$
 
-Pour calculer la valeur de $\alpha$ nous avons besoin de la formule $\left(\left(1 + Truncated \ Mantissa\right) \times 2^{\left(Exponent - bias\right)}\right)$, ce qui donne $\left(\left(1 + 0.0\right) \times 2^{\left(1 - 15\right)}\right) = 0.00006103515625$.
+La valeur du nombre _normalisé_ $\alpha$ est de $\left(\left(1 + 0.0\right) \times 2^{\left(1 - 15\right)}\right)$ ce qui donne $0.00006103515625$.
 
-Je présente également l'illustration du plus grand nombre positif et _dénormalisé_ pouvant être codé au format _Half Precision_.
-Ce nombre _dénormalisé_ sera connu sous le nom de $\beta$.
+En prime, voici l'illustration du plus grand nombre positif _dénormalisé_ pouvant être codé au format _Half Precision_, ce nombre sera connu sous le nom de $\beta$:
 
 $$\beta: \ \left[0_{15}, \quad 0_{14}, \ 0_{13}, \ 0_{12}, \ 0_{11}, \ 0_{10}, \quad 1_9, \ 1_8, \ 1_7, \ 1_6, \ 1_5, \ 1_4, \ 1_3, \ 1_2, \ 1_1, \ 1_0\right]$$
 
-Nous allons calculer la puissance que représente le champs d'exposant $E$ de $\beta$ avec $\left(E - biais\right)$, comme nous le ferions pour n'importe quel nombre _normalisé_.
-Pour calculer la valeur de $\beta$ nous avons alors besoin de la formule $\left(\left(0 + Truncated \ Mantissa\right) \times 2^{\left(Exponent - bias\right)}\right)$, ce qui donne $\left(\left(0 + 0.9990234375\right) \times 2^{\left(0 - 15\right)}\right) = 0.0000304877758026123046875$.
+Rappelons que nous allons calculons la puissance que représente le champs d'exposant $E$ des nombres _dnéormaux_ avec $\left(E - biais\right)$, comme nous le ferions pour n'importe quel nombre _normalisé_.
+Par conséquent, la valeur du nombre _dénormalisé_ $\beta$ est de $\left(\left(0 + 0.9990234375\right) \times 2^{\left(0 - 15\right)}\right)$ ce qui donne $0.0000304877758026123046875$.
 
-Et pour finir, voici l'illustration du plus petit nombre positif et _dénormalisé_ pouvant être codé au format _Half Precision_.
-Par définition, ce nombre est alors le plus petit des nombres positif non nul codable sur un _Half Precision_, c'est le plus proche de $0$.
-Il portera le nom de $\tau$.
+Enfin, voici l'illustration du plus petit nombre positif _dénormalisé_ pouvant être codé au format _Half Precision_, ce nombre sera connu sous le nom de $\tau$:
 
 $$\tau: \ \left[0_{15}, \quad 0_{14}, \ 0_{13}, \ 0_{12}, \ 0_{11}, \ 0_{10}, \quad 0_9, \ 0_8, \ 0_7, \ 0_6, \ 0_5, \ 0_4, \ 0_3, \ 0_2, \ 0_1, \ 1_0\right]$$
 
-Nous devons faire attention à la même chose pour $\tau$ que pour $\beta$.
-Cela veut dire que nous devons calculé la puissance que représente le champs d'exposant $E$ de $\tau$ avec $\left(E - biais\right)$, comme nous le ferions pour n'importe quel nombre _normalisé_.
-C'est un nombre _dénormalisé_ tout comme $\beta$ après tout.
-La valeur de $\tau$ se calcul de la manière suivante $\left(\left(0 + 0,0009765625\right) \times 2^{\left(0 - 15\right)}\right) = 0.0000000298023223876953125$.
+Par définition, $\tau$ est le plus petit des nombres positif non nul pouvant être codé au format _Half Precision_, c'est le nombre le plus proche de $0$ toute représentation confondu.
+Ce nombre, au même titre que $\beta$, est _dénormalisé_.
+D'où le fait que nous calculons la puissance que représente le champs d'exposant $E$ de $\tau$ avec $\left(E - biais\right)$, comme nous avons pu le faire pour $\beta$.
+La valeur du nombre $\tau$ est de $\left(\left(0 + 0.0009765625\right) \times 2^{\left(0 - 15\right)}\right)$ ce qui donne $0.0000000298023223876953125$.
 
-Nous pouvons remarquer quelque chose d'intéressant $\left(\alpha \div \beta\right) \approx 2.0019$.
-Autrement dit, $\beta$ qui représente le plus grand nombre positif _dénormalisé_ est deux fois plus petit que $\alpha$ qui représente le plus petit nombre positif _normalisé_.
+Pour commencer, remarquons que le ratio suivant $\left(\alpha \div \beta\right)$ a une valeur qui vaut environ $2.0019$.
+Le nombre $\beta$ est deux fois plus petit que $\alpha$, ce qui peut se traduire par le plus grand nombre positif _dénormalisé_ est deux fois inférieur au plus petit nombre positif _normalisé_.
+Voici l'une des phrases d'introduction du chapitre "_La continuité de représentation des nombres dénormaux_", je cite " $\left[..\right]$ _les nombres dénormaux positifs sont censés couvrir tout les nombres dont la valeur se situe entre_ $0$ _et le plus petit nombre positif normalisé._".
+Dans les faits, nous nous rendons compte qu'il y a une partie des nombres compris dans l'intervalle $\left]0;\alpha\right[$ qui ne sont pas représentable.
+Pour cause, tout les nombres qui se situent dans l'intervalle suivant $\left]\beta;\alpha\right[$ sont trop grands pour être représenté par des nombres _dénormaux_, tout en étant à la fois trop petit pour l'être par des nombres _normaux_.
+Parmis tout les nombres de l'intervalle $\left]0;\alpha\right[$, nous pouvons savoir qu'il y a $\left(\beta \div \alpha\right)$ c'est à dire $\approx 49.9$% d'entre eux qui ne peuvent pas être représentés.
+
+
+//
+
+
 Rappelons ce qui a été dit plus haut, je cite "_Dans la théorie, tout nombre dont la valeur se situe entre_ $0$ _et le plus petit nombre positif normalisé, devrait pouvoir être représenté sous la forme d'un nombre dénormalisé_.".
 Dans les faits, nous nous rendons compte que ce n'est pas le cas.
 La raison en est que la plage de codage des nombres _dénormaux_ comporte un "trou" de valeur ne pouvant pas être représenté.
