@@ -827,32 +827,36 @@ Je dit bien censé, car cela n'est vrai que si il y a continuité de codage entr
 
 Les nombres _normaux_ sont tous consécutifs les uns aux autres (directement, ou indirectement), nous pouvons donc dire qu'il y a continuité dans la représentation des nombres _normaux_.
 Il en va de même pour les nombres _dénormaux_ entre eux.
-Comme le dit la section "_Codage et interprétation du champs d'exposant des nombres dénormaux_" au propos d'une continuité entre les nombres _normaux_ et _dénormaux_, je cite "_Nous devons cette continuité de codage aux interprétations différentes que l'ont fait des champs d'exposant des nombres normaux et dénormaux._".
+Cependant, ce que nous cherchons à savoir c'est si il y a continuité entre les nombres _normaux_ et _dénormaux_.
+Rappelez-vous de ce que dit la section "_Codage et interprétation du champs d'exposant des nombres dénormaux_", au propos d'une continuité entre les nombres _normaux_ ainsi que _dénormaux_.
+Je cite "_Nous devons cette continuité de codage aux interprétations différentes que l'ont fait des champs d'exposant des nombres normaux et dénormaux._".
 
-Effectivement, dans cette section nous avons dit comment est ce que le champs d'exposant d'un nombre _dénormalisé_ devait être interprété, mais nous n'avons pas dit pourquoi.
-La section qui suit démontre ce qui se passe lorsque le champs d'exposant d'un nombre _dénormalisé_ n'est pas interprété comme le préconise le chapitre "_Codage et interprétation du champs d'exposant des nombres dénormaux_".
+Ce qui va suivre commence par démontrer les problèmes auquels nous devrions faire face si le champs d'exposant $E$ des nombres _dénormaux_, était interprété comme le champs d'exposant des nombres _normaux_.
+C'est à dire par le calcul $\left(E - biais\right).
+Il sera alors plus simple dans un second temps, de formalisé la continuité effective entre les nombres _normaux_ et _dénormaux_.
 
-### Les problèmes que pose une interprétation commune du champs d'exposant des nombres normaux et dénormaux
+### Les problèmes que pose une même interprétation du champs d'exposant des nombres normaux et dénormaux
+
+En cas de continuité entre les nombres _normaux_ et _dénormaux_ au format _Half Precision_, il faut que le plus petit nombre positif _normalisé_ soit consécutif au plus grand nombre positif _dénormalisé_.
+
+Nous avons déjà vu l'illustration du plus petit nombre positif _normalisé_ au format _Half Precision_, ce nombre sera connu sous le nom de $\alpha$:
+
+$$\alpha: \ \left[0_{15}, \quad 0_{14}, \ 0_{13}, \ 0_{12}, \ 0_{11}, \ 1_{10}, \quad 0_9, \ 0_8, \ 0_7, \ 0_6, \ 0_5, \ 0_4, \ 0_3, \ 0_2, \ 0_1, \ 0_0\right]$$
+
+Le nombre $\alpha$ est _normalisé_
+
+En prime, voici l'illustration du plus grand nombre positif _dénormalisé_ pouvant être codé au format _Half Precision_, ce nombre sera connu sous le nom de $\beta$.
+
+$$\beta: \ \left[0_{15}, \quad 0_{14}, \ 0_{13}, \ 0_{12}, \ 0_{11}, \ 0_{10}, \quad 1_9, \ 1_8, \ 1_7, \ 1_6, \ 1_5, \ 1_4, \ 1_3, \ 1_2, \ 1_1, \ 1_0\right]$$
+
+
+
+//
 
 Commençons par voir un cas de continuité de codage immuable, celui du champs de mantisse tronquée des nombres _normaux_ ainsi que _dénormaux_.
 Au format _Half Precision_, la plus petite valeur effective du champs de mantisse tronquée d'un nombre _normalisé_ est de $\left(1 + 0.0000000000\right)$, c'est à dire $1.0000000000$.
 Toujours au format _Half Precision_, représentons désormais la plus grande valeur effective du champs de mantisse tronquée d'un nombre _dénormalisé_, qui est de $\left(0 + 0.1111111111_2\right)$ ce qui vaut $0.1111111111_2$.
 Ces deux champs de mantisse tronquée ont une valeur consécutive $\left(0.1111111111_2 + 0.0000000001_2\right) = 1.0000000000$, ce qui démontre qu'il y a bien continuité dans le codage des champs de mantisse tronquée des nombres _normaux_ et _dénormaux_.
-
-
-
-
-
-
-Réintroduisons en une phrase ce que sont les nombres _dénormaux_.
-Un nombre _dénormalisé_ représente une valeur qui se situe entre $0$ et le plus petit nombre positif _normalisé_ pour un format donné.
-Dans la théorie, tout nombre dont la valeur se situe entre $0$ et le plus petit nombre positif _normalisé_, devrait pouvoir être représenté sous la forme d'un nombre _dénormalisé_.
-Dans les limites de la représentation binaire bien entendu.
-Si c'est le cas, alors les représentations des nombres _normaux_ et _dénormaux_ sont continues. 
-
-Cependant, pour cela il faut que le champs d'exposant des nombres _dénormaux_ soit interprété de la bonne manière, interprétation dont il est le sujet dans le chapitre précédent.
-
-Nous allons démontrer cela mathématiquement au travers des deux chapitres prochain.
 
 ### Représentation non continu des nombres dénormaux
 
