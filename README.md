@@ -821,28 +821,26 @@ Les nombres _dénormaux_ permettent ainsi d'avoir une bien meilleur précision s
 
 Faisons un très bref rappel de ce que sont les nombres _dénormaux_.
 Concrétement, les _dénormaux_ codent des nombres non nul très proche de $0$.
-Par exemple au format _Half Precision_, les nombres positifs _dénormaux_ sont censés couvrir tout les nombres dont la valeur se situe entre $0$ et le plus petit nombre positif _normalisé_.
-Dans les limites de représentation de la base binaire, bien évidemment.
-Je dit bien censé, car cela pourrait ne pas être le cas si le codage des nombres _normaux_ et _dénormaux_ ne devait pas être continu.
+Au format _Half Precision_, les nombres _dénormaux_ positifs sont censés couvrir tout les nombres dont la valeur se situe entre $0$ et le plus petit nombre positif _normalisé_.
+Dans les limites de la base binaire, bien évidemment.
+Je dit bien censé, car cela n'est vrai que si il y a continuité de codage entre les nombres _normaux_ et _dénormaux_.
 
 Les nombres _normaux_ sont tous consécutifs les uns aux autres (directement, ou indirectement), nous pouvons donc dire qu'il y a continuité dans la représentation des nombres _normaux_.
 Il en va de même pour les nombres _dénormaux_ entre eux.
 Comme le dit la section "_Codage et interprétation du champs d'exposant des nombres dénormaux_" au propos d'une continuité entre les nombres _normaux_ et _dénormaux_, je cite "_Nous devons cette continuité de codage aux interprétations différentes que l'ont fait des champs d'exposant des nombres normaux et dénormaux._".
-Pour le dire autrement, tout ne dépend que de l'interprétation que l'on fait du champs d'exposant des nombres _dénormaux_, comme nous allons le voir ci-bas.
 
-Si nous prenons le champs de mantisse tronquée des nombres _normaux_ ainsi que des nombres _dénormaux_ pour exemple.
-La plus petite valeur effective du champs de mantisse tronquée d'un nombre _normalisé_ au format _Half Precision_ est $\left(1 + 0.0000000000\right)$, c'est à dire $1.0000000000$.
-Maintenant, toujours au format _Half Precision_, prenons la plus grande valeur effective du champs de mantisse tronquée d'un nombre _dénormalisé_ $\left(0 + 0.1111111111\right)$ $=$ $0.1111111111$.
+Effectivement, dans cette section nous avons dit comment est ce que le champs d'exposant d'un nombre _dénormalisé_ devait être interprété, mais nous n'avons pas dit pourquoi.
+La section qui suit démontre ce qui se passe lorsque le champs d'exposant d'un nombre _dénormalisé_ n'est pas interprété comme le préconise le chapitre "_Codage et interprétation du champs d'exposant des nombres dénormaux_".
 
-// la continuité entre les nombres _normaux_ et _dénormaux_ ne dépend que de l'interprétation que l'on fait du champs d'exposant des nombres _dénormaux_.
+### Les problèmes que pose une interprétation commune du champs d'exposant des nombres normaux et dénormaux
 
-Le principe de la continuité de représentation des nombres _normaux_ et _dénormaux_ est assez simple.
-Tout les nombres _normaux_ ont un codage consécutif les uns aux autres (directement ou bien indirectement), il en va de même pour les nombres _dénormaux_.
-Par exemple pour le format _Half Precision_, si le plus petit nombre positif _normalisé_ a un codage directement consécutif au plus grand nombre positif _dénormalisé_, alors il y a continuité.
-Autrement dit, nous pouvons codés des nombres en passant d'une représentation à l'autre sans encombre.
-Nous verrons dans le prochain chapitre, les problèmes que nous pourrions rencontré si il n'y avait pas de continuité de représentation entre les nombres _normaux_ et _dénormaux_. 
+Commençons par voir un cas de continuité de codage immuable, celui du champs de mantisse tronquée des nombres _normaux_ ainsi que _dénormaux_.
+Au format _Half Precision_, la plus petite valeur effective du champs de mantisse tronquée d'un nombre _normalisé_ est de $\left(1 + 0.0000000000\right)$, c'est à dire $1.0000000000$.
+Toujours au format _Half Precision_, représentons désormais la plus grande valeur effective du champs de mantisse tronquée d'un nombre _dénormalisé_, qui est de $\left(0 + 0.1111111111_2\right)$ ce qui vaut $0.1111111111_2$.
+Ces deux champs de mantisse tronquée ont une valeur consécutive $\left(0.1111111111_2 + 0.0000000001_2\right) = 1.0000000000$, ce qui démontre qu'il y a bien continuité dans le codage des champs de mantisse tronquée des nombres _normaux_ et _dénormaux_.
 
-// continuité des champs de mantisse tronquée des nombres normaux et dénormaux
+
+
 
 
 
@@ -851,6 +849,7 @@ Un nombre _dénormalisé_ représente une valeur qui se situe entre $0$ et le pl
 Dans la théorie, tout nombre dont la valeur se situe entre $0$ et le plus petit nombre positif _normalisé_, devrait pouvoir être représenté sous la forme d'un nombre _dénormalisé_.
 Dans les limites de la représentation binaire bien entendu.
 Si c'est le cas, alors les représentations des nombres _normaux_ et _dénormaux_ sont continues. 
+
 Cependant, pour cela il faut que le champs d'exposant des nombres _dénormaux_ soit interprété de la bonne manière, interprétation dont il est le sujet dans le chapitre précédent.
 
 Nous allons démontrer cela mathématiquement au travers des deux chapitres prochain.
