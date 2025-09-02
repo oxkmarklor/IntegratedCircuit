@@ -850,7 +850,7 @@ En prime, voici l'illustration du plus grand nombre positif _dénormalisé_ pouv
 
 $$\beta: \ \left[0_{15}, \quad 0_{14}, \ 0_{13}, \ 0_{12}, \ 0_{11}, \ 0_{10}, \quad 1_9, \ 1_8, \ 1_7, \ 1_6, \ 1_5, \ 1_4, \ 1_3, \ 1_2, \ 1_1, \ 1_0\right]$$
 
-Rappelons que nous allons calculons la puissance que représente le champs d'exposant $E$ des nombres _dnéormaux_ avec $\left(E - biais\right)$, comme nous le ferions pour n'importe quel nombre _normalisé_.
+Rappelons que nous allons calculons la puissance que représente le champs d'exposant $E$ des nombres _dénormaux_ avec $\left(E - biais\right)$, comme nous le ferions pour n'importe quel nombre _normalisé_.
 Par conséquent, la valeur du nombre _dénormalisé_ $\beta$ est de $\left(\left(0 + 0.9990234375\right) \times 2^{\left(0 - 15\right)}\right)$ ce qui donne $0.0000304877758026123046875$.
 
 Enfin, voici l'illustration du plus petit nombre positif _dénormalisé_ pouvant être codé au format _Half Precision_, ce nombre sera connu sous le nom de $\tau$:
@@ -886,19 +886,32 @@ Voilà en quoi l'absence de continuité entre la représentation des nombres _no
 
 ### Représentation continu des nombres dénormaux
 
-Dans le chapitre du nom de "_L'interprétation de la valeur du champs d'exposant des nombres dénormaux_", nous avons vu comment est ce que le champs d'exposant des nombres _dénormaux_ devait être interprété.
-Un nombre _dénormalisé_ a obligatoirement un champs d'exposant nul, ce dernier interprète une puissance dont la valeur est alors équivalente au résultat de $\left(1 - biais\right)$.
-Ce qui veut dire que:
-  - $\beta = \left(\left(0 + 0.9990234375\right) \times 2^{\left(1 - 15\right)}\right) = 0,000060975551605224609375 = 0.000000000000001111111111_2$
-  - $\tau = \left(\left(0 + 0,0009765625\right) \times 2^{\left(1 - 15\right)}\right) = 0,000000059604644775390625 = 0.000000000000000000000001_2$
+Nous avons vu dans le chapitre "_Codage et interprétation du champs d'exposant des nombres dénormaux_", comment est ce que le champs d'exposant d'un nombre _dénormalisé_ devait être interprété.
+En bref, le champs d'exposant $E$ d'un nombre _dénormalisé_ est nul, mais la valeur que représente ce champs est celle de la plus petite puissance dont peut faire usage un nombre _normalisé_.
+Le champs d'exposant interprète alors la valeur $\left(1 - biais\right)$.
 
-Si nous reprenons l'exemple de $\left(\alpha - \tau\right)$, le résultat est alors $\beta$.
-Rappelons nous que $\tau$ représente le plus petit nombre pouvant être codé au format _Half Precision_.
-En obtenant $\beta$ par la soustraction de $\tau$ à $\alpha$, nous démontrons que les plages de codage des nombres _normaux_ ainsi que _dénormaux_ sont continues.
-Le fait est que nous ne pourrions pas soustraire une plus petite valeur que $\tau$, au plus petit des nombres _normaux_ que représente $\alpha$.
-Le résultat obtenu est tout juste le plus grand des nombres _dénormaux_ pouvant être codé au format _Half Precision_.
-Il n'y a donc par définition aucun "trou" de valeur non représentable dans la plage de codage des nombres _dénormaux_.
-D'où le terme de continuité.
+Dans ce qui suit, nous allons réutiliser les trois nombres $\alpha$, $\beta$ et $\tau$ de la section précédente.
+Dans un premier temps redéfinissons la valeur des nombres _dénormaux_ $\beta$ et $\tau$, avec cette fois-ci une interprétation correcte de leurs champs d'exposant:
+
+  - Le codage de $\beta$ reste le même et une illustration de ce dernier est présent dans la section précédente.
+    Quant à sa valeur, le nombre _dénormalisé_ $\beta$ est de $\left(\left(0 + 0.9990234375\right) \times 2^{\left(1 - 15\right)}\right)$ ce qui donne $0.000060975551605224609375$ en décimale et $0.000000000000001111111111_2$ en binaire.
+
+  - Il en va de même du codage de $\tau$ qui reste le même, une illustration de ce dernier est aussi présente dans la section précédente.
+    Quant à sa valeur, le nombre _dénormalisé_ $\tau$ est de $\left(\left(0 + 0.0009765625\right) \times 2^{\left(1 - 15\right)}\right)$ ce qui donne $0.000000059604644775390625$ en décimale et $0.000000000000000000000001_2$ en binaire.
+
+  - Le nombre _normalisé_ $\alpha$ ne voit ni son codage ni sa valeur changer.
+    Je rappelle simplement que sa valeur est de $0.00006103515625$ en décimale et $0.000000000000010000000000$ en binaire, ce qui va nous être utile de savoir pour la suite.
+
+Reprenons l'exemple du calcul $\left(\alpha - \tau\right)$ de la section précédente, mais cette fois-ci le résultat est $\beta$.
+Rappelons-nous du fait que $\tau$ est le plus petit nombre positif _dénormalisé_ pouvant être codé au format _Half Precision_.
+Obtenir le plus grand nombre positif _dénormalisé_ $\beta$ en guise de résultat de la soustraction de $\tau$ au plus petit nombre positif _normalisé_ $\alpha$, démontre qu'il y a continuité dans le codage des nombres _normaux_ ainsi que _dénormaux_.
+Le fait est qu'il nous est impossible de soustraire une plus petite valeur que $\tau$ au nombre $\alpha$.
+Ce qui veut dire que tout nombre inférieur à $\alpha$ et pouvant être codé en binaire, peut être représenté sous la forme d'un nombre _dénormalisé_.
+Il n'y a donc aucun "trou" de valeur non représentable.
+
+// 
+
+// Explication des raisons pour lesquels cette interprétation des champs d'exposant permet la continuité (avec des histoires de décalage de virgule, tout ça)
 
 Pour voir les choses autrement.
 Le résultat $T$ de l'addition entre le bit implicite et le champs de mantisse tronquée de chaque nombre $\alpha$, $\beta$ et $\tau$, est multiplié par $2^{\left(1 - 15\right)}$.
