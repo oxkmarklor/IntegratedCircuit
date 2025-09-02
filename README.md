@@ -753,7 +753,7 @@ C'est cela qui entraine une interprétation inédite de la valeur que représent
 La valeur que représente le champs d'exposant $E$ d'un nombre _normalisé_ se calcul comme suit $\left(E - biais\right)$.
 En outre, la valeur qu'interprète le champs d'exposant d'un nombre _dénormalisé_ est la plus petite puissance dont peut faire usage un nombre _normalisé_.
 Autrement dit, le champs d'exposant des nombres _dénormaux_ représente la valeur $\left(1 - biais\right)$.
-Nous verrons plus bas dans le chapitre du nom de "_La continuité de représentation des nombres dénormaux_", qu'il existe une continuité de codage assez fondamentale entre les nombres _normaux_ et _dénormaux_.
+Nous verrons plus bas dans le chapitre du nom de "_La continuité de représentation entre les nombres normaux et dénormaux_", qu'il existe une continuité de codage assez fondamentale entre les nombres _normaux_ et _dénormaux_.
 Nous devons cette continuité de codage aux interprétations distinctes que l'ont fait des champs d'exposant des nombres _normaux_ et _dénormaux_.
 
 ### Le bit implicite du champs de mantisse tronquée des nombres dénormaux
@@ -817,7 +817,7 @@ Autrement dit, le plus petit nombre positif et _dénormalisé_ au format _Half P
 
 Les nombres _dénormaux_ permettent ainsi d'avoir une bien meilleur précision sur le codage des nombres proches de $0$.
 
-## La continuité de représentation des nombres dénormaux
+## La continuité de représentation entre les nombres normaux et dénormaux
 
 Faisons un très bref rappel de ce que sont les nombres _dénormaux_.
 Concrétement, les _dénormaux_ codent des nombres non nul très proche de $0$.
@@ -833,29 +833,6 @@ Je cite "_Nous devons cette continuité de codage aux interprétations distincte
 
 La section suivante va dans un premier temps nous démontrer les problèmes que pose une représentation non continu entre les nombres _normaux_ et _dénormaux_.
 Enfin, la dernière section de cet annexe formalisera ce qu'est la continuité de représentation entre les nombres _normaux_ et _dénormaux_.
-
-### Représentation non continu des nombres dénormaux
-
-En cas de continuité entre les nombres _normaux_ et _dénormaux_ au format _Half Precision_, il faut que le plus petit nombre positif _normalisé_ soit consécutif au plus grand nombre positif _dénormalisé_.
-
-Nous avons déjà vu l'illustration du plus petit nombre positif _normalisé_ au format _Half Precision_, ce nombre sera connu sous le nom de $\alpha$:
-
-$$\alpha: \ \left[0_{15}, \quad 0_{14}, \ 0_{13}, \ 0_{12}, \ 0_{11}, \ 1_{10}, \quad 0_9, \ 0_8, \ 0_7, \ 0_6, \ 0_5, \ 0_4, \ 0_3, \ 0_2, \ 0_1, \ 0_0\right]$$
-
-Le nombre $\alpha$ est _normalisé_
-
-En prime, voici l'illustration du plus grand nombre positif _dénormalisé_ pouvant être codé au format _Half Precision_, ce nombre sera connu sous le nom de $\beta$.
-
-$$\beta: \ \left[0_{15}, \quad 0_{14}, \ 0_{13}, \ 0_{12}, \ 0_{11}, \ 0_{10}, \quad 1_9, \ 1_8, \ 1_7, \ 1_6, \ 1_5, \ 1_4, \ 1_3, \ 1_2, \ 1_1, \ 1_0\right]$$
-
-
-
-//
-
-Commençons par voir un cas de continuité de codage immuable, celui du champs de mantisse tronquée des nombres _normaux_ ainsi que _dénormaux_.
-Au format _Half Precision_, la plus petite valeur effective du champs de mantisse tronquée d'un nombre _normalisé_ est de $\left(1 + 0.0000000000\right)$, c'est à dire $1.0000000000$.
-Toujours au format _Half Precision_, représentons désormais la plus grande valeur effective du champs de mantisse tronquée d'un nombre _dénormalisé_, qui est de $\left(0 + 0.1111111111_2\right)$ ce qui vaut $0.1111111111_2$.
-Ces deux champs de mantisse tronquée ont une valeur consécutive $\left(0.1111111111_2 + 0.0000000001_2\right) = 1.0000000000$, ce qui démontre qu'il y a bien continuité dans le codage des champs de mantisse tronquée des nombres _normaux_ et _dénormaux_.
 
 ### Représentation non continu des nombres dénormaux
 
@@ -886,32 +863,26 @@ D'où le fait que nous calculons la puissance que représente le champs d'exposa
 La valeur du nombre $\tau$ est de $\left(\left(0 + 0.0009765625\right) \times 2^{\left(0 - 15\right)}\right)$ ce qui donne $0.0000000298023223876953125$.
 
 Pour commencer, remarquons que le ratio suivant $\left(\alpha \div \beta\right)$ a une valeur qui vaut environ $2.0019$.
-Le nombre $\beta$ est deux fois plus petit que $\alpha$, ce qui peut se traduire par le plus grand nombre positif _dénormalisé_ est deux fois inférieur au plus petit nombre positif _normalisé_.
-Voici l'une des phrases d'introduction du chapitre "_La continuité de représentation des nombres dénormaux_", je cite " $\left[..\right]$ _les nombres dénormaux positifs sont censés couvrir tout les nombres dont la valeur se situe entre_ $0$ _et le plus petit nombre positif normalisé._".
-Dans les faits, nous nous rendons compte qu'il y a une partie des nombres compris dans l'intervalle $\left]0;\alpha\right[$ qui ne sont pas représentable.
-Pour cause, tout les nombres qui se situent dans l'intervalle suivant $\left]\beta;\alpha\right[$ sont trop grands pour être représenté par des nombres _dénormaux_, tout en étant à la fois trop petit pour l'être par des nombres _normaux_.
+Voici l'une des phrases d'introduction du chapitre "_La continuité de représentation entre les nombres normaux et dénormaux_", je cite " $\left[..\right]$ _les nombres dénormaux positifs sont censés couvrir tout les nombres dont la valeur se situe entre_ $0$ _et le plus petit nombre positif normalisé._".
+Dans les faits, étant donné que le plus grand nombre positif _dénormalisé_ $\beta$ est deux fois inférieur au plus petit nombre positif _normalisé_ $\alpha$, il y a alors une partie des nombres compris dans l'intervalle $\left]0;\alpha\right[$ qui ne sont pas représentable.
+Pour cause, tout les nombres qui se situent dans cet intervalle $\left]\beta;\alpha\right[$, sont soit trop grands pour être représenté par des nombres _dénormaux_, soit trop petit pour l'être par des nombres _normaux_.
 Parmis tout les nombres de l'intervalle $\left]0;\alpha\right[$, nous pouvons savoir qu'il y a $\left(\beta \div \alpha\right)$ c'est à dire $\approx 49.9$% d'entre eux qui ne peuvent pas être représentés.
 
-
-//
-
-
-Rappelons ce qui a été dit plus haut, je cite "_Dans la théorie, tout nombre dont la valeur se situe entre_ $0$ _et le plus petit nombre positif normalisé, devrait pouvoir être représenté sous la forme d'un nombre dénormalisé_.".
-Dans les faits, nous nous rendons compte que ce n'est pas le cas.
-La raison en est que la plage de codage des nombres _dénormaux_ comporte un "trou" de valeur ne pouvant pas être représenté.
-
-Par exemple, pour le calcul $\left(\alpha - \tau\right)$ aussi proche de $\alpha$ que puisse être le résultat, il n'est pourtant pas représentable.
-Le résultat de ce calcul est $0,0000610053539276123046875$ et figure dans l'intervalle de valeur $\left]\beta;\alpha\right[$ ne pouvant donc être codé ni par des nombres _normaux_, ni par des nombres _dénormaux_.
+Prenons pour exemple le résultat du calcul $\left(\alpha - \tau\right)$, aussi proche que le résultat puisse être de $\alpha$ il n'est pour autant pas représentable.
+Nous venons tout juste de voir pourquoi.
+Le résultat de ce calcul est $0,0000610053539276123046875$, ce qui est très légèrement inférieur au nombre $\alpha$.
+Par conséquent, ce résultat se situe dans l'intervalle $\left]\beta;\alpha\right[$, d'où le fait qu'il ne puisse être ni représenté par un nombre _normalisé_, ni par un nombre _dénormalisé_.
+Le résultat de ce calcul fait donc partie d'une sorte de "trou" de valeur non représentable.
 
 Dans les faits, les calculs sur les flottants occasionnent souvent des arrondis, du fait de l'incapacité de toute base numérique à pouvoir représenté certain nombre de manière fini.
 Prenez l'exemple de $\left(1 \div 3\right)$ en base décimale, ou encore $\left(1 \div 10\right)$ en binaire pour vous en convaincre.
 Le standard IEEE-754 défini des méthodes d'arrondissement que nous ne détaillerons pas dans ce document.
-Pour autant, le résultat de $\left(\alpha - \tau\right)$ est si proche de la valeur de $\alpha$, qu'il pourrait être possible d'utiliser une méthode d'arrondi par le haut pour obtenir un résultat suffisamment précis pour certain type de calcul.
-Mais si cela est vrai pour $\tau$, ça ne l'est pas pour un nombre comme $0.000045$.
-Le nombre $0.000045$ a une valeur aussi lointaine de $\alpha$ que de $\beta$ pour ainsi dire.
-N'importe quel méthode d'arrondi transformerait beaucoup ce nombre jusqu'à le rendre trop approximatif pour presque tout les cas d'usage.
+Cependant, le résultat du calcul $\left(\alpha - \tau\right)$ est si proche de la valeur de $\alpha$, qu'il pourrait être possible d'utiliser une méthode d'arrondi par le haut pour obtenir un résultat dont la précision conviendrai à certains cas d'usage.
+Malgré tout cela n'est pas toujours possible, ça ne l'est pas pour un nombre comme $0.000045$ par exemple.
+Ce nombre est pour ainsi dire aussi lointain du plus grand nombre positif _dénormalisé_ $\beta$, que du plus petit nombre positif _normalisé_ $\alpha$.
+N'importe quel méthode d'arrondi transformerait le nombre jusqu'à le rendre trop approximatif pour presque tout les cas d'usage.
 
-Voilà le problème que pose l'absence de continuité entre la représentation des nombres _normaux_ et _dénormaux_.
+Voilà en quoi l'absence de continuité entre la représentation des nombres _normaux_ et _dénormaux_ est un problème sérieux.
 
 ### Représentation continu des nombres dénormaux
 
