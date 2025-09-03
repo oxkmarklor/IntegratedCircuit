@@ -29,7 +29,7 @@ Pour un champs de $16$ bits nous pourrions calculé la somme des bits pour repr�
 Avec cet encodage nous ne pourrions codé que des valeurs entre $0$ et $16$ inclus, ce qui n'est pas optimal pour bien des situations.
 Mais parmis les multiples encodage existant, le plus connu de tous porte le nom de __Binary Unsigned__.
 
-Le __Binary Unsigned__ utilise les mêmes primitives que la base décimale (celle que nous utilisons tous) pour représenter des nombres, _des puissances_.
+Le __Binary Unsigned__ utilise les mêmes primitives que la base décimale pour représenter des nombres, _des puissances_.
 Pour représenter la valeur $103$ en décimale, nous décomposons en réalité chaque chiffre du nombre pour les multipliés avec une puissance de $10_{10}$ adéquat, ensuite nous faisons la somme des résultats de chaque produit.
 Regardez ci-dessous.
 
@@ -38,7 +38,7 @@ $$103 = 1 \times 10^2 + 0 \times 10^1 + 3 \times 10^0$$
 Veuillez noté que l'indice $X_{10}$ représente la base numérique dans laquelle le nombre $X$ qui précède est écrit.
 Nous retrouvons chacun des chiffres du nombre entrain de multiplié une puissance de $10_{10}$.
 Remarquons que le chiffre des unités $3$ est facteur de $10_{10}$ à la puissance $0$, le chiffre d'un ordre plus grand (celui des dizaines) est le facteur de $10_{10}$ à la puissance $1$ et enfin le chiffre des centaines multiplie $10_{10}$ à la puissance $2$.
-La valeur des puissances croix en fonction de la position du chiffre, qui plus est, elle commence à $0$.
+La valeur des puissances croix en fonction de la position du chiffre, qui plus est, elle commence à $0$ au niveau des unités.
 
 Ceci n'est pas propre à la base décimale mais à _n'importe quel base numérique_, comme la __base binaire__ par exemple.
 La base binaire (ou base $2$) utilise les chiffres $0$ et $1$ plutôt que ceux de la base décimale allant de $0$ à $9$.
@@ -46,23 +46,25 @@ Par ailleurs, un tel chiffre s'appelle un _bit_, ce qui est la contraction de __
 Aussi, les puissances de $10_{10}$ sont remplacés par des puissances de $2$.
 Nous venons tout juste de décrire ce sur quoi se base l'encodage __Binary Unsigned__.
 
-Un champs binaire pour lequel nous utilisons un encodage __Binary Unsigned__ associe une puissance de $2$ positive à chaque bit du champs.
-Le champs représente un nombre $X$ par la somme des produits entre la valeur de chaque bit et la puissance de $2$ associée.
-Techniquement, vu que dans chacun des produits la puissance de $2$ est multiplié par son bit associé, qui est à $0$ ou à $1$, soit le résultat est nulle ou soit il est équivalent à la puissance de $2$ associé au bit sous-jacent.
-C'est pourquoi vous entenderez souvent dire (ici compris), qu'un nombre $X$ est représenté par la somme des puissances de $2$ dont le bit est à $1$.
-Les puissances de $2$ vont de $0$ à $N - 1$, ou la valeur de $N$ est le nombre de bits qui compose un champs binaire.
+Un champs binaire pour lequel nous utilisons un encodage _Binary Unsigned_, associe une puissance de $2$ positive ou nulle à chaque bit du champs.
+Le champs représente un nombre par la somme des produits entre la valeur de chaque bit et la puissance de $2$ associée.
+Techniquement, vu que dans chacun des produits la puissance de $2$ est multiplié par son bit associé, qui est à $0$ ou à $1$, soit le résultat est nul ou soit il est équivalent à la puissance de $2$ associé au bit sous-jacent.
+C'est pourquoi vous entenderez souvent dire (ici compris), qu'un champs en _Binary Unsigned_ représente un nombre par la somme des puissances de $2$ dont le bit est à $1$.
+Les puissances de $2$ vont de $0$ à $N - 1$, où $N$ est le nombre de bits qui compose le champs binaire.
 Par ailleurs, il est souvent dit que chaque bit a un "poids".
 Le poids correspond à la valeur de la puissance de $2$ associée à chacun des bits d'un champs, plus cette puissance sera grande et plus un bit aura d'importance dans la représentation d'un nombre. 
 
+$$ 101_2 = 1 \times 2^2 + 0 \times 2^1 + 1 \times 2^0$$
+
 Il est aussi défini ce que nous qualifions de __LSB__ pour __Least Significant Bit__.
-Ce terme désigne le bit de poids le plus faible d'un champs, donc le bit de poids $0$ pour un champs dont l'encodage est en __Binary Unsigned__.
+Ce terme désigne le bit de poids le plus faible d'un champs, en l'occurence le bit le plus à droite de l'illustration ci-dessus et dont la puissance est $2^0$.
 Au contraire, le bit de poids le plus fort d'un champs binaire est ce que l'ont appelle le __MSB__ pour __Most Significant Bit__.
-Il est aussi possible de faire référence au bit à $1$ de poids le plus faible d'un champs avec le terme __LSB1__, ou à celui de poids le plus fort avec __MSB1__.
+Dans l'illustration il s'agit du bit dont la puissance est $2^2$, ou autrement dit le bit de poids $2$.
+Il est aussi possible de faire spécifiquement référence au bit à $1$ de poids le plus faible d'un champs avec le terme __LSB1__, ou à celui de poids le plus fort avec __MSB1__.
 
 ### Une propriété importante de l'encodage Binary Unsigned
 
 Avec un champs dont l'encodage est en __Binary Unsigned__, nous avons la certitude que la valeur d'un bit à $1$ de poids $i$ est strictement supérieur à la somme des valeurs de chaque bit de poids inférieur à $i$.
-Autrement dit $\left(1\times 2^i\right) \gt \left(\sum_{i=i-1}^0 2^i\right)$.
 Prenons comme exemple un champs binaire de $8$ bits, pour lequel nous n'allons faire attention qu'à un seul bit, celui de poids $6$ admettons.
 Disons que ce champs ressemble à ceci $01111111_{2}$, la valeur du nombre représenté est $127$ et le bit qui nous intéresse se trouve être le __MSB1__ du champs.
 La somme des valeurs des bits de poids inférieur au bit de poids $6$ donne un résultat strictement inférieur à $1 \times 2^6 = 64$.
@@ -136,7 +138,7 @@ Il se trouve que le circuit traite les champs d'exposants (que nous nommerons) $
 La raison en est que les champs d'exposant à eux seuls peuvent permettre au circuit d'atteindre un point terminal.
 Le circuit électronique atteint un point terminal lorsqu'il est capable de générer le résultat d'une comparaison entre ses deux opérandes, sans avoir besoin d'attendre le traitement de l'entièreté de ses entrées.
 Techniquement, un point terminal est atteint si $\left(E_{\alpha} \gt E_{\beta}\right)$ car l'opérande $\vert \ \alpha \ \vert$ est strictement plus grand que $\vert \ \beta \ \vert$, et inversement avec $\left(E_{\alpha} \lt E_{\beta}\right)$.
-Nous verrons pourquoi dans le chapitre "_?L'ordre de traitement des champs d'exposant et de mantisse tronquée?_".
+Nous verrons pourquoi dans le chapitre "_Les points terminaux et non terminaux_".
 
 Cependant, le circuit peut aussi rencontrer un point non terminal.
 Le circuit atteint ce dernier lorsque $\left(E_{\alpha} = E_{\beta}\right)$.
