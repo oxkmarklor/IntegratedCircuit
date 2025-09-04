@@ -85,6 +85,16 @@ La norme _IEEE-754_ défini trois éléments pour l'encodage de chaque nombre à
   - Un champs binaire d'___exposant___
   - Un champs binaire de ___mantisse tronquée___
 
+Il existe plusieurs format de flottant défini par le standard IEEE-754.
+Voici la disposition précise de chaque bit de chacun des champs pour le codage d'un nombre au format _Half Precision_, qui est a une taille de $16$ bits:
+
+$$\left[S_{15}, \quad E_{14}, \ E_{13}, \ E_{12}, \ E_{11}, \ E_{10}, \quad T_9, \ T_8, \ T_7, \ T_6, \ T_5, \ T_4, \ T_3, \ T_2, \ T_1, \ T_0\right]$$
+
+$S$: Sign bit,  $E$: Exponent, $T$: Truncated mantissa
+
+Chaque indice (nombre) compris dans l'intervalle $\left[0;15\right]$ représente le poids d'un bit précis.
+En effet, il est très commun d'indicé un bit d'un champs binaire par son poids.
+
 Dans ce qui suit, nous allons nous intéresser aux encodages propre des champs binaires d'exposant et de mantisse tronquée.
 Nous allons voir que les encodages des champs de mantisse tronquée et d'exposant partagent les même caractéristiques que le _Binary Unsigned_.
 Ce qui permet de traité ces deux champs avec un même processus de calcul, ce qui se reflète sur l'architecture du circuit électronique.
@@ -94,10 +104,10 @@ Ce qui permet de traité ces deux champs avec un même processus de calcul, ce q
 __Le champs d'exposant utilise un encodage par biais__, ce dernier est assez simple à comprendre.
 Enfaite, le champs d'exposant est un champs binaire pour lequel nous utilisons un encodage _Binary Unsigned_ qui code une valeur numérique $X$, comme nous l'avons vu précédemment.
 A cela, il faut __ajouté ou déduire__ un biais $B$ (un nombre entier naturel) pour obtenir la valeur représenté par le champs binaire.
-Dans les faits, la valeur que représente le champs d'exposant est alors issu du calcul $X - B$. 
+Dans les faits, la valeur que représente un champs d'exposant est alors issu du calcul $X - B$. 
 Peu importe le format de flottant IEEE-754, le champs d'exposant a un biais $B$ qui se calcul de la manière suivante $\left(2^{\left(N-1\right)} - 1\right)$, où $N$ est le nombre de bits du champs d'exposant.
 
-Etant donné que l'encodage par biais se repose sur le _Binary Unsigned_, le champs d'exposant partage alors les même propriétés que cet encodage.
+Etant donné que l'encodage par biais se repose sur le _Binary Unsigned_, un champs d'exposant partage alors les même propriétés que cet encodage.
 Notamment le fait que dans le champs binaire, la valeur d'un bit à $1$ de poids $i$ soit strictement supérieur à la somme des valeurs des bits de poids inférieur à $i$.
 
 ### La mantisse tronquée, une histoire de puissance de 2
@@ -106,11 +116,11 @@ Comme nous venons de le voir avec le champs d'exposant, le standard IEEE-754 se 
 Je rappelle qu'il existe des nombres binaire à virgule fixe et à virgule flottante (ou nombre flottant).
 La seule différence entre les deux est qu'un nombre à virgule flottante peut avoir une quantité variable de bit derrière sa virgule, au contraire d'un nombre à virgule fixe.
 L'encodage du champs de mantisse tronquée tel que défini par le standard IEEE-754, se base sur l'encodage des nombres à virgule flottante.
-Alors faisons un rapide rappel que cet encodage.
+Alors faisons un rapide rappel de cet encodage.
 
 La partie entière d'un nombre flottant utilise du _Binary Unsigned_ pour être codé, tandis que la partie fractionnaire fait usage d'une version modifiée du _Binary Unsigned_.
 Chaque bit de la partie fractionnaire est un ___facteur d'une puissance de 2 négative___, et non positive.
-Ceci permet à la partie fractionnaire du nombre de représenté des valeurs dans l'intervalle $\left[0;1\right[$.
+Ceci permet à la partie fractionnaire d'un nombre de représenté des valeurs dans l'intervalle $\left[0;1\right[$.
 Le poids des puissances négatives de $2$ décroix en fonction de la position du bit.
 Prenons l'exemple du nombre $3.875$.
 
@@ -118,10 +128,10 @@ $$3.875 = 11.111_2 = Integer \ Part\left(\left(1 \times 2^1\right) + \left(1 \ti
 
 Attention car dans les faits, le point dans l'écriture binaire de $3.875$ n'est pas réelement présent dans le codage du nombre, je l'ai rajouté pour simplifier la lecture.
 Mais ce qu'il y a d'important à remarquer pour les bits de la partie fractionnaire d'un nombre à virgule flottante, c'est que la valeur d'un bit à $1$ de poids $i$ est strictement supérieur à la somme des valeurs des bits de poids inférieur à $i$.
-Imaginons avoir nommé $F$ le nombre illustré ci-dessus, alors pour le bit à $1$ de poids $-1$ nous savons que $\left(1 \times 2^{-1}\right) \gt \sum_{i=-2}^{-3} \left(F_i \times 2^i\right)$.
+Imaginons que nous ayons nommés $F$ le nombre illustré ci-dessus, alors pour le bit à $1$ de poids $-1$ nous savons que $\left(1 \times 2^{-1}\right) \gt \sum_{i=-2}^{-3} \left(F_i \times 2^i\right)$.
 
 Revenons-en au sujet de la mantisse tronquée désormais.
-Plus bas, nous verrons comment le champs de mantisse tronquée code tout les bits de la partie entière ainsi que de la partie fractionnaire d'un nombre à virgule flottante (lorsque c'est possible).
+Plus bas, nous verrons comment le champs de mantisse tronquée code tout les bits de la partie entière, ainsi que de la partie fractionnaire d'un nombre à virgule flottante (lorsque c'est possible).
 __Vu que la partie entière et fractionnaire d'un nombre à virgule flottante partagent les propriétés du _Binary Unsigned_, c'est aussi le cas de la mantisse tronquée elle même__.
 Pour l'instant, c'est tout ce dont nous avons besoin de savoir.
 
@@ -130,9 +140,9 @@ C'est dans la démonstration mathématique que nous verrons à quel point cela v
 
 # L'ordre de traitement des champs d'opérande
 
-Comme dit plus haut, la tâche primaire du circuit est de comparer deux nombres flottants ___Half Precision___ (d'une taille de $16$ bits), nous les nommerons $\alpha$ et $\beta$.
+Comme dit plus haut, la tâche primaire du circuit est de comparer deux nombres flottants IEEE-754 (de format ___Half Precision___ qui plus est), que nous nommerons $\alpha$ et $\beta$.
 La comparaison en question est une vérification de la supériorité stricte de la valeur absolu de l'un de ces deux opérandes envers l'autre, admettons $\left(\vert\alpha\vert \gt \vert\beta\vert\right)$.
-Etant donné que le circuit n'a besoin que de la valeur absolu des opérandes $\alpha$ et $\beta$, seul les $15$ bits de poids faible sont utiles (le bit de signe est omis).
+Etant donné que le circuit n'a besoin que de la valeur absolu des opérandes $\alpha$ et $\beta$, seul les $15$ bits de poids faible des opérandes sont utiles (le bit de signe est omis).
 
 Il se trouve que le circuit traite les champs d'exposants (que nous nommerons) $E$ de $\alpha$ ainsi que de $\beta$, avant les champs de mantisse tronquée (que nous nommerons $T$) de ces même opérandes.
 La raison en est que les champs d'exposant à eux seuls peuvent permettre au circuit d'atteindre un point terminal.
@@ -386,20 +396,6 @@ Pour le circuit, la génération de ses deux bits de sortie passe par une compar
 La démonstration mathématique ne va abordé que la logique de comparaison du circuit, ce qui représente la plus grosse partie de la logique du circuit tout de même.
 Pour expliqué le reste de la logique, il faudrait en dire plus sur le circuit, ce qui est le cas de la documentation vers laquelle je vous renvoie une nouvelle fois.
 __En outre, tout ce qui va suivre de la démonstration se base sur la verification de la condition suivante__ $\left(\vert\alpha\vert \gt \vert\beta\vert\right)$.
-
-### Rapide survol du format Half Precision
-
-L'encodage IEEE-754 défini trois éléments pour chaque format de flottant pris en charge par la norme, le _bit de signe_, le _champs d'exposant_ ainsi que le _champs de mantisse tronquée_.
-Voici la disposition précise de chaque bit de chacun de ces champs pour le codage d'un nombre _Half Precision_ ($16$ bits):
-
-$$\left(1\right) \quad \left[S_{15}, \quad E_{14}, \ E_{13}, \ E_{12}, \ E_{11}, \ E_{10}, \quad T_9, \ T_8, \ T_7, \ T_6, \ T_5, \ T_4, \ T_3, \ T_2, \ T_1, \ T_0\right]$$
-
-$S$: Sign bit,  $E$: Exponent, $T$: Truncated mantissa
-
-Chaque indice (nombre) compris dans l'intervalle $\left[0;15\right]$ représente le poids d'un bit précis.
-En effet, il est très commun d'indicé les bits d'un champs binaire par leur poids.
-Cependant, dans la démonstration mathématique nous ne considérerons que les bits dont les indices sont dans l'intervalle $\left[0;14\right]$.
-N'oublions pas que le circuit ne se soucis que de la valeur absolu des opérandes $\alpha$ et $\beta$ qu'il reçoit en entrée, donc le bit de signe de ces opérandes (bit de poids $15$) est omis.
 
 ### Définition de quelques opérations fondamentales à la démonstration 
 
