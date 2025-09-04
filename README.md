@@ -102,28 +102,28 @@ Notamment le fait que dans le champs binaire, la valeur d'un bit à $1$ de poids
 
 ### La mantisse tronquée, une histoire de puissance de 2
 
-Comme nous venons de le voir avec le champs d'exposant, le standard IEEE-754 se base sur des encodages eux même déjà existant.
-Je rappelle qu'il existe des nombres à virgule fixe et à virgule flottante (ou nombre flottant).
+Comme nous venons de le voir avec le champs d'exposant, le standard IEEE-754 se base sur des champs aux encodages eux même déjà existant.
+Je rappelle qu'il existe des nombres binaire à virgule fixe et à virgule flottante (ou nombre flottant).
 La seule différence entre les deux est qu'un nombre à virgule flottante peut avoir une quantité variable de bit derrière sa virgule, au contraire d'un nombre à virgule fixe.
 L'encodage du champs de mantisse tronquée tel que défini par le standard IEEE-754, se base sur l'encodage des nombres à virgule flottante.
 Alors faisons un rapide rappel que cet encodage.
 
 La partie entière d'un nombre flottant utilise du _Binary Unsigned_ pour être codé, tandis que la partie fractionnaire fait usage d'une version modifiée du _Binary Unsigned_.
-Chaque bit de la partie fractionnaire est un ___facteur d'une puissance de 2 négative___ et non positive.
-Ceci permet de représenté des valeurs dans l'intervalle $\left[0;1\right[$.
+Chaque bit de la partie fractionnaire est un ___facteur d'une puissance de 2 négative___, et non positive.
+Ceci permet à la partie fractionnaire du nombre de représenté des valeurs dans l'intervalle $\left[0;1\right[$.
 Le poids des puissances négatives de $2$ décroix en fonction de la position du bit.
-Prenons l'exemple du nombre $3.75$.
+Prenons l'exemple du nombre $3.875$.
 
-$$3.75 = 11.11_2 = Integer \ Part\left(\left(1 \times 2^1\right) + \left(1 \times 2^0\right)\right) + Fractional \ Part\left(\left(1 \times 2^{-1}\right) + \left(1 \times 2^{-2}\right)\right)$$
+$$3.875 = 11.111_2 = Integer \ Part\left(\left(1 \times 2^1\right) + \left(1 \times 2^0\right)\right) + Fractional \ Part\left(\left(1 \times 2^{-1}\right) + \left(1 \times 2^{-2}\right) + \left(1 \times 2^{-3}\right)\right)$$
 
-Attention car dans les faits, le point dans l'écriture binaire du nombre $3.75$ n'est pas réelement présent dans le codage du nombre.
-Ce qu'il y a d'important à remarquer pour la partie fractionnaire d'un nombre à virgule flottante, c'est que la valeur d'un bit à $1$ de poids $i$ est toujours strictement supérieur à la somme des valeurs des bits de poids inférieur à $i$.
-Autrement dit, pour le bit à $1$ de poids $i$ du nombre fractionnaire $F \in \left[0;1\right[$, alors $\left(1 \times 2^i\right) \gt \left(\sum_{i=i-1}^{lsb\left(F\right)} \left(F_i \times 2^i\right)\right)$.
+Attention car dans les faits, le point dans l'écriture binaire de $3.875$ n'est pas réelement présent dans le codage du nombre, je l'ai rajouté pour simplifier la lecture.
+Mais ce qu'il y a d'important à remarquer pour les bits de la partie fractionnaire d'un nombre à virgule flottante, c'est que la valeur d'un bit à $1$ de poids $i$ est strictement supérieur à la somme des valeurs des bits de poids inférieur à $i$.
+Imaginons avoir nommé $F$ le nombre illustré ci-dessus, alors pour le bit à $1$ de poids $-1$ nous savons que $\left(1 \times 2^{-1}\right) \gt \sum_{i=-2}^{-3} \left(F_i \times 2^i\right)$.
 
 Revenons-en au sujet de la mantisse tronquée désormais.
 Plus bas, nous verrons comment le champs de mantisse tronquée code tout les bits de la partie entière ainsi que de la partie fractionnaire d'un nombre à virgule flottante (lorsque c'est possible).
 __Vu que la partie entière et fractionnaire d'un nombre à virgule flottante partagent les propriétés du _Binary Unsigned_, c'est aussi le cas de la mantisse tronquée elle même__.
-Pour l'instant, c'est tout ce qui nous importe de comprendre.
+Pour l'instant, c'est tout ce dont nous avons besoin de savoir.
 
 Nous pouvons remarquer que le champs d'exposant et de mantisse tronquée partagent bel et bien les même propriétés que l'encodage _Binary Unsigned_, comme mentionné plus haut.
 C'est dans la démonstration mathématique que nous verrons à quel point cela va nous être utile.
