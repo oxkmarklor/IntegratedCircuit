@@ -14,21 +14,17 @@ Par exemple, en ___écriture scientifique décimale___ nous pouvons représenté
 Cela peut paraitre plus compliqué à interprété de prime abord, mais comme nous le verrons dans les chapitres ci-dessous, en réalité tout n'est qu'une histoire de vrigule et de puissance.
 
 Le fonctionnement de l'écriture scientifique ne change que peu lorsque nous passons d'une base numérique vers une autre.
-La composition de la notation scientifique d'un nombre reste cependant la même peut importe la base numérique:
-  - Le ___signe___
+Quant à la composition de la notation scientifique d'un nombre, elle reste cependant la même peut importe la base numérique utilisée pour représenter le nombre:
+  - Un ___signe___
   - Un ___significande___
   - Un ___multiplicande___
 
-Dans l'exemple fournit ci-dessus, le signe est évidemment le symbole $+$ qui indique si le nombre est positif ou négatif, la valeur $3.0$ est le significande qui peut également être appellé ___mantisse___, et enfin le multiplicande qui est la base $10$ élevé à la puissance $5$.
-En notation scientifique décimale, le significande peut être toute valeur comprise dans l'intervalle $\left[1;10\right[$, et le multiplicande est une puissance de $10$.
+Dans l'exemple fournit ci-dessus, le signe est évidemment le symbole $+$ qui indique si le nombre est positif ou négatif, la valeur $3.0$ est le significande qui peut également être appellé ___mantisse___, et enfin le multiplicande est le nombre $10$ élevé à la puissance $5$.
+En notation scientifique décimale, le significande a une valeur comprise dans l'intervalle $\left[1;10\right[$, et le multiplicande est une puissance de $10$.
 De manière général, pour une notation scientifique en base $N$.
-Le significande ne peut être compris qu'entre $\left[1;N\right[$, et le multiplicande est alors une puissance de $N$.
-C'est ce que nous allons respectivement voir dans les chapitres du nom de "_Le significande_" et "_Le multiplicande_" qui suivent.
+La valeur du significande ne peut être comprise qu'entre $\left[1;N\right[$, et le multiplicande est alors une puissance de $N$.
 
-Pour terminer, précisons que si nous parlons de l'écriture scientifique ce n'est pas pour rien.
-Nous verrons d'ici quelques chapitre que chacun des éléments de l'encodage _IEEE-754_ ayant été défini plus tôt, correspond à l'un des éléments de l'écriture scientifique binaire d'un nombre.
-
-## Le significande
+## Comprendre ce qu'est le significande
 
 Pour écrire en notation scientifique le nombre flottant $F$, il faut partir de son codage en nombre à virgule flottante.
 
