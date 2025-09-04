@@ -1,4 +1,74 @@
-// Maj post démonstration: L'écriture scientifique binaire -> Le Binary Unsigned -> Le standard IEEE-754 -> L'encodage des champs d'un nombre IEEE-754 -> Le codage des champs d'un nombre IEEE-754 -> Ordre de traitement des champs + Les points terminaux et non terminaux
+// Maj post démonstration: Le Binary Unsigned -> L'écriture scientifique binaire -> Le standard IEEE-754 -> L'encodage des champs d'un nombre IEEE-754 -> Le codage des champs d'un nombre IEEE-754 -> Ordre de traitement des champs + Les points terminaux et non terminaux
+
+
+
+
+
+
+
+
+# L'encodage Binary Unsigned
+
+Commençons par la base.
+
+Un bit est symboliquement représenté par un $0$ ou un $1$.
+Un champs binaire est quant à lui composé d'un ensemble de bit, c'est à dire d'un ensemble de $0$ et de $1$.
+
+Ce sont ces champs binaire qui nous permettent de représenté des nombres dans un ordinateur, faire des calculs, mémorisé des résultats.
+Il y a cependant plein de façon de représenté des nombres dans un champs binaire, nous parlons d'_encodage_ des nombres.
+Tout les encodages ne se valent pas car il y en a des plus efficasse que d'autre en fonction des besoins, prenons un exemple.
+Pour un champs de $16$ bits nous pourrions calculé la somme des bits pour représenter un nombre.
+Avec cet encodage nous ne pourrions codé que des valeurs entre $0$ et $16$ inclus, ce qui n'est pas optimal pour bien des situations.
+Mais parmis les multiples encodage existant, le plus connu de tous porte le nom de __Binary Unsigned__.
+
+## L'encodage Binary Unsigned
+
+Le __Binary Unsigned__ utilise les mêmes primitives que la base décimale pour représenter des nombres, _des puissances_.
+Pour représenter la valeur $103$ en décimale, nous décomposons en réalité chaque chiffre du nombre pour les multipliés avec une puissance de $10_{10}$ adéquat, ensuite nous faisons la somme des résultats de chaque produit.
+Regardez ci-dessous.
+
+$$103 = 1 \times 10^2 + 0 \times 10^1 + 3 \times 10^0$$
+
+Veuillez noté que l'indice $X_{10}$ représente la base numérique dans laquelle le nombre $X$ qui précède est écrit.
+Nous retrouvons chacun des chiffres du nombre entrain de multiplié une puissance de $10_{10}$.
+Remarquons que le chiffre des unités $3$ est facteur de $10_{10}$ à la puissance $0$, le chiffre d'un ordre plus grand (celui des dizaines) est le facteur de $10_{10}$ à la puissance $1$ et enfin le chiffre des centaines multiplie $10_{10}$ à la puissance $2$.
+La valeur des puissances croix en fonction de la position du chiffre, qui plus est, elle commence à $0$ au niveau des unités.
+
+Ceci n'est pas propre à la base décimale mais à _n'importe quel base numérique_, comme la __base binaire__ par exemple.
+La base binaire (ou base $2$) utilise les chiffres $0$ et $1$ plutôt que ceux de la base décimale allant de $0$ à $9$.
+Par ailleurs, un tel chiffre s'appelle un _bit_, ce qui est la contraction de __Binary Digit__.
+Aussi, les puissances de $10_{10}$ sont remplacés par des puissances de $2$.
+Nous venons tout juste de décrire ce sur quoi se base l'encodage __Binary Unsigned__.
+
+Un champs binaire pour lequel nous utilisons un encodage _Binary Unsigned_, associe une puissance de $2$ positive ou nulle à chaque bit du champs.
+Le champs représente un nombre par la somme des produits entre la valeur de chaque bit et la puissance de $2$ associée.
+Techniquement, vu que dans chacun des produits la puissance de $2$ est multiplié par son bit associé, qui est à $0$ ou à $1$, soit le résultat est nul ou soit il est équivalent à la puissance de $2$ associé au bit sous-jacent.
+C'est pourquoi vous entenderez souvent dire (ici compris), qu'un champs en _Binary Unsigned_ représente un nombre par la somme des puissances de $2$ dont le bit est à $1$.
+Les puissances de $2$ vont de $0$ à $N - 1$, où $N$ est le nombre de bits qui compose le champs binaire.
+Par ailleurs, il est souvent dit que chaque bit a un "poids".
+Le poids correspond à la valeur de la puissance de $2$ associée à chacun des bits d'un champs, plus cette puissance sera grande et plus un bit aura d'importance dans la représentation d'un nombre. 
+
+$$ 101_2 = 1 \times 2^2 + 0 \times 2^1 + 1 \times 2^0$$
+
+Il est aussi défini ce que nous qualifions de __LSB__ pour __Least Significant Bit__.
+Ce terme désigne le bit de poids le plus faible d'un champs, en l'occurence le bit le plus à droite de l'illustration ci-dessus et dont la puissance est $2^0$.
+Au contraire, le bit de poids le plus fort d'un champs binaire est ce que l'ont appelle le __MSB__ pour __Most Significant Bit__.
+Dans l'illustration il s'agit du bit dont la puissance est $2^2$, ou autrement dit le bit de poids $2$.
+Il est aussi possible de faire spécifiquement référence au bit à $1$ de poids le plus faible d'un champs avec le terme __LSB1__, ou à celui de poids le plus fort avec __MSB1__.
+
+### Une propriété importante de l'encodage Binary Unsigned
+
+Avec un champs dont l'encodage est en __Binary Unsigned__, nous avons la certitude que la valeur d'un bit à $1$ de poids $i$ est strictement supérieur à la somme des valeurs de chaque bit de poids inférieur à $i$.
+Prenons comme exemple un champs binaire de $8$ bits, pour lequel nous n'allons faire attention qu'à un seul bit, celui de poids $6$ admettons.
+Disons que ce champs ressemble à ceci $01111111_{2}$, la valeur du nombre représenté est $127$ et le bit qui nous intéresse se trouve être le __MSB1__ du champs.
+La somme des valeurs des bits de poids inférieur au bit de poids $6$ donne un résultat strictement inférieur à $1 \times 2^6 = 64$.
+Cela est systèmatiquement vrai, même lorsque tout les bits de poids inférieur sont à $1$, comme dans cet exemple.
+
+$$\left(1 \times 2^6 = 64\right) \gt \left(63 = 1 \times 2^5 + 1 \times 2^4 + 1 \times 2^3 + 1 \times 2^2 + 1 \times 2^1 + 1 \times 2^0\right)$$
+
+Encore une fois, ceci n'est pas propre à la base binaire mais à _n'importe quel base numérique_ (modulo quelques variation pour chaque base).
+
+
 
 
 
@@ -7,22 +77,21 @@
 
 Pour commencer, qu'est ce que l'_écriture scientifique_?
 
-L'écriture scientifique est une manière de représenté les nombres.
-Elle existe pour chaque base numérique, comme pour la base binaire.
-Le but de cette notation scientifique des nombres est double, le permier objectif est de ne pouvoir représenté un nombre que d'une seule façon, le second permet de simplifier la lecture des grands nombres.
-Par exemple, en ___écriture scientifique décimale___ nous pouvons représenté facilement la vitesse approchée de la lumière en km/s $+3.0 \times 10^5$.
-Cela peut paraitre plus compliqué à interprété de prime abord, mais comme nous le verrons dans les chapitres ci-dessous, en réalité tout n'est qu'une histoire de vrigule et de puissance.
+L'écriture scientifique est une façon comme une autre de représenté des nombres.
+Elle existe pour chaque base numérique, comme pour la base binaire par exemple.
+Le but de cette notation scientifique des nombres est double, le permier objectif est de ne pouvoir représenté les nombres que d'une seule façon, le second permet de simplifier la lecture des grands nombres.
+Par exemple, en ___écriture scientifique décimale___ nous pouvons représenté facilement la vitesse approchée d'un photon dans de le vide en m/s $+3.0 \times 10^8$.
+Cela peut paraitre plus compliqué à interprété de prime abord, mais comme nous allons le voir, en réalité tout n'est qu'une histoire de vrigule et de puissance.
 
 Le fonctionnement de l'écriture scientifique ne change que peu lorsque nous passons d'une base numérique vers une autre.
-Quant à la composition de la notation scientifique d'un nombre, elle reste cependant la même peut importe la base numérique utilisée pour représenter le nombre:
+Mais ce qui compose la notation scientifique ne change jamais:
   - Un ___signe___
   - Un ___significande___
   - Un ___multiplicande___
 
-Dans l'exemple fournit ci-dessus, le signe est évidemment le symbole $+$ qui indique si le nombre est positif ou négatif, la valeur $3.0$ est le significande qui peut également être appellé ___mantisse___, et enfin le multiplicande est le nombre $10$ élevé à la puissance $5$.
+Dans l'exemple fournit ci-dessus, le _signe_ est le symbole $+$ qui indique si le nombre est positif ou négatif, le _significande_ (ou ___mantisse___) est la valeur $3.0$ et enfin le multiplicande est le nombre $10$ qui est élevé à la puissance $8$.
 En notation scientifique décimale, le significande a une valeur comprise dans l'intervalle $\left[1;10\right[$, et le multiplicande est une puissance de $10$.
-De manière général, pour une notation scientifique en base $N$.
-La valeur du significande ne peut être comprise qu'entre $\left[1;N\right[$, et le multiplicande est alors une puissance de $N$.
+De manière plus général, pour une notation scientifique en base $N$, la valeur du significande ne peut être comprise qu'entre $\left[1;N\right[$ et le multiplicande est alors une puissance de $N$.
 
 ## Comprendre ce qu'est le significande
 
@@ -102,7 +171,7 @@ J'attire l'attention sur le fait que côté droit de l'équation puisse être mo
 Mais ce n'est pas fini, car pour trouver l'inverse d'une puissance de $2$ tel que $2^c$, nous pouvons simplement appliqué l'opposé de l'exposant $c$ à la base $2$.
 En gros, $1 \div 2^c = \ 2^{-c}$.
 Je me permet de rappellé que $\left(c \gt 0\right)$.
-Finalement, nous pouvons alors remplacé le membre droit $\left(F \times 2^{-c} \right)$ par $\left(F \times 2^c\right)$, à la condition qu'un décalage de $x$ rangs vers la gauche de la virgule de $F$, soit représenté dans l'équation par une valeur de $c = -x$.
+Finalement, nous pouvons alors remplacé le membre droit $\left(F \times 2^{-c} \right)$ par $\left(F \times 2^c\right)$, à la condition qu'un décalage de $x$ rangs vers la gauche de la virgule de $F$, soit représenté dans l'équation par une valeur de $c = -x$ et non $c = x$.
 
 Avec $\left(F \times 2^c\right)$ nous retrouvons bien le membre droit de notre équation initial, à la condition que $c$ puisse devenir négatif.
 De plus, nous comprenons aussi que le calcul de l'exposant $\left(i + c\right)$ du membre gauche, produit l'équivalent de $\left(i - c\right)$ dans le cas d'un décalage de la virgule de $F$ vers la gauche, car $\left(c \lt 0\right)$.
@@ -141,72 +210,6 @@ Pour retrouver la valeur initial du nombre flottant $F$, il faudra alors que la 
 Une nouvelle fois, la négation de $c$ permettra d'inversé le sens de décalage de la vrigule $\left(-\left(-c\right) = +c\right)$.
 
 Nous comprenons donc que dans les faits déplacé la virgule du significande $S$ de $-c$ rangs, est équivalent à produire le calcul $\left(S \times 2^{-c}\right)$ qui permet de retrouver la valeur de $F$ (comme vu plus haut).
-
-
-
-
-
-# L'encodage Binary Unsigned
-
-Commençons par la base.
-
-Un bit est symboliquement représenté par un $0$ ou un $1$.
-Un champs binaire est quant à lui composé d'un ensemble de bit, c'est à dire d'un ensemble de $0$ et de $1$.
-
-Ce sont ces champs binaire qui nous permettent de représenté des nombres dans un ordinateur, faire des calculs, mémorisé des résultats.
-Il y a cependant plein de façon de représenté des nombres dans un champs binaire, nous parlons d'_encodage_ des nombres.
-Tout les encodages ne se valent pas car il y en a des plus efficasse que d'autre en fonction des besoins, prenons un exemple.
-Pour un champs de $16$ bits nous pourrions calculé la somme des bits pour représenter un nombre.
-Avec cet encodage nous ne pourrions codé que des valeurs entre $0$ et $16$ inclus, ce qui n'est pas optimal pour bien des situations.
-Mais parmis les multiples encodage existant, le plus connu de tous porte le nom de __Binary Unsigned__.
-
-Le __Binary Unsigned__ utilise les mêmes primitives que la base décimale pour représenter des nombres, _des puissances_.
-Pour représenter la valeur $103$ en décimale, nous décomposons en réalité chaque chiffre du nombre pour les multipliés avec une puissance de $10_{10}$ adéquat, ensuite nous faisons la somme des résultats de chaque produit.
-Regardez ci-dessous.
-
-$$103 = 1 \times 10^2 + 0 \times 10^1 + 3 \times 10^0$$
-
-Veuillez noté que l'indice $X_{10}$ représente la base numérique dans laquelle le nombre $X$ qui précède est écrit.
-Nous retrouvons chacun des chiffres du nombre entrain de multiplié une puissance de $10_{10}$.
-Remarquons que le chiffre des unités $3$ est facteur de $10_{10}$ à la puissance $0$, le chiffre d'un ordre plus grand (celui des dizaines) est le facteur de $10_{10}$ à la puissance $1$ et enfin le chiffre des centaines multiplie $10_{10}$ à la puissance $2$.
-La valeur des puissances croix en fonction de la position du chiffre, qui plus est, elle commence à $0$ au niveau des unités.
-
-Ceci n'est pas propre à la base décimale mais à _n'importe quel base numérique_, comme la __base binaire__ par exemple.
-La base binaire (ou base $2$) utilise les chiffres $0$ et $1$ plutôt que ceux de la base décimale allant de $0$ à $9$.
-Par ailleurs, un tel chiffre s'appelle un _bit_, ce qui est la contraction de __Binary Digit__.
-Aussi, les puissances de $10_{10}$ sont remplacés par des puissances de $2$.
-Nous venons tout juste de décrire ce sur quoi se base l'encodage __Binary Unsigned__.
-
-Un champs binaire pour lequel nous utilisons un encodage _Binary Unsigned_, associe une puissance de $2$ positive ou nulle à chaque bit du champs.
-Le champs représente un nombre par la somme des produits entre la valeur de chaque bit et la puissance de $2$ associée.
-Techniquement, vu que dans chacun des produits la puissance de $2$ est multiplié par son bit associé, qui est à $0$ ou à $1$, soit le résultat est nul ou soit il est équivalent à la puissance de $2$ associé au bit sous-jacent.
-C'est pourquoi vous entenderez souvent dire (ici compris), qu'un champs en _Binary Unsigned_ représente un nombre par la somme des puissances de $2$ dont le bit est à $1$.
-Les puissances de $2$ vont de $0$ à $N - 1$, où $N$ est le nombre de bits qui compose le champs binaire.
-Par ailleurs, il est souvent dit que chaque bit a un "poids".
-Le poids correspond à la valeur de la puissance de $2$ associée à chacun des bits d'un champs, plus cette puissance sera grande et plus un bit aura d'importance dans la représentation d'un nombre. 
-
-$$ 101_2 = 1 \times 2^2 + 0 \times 2^1 + 1 \times 2^0$$
-
-Il est aussi défini ce que nous qualifions de __LSB__ pour __Least Significant Bit__.
-Ce terme désigne le bit de poids le plus faible d'un champs, en l'occurence le bit le plus à droite de l'illustration ci-dessus et dont la puissance est $2^0$.
-Au contraire, le bit de poids le plus fort d'un champs binaire est ce que l'ont appelle le __MSB__ pour __Most Significant Bit__.
-Dans l'illustration il s'agit du bit dont la puissance est $2^2$, ou autrement dit le bit de poids $2$.
-Il est aussi possible de faire spécifiquement référence au bit à $1$ de poids le plus faible d'un champs avec le terme __LSB1__, ou à celui de poids le plus fort avec __MSB1__.
-
-### Une propriété importante de l'encodage Binary Unsigned
-
-Avec un champs dont l'encodage est en __Binary Unsigned__, nous avons la certitude que la valeur d'un bit à $1$ de poids $i$ est strictement supérieur à la somme des valeurs de chaque bit de poids inférieur à $i$.
-Prenons comme exemple un champs binaire de $8$ bits, pour lequel nous n'allons faire attention qu'à un seul bit, celui de poids $6$ admettons.
-Disons que ce champs ressemble à ceci $01111111_{2}$, la valeur du nombre représenté est $127$ et le bit qui nous intéresse se trouve être le __MSB1__ du champs.
-La somme des valeurs des bits de poids inférieur au bit de poids $6$ donne un résultat strictement inférieur à $1 \times 2^6 = 64$.
-Cela est systèmatiquement vrai, même lorsque tout les bits de poids inférieur sont à $1$, comme dans cet exemple.
-
-$$\left(1 \times 2^6 = 64\right) \gt \left(63 = 1 \times 2^5 + 1 \times 2^4 + 1 \times 2^3 + 1 \times 2^2 + 1 \times 2^1 + 1 \times 2^0\right)$$
-
-Encore une fois, ceci n'est pas propre à la base binaire mais à _n'importe quel base numérique_ (modulo quelques variation pour chaque base).
-
-
-
 
 
 
