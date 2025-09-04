@@ -78,14 +78,14 @@ Encore une fois, ceci n'est pas propre à la base binaire mais à _n'importe que
 
 Après cette rapide introduction à l'encodage __Binary Unsigned__, passons au sujet suivant qui est l'encodage __IEEE-754__.
 
-Notre circuit a pour fonction principal de produire des comparaisons entre deux opérandes flottants respectant le standard __IEEE-754__.
+Notre circuit a pour fonction principal de produire des comparaisons entre deux nombres à virgule flottante, de standard _IEEE-754_.
 Pour plus d'information sur le circuit électronique, jetez un oeil à la documentation du circuit.
-La norme __IEEE-754__ défini trois éléments qui composent chaque nombre à virgule flottante:
-- Le ___bit de signe___
-- Un champs binaire d'___exposant___
-- Un autre champs binaire pour la ___mantisse tronquée___
+La norme _IEEE-754_ défini trois éléments pour l'encodage de chaque nombre à virgule flottante:
+  - Le ___bit de signe___
+  - Un champs binaire d'___exposant___
+  - Un champs binaire de ___mantisse tronquée___
 
-Dans ce qui suit nous allons nous intéresser aux encodages utilisés dans les champs binaires d'exposant et de mantisse tronquée.
+Dans ce qui suit, nous allons nous intéresser aux encodages propre des champs binaires d'exposant et de mantisse tronquée.
 Nous allons voir que les encodages des champs de mantisse tronquée et d'exposant partagent les même caractéristiques que le _Binary Unsigned_.
 Ce qui permet de traité ces deux champs avec un même processus de calcul, ce qui se reflète sur l'architecture du circuit électronique.
 
@@ -95,10 +95,10 @@ __Le champs d'exposant utilise un encodage par biais__, ce dernier est assez sim
 Enfaite, le champs d'exposant est un champs binaire pour lequel nous utilisons un encodage _Binary Unsigned_ qui code une valeur numérique $X$, comme nous l'avons vu précédemment.
 A cela, il faut __ajouté ou déduire__ un biais $B$ (un nombre entier naturel) pour obtenir la valeur représenté par le champs binaire.
 Dans les faits, la valeur que représente le champs d'exposant est alors issu du calcul $X - B$. 
-Le biais $B$ se calcul toujours de la même manière, peu importe le format de flottant IEEE-754 $\left(2^{\left(N-1\right)} - 1\right)$, où $N$ est le nombre de bits du champs d'exposant.
+Peu importe le format de flottant IEEE-754, le champs d'exposant a un biais $B$ qui se calcul de la manière suivante $\left(2^{\left(N-1\right)} - 1\right)$, où $N$ est le nombre de bits du champs d'exposant.
 
-Etant donné la façon avec laquelle l'encodage par biais se repose sur le _Binary Unsigned_, le champs d'exposant __partage les même propriétés__ que cet encodage.
-Notamment le fait que la valeur d'un bit à $1$ de poids $i$ soit strictement supérieur à la somme des valeurs des bits de poids inférieur à $i$.
+Etant donné que l'encodage par biais se repose sur le _Binary Unsigned_, le champs d'exposant partage alors les même propriétés que cet encodage.
+Notamment le fait que dans le champs binaire, la valeur d'un bit à $1$ de poids $i$ soit strictement supérieur à la somme des valeurs des bits de poids inférieur à $i$.
 
 ### La mantisse tronquée, une histoire de puissance de 2
 
