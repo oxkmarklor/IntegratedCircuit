@@ -1,3 +1,5 @@
+// Maj post démonstration: L'écriture scientifique binaire -> Le Binary Unsigned -> Le standard IEEE-754 -> L'encodage des champs d'un nombre IEEE-754 -> Le codage des champs d'un nombre IEEE-754 -> Ordre de traitement des champs + Les points terminaux et non terminaux
+
 Ce document contient la démonstration mathématique du circuit électronique ainsi que des explications sur les concepts les plus fondamentaux.
 
 Le document se découpe en plusieurs parties:
