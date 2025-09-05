@@ -7,7 +7,7 @@
 
 
 
-# L'encodage Binary Unsigned
+# Les encodages
 
 Commençons par la base.
 
@@ -23,16 +23,22 @@ Mais parmis les multiples encodage existant, le plus connu de tous porte le nom 
 
 ## L'encodage Binary Unsigned
 
-Le __Binary Unsigned__ utilise les mêmes primitives que la base décimale pour représenter des nombres, _des puissances_.
-Pour représenter la valeur $103$ en décimale, nous décomposons en réalité chaque chiffre du nombre pour les multipliés avec une puissance de $10_{10}$ adéquat, ensuite nous faisons la somme des résultats de chaque produit.
-Regardez ci-dessous.
+Le _Binary Unsigned_ est un encodage permettant de codé des nombres entier naturel.
+Techniquement, cet encodage se base sur les même primitives mathématiques que la base décimale pour représenter des nombres.
+En décimale, chaque chiffre qui compose la valeur $103$ est le facteur d'une puissance de $10_{10}$, puis nous faisons la somme des produits pour représenter le nombre sous-jacent.
+Veuillez noté que l'indice $X_{10}$ représente la base numérique dans laquelle le nombre $X$ est écrit, $10$ pour la base décimale et $2$ pour la base binaire.
 
-$$103 = 1 \times 10^2 + 0 \times 10^1 + 3 \times 10^0$$
+$${\color{Cyan}1}0{\color{Red}3} = \left({\color{Cyan}1} \times 10^2 + 0 \times 10^1 + {\color{Red}3} \times 10^0\right)$$
 
-Veuillez noté que l'indice $X_{10}$ représente la base numérique dans laquelle le nombre $X$ qui précède est écrit.
-Nous retrouvons chacun des chiffres du nombre entrain de multiplié une puissance de $10_{10}$.
-Remarquons que le chiffre des unités $3$ est facteur de $10_{10}$ à la puissance $0$, le chiffre d'un ordre plus grand (celui des dizaines) est le facteur de $10_{10}$ à la puissance $1$ et enfin le chiffre des centaines multiplie $10_{10}$ à la puissance $2$.
-La valeur des puissances croix en fonction de la position du chiffre, qui plus est, elle commence à $0$ au niveau des unités.
+Le chiffre des unités $\color{Red}3}$ est facteur de $10$ à la puissance $0$, le chiffre des dizaines $0$ est facteur de $10$ à la puissance $1$, tandis que le chiffre des centaines ${\color{Cyan}1}$ est le facteur de $10$ à la puissance $2$.
+Remarquons que la valeur des puissances commence à partir de $0$ pour le chiffre des unités, et augmente plus ou moins en fonction de la position de son chiffre.
+Mais ceci n'est pas propre à la base décimale.
+
+La base binaire (ou base $2$) permet également de représenté des nombres d'une façon équivalente, mais comme mentionné plus haut, qui dit nombre dit encodage de nombre.
+Vous l'aurez compris, l'encodage qui permet de représenté des nombres de la sorte est le ___Binary Unsigned___.
+Il existe cependant plusieurs spécificité et subtilité.
+Premièrement, les chiffres allant de $0$ à $9$ de la base décimale sont remplacés par des bits qui valent $0$ ou $1$ (le terme "bit" est la contraction de _Binary Digit_).
+
 
 Ceci n'est pas propre à la base décimale mais à _n'importe quel base numérique_, comme la __base binaire__ par exemple.
 La base binaire (ou base $2$) utilise les chiffres $0$ et $1$ plutôt que ceux de la base décimale allant de $0$ à $9$.
