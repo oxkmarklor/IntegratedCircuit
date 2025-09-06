@@ -32,7 +32,7 @@ Veuillez noté que l'indice $X_{10}$ représente la base numérique dans laquell
 $${\color{Cyan}1}0{\color{Red}3} = \left({\color{Cyan}1} \times 10^2 + 0 \times 10^1 + {\color{Red}3} \times 10^0\right)$$
 
 Le chiffre des unités ${\color{Red}3}$ est facteur de $10$ à la puissance $0$, le chiffre des dizaines $0$ est facteur de $10$ à la puissance $1$, tandis que le chiffre des centaines ${\color{Cyan}1}$ est le facteur de $10$ à la puissance $2$.
-Remarquons que la valeur des puissances commence à partir de $0$ pour le chiffre des unités, et augmente plus ou moins en fonction de la position de son chiffre.
+Remarquons que la valeur des puissances commence à partir de $0$ pour le chiffre des unités, et croix en fonction de la position du chiffre.
 Mais ceci n'est pas propre à la base décimale.
 
 La base binaire (ou base $2$) permet également de représenté des nombres d'une façon équivalente, mais comme mentionné plus haut, qui dit représentation de nombre dit encodage de nombre.
@@ -44,7 +44,7 @@ De plus, la représentation des nombres n'est pas " _signé_ ", ce que veut dire
 $$103 = 1100111_2 = 1 \times 2^6 + 1 \times 2^5 + 0 \times 2^4 + 0 \times 2^3 + 1 \times 2^2 + 1 \times 2^1 + 1 \times 2^0$$
 
 Nous ne parlons pas de bit des unités, des dizaines, centaines ou encore milliers dans un champs binaire, mais il y a ce que l'on appelle le " _poids_ " d'un bit qui est à prendre en compte.
-Plus un bit est facteur d'une grande puissance de $2$, plus le poids de ce bit est important dans la représentation d'un nombre.
+Plus un bit est le facteur d'une grande puissance de $2$, plus le poids de ce bit est important dans le calcul de la valeur d'un nombre.
 Par exemple, le bit qui multiplie $2^6$ fait fluctuer la valeur du nombre représenté de $64$, contre une fluctuation de seulement $8$ pour le bit facteur de $2^3$.
 Le bit qui multiplie $2^6$ est donc d'un poids (d'une importance) supérieur à celui qui multiplie $2^3$.
 
@@ -54,8 +54,7 @@ Par exemple, le terme de _LSB_ pour _Least Significant Bit_ fait référence au 
 Il existe aussi le terme de _MSB_ pour _Most Significant Bit_ qui fait référence au bit de poids le plus fort d'un champs binaire.
 D'autres termes comme _LSB1_ pour le bit à $1$ de poids le plus faible, ou encore _MSB1_ pour le bit à $1$ de poids le plus fort, existent aussi.
 
-Pour finir, la valeur d'un nombre _Binary Unsigned_ peut se calculé par la somme des produits entre chaque bit et sa puissance de $2$ correspondante, ce qui donne lieu à des calculs inutiles.
-La valeur d'un bit étant de $0$ ou $1$, chaque produit génère un résultat qui est nul ou égale à la puissance de $2$ du bit en question.
+Pour finir, comme cela a été dit plus haut, la valeur d'un nombre _Binary Unsigned_ se calcule par la somme des produits entre chaque bit et sa puissance de $2$ correspondante. Ce qui donne lieu à des calculs inutiles car la valeur d'un bit étant de $0$ ou $1$, chaque produit génère alors un résultat qui est nul ou égale à la puissance de $2$ du bit en question.
 C'est pourquoi vous entenderez souvent dire (y compris dans ce document), que la valeur d'un nombre _Binary Unsigned_ se calcul comme la somme des puissances de $2$ dont le bit est à $1$.
 
 ### Une propriété importante de l'encodage Binary Unsigned
