@@ -57,22 +57,24 @@ D'autres termes comme _LSB1_ pour le bit à $1$ de poids le plus faible, ou enco
 Pour finir, comme cela a été dit plus haut, la valeur d'un nombre _Binary Unsigned_ se calcule par la somme des produits entre chaque bit et sa puissance de $2$ correspondante. Ce qui donne lieu à des calculs inutiles car la valeur d'un bit étant de $0$ ou $1$, chaque produit génère alors un résultat qui est nul ou égale à la puissance de $2$ du bit en question.
 C'est pourquoi vous entenderez souvent dire (y compris dans ce document), que la valeur d'un nombre _Binary Unsigned_ se calcul comme la somme des puissances de $2$ dont le bit est à $1$.
 
-### Une propriété importante de l'encodage Binary Unsigned
+### Une propriété du Binary Unsigned qui est fondamentale à la démonstration
 
-Avec un champs dont l'encodage est en __Binary Unsigned__, nous avons la certitude que la valeur d'un bit à $1$ de poids $i$ est strictement supérieur à la somme des valeurs de chaque bit de poids inférieur à $i$.
-Prenons comme exemple un champs binaire de $8$ bits, pour lequel nous n'allons faire attention qu'à un seul bit, celui de poids $6$ admettons.
-Disons que ce champs ressemble à ceci $01111111_{2}$, la valeur du nombre représenté est $127$ et le bit qui nous intéresse se trouve être le __MSB1__ du champs.
-La somme des valeurs des bits de poids inférieur au bit de poids $6$ donne un résultat strictement inférieur à $1 \times 2^6 = 64$.
-Cela est systèmatiquement vrai, même lorsque tout les bits de poids inférieur sont à $1$, comme dans cet exemple.
+Avec un champs binaire d'encodage _Binary Unsigned_, nous pouvons être certains qu'un bit à $1$ de poids $i$ ait une valeur strictement supérieur à la somme des valeurs de chaque bit de poids inférieur à $i$.
+Prenons comme exemple le codage _Binary Unsigned_ du nombre $103$, c'est à dire $1100111_2$, que nous nommerons désormais $B$.
+Si nous prêtons attention au bit de poids $5$ du champs $B$, nous remarquons que ce dernier a une valeur $\left(1 \times 2^5\right)$ qui est strictement supérieur à la somme des valeurs des bits de poids inférieur à $5$.
+De manière plus général, pour tout bit de poids $i$ à $1$:
 
-$$\left(1 \times 2^6 = 64\right) \gt \left(63 = 1 \times 2^5 + 1 \times 2^4 + 1 \times 2^3 + 1 \times 2^2 + 1 \times 2^1 + 1 \times 2^0\right)$$
+$$\left(1 \times 2^i\right) \gt \sum_{ii = i - 1}^0 \ \left(B_{ii} \times 2^{ii}\right)$$
 
-Encore une fois, ceci n'est pas propre à la base binaire mais à _n'importe quel base numérique_ (modulo quelques variation pour chaque base).
+Ce qui vient d'être dit ci-dessus est inconditionnel, qu'importe la valeur des bits de poids inférieurs à $i$.
+Par ailleurs, ceci n'est pas propre à la base binaire.
+
+## Les nombres à virgule flottantes
 
 
 
 
-
+//
 
 # L'écriture scientifique binaire
 
