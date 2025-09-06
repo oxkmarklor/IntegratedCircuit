@@ -35,12 +35,11 @@ Le chiffre des unités ${\color{Red}3}$ est facteur de $10$ à la puissance $0$,
 Remarquons que la valeur des puissances commence à partir de $0$ pour le chiffre des unités, et augmente plus ou moins en fonction de la position de son chiffre.
 Mais ceci n'est pas propre à la base décimale.
 
-La base binaire (ou base $2$) permet également de représenté des nombres d'une façon équivalente, mais comme mentionné plus haut, qui dit nombre dit encodage de nombre.
+La base binaire (ou base $2$) permet également de représenté des nombres d'une façon équivalente, mais comme mentionné plus haut, qui dit représentation de nombre dit encodage de nombre.
 Vous l'aurez compris, l'encodage qui permet de représenté des nombres de la sorte est le ___Binary Unsigned___.
-Un champs binaire en _Binary Unsigned_ utilise chaque bit le composant comme étant facteur d'une puissance de $2$ positive ou nul.
+Chaque bit d'un nombre écrit en _Binary Unsigned_ est le facteur d'une puissance de $2$ positive ou nul.
 Le nombre ainsi représenté se calcul par la somme de chacun de ces produits.
 De plus, la représentation des nombres n'est pas " _signé_ ", ce que veut dire qu'il n'y a pas de bit permettant le codage explicite d'un signe $\pm$, et ainsi les nombres codés sont naturellement positifs.
-Regardez ci-dessous:
 
 $$103 = 1100111_2 = 1 \times 2^6 + 1 \times 2^5 + 0 \times 2^4 + 0 \times 2^3 + 1 \times 2^2 + 1 \times 2^1 + 1 \times 2^0$$
 
@@ -55,9 +54,9 @@ Par exemple, le terme de _LSB_ pour _Least Significant Bit_ fait référence au 
 Il existe aussi le terme de _MSB_ pour _Most Significant Bit_ qui fait référence au bit de poids le plus fort d'un champs binaire.
 D'autres termes comme _LSB1_ pour le bit à $1$ de poids le plus faible, ou encore _MSB1_ pour le bit à $1$ de poids le plus fort, existent aussi.
 
-Pour finir, la représentation d'un nombre _Binary unsigned_ peut se calculé par la somme de chacun de ces produits $\left(bit \times power \ of \ 2\right)$ ce qui donne lieu à des calculs inutiles.
-La valeur d'un bit vaut soit $0$, soit $1$.
-Lorsqu'un bit est à $0$ le résultat du produit l'est aussi et il est donc souvent dit qu'un nombre codé en _Binary Unsigned_ à une valeur équivalente à la somme des poids des bits à $1$.
+Pour finir, la valeur d'un nombre _Binary Unsigned_ peut se calculé par la somme des produits entre chaque bit et sa puissance de $2$ correspondante, ce qui donne lieu à des calculs inutiles.
+La valeur d'un bit étant de $0$ ou $1$, chaque produit génère un résultat qui est nul ou égale à la puissance de $2$ du bit en question.
+C'est pourquoi vous entenderez souvent dire (y compris dans ce document), que la valeur d'un nombre _Binary Unsigned_ se calcul comme la somme des puissances de $2$ dont le bit est à $1$.
 
 ### Une propriété importante de l'encodage Binary Unsigned
 
