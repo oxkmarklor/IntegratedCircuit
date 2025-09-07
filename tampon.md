@@ -71,29 +71,33 @@ Par ailleurs, ceci n'est pas propre à la base binaire.
 
 ## Les nombres à virgule flottante
 
-Il existe en informatique de multiple façon de représenter des nombres à virgule, les nombres à virgule fixe, les nombres à virgule flottante, la notation scientifique binaire ou encore le standard IEEE-754, sont à ma connaissance les principaux encodages.
-L'usage des nombres à virgule fixe se fait très rare de nos jours en $2025$.
+Il existe en informatique de multiple façon de représenter des nombres à virgule, les nombres à virgule fixe, les nombres à virgule flottante ou encore le standard IEEE-754, sont à ma connaissance les principaux encodages.
+L'usage des nombres à virgule fixe se fait très rare de nos jours en 2025.
 Malgré tout, les systèmes informatique bancaire utilisent souvent ces derniers pour représenter le solde des déposants et autres.
-Les nombres à virgule flottante sont quant à eux une évolution des nombres à virgule fixe, ces derniers permettent aux humains de pouvoir écrire facilement des nombres à virgule en base binaire.
-De plus, ils sont utilisés indirectement par la notations scientifique binaire des nombres, dont nous parlerons plus tard.
+Les nombres à virgule flottante sont quant à eux une évolution des nombres à virgule fixe, ces derniers permettent principalement aux humains de pouvoir écrire facilement des nombres à virgule en base binaire.
+De plus, ils sont utilisés indirectement par la notation scientifique binaire des nombres, dont nous parlerons plus tard.
 Pour finir, le standard IEEE-754 permet de normalisé la représentation des nombres à virgule dans un ordinateur, c'est un sujet absolument fondamentale à ce document que nous aborderons plus tard également.
 
 Pour le moment, intéressons nous à l'encodage des nombres à virgule flottante.
-Je n'apprend rien à personne en disant qu'un nombre à virgule est scindé en deux parties, la partie entière composée des chiffres derrère la virgule, et la partie fractionnaire composée des chiffre devant la virgule.
-La partie entière d'un nombre à virgule flottante sollicite l'encodage _Binary Unsigned_, que nous venons tout juste de voir.
-Pour pouvoir représenter des nombres à virgule flottante positif ou négatif, il faut donc rajouté un signe $\pm$ à la partie entière du nombre.
+Je n'apprend rien à personne en disant qu'un nombre à virgule est scindé en deux parties, la partie entière composée des chiffres derrère la virgule, et la partie fractionnaire composée des chiffres devant la virgule.
+La partie entière d'un nombre à virgule flottante est codé en _Binary Unsigned_r.
+Par conséquent, pour pouvoir représenter des nombres à virgule flottante positif ou négatif, il faut rajouté un signe $\pm$ à la partie entière du nombre.
 Cependant, l'encodage de la partie fractionnaire est tout nouveau, malgré une ressemblance avec le _Binary Unsigned_.
 Chaque bit de la partie fractionnaire est le facteur d'une puissance de $2$ négative, la partie fractionnaire a comme valeur la somme des produits.
 Il sera plus simple de comprendre tout cela au travers d'une illustration, regardez ci-bas.
 
-$$ + \ 103.0625 = + 1100111.0001_2$$
+$$ +103.5625 = +1100111.1001_2$$
 
-Dans la partie entière du nombre, nous retrouvons le codage _Binary Unsigned_ de $103$ qui commence à nous être familier (en plus du signe, comme mentionné plus haut).
+Dans la partie entière du nombre, nous retrouvons le codage _Binary Unsigned_ de $103$, qui commence à nous être familier (en plus du signe, comme mentionné plus haut).
 Rien d'étonnant pour la partie fractionnaire, nous avons des bits... mais regardons ce que valent ces bits.
 
-$$ 0.0001 = Interger \ Part\left(0 \times 2^0\right) + Fractional \ Part\left(0 \times 2^{-1} + 0 \times 2^{-2} + 0 \times 2^{-3} + 1 \times 2^{-4}\right)$$
+$$ 0.0001 = Integer \ Part\left(0 \times 2^0\right) + Fractional \ Part\left(1 \times 2^{-1} + 0 \times 2^{-2} + 0 \times 2^{-3} + 1 \times 2^{-4}\right)$$
 
 Nous remarquons que le bit de poids le plus fort de la partie fractionnaire est celui de poids $-1$, et que la valeur des puissances de $2$ négatives vont décroissant en fonction de la position du bit correspondant dans le nombre.
+
+Par ailleurs, la partie entière d'un nombre à virgule flottante est codé en _Binary Unsigned_, et cette dernière partage donc la propriété de cet encodage dont il est le sujet dans la section précédente.
+Un aspect très important des nombres à virgule flottante, c'est que la partie fractionnaire elle aussi partage cette même propriété.
+
 
 //
 
