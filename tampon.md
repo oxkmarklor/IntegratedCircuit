@@ -69,9 +69,46 @@ $$\left(1 \times 2^i\right) \gt \sum_{ii = i - 1}^0 \ \left(B_{ii} \times 2^{ii}
 Ce qui vient d'être dit ci-dessus est inconditionnel, qu'importe la valeur des bits de poids inférieurs à $i$.
 Par ailleurs, ceci n'est pas propre à la base binaire.
 
-## Les nombres à virgule flottantes
+## Les nombres à virgule flottante
+
+Il existe en informatique de multiple façon de représenter des nombres à virgule, les nombres à virgule fixe, les nombres à virgule flottante, la notation scientifique binaire ou encore le standard IEEE-754, sont à ma connaissance les principaux encodages.
+L'usage des nombres à virgule fixe se fait très rare de nos jours en $2025$.
+Malgré tout, les systèmes informatique bancaire utilisent souvent ces derniers pour représenter le solde des déposants et autres.
+Les nombres à virgule flottante sont quant à eux une évolution des nombres à virgule fixe, ces derniers permettent aux humains de pouvoir écrire facilement des nombres à virgule en base binaire.
+De plus, ils sont utilisés indirectement par la notations scientifique binaire des nombres, dont nous parlerons plus tard.
+Pour finir, le standard IEEE-754 permet de normalisé la représentation des nombres à virgule dans un ordinateur, c'est un sujet absolument fondamentale à ce document que nous aborderons plus tard également.
+
+Pour le moment, intéressons nous à l'encodage des nombres à virgule flottante.
+Je n'apprend rien à personne en disant qu'un nombre à virgule est scindé en deux parties, la partie entière composée des chiffres derrère la virgule, et la partie fractionnaire composée des chiffre devant la virgule.
+La partie entière d'un nombre à virgule flottante sollicite l'encodage _Binary Unsigned_, que nous venons tout juste de voir.
+Pour pouvoir représenter des nombres à virgule flottante positif ou négatif, il faut donc rajouté un signe $\pm$ à la partie entière du nombre.
+Cependant, l'encodage de la partie fractionnaire est tout nouveau, malgré une ressemblance avec le _Binary Unsigned_.
+Chaque bit de la partie fractionnaire est le facteur d'une puissance de $2$ négative, la partie fractionnaire a comme valeur la somme des produits.
+Il sera plus simple de comprendre tout cela au travers d'une illustration, regardez ci-bas.
+
+$$ + \ 103.0625 = + 1100111.0001_2$$
+
+Dans la partie entière du nombre, nous retrouvons le codage _Binary Unsigned_ de $103$ qui commence à nous être familier (en plus du signe, comme mentionné plus haut).
+Rien d'étonnant pour la partie fractionnaire, nous avons des bits... mais regardons ce que valent ces bits.
+
+$$ 0.0001 = Interger \ Part\left(0 \times 2^0\right) + Fractional \ Part\left(0 \times 2^{-1} + 0 \times 2^{-2} + 0 \times 2^{-3} + 1 \times 2^{-4}\right)$$
+
+Nous remarquons que le bit de poids le plus fort de la partie fractionnaire est celui de poids $-1$, et que la valeur des puissances de $2$ négatives vont décroissant en fonction de la position du bit correspondant dans le nombre.
+
+//
 
 
+La partie entière d'un nombre flottant utilise du _Binary Unsigned_ pour être codé, tandis que la partie fractionnaire fait usage d'une version modifiée du _Binary Unsigned_.
+Chaque bit de la partie fractionnaire est un ___facteur d'une puissance de 2 négative___, et non positive.
+Ceci permet à la partie fractionnaire d'un nombre de représenté des valeurs dans l'intervalle $\left[0;1\right[$.
+Le poids des puissances négatives de $2$ décroix en fonction de la position du bit.
+Prenons l'exemple du nombre $3.875$.
+
+$$3.875 = 11.111_2 = Integer \ Part\left(\left(1 \times 2^1\right) + \left(1 \times 2^0\right)\right) + Fractional \ Part\left(\left(1 \times 2^{-1}\right) + \left(1 \times 2^{-2}\right) + \left(1 \times 2^{-3}\right)\right)$$
+
+Attention car dans les faits, le point dans l'écriture binaire de $3.875$ n'est pas réelement présent dans le codage du nombre, je l'ai rajouté pour simplifier la lecture.
+Mais ce qu'il y a d'important à remarquer pour les bits de la partie fractionnaire d'un nombre à virgule flottante, c'est que la valeur d'un bit à $1$ de poids $i$ est strictement supérieur à la somme des valeurs des bits de poids inférieur à $i$.
+Imaginons que nous ayons nommés $F$ le nombre illustré ci-dessus, alors pour le bit à $1$ de poids $-1$ nous savons que $\left(1 \times 2^{-1}\right) \gt \sum_{i=-2}^{-3} \left(F_i \times 2^i\right)$.
 
 
 //
