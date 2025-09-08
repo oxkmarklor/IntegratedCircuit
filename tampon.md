@@ -80,42 +80,27 @@ Pour finir, le standard IEEE-754 permet de normalisé la représentation des nom
 
 Pour le moment, intéressons nous à l'encodage des nombres à virgule flottante.
 Je n'apprend rien à personne en disant qu'un nombre à virgule est scindé en deux parties, la partie entière composée des chiffres derrère la virgule, et la partie fractionnaire composée des chiffres devant la virgule.
-La partie entière d'un nombre à virgule flottante est codé en _Binary Unsigned_r.
+La partie entière d'un nombre à virgule flottante est codé en _Binary Unsigned_.
 Par conséquent, pour pouvoir représenter des nombres à virgule flottante positif ou négatif, il faut rajouté un signe $\pm$ à la partie entière du nombre.
 Cependant, l'encodage de la partie fractionnaire est tout nouveau, malgré une ressemblance avec le _Binary Unsigned_.
 Chaque bit de la partie fractionnaire est le facteur d'une puissance de $2$ négative, la partie fractionnaire a comme valeur la somme des produits.
 Il sera plus simple de comprendre tout cela au travers d'une illustration, regardez ci-bas.
 
-$$ +103.5625 = +1100111.1001_2$$
+$$ +103.3125 = +1100111.0101_2$$
 
 Dans la partie entière du nombre, nous retrouvons le codage _Binary Unsigned_ de $103$, qui commence à nous être familier (en plus du signe, comme mentionné plus haut).
 Rien d'étonnant pour la partie fractionnaire, nous avons des bits... mais regardons ce que valent ces bits.
 
-$$ 0.0001 = Integer \ Part\left(0 \times 2^0\right) + Fractional \ Part\left(1 \times 2^{-1} + 0 \times 2^{-2} + 0 \times 2^{-3} + 1 \times 2^{-4}\right)$$
+$$ 0.0101 = Integer \ Part\left(0 \times 2^0\right) + Fractional \ Part\left(0 \times 2^{-1} + 1 \times 2^{-2} + 0 \times 2^{-3} + 1 \times 2^{-4}\right)$$
 
 Nous remarquons que le bit de poids le plus fort de la partie fractionnaire est celui de poids $-1$, et que la valeur des puissances de $2$ négatives vont décroissant en fonction de la position du bit correspondant dans le nombre.
 
-Par ailleurs, la partie entière d'un nombre à virgule flottante est codé en _Binary Unsigned_, et cette dernière partage donc la propriété de cet encodage dont il est le sujet dans la section précédente.
-Un aspect très important des nombres à virgule flottante, c'est que la partie fractionnaire elle aussi partage cette même propriété.
-
-
-//
-
-
-La partie entière d'un nombre flottant utilise du _Binary Unsigned_ pour être codé, tandis que la partie fractionnaire fait usage d'une version modifiée du _Binary Unsigned_.
-Chaque bit de la partie fractionnaire est un ___facteur d'une puissance de 2 négative___, et non positive.
-Ceci permet à la partie fractionnaire d'un nombre de représenté des valeurs dans l'intervalle $\left[0;1\right[$.
-Le poids des puissances négatives de $2$ décroix en fonction de la position du bit.
-Prenons l'exemple du nombre $3.875$.
-
-$$3.875 = 11.111_2 = Integer \ Part\left(\left(1 \times 2^1\right) + \left(1 \times 2^0\right)\right) + Fractional \ Part\left(\left(1 \times 2^{-1}\right) + \left(1 \times 2^{-2}\right) + \left(1 \times 2^{-3}\right)\right)$$
-
-Attention car dans les faits, le point dans l'écriture binaire de $3.875$ n'est pas réelement présent dans le codage du nombre, je l'ai rajouté pour simplifier la lecture.
-Mais ce qu'il y a d'important à remarquer pour les bits de la partie fractionnaire d'un nombre à virgule flottante, c'est que la valeur d'un bit à $1$ de poids $i$ est strictement supérieur à la somme des valeurs des bits de poids inférieur à $i$.
-Imaginons que nous ayons nommés $F$ le nombre illustré ci-dessus, alors pour le bit à $1$ de poids $-1$ nous savons que $\left(1 \times 2^{-1}\right) \gt \sum_{i=-2}^{-3} \left(F_i \times 2^i\right)$.
-
-
-//
+Dans la section précédente nous parlions d'une propriété propre à l'encodage _Binary Unsigned_.
+Cet encodage étant utilisé pour codé la partie entière d'un nombre à virgule flottante, nous pouvons donc faire usage de cette propriété pour cette partie là d'un nombre à virgule flottante.
+Mais ce n'est pas tout, l'encodage de la partie fractionnaire permet lui aussi de faire usage de cette propriété.
+Pour rappel, cela veut dire que pour tout bit à $1$ de poids $i$ compris dans la partie fractionnaire, ce dernier a une valeur strictement supérieur à la somme des valeurs de chaque bit de poids inférieur à $i$.
+De fait, il y a continuité de cette propriété entre la partie entière et fractionnaire d'un nombre à virgule flottante.
+Autrement dit, un bit à $1$ de poids $i$ dans la partie entière, a une valeur strictement supérieur à la somme des valeurs de bit de poids inférieur à $i$ compris dans la partie entière et fractionnaire.
 
 # L'écriture scientifique binaire
 
