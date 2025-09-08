@@ -106,21 +106,22 @@ Autrement dit, un bit à $1$ de poids $i$ dans la partie entière, a une valeur 
 
 Pour commencer, qu'est ce que l'_écriture scientifique_?
 
-L'écriture scientifique est une façon comme une autre de représenté des nombres.
+L'écriture scientifique est une façon comme une autre de représenter des nombres.
 Elle existe pour chaque base numérique, comme pour la base binaire par exemple.
-Le but de cette notation scientifique des nombres est double, le permier objectif est de ne pouvoir représenté les nombres que d'une seule façon, le second permet de simplifier la lecture des grands nombres.
-Par exemple, en ___écriture scientifique décimale___ nous pouvons représenté facilement la vitesse approchée d'un photon dans de le vide en m/s $+3.0 \times 10^8$.
-Cela peut paraitre plus compliqué à interprété de prime abord, mais comme nous allons le voir, en réalité tout n'est qu'une histoire de vrigule et de puissance.
+Le but de cette notation scientifique des nombres est double, le permier objectif est de ne pouvoir représenter les nombres que d'une seule et unique façon, le second permet de simplifier la lecture des grands nombres.
+Par exemple, en ___écriture scientifique décimale___ nous pouvons facilement écrire la vitesse approchée d'un photon dans de le vide spatial en m/s $+3.0 \times 10^8$.
+Cela peut paraitre plus compliqué à interprété de prime abord, mais comme nous allons le voir, en réalité tout n'est qu'une histoire de virgule et de puissance.
 
-Le fonctionnement de l'écriture scientifique ne change que peu lorsque nous passons d'une base numérique vers une autre.
-Mais ce qui compose la notation scientifique ne change jamais:
+D'une base numérique à une autre, le fonctionnement de l'écriture scientifique ne change que peu.
+Mais ce qui compose la notation scientifique ne change jamais, qu'importe la base numérique:
   - Un ___signe___
   - Un ___significande___
   - Un ___multiplicande___
 
-Dans l'exemple fournit ci-dessus, le _signe_ est le symbole $+$ qui indique si le nombre est positif ou négatif, le _significande_ (ou ___mantisse___) est la valeur $3.0$ et enfin le multiplicande est le nombre $10$ qui est élevé à la puissance $8$.
+Dans l'exemple fournit ci-dessus, le _signe_ est le symbole $\pm$ qui indique si le nombre est positif ou négatif, le _significande_ (ou _mantisse_) est la valeur $3.0$ et enfin le multiplicande est le terme $10^8$.
 En notation scientifique décimale, le significande a une valeur comprise dans l'intervalle $\left[1;10\right[$, et le multiplicande est une puissance de $10$.
 De manière plus général, pour une notation scientifique en base $N$, la valeur du significande ne peut être comprise qu'entre $\left[1;N\right[$ et le multiplicande est alors une puissance de $N$.
+D'où le fait que d'une base numérique à une autre le foncitonnement de l'écriture scientifique change légèrement.
 
 ## Comprendre ce qu'est le significande
 
