@@ -96,11 +96,11 @@ $$ 0.0101 = Integer \ Part\left(0 \times 2^0\right) + Fractional \ Part\left(0 \
 Nous remarquons que le bit de poids le plus fort de la partie fractionnaire est celui de poids $-1$, et que la valeur des puissances de $2$ négatives vont décroissant en fonction de la position du bit correspondant dans le nombre.
 
 Dans la section précédente nous parlions d'une propriété propre à l'encodage _Binary Unsigned_.
-Cet encodage étant utilisé pour codé la partie entière d'un nombre à virgule flottante, nous pouvons donc faire usage de cette propriété pour cette partie là d'un nombre à virgule flottante.
-Mais ce n'est pas tout, l'encodage de la partie fractionnaire permet lui aussi de faire usage de cette propriété.
-Pour rappel, cela veut dire que pour tout bit à $1$ de poids $i$ compris dans la partie fractionnaire, ce dernier a une valeur strictement supérieur à la somme des valeurs de chaque bit de poids inférieur à $i$.
-De fait, il y a continuité de cette propriété entre la partie entière et fractionnaire d'un nombre à virgule flottante.
-Autrement dit, un bit à $1$ de poids $i$ dans la partie entière, a une valeur strictement supérieur à la somme des valeurs de bit de poids inférieur à $i$ compris dans la partie entière et fractionnaire.
+Cette propriété peut être mise en oeuvre dans la partie entière d'un nombre à virgule flottante, car rappelons-le cette partie est codé en _Binary Unsigned_.
+Malgré cela, l'encodage de la partie fractionnaire permet lui aussi de faire usage de cette propriété.
+Pour rappel, cela veut dire que tout bit à $1$ de poids $i$ compris dans la partie fractionnaire a une valeur strictement supérieur à la somme des valeurs de chaque bit de poids inférieur à $i$.
+De fait, il y a une continuité de cette propriété entre la partie entière et fractionnaire d'un nombre à virgule flottante.
+Autrement dit, un bit à $1$ de poids $i$ dans la partie entière, a une valeur strictement supérieur à la somme des valeurs des bits de poids inférieur à $i$ de la partie entière et fractionnaire.
 
 # L'écriture scientifique binaire
 
