@@ -121,9 +121,33 @@ Mais ce qui compose la notation scientifique ne change jamais, qu'importe la bas
 Dans l'exemple fournit ci-dessus, le _signe_ est le symbole $\pm$ qui indique si le nombre est positif ou négatif, le _significande_ (ou _mantisse_) est la valeur $3.0$ et enfin le multiplicande est le terme $10^8$.
 En notation scientifique décimale, le significande a une valeur comprise dans l'intervalle $\left[1;10\right[$, et le multiplicande est une puissance de $10$.
 De manière plus général, pour une notation scientifique en base $N$, la valeur du significande ne peut être comprise qu'entre $\left[1;N\right[$ et le multiplicande est alors une puissance de $N$.
-D'où le fait que d'une base numérique à une autre le foncitonnement de l'écriture scientifique change légèrement.
+D'où le fait que d'une base numérique à une autre le fonctionnement de l'écriture scientifique change légèrement.
 
-## Comprendre ce qu'est le significande
+Les chapitres suivants se focalisent sur la notation scientifique en base binaire.
+
+
+
+
+
+## Comprendre ce qu'est un significande binaire
+
+Comme expliqué plus haut, la notation scientifique n'est qu'une représentation des nombres comme une autre.
+Qui plus est, cette représentation s'appuie sur les nombres à virgule.
+La notation scientifique binaire et plus particulièrement le significande de cette dernière, s'appuie sur les nombres à virgule flottante.
+Le significande binaire a une valeur comprise entre $\left[1;2\right[$.
+C'est le nombre à virgule flottante que l'on souhaite convertir en écriture scientifique binaire qui est transformé (si nécessaire) en le significande binaire.
+Si ce nombre a une valeur supérieur ou inférieur aux valeurs permises pour un significande binaire, il faut alors modifier la valeur du nombre jusqu'à qu'elle soit comprise entre $\left[1;2\right[$.
+
+En cas de besoin, cette modification de la valeur du nombre à virgule flottante s'effectue par un déplacement de la virgule du nombre.
+Dans les faits, après déplacement il faut que la virgule se situe devant le _MSB1_ (bit à $1$ de poids le plus fort) du champs qui code le nombre.
+Ce déplacement de la virgule peut s'effectuer vers la droite comme vers la gauche, tout ne dépend que de la position du _MSB1_ relativement à la position de la virgule elle même.
+
+Par exemple, si le _MSB1_ se situe à la gauche de la virgule, cela veut que que le nombre a une valeur supérieur ou égale à $1$.
+Si jamais le _MSB1_ se situe immediatement à la gauche de la virgule, alors le nombre à virgule flottante a de quoi devenir le significande binaire sans aucune tranformation du nombre.
+Dans le cas où le bit à $1$ de poids le plus fort ne se trouve pas directement à la gauche de la virgule.
+Alors le nombre a une valeur supérieur ou égale à $2$ et sa virgule doit être déplacée de $log_2\left(N\right)$ rangs vers la gauche, avec $N$ une puissance de $2£ qui divise la valeur du nombre à virgule flottante.
+
+//
 
 Pour écrire en notation scientifique le nombre flottant $F$, il faut partir de son codage en nombre à virgule flottante.
 
