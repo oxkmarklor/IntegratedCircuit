@@ -142,14 +142,15 @@ Si ce nombre a une valeur supérieur ou inférieur aux valeurs permises pour un 
 
 En cas de besoin, cette modification de la valeur du nombre à virgule flottante s'effectue par un déplacement de la virgule du nombre.
 Dans les faits, après déplacement il faut que la virgule se situe devant le _MSB1_ (bit à $1$ de poids le plus fort) du champs qui code le nombre.
-Ce déplacement de la virgule peut s'effectuer vers la droite comme vers la gauche, tout ne dépend que de la position du _MSB1_ vis à vis de celle de la position de la virgule elle même.
+Ce déplacement de la virgule peut s'effectuer vers la droite comme vers la gauche, tout ne dépend que de la position du _MSB1_ vis à vis de celle de la virgule elle même.
 
 Par exemple, si le _MSB1_ se situe à la gauche de la virgule, alors cela veut dire que la partie entière du nombre à virgule flottante est non nul et donc supérieur ou égale à $1$.
 Si jamais le _MSB1_ se situe immediatement à la gauche de la virgule, alors le nombre à virgule flottante a de quoi devenir le significande binaire sans aucune tranformation de la valeur du nombre.
 Voici un exemple d'un tel nombre $1.25 = 1.01_2$.
 Cependant, dans le cas où le bit à $1$ de poids le plus fort n'est pas immediatement à gauche de la virgule, comme avec ce nombre $4.125 = 100.001_2$.
-Alors le nombre a une valeur supérieur ou égale à $2$, et sa virgule doit être déplacée de $log_2\left(N\right)$ rangs vers la gauche, avec $N$ une puissance de $2$ qui divise la valeur du nombre à virgule flottante.
-Pour le nombre à virgule flottante prix pour exemple cela donne $1.03125 = 1.00001$, ce qui vaut $4.125 \div 4$.
+Alors le nombre a une valeur supérieur ou égale à $2$, et sa virgule doit être déplacée de $log_2\left(N\right)$ rangs vers la gauche.
+Le terme $N$ est la puissance de $2$ qui divise la valeur du nombre à virgule flottante après déplacement de la virgule.
+Pour le nombre à virgule flottante pris pour exemple, cela donne $1.03125 = 1.00001_2$, ce qui vaut bien $4.125 \div 4$.
 
 Aussi, il est possible que le _MSB1_ du nombre à virgule flottante ne se situe pas à gauche de la virgule, mais à droite.
 Auquel cas la valeur du nombre à virgule flottante est strictement inférieur à $1$, car la partie entière de ce dernier est nul.
