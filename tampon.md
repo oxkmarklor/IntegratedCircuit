@@ -132,25 +132,20 @@ Les chapitres suivants se focalisent sur la notation scientifique en base binair
 
 
 
-## Comprendre ce qu'est un significande binaire
+## Comprendre ce qu'est un significande
 
-Pour écrire un nombre en sa représentation scientifique, il faut que le nombre lui même devienne un significande.
-Nous l'avons dit plus haut, je cite "_pour une notation scientifique en base_ $N$, _la valeur du significande ne peut être comprise qu'entre_ $\left[1;N\right[$ ".
-Si le nombre a une valeur comprise dans cet intervalle, alors il devient tout naturellement un significande.
-Mais si ce n'est pas le cas, alors il faut modifier la valeur du nombre d'origine pour qu'il puisse devenir un significande licite.
+Nous avons dit plus haut, je cite "_pour une notation scientifique en base_ $N$, _la valeur du significande ne peut être comprise qu'entre_ $\left[1;N\right[$ ".
+Dans le cas de la noatation scientifique en base $2$ (ou notation scientifique binaire), le significande a donc une valeur comprise entre $\left[1;2\right[$.
+C'est le nombre $F$ à écrire sous sa forme scientifique binaire qui forme le significande, mais un problème se pose lorsque la valeur de $F$ n'est pas comprise dans l'intervalle de valeur licite d'un significande.
+Alors la valeur du nombre doit être modifiée.
+Il s'avère que $F$ est un nombre à virgule flottante afin de permettre l'écriture scientifique des nombres entiers et à virgule.
+Commençons par voir dans le détails quand et comment sont faites les modifications du nombre à virgule flottante $F$?
 
-Dans le cas de l'écriture scientifique en base binaire, le _significande_ "binaire" doit avoir une valeur comprise entre $\left[1;2\right[$.
-Le nombre d'origine qui doit être convertit en significande (avec ou sans modification de sa valeur) est alors un nombre à virgule flottante capable de codé des nombres entiers comme des nombres à virgule.
-Voyons désormais comment cette conversion se produit.
+Si en écriture scientifique binaire le significande $S$ ne doit avoir une valeur comprise qu'entre $\left[1;2\right[$, alors $S$ est codé en binaire comme ceci $1.x$.
+Nous savons donc que si la virgule du nombre $F$ est positionné devant son _MSB1_ (bit à $1$ de poids le plus fort), alors il peut être considéré comme un significande licite sans nécessité de modification de sa valeur.
+
 
 //
-
-Comme expliquer plus haut, la notation scientifique n'est qu'une représentation des nombres comme une autre.
-Qui plus est, cette représentation s'appuie sur les nombres à virgule.
-Par conséquent, la notation scientifique binaire et plus particulièrement la définition du significande binaire, s'appuie sur les nombres à virgule flottante.
-Le significande binaire est un nombre réel compris dans l'intervalle $\left[1;2\right[$.
-C'est le nombre à virgule flottante que l'on souhaite convertir en écriture scientifique binaire, qui est transformé (si nécessaire) en le significande binaire.
-Si ce nombre a une valeur supérieur ou inférieur aux valeurs permises pour un significande binaire, il faut alors modifier la valeur du nombre jusqu'à qu'elle soit comprise entre $\left[1;2\right[$.
 
 En cas de besoin, cette modification de la valeur du nombre à virgule flottante s'effectue par un déplacement de la virgule du nombre.
 Dans les faits, après déplacement il faut que la virgule se situe devant le _MSB1_ (bit à $1$ de poids le plus fort) du champs qui code le nombre.
