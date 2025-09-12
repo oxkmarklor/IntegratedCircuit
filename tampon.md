@@ -110,17 +110,18 @@ Pour commencer, qu'est ce que l'_écriture scientifique_?
 
 L'écriture scientifique est une façon comme une autre de représenter des nombres.
 Elle existe pour chaque base numérique, comme pour la base binaire par exemple.
-Le but de cette notation scientifique des nombres est double, le permier objectif est de ne pouvoir représenter les nombres que d'une seule et unique façon, le second permet de simplifier la lecture des grands nombres.
-Par exemple, en ___écriture scientifique décimale___ nous pouvons facilement écrire la vitesse approchée d'un photon dans de le vide spatial en m/s $+3.0 \times 10^8$.
-Cela peut paraitre plus compliqué à interprété de prime abord, mais comme nous allons le voir, en réalité tout n'est qu'une histoire de virgule et de puissance.
+Le but de cette notation scientifique des nombres est double.
+Permièrement, elle ne permet d'écrire les nombres que d'une seule et unique façon.
+En outre, elle simplifie aussi la lecture des très grand comme très petit nombres.
+L'écriture scientifique _en base décimale_ est par exemple capable de rendre facilement lisible la lecture de la vitesse approchée de la lumière dans de le vide spatial en m/s $+3.0 \times 10^8$.
 
-D'une base numérique à une autre, le fonctionnement de l'écriture scientifique ne change que peu.
-Mais ce qui compose la notation scientifique ne change jamais, qu'importe la base numérique:
+Il faut savoir que d'une base numérique à une autre, le fonctionnement de l'écriture scientifique change peu.
+Cependant la composition de la notation scientifique ne change jamais, qu'importe la base numérique, il y a toujours:
   - Un ___signe___
   - Un ___significande___
   - Un ___multiplicande___
 
-Dans l'exemple fournit ci-dessus, le _signe_ est le symbole $\pm$ qui indique si le nombre est positif ou négatif, le _significande_ (ou _mantisse_) est la valeur $3.0$ et enfin le multiplicande est le terme $10^8$.
+Dans l'exemple fournit ci-dessus, le _signe_ est le symbole $\pm$ qui indique si le nombre est positif ou négatif, le _significande_ (aussi appeller _mantisse_) est le terme $3.0$ et enfin le _multiplicande_ est le terme $10^8$.
 En notation scientifique décimale, le significande a une valeur comprise dans l'intervalle $\left[1;10\right[$, et le multiplicande est une puissance de $10$.
 De manière plus général, pour une notation scientifique en base $N$, la valeur du significande ne peut être comprise qu'entre $\left[1;N\right[$ et le multiplicande est alors une puissance de $N$.
 D'où le fait que d'une base numérique à une autre le fonctionnement de l'écriture scientifique change légèrement.
@@ -133,7 +134,18 @@ Les chapitres suivants se focalisent sur la notation scientifique en base binair
 
 ## Comprendre ce qu'est un significande binaire
 
-Comme expliqué plus haut, la notation scientifique n'est qu'une représentation des nombres comme une autre.
+Pour écrire un nombre en sa représentation scientifique, il faut que le nombre lui même devienne un significande.
+Nous l'avons dit plus haut, je cite "_pour une notation scientifique en base_ $N$, _la valeur du significande ne peut être comprise qu'entre_ $\left[1;N\right[$ ".
+Si le nombre a une valeur comprise dans cet intervalle, alors il devient tout naturellement un significande.
+Mais si ce n'est pas le cas, alors il faut modifier la valeur du nombre d'origine pour qu'il puisse devenir un significande licite.
+
+Dans le cas de l'écriture scientifique en base binaire, le _significande_ "binaire" doit avoir une valeur comprise entre $\left[1;2\right[$.
+Le nombre d'origine qui doit être convertit en significande (avec ou sans modification de sa valeur) est alors un nombre à virgule flottante capable de codé des nombres entiers comme des nombres à virgule.
+Voyons désormais comment cette conversion se produit.
+
+//
+
+Comme expliquer plus haut, la notation scientifique n'est qu'une représentation des nombres comme une autre.
 Qui plus est, cette représentation s'appuie sur les nombres à virgule.
 Par conséquent, la notation scientifique binaire et plus particulièrement la définition du significande binaire, s'appuie sur les nombres à virgule flottante.
 Le significande binaire est un nombre réel compris dans l'intervalle $\left[1;2\right[$.
