@@ -134,6 +134,22 @@ Les chapitres suivants se focalisent sur la notation scientifique en base binair
 
 ## Comprendre ce qu'est un significande
 
+Le significande interprète une version souvent modifiée du nombre à virgule flottante $F$ qui doit être représenté en notation scientifique binaire.
+
+Pour commencer, le significande est un nombre réel qui rappelons-le ne peut représenté que des nombres compris dans l'intervalle $\left[1;2\right[$. 
+Ce qui veut dire que la partie entière du significande est à $1$.
+Lorsque le nombre à virgule flottante $F$ a une valeur elle même comprise dans l'intervalle de valeur licite du significande, alors il n'y a rien à faire car le nombre $F$ forme déjà son propre significande.
+Mais quand ce n'est pas le cas, nous déplaçons la virgule du nombre flottant $F$ à représenté en notation scientifique binaire, de sa position initial jusque devant le _MSB1_ du nombre.
+Ce qui veut dire que si $\left(F \ge 2\right)$ alors la virgule du nombre devra être déplacée vers la gauche, et dans le cas où $\left(F \lt 1\right)$ la virgule sera décalée  vers la droite du nombre.
+Une exception est faite pour du nombre à virgule flottante $0.0$.
+La valeur du nombre n'est pas comprise dans l'intervalle de valeur licite du significande et le codage de ce nombre ne défini aucun _MSB1_, il n'y a pas de décalage de la virgule possible.
+
+Mais le déplacement de la virgule d'un nombre engendre en binaire les même choses qu'en décimale.
+Une _division par_ $N$ de $F$ dans le cas d'un déplacement de la virgule de $log_2\left(N\right)$ rangs vers la gauche, et _une multiplication_ de $F$ par le même facteur $N$ pour un décalage de la virgule de $log_2\left(N\right)$ rangs vers la droite.
+__Le terme__ $N$ __qui multiplie ou divise__ $F$ __est systèmatiquement une puissance de 2, ce qui suit explique pourquoi__.
+
+//
+
 Nous avons dit plus haut, je cite "_pour une notation scientifique en base_ $N$, _la valeur du significande ne peut être comprise qu'entre_ $\left[1;N\right[$ ".
 Dans le cas de la notation scientifique en base $2$ (ou notation scientifique binaire), le significande a donc une valeur comprise entre $\left[1;2\right[$.
 Il est possible que le nombre $F$ devant être représenté en notation scientifique binaire ait une valeur comprise dans l'intervalle stipulé ci-dessus.
