@@ -137,45 +137,31 @@ Les chapitres suivants se focalisent sur la notation scientifique en base binair
 Nous avons dit plus haut, je cite "_pour une notation scientifique en base_ $N$, _la valeur du significande ne peut être comprise qu'entre_ $\left[1;N\right[$ ".
 Dans le cas de la notation scientifique en base $2$ (ou notation scientifique binaire), le significande a donc une valeur comprise entre $\left[1;2\right[$.
 C'est le nombre $F$ à écrire sous sa forme scientifique binaire qui forme directement le significande, plus particulèrement lorsque ce dernier à une valeur comprise dans l'intervalle qui figure ci-dessus.
-Mais un problème se pose lorsque la valeur de $F$ n'est pas comprise dans cette intervalle, alors la valeur du nombre doit être modifiée.
-Par ailleurs, il s'avère que $F$ est un nombre à virgule flottante afin de permettre l'écriture scientifique binaire des nombres entiers et à virgule.
+Mais un problème se pose lorsque la valeur de $F$ n'est pas comprise dans cette intervalle, alors le nombre doit être modifiée.
+Par ailleurs, il s'avère que $F$ est un nombre à virgule flottante afin de permettre l'écriture scientifique binaire des nombres entiers ainsi que des nombres à virgule flottante.
 
 En écriture scientifique bianire, un significande $S$ a une valeur de $1.something$.
 Par conséquent, si le nombre à virgule flottante $F$ (qui doit être écrit sous sa forme scientifique binaire) a sa virgule de positionné devant son _MSB1_ (bit à $1$ de poids le plus fort).
 Car $F \in \left[1;2\right[$, alors le nombre à virgule flottante doit être directement interprété comme étant le significande $S$.
+Par exemple, le nombre $1.625$ ou $1.101_2$ en binaire, a bien sa virgule devant son _MSB1_.
+Le nombre devient alors son propre significande car sa valeur est comprise entre $\left[1;2\right[$.
 
-Par exemple, le nombre $1.625$ ou $1.101_2$ en binaire, a bien sa virgule devant son _MSB1_ et sa valeur est comprise entre $\left[1;2\right[$.
-Le nombre devient alors son propre significande.
+En définitif, le nombre $F$ peu bien évidemment avoir une valeur non spécifiée par cette intervalle, ce qui insinue le fait que la virgule du nombre ne se situe pas devant le _MSB1_.
+Comme dit précédemment, il faudra alors modifier la valeur de $F$ pour que cette dernière soit compatible avec celle d'un significande.
+Cette modification s'obtient en déplaçant la virgule du nombre jusque devant son _MSB1_.
 
-//
+Dans le cas où le nombre à virgule flottante $F$ a une valeur supérieur ou égale à $2$, comme avec le nombre $2.25 = 10.01_2$. 
+Pour que la virgule soit devant le _MSB1_ du nombre il faut qu'elle soit déplacée d'un rang vers la gauche, ce qui divise la valeur du nombre par $2$.
+De manière plus général, un déplacement de la virgule de $n$ rangs vers la gauche divise par $n$ fois la valeur du dit nombre par $2$, ou autrement dit le nombre est divisé par $2^n$.
 
-En cas de besoin, cette modification de la valeur du nombre à virgule flottante s'effectue par un déplacement de la virgule du nombre.
-Dans les faits, après déplacement il faut que la virgule se situe devant le _MSB1_ (bit à $1$ de poids le plus fort) du champs qui code le nombre.
-Ce déplacement de la virgule peut s'effectuer vers la droite comme vers la gauche, tout ne dépend que de la position du _MSB1_ vis à vis de celle de la virgule elle même.
+En outre, le nombre à virgule flottante $F$ peu également avoir une valeur strictement inférieur à $1$, comme avec le nombre $0.5 = 0.1_2$.
+Même chose, pour que la virgule soit devant le _MSB1_ du nombre il faut qu'elle soit déplacée d'un rang vers la droite, ce qui cette fois-ci multiplie la valeur du nombre par $2$.
+Dans le cas d'un déplacement de la virgule de $n$ rangs vers la droite, cela multiplie alors par $n$ fois la valeur du dit nombre par $2$, ou autrement dit le nombre est multiplié par $2^n$.
 
-Par exemple, si le _MSB1_ se situe à la gauche de la virgule, alors cela veut dire que la partie entière du nombre à virgule flottante est non nul et donc supérieur ou égale à $1$.
-Si jamais le _MSB1_ se situe immediatement à la gauche de la virgule, alors le nombre à virgule flottante a de quoi devenir le significande binaire sans aucune tranformation de la valeur du nombre.
-Voici un exemple d'un tel nombre $1.25 = 1.01_2$.
-Cependant, dans le cas où le bit à $1$ de poids le plus fort n'est pas immediatement à la gauche de la virgule, comme avec le nombre $4.125 = 100.001_2$.
-Il faut alors déplacer la virgule du nombre de $n$ rangs vers la gauche, jusqu'à qu'elle soit devant le _MSB1_.
-Ce qui a pour effet de divisé par $2^n$ la valeur du nombre.
-Dans le cadre du nombre pris pour exemple, le décalage de la virgule est de $2$ rangs vers la gauche et le nombre est divisé par $2^2$, ce qui donne $1.03125 = 1.00001_2$.
-
-Aussi, il est possible que le _MSB1_ du nombre à virgule flottante ne se situe pas à gauche de la virgule, mais à droite.
-Auquel cas la valeur du nombre à virgule flottante est strictement inférieur à $1$, car la partie entière de ce dernier est nul.
-La virgule du nombre n'étant pas devant le _MSB1_, il faut alors la déplacée de $n$ rangs vers la droite jusqu'à qu'elle le soit.
-Ce qui a pour effet de multiplié par $2^n$ la valeur du nombre.
-Pour un nombre à virgule flottante comme celui-ci $0.25 = 0.01_2$, le décalage de la virgule est de $2$ rangs vers la droite et le nombre est multiplié par $2^2$. 
-
-Pour finir, il existe une exception qui subsiste qu'importe la base numérique.
-En écriture scientifique, il n'est pas possible d'avoir un significande de valeur licite pour représenté $0$.
-Expliquons pourquoi par le prisme de la notation scientifique binaire.
-La valeur du nombre n'est pas comprise dans l'intervalle $\left[1;2\right[$ d'un significande binaire, mais ce n'est pas le seul nombre pour lequel c'est le cas.
-A ce stade, nous devrions déplacer la virgule jusque devant le _MSB1_ du nombre mais le codage de zéro en nombre à virgule flottante ressemble à ceci $0.0_2$, nous remarquons qu'il n'y a pas de _MSB1_.
-C'est pourquoi il n'est pas possible d'avoir un significande binaire licite lorsque nous cherchons à représenter la valeur $0$, ceci est également vrai pour tout base numérique.
-
-
-
+Mais il existe un nombre pour lequel une exception subsiste, qu'importe la base numérique utilisée pour son écriture scientifique, le nombre zéro.
+Enfaite, si nous prenons l'exemple du binaire, le codage du nombre à virgule flottante $0.0$ exclu par définition tout usage de bit à $1$.
+Dans ce cas spécifique, malgré que la valeur du nombre ne soit pas comprise dans l'intervalle de valeur $\left[1;2\right[$ d'un significande, la virgule du nombre ne peut pas être déplacée vers le _MSB1_ vu qu'il n'y en a pas.
+C'est pourquoi il n'est pas possible d'avoir un significande binaire licite lorsque nous cherchons à représenter la valeur $0$ en écriture scientifique.
 
 ### La transformation d'un nombre à virgule flottante en un significande
 
