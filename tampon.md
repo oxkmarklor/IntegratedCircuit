@@ -136,13 +136,14 @@ Les chapitres suivants se focalisent sur la notation scientifique en base binair
 
 Nous avons dit plus haut, je cite "_pour une notation scientifique en base_ $N$, _la valeur du significande ne peut être comprise qu'entre_ $\left[1;N\right[$ ".
 Dans le cas de la notation scientifique en base $2$ (ou notation scientifique binaire), le significande a donc une valeur comprise entre $\left[1;2\right[$.
-C'est le nombre $F$ à écrire sous sa forme scientifique binaire qui forme directement le significande, plus particulèrement lorsque ce dernier à une valeur comprise dans l'intervalle qui figure ci-dessus.
+Il est possible que le nombre $F$ devant être représenté en notation scientifique binaire ait une valeur comprise dans l'intervalle stipulé ci-dessus.
+Auquel cas, le nombre devient lui même son propre significande, sans aucune modification de sa valeur.
 Mais un problème se pose lorsque la valeur de $F$ n'est pas comprise dans cette intervalle, alors le nombre doit être modifiée.
-Par ailleurs, il s'avère que $F$ est un nombre à virgule flottante afin de permettre l'écriture scientifique binaire des nombres entiers ainsi que des nombres à virgule flottante.
+Par ailleurs, il s'avère que $F$ est un nombre à virgule flottante afin de permettre l'écriture scientifique binaire des nombres entiers, ainsi que des nombres à virgule.
 
-En écriture scientifique bianire, un significande $S$ a une valeur de $1.something$.
-Par conséquent, si le nombre à virgule flottante $F$ (qui doit être écrit sous sa forme scientifique binaire) a sa virgule de positionné devant son _MSB1_ (bit à $1$ de poids le plus fort).
-Car $F \in \left[1;2\right[$, alors le nombre à virgule flottante doit être directement interprété comme étant le significande $S$.
+En notation scientifique binaire, un significande $S$ a une valeur de $\left(1.?something?_2\right)$ en binaire.
+Par conséquent, si le nombre à virgule flottante $F$ a sa virgule de positionné devant son _MSB1_ (bit à $1$ de poids le plus fort), alors le nombre doit être directement interprété comme son propre significande $S$.
+Car $F \in \left[1;2\right[$.
 Par exemple, le nombre $1.625$ ou $1.101_2$ en binaire, a bien sa virgule devant son _MSB1_.
 Le nombre devient alors son propre significande car sa valeur est comprise entre $\left[1;2\right[$.
 
