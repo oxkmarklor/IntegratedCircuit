@@ -135,15 +135,17 @@ Les chapitres suivants se focalisent sur la notation scientifique en base binair
 ## Comprendre ce qu'est un significande
 
 Nous avons dit plus haut, je cite "_pour une notation scientifique en base_ $N$, _la valeur du significande ne peut être comprise qu'entre_ $\left[1;N\right[$ ".
-Dans le cas de la noatation scientifique en base $2$ (ou notation scientifique binaire), le significande a donc une valeur comprise entre $\left[1;2\right[$.
-C'est le nombre $F$ à écrire sous sa forme scientifique binaire qui forme le significande, mais un problème se pose lorsque la valeur de $F$ n'est pas comprise dans l'intervalle de valeur licite d'un significande.
-Alors la valeur du nombre doit être modifiée.
-Il s'avère que $F$ est un nombre à virgule flottante afin de permettre l'écriture scientifique des nombres entiers et à virgule.
-Commençons par voir dans le détails quand et comment sont faites les modifications du nombre à virgule flottante $F$?
+Dans le cas de la notation scientifique en base $2$ (ou notation scientifique binaire), le significande a donc une valeur comprise entre $\left[1;2\right[$.
+C'est le nombre $F$ à écrire sous sa forme scientifique binaire qui forme directement le significande, plus particulèrement lorsque ce dernier à une valeur comprise dans l'intervalle qui figure ci-dessus.
+Mais un problème se pose lorsque la valeur de $F$ n'est pas comprise dans cette intervalle, alors la valeur du nombre doit être modifiée.
+Par ailleurs, il s'avère que $F$ est un nombre à virgule flottante afin de permettre l'écriture scientifique binaire des nombres entiers et à virgule.
 
-Si en écriture scientifique binaire le significande $S$ ne doit avoir une valeur comprise qu'entre $\left[1;2\right[$, alors $S$ est codé en binaire comme ceci $1.x$.
-Nous savons donc que si la virgule du nombre $F$ est positionné devant son _MSB1_ (bit à $1$ de poids le plus fort), alors il peut être considéré comme un significande licite sans nécessité de modification de sa valeur.
+En écriture scientifique bianire, un significande $S$ a une valeur de $1.something$.
+Par conséquent, si le nombre à virgule flottante $F$ (qui doit être écrit sous sa forme scientifique binaire) a sa virgule de positionné devant son _MSB1_ (bit à $1$ de poids le plus fort).
+Car $F \in \left[1;2\right[$, alors le nombre à virgule flottante doit être directement interprété comme étant le significande $S$.
 
+Par exemple, le nombre $1.625$ ou $1.101_2$ en binaire, a bien sa virgule devant son _MSB1_ et sa valeur est comprise entre $\left[1;2\right[$.
+Le nombre devient alors son propre significande.
 
 //
 
