@@ -157,9 +157,9 @@ Il subsiste cependant une exception, la représentation du nombre $0$ en notatio
 Ce nombre n'étant pas compris dans l'intervalle de valeur licite d'un significande, il faudrait modifier ce dernier.
 Mais nous venons de le voir, modifier la valeur du nombre voudrait que l'on déplace sa virgule jusque devant son _MSB1_, et il n'y a pas de _MSB1_ dans le codage de $0$ en binaire.
 __Par conséquent, le significande est alors excpetionnellement nul pour représenté la valeur__ $0$ __en notation scientifique binaire.__
-Il me faut précisé que ceci est une généralité de l'écriture scientifique pour n'importe quel base numérique.
+Il me faut précisé qu' aucune base numérique ne fait exception à cette généralité.
 
-Ce qui suit cherche à précisé l'impacte d'un déplacement de la virgule du nombre flottant $F$, sur sa valeur. 
+La section suivante cherche à précisé l'impacte qu'a un déplacement de la virgule du nombre flottant $F$, sur sa valeur. 
 
 ### La transformation d'un nombre à virgule flottante en un significande
 
@@ -193,18 +193,16 @@ Après décalage de la virgule du nombre flottant $F$, le bit de poids $i$ passe
 Comme la valeur de $F$ se calcul au travers de la somme des puissances dont le bit est à $1$, chaque puissance ayant été multiplié par $2$, le nombre flottant $F$ l'est également.
 C'est ce que démontre le membre de gauche de l'équation pour $\left(c = 1\right)$, tandis que le membre de droite se contente de donné le résultat attendu.
 
-//
+Désormais, nous sommes en capacité de comprendre toutes les implications qu'un décalage de la virgule du nombre $F$, peut avoir sur la valeur du nombre lui même. 
+Prenons un décalage quel qu'il soit de la virgule vers la droite $\left(c \gt 0\right)$.
+Nous venons tout juste de voir qu'un décalage d'un rang vers la droite de la virgule de $F$ $\left(c = 1\right)$, multiplie par $2$ la valeur du nombre.
+Par conséquent, pour n'importe quel autre décalage de la virgule vers la droite il suffit alors de multiplié $c$ fois par $2$ le nombre flottant $F$, ou autrement dit multiplié $F$ par $2^c$.
+Voyons maintenant le cas d'un décalage quelconque de la virgule vers la gauche $\left(c \lt 0\right)$.
+Nous savons qu'un décalage d'un rang vers la gauche de la virgule de $F$ $\left(c = -1\right)$, divise par $2$ la valeur du nombre.
+Donc dans le cas de tout autre décalage de la virgule vers la gauche, il suffit alors de divisé $\vert \ c \ \vert$ fois la valeur du nombre $F$ par $2$, ce qui revient à divisé $F$ par $2^{\vert \ c \ \vert}$.
+Aussi, il est possible de dire que cela revient à multiplié $F$ par $2^c$ (pour faire référence au membre droit de l'équation), mais nous expliquerons plus en profondeur le fonctionnement de l'équation dans le chapitre qui suit.
 
-Nous sommes désormais capable de comprendre toutes les implications d'un décalage de la virgule du nombre $F$, sur la valeur du nombre lui même. 
-Prenons un décalage de $c = x$ comme exemple, où $x \in \left[-\infty ;+\infty \right]$.
-Si $\left(c \gt 0\right)$ alors nous n'avons qu'à décalé la virgule de $c$ fois $1$ rang _vers la droite_.
-Vu que nous savons qu'un décalage de la virgule de $1$ rang vers la droite engendre une multiplication par $2$ du nombre $F$, alors après $c$ décalages de $1$ rang, nous aurons multiplié $F$ par $2^c$.
-Au contraire si $\left(c \lt 0\right)$, alors nous devrons décalé la virgule de $\vert \ c \ \vert$ fois $1$ rang _vers la gauche_.
-Un décalage de la virgule d'un rang vers la gauche revient à divisé par $2$ la valeur de $F$.
-Par conséquent, après $\vert \ c \ \vert$ décalages de la virgule de $1$ rang vers la gauche, nous aurons divisé $\vert \ c \ \vert$ fois la valeur de $F$ par $2$.
-Ou autrement dit, $F$ aura été divisé par $2^{\vert \ c \ \vert}$.
-
-Voilà pourquoi n'_importe quel décalage de la virgule_ d'un nombre flottant $F$, engendre une _multiplication_ ou une _division_ du nombre par une puissance de $2$.
+__Nous savons désormais que n'importe quel déplacement de la virgule d'un nombre flottant, engendre une multiplication ou une division de la valeur du nombre par une puissance de__ $2$.
 
 ### Détail sur le fonctionnement de l'équation
 
