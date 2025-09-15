@@ -167,12 +167,15 @@ Le terme $c$ représente le nombre de rang de décalage à induire sur la virgul
 Qui plus est, lorsque $\left(c \lt 0\right)$ c'est que la virgule doit être décalée vers la gauche et inversement quand $\left(c \gt 0\right)$, c'est que le décalage de la virgule doit se produire vers la droite.
 
 Essayons de comprendre pourquoi est ce qu'un décalage d'un rang vers la gauche de la virgule de $F$ $\left(c = -1\right)$, divise la valeur de $F$ par $2$ comme nous le démontre l'équation ci-dessus.
-Les nombres flottants sont formés d'une partie entière et d'une autre fractionnaire.
-Elles sont composées de bit ayant chacun un poids, à savoir qu'un bit de poids $i$ a une valeur deux fois supérieur au bit de poids $i - 1$, ou pour le dire autrement $2^i \ = \ 2 \times 2^{\left(i - 1\right)}$.
-Mais n'oublions pas qu'avec un décalage d'un rang vers la gauche de la virgule du nombre flottant $F$, je cite "chaque bit de la partie entière comme de la partie fractionnaire de $F$ voit son poids être _décrémenté_ de $1$".
-Par conséquent, après décalage de la virgule, chaque bit de $F$ voit la valeur de son poids être divisé par $2$.
-Etant donné que la valeur d'un nombre à virgule flottante $F$ se calcul comme la somme des valeurs des poids dont un bit à $1$ est facteur, ceci explique le fait que $F$ soit divisé par $2$.
+Nous savons que les nombres flottants ont une partie entière et une autre fractionnaire.
+Ces deux parties utilisent chaque bit comme un facteur d'une puissance de $2$, des puissances _positives_ pour la partie entière et _négatives_ pour la partie fractionnaire.
+Remarquons que dans le codage du nombre flottant $F$, n'importe quel bit de poids $i$ est facteur d'une puissance de $2$ qui est deux fois plus grande que celle du bit de poids $i - 1$.
+Par exemple, le bit de poids $0$ est facteur de $\left(2^0 = 1\right)$ qui est une puissance deux fois supérieur à celle dont le bit de poids $-1$ est le facteur $\left(2^{-1} = 0.5\right)$.
 
+Mais n'oublions pas qu'avec un décalage d'un rang vers la gauche de la virgule de $F$, je cite "_chaque bit de la partie entière comme de la partie fractionnaire de_ $F$ _voit son poids être décrémenté de_ $1$".
+Par conséquent, après décalage de la virgule, le bit de poids $i$ n'est plus facteur de $2^i$ mais de $2^{\left(i - 1\right)}$, sa valeur a été divisé par $2$.
+Ceci se généralise à l'ensemble des bits du nombre $F$.
+C'est pourquoi la valeur de $F$ est divisé par $2$ après un décalage d'un rang vers la gauche de sa virgule.
 
 
 //
