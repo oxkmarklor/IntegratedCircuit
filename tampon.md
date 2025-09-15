@@ -167,10 +167,13 @@ Le terme $c$ représente le nombre de rang de décalage à induire sur la virgul
 Qui plus est, lorsque $\left(c \lt 0\right)$ c'est que la virgule doit être décalée vers la gauche et inversement quand $\left(c \gt 0\right)$, c'est que le décalage de la virgule doit se produire vers la droite.
 
 Essayons de comprendre pourquoi est ce qu'un décalage d'un rang vers la gauche de la virgule de $F$ $\left(c = -1\right)$, divise la valeur de $F$ par $2$ comme nous le démontre l'équation ci-dessus.
-Les nombres flottants ont une partie entière et une autre fractionnaire, chaque bit les composants ont un poids.
-A savoir qu'un bit de poids $i$ a une valeur deux fois supérieur au bit de poids $i - 1$, autrement dit $2^i \ = \ 2 \times 2^{\left(i - 1\right)}$.
+Les nombres flottants sont formés d'une partie entière et d'une autre fractionnaire.
+Elles sont composées de bit ayant chacun un poids, à savoir qu'un bit de poids $i$ a une valeur deux fois supérieur au bit de poids $i - 1$, ou pour le dire autrement $2^i \ = \ 2 \times 2^{\left(i - 1\right)}$.
 Mais n'oublions pas qu'avec un décalage d'un rang vers la gauche de la virgule du nombre flottant $F$, je cite "chaque bit de la partie entière comme de la partie fractionnaire de $F$ voit son poids être _décrémenté_ de $1$".
-Par conséquent, après décalage chaque bit de $F$ voit la valeur de son propre poids être divisé par $2$.
+Par conséquent, après décalage de la virgule, chaque bit de $F$ voit la valeur de son poids être divisé par $2$.
+Etant donné que la valeur d'un nombre à virgule flottante $F$ se calcul comme la somme des valeurs des poids dont un bit à $1$ est facteur, ceci explique le fait que $F$ soit divisé par $2$.
+
+
 
 //
 
