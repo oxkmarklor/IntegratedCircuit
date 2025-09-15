@@ -181,9 +181,8 @@ C'est pourquoi la valeur de $F$ est divisé par $2$ après un décalage d'un ran
 Maintenant que nous avons compris pourquoi un décalage d'un rang vers la gauche de la virgule de $F$, engendre une division par $2$ du nombre.
 Découvrons désormais les effets d'un décalage d'un rang vers la droite de la virgule de $F$, sur la valeur du nombre lui même.
 Dans le cas d'un tel décalage, chaque bit de la partie entière comme fractionnaire de $F$ voit son poids être _incrémenté_ de $1$.
-Comme nous avons déjà pu le voir, le bit de poids $i$ est facteur d'une puissande $2^i$ qui est deux fois inférieur à celle du bit de poids $i + 1$ dont la puissance est $2^{\left(i + 1\right)}$.
-Après décalage de la virgule du nombre flottant $F$, le bit de poids $i$ passe de facteur de $2^i$ à $2^{\left(i + 1\right)}$, et ceci se généralise à l'ensemble des bits du nombre.
-La valeur du nombre $F$ se calculant par la somme des puissances dont le bit est à $1$, chaque puissance ayant été multiplié par $2$, le nombre flottant $F$ l'est également.
+Après décalage de la virgule du nombre flottant $F$, le bit de poids $i$ passe de facteur de $2^i$ à $2^{\left(i + 1\right)}$ et cela se généralise à l'ensemble des bits du nombre.
+Comme la valeur de $F$ se calcul au travers de la somme des puissances dont le bit est à $1$, chaque puissance ayant été multiplié par $2$, le nombre flottant $F$ l'est également.
 C'est ce que démontre le membre de gauche de l'équation pour $\left(c = 1\right)$, tandis que le membre de droite se contente de donné le résultat attendu.
 
 //
