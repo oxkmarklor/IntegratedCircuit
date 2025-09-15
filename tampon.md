@@ -136,10 +136,6 @@ D'où le fait que d'une base numérique à une autre le fonctionnement de l'écr
 
 Les chapitres suivants se focalisent sur la notation scientifique en base binaire.
 
-
-
-
-
 ## Le significande
 
 Nous l'avons vus plus haut, en notation scientifique binaire le significande interprète une valeur de l'intervalle suivante $\left[1;2\right[$.
@@ -169,7 +165,7 @@ Pour le dire autrement, chaque bit de la partie entière comme de la partie frac
 
 L'équation ci-dessous permet de calculer la transformation de n'importe quel nombre à virgule flottante $F$ en un significande.
 
-$$\sum_{i = msb\left(F\right)}^{lsb\left(F\right)} \ \left(F_i \times 2^{\left(i+c\right)}\right) = \ F \times 2^c$$
+$$\sum_{i = msb\left(F\right)}^{lsb\left(F\right)} \ \left(F_i \times 2^{\left(i + c\right)}\right) = \ F \times 2^c$$
 
 Le terme $c$ représente le nombre de rang de décalage à induire sur la virgule du nombre $F$.
 Qui plus est, lorsque $\left(c \lt 0\right)$ c'est que la virgule doit être décalée vers la gauche et inversement quand $\left(c \gt 0\right)$, c'est que le décalage de la virgule doit se produire vers la droite.
@@ -206,10 +202,23 @@ __Nous savons désormais que n'importe quel déplacement de la virgule d'un nomb
 
 ### Détail sur le fonctionnement de l'équation
 
-Je parle de divisé par une puissance de $2$ le nombre flottant $F$ dans le cas d'un décalage de sa virgule vers la gauche, mais malgré que l'équation fonctionne elle ne fait pas usage de division.
-Essayons de comprendre pourquoi.
-Le côté droit de cette équation $\left(F \times 2^c\right)$ semble être approprié pour un décalage de la virgule vers la droite du nombre $F$.
-Je rappelle qu'après un déplacement de la virgule de $c$ rangs vers la droite, le nombre flottant $F$ est mulitplié par une puissance de $2$ qui vaut $2^c$, où $\left(c \gt 0\right)$.
+Si vous avez déjà compris le fonctionnement de l'équation, vous pouvez vous rendre au chapitre suivant du nom de "_Le multiplicande_".
+
+Dans la section précédente, je dit que la valeur du nombre $F$ est divisé par une puissance de $2$ lorsque la virgule du nombre est décalée vers la gauche.
+Pourtant, l'équation qui figure ci-dessus ne fait pas usage de division, essayons de comprendre la situation.
+
+Cette équation semble être parfaitement appropriée pour les décalages vers la droite de la virgule du nombre flottant $F$.
+En effet, je vous rappelle qu'un déplacement de la virgule du nombre $F$ de $c$ rangs vers la droite, multiplie la valeur du nombre par $2^c$, avec $\left(c \gt 0\right)$. 
+Ce qui colle donc avec le membre droit de l'équation $\left(F \times 2^c\right)$.
+
+En revanche, j'ai pris le parti de prendre des valeurs négatives de $c$ lors des décalages de virgule vers la gauche $\left(c \lt 0\right)$.
+Cependant, le plus intuitif aurait été de définir une seconde équation, plus adapté aux décalages vers la gauche de la virgule.
+Ce qui aurait permis d'exprimer les déplacements de virgule au travers d'une variable $c$ positive.
+Cette équation ressemblerait à ceci:
+
+$$\sum_{i = msb\left(F\right)}^{lsb\left(F\right)} \ \left(F_i \times 2^{\left(i - c\right)}\right) = \ F \div 2^c$$
+
+//
 
 En parallèle, l'équation utilise des valeurs négatives de $c$ lors d'un décalage de virgule vers la gauche.
 Pourtant le plus intuitif aurait été de définir les même valeurs de $c$ peu importe la direction des décalages, accompagné de deux équations différentes.
@@ -223,6 +232,8 @@ Mais ce n'est pas fini, car pour trouver l'inverse d'une puissance de $2$ tel qu
 En gros, $1 \div 2^c = \ 2^{-c}$.
 Je me permet de rappellé que $\left(c \gt 0\right)$.
 Finalement, nous pouvons alors remplacé le membre droit $\left(F \times 2^{-c} \right)$ par $\left(F \times 2^c\right)$, à la condition qu'un décalage de $x$ rangs vers la gauche de la virgule de $F$, soit représenté dans l'équation par une valeur de $c = -x$ et non $c = x$.
+
+// comparaison du membre gauche de l'équation initial et altrenative
 
 Avec $\left(F \times 2^c\right)$ nous retrouvons bien le membre droit de notre équation initial, à la condition que $c$ puisse devenir négatif.
 De plus, nous comprenons aussi que le calcul de l'exposant $\left(i + c\right)$ du membre gauche, produit l'équivalent de $\left(i - c\right)$ dans le cas d'un décalage de la virgule de $F$ vers la gauche, car $\left(c \lt 0\right)$.
