@@ -244,13 +244,19 @@ En bref, le fait que la variable $c$ puisse être positive ainsi que négative p
 Résumons rapidement en quelques point ce que nous avons vu jusqu'ici au propos de l'écriture scientifique binaire:
 
   - La notation scientifique a pour but principal de représenter tout nombre de façon unique.
-  - En notation scientifique binaire, le significande ne peut représenter que des valeurs comprises entre $\left[1;2\right[$.
-  - Un nombre à virgule flottante $F$ dont la valeur n'est pas comprise dans l'intervalle de valeur licite d'un significande, doit déplacé sa virgule jusque devant son _MSB1_.
+  - En notation scientifique binaire, le significande ne peut interprété que des valeurs comprises entre $\left[1;2\right[$.
+  - Si l'on souhaite représenté en notation scientifique binaire un nombre à virgule flottante $F$ dont la valeur n'est pas comprise dans l'intervalle de valeur licite d'un significande, la virgule du nombre doit être déplacée jusque devant son _MSB1_.
     Ce qui multiplie ou divise la valeur de $F$ par une puissance de $2$.
 
-Lorsqu'il y a déplacement de la virgule du nombre flottant $F$, alors cela veut dire que le significande $S$ résultant de cette transformation ne représente pas la valeur du nombre $F$ sous-jacent.
-Pour que ce soit bel et bien le nombre $F$ qui soit représenté en notation scientifique binaire, il est nécessaire qu'un multiplicande compense les modifications qui ont affecté la valeur du nombre.
-Vous comprendrez mieux le rôle du multiplicande avec les explications qui vont suivre.
+La formation d'un significande est contraignante lorsque nous prenons en compte tout ces points.
+Quand le nombre à virgule flottante $F$ a une valeur en dehors de l'intervalle $\left[1;2\right[$, il faut décalé la virgule du nombre jusque devant son _MSB1_.
+Ce qui a pour effet de divisé ou multiplié la valeur du nombre par une puissance de $2$.
+Le significande ainsi formé ne peut donc pas représenté à lui seul le nombre flottant $F$ en notation scientifique binaire.
+C'est pourquoi l'écriture scientifique fait l'usage d'un multiplicande.
+Le rôle de ce dernier est en quelque sorte de réajusté la valeur du significande, à la valeur du nombre à virgule flottante $F$.
+
+
+//
 
 Concrètement, si la virgule du nombre flottant $F$ subit un décalage vers la gauche $\left(c \lt 0\right)$, alors la valeur du nombre est divisé par une puissance de $2$.
 Le significande $S$ résultant a donc une valeur plus petite que celle du nombre $F$.
