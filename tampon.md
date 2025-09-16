@@ -202,28 +202,45 @@ __Nous savons désormais que n'importe quel déplacement de la virgule d'un nomb
 
 ### Détail sur le fonctionnement de l'équation
 
-Si vous avez déjà compris le fonctionnement de l'équation, vous pouvez vous rendre au chapitre suivant du nom de "_Le multiplicande_".
+Si vous avez déjà compris le fonctionnement de l'équation, vous pouvez vous rendre au chapitre suivant.
 
 Dans la section précédente, je dit que la valeur du nombre $F$ est divisé par une puissance de $2$ lorsque la virgule du nombre est décalée vers la gauche.
-Pourtant, l'équation qui figure ci-dessus ne fait pas usage de division, essayons de comprendre la situation.
+Pourtant, l'équation qui figure ci-dessus ne fait pas usage de division, essayons de comprendre pourquoi.
 
 Cette équation semble être parfaitement appropriée pour les décalages vers la droite de la virgule du nombre flottant $F$.
 En effet, je vous rappelle qu'un déplacement de la virgule du nombre $F$ de $c$ rangs vers la droite, multiplie la valeur du nombre par $2^c$, avec $\left(c \gt 0\right)$. 
-Ce qui colle donc avec le membre droit de l'équation $\left(F \times 2^c\right)$.
+Ce qui colle explicitement bien avec le membre droit de l'équation $\left(F \times 2^c\right)$.
 
-En revanche, j'ai pris le parti de prendre des valeurs négatives de $c$ lors des décalages de virgule vers la gauche $\left(c \lt 0\right)$.
-Cependant, le plus intuitif aurait été de définir une seconde équation, plus adapté aux décalages vers la gauche de la virgule.
-Ce qui aurait permis d'exprimer les déplacements de virgule au travers d'une variable $c$ positive.
-Cette équation ressemblerait à ceci:
+En parallèle, cette équation utilise des valeurs négatives de $c$ lors d'un décalage de la virgule vers la gauche.
+Pourtant le plus simple aurait été de définir les même valeurs de $c$ peu importe la direction des décalages, accompagné de deux équations différentes.
+Une équation pour les décalages de la virgule vers la droite (celle étant déjà défini), ainsi qu'une autre équation pour les décalages vers la gauche.
+Cette seconde équation ressemblerait à ce qui suit. 
 
 $$\sum_{i = msb\left(F\right)}^{lsb\left(F\right)} \ \left(F_i \times 2^{\left(i - c\right)}\right) = \ F \div 2^c$$
 
+Cette équation parait plus appropriée aux décalages vers la gauche de la virgule du nombre flottant $F$.
+Rappelons qu'un décalage de la virgule d'un rang vers la gauche de $F$, divise la valeur du nombre par $2$.
+Pour un décalage de la virgule de $F$ de $c$ rangs vers la gauche, avec $\left(c \gt 0\right)$, la valeur du nombre est divisé par $2^c$.
+
+
+
+Les explications suivantes vont nous permettre de comprendre pourquoi il vaut mieux que $c$ soit négatif lors des décalages de virgule vers la gauche.
+
+
+Remarquons que $\left(c \gt 0\right)$.
+
+
+Dans le cas d'un décalage de $\vert \ c \ \vert$ rangs vers la gauche de la virgule du nombre flottant $F$, la valeur du nombre doit être divisé par $2^{\vert \ c \ \vert}$.
+C'est ce que nous avons vu plus haut.
+La chose la plus simple à faire aurait été de définir une seconde équation, plus appropiée aux décalages vers la gauche de la virgule.
+Cela permettrait d'exprimer les déplacements de virgule vers la droite comme vers la gauche de la même manière, avec une variable $c$ toujours positive.
+Pour un décalage de $c$ rangs vers la droite nous utiliserions la première équation ayant été défini dans le chapitre précédent, et dans le cas d'un décalage vers la gauche de la virgule nous utiliserions l'équation suivante.
+
+
 //
 
-En parallèle, l'équation utilise des valeurs négatives de $c$ lors d'un décalage de virgule vers la gauche.
-Pourtant le plus intuitif aurait été de définir les même valeurs de $c$ peu importe la direction des décalages, accompagné de deux équations différentes.
-Dans ce qui suit, je vais donc faire usage de $\left(c \gt 0\right)$ pour des décalages vers la gauche.
-Les explications suivantes vont nous permettre de comprendre pourquoi il vaut mieux que $c$ soit négatif lors des décalages de la virgule vers la gauche.
+
+
 
 Pour un décalage de la virgule de $c$ rangs vers la gauche, nous devrions divisé $c$ fois le nombre $F$ par $2$, ou autrement dit divisé $F$ par $2^c$.
 Initialement, nous pourrions penser avoir besoin d'une équation ressemblant à celle-ci $\sum_{i=msb\left(F\right)}^{lsb\left(F\right)} \left(F_i \times 2^{\left(i-c\right)}\right) = \ F \div 2^c$.
