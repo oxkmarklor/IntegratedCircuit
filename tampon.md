@@ -241,6 +241,14 @@ En bref, le fait que la variable $c$ puisse être positive ainsi que négative p
 
 ## Le multiplicande
 
+Plus en amont, nous avons vu qu'en notation scientifique binaire le significande ne pouvait interprété que des valeurs comprises dans l'intervalle $\left[1;2\right[$.
+Dans le cas où la valeur d'un nombre à virgule flottante $F$ n'est pas comprise dans cette intervalle, alors il faut déplacé la virgule de $F$ de sa position initial jusque devant le _MSB1_ du nombre.
+Ce déplacement de la virgule engendre une multiplication ou une division par une puissance de $2$ de la valeur du nombre flottant $F$.
+Mais ne perdons pas de vue l'objectif principal de l'écriture scientifique, représenter chaque nombre de façon unique.
+Si il est nécessaire de modifier la valeur du nombre $F$ pour obtenir le significande, il faut alors qu'il y ait un compensateur (le multiplicande).
+
+//
+
 Nous savons désormais comment obtenir un significande.
 Le problème c'est que tout nombre flottant $F$ dont la valeur n'est pas comprise dans l'intervalle $\left[1;2\right[$ doit forcémment subir un décalage de sa virgule, et donc voir sa valeur être multiplié ou divisé par une puissance de $2$.
 Pour contrecarrer ce problème, l'écriture scientifique défini ce qui s'appelle un multiplicande. 
