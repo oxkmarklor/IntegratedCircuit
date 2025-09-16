@@ -251,21 +251,33 @@ Résumons rapidement en quelques point ce que nous avons vu jusqu'ici au propos 
 La formation d'un significande est contraignante lorsque nous prenons en compte tout ces points.
 Quand le nombre à virgule flottante $F$ a une valeur en dehors de l'intervalle $\left[1;2\right[$, il faut décalé la virgule du nombre jusque devant son _MSB1_.
 Ce qui a pour effet de divisé ou multiplié la valeur du nombre par une puissance de $2$.
-Le significande ainsi formé ne peut donc pas représenté à lui seul le nombre flottant $F$ en notation scientifique binaire.
-C'est pourquoi l'écriture scientifique fait l'usage d'un multiplicande.
-Le rôle de ce dernier est en quelque sorte de réajusté la valeur du significande, à la valeur du nombre à virgule flottante $F$.
+C'est pourquoi l'écriture scientifique fait usage d'un multiplicande, le significande ainsi formé voit sa valeur être réajusté à la valeur du nombre à virgule flottante $F$, par le multiplicande.
+Nous comprendrons mieux comment tout cela fonctionne avec les explications suivantes.
+
+
+
+Par le décalage vers la gauche de la virgule d'un nombre flottant $F$ nous obtenons un significande $S$ $\left(c \lt 0\right)$, nous savons que la valeur du nombre $F$ a été divisé par une puissance de $2$.
+Pour interprété la valeur du nombre à virgule flottante $F$ depuis le significande $S$, il suffit de multiplié ce dernier par la puissance de $2$ qui a divisé la valeur de $F$.
+Le chapitre précédent explique pourquoi l'équation divise la valeur du nombre flottant $F$ par $\left(F \times 2^c\right)$, ce qui donne $\left(F \div \left(1 \div 2^c\right)\right)$.
+Il faut donc multiplié le significande $S$ comme suit $\left(S \times \left(1 \div 2^c\right)\right)$ pour pouvoir interprété la valeur du nombre flottant $F$, ce qui est équivalent à $\left(S \times 2^{-c}\right)$.
 
 
 //
 
-Concrètement, si la virgule du nombre flottant $F$ subit un décalage vers la gauche $\left(c \lt 0\right)$, alors la valeur du nombre est divisé par une puissance de $2$.
+Concrètement, lorsque la virgule du nombre flottant $F$ subit un décalage vers la gauche $\left(c \lt 0\right)$, alors la valeur du nombre est divisé par une puissance de $2$.
+Je rappelle que le chapitre précédent explique pourquoi est-ce-que l'équation divise le nombre flottant $F$ par $\left(F \times 2^c\right)$, ce qui est équivalent à $\left(F \div \left(1 \div 2^c\right)\right)$.
+Le significande $S$ résultant de l'opération de décalage est $\left(1 \div 2^c\right)$ fois inférieur au nombre à virgule flottante $F$.
+En notation scientifique binaire le nombre à virgule flottante $F$ se trouve être $\left(S \times \left(1 \div 2^c\right)\right)$, ce qui donne $\left(S \times 2^{-c}\right)$.
+Le multiplicande est le terme $2^{-c}$ qui multiplie le significande.
+Pour le dire autrement, le multiplicande a ici pour rôle de multiplié le significande $S$ par la même puissance de $2$ que celle ayant divisé le nombre flottant $F$, après  décalage vers la gauche de la virgule du nombre.
+
+//
+
 Le significande $S$ résultant a donc une valeur plus petite que celle du nombre $F$.
 Par conséquent, le multiplicande se charge de multiplié la valeur du significande $S$ par la même puissance de $2$ ayant à l'origine divisé le nombre flottant $F$.
 Cependant, nous savons que l'équation du chapitre "_La transformation d'un nombre à virgule flottante en un significande_" effectue la division du nombre flottant $F$ comme ceci $\left(F \times 2^c\right)$.
 Ce qui est équivalent à $\left(F \div \left(1 \div 2^c\right)\right)$.
 Le multiplicande vaut donc $\left(1 \div 2^c\right)$, et lorsqu'il multiplie le significande $S$ nous obtenons en résultat $F$ $=$ $\left(S \times \left(1 \div 2^c\right)\right)$, ce qui est équivalent à $\left(S \times 2^{-c}\right)$.
-
-
 
 
 //
