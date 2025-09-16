@@ -241,18 +241,29 @@ En bref, le fait que la variable $c$ puisse être positive ainsi que négative p
 
 ## Le multiplicande
 
-Plus en amont, nous avons vu qu'en notation scientifique binaire le significande ne pouvait interprété que des valeurs comprises dans l'intervalle $\left[1;2\right[$.
-Dans le cas où la valeur d'un nombre à virgule flottante $F$ n'est pas comprise dans cette intervalle, alors il faut déplacé la virgule de $F$ de sa position initial jusque devant le _MSB1_ du nombre.
-Ce déplacement de la virgule engendre une multiplication ou une division par une puissance de $2$ de la valeur du nombre flottant $F$.
-Mais ne perdons pas de vue l'objectif principal de l'écriture scientifique, représenter chaque nombre de façon unique.
-Si il est nécessaire de modifier la valeur du nombre $F$ pour obtenir le significande, il faut alors qu'il y ait un compensateur (le multiplicande).
+Résumons rapidement en quelques point ce que nous avons vu jusqu'ici au propos de l'écriture scientifique binaire:
+
+  - La notation scientifique a pour but principal de représenter tout nombre de façon unique.
+  - En notation scientifique binaire, le significande ne peut représenter que des valeurs comprises entre $\left[1;2\right[$.
+  - Un nombre à virgule flottante $F$ dont la valeur n'est pas comprise dans l'intervalle de valeur licite d'un significande, doit déplacé sa virgule jusque devant son _MSB1_.
+    Ce qui multiplie ou divise la valeur de $F$ par une puissance de $2$.
+
+Lorsqu'il y a déplacement de la virgule du nombre flottant $F$, alors cela veut dire que le significande $S$ résultant de cette transformation ne représente pas la valeur du nombre $F$ sous-jacent.
+Pour que ce soit bel et bien le nombre $F$ qui soit représenté en notation scientifique binaire, il est nécessaire qu'un multiplicande compense les modifications qui ont affecté la valeur du nombre.
+Vous comprendrez mieux le rôle du multiplicande avec les explications qui vont suivre.
+
+Concrètement, si la virgule du nombre flottant $F$ subit un décalage vers la gauche $\left(c \lt 0\right)$, alors la valeur du nombre est divisé par une puissance de $2$.
+Le significande $S$ résultant a donc une valeur plus petite que celle du nombre $F$.
+Par conséquent, le multiplicande se charge de multiplié la valeur du significande $S$ par la même puissance de $2$ ayant à l'origine divisé le nombre flottant $F$.
+Cependant, nous savons que l'équation du chapitre "_La transformation d'un nombre à virgule flottante en un significande_" effectue la division du nombre flottant $F$ comme ceci $\left(F \times 2^c\right)$.
+Ce qui est équivalent à $\left(F \div \left(1 \div 2^c\right)\right)$.
+Le multiplicande vaut donc $\left(1 \div 2^c\right)$, et lorsqu'il multiplie le significande $S$ nous obtenons en résultat $F$ $=$ $\left(S \times \left(1 \div 2^c\right)\right)$, ce qui est équivalent à $\left(S \times 2^{-c}\right)$.
+
+
+
 
 //
 
-Nous savons désormais comment obtenir un significande.
-Le problème c'est que tout nombre flottant $F$ dont la valeur n'est pas comprise dans l'intervalle $\left[1;2\right[$ doit forcémment subir un décalage de sa virgule, et donc voir sa valeur être multiplié ou divisé par une puissance de $2$.
-Pour contrecarrer ce problème, l'écriture scientifique défini ce qui s'appelle un multiplicande. 
-Le rôle du multiplicande est de nous permettre de retrouver la valeur initial de $F$ après qu'il ait été transformé en un significande $S$.
 
 En reprenant les termes de l'aquation précédente, dans le cas d'une transformation d'un nombre $F$ en un significande $S$ avec $\left(c \lt 0\right)$, nous savons que la virgule du nombre $F$ a été déplacée vers la gauche et donc sa valeur divisé.
 Pour retrouver le nombre à virgule flottante initial $F$, il suffit alors de _multiplié_ le significande $S$ par la puissance de $2$ qui a divisé le nombre $F$.
