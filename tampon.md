@@ -241,6 +241,22 @@ En bref, le fait que la variable $c$ puisse être positive ainsi que négative p
 
 ## Le multiplicande
 
+Précédemment, nous avons vu que l'écriture scientifique (au sens général) servait à représenté des nombres de façon unique.
+Dans le cas où nous devrions représenté le nombre à virgule flottante $F$ en notation scientifique binaire.
+Si jamais la valeur du nombre flottant $F$ n'est pas comprise dans l'intervalle de valeur licite d'un tel significande $\left[1;2\right[$, il faudra alors déplacé la virgule du nombre $F$ jusque devant son _MSB1_.
+Comme l'explique le chapitre "_La transformation d'un nombre à virgule flottante en un significande_", un tel déplacement de la virgule du nombre flottant $F$ multiplie ou divise la valeur du nombre par une puissance de $2$. 
+Le significande $S$ résultant des modifications sur le nombre flottant $F$, est complété par un multiplicande $M$.
+A ce stade nous savons que $\left(S \neq F\right)$, le significande ne peut donc pas représenté à lui seul la valeur de $F$ en notation scientifique binaire.
+C'est pourquoi le multiplicande $M$ réajuste la valeur du significande $S$ à celle du nombre flottant $F$ d'origine, de sorte à ce que $\left(S \times M = F\right)$.
+
+
+Par conséquent, le rôle d'un multiplicande est de réajusté le significande $S$ à la valeur du nombre flottant $F$.
+Voici l'illustration de la notation scientifique binaire du nombre $+103.3125 = 1100111.0101_2$.
+
+$$+ \ 1.1001110101 \times 2^6$$
+
+//
+
 Résumons rapidement en quelques point ce que nous avons vu jusqu'ici au propos de l'écriture scientifique binaire:
 
   - La notation scientifique a pour but principal de représenter tout nombre de façon unique.
