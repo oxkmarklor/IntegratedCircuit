@@ -251,6 +251,16 @@ A ce stade nous savons que $\left(S \lt F\right)$, le significande ne peut donc 
 Par conséquent, le multiplicande $M$ réajuste la valeur du significande $S$ à celle du nombre flottant $F$ d'origine, de sorte à ce que $F = \left(S \times M\right)$.
 Le multiplicande multiplie donc le significande par la même puissance de $2$ que celle ayant divisé le nombre flottant $F$ d'origine, ce qui donne $F = \left(S \times 2^{-c}\right)$.
 
+Voici l'écriture scientifique binaire du nombre $+103.3125$ qui vaut $+1100111.0101_2$ en nombre à virgule flottante :
+
+$$+ \ 1.1001110101 \times 2^6$$
+
+N'oublions pas le signe $+$ du nombre.
+Le nombre flottant d'origine $1100111.0101_2$ a une valeur en dehors de l'intervalle de valeur licite d'un significande $\left[1;2\right[$.
+La formation du significande requiert donc un décalage de la virgule du nombre d'origine, jusque devant son bit à $1$ de poids le plus fort.
+Ce déplacement de la virgule divise la valeur du nombre de $2^6$ mais permet d'obtenir en retour un significande d'une valeur de $1.1001110101_2$, soit $1.6142578125$.
+Pour représenter le nombre d'origine $+103.3125$ en notation scientifique binaire, le multiplicande réajuste la valeur du significande en multipliant ce dernier par $2^6$.
+
 //
 
 En reprenant les termes de l'aquation précédente, dans le cas d'une transformation d'un nombre $F$ en un significande $S$ avec $\left(c \lt 0\right)$, nous savons que la virgule du nombre $F$ a été déplacée vers la gauche et donc sa valeur divisé.
