@@ -234,6 +234,14 @@ En bref, le fait que la variable $c$ puisse être positive ainsi que négative p
 
 ## Le multiplicande
 
+Parfois la formation d'un significande $S$ résulte du déplacement de la virgule d'un nombre flottant $F$.
+C'est ce qui arrive lorsque la valeur d'un nombre à virgule flottante $F$ n'est pas comprise dans l'intervalle de valeur licite d'un significande.
+Le significande $S$ ne peut donc pas à lui seul représenté la valeur de $F$ en écriture scientifique, car $\left(S \neq F\right)$.
+Par conséquent, un multiplicande $M$ multiplie le significande $S$ de sorte à ce que le résultat du produit soit égale au nombre flottant $F$, ou autrement dit que $F = \left(S \times M\right)$.
+Les explications suivantes nous en dirons plus sur le multiplicande.
+
+//
+
 Précédemment, nous avons vu que l'écriture scientifique (au sens général) servait à représenté des nombres de façon unique.
 En notation scientifique binaire, la représentation d'un nombre à virgule flottante $F$ nécessite une transformation du nombre en un significande $S$, dont la valeur est comprise dans l'intervalle $\left[1;2\right[$.
 Si la valeur du nombre flottant $F$ n'est pas comprise dans cette intervalle, il faudra déplacé la virgule du nombre jusque devant son _MSB1_.
