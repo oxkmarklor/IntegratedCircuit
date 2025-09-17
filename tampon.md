@@ -246,10 +246,12 @@ Les explications qui vont suivre reposent sur l'équation défini dans le chapit
 
 Lorsque la virgule d'un nombre flottant $F$ subit un décalage vers la gauche $\left(c \lt 0\right)$, alors la valeur du nombre est divisé par une puissance de $2$.
 Rappelons que le chapitre précédent précise pourquoi l'équation divise la valeur de $F$ avec $\left(F \times 2^c\right)$. 
-Quoi qu'il en soit le significande $S$ ainsi formé s'obtient avec le calcul $\left(F \times 2^c\right)$, ce qui donne $S = \left(F \div \left(1 \div 2^c\right)\right)$ ou encore $S = \left(F \div 2^{-c}\right)$.
+Quoi qu'il en soit, un significande $S$ est ainsi formé par le calcul $\left(F \times 2^c\right)$, ce qui est équivalent à $\left(F \div \left(1 \div 2^c\right)\right)$ ou encore $\left(F \div 2^{-c}\right)$.
 A ce stade nous savons que $\left(S \lt F\right)$, le significande ne peut donc pas représenté à lui seul la valeur de $F$ en notation scientifique binaire.
-Par conséquent, le multiplicande $M$ réajuste la valeur du significande $S$ de sorte à ce qu'elle soit égale à celle du nombre flottant $F$ d'origine, ou autrement dit que $F = \left(S \times M\right)$.
-Le multiplicande $M$ multiplie donc le significande par la même puissance de $2$ que celle ayant divisé le nombre flottant $F$ d'origine, ce qui donne $F = \left(S \times 2^{-c}\right)$.
+Par conséquent, le multiplicande $M$ multiplie le significande $S$ de sorte à ce que le résultat du produit soit égale au nombre flottant $F$, ou autrement dit que $F = \left(S \times M\right)$.
+Rappellez-vous du fait que $S = \left(F \div 2^{-c}\right)$.
+C'est pourquoi le multiplicande $M$ multiplie le significande $S$ par la même puissance de $2$ que celle ayant divisé le nombre flottant $F$.
+Ce qui au final donne $F = \left(S \times 2^{-c}\right)$.
 
 Voici l'écriture scientifique binaire du nombre $+103.3125$ qui vaut $+1100111.0101_2$ en nombre à virgule flottante :
 
