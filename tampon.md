@@ -245,11 +245,11 @@ C'est pourquoi le multiplicande $M$ réajuste la valeur du significande $S$ à c
 Les explications qui vont suivre reposent sur l'équation défini dans le chapitre "_La transformation d'un nombre à virgule flottante en un significande_".
 
 Lorsque la virgule d'un nombre flottant $F$ subit un décalage vers la gauche $\left(c \lt 0\right)$, alors la valeur du nombre est divisé par une puissance de $2$.
-Cependant, rappelons que le chapitre précédent précise pourquoi l'équation divise la valeur de $F$ par $\left(F \times 2^c\right)$. 
-Quoi qu'il en soit le significande $S$ ainsi formé se calcul par $\left(F \times 2^c\right)$, ce qui donne $S = \left(F \div \left(1 \div 2^c\right)\right)$ ou encore $S = \left(F \div 2^{-c}\right)$.
+Rappelons que le chapitre précédent précise pourquoi l'équation divise la valeur de $F$ avec $\left(F \times 2^c\right)$. 
+Quoi qu'il en soit le significande $S$ ainsi formé s'obtient avec le calcul $\left(F \times 2^c\right)$, ce qui donne $S = \left(F \div \left(1 \div 2^c\right)\right)$ ou encore $S = \left(F \div 2^{-c}\right)$.
 A ce stade nous savons que $\left(S \lt F\right)$, le significande ne peut donc pas représenté à lui seul la valeur de $F$ en notation scientifique binaire.
-Par conséquent, le multiplicande $M$ réajuste la valeur du significande $S$ à celle du nombre flottant $F$ d'origine, de sorte à ce que $F = \left(S \times M\right)$.
-Le multiplicande multiplie donc le significande par la même puissance de $2$ que celle ayant divisé le nombre flottant $F$ d'origine, ce qui donne $F = \left(S \times 2^{-c}\right)$.
+Par conséquent, le multiplicande $M$ réajuste la valeur du significande $S$ de sorte à ce qu'elle soit égale à celle du nombre flottant $F$ d'origine, ou autrement dit que $F = \left(S \times M\right)$.
+Le multiplicande $M$ multiplie donc le significande par la même puissance de $2$ que celle ayant divisé le nombre flottant $F$ d'origine, ce qui donne $F = \left(S \times 2^{-c}\right)$.
 
 Voici l'écriture scientifique binaire du nombre $+103.3125$ qui vaut $+1100111.0101_2$ en nombre à virgule flottante :
 
