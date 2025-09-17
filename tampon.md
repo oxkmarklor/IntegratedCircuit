@@ -235,10 +235,24 @@ En bref, le fait que la variable $c$ puisse être positive ainsi que négative p
 ## Le multiplicande
 
 Parfois la formation d'un significande $S$ résulte du déplacement de la virgule d'un nombre flottant $F$.
-C'est ce qui arrive lorsque la valeur d'un nombre à virgule flottante $F$ n'est pas comprise dans l'intervalle de valeur licite d'un significande.
-Le significande $S$ ne peut donc pas à lui seul représenté la valeur de $F$ en écriture scientifique, car $\left(S \neq F\right)$.
+Dans le cas de l'écriture scientifique binaire, c'est ce qui arrive lorsque la valeur d'un nombre à virgule flottante $F$ n'est pas comprise dans l'intervalle de valeur licite du significande $\left[1;2\right[$.
+Le significande $S$ ne peut donc pas représenté à lui seul la valeur de $F$ en notation scientifique binaire, car $\left(S \neq F\right)$.
 Par conséquent, un multiplicande $M$ multiplie le significande $S$ de sorte à ce que le résultat du produit soit égale au nombre flottant $F$, ou autrement dit que $F = \left(S \times M\right)$.
-Les explications suivantes nous en dirons plus sur le multiplicande.
+
+Les explications qui vont suivre reposent sur l'équation défini dans le chapitre "_La transformation d'un nombre à virgule flottante en un significande_".
+
+Lorsque la virgule d'un nombre flottant $F$ subit un décalage vers la gauche $\left(c \lt 0\right)$, alors la valeur du nombre est divisé par une puissance de $2$.
+L'équation divise la valeur du nombre à virgule flottante $F$ comme ceci $\left(F \times 2^c\right)$, le chapitre précédent explique pourquoi. 
+Quoi qu'il en soit, un significande $S$ résulte ainsi du calcul $\left(F \times 2^c\right)$, qui est équivalent à $\left(F \div \left(1 \div 2^c\right)\right)$ ou encore $\left(F \div 2^{-c}\right)$.
+A ce stade nous savons que $\left(S \lt F\right)$, le significande ne peut donc pas représenté à lui seul la valeur de $F$ en notation scientifique binaire.
+Heureusement, l'écriture scientifique fait usage d'un multiplicande $M$ qui multiplie le significande $S$ de sorte à ce que le résultat du produit $\left(S \times M\right)$ soit la valeur $F$.
+Rappellez-vous du fait que $S = \left(F \div 2^{-c}\right)$.
+C'est pourquoi le multiplicande $M$ multiplie le significande $S$ par la même puissance de $2$ que celle ayant divisé le nombre flottant $F$, ce qui donne au final $F = \left(S \times 2^{-c}\right)$.
+
+
+//
+
+
 
 //
 
@@ -249,17 +263,6 @@ Comme l'explique le chapitre "_La transformation d'un nombre à virgule flottant
 Le significande $S$ résultant des modifications sur le nombre flottant $F$, est complété par un multiplicande $M$.
 A ce stade nous savons que $\left(S \neq F\right)$, le significande ne peut donc pas représenté à lui seul la valeur de $F$ en notation scientifique binaire.
 C'est pourquoi le multiplicande $M$ réajuste la valeur du significande $S$ à celle du nombre flottant $F$ d'origine, de sorte à ce que $F = \left(S \times M\right)$.
-
-Les explications qui vont suivre reposent sur l'équation défini dans le chapitre "_La transformation d'un nombre à virgule flottante en un significande_".
-
-Lorsque la virgule d'un nombre flottant $F$ subit un décalage vers la gauche $\left(c \lt 0\right)$, alors la valeur du nombre est divisé par une puissance de $2$.
-Rappelons que le chapitre précédent précise pourquoi l'équation divise la valeur de $F$ avec $\left(F \times 2^c\right)$. 
-Quoi qu'il en soit, un significande $S$ est ainsi formé par le calcul $\left(F \times 2^c\right)$, ce qui est équivalent à $\left(F \div \left(1 \div 2^c\right)\right)$ ou encore $\left(F \div 2^{-c}\right)$.
-A ce stade nous savons que $\left(S \lt F\right)$, le significande ne peut donc pas représenté à lui seul la valeur de $F$ en notation scientifique binaire.
-Par conséquent, le multiplicande $M$ multiplie le significande $S$ de sorte à ce que le résultat du produit soit égale au nombre flottant $F$, ou autrement dit que $F = \left(S \times M\right)$.
-Rappellez-vous du fait que $S = \left(F \div 2^{-c}\right)$.
-C'est pourquoi le multiplicande $M$ multiplie le significande $S$ par la même puissance de $2$ que celle ayant divisé le nombre flottant $F$.
-Ce qui au final donne $F = \left(S \times 2^{-c}\right)$.
 
 Voici l'écriture scientifique binaire du nombre $+103.3125$ qui vaut $+1100111.0101_2$ en nombre à virgule flottante :
 
