@@ -1,12 +1,5 @@
 // Maj post démonstration: Le Binary Unsigned -> L'écriture scientifique binaire -> Le standard IEEE-754 -> L'encodage des champs d'un nombre IEEE-754 -> Le codage des champs d'un nombre IEEE-754 -> Ordre de traitement des champs + Les points terminaux et non terminaux
 
-
-
-
-
-
-
-
 # Les encodages
 
 Commençons par la base.
@@ -242,62 +235,23 @@ En bref, le fait que la variable $c$ puisse être positive ainsi que négative p
 ## Le multiplicande
 
 Précédemment, nous avons vu que l'écriture scientifique (au sens général) servait à représenté des nombres de façon unique.
-Dans le cas où nous devrions représenté le nombre à virgule flottante $F$ en notation scientifique binaire.
-Si jamais la valeur du nombre flottant $F$ n'est pas comprise dans l'intervalle de valeur licite d'un tel significande $\left[1;2\right[$, il faudra alors déplacé la virgule du nombre $F$ jusque devant son _MSB1_.
-Comme l'explique le chapitre "_La transformation d'un nombre à virgule flottante en un significande_", un tel déplacement de la virgule du nombre flottant $F$ multiplie ou divise la valeur du nombre par une puissance de $2$. 
+En notation scientifique binaire, la représentation d'un nombre à virgule flottante $F$ nécessite une transformation du nombre en un significande $S$, dont la valeur est comprise dans l'intervalle $\left[1;2\right[$.
+Si la valeur du nombre flottant $F$ n'est pas comprise dans cette intervalle, il faudra déplacé la virgule du nombre jusque devant son _MSB1_.
+Comme l'explique le chapitre "_La transformation d'un nombre à virgule flottante en un significande_", un tel déplacement de la virgule du nombre flottant $F$, multiplie ou divise la valeur du nombre par une puissance de $2$. 
 Le significande $S$ résultant des modifications sur le nombre flottant $F$, est complété par un multiplicande $M$.
 A ce stade nous savons que $\left(S \neq F\right)$, le significande ne peut donc pas représenté à lui seul la valeur de $F$ en notation scientifique binaire.
-C'est pourquoi le multiplicande $M$ réajuste la valeur du significande $S$ à celle du nombre flottant $F$ d'origine, de sorte à ce que $\left(S \times M = F\right)$.
+C'est pourquoi le multiplicande $M$ réajuste la valeur du significande $S$ à celle du nombre flottant $F$ d'origine, de sorte à ce que $F = \left(S \times M\right)$.
 
+Les explications qui vont suivre reposent sur l'équation défini dans le chapitre "_La transformation d'un nombre à virgule flottante en un significande_".
 
-Par conséquent, le rôle d'un multiplicande est de réajusté le significande $S$ à la valeur du nombre flottant $F$.
-Voici l'illustration de la notation scientifique binaire du nombre $+103.3125 = 1100111.0101_2$.
-
-$$+ \ 1.1001110101 \times 2^6$$
-
-//
-
-Résumons rapidement en quelques point ce que nous avons vu jusqu'ici au propos de l'écriture scientifique binaire:
-
-  - La notation scientifique a pour but principal de représenter tout nombre de façon unique.
-  - En notation scientifique binaire, le significande ne peut interprété que des valeurs comprises entre $\left[1;2\right[$.
-  - Si l'on souhaite représenté en notation scientifique binaire un nombre à virgule flottante $F$ dont la valeur n'est pas comprise dans l'intervalle de valeur licite d'un significande, la virgule du nombre doit être déplacée jusque devant son _MSB1_.
-    Ce qui multiplie ou divise la valeur de $F$ par une puissance de $2$.
-
-La formation d'un significande est contraignante lorsque nous prenons en compte tout ces points.
-Quand le nombre à virgule flottante $F$ a une valeur en dehors de l'intervalle $\left[1;2\right[$, il faut décalé la virgule du nombre jusque devant son _MSB1_.
-Ce qui a pour effet de divisé ou multiplié la valeur du nombre par une puissance de $2$.
-C'est pourquoi l'écriture scientifique fait usage d'un multiplicande, le significande ainsi formé voit sa valeur être réajusté à la valeur du nombre à virgule flottante $F$, par le multiplicande.
-Nous comprendrons mieux comment tout cela fonctionne avec les explications suivantes.
-
-
-
-Par le décalage vers la gauche de la virgule d'un nombre flottant $F$ nous obtenons un significande $S$ $\left(c \lt 0\right)$, nous savons que la valeur du nombre $F$ a été divisé par une puissance de $2$.
-Pour interprété la valeur du nombre à virgule flottante $F$ depuis le significande $S$, il suffit de multiplié ce dernier par la puissance de $2$ qui a divisé la valeur de $F$.
-Le chapitre précédent explique pourquoi l'équation divise la valeur du nombre flottant $F$ par $\left(F \times 2^c\right)$, ce qui donne $\left(F \div \left(1 \div 2^c\right)\right)$.
-Il faut donc multiplié le significande $S$ comme suit $\left(S \times \left(1 \div 2^c\right)\right)$ pour pouvoir interprété la valeur du nombre flottant $F$, ce qui est équivalent à $\left(S \times 2^{-c}\right)$.
-
+Lorsque la virgule d'un nombre flottant $F$ subit un décalage vers la gauche $\left(c \lt 0\right)$, alors la valeur du nombre est divisé par une puissance de $2$.
+Cependant, rappelons que le chapitre précédent précise pourquoi l'équation divise la valeur de $F$ par $\left(F \times 2^c\right)$. 
+Quoi qu'il en soit le significande $S$ ainsi formé se calcul par $\left(F \times 2^c\right)$, ce qui donne $S = \left(F \div \left(1 \div 2^c\right)\right)$ ou encore $S = \left(F \div 2^{-c}\right)$.
+A ce stade nous savons que $\left(S \lt F\right)$, le significande ne peut donc pas représenté à lui seul la valeur de $F$ en notation scientifique binaire.
+Par conséquent, le multiplicande $M$ réajuste la valeur du significande $S$ à celle du nombre flottant $F$ d'origine, de sorte à ce que $F = \left(S \times M\right)$.
+Le multiplicande multiplie donc le significande par la même puissance de $2$ que celle ayant divisé le nombre flottant $F$ d'origine, ce qui donne $F = \left(S \times 2^{-c}\right)$.
 
 //
-
-Concrètement, lorsque la virgule du nombre flottant $F$ subit un décalage vers la gauche $\left(c \lt 0\right)$, alors la valeur du nombre est divisé par une puissance de $2$.
-Je rappelle que le chapitre précédent explique pourquoi est-ce-que l'équation divise le nombre flottant $F$ par $\left(F \times 2^c\right)$, ce qui est équivalent à $\left(F \div \left(1 \div 2^c\right)\right)$.
-Le significande $S$ résultant de l'opération de décalage est $\left(1 \div 2^c\right)$ fois inférieur au nombre à virgule flottante $F$.
-En notation scientifique binaire le nombre à virgule flottante $F$ se trouve être $\left(S \times \left(1 \div 2^c\right)\right)$, ce qui donne $\left(S \times 2^{-c}\right)$.
-Le multiplicande est le terme $2^{-c}$ qui multiplie le significande.
-Pour le dire autrement, le multiplicande a ici pour rôle de multiplié le significande $S$ par la même puissance de $2$ que celle ayant divisé le nombre flottant $F$, après  décalage vers la gauche de la virgule du nombre.
-
-//
-
-Le significande $S$ résultant a donc une valeur plus petite que celle du nombre $F$.
-Par conséquent, le multiplicande se charge de multiplié la valeur du significande $S$ par la même puissance de $2$ ayant à l'origine divisé le nombre flottant $F$.
-Cependant, nous savons que l'équation du chapitre "_La transformation d'un nombre à virgule flottante en un significande_" effectue la division du nombre flottant $F$ comme ceci $\left(F \times 2^c\right)$.
-Ce qui est équivalent à $\left(F \div \left(1 \div 2^c\right)\right)$.
-Le multiplicande vaut donc $\left(1 \div 2^c\right)$, et lorsqu'il multiplie le significande $S$ nous obtenons en résultat $F$ $=$ $\left(S \times \left(1 \div 2^c\right)\right)$, ce qui est équivalent à $\left(S \times 2^{-c}\right)$.
-
-
-//
-
 
 En reprenant les termes de l'aquation précédente, dans le cas d'une transformation d'un nombre $F$ en un significande $S$ avec $\left(c \lt 0\right)$, nous savons que la virgule du nombre $F$ a été déplacée vers la gauche et donc sa valeur divisé.
 Pour retrouver le nombre à virgule flottante initial $F$, il suffit alors de _multiplié_ le significande $S$ par la puissance de $2$ qui a divisé le nombre $F$.
