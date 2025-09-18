@@ -242,12 +242,19 @@ Le significande $S$ ainsi obtenu a désormais une valeur comprise dans l'interva
 C'est pour cette raison que la notation scientifique binaire du nombre flottant $F$ ne peut pas uniquement s'appuyer sur le significande $S$.
 Elle sollicite plutôt un multiplicande $M$ qui multiplie le significande $S$, de sorte à ce que le résultat du produit $\left(S \times M\right)$ soit égale à $F$.
 
-Les explications suivantes utilisent l'équation défini dans le chapitre "_La transformation d'un nombre à virgule flottante en un significande_".
+Les sections suivantes font référence à l'équation défini dans le chapitre "_La transformation d'un nombre à virgule flottante en un significande_".
 
-// décalage vers la gauche de la virgule de F
+### Lorsque le multiplicande multiplie le significande
 
-Dans le cas d'un décalage vers la gauche de la virgule d'un nombre flottant $F$ $\left(c \lt 0\right)$, alors la valeur du nombre est divisé par une puissance de $2$.
-...
+L'écriture scientifique binaire d'un nombre à virgule flottante $F$ dont la valeur est supérieur à l'intervalle de valeur licite d'un significande $\left[1;2\right[$, s'accompagne d'une transformation du nombre flottant $F$ en un significande $S$.
+La formation du significande passe par un décalage vers la gauche de la virgule du nombre $F$, ce qui divise par une puissance de $2$ la valeur du nombre.
+Pour $\left(c \lt 0\right)$, le membre droit de l'équation nous fait comprendre que $S = \left(F \times 2^c\right)$, ce qui est équivalent à $S = \left(F \div 2^{-c}\right)$.
+Nous comprenons donc que $\left(S \lt F\right)$, le significande est un terme qui à lui seul ne pourrait pas représenté la valeur du nombre flottant $F$ en notation scientifique binaire.
+C'est pourquoi le multiplicande $M$ multiplie le significande $S$ de sorte à ce que $F = \left(S \times M\right)$.
+Nous savons que $S = \left(F \div 2^{-c}\right)$, le multiplicande $M$ multiplie donc le significande $S$ par la même puissance de $2$ que celle ayant contribué à la formation du significande en divisant le nombre à virgule flottante $F$. 
+Ce qui donne au final $F = \left(S \times 2^{-c}\right)$.
+
+### Lorsque le multiplicande divise le significande
 
 // décalage vers la droite de la virgule de F
 
