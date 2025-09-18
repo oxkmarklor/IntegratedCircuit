@@ -235,14 +235,25 @@ En bref, le fait que la variable $c$ puisse être positive ainsi que négative p
 ## Le multiplicande
 
 Nous savons désormais ce qu'est un significande ainsi que comment l'obtenir.
-Mais le significande n'est qu'un seul des deux termes de l'écriture scientifique d'un nombre, il y a aussi le multiplicande.
+Mais le significande n'est qu'un seul des deux termes de l'écriture scientifique d'un nombre, il y a aussi le __multiplicande__.
 En notation scientifique binaire, lorsque nous cherchons à représenté un nombre à virgule flottante $F$ dont la valeur n'est pas comprise dans l'intervalle $\left[1;2\right[$.
 Il faut déplacé la virgule du nombre jusque devant son _MSB1_, ce qui modifie sa valeur.
 Le significande $S$ ainsi obtenu a désormais une valeur comprise dans l'intervalle $\left[1;2\right[$, ce qui veut dire que $\left(S \neq F\right)$.
 C'est pour cette raison que la notation scientifique binaire du nombre flottant $F$ ne peut pas uniquement s'appuyer sur le significande $S$.
-Elle sollicite plutôt un multiplicande $M$ qui multiplie le significande $S$, de sorte à ce que le résultat du produit $\left(S \times M\right)$ soit égale à $F$.
+Elle sollicite plutôt un multiplicande $M$ qui multiplie le significande $S$, de sorte à ce que $F = \left(S \times M\right)$.
 
 Les sections suivantes font référence à l'équation défini dans le chapitre "_La transformation d'un nombre à virgule flottante en un significande_".
+
+### Quand un nombre flottant a une valeur comprise dans l'intervalle de valeur licite d'un significande
+
+Le paragraphe d'introduction qui précède ne parle que des cas dans lequels le multiplicande se rend indispensable, mais parfois il ne l'est pas.
+C'est ce que nous allons voir dans cette section.
+
+En écriture scientifique binaire, le significande a une intervalle de valeur licite de $\left[1;2\right[$.
+Lorsque le nombre à virgule flottante $F$ qui doit être représenté en notation scientifique binaire, a une valeur comprise dans cette intervalle.
+En soit, le nombre flottant $F$ forme alors déjà un significande $S$ valide $\left(S = F\right)$.
+Par conséquent, le significande est un terme qui pourrait à lui seul représenté la valeur du nombre flottant $F$ en notation scientifique binaire.
+Mais rappelons ce qui a été dit plus haut, la notation scientifique d'un nombre flottant $F$ prend la forme de $F = \left(S \times M\right)$, alors le multiplicande $M$ vaut $1$ afin de ne pas modifier la valeur de $S$.
 
 ### Lorsque le multiplicande multiplie le significande
 
@@ -280,11 +291,9 @@ Voici l'écriture scientifique binaire du nombre $F = -0.140625$, qui en virgule
 $$- \ 1.001 \times 2^{-3}$$
 
 Le significande $1.001_2$ (ou $1.125$ en décimale) résulte du décalage de $3$ rangs vers la droite de la virgule du nombre $F$ $\left(c = 3\right)$.
-Selon l'équation, la formation du significande a engendré une multiplication de la valeur du nombre avec $\left(F \times 2^c\right)$.
+Selon l'équation, la formation du significande a engendré une multiplication de la valeur du nombre $\left(F \times 2^c\right)$.
 Pour représenter le nombre $F$ en notation scientifique binaire.
-Le multiplicande doit donc __divisé__ le significande par la même puissance de $2$ que celle ayant __multiplié__ le nombre flottant $F$, ce qui donne $-0.140625 = - 1.125 \div 2^3$ ce qui revient à $-0.140625 = - 1.125 \times 2^{-3}$.
-
-// Quand F = S
+Le multiplicande doit donc __divisé__ le significande par la même puissance de $2$ que celle ayant __multiplié__ le nombre flottant $F$, ce qui donne $- \ 0.140625 = - 1.125 \div 2^3$ ce qui revient à $- \ 0.140625 = - 1.125 \times 2^{-3}$.
 
 # Le standard IEEE-754
 
