@@ -254,17 +254,16 @@ L'équation nous dit que la formation du significande $S$ passe par $\left(F \ti
 Le significande, par le fait que $\left(S \lt F\right)$, est un terme de l'écriture scientifique qui à lui seul ne peut pas représenté la valeur du nombre flottant $F$.
 C'est pourquoi un multiplicande $M$ multiplie le significande $S$ de sorte à ce que $F = \left(S \times M\right)$.
 Parce que $S = \left(F \div 2^{-c}\right)$, le multiplicande $M$ multiplie donc le significande $S$ par la même puissance de $2$ que celle ayant contribué à la formation du significande en divisant le nombre à virgule flottante $F$. 
-Ce qui donne au final $F = \left(S \times 2^{-c}\right)$.
+Ce qui donne $F = \left(S \times 2^{-c}\right)$.
 
 Voici l'écriture scientifique binaire du nombre $F = 5.5$, qui en virgule flottante vaut $+ \ 101.1_2$ :
 
 $$+ \ 1.011_2 \times 2^2$$
 
-// à relire
-
 Le significande $1.011_2$ (ou $1.375$ en décimale) résulte du décalage de $2$ rangs vers la gauche de la virgule du nombre $F$.
-La formation du significande a engendré une division de la valeur du nombre $F$, ce que l'équation traduit par $\left(F \times 2^c\right)$ avec $\left(c = -2\right)$ ou encore $\left(F \div 2^{-c}\right)$.
-Par conséquent, le multiplicande __multiplie__ le significande $1.375$ par la même puissance de $2$ que celle ayant __divisé__ le nombre $F$, ce qui donne $5.5 = \left(+ 1.375 \times 2^2\right)$.
+La formation du significande requiert une division de la valeur du nombre $F$, ce que l'équation traduit par $\left(F \times 2^c\right)$ avec $\left(c = -2\right)$, ou encore $\left(F \div 2^{-c}\right)$.
+Sachant que $\left(1.375 \lt 5.5\right)$, le multiplicande $M$ doit multiplié le significande $S$ de sorte à ce que $F = \left(S \times M\right)$.
+Ce qui revient à dire que le multiplicande doit __multiplié__ le significande par la même puissance de $2$ que celle ayant __divisé__ le nombre à virgule flottante $F$, ce qui donne $5.5 \ =$ $+ \ 1.375 \times 2^2$.
 
 ### Lorsque le multiplicande divise le significande
 
