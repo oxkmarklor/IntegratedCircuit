@@ -113,11 +113,11 @@ L'écriture scientifique est une façon comme une autre de représenter des nomb
 Elle existe pour chaque base numérique, comme pour la base binaire par exemple.
 Le but de cette notation scientifique des nombres est double.
 Permièrement, elle ne permet d'écrire les nombres que d'une seule et unique façon.
-En outre, elle simplifie aussi la lecture des très grand comme très petit nombres.
-L'écriture scientifique _en base décimale_ est par exemple capable de rendre facilement lisible la lecture de la vitesse approchée de la lumière dans de le vide spatial en m/s $+3.0 \times 10^8$.
+En outre, elle simplifie aussi la lecture des très grands ainsi que des très petits nombres.
+Par exemple, l'écriture scientifique _en base décimale_ rend facilement lisible la lecture de la vitesse approchée de la lumière dans de le vide spatial (en m/s) $+ \ 3.0 \times 10^8$.
 
 Il faut savoir que d'une base numérique à une autre, le fonctionnement de l'écriture scientifique change peu.
-Cependant la composition de la notation scientifique ne change jamais, qu'importe la base numérique, il y a toujours:
+Quant à la composition de la notation scientifique, elle ne change jamais qu'importe la base numérique, il y a toujours:
   - Un ___signe___
   - Un ___significande___
   - Un ___multiplicande___
@@ -130,6 +130,18 @@ D'où le fait que d'une base numérique à une autre le fonctionnement de l'écr
 Les chapitres suivants se focalisent sur la notation scientifique en base binaire.
 
 ## Le significande
+
+L'écriture scientifique en base binaire représente n'importe quel nombre $F$ codé en virgule flottante, qu'il soit positif ou bien négatif.
+Le nombre flottant $F$ à représenté en notation scientifique binaire permet à lui seul de définir deux des trois éléments de sa propre écriture scientifique, le signe et le significande.
+Dans un premier temps, la formation du _signe_ n'est qu'un report du symbole $\pm$ du nombre flottant $F$.
+Cependant, il y a dans un second temps la formation du significande qui est quant à elle plus complexe.
+A ce stade, nous pouvons déjà déduire le signe du nombre à virgule flottante $F$, qui a déjà été pris en charge.
+
+// ce qui reste de F est donc positif
+
+Pour commencer, nous savons qu'en écriture scientifique binaire (en base $2$) le significande ne peut avoir qu'une valeur comprise dans l'intervalle $\left[1;2\right[$.
+C'est alors la valeur absolu du nombre à virgule flottante $F$ qui prend ainsi en charge la génération du significande, vous allez comprendre pourquoi.
+
 
 Nous l'avons vus plus haut, en notation scientifique binaire le significande interprète une valeur de l'intervalle suivante $\left[1;2\right[$.
 __C'est le nombre à virgule flottante__ $F$ __qui doit être représenté en notation scientifique binaire, qui forme lui même son propre significande.__
@@ -146,7 +158,7 @@ Il subsiste cependant une exception, la représentation du nombre $0$ en notatio
 Ce nombre n'étant pas compris dans l'intervalle de valeur licite d'un significande, il faudrait modifier ce dernier.
 Mais nous venons de le voir, modifier la valeur du nombre voudrait que l'on déplace sa virgule jusque devant son _MSB1_, et il n'y a pas de _MSB1_ dans le codage de $0$ en binaire.
 __Par conséquent, le significande est alors excpetionnellement nul pour représenté la valeur__ $0$ __en notation scientifique binaire.__
-Il me faut précisé qu' aucune base numérique ne fait exception à cette généralité.
+Aucune base numérique ne fait exception à cette généralité.
 
 La section suivante cherche à précisé l'impacte qu'a un déplacement de la virgule du nombre flottant $F$, sur sa valeur. 
 
