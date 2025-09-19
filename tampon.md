@@ -42,7 +42,7 @@ Par exemple, le bit qui multiplie $2^6$ fait fluctuer la valeur du nombre repré
 Le bit qui multiplie $2^6$ est donc d'un poids (d'une importance) supérieur à celui qui multiplie $2^3$.
 
 Par conséquent, il est très commun d'indicé les bits d'un champs binaire par leurs poids, le bit de poids $3$ fait référence au bit qui multiplie la puissance $2^3$.
-Il s'évère que certains termes sont rentrés dans le langage commun et représentent des bits d'un poids bien précis à l'intérieur d'un champs.
+Il s'avère que certains termes sont rentrés dans le langage commun et représentent des bits d'un poids bien précis à l'intérieur d'un champs.
 Par exemple, le terme de _LSB_ pour _Least Significant Bit_ fait référence au bit de poids le plus faible d'un champs binaire, le bit de poids $0$ pour tout nombre représenté en _Binary Unsigned_.
 Il existe aussi le terme de _MSB_ pour _Most Significant Bit_ qui fait référence au bit de poids le plus fort d'un champs binaire.
 D'autres termes comme _LSB1_ pour le bit à $1$ de poids le plus faible, ou encore _MSB1_ pour le bit à $1$ de poids le plus fort, existent aussi.
@@ -75,14 +75,15 @@ Pour le moment, intéressons nous à l'encodage des nombres à virgule flottante
 Je n'apprend rien à personne en disant qu'un nombre à virgule est scindé en deux parties, la partie entière composée des chiffres derrère la virgule, et la partie fractionnaire composée des chiffres devant la virgule.
 La partie entière d'un nombre à virgule flottante est codé en _Binary Unsigned_.
 Par conséquent, pour pouvoir représenter des nombres à virgule flottante positif ou négatif, il faut rajouté un signe $\pm$ à la partie entière du nombre.
+C'est pourquoi le bit de poids le plus fort de la partie entière d'un nombre flottant, code le signe $-$ lorsqu'il est à $1$, et $+$ quand il vaut $0$.
 Cependant, l'encodage de la partie fractionnaire est tout nouveau, malgré une ressemblance avec le _Binary Unsigned_.
 Chaque bit de la partie fractionnaire est le facteur d'une puissance de $2$ négative, la partie fractionnaire a comme valeur la somme de ces produits.
 Il sera plus simple de comprendre tout cela au travers d'une illustration, regardez ci-bas.
 
-$$ +103.3125 = +1100111.0101_2$$
+$$+ \ 103.3125 = 0 \ 1100111.0101_2$$
 
-Dans la partie entière du nombre, nous retrouvons le codage _Binary Unsigned_ de $103$, qui commence à nous être familier (en plus du signe, comme mentionné plus haut).
-Rien d'étonnant pour la partie fractionnaire, nous avons des bits... mais regardons ce que valent ces bits.
+Dans la partie entière du nombre nous retrouvons le bit de poids le plus fort qui est à $0$ (ce dernier représente le signe $+$), ainsi que le codage _Binary Unsigned_ du nombre $103$, qui commence à nous être familier.
+Rien d'étonnant pour la partie fractionnaire, nous avons des bits... mais regardons dans le détails ce que valent ces bits.
 
 $$ 0.0101 = Integer \ Part\left(0 \times 2^0\right) + Fractional \ Part\left(0 \times 2^{-1} + 1 \times 2^{-2} + 0 \times 2^{-3} + 1 \times 2^{-4}\right)$$
 
@@ -91,9 +92,11 @@ Nous remarquons que le bit de poids le plus fort de la partie fractionnaire est 
 Dans la section précédente nous parlions d'une propriété propre à l'encodage _Binary Unsigned_.
 Cette propriété peut être mise en oeuvre dans la partie entière d'un nombre à virgule flottante, car rappelons-le cette partie est codé en _Binary Unsigned_.
 Malgré cela, l'encodage de la partie fractionnaire permet lui aussi de faire usage de cette propriété.
-Pour rappel, cela veut dire que tout bit à $1$ de poids $i$ compris dans la partie fractionnaire a une valeur strictement supérieur à la somme des valeurs de chaque bit de poids inférieur à $i$.
+Pour rappel, cela veut dire que tout bit à $1$ de poids $i$ compris dans la partie fractionnaire, a une valeur strictement supérieur à la somme des valeurs de chaque bit de poids inférieur à $i$.
 De fait, il y a une continuité de cette propriété entre la partie entière et fractionnaire d'un nombre à virgule flottante.
 Autrement dit, un bit à $1$ de poids $i$ dans la partie entière, a une valeur strictement supérieur à la somme des valeurs des bits de poids inférieur à $i$ de la partie entière et fractionnaire.
+
+### L'étymologie du terme de nombre à virgule flottante
 
 Par ailleurs, si ces nombres sont dits à virgule flottante, c'est parce que la virgule du nombre peut être déplacée sans que cela ne pose de problème.
 C'est la solution qui à ce jour, pour l'Homme, est la plus intuitive ainsi que la plus flexible pour représenter des nombres à virgule en base $2$.
@@ -131,9 +134,7 @@ Les chapitres suivants se focalisent sur la notation scientifique en base binair
 
 ## Le significande
 
-// à relire
-
-L'écriture scientifique en base binaire représente n'importe quel nombre $F$ codé en virgule flottante, qu'il soit positif ou bien négatif.
+L'écriture scientifique en base binaire peut représenté n'importe quel nombre $F$ codé en virgule flottante, qu'il soit positif ou bien négatif.
 Le nombre flottant $F$ à représenté en notation scientifique binaire permet à lui seul de définir deux des trois éléments de sa propre écriture scientifique, le signe et le significande.
 Le signe est une simple copie du symbole $\pm$ du nombre flottant $F$.
 Tandis que le significande s'obtient depuis une modification (non systèmatique) de la valeur absolu du nombre à virgule flottante $F$.
@@ -143,19 +144,18 @@ Lorsque la valeur absolu d'un nombre à virgule flottante $F$ est comprise dans 
 Cependant, si ce n'est pas le cas, alors il faut modifier la valeur du nombre $\vert \ F \ \vert$ de sorte à ce que le résultat soit compris dans l'intervalle $\left[1;2\right]$.
 Néanmoins, ces modifications ne s'effectuent pas n'importe comment.
 
-Ces modifications consistent en des déplacements de la virgule d'un nombre flottant $\vert \ F \ \vert$.
+Une modification consiste en un déplacement de la virgule d'un nombre flottant $\vert \ F \ \vert$.
 Dans le cas où $\left(\vert F \vert \ge \ 2\right)$, alors la virgule de $\vert \ F \ \vert$ subit un décalage vers la gauche jusqu'à que cette dernière se retrouve devant le _MSB1_ du champs binaire.
 Mais ce n'est tout car dans le cas où $\left(\vert F \vert \lt \ 1\right)$, alors la virgule de $\vert \ F \ \vert$ subit aussi un décalage vers la droite jusqu'à qu'elle se retrouve devant le _MSB1_ du champs binaire.
 En déplaçant de la virgule de $\vert \ F \ \vert$ jusque devant le bit à $1$ de poids le plus fort du nombre, nous nous assurons du fait que le résultat de la modification du nombre $\vert \ F \ \vert$ soit compris dans l'intervalle de valeur $\left[1;2\right[$.
 
-Il subsiste cependant une exception, la représentation du nombre $0.0$ (la valeur nulle) en notation scientifique binaire.
+Il subsiste cependant une exception, la représentation du nombre $0$ en notation scientifique binaire.
 La valeur de ce nombre n'étant pas comprise dans l'intervalle de valeur licite d'un significande $\left[1;2\right[$, alors il faudrait apporté des modifications au nombre.
-Pourtant comme nous venons de le voir, modifier la valeur d'un nombre à virgule flottante insinue que un déplacement de la virgule du nombre jusque devant son _MSB1_.
-Mais il n'y a pas de _MSB1_ dans le codage en virgule flottante du nombre $0.0$.
-__Par conséquent, le significande est alors excpetionnellement nul pour pouvoir représenté la valeur__ $0.0$ __en notation scientifique binaire.__
-Par ailleurs, ceci est commun à toute écriture scientifique dans n'importe quel base numérique.
+Cela demanderait de déplacer la virgule du nombre jusque devant son _MSB1_, mais il n'y a pas de _MSB1_ dans le codage de $0$ en virgule flottante.
+__Par conséquent, le significande est alors excpetionnellement nul pour pouvoir représenté la valeur__ $0$ __en notation scientifique binaire.__
+Par ailleurs, ceci est commun à chaque écriture scientifique, pour n'importe quel base numérique.
 
-La section suivante cherche à précisé l'impacte qu'a un déplacement de la virgule du nombre flottant $F$, sur sa valeur. 
+La section suivante cherche à précisé l'impacte qu'a un déplacement de la virgule d'un nombre flottant, sur sa valeur. 
 
 ### La transformation d'un nombre à virgule flottante en un significande
 
@@ -163,18 +163,20 @@ Pour tout nombre à virgule flottante $F$, nous savons que la virgule se trouve 
 Par conséquent, un déplacement de la virgule d'un rang vers la gauche force le bit de poids $1$ à devenir le bit de poids $0$, le bit de poids $0$ à devenir celui de poids $-1$, et celui de poids $-1$ devient le bit de poids $-2$, etc.
 Pour le dire autrement, chaque bit de la partie entière comme de la partie fractionnaire du nombre $F$ voit son poids être _décrémenté_ de $1$. 
 
-L'équation ci-dessous permet de calculer la transformation de n'importe quel nombre à virgule flottante $F$ en un significande.
+L'équation ci-dessous permet de calculer la transformation de n'importe quel nombre à virgule flottante $\vert \ F \vert \notin \left[1;2\right[$, en un significande.
 
-$$\sum_{i = msb\left(F\right)}^{lsb\left(F\right)} \ \left(F_i \times 2^{\left(i + c\right)}\right) = \ F \times 2^c$$
+$$\sum_{i = F_{msb - 1}}^{F_{lsb}} \left(F_i \ \times \ 2^{\left(i + c\right)}\right) = \vert F \vert \times \ 2^c$$
 
-Le terme $c$ représente le nombre de rang de décalage à induire sur la virgule du nombre $F$.
+Le terme $c$ représente le nombre de rang de décalage à induire sur la virgule du nombre $\vert \ F \ \vert$.
 Qui plus est, lorsque $\left(c \lt 0\right)$ c'est que la virgule doit être décalée vers la gauche et inversement quand $\left(c \gt 0\right)$, c'est que le décalage de la virgule doit se produire vers la droite.
 
-Essayons de comprendre pourquoi est ce qu'un décalage d'un rang vers la gauche de la virgule de $F$ $\left(c = -1\right)$, divise la valeur de $F$ par $2$ comme nous le démontre l'équation ci-dessus.
+// reprendre ici
+
+Essayons de comprendre pourquoi est ce qu'un décalage d'un rang vers la gauche de la virgule de $\vert \ F \ \vert$ $\left(c = -1\right)$, divise la valeur de $F$ par $2$ comme nous le démontre l'équation ci-dessus.
 Nous savons que les nombres flottants ont une partie entière et une autre fractionnaire.
 Ces deux parties utilisent chaque bit comme un facteur d'une puissance de $2$, des puissances _positives_ pour la partie entière et _négatives_ pour la partie fractionnaire.
-__Remarquons que dans le codage du nombre flottant__ $F$, __n'importe quel bit de poids__ $i$ __est facteur d'une puissance de__ $2$ __qui est deux fois plus grande que celle du bit de poids__ $i - 1$.
-Par exemple, le bit de poids $0$ est facteur de $\left(2^0 = 1\right)$ qui est une puissance deux fois supérieur à celle dont le bit de poids $-1$ est le facteur $\left(2^{-1} = 0.5\right)$.
+__Remarquons que dans le codage d'un nombre à virgule flottante, n'importe quel bit de poids__ $i$ __est facteur d'une puissance de__ $2$ __qui est deux fois plus grande que celle du bit de poids__ $i - 1$.
+Par exemple, le bit de poids $0$ est facteur de $2^0$ qui est une puissance deux fois supérieur à celle du bit de poids $-1$, qui est $2^{-1}$.
 
 Mais n'oublions pas qu'avec un décalage d'un rang vers la gauche de la virgule de $F$, je cite "_chaque bit de la partie entière comme de la partie fractionnaire de_ $F$ _voit son poids être décrémenté de_ $1$".
 Avant décalage de la virgule du nombre $F$, le bit de poids $i$ est facteur de $2^i$, mais après décalage ce dernier n'est plus que facteur de $2^{\left(i - 1\right)}$, la valeur du bit a été divisé par $2$.
