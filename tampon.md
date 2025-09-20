@@ -191,16 +191,17 @@ Après décalage de la virgule du nombre flottant $\vert \ F \ \vert$, le bit de
 Comme la valeur de $\vert \ F \ \vert$ se calcul selon la somme des puissances dont le bit est à $1$, chaque puissance ayant été multiplié par $2$ dû au décalage de la virgule, la somme de ces dernières l'a également été.
 C'est ce que démontre le membre de gauche de l'équation pour $\left(c = 1\right)$, alors que le membre de droite se contente de donné le résultat attendu.
 
-// verif les conclusions avec le chapitre suivant
+// à relire
 
 Désormais, nous sommes en capacité de comprendre toutes les implications qu'un décalage de la virgule du nombre $\vert \ F \ \vert$, peut avoir sur la valeur du nombre lui même. 
-Prenons un décalage de la virgule vers la droite, quel qu'il soit $\left(c \gt 0\right)$.
+Prenons comme exemple un décalage quelconque de la virgule vers la droite $\left(c \gt 0\right)$.
 Nous venons tout juste de voir qu'un décalage d'un rang vers la droite de la virgule de $\vert \ F \ \vert$ $\left(c = 1\right)$, multiplie par $2$ la valeur du nombre.
-Par conséquent, pour n'importe quel autre décalage de la virgule vers la droite, il suffit alors de multiplié $c$ fois par $2$ la valeur de $\vert \ F \ \vert$, ou autrement dit multiplié $\vert \ F \ \vert$ par $2^c$.
+Par conséquent, pour tout autre décalage de la virgule vers la droite, il suffit de multiplié $c$ fois par $2$ la valeur de $\vert \ F \ \vert$.
+Ce qui donne $\left(\vert F \vert \times \ 2^c\right)$.
 Voyons maintenant le cas d'un décalage quelconque de la virgule vers la gauche $\left(c \lt 0\right)$.
 Nous savons qu'un décalage d'un rang vers la gauche de la virgule de $\vert \ F \ \vert$ $\left(c = -1\right)$, divise par $2$ la valeur du nombre.
-Donc dans le cas de tout autre décalage de la virgule vers la gauche, il suffit alors de divisé $\vert \ c \ \vert$ fois la valeur du nombre $\vert \ F \ \vert$ par $2$, ce qui revient à divisé $\vert \ F \ \vert$ par $2^{\vert \ c \ \vert}$.
-Aussi, il est possible de dire que cela revient à multiplié $\vert \ F \ \vert$ par $2^c$ (pour faire référence au membre droit de l'équation), mais nous expliquerons plus en profondeur le fonctionnement de l'équation dans le chapitre qui suit.
+Donc dans le cas de tout autre décalage de la virgule vers la gauche, il suffit alors de divisé $\vert \ c \ \vert$ fois la valeur du nombre $\vert \ F \ \vert$ par $2$, ou autrement dit $\vert \ F \ \vert$ est divisé par $2^{\vert \ c \ \vert}$.
+Ce qui revient aussi à $\left(\vert F \vert \times \ 2^c\right)$.
 
 __Nous savons désormais que n'importe quel déplacement de la virgule d'un nombre flottant, engendre une multiplication ou une division de la valeur du nombre par une puissance de__ $2$.
 
@@ -231,12 +232,8 @@ Ce qui suit explique comment il est possible de passé d'un tel raisonnement à 
 
 Nous allons essayés de réduire la forme de la seconde équation que nous venons tout juste de définir, en la forme de la première équation ayant été défini dans le chapitre précédent.
 Remarquons que le membre droit de cette seconde équation $\left(\vert F \vert \div \ 2^c\right)$ pourrait être remplacé par $\left(\vert F \vert \times \left(1 \div 2^c\right)\right)$ et que $\left(1 \div 2^c\right) = 2^{-c}$.
-Par définition, il est donc possible de remplacé $\left(\vert F \vert \times \ 2^{-c}\right)$ avec $\left(c \gt 0\right)$, par $\left(\vert F \vert \times \ 2^c\right)$.
+Par définition, il est donc possible de remplacé $\left(\vert F \vert \times \ 2^{-c}\right)$ avec $\left(c \gt 0\right)$, par le membre de droite de la première équation $\left(\vert F \vert \times \ 2^c\right)$.
 Pour cela, il suffit de faire en sorte que tout déplacement vers la gauche de la virgule du nombre $\vert \ F \ \vert$, soit interprété par une valeur négative de $c$, et non positive.
-
-// à relire
-
-Avec $\left(c \lt 0\right)$ lors d'un déplacement vers la gauche de la virgule du nombre flottant $\vert \ F \ \vert$, nous retrouvons bien le membre droit de la première équation $\left(F \times 2^c\right)$.
 Par ailleurs, le membre de gauche de la première équation procède au calcul d'exposant $\left(i + c\right)$, avec $\left(c \lt 0\right)$.
 Ce qui revient au même que le calcul d'exposant du membre de gauche de la seconde équation $\left(i - c\right)$, lorsque $\left(c \gt 0\right)$.
 
