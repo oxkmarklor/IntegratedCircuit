@@ -175,8 +175,8 @@ Essayons de comprendre pourquoi est ce qu'un décalage d'un rang vers la gauche 
 N'oublions pas qu'avec un décalage d'un rang vers la gauche de la virgule de $F$, je cite "_chaque bit de la partie entière comme de la partie fractionnaire de_ $F$ _voit son poids être décrémenté de_ $1$".
 Avant décalage de la virgule du nombre $F$ le bit de poids $i$ est facteur de la puissance $2^i$, mais après décalage, ce dernier n'est plus que facteur de la puissance $2^{\left(i - 1\right)}$, la valeur du bit a été divisé par $2$.
 Ceci se généralise à l'ensemble des bits du nombre $F$.
-Rappelons que nous calculons la valeur de $F$ comme la somme des puissances dont le bit est à $1$, chaque puissance ayant été divisé par $2$, la somme de ces dernières l'est également.
-C'est pourquoi la valeur du nombre $F$ en valeur absolu (ou non) est divisé par $2$ après un décalage d'un rang vers la gauche de sa virgule.
+Rappelons que nous calculons la valeur de $F$ comme la somme des puissances dont le bit est à $1$, chaque puissance ayant été divisé par $2$ dû au décalage de la virgule, la somme de ces dernières l'est également.
+C'est pourquoi la valeur du nombre $F$ en valeur absolu (ou non), est divisé par $2$ après un décalage d'un rang vers la gauche de la virgule.
 
 //
 
