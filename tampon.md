@@ -165,24 +165,27 @@ Pour le dire autrement, chaque bit de la partie entière comme de la partie frac
 
 L'équation ci-dessous permet de calculer la transformation de n'importe quel nombre à virgule flottante $\vert \ F \vert \notin \left[1;2\right[$, en un significande.
 
-$$\sum_{i = F_{msb - 1}}^{F_{lsb}} \left(F_i \ \times \ 2^{\left(i + c\right)}\right) = \vert F \vert \times \ 2^c$$
+$$\sum_{i = msb\left(F\right) - 1}^{lsb\left(F\right)} \left(F_i \ \times \ 2^{\left(i + c\right)}\right) = \vert F \vert \times \ 2^c$$
 
-Le terme $c$ représente le nombre de rang de décalage à induire sur la virgule du nombre $\vert \ F \ \vert$.
+Les fonctions $msb$ et $lsb$ retournent respectivement le poids de numéro le plus fort ainsi que le plus faible du nombre passé en argument.
+Quant au terme $c$, il représente le nombre de rang de décalage à induire sur la virgule du nombre $\vert \ F \ \vert$.
 Qui plus est, lorsque $\left(c \lt 0\right)$ c'est que la virgule doit être décalée vers la gauche et inversement quand $\left(c \gt 0\right)$, c'est que le décalage de la virgule doit se produire vers la droite.
 
-// reprendre ici
+Essayons de comprendre pourquoi est ce qu'un décalage d'un rang vers la gauche de la virgule de $\vert \ F \ \vert$ $\left(c = -1\right)$, divise la valeur du nombre par $2$ comme le démontre l'équation ci-dessus.
+N'oublions pas qu'avec un décalage d'un rang vers la gauche de la virgule de $F$, je cite "_chaque bit de la partie entière comme de la partie fractionnaire de_ $F$ _voit son poids être décrémenté de_ $1$".
+Avant décalage de la virgule du nombre $F$ le bit de poids $i$ est facteur de la puissance $2^i$, mais après décalage, ce dernier n'est plus que facteur de la puissance $2^{\left(i - 1\right)}$, la valeur du bit a été divisé par $2$.
+Ceci se généralise à l'ensemble des bits du nombre $F$.
+Rappelons que nous calculons la valeur de $F$ comme la somme des puissances dont le bit est à $1$, chaque puissance ayant été divisé par $2$, la somme de ces dernières l'est également.
+C'est pourquoi la valeur du nombre $F$ en valeur absolu (ou non) est divisé par $2$ après un décalage d'un rang vers la gauche de sa virgule.
 
-Essayons de comprendre pourquoi est ce qu'un décalage d'un rang vers la gauche de la virgule de $\vert \ F \ \vert$ $\left(c = -1\right)$, divise la valeur de $F$ par $2$ comme nous le démontre l'équation ci-dessus.
+//
+
 Nous savons que les nombres flottants ont une partie entière et une autre fractionnaire.
 Ces deux parties utilisent chaque bit comme un facteur d'une puissance de $2$, des puissances _positives_ pour la partie entière et _négatives_ pour la partie fractionnaire.
-__Remarquons que dans le codage d'un nombre à virgule flottante, n'importe quel bit de poids__ $i$ __est facteur d'une puissance de__ $2$ __qui est deux fois plus grande que celle du bit de poids__ $i - 1$.
-Par exemple, le bit de poids $0$ est facteur de $2^0$ qui est une puissance deux fois supérieur à celle du bit de poids $-1$, qui est $2^{-1}$.
+Remarquons que dans le codage d'un nombre à virgule flottante, n'importe quel bit de poids $i$ est facteur d'une puissance de $2$ qui est deux fois plus grande que celle du bit de poids $i - 1$.
+Par exemple, le bit de poids $0$ est facteur de $2^0$, qui est une puissance deux fois supérieur à celle du bit de poids $-1$, qui est $2^{-1}$.
 
-Mais n'oublions pas qu'avec un décalage d'un rang vers la gauche de la virgule de $F$, je cite "_chaque bit de la partie entière comme de la partie fractionnaire de_ $F$ _voit son poids être décrémenté de_ $1$".
-Avant décalage de la virgule du nombre $F$, le bit de poids $i$ est facteur de $2^i$, mais après décalage ce dernier n'est plus que facteur de $2^{\left(i - 1\right)}$, la valeur du bit a été divisé par $2$.
-Ceci se généralise à l'ensemble des bits du nombre $F$.
-Nous calculons la valeur de $F$ comme la somme des puissances dont le bit est à $1$, chaque puissance ayant été divisé par $2$, le nombre flottant $F$ l'est également.
-C'est pourquoi la valeur de $F$ est divisé par $2$ après un décalage d'un rang vers la gauche de sa virgule.
+//
 
 Maintenant que nous avons compris pourquoi un décalage d'un rang vers la gauche de la virgule de $F$, engendre une division par $2$ du nombre.
 Découvrons désormais les effets d'un décalage d'un rang vers la droite de la virgule de $F$, sur la valeur du nombre lui même.
