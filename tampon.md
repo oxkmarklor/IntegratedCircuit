@@ -136,7 +136,7 @@ Les chapitres suivants se focalisent sur la notation scientifique en base binair
 
 L'écriture scientifique en base binaire peut représenté n'importe quel nombre $F$ codé en virgule flottante, qu'il soit positif ou bien négatif.
 Le nombre flottant $F$ à représenté en notation scientifique binaire permet à lui seul de définir deux des trois éléments de sa propre écriture scientifique, le signe et le significande.
-Le signe est une simple copie du symbole $\pm$ du nombre flottant $F$.
+Comme son nom l'indique, l'élément qu'est le "signe" ne représente que le signe $\pm$ du nombre flottant $F$.
 Tandis que le significande s'obtient depuis une modification (non systèmatique) de la valeur absolu du nombre à virgule flottante $F$.
 
 Nous savons qu'en notation scientifique binaire, le significande ne peut interprété que des valeurs comprises dans l'intervalle $\left[1;2\right[$.
@@ -241,18 +241,22 @@ En bref, le fait que la variable $c$ puisse être positive ainsi que négative p
 ## Le multiplicande
 
 Lorsque le nombre à virgule flottante $F$ à représenter en notation scientifique binaire, a une valeur absolu qui n'est pas comprise dans l'intervalle de valeur licite d'un significande $\left[1;2\right[$.
-La valeur de son propre significande $S$, qui elle est comprise dans cette intervalle, est différente de celle du nombre flottant $F$ d'origine.
+La valeur de son propre significande $S$, qui elle est comprise dans cette intervalle, est différente de $\vert \ F \ \vert$.
 C'est pourquoi l'écriture scientifique fait usage d'un multiplicande.
-Lorsque $\left(\vert F \vert \neq S\right)$, le multiplicande $M$ permet comme son nom l'indique de multiplié le significande $S$, de sorte à ce que $\vert F \vert = \left(S \times M\right)$.
+Lorsque $\left(S \ \neq \vert F \vert\right)$, le multiplicande $M$ permet comme son nom l'indique de multiplié le significande $S$, de sorte à ce que $\vert \ F \vert = \left(S \times M\right)$.
 Autrement dit, le multiplicande réajuste la valeur du significande à la valeur absolu du nombre $F$ à représenter, quand c'est nécessaire.
 
-Cependant, il est possible que le nombre à virgule flottante $F$ ait une valeur comprise dans l'intervalle de valeur licite d'un significande $\left[1;2\right[$.
-L'écriture scientifique binaire d'un tel nombre est toujours de la forme $F = \left(S \times M\right)$.
-Parce que la valeur du nombre flottant $F$ est égale à celle de son propre significande $\left(S = F\right)$, nous en déduisons que le multiplicande $M$ ne peut donc valoir que $1$.
+Cependant, il est possible que le nombre à virgule flottante $F$ ait une valeur absolu comprise dans l'intervalle de valeur licite d'un significande $\left[1;2\right[$.
+Parce que $\left(S \ = \vert F \vert\right)$, nous en déduisons que dans cette situation le multiplicande $M$ vaut $1$, de sorte à ce que $\vert \ F \vert = \left(S \times M\right)$.
 
-En outre, les sections suivantes font référence à l'équation défini dans le chapitre "_La transformation d'un nombre à virgule flottante en un significande_".
+Je tient à vous faire remarquez que si $\vert \ F \vert = \left(S \times M\right)$, alors la forme complète de l'écriture scientifique binaire du nombre à virgule flottante est $F \ = \pm \left(S \times M\right)$.
+Rappellez-vous en, le signe $\pm$ est celui du nombre flottant $F$ dont nous parlons au tout début du chapitre "_Le significande_".
+Nous retrouvons les trois éléments de l'écriture scientifique, le _signe_, le _significande_ ainsi que le _multiplicande_.
 
-### Lorsque le multiplicande multiplie le significande
+Les sections suivantes expliquent comment le multiplicande réajuste la valeur du significande à celle du nombre $F$ en valeur absolu.
+En outre, sachez que ces dernières font références à l'équation défini dans le chapitre "_La transformation d'un nombre à virgule flottante en un significande_".
+
+### Lorsque le multiplicande multiplie la valeur du significande
 
 En écriture scientifique binaire, la représentation d'un nombre à virgule flottante $F$ dont la valeur est supérieur à l'intervalle $\left[1;2\right[$ d'un significande, s'accompagne d'une transformation du nombre $F$ en un significande $S$.
 La formation du significande passe par un décalage vers la gauche de la virgule du nombre $F$, ce qui divise par une puissance de $2$ la valeur de $F$.
@@ -261,6 +265,8 @@ Le significande, par le fait que $\left(S \lt F\right)$, est un terme de l'écri
 C'est pourquoi un multiplicande $M$ multiplie le significande $S$ de sorte à ce que $F = \left(S \times M\right)$.
 Parce que $S = \left(F \div 2^{-c}\right)$, le multiplicande $M$ multiplie donc le significande $S$ par la même puissance de $2$ que celle ayant contribué à la formation du significande en divisant le nombre à virgule flottante $F$. 
 Ce qui donne $F = \left(S \times 2^{-c}\right)$.
+
+// faire référence à $F = \pm  \left(S \times M\right)$
 
 Voici l'écriture scientifique binaire du nombre $F = 5.5$, qui en virgule flottante vaut $+ \ 101.1_2$ :
 
