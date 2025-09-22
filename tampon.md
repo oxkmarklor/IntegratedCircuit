@@ -274,7 +274,7 @@ $$+ \ 1.011_2 \ \times \ 2^2$$
 Le significande $1.011_2$ (ou $1.375$ en décimale) résulte du décalage de $2$ rangs vers la gauche de la virgule du nombre flottant $\vert \ F \ \vert$.
 La formation du significande engendre une division de la valeur du nombre $\vert \ F \ \vert$, ce que l'équation traduit par $\left(\vert F \vert \times \ 2^c\right)$ avec $\left(c = -2\right)$, ou encore $\left(\vert F \vert \div \ 2^{-c}\right)$.
 Sachant que $\left(1.375 \ \lt \vert 5.5 \vert\right)$, le multiplicande $M$ doit multiplié le significande $1.375$ par $2^{-c}$ de sorte à ce que $\vert \ 5.5 \vert = \left(1.375 \ \times \ M\right)$.
-L'écriture scientifique du nombre à virgule flottante est donc $5.5 \ = + \ 1.375 \ \times \ 2^2$.
+L'écriture scientifique du nombre à virgule flottante $F$ est donc bel et bien $5.5 \ = + \ 1.375 \ \times \ 2^2$.
 
 ### Lorsque le multiplicande divise la valeur du significande
 
@@ -297,32 +297,35 @@ Le significande $1.001_2$ (ou $1.125$ en décimale) résulte du décalage de $3$
 La formation du significande engendre une multiplication de la valeur du nombre $\vert \ F \ \vert$, ce que l'équation traduit par $\left(\vert F \vert \times \ 2^c\right)$ avec $\left(c = 3\right)$.
 Sachant que $\left(1.125 \ \gt \vert - \ 0.140625 \vert\right)$, le multiplicande $M$ doit divisé le significande $1.125$ par $2^c$ de sorte à ce que $\vert - \ 0.140625 \vert = \left(1.125 \div M\right)$.
 Cela donne $\vert - 0.140625 \vert = \left(1.125 \ \div \ 2^3\right)$, ce qui est équivalent à $\vert - \ 0.140625 \vert = \left(1.125 \ \times \ 2^{-3}\right)$.
-L'écriture scientifique du nombre à virgule flottante est donc $- \ 0.140625 \ = - \ 1.125 \ \times \ 2^{-3}$.
+L'écriture scientifique du nombre à virgule flottante $F$ est donc bel et bien $- \ 0.140625 \ = - \ 1.125 \ \times \ 2^{-3}$.
 
 # Le standard IEEE-754
 
-Après cette rapide introduction à l'encodage __Binary Unsigned__, passons au sujet suivant qui est l'encodage __IEEE-754__.
-
-Notre circuit a pour fonction principal de produire des comparaisons entre deux nombres à virgule flottante, de standard _IEEE-754_.
-Pour plus d'information sur le circuit électronique, jetez un oeil à la documentation du circuit.
-La norme _IEEE-754_ défini trois éléments pour l'encodage de chaque nombre à virgule flottante:
+La norme IEEE-754 standardise la représentation (l'encodage) des nombres à virgule dans un ordinateur.
+Ce document est une démonstration mathématique d'un circuit électronique qui a pour fonction principal de produire des comparaisons entre deux opérandes de standard IEEE-754.
+Pour plus d'information sur le circuit électronique, jetez un oeil à la documentation dédié au circuit.
+La norme IEEE-754 défini trois éléments pour l'encodage de chaque nombre du standard:
   - Le ___bit de signe___
-  - Un champs binaire d'___exposant___
-  - Un champs binaire de ___mantisse tronquée___
+  - Le champs d'___exposant___
+  - Le champs de ___mantisse tronquée___
 
-Il existe plusieurs format de flottant défini par le standard IEEE-754.
-Voici la disposition précise de chaque bit de chacun des champs pour le codage d'un nombre au format _Half Precision_, qui est a une taille de $16$ bits:
+Il existe plusieurs format de nombre défini par le standard IEEE-754, chaque format ne change des autres que par sa taille.
+Les deux formats les plus connus sont le _Simple Precision_ ainsi que le _Double Precision_, qui permettent le codage de nombre à virgule sur des champs binaire de respectivement $32$ et $64$ bits.
+Cependant, le circuit électronique que j'ai conceptualisé ne prend en charge que les opérandes de format _Half Precision_, ceci est principalement dû aux complexités de schématisation du circuit.
+Le format Half Precision permet de codé des nombres à virgule sur des champs binaire de $16$ bits.
+Voici la disposition de chaque bit, dans chaque champs, au format _Half Precision_ :
 
 $$\left[S_{15}, \quad E_{14}, \ E_{13}, \ E_{12}, \ E_{11}, \ E_{10}, \quad T_9, \ T_8, \ T_7, \ T_6, \ T_5, \ T_4, \ T_3, \ T_2, \ T_1, \ T_0\right]$$
 
-$S$: Sign bit,  $E$: Exponent, $T$: Truncated mantissa
+$\quad S$: Sign bit, $\quad E$: Exponent, $\quad T$: Truncated mantissa
 
-Chaque indice (nombre) compris dans l'intervalle $\left[0;15\right]$ représente le poids d'un bit précis.
+Chaque indice $i$ de la forme $X_i$ qui est compris dans l'intervalle $\left[0;15\right]$, représente le poids d'un bit précis dans le champs binaire.
 En effet, il est très commun d'indicé un bit d'un champs binaire par son poids.
 
-Dans ce qui suit, nous allons nous intéresser aux encodages propre des champs binaires d'exposant et de mantisse tronquée.
-Nous allons voir que les encodages des champs de mantisse tronquée et d'exposant partagent les même caractéristiques que le _Binary Unsigned_.
-Ce qui permet de traité ces deux champs avec un même processus de calcul, ce qui se reflète sur l'architecture du circuit électronique.
+Comme cela a été dit plus haut, chaque format de nombre IEEE-754 est composé de 3 champs binaire.
+Dans ce qui suit, nous allons nous intéressés aux encodages des champs binaire d'exposant et de mantisse tronquée.
+Nous allons voir que les encodages de ces derniers partagent certaines des propriétés de l'encodage _Binary Unsigned_, dont nous avons parlé au tout début du document.
+Ceci a un impacte sur la logique du circuit.
 
 ### L'encodage par biais du champs d'exposant
 
