@@ -263,44 +263,41 @@ La formation du significande passe par un décalage vers la gauche de la virgule
 L'équation nous dit que la formation du significande $S$ passe par $\left(\vert F \vert \times \ 2^c\right)$ avec $\left(c \lt 0\right)$, ce qui est équivalent au fait de dire que $S \ = \left(\vert F \vert \div \ 2^{-c}\right)$.
 Le significande, par le fait que $\left(S \ \lt \vert F \vert\right)$, est un terme de l'écriture scientifique qui à lui seul ne peut pas représenté la valeur du nombre flottant $\vert \ F \ \vert$.
 C'est pourquoi un multiplicande $M$ multiplie le significande $S$ de sorte à ce que $\vert \ F \vert = \left(S \times M\right)$.
-Parce que $S \ = \left(\vert F \vert \div \ 2^{-c}\right)$, le multiplicande $M$ multiplie donc le significande $S$ par la même puissance de $2$ que celle ayant contribué à la formation du significande en divisant le nombre $\vert \ F \ \vert$. 
-Ce qui donne $\vert \ F \vert = \left(S \times 2^{-c}\right)$.
-Par conséquent, l'écriture scientifique binaire du nombre à virgule flottante est $F \ = \pm \left(S \times 2^{-c}\right)$, comme nous l'avons vu plus haut.
+Parce que $S \ = \left(\vert F \vert \div \ 2^{-c}\right)$, le multiplicande $M$ multiplie donc le significande $S$ par la même puissance de $2$ que celle ayant divisé $\vert \ F \ \vert$ pour formé le significande.
+Ce qui donne $\vert \ F \vert = \left(S \ \times \ 2^{-c}\right)$.
+Par conséquent, l'écriture scientifique binaire du nombre à virgule flottante est $F \ = \pm \left(S \ \times \ 2^{-c}\right)$, comme nous l'avons vu plus haut.
 
 Voici comme exemple l'écriture scientifique binaire du nombre $F = 5.5$, qui en virgule flottante vaut $+ \ 101.1_2$ :
 
-$$+ \ 1.011_2 \times 2^2$$
+$$+ \ 1.011_2 \ \times \ 2^2$$
 
-Le significande $1.011_2$ (ou $1.375$ en décimale) résulte du décalage de $2$ rangs vers la gauche de la virgule du nombre $F$.
-La formation du significande requiert une division de la valeur du nombre $F$, ce que l'équation traduit par $\left(F \times 2^c\right)$ avec $\left(c = -2\right)$, ou encore $\left(F \div 2^{-c}\right)$.
-Sachant que $\left(1.375 \lt 5.5\right)$, le multiplicande $M$ doit multiplié le significande $S$ de sorte à ce que $F = \left(S \times M\right)$.
-Ce qui revient à dire que le multiplicande doit __multiplié__ le significande par la même puissance de $2$ que celle ayant __divisé__ le nombre à virgule flottante $F$, ce qui donne $5.5 \ =$ $+ \ 1.375 \times 2^2$.
+Le significande $1.011_2$ (ou $1.375$ en décimale) résulte du décalage de $2$ rangs vers la gauche de la virgule du nombre flottant $\vert \ F \ \vert$.
+La formation du significande engendre une division de la valeur du nombre $\vert \ F \ \vert$, ce que l'équation traduit par $\left(\vert F \vert \times \ 2^c\right)$ avec $\left(c = -2\right)$, ou encore $\left(\vert F \vert \div \ 2^{-c}\right)$.
+Sachant que $\left(1.375 \ \lt \vert 5.5 \vert\right)$, le multiplicande $M$ doit multiplié le significande $1.375$ par $2^{-c}$ de sorte à ce que $\vert \ 5.5 \vert = \left(1.375 \ \times \ M\right)$.
+L'écriture scientifique du nombre à virgule flottante est donc $5.5 \ = + \ 1.375 \ \times \ 2^2$.
 
-### Lorsque le multiplicande divise le significande
+### Lorsque le multiplicande divise la valeur du significande
 
-Voyons désormais le cas contraire.
+Voyons désormais le cas contraire, celui dans lequel le multiplicande réduit la valeur du significande.
 
-En écriture scientifique binaire, la représentation d'un nombre à virgule flottante $F$ dont la valeur est inférieur à l'intervalle $\left[1;2\right[$ d'un significande, s'accompagne d'une transformation du nombre $F$ en un significande $S$.
-La formation du significande passe par un décalage vers la droite de la virgule du nombre $F$, ce qui multiplie par une puissance de $2$ la valeur de $F$.
-L'équation nous dit que la formation du significande $S$ passe par $\left(F \times 2^c\right)$, avec $\left(c \gt 0\right)$.
-Le significande, par le fait que $\left(S \gt F\right)$, est un terme de l'écriture scientifique qui à lui seul ne peut pas représenté la valeur du nombre flottant $F$.
-C'est pourquoi un multiplicande $M$ divise le significande $S$ de sorte à ce que $F = \left(S \div M\right)$.
-Parce que $S = \left(F \times 2^c\right)$, le multiplicande $M$ divise donc le significande $S$ par la même puissance de $2$ que celle ayant contribué à la formation du significande en multipliant le nombre à virgule flottante $F$. 
-Ce qui donne $F = \left(S \div 2^c\right)$, et nous retombons ainsi sur $F = \left(S \times 2^{-c}\right)$.
+En écriture scientifique binaire, la représentation d'un nombre à virgule flottante $F$ dont la valeur absolu est inférieur à l'intervalle $\left[1;2\right[$ d'un significande, s'accompagne d'une transformation du nombre $\vert \ F \ \vert$ en un significande $S$.
+La formation du significande passe par un décalage vers la droite de la virgule du nombre $\vert \ F \ \vert$, ce qui multiplie par une puissance de $2$ la valeur du nombre.
+L'équation nous dit que la formation du significande $S$ passe par $\left(\vert F \vert \times \ 2^c\right)$, avec $\left(c \gt 0\right)$.
+Le significande, par le fait que $\left(S \ \gt \vert F \vert\right)$, est un terme de l'écriture scientifique qui à lui seul ne peut pas représenté la valeur du nombre flottant $\vert \ F \ \vert$.
+C'est pourquoi un multiplicande $M$ divise le significande $S$ de sorte à ce que $\vert \ F \vert = \left(S \ \div \ M\right)$.
+Parce que $S \ = \left(\vert F \vert \times \ 2^c\right)$, le multiplicande $M$ divise donc le significande $S$ par la même puissance de $2$ que celle ayant multiplié $\vert \ F \ \vert$ pour formé le significande. 
+Ce qui donne $\vert \ F \vert = \left(S \ \div \ 2^c\right)$, et nous retombons ainsi sur $\vert \ F \vert = \left(S \ \times \ 2^{-c}\right)$.
+Par conséquent, l'écriture scientifique binaire du nombre à virgule flottante tombe une nouvelle fois sur $F \ = \pm \left(S \ \times \ 2^{-c}\right)$.
 
-Voici l'écriture scientifique binaire du nombre $F = -0.140625$, qui en virgule flottante vaut $- \ 0.001001_2$ :
+Voici comme exemple l'écriture scientifique binaire du nombre $F = -0.140625$, qui en virgule flottante vaut $- \ 0.001001_2$ :
 
-$$- \ 1.001 \times 2^{-3}$$
+$$- \ 1.001_2 \ \times \ 2^{-3}$$
 
-Le significande $1.001_2$ (ou $1.125$ en décimale) résulte du décalage de $3$ rangs vers la droite de la virgule du nombre $F$.
-La formation du significande requiert une multiplication de la valeur du nombre $F$, ce que l'équation traduit par $\left(F \times 2^c\right)$ avec $\left(c = 3\right)$.
-Sachant que $\left(1.125 \gt 0.140625\right)$, le multiplicande $M$ doit multiplié le significande $S$ de sorte à ce que $F = \left(S \times M\right)$.
-Ce qui revient à dire que le multiplicande doit __multiplié__ le significande par la même puissance de $2$ que celle ayant __divisé__ le nombre à virgule flottante $F$, ce qui donne $5.5 \ =$ $+ \ 1.375 \times 2^2$.
-
-Le significande $1.001_2$ (ou $1.125$ en décimale) résulte du décalage de $3$ rangs vers la droite de la virgule du nombre $F$ $\left(c = 3\right)$.
-Selon l'équation, la formation du significande a engendré une multiplication de la valeur du nombre $\left(F \times 2^c\right)$.
-Pour représenter le nombre $F$ en notation scientifique binaire.
-Le multiplicande doit donc __divisé__ le significande par la même puissance de $2$ que celle ayant __multiplié__ le nombre flottant $F$, ce qui donne $- \ 0.140625 = - 1.125 \div 2^3$ ce qui revient à $- \ 0.140625 = - 1.125 \times 2^{-3}$.
+Le significande $1.001_2$ (ou $1.125$ en décimale) résulte du décalage de $3$ rangs vers la droite de la virgule du nombre flottant $\vert \ F \ \vert$.
+La formation du significande engendre une multiplication de la valeur du nombre $\vert \ F \ \vert$, ce que l'équation traduit par $\left(\vert F \vert \times \ 2^c\right)$ avec $\left(c = 3\right)$.
+Sachant que $\left(1.125 \ \gt \vert - \ 0.140625 \vert\right)$, le multiplicande $M$ doit divisé le significande $1.125$ par $2^c$ de sorte à ce que $\vert - \ 0.140625 \vert = \left(1.125 \div M\right)$.
+Cela donne $\vert - 0.140625 \vert = \left(1.125 \ \div \ 2^3\right)$, ce qui est équivalent à $\vert - \ 0.140625 \vert = \left(1.125 \ \times \ 2^{-3}\right)$.
+L'écriture scientifique du nombre à virgule flottante est donc $- \ 0.140625 \ = - \ 1.125 \ \times \ 2^{-3}$.
 
 # Le standard IEEE-754
 
