@@ -304,16 +304,16 @@ L'écriture scientifique du nombre à virgule flottante $F$ est donc bel et bien
 La norme IEEE-754 standardise la représentation (l'encodage) des nombres à virgule dans un ordinateur.
 Ce document est une démonstration mathématique d'un circuit électronique qui a pour fonction principal de produire des comparaisons entre deux opérandes de standard IEEE-754.
 Pour plus d'information sur le circuit électronique, jetez un oeil à la documentation dédié au circuit.
-La norme IEEE-754 défini trois éléments pour l'encodage de chaque nombre du standard:
+Il existe plusieurs format de nombre défini par le standard IEEE-754, chaque format ne change des autres que par sa taille.
+Un format de nombre à virgule défini par la norme est composé des trois sous champs binaire suivant :
   - Le ___bit de signe___
   - Le champs d'___exposant___
   - Le champs de ___mantisse tronquée___
 
-Il existe plusieurs format de nombre défini par le standard IEEE-754, chaque format ne change des autres que par sa taille.
 Les deux formats les plus connus sont le _Simple Precision_ ainsi que le _Double Precision_, qui permettent le codage de nombre à virgule sur des champs binaire de respectivement $32$ et $64$ bits.
 Cependant, le circuit électronique que j'ai conceptualisé ne prend en charge que les opérandes de format _Half Precision_, ceci est principalement dû aux complexités de schématisation du circuit.
 Le format Half Precision permet de codé des nombres à virgule sur des champs binaire de $16$ bits.
-Voici la disposition de chaque bit, dans chaque champs, au format _Half Precision_ :
+Voici la disposition de chaque bit, dans chaque champs, au format Half Precision :
 
 $$\left[S_{15}, \quad E_{14}, \ E_{13}, \ E_{12}, \ E_{11}, \ E_{10}, \quad T_9, \ T_8, \ T_7, \ T_6, \ T_5, \ T_4, \ T_3, \ T_2, \ T_1, \ T_0\right]$$
 
@@ -322,14 +322,14 @@ $\quad S$: Sign bit, $\quad E$: Exponent, $\quad T$: Truncated mantissa
 Chaque indice $i$ de la forme $X_i$ qui est compris dans l'intervalle $\left[0;15\right]$, représente le poids d'un bit précis dans le champs binaire.
 En effet, il est très commun d'indicé un bit d'un champs binaire par son poids.
 
-Comme cela a été dit plus haut, chaque format de nombre IEEE-754 est composé de 3 champs binaire.
-Dans ce qui suit, nous allons nous intéressés aux encodages des champs binaire d'exposant et de mantisse tronquée.
-Nous allons voir que les encodages de ces derniers partagent certaines des propriétés de l'encodage _Binary Unsigned_, dont nous avons parlé au tout début du document.
-Ceci a un impacte sur la logique du circuit.
+Comme cela a été dit plus haut, chaque format de nombre IEEE-754 est composé de trois sous champs binaire (3 éléments).
+Dans ce qui suit, nous allons nous intéressés aux encodages des sous champs binaire d'_exposant_ et de _mantisse tronquée_.
+Nous allons voir que les encodages de ces derniers partagent certaines des propriétés du _Binary Unsigned_, dont nous avons parlé au tout début du document.
+Cela a un impacte sur le traitement des sous champs binaire d'exposant et de mantisse tronquée.
 
 ### L'encodage par biais du champs d'exposant
 
-__Le champs d'exposant utilise un encodage par biais__, ce dernier est assez simple à comprendre.
+__Le champs binaire d'exposant utilise un encodage par biais__, cet encodage est assez simple à comprendre.
 Enfaite, le champs d'exposant est un champs binaire pour lequel nous utilisons un encodage _Binary Unsigned_ qui code une valeur numérique $X$, comme nous l'avons vu précédemment.
 A cela, il faut __ajouté ou déduire__ un biais $B$ (un nombre entier naturel) pour obtenir la valeur représenté par le champs binaire.
 Dans les faits, la valeur que représente un champs d'exposant est alors issu du calcul $X - B$. 
@@ -337,6 +337,15 @@ Peu importe le format de flottant IEEE-754, le champs d'exposant a un biais $B$ 
 
 Etant donné que l'encodage par biais se repose sur le _Binary Unsigned_, un champs d'exposant partage alors les même propriétés que cet encodage.
 Notamment le fait que dans le champs binaire, la valeur d'un bit à $1$ de poids $i$ soit strictement supérieur à la somme des valeurs des bits de poids inférieur à $i$.
+
+
+
+
+
+
+
+
+
 
 ### La mantisse tronquée, une histoire de puissance de 2
 
