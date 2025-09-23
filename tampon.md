@@ -357,27 +357,30 @@ Nous en reparlerons d'ici là.
 
 ### Le codage du champs de mantisse tronquée
 
-// à relire + corriger
-
-Précédemment, nous avons dit que le champs de mantisse tronquée d'un nombre $F$ codé au format Half Precision, correspondait au significande de l'écriture scientifique binaire de $F$.
-Ce qui est faux ou plutôt presque vrai.
+Précédemment, nous disions que le nombre $F$ codé au format Half Precision, avait un champs de mantisse tronquée qui correspondait au significande de l'écriture scientifique binaire de ce même nombre $F$.
+Ce qui est faux, ou plutôt presque vrai.
 
 En écriture scientifique binaire, le significande ne peut interprété que des valeurs comprises dans l'intervalle $\left[1;2\right[$.
-Cela insinue que la partie entière d'un tel singificande ne peut être composée que d'un seul bit à $1$.
-Le champs de mantisse tronquée ayant une taille limitée, ne pas représenter ce bit dont la valeur est systèmatiquement la même permet de gagner un bit de précision sur le codage de la partie fractionnaire des significandes.
-Donc au format Half Precision, les $10$ bits du champs de mantisse tronquée sont utilisés pour codé la partie fractionnaire du significande, le bit à $1$ de la partie entière est dit implicite.
-Sans cette optimisation, il y aurait toujours un bit du champs de mantisse tronquée qui serait à $1$, c'est comme si le champs avait une taille de $9$ bits.
-Je tiens à préciser que cette optimisation est apliquée sur tout les champs de mantisse tronquée, peu importe le format.
+Cela insinue que la partie entière d'un tel singificande est toujours composée d'un seul et unique bit à $1$.
+Le standard IEEE-754 a donc fait le choix de ne pas codé la partie entière des significandes dans les champs de mantisse tronquée, cela permet un gain de précision de $1$ bit sur le codage des significandes.
+Pour autant, la valeur du bit de la partie entière d'un significande est toujours prise en compte, ce dernier ne porte pas le nom de _bit implicite_ pour rien.
+Cette optimisation est appliquée peu importe le format.
 
-Je vous rappelle qu'en écriture scientifique le significande s'appelle aussi une _mantisse_.
-C'est pourquoi le standrard IEEE-754 a choisit le nom de champs de mantisse tronquée pour les différents formats de nombre à virgule.
-Le champs de mantisse tronquée d'un nombre $F$ codé au format Half Precision, ne correspond qu'à une partie de la mantisse de l'écriture scientifique binaire du nombre $F$.
+Je vous rappelle qu'en écriture scientifique, le significande s'appelle aussi une _mantisse_.
+C'est dû au fait que le champs de mantisse tronquée ne code qu'une partie du significande (de la mantisse), qui a value un tel nom à ce champs.
 
 ## Le champs d'exposant
 
-// intro
+En introduction se trouve une illustration de la disposition des bits qui composent le format Half Precision, cette illustration montre que le champs d'exposant $E$ est composé de $5$ bits.
+Voici les poids de chacun des bits qui compose le champs d'exposant :
 
-### L'encodage du champs d'exposant
+$$\left[ \quad .. \quad , \quad E_{14}, \ E_{13}, \ E_{12}, \ E_{11}, \ E_{10}, \quad .. \quad \right]$$
+
+Les deux sections suivantes concernent l'ensemble de ces bits formant le champs d'exposant.
+
+### L'encodage par biais du champs d'exposant
+
+// à lire, faire des réfs
 
 __Le champs binaire d'exposant utilise un encodage par biais__, cet encodage est assez simple à comprendre.
 Enfaite, le champs d'exposant est un champs binaire pour lequel nous utilisons un encodage _Binary Unsigned_ qui code une valeur numérique $X$, comme nous l'avons vu précédemment.
@@ -390,7 +393,7 @@ Notamment le fait que dans le champs binaire, la valeur d'un bit à $1$ de poids
 
 ### Le codage du champs d'exposant
 
-
+// approche par $log_2(2^{-c})$
 
 
 
