@@ -332,55 +332,28 @@ Etant donné que le circuit électronique ne prend en charge que des opérandes 
 
 ## Le champs de mantisse tronquée
 
-Dans le chapitre précédent, une illustrion de la disposition des bits d'un nombre codé au format Half Precision, nous montre que le champs de mantisse tronquée $T$ est composé de $10$ bits.
+En introduction se trouve une illustration de la disposition des bits qui composent le format Half Precision, cette illustration montre que le champs de mantisse tronquée $T$ est composé de $10$ bits.
+Voici les poids de chacun des bits qui compose le champs de mantisse tronquée :
 
 $$\left[ \quad .. \quad , \quad T_9, \ T_8, \ T_7, \ T_6, \ T_5, \ T_4, \ T_3, \ T_2, \ T_1, \ T_0\right]$$
 
-Voici les poids précis des bits du champs de mantisse tronquée $T$ au sein du format Half Precision.
+Les deux sections suivantes concernent l'ensemble de ces bits formant le champs de mantisse tronquée.
 
 ### L'encodage du champs de mantisse tronquée
 
-Le sujet des nombres à virgule flottante a été abordé au début du document, dans le chapitre "_Les nombres à virgule flottante_".
-Dans ce chapitre, le dernier paragraphe explique que les nombres à virgule flottante partagent une proriété de l'encodage _Binary Unsigned_, cette dernière a été le sujet de la section "_Une propriété du Binary Unsigned qui est fondamentale à la démonstration_".
-Pour résumer, la valeur de n'importe quel bit à $1$ de poids $i$ dans un nombre à virgule flottante, est strictement supérieur à la somme des valeurs des bits de poids inférieur à $i$.
+Le nombre $F$ codé au format Half Precision a un champs de mantisse tronquée qui correspond au significande de l'écriture scientifique binaire du même nombre $F$.
+Par conséquent, l'encodage du champs de mantisse tronquée est simplement celui d'un nombre à virgule flottante.
+Je vous invite donc à relire le chapitre "_les nombres à virgule flottante_", si nécessaire.
 
-Maintenant que nous avons en tête cela, rappelons que l'écriture scientifique binaire représente tout nombre à virgule flottante $F$, qu'il soit positif ou négatif.
-La première étape est la formation d'un significande, cela demande une transformation (non systèmatique) de la valeur de $\vert \ F \ \vert$.
-Ce qui veut dire qu'un significande est ni plus ni moins qu'un nombre à virgule flottante.
+Néanmoins, le dernier paragraphe de ce chapitre donne une information assez importante. 
+La valeur de n'importe quel bit à $1$ de poids $i$ dans un nombre à virgule flottante, est strictement supérieur à la somme des valeurs des bits de poids inférieur à $i$.
+Ce qui veut dire que n'importe quel bit à $1$ de poids $i$ dans le champs de mantisse tronquée, est lui aussi strictement supérieur à la somme des valeurs des bits de poids inférieur à $i$.
+Autrement dit, le champs de mantisse tronquée partage les propriétés des nombres à virgule flottante, mais il n'est pas le seul.
 
-Précédemment, il a été dit que le champs de mantisse tronquée d'un nombre $F$ codé au format Half Precision, correspondait au significande de l'écriture scientifique binaire de ce même nombre $F$.
-L'encodage du champs de mantisse tronquée est donc simplement celui d'un nombre à virgule flottante.
-Bien évidemment, cela veut aussi dire que tout bit à $1$ de poids $i$ dans le champs de mantisse tronquée, a une valeur strictement supérieur à la somme des bits de poids inférieur à $i$.
-Autrement dit, les champs de mantisse tronquée partagent les propriétés des nombres à virgule flottante.
-
-Quand bien même cela s'obtient de façon différente, nous verrons dans le chapitre dédié aux champs d'exposant que ces derniers partagent eux aussi ces même propriétés.
-Cela a un grand impacte sur la logique du circuit.
-La raison est qu'il devient possible de traiter les champs de mantisse tronquée et d'exposant de le même manière, avec les même ensembles de circuit.
-Mais n'allons pas trop vite, tout cela sera rendu clair et tangible par la démonstration mathématique du circuit.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Cette propriété provient de l'encodage _Binary Unsigned_, et il se trouve que l'encodage du champs d'exposant en est une déclinaison.
+Nous verrons cela plus dans le détails à l'intérieur du chapitre dédié au champs d'exposant, mais il faut savoir que tout cela a un impacte.
+La logique du circuit traite les champs de mantisse tronquée comme les champs d'exposant, avec le même sous ensemble de circuit, ce qui se reflète aussi dans la démonstration mathématique.
+Nous en reparlerons d'ici là.
 
 ### Le codage du champs de mantisse tronquée
 
