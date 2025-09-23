@@ -85,7 +85,7 @@ $$+ \ 103.3125 = 0 \ 1100111.0101_2$$
 Dans la partie entière du nombre nous retrouvons le bit de poids le plus fort qui est à $0$ (ce dernier représente le signe $+$), ainsi que le codage _Binary Unsigned_ du nombre $103$, qui commence à nous être familier.
 Rien d'étonnant pour la partie fractionnaire, nous avons des bits... mais regardons dans le détails ce que valent ces bits.
 
-$$ 0.0101 = Integer \ Part\left(0 \times 2^0\right) + Fractional \ Part\left(0 \times 2^{-1} + 1 \times 2^{-2} + 0 \times 2^{-3} + 1 \times 2^{-4}\right)$$
+$$ 0.0101_2 = Integer \ Part\left(0 \times 2^0\right) + Fractional \ Part\left(0 \times 2^{-1} + 1 \times 2^{-2} + 0 \times 2^{-3} + 1 \times 2^{-4}\right)$$
 
 Nous remarquons que le bit de poids le plus fort de la partie fractionnaire est celui de poids $-1$, et que la valeur des puissances de $2$ négatives vont décroissant en fonction de la position du bit correspondant dans le nombre.
 
@@ -336,11 +336,51 @@ Dans le chapitre précédent, une illustrion de la disposition des bits d'un nom
 
 $$\left[ \quad .. \quad , \quad T_9, \ T_8, \ T_7, \ T_6, \ T_5, \ T_4, \ T_3, \ T_2, \ T_1, \ T_0\right]$$
 
-Voici les poids précis des bits du champs de mantisse tronquée $T$ dont nous allons parlé.
+Voici les poids précis des bits du champs de mantisse tronquée $T$ au sein du format Half Precision.
 
 ### L'encodage du champs de mantisse tronquée
 
-// faire réf au ch "les nombres à virgule flottante"
+Le sujet des nombres à virgule flottante a été abordé au début du document, dans le chapitre "_Les nombres à virgule flottante_".
+Dans ce chapitre, le dernier paragraphe explique que les nombres à virgule flottante partagent une proriété de l'encodage _Binary Unsigned_, cette dernière a été le sujet de la section "_Une propriété du Binary Unsigned qui est fondamentale à la démonstration_".
+Pour résumer, la valeur de n'importe quel bit à $1$ de poids $i$ dans un nombre à virgule flottante, est strictement supérieur à la somme des valeurs des bits de poids inférieur à $i$.
+
+Maintenant que nous avons en tête cela, rappelons que l'écriture scientifique binaire représente tout nombre à virgule flottante $F$, qu'il soit positif ou négatif.
+La première étape est la formation d'un significande, cela demande une transformation (non systèmatique) de la valeur de $\vert \ F \ \vert$.
+Ce qui veut dire qu'un significande est ni plus ni moins qu'un nombre à virgule flottante.
+
+Précédemment, il a été dit que le champs de mantisse tronquée d'un nombre $F$ codé au format Half Precision, correspondait au significande de l'écriture scientifique binaire de ce même nombre $F$.
+L'encodage du champs de mantisse tronquée est donc simplement celui d'un nombre à virgule flottante.
+Bien évidemment, cela veut aussi dire que tout bit à $1$ de poids $i$ dans le champs de mantisse tronquée, a une valeur strictement supérieur à la somme des bits de poids inférieur à $i$.
+Autrement dit, les champs de mantisse tronquée partagent les propriétés des nombres à virgule flottante.
+
+Quand bien même cela s'obtient de façon différente, nous verrons dans le chapitre dédié aux champs d'exposant que ces derniers partagent eux aussi ces même propriétés.
+Cela a un grand impacte sur la logique du circuit.
+La raison est qu'il devient possible de traiter les champs de mantisse tronquée et d'exposant de le même manière, avec les même ensembles de circuit.
+Mais n'allons pas trop vite, tout cela sera rendu clair et tangible par la démonstration mathématique du circuit.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ### Le codage du champs de mantisse tronquée
 
