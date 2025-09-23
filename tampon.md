@@ -319,15 +319,25 @@ $$\left[S_{15}, \quad E_{14}, \ E_{13}, \ E_{12}, \ E_{11}, \ E_{10}, \quad T_9,
 
 $\quad S$: Sign bit, $\quad E$: Exponent, $\quad T$: Truncated mantissa
 
-Chaque indice $i$ de la forme $X_i$ qui est compris dans l'intervalle $\left[0;15\right]$, représente le poids d'un bit précis dans le champs binaire.
-En effet, il est très commun d'indicé un bit d'un champs binaire par son poids.
+Chaque indice $i$ de la forme $X_i$ qui est compris dans l'intervalle $\left[0;15\right]$, représente le poids d'un bit précis dans le champs binaire d'un nombre codé au format Half Precision.
+Il est en effet très commun d'indicé les bits d'un champs binaire par leurs poids.
 
-Comme cela a été dit plus haut, chaque format de nombre IEEE-754 est composé de trois sous champs binaire (3 éléments).
-Dans ce qui suit, nous allons nous intéressés aux encodages des sous champs binaire d'_exposant_ et de _mantisse tronquée_.
-Nous allons voir que les encodages de ces derniers partagent certaines des propriétés du _Binary Unsigned_, dont nous avons parlé au tout début du document.
-Cela a un impacte sur le traitement des sous champs binaire d'exposant et de mantisse tronquée.
+Précédemment, nous avons longuement parlé de l'écriture scientifique binaire des nombres à virgule flottante.
+La raison en est que le standard IEEE-754 s'appuie sur cette dernière pour définir les différents formats de nombre à virgule, tel que le Half Precision.
+Dans le champs binaire d'un nombre $F$ au format Half Precision, le bit de signe (bit de poids $15$) est défini en fonction du signe $\pm$ de l'écriture scientifique binaire du nombre $F$.
+Quant aux champs d'exposant ainsi que de mantisse tronquée, ils correspondent repectivement plus ou moins au multiplicande et au significande de l'écriture scientifique de $F$.
+Nous parlerons de ceci des les chapitres dédiés aux champs d'exposant ainsi qu'aux champs de mantisse tronquée. 
 
-### L'encodage par biais du champs d'exposant
+Il n'y a pas grand chose à dire d'autre sur le bit de signe des nombres représentés par l'un des formats IEEE-754.
+Mais il y a encore beaucoup à dire sur les champs d'exposant et de mantisse tronquée, plus particulièrement sur les encodages de ces sous champs binaire.
+Les encodages de ces champs partagent une propriété du _Binary Unsigned_, cette dernière ayant été défini dans le chapitre du nom de "_Une propriété du Binary Unsigned qui est fondamentale à la démonstration_".
+Nous verrons que cela à un gros impacte sur la logique du circuit.
+
+## Le champs d'exposant
+
+// intro
+
+### L'encodage du champs d'exposant
 
 __Le champs binaire d'exposant utilise un encodage par biais__, cet encodage est assez simple à comprendre.
 Enfaite, le champs d'exposant est un champs binaire pour lequel nous utilisons un encodage _Binary Unsigned_ qui code une valeur numérique $X$, comme nous l'avons vu précédemment.
@@ -338,14 +348,14 @@ Peu importe le format de flottant IEEE-754, le champs d'exposant a un biais $B$ 
 Etant donné que l'encodage par biais se repose sur le _Binary Unsigned_, un champs d'exposant partage alors les même propriétés que cet encodage.
 Notamment le fait que dans le champs binaire, la valeur d'un bit à $1$ de poids $i$ soit strictement supérieur à la somme des valeurs des bits de poids inférieur à $i$.
 
+### Le codage du champs d'exposant
 
 
 
 
 
 
-
-
+//
 
 ### La mantisse tronquée, une histoire de puissance de 2
 
