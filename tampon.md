@@ -403,7 +403,27 @@ Nous le verrons plus tard, mais c'est cette propriété qui permet à la démons
 ### Le codage du champs d'exposant
 
 Dans l'introduction, nous avons dit que le nombre $F$ codé au format Half Precision a un champs d'exposant qui correspond au multiplicande de l'écriture scientifique binaire du même nombre $F$.
-Il s'agit une nouvelle fois d'une approximation.
+Il s'agit cependant d'une approximation.
+
+Essayons d'abordé l'écriture scientifique binaire d'un nombre à virgule flottante de la façon la plus simple possible.
+Pour cela, nous allons avoir besoin de reprendre le terme $c$ de l'équation défini dans le chapitre "_Le significande_".
+
+Commençons par dire que l'écriture scientifique binaire d'un nombre à virgule flottante $F$ passe par la formation d'un significande, ce dernier s'obtenant par un déplacement (non systèmatique) de la virgule du nombre $\vert \ F \ \vert$.
+La variable $c$ représente le nombre de rang sur lequel il faut déplacé la virgule, mais aussi la direction du déplacement.
+Lorsque $\left(c \lt 0\right)$ la virgule doit être décalée vers la gauche, et quand $\left(c \gt 0\right)$ elle doit l'être vers la droite.
+Dans le cas où $\left(c = 3\right)$, alors la virgule du nombre flottant $\vert \ F \ \vert$ est déplacée de $3$ rangs vers la droite, cela modifie bien évidemment la valeur du nombre sous-jacent.
+Le significande $S$ ainsi obtenu vaut $\left(\vert F \vert \times 2^c\right)$.
+Pour retrouver la valeur du nombre d'origine $\vert \ F \ \vert$ depuis le significande $S$, il suffit de déplacé la virgule du significande du même nombre de rang mais dans la direction opposé.
+La simple négation du terme $c$ permet de passé d'un décalage de la virgule vers la droite $\left(c \gt 0\right)$, à un décalage vers la gauche avec $\left(c \lt 0\right)$, sans touché pour autant au nombre de rang de décalage.
+Nous déplaçons donc la virgule du significande de $-c$ $\left(-3\right)$ rangs vers la gauche, ce qui divise la valeur du significande comme ceci $\left(S \times 2^{-c}\right)$.
+
+Pour résumer, déplacer de $c$ rangs la virgule d'un nombre flottant quelconque $X$ revient à multiplié/divisé la valeur du nombre par $\left(X \times 2^c\right)$.
+
+// rôle du multiplicande + $log_2(2^{-c})$
+
+
+
+//
 
 Je vous conseille de relire le chapitre "_Le significande_", si jamais ce qui figure ci-dessous vous semble obscure.
 
