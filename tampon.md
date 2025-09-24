@@ -402,12 +402,46 @@ Nous le verrons plus tard, mais c'est cette propriété qui permet à la démons
 
 ### Le codage du champs d'exposant
 
-Dans l'introduction, nous avons dit que le nombre $F$ codé au format Half Precision a un champs d'exposant qui correspond au significande de l'écriture scientifique binaire du même nombre $F$.
-Il s'agit une nouvelle fois d'une approximation, je précise pourquoi dans ce qui suit.
+Dans l'introduction, nous avons dit que le nombre $F$ codé au format Half Precision a un champs d'exposant qui correspond au multiplicande de l'écriture scientifique binaire du même nombre $F$.
+Il s'agit une nouvelle fois d'une approximation.
 
+Je vous conseille de relire le chapitre "_Le significande_", si jamais ce qui figure ci-dessous vous semble obscure.
 
+L'écriture scientifique binaire d'un nombre à virgule flottante $F$ passe par la formation d'un significande, ce dernier s'obtient par un déplacement (non systèmatique) de la virgule du nombre $\vert \ F \ \vert$.
+Imaginons que la formation d'un significande nécessite de déplacé la virgule d'un nombre flottant $\vert \ F \ \vert$ de $3$ rangs vers la droite, ce qui revient à multiplié la valeur de $\vert \ F \ \vert par $2^3$.
+Pour retrouver la valeur du nombre $\vert \ F \ \vert$ depuis le significande, il faudra cette fois-ci déplacé la virgule du significande de $3$ rangs vers la gauche.
+Ce qui divise la valeur du significande de $2^3$, ou autrement dit cela multiplie le significande par $2^{-3}$.
+
+Nous retrouvons ici la variable $c$ de l'équation défini dans le chapitre "_Le significande_".
+Le terme $c$ représente le nombre de rang de décalage à induire sur la virgule du nombre flottant $\vert \ F \ \vert$, en outre, lorsque $\left(c \lt 0\right)$ la virgule est décalée vers la gauche et quand $\left(c \gt 0\right)$ elle l'est vers la droite.
+Reprenons l'exemple qui se situe ci-dessus.
+Dans le cas d'un décalage de la virgule de $\vert \ F \ \vert$ de $3$ rangs vers la droite $\left(c = 3\right)$, alors la valeur de $\vert \ F \ \vert$ est multiplié par $2^c$.
+Afin de retrouver la valeur de $\vert \ F \ \vert$ depuis le significande, il faut donc multiplié le significande par $2^{-c}$.
+
+// négation de $c$
+
+// rôle du multiplicande
 
 // approche par $log_2(2^{-c})$
+
+//
+
+Commençons par rappellé qu'un multiplicande $M$ réajuste la valeur d'un significande $S$ à la valeur absolu du nombre $F$ à représenté en écriture scientifique binaire, ce qui donne $\vert \ F \vert = \left(S \ \times \ M\right)$.
+Le chapitre du nom de "_Le multiplicande_" défini ainsi la valeur d'un multiplicande à $2^{-c}$, donc $\vert \ F \vert = \left(S \ \times \ 2^{-c}\right)$.
+Le terme $c$ appartient à l'équation du chapitre "_Le significande_", il représente le nombre de rang de décalage à induire sur la virgule de $\vert \ F \ \vert \notin \left[1;2\right[$.
+Rappellez-vous en, lorsque $\left(c \lt 0\right)$ la virgule de $\vert \ F \ \vert$ est déplacée vers la gauche et quand $\left(c \gt 0\right)$ la virgule est décalée vers la droite.
+
+//
+
+Pour commencer, je vous rappelle que le rôle d'un multiplicande $M$ est de réajusté la valeur d'un significande $S$ à la valeur absolu du nombre $F$ à représenté en notation scientifique binaire.
+Suite aux calculs effectués dans le chapitre "_le multiplicande_", nous savons que le multiplicande multiplie le significande par $2^{-c}$.
+Du multiplicande $2^{-c}$, je rappel que le terme $c$ représente dans l'équation du chapitre "_Le significande_", le nombre de rang de décalage à induire sur la virgule d'un nombre $F$ à représenté en écriture scientifique binaire.
+Lorsque $\left(c \lt 0\right)$ la virgule est déplacée vers la gauche et quand $\left(c \gt 0\right)$ la virgule est décalée vers la droite.
+C'est pourquoi la négation du terme $c$ permet de décalée la virgule du significande dans la direction opposé pour obtenir le nombre d'origine.
+
+
+
+
 
 
 
