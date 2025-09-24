@@ -380,24 +380,25 @@ Les deux sections suivantes concernent l'ensemble de ces bits formant le champs 
 
 ### L'encodage par biais du champs d'exposant
 
-// à relire
-
 Le champs d'exposant utilise un _encodage par biais_ qui est une déclinaison de l'encodage _Binary Unsigned_.
 
-L'encodage par biais s'appuie sur un champs binaire utilisant l'encodage Binary Unsigned, le champs en question code un nombre entier naturel.
+L'encodage par biais s'appuie sur un champs binaire utilisant l'encodage Binary Unsigned, le champs en question se charge de codé un nombre entier naturel.
 Il faut ensuite ajouter ou déduire une constante appellée biais (qui est aussi un nombre entier naturel), au nombre codé par le champs binaire sous-jacent.
-Le résultat de ce calcul forme la valeur représenté par le champs.
-Un encodage par biais est donc une sorte d'encodage Binary Unsigned déguisé.
+Le résultat de ce calcul forme la valeur réel que représente le champs.
+Nous comprenons donc qu'un encodage par biais est en quelque sorte un encodage Binary Unsigned déguisé.
 
-Dans le cas d'un champs d'exposant $E$ composé de $N$ bits, le champs code en Binary Unsigned un nombre dont la valeur est comprise dans l'intervalle $\left[0; \ 2^N - 1\right]$.
-La valeur que représente le champs d'exposant $E$ est issu du calcul $\left(E - B\right)$, pour un biais $B$ d'une valeur de $\left(2^{\left(N - 1\right)} - 1\right)$.
-Ceci est valable pour tout les formats de nombre à virgule ayant été établit par le standard IEEE-754.
+Dans le cas d'un champs d'exposant $E$ d'une taille de $N$ bits, le champs code en Binary Unsigned un nombre entier naturel dont la valeur est comprise dans l'intervalle $\left[0; \ 2^N - 1\right]$.
+La valeur que représente un champs d'exposant $E$ est issu du calcul $\left(E - B\right)$, pour un biais $B$ d'une valeur de $\left(2^{\left(N - 1\right)} - 1\right)$.
+Un champs d'exposant peut donc représenté des valeurs positives comme négatives.
+Par ailleurs, tout ce qui vient d'être dit est valable pour tout les formats de nombre à virgule ayant été établit par le standard IEEE-754.
 
-Par conséquent, le champs d'exposant $E$ partage les propriétés du Binary Unsigned, notamment celle dont il a été le sujet dans la section suivante "_Une propriété du Binary Unsigned qui est fondamentale à la démonstration_".
-En bref, cela veut dire que la valeur de n'importe quel bit à $1$ de poids $i$ du champs d'exposant, est strictement supérieur à la somme des valeurs des bits de poids inférieur à $i$.
-Nous y sommes pas encore, mais la démonstration mathématique se sert justement de cette propriété pour comparer les nombres codés par deux champs d'exposant $E$ distincts.
-Par exemple, dans le cas de deux champs d'exposant $E_1$ et $E_2$ munis d'un biais $B$ identique, nous savons que si $\left(E_1 - B\right) \gt \left(E_2 - B\right)$ alors $\left(E_1 \gt E_2\right)$.
-Il suffit donc de vérifier directement si $\left(E_1 \gt E_2\right)$, ce que cette propriété permet entre autre de faire.
+Il s'avère que le circuit et sa démonstration mathématique sont menés à effectuer des comparaisons entre deux champs d'exposant $E_1$ et $E_2$, ayant un même biais $B$.
+Ces comparaisons n'ont pas besoin de la valeur réel des champs d'exposant comme avec $\left(E_1 - B\right) \gt \left(E_2 - B\right)$, car le biais $B$ est constant.
+Cette compraison se transforme alors en $\left(E_1 \gt E_2\right)$, seul la valeur des nombres codés dans les champs d'exposant compte.
+En outre, n'oublions pas que l'_encodage par biais_ est une déclinaison du _Binary Unsigned_.
+Cela veut dire que les deux encodages partagent les même propriétés, notamment celle dont il a été le sujet dans la section "_Une propriété du Binary Unsigned qui est fondamentale à la démonstration_".
+En bref, cela veut dire que la valeur de n'importe quel bit à $1$ de poids $i$ dans un champs d'exposant, est strictement supérieur à la somme des valeurs des bits de poids inférieur à $i$.
+Nous le verrons plus tard, mais c'est cette propriété qui permet à la démonstration mathématique d'effectuer entre autre des comparaisons entre des champs d'exposant.
 
 ### Le codage du champs d'exposant
 
