@@ -380,6 +380,25 @@ Les deux sections suivantes concernent l'ensemble de ces bits formant le champs 
 
 ### L'encodage par biais du champs d'exposant
 
+Le champs d'exposant utilise un _encodage par biais_ qui est une déclinaison de l'encodage _Binary Unsigned_.
+
+Un champs binaire faisant usage de l'encodage par biais, est un champs qui a pour fonction première de codé un nombre entier naturel en _Binary Unsigned_.
+A la valeur du nombre que code le champs, il faut __ajouter ou déduire__ un biais constant qui est lui aussi un nombre entier naturel.
+
+Dans le cas du champs d'exposant, cela se traduit par un champs qui code un nombre entier $X$ compris dans l'intervalle $\left[0;2^N - 1\right]$, avec $N$ le nombre de bits qui compose le champs d'exposant.
+A cela, il faut déduire un biais $B$ de la valeur $\left(2^{\left(N - 1\right)} - 1\right)$.
+Le champs d'exposant représente donc une valeur de $X - B$, ce qui permet à un tel champs d'interprété des valeurs positives bien entendu, mais aussi négative.
+Je précise que ce paragraphe vaut pour tout format de nombre à virgule ayant été établit par le standard IEEE-754.
+
+// à poursuivre
+
+A cela il faut souligné que le champs d'exposant partage les propriétés du _Binary Unsigned_, notamment celle dont il est le sujet dans le chapitre "_Une propriété du Binary Unsigned qui est fondamentale à la démonstration_".
+Cela veut dire que tout bit à $1$ de poids $i$ du champs d'exposant, a une valeur strictement supérieur à la somme des valeurs des bits de poids inférieur à $i$.
+
+Comme nous venons de le dire, le champs d'exposant code un nombre entier naturel $X$ en _Binary Unsigned_, auquel il faut déduire une valeur constante $B$.
+Par conséquent, nous savons que la valeur qu'interprète le champs d'exposant lorsqu'il code le nombre $X + 1$ est supérieur à celle du nombre $X$, car $\left(\left(X + 1\right) - B\right) \gt \left(X - B\right)$.
+
+
 // à lire, faire des réfs
 
 __Le champs binaire d'exposant utilise un encodage par biais__, cet encodage est assez simple à comprendre.
