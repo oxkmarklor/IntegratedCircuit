@@ -402,6 +402,11 @@ Nous le verrons plus tard, mais c'est cette propriété qui permet à la démons
 
 ### Le codage du champs d'exposant
 
+Dans l'introduction, nous avons dit que le nombre $F$ codé au format Half Precision a un champs d'exposant qui correspond au significande de l'écriture scientifique binaire du même nombre $F$.
+Il s'agit une nouvelle fois d'une approximation, je précise pourquoi dans ce qui suit.
+
+
+
 // approche par $log_2(2^{-c})$
 
 
