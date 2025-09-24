@@ -384,57 +384,20 @@ Les deux sections suivantes concernent l'ensemble de ces bits formant le champs 
 
 Le champs d'exposant utilise un _encodage par biais_ qui est une déclinaison de l'encodage _Binary Unsigned_.
 
-Un champs binaire quelconque faisant usage de l'encodage par biais, est un champs qui a pour fonction première de codé un nombre entier naturel en _Binary Unsigned_.
-Le champs représente une valeur qui est issu de l'ajout ou de la déduction d'une constante appellée le biais (qui est aussi un nombre entier naturel), à la valeur du nombre que code le champs.
+L'encodage par biais s'appuie sur un champs binaire utilisant l'encodage Binary Unsigned, le champs en question code un nombre entier naturel.
+Il faut ensuite ajouter ou déduire une constante appellée biais (qui est aussi un nombre entier naturel), au nombre codé par le champs binaire sous-jacent.
+Le résultat de ce calcul forme la valeur représenté par le champs.
+Un encodage par biais est donc une sorte d'encodage Binary Unsigned déguisé.
 
-Dans le cas d'un champs d'exposant de $N$ bits, ce dernier code en _Binary Unsigned_ un nombre $X$ dont la valeur est comprise dans l'intervalle $\left[0; \ 2^N - 1\right]$.
-A cela il faut déduire du nombre $X$ codé par le champs d'exposant, un biais $B$ d'une valeur de $\left(2^{\left(N - 1\right)} - 1\right)$.
-Le champs d'exposant représente donc une valeur de $\left(X - B\right)$, et a la capacité de représenté des valeurs positives comme négatives.
-Je précise que ce paragraphe est valable pour tout les formats de nombre à virgule ayant été établit par le standard IEEE-754.
+Dans le cas d'un champs d'exposant $E$ composé de $N$ bits, le champs code en Binary Unsigned un nombre dont la valeur est comprise dans l'intervalle $\left[0; \ 2^N - 1\right]$.
+La valeur que représente le champs d'exposant $E$ est issu du calcul $\left(E - B\right)$, pour un biais $B$ d'une valeur de $\left(2^{\left(N - 1\right)} - 1\right)$.
+Ceci est valable pour tout les formats de nombre à virgule ayant été établit par le standard IEEE-754.
 
-Nous comprenons pourquoi le champs d'exposant partage les propriétés du _Binary Unsigned_, notamment celle dont il a été le sujet dans le chapitre "_Une propriété du Binary Unsigned qui est fondamentale à la démonstration_".
-En bref, cette section dit que la valeur de n'importe quel bit à $1$ de poids $i$ du champs d'exposant, devrait être strictement supérieur à la somme des valeurs des bits de poids inférieur à $i$.
-Nous le verrons en temps et en heure, mais il faut savoir que dans la démonstration mathématique, cette propriété sert entre autre à comparé les nombres entiers naturels que codent deux champs d'exposant $E$ distincts.
-Pour un biais $B$ équivalent, nous pouvons en déduire que $\left(E_1 \gt E_2\right)$ à la condition que $\left(E_1 - B\right) \gt \left(E_2 - B\right)$, ce qui revient à vérifier que $\left(E_1 \gt E_2\right)$.
-Evidemment, il en va de même pour la condition inverse $\left(E_1 \lt E_2\right)$.
-
-// C'est une propriété que le champs d'exposant a en commun avec le champs de mantisse tronquée.
-
-
-//
-
-dans le cas de deux champs d'exposant qui codent respectivement un nombre entier naturel $X$ et $Y$, nous pouvons savoir quel champs interprète la valeur la plus grande par R \ = \ $\left(X - B\right) - \left(Y - B\right)$.
-Dans le cas où $\left(R \lt 0\right)$ alors $\left(X \lt Y\right)$, sinon si $\left(R \gt 0\right)$ alors $\left(X \gt Y\right)$.
-
-//
-
-Savoir si le nombre entier $X$ codé par un champs d'exposant est supérieur à $Y$ codé par un second champs d'exposant, permet de savoir si à biais $B$ équivalent le premier champs d'exposant interprète une valeur $X - B$ supérieur ou non à $Y - B$.
-
-//
-
-Nous savons que la valeur qu'interprète le champs d'exposant quand il code le nombre $X + 1$ qui est $\left(\left(X + 1\right) - B\right)$, est strictement supérieur à la valeur qu'interprète le champs d'éexposant lors du codage du nombre $X$, car \left(X - B\right)$.
-Pour le dire autrement, nous pouvons mettre à profit cette propriété afin de faire une comparaison entre deux nombres entiers naturels codé dans deux champs d'exposant distincts.
-
-
-// à poursuivre
-
-A cela il faut souligné que le champs d'exposant partage les propriétés du _Binary Unsigned_, notamment celle dont il est le sujet dans le chapitre "_Une propriété du Binary Unsigned qui est fondamentale à la démonstration_".
-Cela veut dire que tout bit à $1$ de poids $i$ du champs d'exposant, a une valeur strictement supérieur à la somme des valeurs des bits de poids inférieur à $i$.
-
-Comme nous venons de le dire, le champs d'exposant code un nombre entier naturel $X$ en _Binary Unsigned_, auquel il faut déduire une valeur constante $B$.
-Par conséquent, nous savons que la valeur qu'interprète le champs d'exposant lorsqu'il code le nombre $X + 1$ est supérieur à celle du nombre $X$, car $\left(\left(X + 1\right) - B\right) \gt \left(X - B\right)$.
-
-
-// à lire, faire des réfs
-
-__Le champs binaire d'exposant utilise un encodage par biais__, cet encodage est assez simple à comprendre.
-Enfaite, le champs d'exposant est un champs binaire pour lequel nous utilisons un encodage _Binary Unsigned_ qui code une valeur numérique $X$, comme nous l'avons vu précédemment.
-A cela, il faut __ajouté ou déduire__ un biais $B$ (un nombre entier naturel) pour obtenir la valeur représenté par le champs binaire.
-Dans les faits, la valeur que représente un champs d'exposant est alors issu du calcul $X - B$. 
-Peu importe le format de flottant IEEE-754, le champs d'exposant a un biais $B$ qui se calcul de la manière suivante $\left(2^{\left(N-1\right)} - 1\right)$, où $N$ est le nombre de bits du champs d'exposant.
-
-Etant donné que l'encodage par biais se repose sur le _Binary Unsigned_, un champs d'exposant partage alors les même propriétés que cet encodage.
-Notamment le fait que dans le champs binaire, la valeur d'un bit à $1$ de poids $i$ soit strictement supérieur à la somme des valeurs des bits de poids inférieur à $i$.
+Par conséquent, le champs d'exposant $E$ partage les propriétés du Binary Unsigned, notamment celle dont il a été le sujet dans la section suivante "_Une propriété du Binary Unsigned qui est fondamentale à la démonstration_".
+En bref, cela veut dire que la valeur de n'importe quel bit à $1$ de poids $i$ du champs d'exposant, est strictement supérieur à la somme des valeurs des bits de poids inférieur à $i$.
+Nous y sommes pas encore, mais la démonstration mathématique se sert justement de cette propriété pour comparer les nombres codés par deux champs d'exposant $E$ distincts.
+Par exemple, dans le cas de deux champs d'exposant $E_1$ et $E_2$ munis d'un biais $B$ identique, nous savons que si $\left(E_1 - B\right) \gt \left(E_2 - B\right)$ alors $\left(E_1 \gt E_2\right)$.
+Il suffit donc de vérifier directement si $\left(E_1 \gt E_2\right)$, ce que cette propriété permet entre autre de faire.
 
 ### Le codage du champs d'exposant
 
