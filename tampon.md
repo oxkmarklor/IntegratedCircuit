@@ -190,7 +190,7 @@ Découvrons désormais les effets d'un décalage d'un rang vers la droite de la 
 Dans le cas d'un tel décalage, chaque bit de la partie entière comme de la partie fractionnaire du nombre $F$, voit son poids être _incrémenté_ de $1$.
 Après décalage de la virgule du nombre flottant $\vert \ F \ \vert$, le bit de poids $i$ passe de facteur de $2^i$ à $2^{\left(i + 1\right)}$, et cela se généralise à l'ensemble des bits du nombre.
 Comme la valeur de $\vert \ F \ \vert$ se calcul selon la somme des puissances dont le bit est à $1$, chaque puissance ayant été multiplié par $2$ dû au décalage de la virgule, la somme de ces dernières l'a également été.
-C'est ce que démontre le membre de gauche de l'équation pour $\left(c = 1\right)$, alors que le membre de droite se contente de donné le résultat attendu.
+C'est ce que démontre le membre de gauche de l'équation pour $\left(c = 1\right)$, alors que le membre droit se contente de donné le résultat attendu.
 
 Désormais, nous sommes en capacité de comprendre toutes les implications qu'un décalage de la virgule du nombre $\vert \ F \ \vert$, peut avoir sur la valeur du nombre lui même. 
 Prenons comme exemple un décalage quelconque de la virgule vers la droite $\left(c \gt 0\right)$.
@@ -200,7 +200,7 @@ Ce qui est équivalent au membre droit de l'équation $\left(\vert F \vert \time
 Voyons maintenant le cas d'un décalage quelconque de la virgule vers la gauche $\left(c \lt 0\right)$.
 Nous savons qu'un décalage d'un rang vers la gauche de la virgule de $\vert \ F \ \vert$ $\left(c = -1\right)$, divise par $2$ la valeur du nombre.
 Donc dans le cas de tout autre décalage de la virgule vers la gauche, il suffit alors de divisé $\vert \ c \ \vert$ fois la valeur du nombre $\vert \ F \ \vert$ par $2$.
-Le chapitre suivant explique le fonctionnement de l'équation et pourquoi cela est une nouvelle fois équivalent au membre droit $\left(\vert F \vert \times \ 2^c\right)$ de cette dernière.
+Cela est une nouvelle fois équivalent au membre droit de l'équation $\left(\vert F \vert \times \ 2^c\right)$, nous verrons pourquoi dans le chapitre suivant.
 
 __Nous savons désormais que n'importe quel déplacement de la virgule d'un nombre flottant, engendre une multiplication ou une division de la valeur du nombre par une puissance de__ $2$.
 
@@ -404,6 +404,22 @@ Nous le verrons plus tard, mais c'est cette propriété qui permet à la démons
 
 Dans l'introduction, nous avons dit que le nombre $F$ codé au format Half Precision a un champs d'exposant qui correspond au multiplicande de l'écriture scientifique binaire du même nombre $F$.
 Il s'agit cependant d'une approximation.
+
+Si vous ne comprenez pas ce qui est écrit ci-dessous, je vous redirige vers les chapitres "_L'écriture scientifique binaire_", "_Le significande_" ainsi que "_La transformation d'un nombre à virgule flottante en un significande_".
+
+Nous savons que tout déplacement de la virgule d'un nombre flottant multiplie/divise la valeur du nombre par une puissance de $2$.
+Quand la valeur absolu d'un nombre flottant $F$ à représenté en écriture scientifique binaire n'est pas comprise dans l'intervalle de valeur licite d'un significande $\left[1;2\right[$, il faut déplacé la virgule du nombre de $c$ rangs jusqu'à qu'elle se retrouve devant le _MSB1_ du champs du nombre. 
+Le terme $c$ quantifie le nombre de rang sur lequel déplacé la virgule, mais il spécifie aussi la direction du déplacement.
+Il s'avère que lorsque $\left(c \lt 0\right)$ la virgule doit être décalée vers la gauche, et quand $\left(c \gt 0\right)$ elle doit l'être vers la droite.
+Par conséquent, en déplaçant de $c$ rangs la virgule du nombre flottant $\vert \ F \ \vert$, que $c$ soit strictement supérieur ou inférieur à $0$, le significande $S$ ainsi obtenu vaut $\left(\vert F \vert \times \ 2^c\right)$.
+
+Vient ensuite le tour du multiplicande qui réajuste la valeur du significande $S$ à celle du nombre $\vert \ F \ \vert$.
+Pour cela, il suffit de négationné le terme $c$ comme ceci $-c$.
+De la sorte, le nombre de rang sur lequel déplacé la virgule ne change pas, mais la direction du décalage s'inverse.
+En déplaçant de $-c$ rangs la virgule du significande $S$, la virgule revient dans sa position initial et nous retrouvons le nombre $\vert \ F \ \vert$, ou autrement dit comme en conclu toujours le chapitre "_Le multiplicande_" $\vert \ F \vert = \left(S \ \times \ 2^{-c}\right)$.
+
+
+//
 
 Essayons d'abordé l'écriture scientifique binaire d'un nombre à virgule flottante de la façon la plus simple possible.
 Pour cela, nous allons avoir besoin de reprendre le terme $c$ de l'équation défini dans le chapitre "_Le significande_".
