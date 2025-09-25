@@ -403,7 +403,32 @@ Nous le verrons plus tard, mais c'est cette propriété qui permet à la démons
 ### Le codage du champs d'exposant
 
 Dans l'introduction, il est dit qu'un nombre $F$ codé au format Half Precision a un champs d'exposant qui correspond au multiplicande de l'écriture scientifique binaire de ce même nombre.
-Il s'agit cependant d'une approximation, voyons pourquoi.
+Il s'agit cependant d'une approximation.
+
+Pour comprendre pourquoi, rappelons que le rôle d'un multiplicande $M$ est de réajusté la valeur d'un significande $S$ à la valeur absolu du nombre $F$, qui doit être représenté en écriture scientifique binaire $\vert \ F \vert = \left(S \times M\right)$.
+Dans le chapitre "_Le multiplicande_", qu'il doive multiplié ou divisé la valeur du significande, nous en concluons que le multiplicande vaut toujours $2^{-c}$.
+Je rappel que le terme $c$ représente le nombre de rang par lequel la virgule du nombre $\vert \ F \ \vert$ a été décalée pour formé le significande $S$.
+Qui plus est, la variable $c$ est positive lors des décalages de la virgule vers la droite et négative pour les décalages vers la gauche.
+
+// MEME DIFFICULTE
+
+//
+
+Nous savons que la formation du significande d'un nombre flottant $F$ demande, quand ce n'est pas déjà le cas, de décalé la virgule du nombre de $c$ rangs jusqu'à qu'elle soit devant le _MSB1_ de $\vert \ F \ \vert$.
+La virgule peut être décalée vers la gauche $\left(c \lt 0\right)$, mais aussi vers la droite $\left(c \gt 0\right)$.
+Il se trouve que dans le chapitre "_La transformation d'un nombre à virgule flottante en un significande_" est défini l'équation que nous avons utilisé tout le long des chapitres précédent.
+Dans le membre droit de cette équation $\left(\vert F \vert \times \ 2^c\right)$, le nombre $\vert \ F \ \vert$ voit sa valeur être multiplié ou divisé par une puissance de $2$ $\left(2^c\right)$ positive ou négative en fonction de $c$.
+Remarquons que cela est identique au fait de décaler de $log_2\left(2^c\right)$ rangs la virgule du nombre $\vert \ F \ \vert$.
+
+
+
+// contexte
+
+// équation
+
+// log
+
+//
 
 Le chapitre "_La transformation d'un nombre à virgule flottante en un significande_" explique le processus de formation du significande d'un nombre flottant $F$ à représenter en écriture scientifique binaire.
 C'est avec la valeur absolu du nombre flottant $F$ que l'on génère un significande, par un déplacement de la virgule plus précisément.
