@@ -402,20 +402,17 @@ Nous le verrons plus tard, mais c'est cette propriété qui permet à la démons
 
 ### Le codage du champs d'exposant
 
-Dans l'introduction, il est dit que le nombre $F$ codé au format Half Precision a un champs d'exposant qui correspond au multiplicande de l'écriture scientifique binaire de ce même nombre.
-Il s'agit cependant d'une approximation.
+Dans l'introduction, il est dit qu'un nombre $F$ codé au format Half Precision a un champs d'exposant qui correspond au multiplicande de l'écriture scientifique binaire de ce même nombre.
+Il s'agit cependant d'une approximation, voyons pourquoi.
 
-Nous avons vu dans le chapitre "_La transformation d'un nombre à virgule flottante en un significande_", que tout déplacement de la virgule d'un nombre flottant multiplie/divise la valeur du nombre par une puissance de $2$.
-
-Prenons comme exemple la formation du significande d'un nombre flottant $F$ à représenté en écriture scientifique binaire.
-Lorsque la valeur de $\vert \ F \ \vert$ n'est pas comprise dans l'intervalle de valeur licite d'un significande $\left[1;2\right[$, il faut déplacé la virgule du nombre de $c$ rangs jusqu'à qu'elle se retrouve devant le _MSB1_ de $\vert \ F \ \vert$.
-Le terme $c$ est celui de l'équation défini dans le chapitre "_La transformation d'un nombre à virgule flottante en un significande_".
-En déplaçant de $c$ rangs la virgule du nombre flottant $\vert \ F \ \vert$, que $c$ soit strictement supérieur ou inférieur à $0$, la valeur du nombre est ainsi multiplié/divisé tel que le montre cette expression $\left(\vert F \vert \times \ 2^c\right)$.
-Pour le dire autrement, multiplié ou divisé la valeur du nombre $\vert \ F \ \vert$ par le calcul $\left(\vert F \vert \times \ 2^c\right)$, est équivalent au fait de déplacé la virgule de $\vert \ F \ \vert$ du $log_2\left(2^c\right)$ rangs.
+Le chapitre "_La transformation d'un nombre à virgule flottante en un significande_" explique les raisons qui font que n'importe quel déplacement de la virgule d'un nombre flottant, multiplie ou divise la valeur du nombre par une puissance de $2$.
+Ce chapitre défini une équation permettant de transformer un nombre flottant $\vert \ F \ \vert$, en un significande.
+C'est le membre droit de cette équation qui m'intéresse tout particulièrement $\left(\vert F \vert \times \ 2^c\right)$.
+Nous y retrouvons un nombre à virgule flottante $F$ en valeur absolu, multiplié par une puissance de $2$ dont l'exposant est le terme $c$.
+Le terme $c$ quantifie le nombre de décalage à induire sur la virgule du nombre $\vert \ F \ \vert$, mais il spécifie aussi la direction du décalage car avec $\left(c \lt 0\right)$ la virgule est décalée vers la gauche, tandis qu'avec $\left(c \gt 0\right)$ elle doit l'être vers la droite.
 
 
-/// Le terme $c$ quantifie le nombre de rang sur lequel déplacé la virgule, mais il spécifie aussi la direction du déplacement.
-/// Il s'avère que lorsque $\left(c \lt 0\right)$ la virgule doit être décalée vers la gauche, et quand $\left(c \gt 0\right)$ elle doit l'être vers la droite.
+//
 
 
 Quand la valeur absolu d'un nombre flottant $F$ à représenté en écriture scientifique binaire n'est pas comprise dans l'intervalle de valeur licite d'un significande $\left[1;2\right[$, il faut déplacé la virgule du nombre de $c$ rangs jusqu'à qu'elle se retrouve devant le _MSB1_ du champs du nombre. 
