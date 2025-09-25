@@ -405,25 +405,21 @@ Nous le verrons plus tard, mais c'est cette propriété qui permet à la démons
 Dans l'introduction, il est dit qu'un nombre $F$ codé au format Half Precision a un champs d'exposant qui correspond au multiplicande de l'écriture scientifique binaire de ce même nombre.
 Il s'agit cependant d'une approximation, voyons pourquoi.
 
-Le chapitre "_La transformation d'un nombre à virgule flottante en un significande_" explique les raisons qui font que n'importe quel déplacement de la virgule d'un nombre flottant, multiplie ou divise la valeur du nombre par une puissance de $2$.
-Ce chapitre défini une équation permettant de transformer un nombre flottant $\vert \ F \ \vert$, en un significande.
-C'est le membre droit de cette équation qui m'intéresse tout particulièrement $\left(\vert F \vert \times \ 2^c\right)$.
-Nous y retrouvons un nombre à virgule flottante $F$ en valeur absolu, multiplié par une puissance de $2$ dont l'exposant est le terme $c$.
-Le terme $c$ quantifie le nombre de décalage à induire sur la virgule du nombre $\vert \ F \ \vert$, mais il spécifie aussi la direction du décalage car avec $\left(c \lt 0\right)$ la virgule est décalée vers la gauche, tandis qu'avec $\left(c \gt 0\right)$ elle doit l'être vers la droite.
+Le chapitre "_La transformation d'un nombre à virgule flottante en un significande_" explique le processus de formation du significande d'un nombre flottant $F$ à représenter en écriture scientifique binaire.
+C'est avec la valeur absolu du nombre flottant $F$ que l'on génère un significande, par un déplacement de la virgule plus précisément.
+Le chapitre défini une équation qui transforme un nombre $\vert \ F \ \vert$ en son propre significande $S$, voici le membre droit de cette équation $\left(\vert F \vert \times \  2^c\right)$.
+Le terme $c$ quantifie le nombre de décalage à induire sur la virgule du nombre $\vert \ F \ \vert$, ainsi que le sens de décalage.
+Effectivement, lorsque $\left(c \lt 0\right)$ la virgule est décalée vers la gauche, tandis qu'avec $\left(c \gt 0\right)$ elle est décalée vers la droite.
+
+Remarquons que pour $c$ décalage de la virgule du nombre $\vert \ F \ \vert$, la valeur du nombre est multiplié ou divisé par $2^c$ comme ceci $\left(\vert F \vert \times \  2^c\right)$.
 
 
-//
 
 
-Quand la valeur absolu d'un nombre flottant $F$ à représenté en écriture scientifique binaire n'est pas comprise dans l'intervalle de valeur licite d'un significande $\left[1;2\right[$, il faut déplacé la virgule du nombre de $c$ rangs jusqu'à qu'elle se retrouve devant le _MSB1_ du champs du nombre. 
-Le terme $c$ quantifie le nombre de rang sur lequel déplacé la virgule, mais il spécifie aussi la direction du déplacement.
-Il s'avère que lorsque $\left(c \lt 0\right)$ la virgule doit être décalée vers la gauche, et quand $\left(c \gt 0\right)$ elle doit l'être vers la droite.
-Par conséquent, en déplaçant de $c$ rangs la virgule du nombre flottant $\vert \ F \ \vert$, que $c$ soit strictement supérieur ou inférieur à $0$, le significande $S$ ainsi obtenu vaut $\left(\vert F \vert \times \ 2^c\right)$.
 
-Vient ensuite le tour du multiplicande qui réajuste la valeur du significande $S$ à celle du nombre $\vert \ F \ \vert$.
-Pour cela, il suffit de négationné le terme $c$ comme ceci $-c$.
-De la sorte, le nombre de rang sur lequel déplacé la virgule ne change pas, mais la direction du décalage s'inverse.
-En déplaçant de $-c$ rangs la virgule du significande $S$, la virgule revient dans sa position initial et nous retrouvons le nombre $\vert \ F \ \vert$, ou autrement dit comme en conclu toujours le chapitre "_Le multiplicande_" $\vert \ F \vert = \left(S \ \times \ 2^{-c}\right)$.
+
+
+
 
 // déplacé la virgule de F c'est multiplier/diviser F par une puissande de 2
 
