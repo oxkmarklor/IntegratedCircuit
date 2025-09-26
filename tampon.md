@@ -405,6 +405,27 @@ Nous le verrons plus tard, mais c'est cette propriété qui permet à la démons
 Dans l'introduction, il est dit qu'un nombre $F$ codé au format Half Precision a un champs d'exposant qui correspond au multiplicande de l'écriture scientifique binaire de ce même nombre.
 Il s'agit cependant d'une approximation.
 
+Le chapitre "_La transformation d'un nombre à virgule flottante en un significande_" explique comment former le significande $S$ d'un nombre flottant $F$ à représenter en écriture scientifique binaire.
+En bref, par un décalage de la virgule du nombre jusqu'à qu'elle se retrouve devant le _MSB1_ de $\vert \ F \ \vert$.
+Cependant, peu importe le décalage de la virgule, l'impacte de ce dernier est toujours le même $\left(\vert F \vert \times \ 2^c\right)$.
+La variable $c$ permet justement de quantifier le nombre de rang de décalage à induire sur la virgule de $\vert \ F \ \vert$, si elle est positive la virgule doit être décalée vers la droite et vers la gauche si elle est négative.
+En conséquence, nous comprenons qu'un décalage de la virgule du nombre vers la gauche $\left(c \lt 0\right)$ divise la valeur de $\vert \ F \ \vert$ par son produit avec $2^c$, tandis qu'un décalage vers la droite $\left(c \gt 0\right)$ multiplie $\vert \ F \ \vert$ par $2^c$.
+Pour le dire autrement, multiplié $\vert \ F \ \vert$ par $2^c$, que $c$ soit positif ou négatif, est équivalent au fait de déplacé de $log_2\left(2^c\right)$ rangs la virgule de $\vert \ F \ \vert$.
+
+//
+
+// pas dégeu
+
+Nous savons que la formation du significande d'un nombre flottant $F$ demande de décalé la virgule du nombre jusqu'à qu'elle soit devant le _MSB1_ de $\vert \ F \ \vert$.
+Le décalage de la virgule de $\vert \ F \ \vert$ a cependant un impacte sur la valeur du nombre, il multiplie ou divise le nombre par une puissance de $2$.
+L'équation que nous avons utilisé tout le long des chapitres précédent et qui est défini dans le chapitre "_La transformation d'un nombre à virgule flottante en un significande_", a un membre droit $\left(\vert F \vert \times \ 2^c\right)$.
+Cette équation, et son membre droit, permet justement de calculer l'impacte qu'un déplacement de $c$ rangs de la virgule de $\vert \ F \ \vert$ a sur la valeur du nombre.
+Le terme $c$ quantifie le nombre de rang de décalage à induire sur la virgule de $\vert \ F \ \vert$.
+Qui plus est, lorsque $\left(c \lt 0\right)$ la virgule est décalée vers la gauche, tandis qu'avec $\left(c \gt 0\right)$ elle est décalée vers la droite.
+Sachant ceci, nous en déduisons donc que $\vert \ F \ \vert$ est divisé par $2^c$ lorsque le décalage de la virgule s'est produit vers la gauche $\left(c \lt 0\right)$, et multiplié pour un décalage de la virgule vers la droite $\left(c \gt 0\right)$.
+
+//
+
 Pour comprendre pourquoi, rappelons que le rôle d'un multiplicande $M$ est de réajusté la valeur d'un significande $S$ à la valeur absolu du nombre $F$, qui doit être représenté en écriture scientifique binaire $\vert \ F \vert = \left(S \times M\right)$.
 Dans le chapitre "_Le multiplicande_", qu'il doive multiplié ou divisé la valeur du significande, nous en concluons que le multiplicande vaut toujours $2^{-c}$.
 Je rappel que le terme $c$ représente le nombre de rang par lequel la virgule du nombre $\vert \ F \ \vert$ a été décalée pour formé le significande $S$.
