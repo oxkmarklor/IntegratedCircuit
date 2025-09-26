@@ -301,23 +301,22 @@ L'écriture scientifique du nombre à virgule flottante $F$ est donc bel et bien
 
 ### Un autre regard sur le multiplicande
 
-Je vous invite à voir les choses par un biais différent, ceci nous sera utile pour plus tard.
+Je vous invite à voir les choses d'une manière différente, ceci nous sera utile pour plus tard.
 
-Nous savons que la formation du significande d'un nombre flottant $F$ dont $\vert \ F \vert \notin \left[1;2\right[$, demande de décalé de $c$ rangs la virgule du nombre $\vert \ F \ \vert$.
+Nous savons que la formation du significande d'un nombre flottant $F$ dont $\vert \ F \vert \notin \left[1;2\right[$, requiert de décalé de $c$ rangs la virgule du nombre $\vert \ F \ \vert$.
 Selon l'équation, le significande $S$ ainsi obtenu vaut $\left(\vert F \vert \times \ 2^c\right)$.
-Pour le dire autrement, obtenir le significande $S$ au travers du calcul $\left(\vert F \vert \times \ 2^c\right)$, revient à décalé de $log_2\left(2^c\right)$ rangs la virgule de $\vert \ F \ \vert$.
+Pour le dire autrement, obtenir le significande $S$ par l'intermédiaire du calcul $\left(\vert F \vert \times \ 2^c\right)$, revient à décalé la virgule du nombre $\vert \ F \ \vert$ de $log_2\left(2^c\right)$ rangs.
 
 Rappelons que le rôle du multiplicande est de réajusté la valeur du significande à la valeur absolu du nombre $F$.
-Nous avons vu dans les deux précédents chapitres que le multiplicande réajuste toujours la valeur du significande en le multipliant par $2^{-c}$, ce qui donne $\vert \ F \vert = \left(S \times 2^{-c}\right)$.
-Une nouvelle fois, retrouver la valeur de $\vert \ F \ \vert$ au travers du calcul $\left(S \times 2^{-c}\right)$, revient à décalé de $log_2\left(2^{-c}\right)$ rangs la virgule du significande $S$.
+Nous avons vu dans les deux précédentes section que le multiplicande réajuste toujours la valeur du significande en le multipliant par $2^{-c}$, ce qui donne $\vert \ F \vert = \left(S \times 2^{-c}\right)$.
+Une nouvelle fois, retrouver la valeur de $\vert \ F \ \vert$ par l'intermédiaire du calcul $\left(S \times 2^{-c}\right)$, revient à décalé la virgule du significande $S$ de $log_2\left(2^{-c}\right)$ rangs.
 
-Ce que cette section explique, c'est que pour retrouver depuis le significande la valeur absolu du nombre $F$.
-Il suffit de décalé la virgule du significande $S$ par le même nombre de rang que ne l'a été celle de $\vert \ F \ \vert$ pour former un significande, mais dans la direction opposé.
-Rendons cela plus clair avec un exemple.
-
-La formation d'un significande $S$ est obtenu par un décalage de ___trois rangs vers la gauche___ de la virgule d'un nombre $\vert \ F \ \vert$, donc $\left(c = -3\right)$.
-Retrouver la valeur de $\vert \ F \ \vert$ depuis le significande $S$, requiert de décalé de ___trois rangs vers la droite___ la virgule du significande, ou autrement dit de décalé la virgule du significande $S$ de $-c$ rangs.
-C'est aussi simple que cela.
+Cette section explique que pour remplir le rôle d'un multiplicande.
+Il suffit de décalé la virgule du significande $S$ par le même nombre de rang que ne l'a été celle de $\vert \ F \ \vert$ pour former le significande, mais dans la direction opposé.
+Rendons cela le plus clair possible avec un exemple.
+Imaginons que la formation d'un significande $S$ soit obtenu par un décalage de ___trois rangs vers la gauche___ de la virgule du nombre $\vert \ F \ \vert$, donc $\left(c = -3\right)$.
+Retrouver la valeur du nombre $\vert \ F \ \vert$ depuis le significande $S$, requiert un décalage de ___trois rangs vers la droite___ de la virgule du significande, ou autrement dit de décalé la virgule du significande $S$ de $-c$ rangs.
+Bien entendu, cela fonctionne aussi quand $c$ est positif.
 
 # Le standard IEEE-754
 
