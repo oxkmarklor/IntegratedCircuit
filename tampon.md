@@ -246,12 +246,12 @@ C'est pourquoi l'écriture scientifique fait usage d'un multiplicande.
 Lorsque $\left(S \ \neq \vert F \vert\right)$, le multiplicande $M$ permet comme son nom l'indique de multiplié le significande $S$, de sorte à ce que $\vert \ F \vert = \left(S \times M\right)$.
 Autrement dit, le multiplicande réajuste la valeur du significande à la valeur absolu du nombre $F$ à représenter, quand c'est nécessaire.
 
-Cependant, il est possible que le nombre à virgule flottante $F$ ait une valeur absolu comprise dans l'intervalle de valeur licite d'un significande $\left[1;2\right[$.
-Parce que $\left(S \ = \vert F \vert\right)$, nous en déduisons que dans cette situation le multiplicande $M$ vaut $1$, de sorte à ce que $\vert \ F \vert = \left(S \times M\right)$.
+Cependant, il est possible que le nombre à virgule flottante $F$ ait une valeur absolu comprise dans l'intervalle de valeur licite d'un significande.
+Parce que $\left(S \ = \vert F \vert\right)$, nous en déduisons que dans cette situation le multiplicande $M$ vaut $1$, de sorte à ce qu'une nouvelle fois $\vert \ F \vert = \left(S \times M\right)$.
 
-Je tient à vous faire remarquez que si $\vert \ F \vert = \left(S \times M\right)$, alors la forme complète de l'écriture scientifique binaire du nombre à virgule flottante est $F \ = \pm \left(S \times M\right)$.
-Rappellez-vous en, le signe $\pm$ est celui du nombre flottant $F$ dont nous parlons au tout début du chapitre "_Le significande_".
-Nous retrouvons les trois éléments de l'écriture scientifique, le _signe_ $\pm$, le _significande_ $S$ ainsi que le _multiplicande_ $M$.
+Je tient à vous faire remarqué que si $\vert \ F \vert = \left(S \times M\right)$, alors la représentation du nombre flottant $F$ en écriture scientifique binaire est $F \ = \pm \left(S \times M\right)$.
+Le signe $\pm$ est celui du nombre flottant $F$, ce dont nous parlons au début du chapitre "_Le significande_".
+En bref, nous retrouvons les trois éléments de l'écriture scientifique, le _signe_ $\pm$, le _significande_ $S$ ainsi que le _multiplicande_ $M$.
 
 Les sections suivantes expliquent comment le multiplicande réajuste la valeur du significande à celle du nombre $F$ en valeur absolu.
 En outre, sachez que ces dernières font références à l'équation défini dans le chapitre "_La transformation d'un nombre à virgule flottante en un significande_".
@@ -265,7 +265,7 @@ Le significande, par le fait que $\left(S \ \lt \vert F \vert\right)$, est un te
 C'est pourquoi un multiplicande $M$ multiplie le significande $S$ de sorte à ce que $\vert \ F \vert = \left(S \times M\right)$.
 Parce que $S \ = \left(\vert F \vert \div \ 2^{-c}\right)$, le multiplicande $M$ multiplie donc le significande $S$ par la même puissance de $2$ que celle ayant divisé $\vert \ F \ \vert$ pour formé le significande.
 Ce qui donne $\vert \ F \vert = \left(S \ \times \ 2^{-c}\right)$.
-Par conséquent, l'écriture scientifique binaire du nombre à virgule flottante est $F \ = \pm \left(S \ \times \ 2^{-c}\right)$, comme nous l'avons vu plus haut.
+Par conséquent, la représentation du nombre flottant $F$ en écriture scientifique binaire est $F \ = \pm \left(S \ \times \ 2^{-c}\right)$, comme nous l'avons vu plus haut.
 
 Voici comme exemple l'écriture scientifique binaire du nombre $F = 5.5$, qui en virgule flottante vaut $+ \ 101.1_2$ :
 
@@ -287,7 +287,7 @@ Le significande, par le fait que $\left(S \ \gt \vert F \vert\right)$, est un te
 C'est pourquoi un multiplicande $M$ divise le significande $S$ de sorte à ce que $\vert \ F \vert = \left(S \ \div \ M\right)$.
 Parce que $S \ = \left(\vert F \vert \times \ 2^c\right)$, le multiplicande $M$ divise donc le significande $S$ par la même puissance de $2$ que celle ayant multiplié $\vert \ F \ \vert$ pour formé le significande. 
 Ce qui donne $\vert \ F \vert = \left(S \ \div \ 2^c\right)$, et nous retombons ainsi sur $\vert \ F \vert = \left(S \ \times \ 2^{-c}\right)$.
-Par conséquent, l'écriture scientifique binaire du nombre à virgule flottante tombe une nouvelle fois sur $F \ = \pm \left(S \ \times \ 2^{-c}\right)$.
+Par conséquent, la représentation du nombre flottant $F$ en écriture scientifique binaire tombe une nouvelle fois sur $F \ = \pm \left(S \ \times \ 2^{-c}\right)$.
 
 Voici comme exemple l'écriture scientifique binaire du nombre $F = -0.140625$, qui en virgule flottante vaut $- \ 0.001001_2$ :
 
@@ -298,6 +298,10 @@ La formation du significande engendre une multiplication de la valeur du nombre 
 Sachant que $\left(1.125 \ \gt \vert - \ 0.140625 \vert\right)$, le multiplicande $M$ doit divisé le significande $1.125$ par $2^c$ de sorte à ce que $\vert - \ 0.140625 \vert = \left(1.125 \div M\right)$.
 Cela donne $\vert - 0.140625 \vert = \left(1.125 \ \div \ 2^3\right)$, ce qui est équivalent à $\vert - \ 0.140625 \vert = \left(1.125 \ \times \ 2^{-3}\right)$.
 L'écriture scientifique du nombre à virgule flottante $F$ est donc bel et bien $- \ 0.140625 \ = - \ 1.125 \ \times \ 2^{-3}$.
+
+### Un autre regard sur le multiplicande
+
+// F >> 5 = S << 5 = F
 
 # Le standard IEEE-754
 
