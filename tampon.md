@@ -405,6 +405,17 @@ Nous le verrons plus tard, mais c'est cette propriété qui permet à la démons
 Dans l'introduction, il est dit qu'un nombre $F$ codé au format Half Precision a un champs d'exposant qui correspond au multiplicande de l'écriture scientifique binaire de ce même nombre.
 Il s'agit cependant d'une approximation.
 
+Ce qui suit fait référence au membre droit de l'équation ainsi qu'à son terme $c$ défini dans le chapitre "_La transformation d'un nombre à virgule flottante en un significande_".
+Je vous conseille de relire ce chapitre et le suivant si besoin.
+
+La formation du significande $S$ d'un nombre flottant $F$ à représenté en écriture scientifique binaire, nécessite le déplacement de la virgule de $\vert \ F \ \vert$.
+Un déplacement de la virgule de $c$ rangs du nombre $\vert \ F \ \vert$, multiplie ou divise _la valeur du nombre_ comme le montre le membre droit de l'équation $\left(\vert F \vert \times \ 2^c\right)$.
+Par conséquent, multiplié ou divisé _la valeur_ de $\vert \ F \ \vert$ avec $\left(\vert F \vert \times \ 2^c\right)$, revient au même que de déplacer la virgule de $\vert \ F \ \vert$ de $log_2\left(2^c\right)$ rangs.
+
+// même chose avec le multiplicande
+
+//
+
 Le chapitre "_La transformation d'un nombre à virgule flottante en un significande_" explique comment former le significande $S$ d'un nombre flottant $F$ à représenter en écriture scientifique binaire.
 En bref, par un décalage de la virgule du nombre jusqu'à qu'elle se retrouve devant le _MSB1_ de $\vert \ F \ \vert$.
 Cependant, peu importe le décalage de la virgule, l'impacte de ce dernier est toujours le même $\left(\vert F \vert \times \ 2^c\right)$.
