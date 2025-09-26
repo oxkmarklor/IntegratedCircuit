@@ -301,7 +301,54 @@ L'écriture scientifique du nombre à virgule flottante $F$ est donc bel et bien
 
 ### Un autre regard sur le multiplicande
 
-// F >> 5 = S << 5 = F
+Je vous invite à voir les choses par un biais différent, ceci nous sera utile pour un chapitre ultérieur du nom de "_Le codage du champs d'exposant_".
+
+Nous savons que la formation du significande d'un nombre flottant $F$ dont $\vert \ F \vert \notin \left[1;2\right[$, demande de décalé de $c$ rangs la virgule du nombre $\vert \ F \ \vert$.
+Selon l'équation, le significande $S$ ainsi obtenu vaut $\left(\vert F \vert \times \ 2^c\right)$.
+Mais obtenir le significande $S$ au travers du calcul $\left(\vert F \vert \times \ 2^c\right)$, revient au même que de décalé de $log_2\left(2^c\right)$ rangs la virgule de $\vert \ F \ \vert$.
+
+Le rôle du multiplicande $M$ est de réajusté la valeur du significande $S$ à la valeur absolu du nombre $F$, autrement dit $\vert \ F \vert = \left(S \times M\right)$.
+Nous avons vu dans les deux précédents chapitres que le multiplicande réajuste la valeur du significande en le multipliant par $2^{-c}$, ce qui donne $\vert \ F \vert = \left(S \times 2^{-c}\right)$.
+Néanmoins, retrouver la valeur de $\vert \ F \ \vert$ revient donc à décalé de $log_2\left(2^{-c}\right)$ rangs la virgule du significande $S$.
+
+Pour résumer, le document rentre dans les mathématiques qui sous tendent l'écriture scientifique binaire, afin qu'aucun détail ne vienne à manqué pour la démonstration du circuit.
+Ce que cette section explique, c'est que le multiplicande doit décalé la virgule du significande par le même nombre de rang que ne l'a été la virgule de $\vert \ F \ \vert$ au moment de la formation du significande, mais dans la direction opposé.
+
+
+//
+
+Pour comprendre pourquoi, rappelons que le rôle d'un multiplicande $M$ est de réajusté la valeur d'un significande $S$ à la valeur absolu du nombre $F$, qui doit être représenté en écriture scientifique binaire $\vert \ F \vert = \left(S \times M\right)$.
+Dans le chapitre "_Le multiplicande_", qu'il doive multiplié ou divisé la valeur du significande, nous en concluons que le multiplicande vaut toujours $2^{-c}$.
+Je rappel que le terme $c$ représente le nombre de rang par lequel la virgule du nombre $\vert \ F \ \vert$ a été décalée pour formé le significande $S$.
+Qui plus est, la variable $c$ est positive lors des décalages de la virgule vers la droite et négative pour les décalages vers la gauche.
+
+//
+
+Nous savons que la formation du significande $S$ d'un nombre flottant $F$ dont $\vert \ F \vert \notin \left[1;2\right[$, demande de décalé la virgule du nombre de $c$ rangs jusqu'à qu'elle soit devant le MSB1 de $\vert \ F \ \vert$.
+L'équation nous dit que la formation du significande $S$ passe par $\left(\vert F \vert \times \ 2^c\right)$.
+Autrement dit, le significande est dû à la multiplication de $\vert \ F \ \vert$ par $2^c$ lorsque la virgule du nombre est décalée vers la droite $\left(c \gt 0\right)$, et à la division de la valeur de $\vert \ F \ \vert$ par son produit avec $2^c$ quand la virgule est décalée vers la gauche $\left(c \lt 0\right)$.
+
+
+
+
+//
+
+La formation du significande $S$ d'un nombre flottant $F$ à représenté en écriture scientifique binaire, nécessite le déplacement de la virgule de $\vert \ F \ \vert$.
+Un déplacement de la virgule de $c$ rangs du nombre $\vert \ F \ \vert$, multiplie ou divise _la valeur du nombre_ comme le montre le membre droit de l'équation $\left(\vert F \vert \times \ 2^c\right)$.
+Par conséquent, multiplié ou divisé _la valeur_ de $\vert \ F \ \vert$ avec $\left(\vert F \vert \times \ 2^c\right)$, revient au même que de déplacer la virgule de $\vert \ F \ \vert$ de $log_2\left(2^c\right)$ rangs.
+
+//
+
+Pour la transformation d'un nombre flottant $F$ en un significande $S$, si la virgule de $F$ a été déplacée de $c$ rangs vers la droite, alors $\left(c \gt 0\right)$.
+Pour retrouver depuis le significande $S$ la valeur initial du nombre flottant $F$, le multiplicande doit permettre de déplacé de $c$ rangs vers la gauche la virgule du significande.
+Il suffit alors d'inversé le signe de $c$ pour changé la direction du décalage, comme ceci $\left(-\left(+c\right) = -c\right)$.
+Le nombre de rang de décalage reste le même mais le sens de décalage passe de la droite avec $\left(c \gt 0\right)$, à la gauche avec $\left(c \lt 0\right)$.
+
+Dans le cas contraire, la transformation du nombre flottant $F$ en un significande $S$ avec $\left(c \lt 0\right)$, engendre un déplacement de la virgule de $F$ de $\vert \ c \ \vert$ rangs vers la gauche.
+Pour retrouver la valeur initial du nombre flottant $F$, il faudra alors que la virgule du significande $S$ soit décalée de $\vert \ c \ \vert$ rangs vers la droite.
+Une nouvelle fois, la négation de $c$ permettra d'inversé le sens de décalage de la vrigule $\left(-\left(-c\right) = +c\right)$.
+
+Nous comprenons donc que dans les faits déplacé la virgule du significande $S$ de $-c$ rangs, est équivalent à produire le calcul $\left(S \times 2^{-c}\right)$ qui permet de retrouver la valeur de $F$ (comme vu plus haut).
 
 # Le standard IEEE-754
 
