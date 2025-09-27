@@ -305,11 +305,11 @@ Je vous invite à voir les choses d'une manière différente, ceci nous sera uti
 
 Nous savons que la formation du significande d'un nombre flottant $F$ dont $\vert \ F \vert \notin \left[1;2\right[$, requiert de décalé de $c$ rangs la virgule du nombre $\vert \ F \ \vert$.
 Selon l'équation, le significande $S$ ainsi obtenu vaut $\left(\vert F \vert \times \ 2^c\right)$.
-Pour le dire autrement, obtenir le significande $S$ par l'intermédiaire du calcul $\left(\vert F \vert \times \ 2^c\right)$, revient à décalé la virgule du nombre $\vert \ F \ \vert$ de $log_2\left(2^c\right)$ rangs.
+Pour le dire autrement, obtenir le significande $S$ par l'intermédiaire du calcul $\left(\vert F \vert \times \ 2^c\right)$, revient au même que de décalé la virgule du nombre $\vert \ F \ \vert$ de $log_2\left(2^c\right)$ rangs.
 
 Rappelons que le rôle du multiplicande est de réajusté la valeur du significande à la valeur absolu du nombre $F$.
 Nous avons vu dans les deux précédentes section que le multiplicande réajuste toujours la valeur du significande en le multipliant par $2^{-c}$, ce qui donne $\vert \ F \vert = \left(S \times 2^{-c}\right)$.
-Une nouvelle fois, retrouver la valeur de $\vert \ F \ \vert$ par l'intermédiaire du calcul $\left(S \times 2^{-c}\right)$, revient à décalé la virgule du significande $S$ de $log_2\left(2^{-c}\right)$ rangs.
+Une nouvelle fois, retrouver la valeur de $\vert \ F \ \vert$ par l'intermédiaire du calcul $\left(S \times 2^{-c}\right)$, revient au même que de décalé la virgule du significande $S$ de $log_2\left(2^{-c}\right)$ rangs.
 
 Cette section explique que pour remplir le rôle d'un multiplicande.
 Il suffit de décalé la virgule du significande $S$ par le même nombre de rang que ne l'a été celle de $\vert \ F \ \vert$ pour former le significande, mais dans la direction opposé.
@@ -424,93 +424,20 @@ Nous le verrons plus tard, mais c'est cette propriété qui permet à la démons
 Dans l'introduction, il est dit qu'un nombre $F$ codé au format Half Precision a un champs d'exposant qui correspond au multiplicande de l'écriture scientifique binaire de ce même nombre.
 Il s'agit cependant d'une approximation.
 
-Ce qui suit fait référence au membre droit de l'équation ainsi qu'à son terme $c$ défini dans le chapitre "_La transformation d'un nombre à virgule flottante en un significande_".
-Je vous conseille de relire ce chapitre et le suivant si besoin.
+Rappelons que le rôle d'un multiplicande $M$ est de réajusté la valeur du significande $S$ à la valeur absolu du nombre $F$ à représenté en écriture scientifique, ce qui correspond à $\vert \ F \vert = \left(S \times M\right)$.
+Au travers du chapitre "_Le multiplicande_" et des deux sections qui le suivent, nous avons vus que le multiplicande réajustait toujours la valeur du significande en le multipliant par $2^{-c}$, ce qui donne $\vert \ F \vert = \left(S \times 2^{-c}\right)$.
+Cependant, comme l'explique clairement (je l'espère) le chapitre "_Un autre regard sur le multiplicande_", il n'est pas nécessaire de réajusté la valeur du significande $S$ en le multipliant par $2^{-c}$.
+Je cite "_Il suffit de décalé la virgule du significande_ $S$ _par le même nombre de rang que ne l'a été celle de_ $\vert \ F \ \vert$ _pour former le significande, mais dans la direction opposé_".
+Je ne vais pas à nouveau rentré dans les détails, et vous invite à lire ce chapitre si besoin.
+Pour conclure, le champs d'exposant ne code que la valeur de $log_2\left(2^{-c}\right)$, ou autrement dit l'exposant $-c$ du multiplicande $2^{-c}$ et non la puissance de $2$ elle même.
 
-La formation du significande $S$ d'un nombre flottant $F$ à représenté en écriture scientifique binaire, nécessite le déplacement de la virgule de $\vert \ F \ \vert$.
-Un déplacement de la virgule de $c$ rangs du nombre $\vert \ F \ \vert$, multiplie ou divise _la valeur du nombre_ comme le montre le membre droit de l'équation $\left(\vert F \vert \times \ 2^c\right)$.
-Par conséquent, multiplié ou divisé _la valeur_ de $\vert \ F \ \vert$ avec $\left(\vert F \vert \times \ 2^c\right)$, revient au même que de déplacer la virgule de $\vert \ F \ \vert$ de $log_2\left(2^c\right)$ rangs.
-
-// même chose avec le multiplicande
-
-//
-
-Le chapitre "_La transformation d'un nombre à virgule flottante en un significande_" explique comment former le significande $S$ d'un nombre flottant $F$ à représenter en écriture scientifique binaire.
-En bref, par un décalage de la virgule du nombre jusqu'à qu'elle se retrouve devant le _MSB1_ de $\vert \ F \ \vert$.
-Cependant, peu importe le décalage de la virgule, l'impacte de ce dernier est toujours le même $\left(\vert F \vert \times \ 2^c\right)$.
-La variable $c$ permet justement de quantifier le nombre de rang de décalage à induire sur la virgule de $\vert \ F \ \vert$, si elle est positive la virgule doit être décalée vers la droite et vers la gauche si elle est négative.
-En conséquence, nous comprenons qu'un décalage de la virgule du nombre vers la gauche $\left(c \lt 0\right)$ divise la valeur de $\vert \ F \ \vert$ par son produit avec $2^c$, tandis qu'un décalage vers la droite $\left(c \gt 0\right)$ multiplie $\vert \ F \ \vert$ par $2^c$.
-Pour le dire autrement, multiplié $\vert \ F \ \vert$ par $2^c$, que $c$ soit positif ou négatif, est équivalent au fait de déplacé de $log_2\left(2^c\right)$ rangs la virgule de $\vert \ F \ \vert$.
-
-//
-
-// pas dégeu
-
-Nous savons que la formation du significande d'un nombre flottant $F$ demande de décalé la virgule du nombre jusqu'à qu'elle soit devant le _MSB1_ de $\vert \ F \ \vert$.
-Le décalage de la virgule de $\vert \ F \ \vert$ a cependant un impacte sur la valeur du nombre, il multiplie ou divise le nombre par une puissance de $2$.
-L'équation que nous avons utilisé tout le long des chapitres précédent et qui est défini dans le chapitre "_La transformation d'un nombre à virgule flottante en un significande_", a un membre droit $\left(\vert F \vert \times \ 2^c\right)$.
-Cette équation, et son membre droit, permet justement de calculer l'impacte qu'un déplacement de $c$ rangs de la virgule de $\vert \ F \ \vert$ a sur la valeur du nombre.
-Le terme $c$ quantifie le nombre de rang de décalage à induire sur la virgule de $\vert \ F \ \vert$.
-Qui plus est, lorsque $\left(c \lt 0\right)$ la virgule est décalée vers la gauche, tandis qu'avec $\left(c \gt 0\right)$ elle est décalée vers la droite.
-Sachant ceci, nous en déduisons donc que $\vert \ F \ \vert$ est divisé par $2^c$ lorsque le décalage de la virgule s'est produit vers la gauche $\left(c \lt 0\right)$, et multiplié pour un décalage de la virgule vers la droite $\left(c \gt 0\right)$.
-
-//
-
-Pour comprendre pourquoi, rappelons que le rôle d'un multiplicande $M$ est de réajusté la valeur d'un significande $S$ à la valeur absolu du nombre $F$, qui doit être représenté en écriture scientifique binaire $\vert \ F \vert = \left(S \times M\right)$.
-Dans le chapitre "_Le multiplicande_", qu'il doive multiplié ou divisé la valeur du significande, nous en concluons que le multiplicande vaut toujours $2^{-c}$.
-Je rappel que le terme $c$ représente le nombre de rang par lequel la virgule du nombre $\vert \ F \ \vert$ a été décalée pour formé le significande $S$.
-Qui plus est, la variable $c$ est positive lors des décalages de la virgule vers la droite et négative pour les décalages vers la gauche.
-
-// MEME DIFFICULTE
-
-//
-
-Nous savons que la formation du significande d'un nombre flottant $F$ demande, quand ce n'est pas déjà le cas, de décalé la virgule du nombre de $c$ rangs jusqu'à qu'elle soit devant le _MSB1_ de $\vert \ F \ \vert$.
-La virgule peut être décalée vers la gauche $\left(c \lt 0\right)$, mais aussi vers la droite $\left(c \gt 0\right)$.
-Il se trouve que dans le chapitre "_La transformation d'un nombre à virgule flottante en un significande_" est défini l'équation que nous avons utilisé tout le long des chapitres précédent.
-Dans le membre droit de cette équation $\left(\vert F \vert \times \ 2^c\right)$, le nombre $\vert \ F \ \vert$ voit sa valeur être multiplié ou divisé par une puissance de $2$ $\left(2^c\right)$ positive ou négative en fonction de $c$.
-Remarquons que cela est identique au fait de décaler de $log_2\left(2^c\right)$ rangs la virgule du nombre $\vert \ F \ \vert$.
-
-
-
-// contexte
-
-// équation
-
-// log
-
-//
-
-Le chapitre "_La transformation d'un nombre à virgule flottante en un significande_" explique le processus de formation du significande d'un nombre flottant $F$ à représenter en écriture scientifique binaire.
-C'est avec la valeur absolu du nombre flottant $F$ que l'on génère un significande, par un déplacement de la virgule plus précisément.
-Le chapitre défini une équation qui transforme un nombre $\vert \ F \ \vert$ en son propre significande $S$, voici le membre droit de cette équation $\left(\vert F \vert \times \  2^c\right)$.
-Le terme $c$ quantifie le nombre de décalage à induire sur la virgule du nombre $\vert \ F \ \vert$, ainsi que le sens de décalage.
-Effectivement, lorsque $\left(c \lt 0\right)$ la virgule est décalée vers la gauche, tandis qu'avec $\left(c \gt 0\right)$ elle est décalée vers la droite.
-
-Remarquons que pour $c$ décalage de la virgule du nombre $\vert \ F \ \vert$, la valeur du nombre est multiplié ou divisé par $2^c$ comme ceci $\left(\vert F \vert \times \  2^c\right)$.
-
-
-
-
-
-
-
-
-
-// déplacé la virgule de F c'est multiplier/diviser F par une puissande de 2
-
-// Exemple avec la génération d'un significande
-
-// changement de point de vue avec un déplacement de la virgule de log en base 2 de 2^c rangs
-
-// Rappel sur le rôle du multiplicande
-
-// Le multiplicande multiplie/divise la valeur du significande S par S * 2^-c
-
-// Référence au déplacement de la virgule du significande par log en base 2 de 2^-c rangs
-
-// C'est pourquoi le champs d'exposant ne correspond pas parfaitement au multiplicande, explication des contraintes (taille du champs, complexité d'encodage)
-
+Cela comporte de nombreux avantages, voyons les rapidement.
+Le multiplicande interprète une puissance $2^{-c}$ qui peut être positive comme négative, dans le cas des puissances de $2$ positives ces dernières ont une valeur qui croix exponentiellement.
+Le champs d'exposant devrait donc être composé d'un grand nombre de bits comparé à ce qui est nécessaire pour le simple codage de $-c$.
+Dans le cas des puissances de $2$ négatives, le champs d'exposant devrait être capable de codé des nombres à virgule, cela complexifierait encore un peu plus les formats de nombre du standard IEEE-754.
+Par dessus tout, il serait nécessaire d'effectuer une opération de multiplication entre le champs de mantisse tronquée (significande $S$) et le champs d'exposant (multiplicande $M$) pour calculer la valeur d'un nombre.
+Il n'y a aucun ordinateur qui à ma connaissance soit capable d'effectuer des multiplications sur des opérandes quelconque et en un seul cycle d'horologe, sauf optimisation sur des cas très spécifiques (opérande nul par exemple) et/ou architecture de circuit multiplieur spéciale, comme les multiplieurs séquentiels.
+Par essence, la multiplication est une opération arithmétique complexe à prendre en charge et demande plusieurs cycles d'horloge pour s'exéuter, ceci est exacerbé par le fait que les opérandes comportent des virgules.
 
 ### La mantisse tronquée, une histoire de puissance de 2
 
