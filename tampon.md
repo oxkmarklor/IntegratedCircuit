@@ -421,23 +421,24 @@ Nous le verrons plus tard, mais c'est cette propriété qui permet à la démons
 
 ### Le codage du champs d'exposant
 
+// à relire
+
 Dans l'introduction, il est dit qu'un nombre $F$ codé au format Half Precision a un champs d'exposant qui correspond au multiplicande de l'écriture scientifique binaire de ce même nombre.
 Il s'agit cependant d'une approximation.
 
 Rappelons que le rôle d'un multiplicande $M$ est de réajusté la valeur du significande $S$ à la valeur absolu du nombre $F$ à représenté en écriture scientifique, ce qui correspond à $\vert \ F \vert = \left(S \times M\right)$.
 Au travers du chapitre "_Le multiplicande_" et des deux sections qui le suivent, nous avons vus que le multiplicande réajustait toujours la valeur du significande en le multipliant par $2^{-c}$, ce qui donne $\vert \ F \vert = \left(S \times 2^{-c}\right)$.
-Cependant, comme l'explique clairement (je l'espère) le chapitre "_Un autre regard sur le multiplicande_", il n'est pas nécessaire de réajusté la valeur du significande $S$ en le multipliant par $2^{-c}$.
-Je cite "_Il suffit de décalé la virgule du significande_ $S$ _par le même nombre de rang que ne l'a été celle de_ $\vert \ F \ \vert$ _pour former le significande, mais dans la direction opposé_".
-Je ne vais pas à nouveau rentré dans les détails, et vous invite à lire ce chapitre si besoin.
-Pour conclure, le champs d'exposant ne code que la valeur de $log_2\left(2^{-c}\right)$, ou autrement dit l'exposant $-c$ du multiplicande $2^{-c}$ et non la puissance de $2$ elle même.
 
-Cela comporte de nombreux avantages, voyons les rapidement.
-Le multiplicande interprète une puissance $2^{-c}$ qui peut être positive comme négative, dans le cas des puissances de $2$ positives ces dernières ont une valeur qui croix exponentiellement.
-Le champs d'exposant devrait donc être composé d'un grand nombre de bits comparé à ce qui est nécessaire pour le simple codage de $-c$.
-Dans le cas des puissances de $2$ négatives, le champs d'exposant devrait être capable de codé des nombres à virgule, cela complexifierait encore un peu plus les formats de nombre du standard IEEE-754.
-Par dessus tout, il serait nécessaire d'effectuer une opération de multiplication entre le champs de mantisse tronquée (significande $S$) et le champs d'exposant (multiplicande $M$) pour calculer la valeur d'un nombre.
-Il n'y a aucun ordinateur qui à ma connaissance soit capable d'effectuer des multiplications sur des opérandes quelconque et en un seul cycle d'horologe, sauf optimisation sur des cas très spécifiques (opérande nul par exemple) et/ou architecture de circuit multiplieur spéciale, comme les multiplieurs séquentiels.
-Par essence, la multiplication est une opération arithmétique complexe à prendre en charge et demande plusieurs cycles d'horloge pour s'exéuter, ceci est exacerbé par le fait que les opérandes comportent des virgules.
+Cependant, la section du nom de "_Un autre regard sur le multiplicande_", explique pourquoi la valeur du significande $S$ n'a pas besoin d'être multiplié par $2^{-c}$ pour être réajusté à la valeur de $\vert \ F \ \vert$.
+Je cite "_Il suffit de décalé la virgule du significande_ $S$ _par le même nombre de rang que ne l'a été celle de_ $\vert \ F \ \vert$ _pour former le significande, mais dans la direction opposé_".
+Je vous redirige vers cette section si vous en avez besoin, aucune explication ne sera faites ici.
+Par conséquent, le champs d'exposant ne code que l'exposant $-c$ de la puissance $2^{-c}$ qu'interprète le multiplicande, d'où l'approximation des propos tenus précédemment.
+
+Il y a de nombreux avantages à ce que le champs d'exposant ne code que l'exposant et non la puissance de $2$ elle même.
+Dans un premier temps, la valeur de l'exposant $-c$ croix de façon linéaire, tandis que la valeur de la puissance $2^{-c}$ qu'interprète le multiplicande croix exponentiellement.
+Cela veut dire que le champs d'exposant devrait être composé de (beaucoup) plus de bits pour codé la puissance $2^{-c}$, que pour codé l'exposant $-c$ lui même.
+En outre, il faudrait que le champs d'exposant code le multiplicande sous la forme d'un nombre à virgule, ceci afin de pouvoir codé les puissances de $2$ négatives.
+Pour finir, le traitement des nombres dans des opérations arithmétique s'en retrouverait probablement impacté négativement si le champs d'exposant codait le multiplicande, l'alignement des virgules entre deux opérandes à soustraire serait plus complexe par exemple.
 
 ### La mantisse tronquée, une histoire de puissance de 2
 
