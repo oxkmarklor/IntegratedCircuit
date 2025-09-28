@@ -1,4 +1,17 @@
-// Maj post démonstration: Le Binary Unsigned -> L'écriture scientifique binaire -> Le standard IEEE-754 -> L'encodage des champs d'un nombre IEEE-754 -> Le codage des champs d'un nombre IEEE-754 -> Ordre de traitement des champs + Les points terminaux et non terminaux
+Bonjour.
+
+Ce document est une preuve mathématique d'un circuit électronique du nom de FPU Configuration Unit.
+J'ai conceptualisé ce circuit dans le but de résoudre un problème concernant le traitement des nombres flottants dans les unités de calculs flottantes (FPUs) d'un ordinateur.
+La micro-architecture du circuit électronique ainsi que les compromis de conceptualisation, le problème que cherche à résoudre le FPU Configuration Unit ou encore la solution qu'il apporte, sont autant de sujets dont je parle dans une documentation dédié au circuit.
+
+Pour les curieux, si vous souhaitez voir à quoi ressemble le circuit, sachez qu'il y a un fichier du nom de _16-bit_FPU_configuration_unit_ qui le schématise.
+Le circuit a été directement schématisé en transistor de technologie CMOS, cela permet de mettre en évidence certains compromis sur le choix des portes logiques.
+Disons que l'apparence abrupte du schéma rend hommage à la (relative) complexité algorithmique du FPU Configuration Unit, cette complexité est plus tangible qu'avec des lignes de code.
+
+Le document va même au delà de la démonstration mathématique du circuit, il explique les sujets fondamentaux sur lequels la démonstration ainsi que le circuit reposent.
+Ce qui explique la préscence de la table des matières suivante:
+
+...
 
 # Les encodages
 
@@ -443,7 +456,9 @@ L'alignement des virgules de deux opérandes à soustraire serait plus complexe 
 
 # L'ordre de traitement des champs d'opérande
 
-// à traiter
+
+
+//
 
 Comme dit plus haut, la tâche primaire du circuit est de comparer deux nombres flottants IEEE-754 (de format ___Half Precision___ qui plus est), que nous nommerons $\alpha$ et $\beta$.
 La comparaison en question est une vérification de la supériorité stricte de la valeur absolu de l'un de ces deux opérandes envers l'autre, admettons $\left(\vert\alpha\vert \gt \vert\beta\vert\right)$.
