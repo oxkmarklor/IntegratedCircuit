@@ -454,17 +454,18 @@ En outre, il faudrait que les puissances de $2$ soient codés sous la forme de n
 Enfin pour finir, le traitement des nombres par les unités de calcul arithmétique (FPUs) serait probablement plus complexe avec un champs d'exposant codant une puissance de $2$.
 L'alignement des virgules de deux opérandes à soustraire serait plus complexe par exemple.
 
-# Les points terminaux et non terminaux
+# Introduction au FPU Configuration Unit
 
-Comme dit en introduction du chapitre "_Le standard IEEE-754_", le circuit électronique à l'étude dans ce document compare deux opérandes $\alpha$ et $\beta$ entre elle, deux opérandes de format Half Precision.
-Le circuit, FPU Configuration Unit de son nom, ne prenant en charge que ce format.
-Ladite comparaison est une vérification de la supériorité stricte de la valeur absolu de l'un de des deux opérandes envers l'autre, admettons $\left(\vert\alpha\vert \gt \vert\beta\vert\right)$.
-Remarquons que le FPU Configuration Unit n'utilise que la valeur absolu de ses opérandes $\alpha$ et $\beta$, ce qui veut dire que le bit de signe des opérandes (le bit de poids $15$) n'est pas transmis au circuit.
-Je vous renvoie vers l'illustration du codage d'un nombre Half Precision faites dans le chapitre "_Le standard IEEE-754_", si nécessaire.
+Comme dit dans le chapitre "_Le standard IEEE-754_", le circuit électronique à l'étude dans ce document compare deux opérandes $\alpha$ et $\beta$ entre elle, deux opérandes de format Half Precision.
+Je vous rappel que le circuit, du nom de FPU Configuration Unit, ne prend en charge que ce format pour des raisons de complexité de schématisation.
 
-Au travers du traitement de ses opérandes, le FPU Configuration Unit peut être mis dans deux états, l'état de _point terminal_ et de _point non terminal_.
-Ces deux états sont générés par le traitement des champs d'exposant $E$ des opérandes $\alpha$ et $\beta$, c'est pourquoi le circuit traite les champs d'exposant avant les champs de mantisse tronquée des opérandes.
-Nous allons voir ci-dessous ce que sont les points terminaux et pourquoi paraissent-ils si important, ainsi que les points non terminaux et ce qu'ils impliquent.
+Ladite comparaison est une vérification de la supériorité stricte de la valeur absolu de l'un des deux opérandes envers la valeur absolu de l'autre.
+Le FPU Configuration Unit n'utilise que la valeur absolu de ses opérandes $\alpha$ et $\beta$, le bit de signe des opérandes (bit de poids $15$) n'est pas transmis au circuit.
+Je vous renvoie vers le chapitre "_Le standard IEEE-754_", si vous souhaitez revoir l'illustration du codage Half Precision d'un nombre.
+
+En bref, le circuit peut être mis dans deux états, l'état de _point terminal_ et de _point non terminal_.
+L'un ou l'autre de ces états est généré par le traitement des champs d'exposant $E$ des opérandes $\alpha$ et $\beta$, c'est pourquoi le circuit traite les champs d'exposant avant les champs de mantisse tronquée des opérandes.
+Voyons ci-dessous ce que sont les points terminaux et non terminaux, ainsi que ce qu'ils impliquent.
 
 ### TBD
 
