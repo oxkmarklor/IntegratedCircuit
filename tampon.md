@@ -464,12 +464,20 @@ Le FPU Configuration Unit n'utilise que la valeur absolu de ses opérandes $\alp
 Je vous renvoie vers le chapitre "_Le standard IEEE-754_", si vous souhaitez revoir l'illustration du codage Half Precision d'un nombre.
 
 En bref, le circuit peut être mis dans deux états, l'état de _point terminal_ et de _point non terminal_.
-L'un ou l'autre de ces états est généré par le traitement des champs d'exposant $E$ des opérandes $\alpha$ et $\beta$, c'est pourquoi le circuit traite les champs d'exposant avant les champs de mantisse tronquée des opérandes.
+L'un ou l'autre de ces états est généré par le traitement des champs d'exposant des opérandes $\alpha$ et $\beta$, c'est pourquoi le circuit traite les champs d'exposant avant les champs de mantisse tronquée des opérandes.
 Voyons ci-dessous ce que sont les points terminaux et non terminaux, ainsi que ce qu'ils impliquent.
 
-### TBD
+### Les points terminaux et non terminaux
 
-Pour finir, je vais enfin pouvoir expliqué pourquoi le circuit électronique traite les champs d'exposant $E$ des opérandes $\alpha$ et $\beta$, avant les champs de mantisse tronquée $T$ de ces même opérandes.
+Cette section explique ce que sont les points terminaux et non terminaux.
+Mais aussi la raison du traitement prioritaire des champs d'exposant $E$ des opérandes $\alpha$ et $\beta$, vis à vis des champs de mantisse tronquée $T$ de ces même opérandes.
+
+Nous avons vu au travers du chapitre "_Le multiplicande_" et des deux sections qui le suivent, que l'écriture du nombre $F$ en notation scientifique binaire ressemblait à $F \ = \pm \left(S \times 2^{-c}\right)$.
+Par conséquent, nous savons désormais que pour n'importe quel format IEEE-754, cela est équivalent à $F \ = \pm$ $\left(\left(1 + T\right) \times \ 2^E\right)$.
+N'oubliez pas que le champs de mantisse tronquée rend implicite le bit à $1$ de la partie entière du significande $S \in \left[1;2\right[$.
+D'où le fait qu'il faille ajouté la valeur de ce bit à celle du champs de mantisse tronquée $T$ pour obtenir la valeur réel qu'interprète le champs.
+
+//
 
 Nous avons vu dans le chapitre "_Le multiplicande_", comment est ce qu'en écriture scientifique binaire nous pouvions obtenir le nombre d'origine $F$ depuis le significande $S$. Précisément au travers du calcul suivant $F \ = \left(S\times 2^{-c}\right)$.
 En tenant compte des correspondances entre les éléments de l'encodage IEEE-754 et de l'écriture scientifique binaire du nombre $F$, nous en déduisons qu'en IEEE-754 $F \ =$ $\left(\left(1 + T\right) \times 2^E\right)$.
