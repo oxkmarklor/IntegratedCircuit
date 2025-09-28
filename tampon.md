@@ -421,8 +421,6 @@ Nous le verrons plus tard, mais c'est cette propriété qui permet à la démons
 
 ### Le codage du champs d'exposant
 
-// à relire
-
 Dans l'introduction, il est dit qu'un nombre $F$ codé au format Half Precision a un champs d'exposant qui correspond au multiplicande de l'écriture scientifique binaire de ce même nombre.
 Il s'agit cependant d'une approximation.
 
@@ -443,41 +441,9 @@ En outre, il faudrait que les puissances de $2$ soient codés sous la forme de n
 Enfin pour finir, le traitement des nombres par les unités de calcul arithmétique (FPUs) serait probablement plus complexe avec un champs d'exposant codant une puissance de $2$.
 L'alignement des virgules de deux opérandes à soustraire serait plus complexe par exemple.
 
-### La mantisse tronquée, une histoire de puissance de 2
-
-Comme nous venons de le voir avec le champs d'exposant, le standard IEEE-754 se base sur des champs aux encodages eux même déjà existant.
-Je rappelle qu'il existe des nombres binaire à virgule fixe et à virgule flottante (ou nombre flottant).
-La seule différence entre les deux est qu'un nombre à virgule flottante peut avoir une quantité variable de bit derrière sa virgule, au contraire d'un nombre à virgule fixe.
-L'encodage du champs de mantisse tronquée tel que défini par le standard IEEE-754, se base sur l'encodage des nombres à virgule flottante.
-Alors faisons un rapide rappel de cet encodage.
-
-La partie entière d'un nombre flottant utilise du _Binary Unsigned_ pour être codé, tandis que la partie fractionnaire fait usage d'une version modifiée du _Binary Unsigned_.
-Chaque bit de la partie fractionnaire est un ___facteur d'une puissance de 2 négative___, et non positive.
-Ceci permet à la partie fractionnaire d'un nombre de représenté des valeurs dans l'intervalle $\left[0;1\right[$.
-Le poids des puissances négatives de $2$ décroix en fonction de la position du bit.
-Prenons l'exemple du nombre $3.875$.
-
-$$3.875 = 11.111_2 = Integer \ Part\left(\left(1 \times 2^1\right) + \left(1 \times 2^0\right)\right) + Fractional \ Part\left(\left(1 \times 2^{-1}\right) + \left(1 \times 2^{-2}\right) + \left(1 \times 2^{-3}\right)\right)$$
-
-Attention car dans les faits, le point dans l'écriture binaire de $3.875$ n'est pas réelement présent dans le codage du nombre, je l'ai rajouté pour simplifier la lecture.
-Mais ce qu'il y a d'important à remarquer pour les bits de la partie fractionnaire d'un nombre à virgule flottante, c'est que la valeur d'un bit à $1$ de poids $i$ est strictement supérieur à la somme des valeurs des bits de poids inférieur à $i$.
-Imaginons que nous ayons nommés $F$ le nombre illustré ci-dessus, alors pour le bit à $1$ de poids $-1$ nous savons que $\left(1 \times 2^{-1}\right) \gt \sum_{i=-2}^{-3} \left(F_i \times 2^i\right)$.
-
-Revenons-en au sujet de la mantisse tronquée désormais.
-Plus bas, nous verrons comment le champs de mantisse tronquée code tout les bits de la partie entière, ainsi que de la partie fractionnaire d'un nombre à virgule flottante (lorsque c'est possible).
-__Vu que la partie entière et fractionnaire d'un nombre à virgule flottante partagent les propriétés du _Binary Unsigned_, c'est aussi le cas de la mantisse tronquée elle même__.
-Pour l'instant, c'est tout ce dont nous avons besoin de savoir.
-
-Nous pouvons remarquer que le champs d'exposant et de mantisse tronquée partagent bel et bien les même propriétés que l'encodage _Binary Unsigned_, comme mentionné plus haut.
-C'est dans la démonstration mathématique que nous verrons à quel point cela va nous être utile.
-
-
-
-
-
-
-
 # L'ordre de traitement des champs d'opérande
+
+// à traiter
 
 Comme dit plus haut, la tâche primaire du circuit est de comparer deux nombres flottants IEEE-754 (de format ___Half Precision___ qui plus est), que nous nommerons $\alpha$ et $\beta$.
 La comparaison en question est une vérification de la supériorité stricte de la valeur absolu de l'un de ces deux opérandes envers l'autre, admettons $\left(\vert\alpha\vert \gt \vert\beta\vert\right)$.
@@ -496,59 +462,6 @@ Il faudra alors traité les champs de mantisse tronquée $T_{\alpha}$ et $T_{\be
 
 __Dans les chapitres suivant, je vais expliqué dans les fondements pourquoi est ce que les champs d'exposant sont traités en priorité par le circuit électronique__.
 Pour cela, il va d'abord me falloir abordé le sujet de l'écriture scientifique binaire, alors commençons.
-
-# Le codage d'un nombre flottant IEEE-754
-
-Nous avons déjà parler de l'encodage IEEE-754 en introduction de ce document, plus particulièrement des trois éléments qui le compose ainsi que de l'encodage propre à ceux-ci.
-Je rappelle que ces trois éléments sont des champs binaire où chacun code respectivement un __bit de signe__, un __exposant__ ainsi qu'une __mantisse tronquée__.
-Par ailleurs, nous venons tout juste de voir dans le détails ce qu'est l'écriture scientifique biniaire d'un nombre, ce qui nous a permis de mettre en lumière ce qu'est un __significande__ (qui peut être appellé __mantisse__), ainsi qu'un __multiplicande__.
-Il y a aussi le __signe__ $\pm$ du nombre représenté en écriture scientifique.
-
-Chaque champs binaire de l'encodage IEEE-754, correspond (plus ou moins) à l'un des éléments de l'écriture scientifique binaire d'un nombre.
-Par exemple, le champs du _bit de signe_ en IEEE-754 correspond assez logiquement au _signe_ de la notation scientifique binaire d'un nombre.
-Nous ne reviendrons pas sur le sujet du bit de signe d'un nombre IEEE-754 car rappelons-le, le circuit électronique ne prend en charge que la valeur absolu (sans bit de signe) de ses opérandes.
-Dans ce qui suit, nous allons parlé plus en profondeur du champs d'exposant ainsi que du champs de mantisse tronquée.
-Nous avons déjà abordé le sujet de l'encodage de ces champs dans l'introduction, aussi je ne vais pas y revenir.
-
-### Composition du champs de mantisse tronquée et du champs d'exposant
-
-En reprenant ce que nous avons dit précédemment, le champs de la mantisse tronquée correspond au significande (mantisse) d'un nombre représenté en écriture scientifique binaire.
-Faisons un rapide rappelle sur ce qu'est un significande.
-Le significande $S$ est un nombre dont la valeur se situe dans l'intervalle $\left[1;2\right[$, il est souvent le résultat d'une transformation (un calcul) sur un nombre codé en virgule flottante $F$.
-Enfaite, si $F \notin \left[1;2\right[$ alors le flottant sera divisé ou multiplié par une puissance de $2$ que nous nommons $N$.
-Ceci nous permet d'obtenir le significande de la notation scientifique binaire de $F$. 
-
-En somme, le significande est un nombre à virgule qui est donc composé d'une partie entière ainsi que d'une partie fractionnaire.
-Vu que la valeur du significande doit être strictement inférieur à $2$ ou $10_2$ en binaire, ça veut dire que la partie entière ne peut être que à $0$ ou $1$.
-Par conséquent la partie entière du significande n'est codé que sur un bit.
-En soit, le bit de la partie entière ne peut pas non plus être à $0$, car il est nécessaire que la valeur du significande soit au moins de $1$.
-__Donc le bit de la partie entière est à 1__.
-En plus de cela, nous avons la partie fractionnaire du significande à prendre en compte (dont la valeur est logiquement strictement inférieur à $1$).
-Finalement, la valeur du significande est la somme de la partie entière et de la partie fractionnaire.
-
-La norme IEEE-754 défini un champs de mantisse tronquée de $x$ bits pour chaque format de nombre flottant. 
-Prenons pour exemple le format ___Half Precision___ que gère la FPU Configuration Unit.
-Il s'avère que le champs de la mantisse tronquée de ce format est établit à une taille de $10$ bits.
-L'entièreté d'un significande $S$ pourrait être enregistré sur ces $10$ bits (si possible), mais ce n'est pas utiles car sa partie entière est toujours composé d'un seul et même bit à $1$, comme nous venons de le voir.
-C'est pourquoi la norme ampute le significande (ou mantisse) de sa partie entière, indépendemment du format de flottant.
-L'intérêt c'est que le champs champs de mantisse tronquée reste de la même taille ($10$ bits pour un _Half Precision_), tout en gagnant un bit de précision sur le codage d'un significande.
-C'est d'ailleurs la raison derrière le nom de ce champs, qui code une mantisse ___tronquée___.
-
-Le standard IEEE-754 défini également un champs d'exposant qui correspond _en partie_ au multiplicande de l'écriture scientifique binaire d'un nombre à virgule flottante $F$.
-Je conseille une relecture du chapitre sur le multiplicande si un rafraichissement est nécessaire.
-De ce chapitre j'en tire la phrase "_Le multiplicande est le facteur_ $2^{-c}$.".
-En réalité le champs d'exposant d'un nombre IEEE-754 ne correspond qu'à l'exposant $-c$ d'un multiplicande, et non à la valeur de la puissance elle même. 
-Un champs d'exposant ne code que la valeur $-c$, car il se base sur ce qui a été dit lors des deux derniers paragraphes du chapitre "_Le multiplicande_", afin de déplacé la virgule du significande du bon nombre de rang, ainsi que dans la bonne direction.
-
-Le standard défini une taille de champs d'exposant propre à chaque format de flottant.
-Dans le cas du format _Half Precision_, la taille du champs d'exposant est de $5$ bits.
-
-
-
-
-
-
-
 
 # Les points terminaux et non terminaux
 
