@@ -461,7 +461,7 @@ Je vous rappel que le circuit, du nom de FPU Configuration Unit, ne prend en cha
 
 Ladite comparaison est une vérification de la supériorité stricte de la valeur absolu de l'un des deux opérandes envers la valeur absolu de l'autre.
 Le FPU Configuration Unit n'utilise que la valeur absolu de ses opérandes $\alpha$ et $\beta$, le bit de signe des opérandes (bit de poids $15$) n'est pas transmis au circuit.
-Je vous renvoie vers le chapitre "_Le standard IEEE-754_", si vous souhaitez revoir l'illustration du codage Half Precision d'un nombre.
+Je vous renvoie vers le chapitre "_Le standard IEEE-754_", si vous souhaitez visualiser l'illustration du codage Half Precision d'un nombre.
 
 En bref, le circuit peut être mis dans deux états, l'état de _point terminal_ et de _point non terminal_.
 L'un ou l'autre de ces états est généré par le traitement des champs d'exposant des opérandes $\alpha$ et $\beta$, c'est pourquoi le circuit traite les champs d'exposant avant les champs de mantisse tronquée des opérandes.
@@ -473,24 +473,23 @@ Cette section explique ce que sont les points terminaux et non terminaux.
 Mais aussi la raison du traitement prioritaire des champs d'exposant $E$ des opérandes $\alpha$ et $\beta$, vis à vis des champs de mantisse tronquée $T$ de ces même opérandes.
 
 Nous avons vu au travers du chapitre "_Le multiplicande_" et des deux sections qui le suivent, que l'écriture du nombre $F$ en notation scientifique binaire ressemblait à $F \ = \pm \left(S \times 2^{-c}\right)$.
-Par conséquent, nous savons désormais que pour n'importe quel format IEEE-754, cela est équivalent à $F \ = \pm$ $\left(\left(1 + T\right) \times \ 2^E\right)$.
-N'oubliez pas que le champs de mantisse tronquée rend implicite le bit à $1$ de la partie entière du significande $S \in \left[1;2\right[$.
-D'où le fait qu'il faille ajouté la valeur de ce bit à celle du champs de mantisse tronquée $T$ pour obtenir la valeur réel qu'interprète le champs.
+En revanche, nous savons que n'importe quel format IEEE-754 représenterait la valeur du nombre $F$ de la manière suivante $F \ =$ $\pm \left(\left(1 + T\right) \times \ 2^E\right)$.
+N'oubliez pas que le champs de mantisse tronquée $T$ rend implicite le bit à $1$ de la partie entière du significande $S$.
+D'où le fait qu'il faille ajouté la valeur de ce bit à celle du champs de mantisse tronquée $T$, afin d'obtenir la valeur réel qu'interprète le champs.
+
+// valeur absolu d'un nombre
+
+Remarquons quelque chose d'intéressant dans l'expression $\left(\left(1 + T\right) \times \ 2^E\right)$.
+Le champs de mantisse tronquée $T$ code inévitablement une valeur inférieur à $1$, donc nous savons avec certitude que $\left(\left(1 + T\right) \times \ 2^E\right)$ est strictement inférieur à $\left(1 \times 2^{E + 1}\right)$.
+Voilà pourquoi les champs d'exposant $E$ sont traités avant les champs de mantisse tronquée $T$.
+
+Rappelons désormais que le circuit doit effectué une vérification de la supériorité stricte de la valeur absolu de l'un de ses deux opérandes, envers la valeur absolu de l'autre.
+Admettons que la condition $\left(\vert \alpha \vert \gt \vert \beta \vert\right)$ soit celle que cherche à vérifier le circuit.
+La comparaison sera réussie du moment où $\left(E_{\alpha} \gt E_{\beta}\right)$ car $\left(\left(1 + T_{\alpha}\right) \times 2^{E_{\alpha}}\right) \gt \left(\left(1 + T_{\beta}\right) \times 2^{E_{\beta}}\right)$, et ce même dans le cas où $T_{\alpha} = 0$ lorsque $T_{\beta} = 0.99$.
+Cependant, la comparaison sera un échec du moment où $\left(E_{\alpha} \lt E_{\beta}\right)$ car $\left(\left(1 + T_{\alpha}\right) \times 2^{E_{\alpha}}\right) \lt \left(\left(1 + T_{\beta}\right)\times 2^{E_{\beta}}\right)$, et ce même dans le cas où $T_{\alpha} = 0.99$ lorsque $T_{\beta} = 0$.
+
 
 //
-
-Nous avons vu dans le chapitre "_Le multiplicande_", comment est ce qu'en écriture scientifique binaire nous pouvions obtenir le nombre d'origine $F$ depuis le significande $S$. Précisément au travers du calcul suivant $F \ = \left(S\times 2^{-c}\right)$.
-En tenant compte des correspondances entre les éléments de l'encodage IEEE-754 et de l'écriture scientifique binaire du nombre $F$, nous en déduisons qu'en IEEE-754 $F \ =$ $\left(\left(1 + T\right) \times 2^E\right)$.
-
-N'oublions pas que si le significande $S$ de la notation scientifique binaire du nombre $F$, est compris dans l'intervalle de valeur suivante $\left[1;2\right[$.
-Ce n'est pas le cas du champs de mantisse tronquée $T$, __car le bit à 1 de sa partie entière est rendu implicite__.
-D'où le fait que pour représenté la valeur réel du champs, il nécessaire d'ajouté ce que vaut la partie entière (c'est à dire $1$) au champs de mantisse tronquée lui même. 
-Ce qui donne $\left(1 + T\right)$.
-
-Au travers du calcul suivant $\left(\left(1 + T\right) \times 2^E\right)$, nous observons quelques chose d'intéressant.
-Par essence $\left(2^i = 2 \times 2^{\left(i-1\right)}\right)$.
-Etant donné que la valeur codé dans le champs de la mantisse tronquée $T$ est strictement inférieur à $1$, alors même pour $T = 0.99..9$ nous obtenons avec $\left(\left(1 + T\right) \times 2^E\right)$ une valeur __strictement inférieur__ à $\left(1 \times 2^{\left(E+1\right)}\right)$.
-Nous voyons ici pourquoi est ce que les champs d'exposant $E$ des opérandes sont traités avant les champs de mantisse tronquée $T$.
 
 Imaginons que pour deux opérandes $\alpha$ et $\beta$, le circuit teste la condition $\left(\vert\alpha\vert \gt \vert\beta\vert\right)$:
   - Si $\left(E_{\alpha} \lt E_{\beta}\right)$ alors nous savons que la comparaison __échoue__ car $\left(\left(1 + T_{\alpha}\right) \times 2^{E_{\alpha}}\right) \lt \left(\left(1 + T_{\beta}\right)\times 2^{E_{\beta}}\right)$ et ce même si $T_{\alpha} = 0.99..9$ lorsque $T_{\beta} = 0$.
