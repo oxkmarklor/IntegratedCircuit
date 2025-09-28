@@ -454,31 +454,19 @@ En outre, il faudrait que les puissances de $2$ soient codés sous la forme de n
 Enfin pour finir, le traitement des nombres par les unités de calcul arithmétique (FPUs) serait probablement plus complexe avec un champs d'exposant codant une puissance de $2$.
 L'alignement des virgules de deux opérandes à soustraire serait plus complexe par exemple.
 
-# L'ordre de traitement des champs d'opérande
-
-
-
-//
-
-Comme dit plus haut, la tâche primaire du circuit est de comparer deux nombres flottants IEEE-754 (de format ___Half Precision___ qui plus est), que nous nommerons $\alpha$ et $\beta$.
-La comparaison en question est une vérification de la supériorité stricte de la valeur absolu de l'un de ces deux opérandes envers l'autre, admettons $\left(\vert\alpha\vert \gt \vert\beta\vert\right)$.
-Etant donné que le circuit n'a besoin que de la valeur absolu des opérandes $\alpha$ et $\beta$, seul les $15$ bits de poids faible des opérandes sont utiles (le bit de signe est omis).
-
-Il se trouve que le circuit traite les champs d'exposants (que nous nommerons) $E$ de $\alpha$ ainsi que de $\beta$, avant les champs de mantisse tronquée (que nous nommerons $T$) de ces même opérandes.
-La raison en est que les champs d'exposant à eux seuls peuvent permettre au circuit d'atteindre un point terminal.
-Le circuit électronique atteint un point terminal lorsqu'il est capable de générer le résultat d'une comparaison entre ses deux opérandes, sans avoir besoin d'attendre le traitement de l'entièreté de ses entrées.
-Techniquement, un point terminal est atteint si $\left(E_{\alpha} \gt E_{\beta}\right)$ car l'opérande $\vert \ \alpha \ \vert$ est strictement plus grand que $\vert \ \beta \ \vert$, et inversement avec $\left(E_{\alpha} \lt E_{\beta}\right)$.
-Nous verrons pourquoi dans le chapitre "_Les points terminaux et non terminaux_".
-
-Cependant, le circuit peut aussi rencontrer un point non terminal.
-Le circuit atteint ce dernier lorsque $\left(E_{\alpha} = E_{\beta}\right)$.
-Comme nous le verrons plus tard, dans cette situation il n'y a rien dans les champs d'exposant des opérandes $\alpha$ et $\beta$ qui puisse permettre au circuit de déduire le résultat à générer.
-Il faudra alors traité les champs de mantisse tronquée $T_{\alpha}$ et $T_{\beta}$, dans un second temps.
-
-__Dans les chapitres suivant, je vais expliqué dans les fondements pourquoi est ce que les champs d'exposant sont traités en priorité par le circuit électronique__.
-Pour cela, il va d'abord me falloir abordé le sujet de l'écriture scientifique binaire, alors commençons.
-
 # Les points terminaux et non terminaux
+
+Comme dit en introduction du chapitre "_Le standard IEEE-754_", le circuit électronique à l'étude dans ce document compare deux opérandes $\alpha$ et $\beta$ entre elle, deux opérandes de format Half Precision.
+Le circuit, FPU Configuration Unit de son nom, ne prenant en charge que ce format.
+Ladite comparaison est une vérification de la supériorité stricte de la valeur absolu de l'un de des deux opérandes envers l'autre, admettons $\left(\vert\alpha\vert \gt \vert\beta\vert\right)$.
+Remarquons que le FPU Configuration Unit n'utilise que la valeur absolu de ses opérandes $\alpha$ et $\beta$, ce qui veut dire que le bit de signe des opérandes (le bit de poids $15$) n'est pas transmis au circuit.
+Je vous renvoie vers l'illustration du codage d'un nombre Half Precision faites dans le chapitre "_Le standard IEEE-754_", si nécessaire.
+
+Au travers du traitement de ses opérandes, le FPU Configuration Unit peut être mis dans deux états, l'état de _point terminal_ et de _point non terminal_.
+Ces deux états sont générés par le traitement des champs d'exposant $E$ des opérandes $\alpha$ et $\beta$, c'est pourquoi le circuit traite les champs d'exposant avant les champs de mantisse tronquée des opérandes.
+Nous allons voir ci-dessous ce que sont les points terminaux et pourquoi paraissent-ils si important, ainsi que les points non terminaux et ce qu'ils impliquent.
+
+### TBD
 
 Pour finir, je vais enfin pouvoir expliqué pourquoi le circuit électronique traite les champs d'exposant $E$ des opérandes $\alpha$ et $\beta$, avant les champs de mantisse tronquée $T$ de ces même opérandes.
 
