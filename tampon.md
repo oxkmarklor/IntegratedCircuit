@@ -469,6 +469,8 @@ Voyons ci-dessous ce que sont entre autre les points terminaux et non terminaux,
 
 ### Les points terminaux et non terminaux
 
+// à relire
+
 Cette section aborde les sujets suivants:
   - Les traitements à effectués sur les champs des opérandes.
   - Les états de points terminaux et non terminaux dans lesquels peut se retrouvé le circuit.
@@ -485,22 +487,20 @@ N'oubliez pas que le champs de mantisse tronquée $T$ rend implicite le bit à $
 D'où le fait qu'il faille ajouté la valeur de ce bit à celle du champs de mantisse tronquée $\left(1 + T\right)$.
 Je vous invite à relire la section "_Le codage du champs de mantisse tronquée_", si nécessaire.
 
-Extrapolons aux opérandes du FPU Configuration Unit ce qu'explique le paragraphe ci-dessus, ce qui donne $\vert \ \alpha \vert = \left(\left(1 + T_{\alpha}\right) \times \ 2^{E_{\alpha}}\right)$ ainsi que $\vert \ \beta \vert = \left(\left(1 + T_{\beta}\right) \times \ 2^{E_{\beta}}\right)$.
-Remarquons que du moment où $\left(E_{\alpha} \neq E_{\beta}\right)$, nous pouvons avoir la certitude que $\left(\vert \alpha \vert \neq \vert \beta \vert\right)$.
-Dans cette situation le circuit atteint soudainement l'état de point terminal, ce qui traduit l'idée qu'il puisse générer le résultat de la condition qu'il teste par le seul traitement des champs d'exposant de ses opérandes.
-Par le fait que les champs de mantisse tronquée $T_{\alpha}$ et $T_{\beta}$ codent une valeur comprise dans l'intervalle $\left[0;1\right[$.
-Nous comprenons pourquoi lorsque $\left(E_{\alpha} \neq E_{\beta}\right)$, alors $\left(\left(1 + T_{\alpha}\right) \times \ 2^{E_{\alpha}}\right) \neq \left(\left(1 + T_{\beta}\right) \times \ 2^{E_{\beta}}\right)$.
+Extrapolons aux opérandes du FPU Configuration Unit ce qu'explique le paragraphe ci-dessus, cela donne $\vert \ \alpha \vert = \left(\left(1 + T_{\alpha}\right) \times \ 2^{E_{\alpha}}\right)$ ainsi que $\vert \ \beta \vert = \left(\left(1 + T_{\beta}\right) \times \ 2^{E_{\beta}}\right)$.
+Remarquons qu'à partir du moment où $\left(E_{\alpha} \neq E_{\beta}\right)$, nous pouvons avoir la certitude que $\left(\vert \alpha \vert \neq \vert \beta \vert\right)$.
+Dans cette situation, le circuit atteint soudainement l'état de point terminal.
+Ce qui traduit l'idée qu'il puisse générer le résultat de la condition qu'il teste, par le seul traitement des champs d'exposant $E$ de ses opérandes.
+Le fait que les champs de mantisse tronquée $T_{\alpha}$ et $T_{\beta}$ codent une valeur comprise dans l'intervalle $\left[0;1\right[$, explique que $\left(\left(1 + T_{\alpha}\right) \times \ 2^{E_{\alpha}}\right) \neq \left(\left(1 + T_{\beta}\right) \times \ 2^{E_{\beta}}\right)$ lorsque $\left(E_{\alpha} \neq E_{\beta}\right)$.
 
 L'intérêt des points terminaux est bien évidemment de permettre au circuit de générer son résultat le plus rapidement possible, en court-circuitant les traitements en cours sur les champs de mantisse tronquée.
 C'est la raison pour laquelle les champs d'exposant des opérandes du circuit sont traités en priorité, avant les champs de mantisse tronquée de ces même opérandes.
 
-// à refaire
-
 Il reste cependant possible que les champs d'exposant des opérandes soient égaux $\left(E_{\alpha} = E_{\beta}\right)$.
-Dans cette situation, il n'y a rien dans les champs d'exposant $E$ des opérandes qui puisse permettre au circuit de déduire de manière anticipée le résultat de la condition qu'il teste.
-Autrement dit, les opérandes du circuit $\left(\left(1 + T_{\alpha}\right) \times \ 2^{E_{\alpha}}\right)$ et $\left(\left(1 + T_{\beta}\right) \times \ 2^{E_{\beta}}\right)$ partagent la même puissance $2$.
-Le circuit passe alors en état de point non terminal, pour qu'il puisse générer un résultat en fonction de la condition qu'il teste, nous remarquons que ce dernier devra considéré le traitement des champs de mantisse tronquée $T_{\alpha}$ ainsi que $T_{\beta}$.
-
+Dans cette situation il n'y a rien dans les champs d'exposant $E$ des opérandes, qui puisse permettre au circuit de déduire de manière anticipée le résultat de la condition qu'il teste.
+Au contraire, le circuit n'est pas dans un état de point terminal mais de point non terminal.
+Du point de vue des mathématiques, les opérandes du circuit $\left(\left(1 + T_{\alpha}\right) \times \ 2^{E_{\alpha}}\right)$ et $\left(\left(1 + T_{\beta}\right) \times \ 2^{E_{\beta}}\right)$ partagent la même puissance $2$.
+Ce qui force le circuit à devoir traité les champs de mantisse tronquée $T_{\alpha}$ ainsi que $T_{\beta}$ pour pouvoir générer un résultat.
 
 ### Les points terminaux et non terminaux
 
