@@ -459,17 +459,15 @@ L'alignement des virgules de deux opérandes à soustraire serait plus complexe 
 Comme dit dans le chapitre "_Le standard IEEE-754_", le circuit électronique à l'étude dans ce document compare deux opérandes $\alpha$ et $\beta$ entre elle, deux opérandes de format Half Precision.
 Je vous rappel que le circuit, du nom de FPU Configuration Unit, ne prend en charge que ce format pour des raisons de complexité de schématisation.
 
-Ladite comparaison est une vérification de la supériorité stricte de la valeur absolu de l'un des deux opérandes envers la valeur absolu de l'autre.
+Ladite comparaison est une vérification de supériorité stricte de la valeur absolu de l'un des deux opérandes envers la valeur absolu de l'autre.
 Le FPU Configuration Unit n'utilise que la valeur absolu de ses opérandes $\vert \ \alpha \ \vert$ et $\vert \ \beta \ \vert$, le bit de signe des opérandes (bit de poids $15$) n'est pas transmis au circuit.
 Je vous renvoie vers le chapitre "_Le standard IEEE-754_", si vous souhaitez visualiser l'illustration du codage Half Precision d'un nombre.
 
 En bref, le circuit peut être mis dans deux états, l'état de _point terminal_ et de _point non terminal_.
 L'un ou l'autre de ces états est généré par le traitement des champs d'exposant des opérandes $\vert \ \alpha \ \vert$ et $\vert \ \beta \ \vert$, c'est pourquoi le circuit traite les champs d'exposant avant les champs de mantisse tronquée des opérandes.
-Voyons ci-dessous ce que sont entre autre les points terminaux et non terminaux, ainsi que ce qu'ils impliquent.
+Voyons ci-dessous ce que sont (entre autre) les points terminaux et non terminaux, ainsi que ce qu'ils impliquent.
 
 ### Les points terminaux et non terminaux
-
-// à relire
 
 Cette section aborde les sujets suivants:
   - Les traitements à effectués sur les champs des opérandes.
@@ -502,33 +500,6 @@ Au contraire, le circuit n'est pas dans un état de point terminal mais de point
 Du point de vue des mathématiques, les opérandes du circuit $\left(\left(1 + T_{\alpha}\right) \times \ 2^{E_{\alpha}}\right)$ et $\left(\left(1 + T_{\beta}\right) \times \ 2^{E_{\beta}}\right)$ partagent la même puissance $2$.
 Ce qui force le circuit à devoir traité les champs de mantisse tronquée $T_{\alpha}$ ainsi que $T_{\beta}$ pour pouvoir générer un résultat.
 
-### Les points terminaux et non terminaux
-
-Cette section explique ce que sont les points terminaux et non terminaux.
-Mais aussi la raison du traitement prioritaire des champs d'exposant $E$ des opérandes $\alpha$ et $\beta$, vis à vis des champs de mantisse tronquée $T$ de ces même opérandes.
-
-Nous avons vu au travers du chapitre "_Le multiplicande_" et des deux sections qui le suivent, que l'écriture du nombre $F$ en notation scientifique binaire ressemblait à $F \ = \pm \left(S \times 2^{-c}\right)$.
-En revanche, nous savons que n'importe quel format IEEE-754 représenterait la valeur du nombre $F$ de la manière suivante $F \ =$ $\pm \left(\left(1 + T\right) \times \ 2^E\right)$.
-N'oubliez pas que le champs de mantisse tronquée $T$ rend implicite le bit à $1$ de la partie entière du significande $S$.
-D'où le fait qu'il faille ajouté la valeur de ce bit à celle du champs de mantisse tronquée $T$, afin d'obtenir la valeur réel qu'interprète le champs.
-
-// valeur absolu d'un nombre
-
-Remarquons quelque chose d'intéressant dans l'expression $\left(\left(1 + T\right) \times \ 2^E\right)$.
-Le champs de mantisse tronquée $T$ code inévitablement une valeur inférieur à $1$, donc nous savons avec certitude que $\left(\left(1 + T\right) \times \ 2^E\right)$ est strictement inférieur à $\left(1 \times 2^{E + 1}\right)$.
-Voilà pourquoi les champs d'exposant $E$ sont traités avant les champs de mantisse tronquée $T$.
-
-Rappelons désormais que le circuit doit effectué une vérification de la supériorité stricte de la valeur absolu de l'un de ses deux opérandes, envers la valeur absolu de l'autre.
-Admettons que la condition $\left(\vert \alpha \vert \gt \vert \beta \vert\right)$ soit celle que cherche à vérifier le circuit.
-La comparaison sera réussie du moment où $\left(E_{\alpha} \gt E_{\beta}\right)$ car $\left(\left(1 + T_{\alpha}\right) \times 2^{E_{\alpha}}\right) \gt \left(\left(1 + T_{\beta}\right) \times 2^{E_{\beta}}\right)$, et ce même dans le cas où $T_{\alpha} = 0$ lorsque $T_{\beta} = 0.99$.
-Cependant, la comparaison sera un échec du moment où $\left(E_{\alpha} \lt E_{\beta}\right)$ car $\left(\left(1 + T_{\alpha}\right) \times 2^{E_{\alpha}}\right) \lt \left(\left(1 + T_{\beta}\right)\times 2^{E_{\beta}}\right)$, et ce même dans le cas où $T_{\alpha} = 0.99$ lorsque $T_{\beta} = 0$.
-
-Dans ces deux situations où $\left(E_{\alpha} \neq E_{\beta}\right)$, le circuit atteint un état de point terminal.
-Un point terminal est un état dans lequel le circuit est en capacité de génerer le résultat d'une comparaison par le seul traitement des champs d'exposant de ses opérandes.
-Cela permet de rendre disponible le résultat le plus rapidement possible, sans avoir à traité les champs de mantisse tronquée.
-
-Néanmoins, que ce passe-t-il lorsque les champs d'exposant $E$ des opérandes $\alpha$ et $\beta$ sont égaux $\left(E_{\alpha} = E_{\beta}\right)$?
-Le FPU Configuration Unit est alors dans un état dit de point non terminal.
-Dans cette situation, les deux opérandes $\alpha$ et $\beta$ ont une valeur respective de $\left(\left(1 + T_{\alpha}\right) \times 2^{E_{\alpha}}\right)$ ainsi que $\left(\left(1 + T_{\beta}\right) \times 2^{E_{\beta}}\right)$.
-Remarquez que dans ces produits les puissances de $2$ sont identiques, ce qui insinue que le circuit n'est pas en mesure de déduire un quelconque résultat par l'unique traitement des champs d'exposant de ses opérandes.
-Dans un second temps, le circuit électronique se repose alors sur les champs $T_{\alpha}$ et $T_{\beta}$ pour pouvoir départagé si $\left(\vert \alpha \vert \gt \vert \beta \vert\right)$ ou non.
+Nous l'aurons compris, le circuit atteint un état de point non terminal lorsque le traitement des champs d'exposant $E_{\alpha}$ et $E_{\beta}$ ne l'amène à un état de point terminal.
+Dans un état de point non terminal, le circuit doit effectuer le traitement des champs de mantisse tronquée $T_{\alpha}$ ainsi que $T_{\beta}$.
+Comme cela a été dit en introduction de cette section, le traitement des champs de mantisse tronquée, à l'instar de celui des champs d'exposant, consiste en une vérification de supériorité stricte entre la valeur des champs.
