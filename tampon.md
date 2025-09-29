@@ -460,12 +460,34 @@ Comme dit dans le chapitre "_Le standard IEEE-754_", le circuit électronique à
 Je vous rappel que le circuit, du nom de FPU Configuration Unit, ne prend en charge que ce format pour des raisons de complexité de schématisation.
 
 Ladite comparaison est une vérification de la supériorité stricte de la valeur absolu de l'un des deux opérandes envers la valeur absolu de l'autre.
-Le FPU Configuration Unit n'utilise que la valeur absolu de ses opérandes $\alpha$ et $\beta$, le bit de signe des opérandes (bit de poids $15$) n'est pas transmis au circuit.
+Le FPU Configuration Unit n'utilise que la valeur absolu de ses opérandes $\vert \ \alpha \ \vert$ et $\vert \ \beta \ \vert$, le bit de signe des opérandes (bit de poids $15$) n'est pas transmis au circuit.
 Je vous renvoie vers le chapitre "_Le standard IEEE-754_", si vous souhaitez visualiser l'illustration du codage Half Precision d'un nombre.
 
 En bref, le circuit peut être mis dans deux états, l'état de _point terminal_ et de _point non terminal_.
-L'un ou l'autre de ces états est généré par le traitement des champs d'exposant des opérandes $\alpha$ et $\beta$, c'est pourquoi le circuit traite les champs d'exposant avant les champs de mantisse tronquée des opérandes.
-Voyons ci-dessous ce que sont les points terminaux et non terminaux, ainsi que ce qu'ils impliquent.
+L'un ou l'autre de ces états est généré par le traitement des champs d'exposant des opérandes $\vert \ \alpha \ \vert$ et $\vert \ \beta \ \vert$, c'est pourquoi le circuit traite les champs d'exposant avant les champs de mantisse tronquée des opérandes.
+Voyons ci-dessous ce que sont entre autre les points terminaux et non terminaux, ainsi que ce qu'ils impliquent.
+
+### Les points terminaux et non terminaux
+
+Cette section aborde les sujets suivants:
+  - Les traitements à effectués sur les champs des opérandes.
+  - Ce que sont les états de points terminaux et non terminaux dans lesquels peut se retrouvé le circuit.
+  - Les raisons du traitement prioritaire des champs d'exposant vis à vis des champs de mantisse tronquée.
+
+Nous savons que le FPU Configuration Unit effectue une vérification de superiorité stricte entre ses deux opérandes $\vert \ \alpha \ \vert$ et $\vert \ \beta \ \vert$.
+Cependant, le tout est de savoir comment est ce que cette comparaison peut réelement avoir lieu, sachant que les opérandes sont composés de multiples champs.
+La réponse est simple, il suffit d'effectuer une vérification de supériorité stricte entre les champs d'exposants $E$ des opérandes $\vert \ \alpha \ \vert$ et $\vert \ \beta \ \vert$, ainsi que reproduire la même chose entre les champs de mantisse tronquée $T_{\alpha}$ et $T_{\beta}$.
+Voyons ce qu'il en est dans la pratique.
+
+// transition ??
+
+Dans le chapitre "_le multiplicande_" ainsi que dans les deux sections qui le suivent, nous avons vus que l'écriture de la valeur absolu d'un nombre $F$ à représenté en notation scientifique binaire était $\vert \ F \vert = \left(S \times 2^{-c}\right)$.
+Suite au chapitre et section en lien avec le standard IEEE-754, nous en déduisons que n'importe quel format défini par la norme représenterait ce même nombre de la façon suivante $\vert \ F \vert = \left(\left(1 + T\right) \times \ 2^E\right)$.
+N'oubliez pas que le champs de mantisse tronquée $T$ rend implicite le bit à $1$ de la partie entière du significande $S$.
+D'où le fait qu'il faille ajouté la valeur de ce bit à celle du champs de mantisse tronquée $T$, afin d'obtenir la valeur réel qu'interprète le champs $\left(1 + T\right)$.
+
+
+
 
 ### Les points terminaux et non terminaux
 
