@@ -476,9 +476,10 @@ Cette section aborde les sujets suivants:
 
 Nous savons que le FPU Configuration Unit effectue une vérification de supériorité stricte de la valeur absolu de l'un de ses deux opérandes, envers la valeur absolu de l'autre.
 Cependant, le tout est de savoir comment est ce que cette comparaison peut réelement avoir lieu, sachant que les opérandes du circuit sont composés de multiples champs.
-La réponse est simple, il suffit d'effectuer une vérification de supériorité stricte entre les champs d'exposant $E$ des opérandes $\vert \ \alpha \ \vert$ et $\vert \ \beta \ \vert$, ainsi que reproduire la même chose entre les champs de mantisse tronquée $T_{\alpha}$ et $T_{\beta}$.
+La réponse est simple, il suffit d'effectuer une vérification de supériorité stricte entre les champs d'exposant $E$ des opérandes $\vert \ \alpha \ \vert$ et $\vert \ \beta \ \vert$, et de faire de même entre les champs de mantisse tronquée $T_{\alpha}$ et $T_{\beta}$.
+Nous verrons ci-bas comment cela se traduit.
 
-Au travers du chapitre "_le multiplicande_" ainsi que dans les deux sections qui le suivent, nous avons vus que l'écriture de la valeur absolu d'un nombre $F$ à représenté en notation scientifique binaire était $\vert \ F \vert = \left(S \times 2^{-c}\right)$.
+Au travers du chapitre "_le multiplicande_" ainsi que dans les deux sections qui le suivent, nous avons vus que la représentation en écriture scientifique binaire du nombre $F$ en valeur absolu était $\vert \ F \vert = \left(S \times 2^{-c}\right)$.
 Suite au chapitre "_Le standard IEEE-754_" et aux sections suivante, nous en déduisons que n'importe quel format défini par la norme représenterait la valeur absolu de ce même nombre de la façon suivante $\vert \ F \vert = \left(\left(1 + T\right) \times \ 2^E\right)$.
 N'oubliez pas que le champs de mantisse tronquée $T$ rend implicite le bit à $1$ de la partie entière du significande $S$.
 D'où le fait qu'il faille ajouté la valeur de ce bit à celle du champs de mantisse tronquée $\left(1 + T\right)$.
@@ -488,9 +489,17 @@ Extrapolons aux opérandes du FPU Configuration Unit ce qu'explique le paragraph
 Remarquons que du moment où $\left(E_{\alpha} \neq E_{\beta}\right)$, nous pouvons avoir la certitude que $\left(\vert \alpha \vert \neq \vert \beta \vert\right)$.
 Dans cette situation le circuit atteint soudainement l'état de point terminal, ce qui traduit l'idée qu'il puisse générer le résultat de la condition qu'il teste par le seul traitement des champs d'exposant de ses opérandes.
 Par le fait que les champs de mantisse tronquée $T_{\alpha}$ et $T_{\beta}$ codent une valeur comprise dans l'intervalle $\left[0;1\right[$.
-Nous comprenons que du moment où $\left(E_{\alpha} \neq E_{\beta}\right)$, alors $\left(\left(1 + T_{\alpha}\right) \times \ 2^{E_{\alpha}}\right) \neq \left(\left(1 + T_{\beta}\right) \times \ 2^{E_{\beta}}\right)$.
+Nous comprenons pourquoi lorsque $\left(E_{\alpha} \neq E_{\beta}\right)$, alors $\left(\left(1 + T_{\alpha}\right) \times \ 2^{E_{\alpha}}\right) \neq \left(\left(1 + T_{\beta}\right) \times \ 2^{E_{\beta}}\right)$.
 
+L'intérêt des points terminaux est bien évidemment de permettre au circuit de générer son résultat le plus rapidement possible, en court-circuitant les traitements en cours sur les champs de mantisse tronquée.
+C'est la raison pour laquelle les champs d'exposant des opérandes du circuit sont traités en priorité, avant les champs de mantisse tronquée de ces même opérandes.
 
+// à refaire
+
+Il reste cependant possible que les champs d'exposant des opérandes soient égaux $\left(E_{\alpha} = E_{\beta}\right)$.
+Dans cette situation, il n'y a rien dans les champs d'exposant $E$ des opérandes qui puisse permettre au circuit de déduire de manière anticipée le résultat de la condition qu'il teste.
+Autrement dit, les opérandes du circuit $\left(\left(1 + T_{\alpha}\right) \times \ 2^{E_{\alpha}}\right)$ et $\left(\left(1 + T_{\beta}\right) \times \ 2^{E_{\beta}}\right)$ partagent la même puissance $2$.
+Le circuit passe alors en état de point non terminal, pour qu'il puisse générer un résultat en fonction de la condition qu'il teste, nous remarquons que ce dernier devra considéré le traitement des champs de mantisse tronquée $T_{\alpha}$ ainsi que $T_{\beta}$.
 
 
 ### Les points terminaux et non terminaux
