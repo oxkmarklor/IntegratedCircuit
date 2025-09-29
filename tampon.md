@@ -488,24 +488,12 @@ Admettons que la condition $\left(\vert \alpha \vert \gt \vert \beta \vert\right
 La comparaison sera réussie du moment où $\left(E_{\alpha} \gt E_{\beta}\right)$ car $\left(\left(1 + T_{\alpha}\right) \times 2^{E_{\alpha}}\right) \gt \left(\left(1 + T_{\beta}\right) \times 2^{E_{\beta}}\right)$, et ce même dans le cas où $T_{\alpha} = 0$ lorsque $T_{\beta} = 0.99$.
 Cependant, la comparaison sera un échec du moment où $\left(E_{\alpha} \lt E_{\beta}\right)$ car $\left(\left(1 + T_{\alpha}\right) \times 2^{E_{\alpha}}\right) \lt \left(\left(1 + T_{\beta}\right)\times 2^{E_{\beta}}\right)$, et ce même dans le cas où $T_{\alpha} = 0.99$ lorsque $T_{\beta} = 0$.
 
+Dans ces deux situations où $\left(E_{\alpha} \neq E_{\beta}\right)$, le circuit atteint un état de point terminal.
+Un point terminal est un état dans lequel le circuit est en capacité de génerer le résultat d'une comparaison par le seul traitement des champs d'exposant de ses opérandes.
+Cela permet de rendre disponible le résultat le plus rapidement possible, sans avoir à traité les champs de mantisse tronquée.
 
-//
-
-Imaginons que pour deux opérandes $\alpha$ et $\beta$, le circuit teste la condition $\left(\vert\alpha\vert \gt \vert\beta\vert\right)$:
-  - Si $\left(E_{\alpha} \lt E_{\beta}\right)$ alors nous savons que la comparaison __échoue__ car $\left(\left(1 + T_{\alpha}\right) \times 2^{E_{\alpha}}\right) \lt \left(\left(1 + T_{\beta}\right)\times 2^{E_{\beta}}\right)$ et ce même si $T_{\alpha} = 0.99..9$ lorsque $T_{\beta} = 0$.
-
-  - Si $\left(E_{\alpha} \gt E_{\beta}\right)$ alors la comparaison __réussie__ cette fois-ci, car $\left(\left(1 + T_{\alpha}\right) \times 2^{E_{\alpha}}\right) \gt \left(\left(1 + T_{\beta}\right) \times 2^{E_{\beta}}\right)$ et ce même si $T_{\alpha} = 0$ lorsque $T_{\beta} = 0.99..9$.
-
-Dans les deux cas qui figurent ci-dessus, __le circuit atteint un point terminal__.
-C'est à dire qu'il est capable de générer le résultat d'une comparaison par le seul traitement des champs d'exposant de ses opérandes, il court-circuite le reste des calculs sur les champs de mantisse tronquée afin de rendre disponible le résultat le plus rapidement possible.
-En bref, un point terminal sera atteint lorsque $\left(E_{\alpha} \neq E_{\beta}\right)$.
-
-Mais il existe une autre possibilité à laquelle le circuit peut être confronté, celle dans laquelle les champs d'exposant de ses opérandes $\alpha$ et $\beta$ sont égaux $\left(E_{\alpha} = E_{\beta}\right)$.
-A ce moment là, le circuit atteint alors un __point non terminal__.
-Dans ce cas spécifique, les produits $\left(\left(1 + T_{\alpha}\right) \times 2^{E_{\alpha}}\right)$ ainsi que $\left(\left(1 + T_{\beta}\right) \times 2^{E_{\beta}}\right)$ ont la même puissance de $2$ en commun.
-Par conséquent, le circuit électronique se repose sur les champs $T_{\alpha}$ et $T_{\beta}$ pour pouvoir départagé si $\left(\vert\alpha\vert \gt \vert\beta\vert\right)$ ou non.
-
-Nous comprenons désormais pourquoi est ce que le circuit traite les champs d'exposant $E$ de ses opérandes $\alpha$ et $\beta$, avant les champs de mantisse tronquée $T_{\alpha}$ ainsi que $T_{\beta}$.
-Le résultat d'une comparaison peut être généré rapidement en cas de _point terminal_ occasionner par une non égalité entre les champs d'exposant $E$ des opérandes du circuit.
-En cas de dernier recours si $E_{\alpha}$ et $E_{\beta}$ sont égaux, le circuit ira jusqu'à comparer les champs de mantisse tronquée $T_{\alpha}$ et $T_{\beta}$ pour générer un résultat.
-Ce qui est plus long.
+Néanmoins, que ce passe-t-il lorsque les champs d'exposant $E$ des opérandes $\alpha$ et $\beta$ sont égaux $\left(E_{\alpha} = E_{\beta}\right)$?
+Le FPU Configuration Unit est alors dans un état dit de point non terminal.
+Dans cette situation, les deux opérandes $\alpha$ et $\beta$ ont une valeur respective de $\left(\left(1 + T_{\alpha}\right) \times 2^{E_{\alpha}}\right)$ ainsi que $\left(\left(1 + T_{\beta}\right) \times 2^{E_{\beta}}\right)$.
+Remarquez que dans ces produits les puissances de $2$ sont identiques, ce qui insinue que le circuit n'est pas en mesure de déduire un quelconque résultat par l'unique traitement des champs d'exposant de ses opérandes.
+Dans un second temps, le circuit électronique se repose alors sur les champs $T_{\alpha}$ et $T_{\beta}$ pour pouvoir départagé si $\left(\vert \alpha \vert \gt \vert \beta \vert\right)$ ou non.
