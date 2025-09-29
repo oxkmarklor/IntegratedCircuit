@@ -472,27 +472,25 @@ Voyons ci-dessous ce que sont entre autre les points terminaux et non terminaux,
 Cette section aborde les sujets suivants:
   - Les traitements à effectués sur les champs des opérandes.
   - Les états de points terminaux et non terminaux dans lesquels peut se retrouvé le circuit.
-  - Les raisons du traitement prioritaire des champs d'exposant vis à vis des champs de mantisse tronquée.
+  - La raison du traitement prioritaire des champs d'exposant vis à vis des champs de mantisse tronquée.
 
-Nous savons que le FPU Configuration Unit effectue une vérification de superiorité stricte entre ses deux opérandes $\vert \ \alpha \ \vert$ et $\vert \ \beta \ \vert$.
-Cependant, le tout est de savoir comment est ce que cette comparaison peut réelement avoir lieu, sachant que les opérandes sont composés de multiples champs.
+Nous savons que le FPU Configuration Unit effectue une vérification de supériorité stricte de la valeur absolu de l'un de ses deux opérandes, envers la valeur absolu de l'autre.
+Cependant, le tout est de savoir comment est ce que cette comparaison peut réelement avoir lieu, sachant que les opérandes du circuit sont composés de multiples champs.
 La réponse est simple, il suffit d'effectuer une vérification de supériorité stricte entre les champs d'exposant $E$ des opérandes $\vert \ \alpha \ \vert$ et $\vert \ \beta \ \vert$, ainsi que reproduire la même chose entre les champs de mantisse tronquée $T_{\alpha}$ et $T_{\beta}$.
-Voyons ce qu'il en est dans la pratique.
 
-Au travers du chapitre "_le multiplicande_" ainsi que des deux sections qui le suivent, nous avons vus que l'écriture de la valeur absolu d'un nombre $F$ à représenté en notation scientifique binaire était $\vert \ F \vert = \left(S \times 2^{-c}\right)$.
-Suite au chapitre et section en lien avec le standard IEEE-754, nous en déduisons que n'importe quel format défini par la norme représenterait ce même nombre de la façon suivante $\vert \ F \vert = \left(\left(1 + T\right) \times \ 2^E\right)$.
+Au travers du chapitre "_le multiplicande_" ainsi que dans les deux sections qui le suivent, nous avons vus que l'écriture de la valeur absolu d'un nombre $F$ à représenté en notation scientifique binaire était $\vert \ F \vert = \left(S \times 2^{-c}\right)$.
+Suite au chapitre "_Le standard IEEE-754_" et aux sections suivante, nous en déduisons que n'importe quel format défini par la norme représenterait la valeur absolu de ce même nombre de la façon suivante $\vert \ F \vert = \left(\left(1 + T\right) \times \ 2^E\right)$.
 N'oubliez pas que le champs de mantisse tronquée $T$ rend implicite le bit à $1$ de la partie entière du significande $S$.
-D'où le fait qu'il faille ajouté la valeur de ce bit à celle du champs de mantisse tronquée $T$, afin d'obtenir la valeur réel qu'interprète le champs $\left(1 + T\right)$.
+D'où le fait qu'il faille ajouté la valeur de ce bit à celle du champs de mantisse tronquée $\left(1 + T\right)$.
+Je vous invite à relire la section "_Le codage du champs de mantisse tronquée_", si nécessaire.
 
-Extrapolons ceci aux opérandes du FPU Configuration Unit $\vert \ \alpha \vert \ =$ $\left(\left(1 + T_{\alpha}\right) \times \ 2^{E_{\alpha}}\right)$ et $\vert \ \beta \vert \ =$ $\left(\left(1 + T_{\beta}\right) \times \ 2^{E_{\beta}}\right)$.
-Remarquons que du moment où $\left(E_{\alpha} \neq E_{\beta}\right)$, le circuit peut avoir la certitude que $\left(\vert \alpha \vert \neq \vert \beta \vert\right)$.
-Dans cette situation le circuit atteint soudainement l'état de point terminal, ce qui traduit l'idée qu'il puisse générer le résultat de la condition qu'il vérifie par le seul traitement des champs d'exposant de ses opérandes.
-Effectivement, nous savons que les champs de mantisse tronquée $T$ interprètent une valeur comprise dans l'intervalle $\left[0;1\right[$.
-Il est donc simple d'en déduire que si $\left(E_{\alpha} \neq E_{\beta}\right)$ alors $\left(\left(1 + T_{\alpha}\right) \times \ 2^{E_{\alpha}}\right) \neq \left(\left(1 + T_{\beta}\right) \times \ 2^{E_{\beta}}\right)$.
+Extrapolons aux opérandes du FPU Configuration Unit ce qu'explique le paragraphe ci-dessus, ce qui donne $\vert \ \alpha \vert = \left(\left(1 + T_{\alpha}\right) \times \ 2^{E_{\alpha}}\right)$ ainsi que $\vert \ \beta \vert = \left(\left(1 + T_{\beta}\right) \times \ 2^{E_{\beta}}\right)$.
+Remarquons que du moment où $\left(E_{\alpha} \neq E_{\beta}\right)$, nous pouvons avoir la certitude que $\left(\vert \alpha \vert \neq \vert \beta \vert\right)$.
+Dans cette situation le circuit atteint soudainement l'état de point terminal, ce qui traduit l'idée qu'il puisse générer le résultat de la condition qu'il teste par le seul traitement des champs d'exposant de ses opérandes.
+Par le fait que les champs de mantisse tronquée $T_{\alpha}$ et $T_{\beta}$ codent une valeur comprise dans l'intervalle $\left[0;1\right[$.
+Nous comprenons que du moment où $\left(E_{\alpha} \neq E_{\beta}\right)$, alors $\left(\left(1 + T_{\alpha}\right) \times \ 2^{E_{\alpha}}\right) \neq \left(\left(1 + T_{\beta}\right) \times \ 2^{E_{\beta}}\right)$.
 
 
-
-$\left(\left(1 + T\right) \times \ 2^E\right)$ est quoi qu'il arrive strictement inférieur à $\left(\left(1 + 0\right) \times \ 2^{\left(E + 1\right)}\right)$.
 
 
 ### Les points terminaux et non terminaux
