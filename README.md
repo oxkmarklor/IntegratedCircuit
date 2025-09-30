@@ -563,21 +563,21 @@ $$Nimply \ \left(x, \ y\right) \rightarrow \ x \ \wedge \ \overline{y}$$
 
 # Le traitement des champs d'exposant
 
-Comme cela a été respectivement dit par le chapitre "_Introduction au FPU Configuration Unit_", puis expliquer par la section "_Les points terminaux et non terminaux_".
+Comme cela a été dit par le chapitre "_Introduction au FPU Configuration Unit_", puis expliquer par la section "_Les points terminaux et non terminaux_".
 Les champs d'exposant des opérandes du circuit sont traités avant les champs de mantisse tronquée de ces même opérandes.
-Je vous invite à relire ces paragraphes si nécessaire.
+Je vous invite à relire ces chapitres si nécessaire.
 
-Rappelons que le circuit effectue une vérification de supériorité stricte entre les champs d'exposant $E$ de ses opérandes.
-Ce qui dans le cas de la condition que test le circuit $\left(\vert \alpha \vert \gt \vert \beta \vert\right)$, nécessite de vérifier si $\left(E_{\alpha} \gt E_{\beta}\right)$.
+Rappelons que le circuit effectue une comparaison de supériorité stricte entre les champs d'exposant $E$ de ses opérandes.
+Ce qui dans le cas de la condition $\left(\vert \alpha \vert \gt \vert \beta \vert\right)$, nécessite de vérifier si $\left(E_{\alpha} \gt E_{\beta}\right)$.
 Voici la première phase du traitement des champs d'exposant.
 
 $$\forall \ i \in \left[10;14\right], \quad Write \ \left(\tau_i, \ Nimply \ \left(E_{\beta i}, \ E_{\alpha i}\right)\right)$$
 
-// ajouter des détails?
-
-Nous effectuons l'opération logique $Nimply$ sur l'ensemble des bits de poids $i$ des champs d'exposant des opérandes du circuit.
-La variable $\tau$ (tau) est un champs binaire de $15$ bits, dont les poids s'étendent de $0$ à $14$.
+Nous effectuons l'opération logique $Nimply$ sur l'ensemble des bits de poids $i$ des champs d'exposant $E$.
+La variable $\tau$ (tau) est un champs binaire de $15$ bits, dont les poids vont de $0$ à $14$.
 Chaque bit de résultat d'une opération $Nimply$ sur $E_{\beta i}$ et $E_{\alpha i}$ pour $i \in \left[10;14\right]$, est inscrit dans $\tau_i$.
+
+
 
 ### L'opération logique Nimply
 
@@ -586,7 +586,7 @@ Selon cette définition, nous observons que le bit de résultat d'une telle opé
 Pour tout les autres cas, si $\left(x = y\right)$ ou $\left(x \lt y\right)$ alors le bit de résultat sera $0$.
 Dans la documentation du circuit électronique, nous définissons le terme de "___zéro anonyme___" pour désigné tout bit de résultat à $0$, provenant d'une opération logique $Nimply$.
 
-### Qu'est ce qu'un zéro anonyme?
+### Qu'est ce qu'un zéro anonyme? // merge
 
 Nous venons de voir à quoi correspond le terme de "_zéro anonyme_".
 Cependant, nous ne connaissons pas la raison derrière un nom aussi bizarre.
