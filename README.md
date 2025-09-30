@@ -563,12 +563,21 @@ $$Nimply \ \left(x, \ y\right) \rightarrow \ x \ \wedge \ \overline{y}$$
 
 # Le traitement des champs d'exposant
 
+Comme cela a été respectivement dit par le chapitre "_Introduction au FPU Configuration Unit_", puis expliquer par la section "_Les points terminaux et non terminaux_".
+Les champs d'exposant des opérandes du circuit sont traités avant les champs de mantisse tronquée de ces même opérandes.
+Je vous invite à relire ces paragraphes si nécessaire.
+
+Rappelons que le circuit effectue une vérification de supériorité stricte entre les champs d'exposant $E$ de ses opérandes.
+Ce qui dans le cas de la condition que test le circuit $\left(\vert \alpha \vert \gt \vert \beta \vert\right)$, nécessite de vérifier si $\left(E_{\alpha} \gt E_{\beta}\right)$.
+Voici la première phase du traitement des champs d'exposant.
+
 $$\forall \ i \in \left[10;14\right], \quad Write \ \left(\tau_i, \ Nimply \ \left(E_{\beta i}, \ E_{\alpha i}\right)\right)$$
 
-Nous effectuons l'opération logique $Nimply$ sur tout les bits de poids $i$ des champs d'exposant $E$ des opérandes $\alpha$ et $\beta$.
-La variable $\tau$ (tau) est un champs binaire de $15$ bits, dont les poids vont de $0$ à $14$.
+// ajouter des détails?
+
+Nous effectuons l'opération logique $Nimply$ sur l'ensemble des bits de poids $i$ des champs d'exposant des opérandes du circuit.
+La variable $\tau$ (tau) est un champs binaire de $15$ bits, dont les poids s'étendent de $0$ à $14$.
 Chaque bit de résultat d'une opération $Nimply$ sur $E_{\beta i}$ et $E_{\alpha i}$ pour $i \in \left[10;14\right]$, est inscrit dans $\tau_i$.
-Ce qui veut dire que $\tau \in \left[10;14\right]$ correspond aux bits de résultat des opérations $Nimply$ sur $E_{\beta i}$ et $E_{\alpha i}$.
 
 ### L'opération logique Nimply
 
