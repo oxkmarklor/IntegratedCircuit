@@ -10,6 +10,28 @@ Disons que l'apparence abrupte du schéma rend hommage à la (relative) complexi
 
 Le document va même au delà de la démonstration mathématique du circuit, il explique les sujets fondamentaux sur lequels la démonstration ainsi que le circuit reposent.
 Ce qui explique la préscence de la table des matières suivante:
+  - Les encodages
+    - L'encodage Binary Unsigned
+      - Une propriété du Binary Unsigned qui est fondamentale à la démonstration
+    - Les nombres à virgule flottante
+      - L'étymologie du terme de nombre à virgule flottante
+  - L'écriture scientifique binaire
+    - Le significande
+      - La transformation d'un nombre à virgule flottante en un significande
+      - Détail sur le fonctionnement de l'équation
+    - Le multiplicande
+      - Lorsque le multiplicande multiplie la valeur du significande
+      - Lorsque le multiplicande divise la valeur du significande
+      - Un autre regard sur le multiplicande
+  - Le standard IEEE-754
+    - Le champs de mantisse tronquée
+      - L'encodage du champs de mantisse tronquée
+      - Le codage du champs de mantisse tronquée
+    - Le champs d'exposant
+      - L'encodage par biais du champs d'exposant
+      - Le codage du champs d'exposant
+  - Introduction au FPU Configuration Unit
+    - Les points terminaux et non terminaux
 
 ...
 
@@ -467,7 +489,7 @@ En bref, le circuit peut être mis dans deux états, l'état de _point terminal_
 L'un ou l'autre de ces états est généré par le traitement des champs d'exposant des opérandes $\vert \ \alpha \ \vert$ et $\vert \ \beta \ \vert$, c'est pourquoi le circuit traite les champs d'exposant avant les champs de mantisse tronquée des opérandes.
 Voyons ci-dessous ce que sont (entre autre) les points terminaux et non terminaux, ainsi que ce qu'ils impliquent.
 
-### Les points terminaux et non terminaux
+## Les points terminaux et non terminaux
 
 Cette section aborde les sujets suivants:
   - Les traitements à effectués sur les champs des opérandes.
