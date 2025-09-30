@@ -531,14 +531,14 @@ Comme cela a été dit en introduction de cette section, le traitement des champ
 Nous pouvons désormais plongé dans le coeur de ce document, la démonstration mathématique du circuit.
 Il y a une documentation dédié au circuit pour comprendre son utilité ainsi que son architecture, si vous souhaitez plus d'information concrète sur ce dernier je vous conseille de la lire.
 
-Je rappelle que le circuit se nomme __FPU Configuration Unit__.
-En bref, il génère deux bits de sortie.
-L'un pour configuré un circuit soustracteur de nombre flottant, et l'autre pour la sortie même de cette unité de calcul.
-A cette fin, le circuit reçoit deux opérandes IEEE-754 en valeur absolu (au format _Half Precision_ dans le cas du circuit schématisé), que nous nommerons $\alpha$ et $\beta$.
-Pour le circuit, la génération de ses deux bits de sortie passe par une comparaison entre les deux opérandes $\alpha$ et $\beta$.
-La démonstration mathématique ne va abordé que la logique de comparaison du circuit, ce qui représente la plus grosse partie de la logique du circuit tout de même.
-Pour expliqué le reste de la logique, il faudrait en dire plus sur le circuit, ce qui est le cas de la documentation vers laquelle je vous renvoie une nouvelle fois.
-__En outre, tout ce qui va suivre de la démonstration se base sur la verification de la condition suivante__ $\left(\vert\alpha\vert \gt \vert\beta\vert\right)$.
+En bref, le circuit génère deux bits de sortie, l'un pour configuré un circuit soustracteur de nombre flottant et l'autre pour la sortie même de cette unité de calcul.
+Le FPU Configuration Unit (le circuit) reçoit en entrée deux opérandes Half Precision en valeur absolu, que nous nommerons $\vert \ \alpha \ \vert$ et $\vert \ \beta \ \vert$.
+La génération des deux bits de sortie du circuit passe par une vérification de supériorité stricte de la valeur absolu de l'un de ses deux opérandes, envers la valeur absolu de l'autre.
+Cette démonstration mathématique n'aborde que la partie de la logique de comparaison du circuit, ce qui représente tout de même la majeur partie de la logique du FPU Configuration Unit.
+Le reste de la logique manquante ne peut pas être expliqué sans l'apport de beaucoup de nouvelle notion.
+Je vous renvoie vers la documentation dédié au circuit si vous voulez en savoir plus sur cette partie de la logique manquante.
+
+__Tout ce qui va suivre de la démonstration, part du principe que le FPU Configuration Unit cherche à verifié la condition__ $\left(\vert \alpha \vert \gt \vert \beta \vert\right)$.
 
 ### Définition de quelques opérations fondamentales à la démonstration 
 
