@@ -574,10 +574,19 @@ Voici la première phase du traitement des champs d'exposant.
 $$\forall \ i \in \left[10;14\right], \quad Write \ \left(\tau_i, \ Nimply \ \left(E_{\beta i}, \ E_{\alpha i}\right)\right)$$
 
 Nous effectuons l'opération logique $Nimply$ sur l'ensemble des bits de poids $i$ des champs d'exposant $E$.
-La variable $\tau$ (tau) est un champs binaire de $15$ bits, dont les poids vont de $0$ à $14$.
+La variable $\tau$ (tau) représente un champs binaire de $15$ bits, dont les poids vont de $0$ à $14$.
 Chaque bit de résultat d'une opération $Nimply$ sur $E_{\beta i}$ et $E_{\alpha i}$ pour $i \in \left[10;14\right]$, est inscrit dans $\tau_i$.
 
+// à relire
 
+Avec ce que nous avons vu de l'opération logique $Nimply$ dans la section précédente, nous comprenons que du moment où $\left(\tau_i = 1\right)$ il est certain que $\left(E_{\beta i} = 1\right)$ tandis que $\left(E_{\alpha i} = 0\right)$, ou autrement dit $\left(E_{\beta i} \times 2^i\right) \gt \left(E_{\alpha i} \times 2^i\right)$.
+Mais ce n'est pas tout, rappelez vous de la section "_L'encodage par biais du champs d'exposant_".
+Cette section explique entre autre que, je cite "_la valeur de n'importe quel bit à_ $1$ _de poids_ $i$ _dans un champs d'exposant, est strictement supérieur à la somme des valeurs des bits de poids inférieur à_ $i$".
+Par conséquent, cela traduit l'idée que du moment où $\left(\tau_i = 1\right)$ pour tout $i \in \left[11;14\right]$, nous pouvons être sûrs que $\left(E_{\beta i} \times 2^i\right) \gt \sum_{ii = i - 1}^{10} \left(E_{\alpha ii} \times 2^{ii}\right)$.
+
+Au final, nous pouvons en conclure que dans le cas où $\left(\tau_i = 1\right)$ pour tout $i \in \left[10;14\right], alors $\left(E_{\beta i} \times 2^i\right) \ \gt \ \sum_i^{10} \ \left(E_{\alpha i} \times 2^i\right)$.
+
+// h2 merge ch "L'opération logique Nimply", "Qu'est ce qu'un zéro anonyme?"
 
 ### L'opération logique Nimply
 
@@ -586,7 +595,7 @@ Selon cette définition, nous observons que le bit de résultat d'une telle opé
 Pour tout les autres cas, si $\left(x = y\right)$ ou $\left(x \lt y\right)$ alors le bit de résultat sera $0$.
 Dans la documentation du circuit électronique, nous définissons le terme de "___zéro anonyme___" pour désigné tout bit de résultat à $0$, provenant d'une opération logique $Nimply$.
 
-### Qu'est ce qu'un zéro anonyme? // merge
+### Qu'est ce qu'un zéro anonyme?
 
 Nous venons de voir à quoi correspond le terme de "_zéro anonyme_".
 Cependant, nous ne connaissons pas la raison derrière un nom aussi bizarre.
@@ -609,7 +618,7 @@ Si $\left(\tau_i = 1\right)$ alors nous savons que $\left(E_{\beta i} = 1\right)
 
 De plus, rappellez vous du chapitre du nom de "_L'encodage par biais du champs d'exposant_".
 Dans ce chapitre, il est dit que la valeur d'un bit à $1$ de poids $i$ d'un champs d'exposant $E$, est _inconditionnellement_ supérieur à la somme de la valeur de chacun des bits de poids inférieur à $i$.
-En prenant au pied de la lettre ce que nous venons tout juste de dire, pour $i \in \left[11;14\right]$ si $\left(\beta_i = 1\right)$ nous obtenons alors $\left(E_{\beta i} \times 2^i\right) \ \gt \ \sum_{\sigma=i-1}^{10} \ \left(E_{\beta\sigma} \times 2^{\sigma}\right)$.
+En prenant au pied de la lettre ce que nous venons tout juste de dire, pour $i \in \left[11;14\right]$ si $\left(\tau_i = 1\right)$ nous obtenons alors $\left(E_{\beta i} \times 2^i\right) \ \gt \ \sum_{\sigma=i-1}^{10} \ \left(E_{\beta\sigma} \times 2^{\sigma}\right)$.
 Ceci peut également être arrangé au champs d'exposant $E_{\alpha}$, alors $\left(E_{\beta i} \times 2^i\right) \ \gt \ \sum_{\sigma=i-1}^{10} \ \left(E_{\alpha\sigma} \times 2^{\sigma}\right)$. 
 
 Au final, nous pouvons en conclure que si $\left(\tau_i = 1\right)$ alors $\left(E_{\beta i} \times 2^i\right) \ \gt \ \sum_{i}^{10} \ \left(E_{\alpha i} \times 2^i\right)$.
