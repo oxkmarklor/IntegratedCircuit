@@ -543,25 +543,23 @@ __Tout ce qui va suivre de la démonstration, part du principe que le FPU Config
 ### Définition de quelques opérations fondamentales à la démonstration 
 
 Pour commencer, l'opération __Write__ sert de fonction d'affectation.
-L'argument sur le paramètre $\left(y\right)$ est copié dans l'argument sur le paramètre $\left(x\right)$.
-Il n'y a pas de taille ni de "type" d'argument, cette fonction est abstraite et vise simplement à faire comprendre qu'il faut retenir $\left(y\right)$ dans $\left(x\right)$.
+L'argument sur le paramètre $y$ est copié dans l'argument sur le paramètre $x$.
+Il n'y a pas de taille ni de "type" d'argument, cette fonction est abstraite et vise simplement à faire comprendre qu'il faut retenir $y$ dans $x$.
 
 $$Write \ \left(x, \ y\right) \rightarrow \ x \ := \ y$$
 
-Passons désormais à l'opération logique __Nimply__.
-Nous formalisons cette opération en tant que fonction, cette dernière n'étant pas très connu elle ne possède pas son propre symbole calculatoire.
-C'est une opération de logique bit à bit, par conséquent, la fonction ne prend que deux bits d'opérande comme paramètre.
-Elle ne retourne un $1$ que si le bit sur son paramètre $\left(y\right)$ vaut $0$ lorsque celui sur $\left(x\right)$ vaut $1$, autrement l'opération retourne $0$.
-Par ailleurs, en électronique cette opération ce décline directement en une porte logique.
+Passons au cas des opérations logique avec l'opération __And__ $\left(x \wedge y\right)$.
+C'est une opération de logique bit à bit qui prend deux bits $x$ et $y$ comme argument, et retourne un unique bit de résultat.
+L'opération ne retourne un bit à $1$ que lorsque ses deux bits en argument sont eux même à $1$, sinon elle retrourne un bit à $0$.
+
+L'opération logique __Not__ $\left(\overline{x}\right)$, ne prend quant à elle qu'un seul bit comme argument et retourne l'inverse de ce bit $\left(\overline{1} = 0\right)$.
+
+Pour finir, passons à l'opération logique __Nimply__.
+Cette opération est défini en tant que fonction car elle n'est pas très connu et ne possède pas son propre symbole calculatoire.
+Ladite fonction a deux paramètres $x$ et $y$, et retourne un bit de résultat. 
+Selon le corps de la fonction, nous en déduisons qu'elle ne retourne un bit à $1$ que lorsque le bit sur son paramètre $x$ vaut $1$ quand celui sur $y$ est à $0$, sinon le bit retourné vaut $0$.
 
 $$Nimply \ \left(x, \ y\right) \rightarrow \ x \ \wedge \ \overline{y}$$
-
-De plus, $\overline{y}$ est l'opération logique __Not__ qui inverse un bit en son opposé $\left(1 = \overline{0}\right)$ ou $\left(0 = \overline{1}\right)$.
-Cette opération possède également sa propre porte logique, qui est d'ailleurs assez élémentaire pour la conception de circuit électronique en tout genre.
-
-Pour finir, le symbole $\wedge$ est l'opération logique __And__ qui ne retourne un bit à $1$ que lorsque ses deux bits d'opérande le sont aussi, sinon $0$.
-Tandis que le symbole $\vee$ est l'opération logique __Or__ qui ne retourne un $0$ que si ses deux bits d'opérande le sont également, autrement elle renvoie un $1$.
-Ce sont des opérations de logique bit à bit qui ne manipulent donc que des bits en entrée, je le précise une nouvelle fois.
 
 # Le traitement des champs d'exposant
 
