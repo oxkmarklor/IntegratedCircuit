@@ -621,13 +621,23 @@ N'oublions pas que la démonstration mathématique du circuit se base sur la vé
 
 ### Les zéros anonymes capitaux
 
-Reprenons là où nous nous sommes arrêter dans le chapitre "_Le traitement des champs d'exposant_".
-Nous en étions à dire que du moment où $\left(\tau_i = 1\right)$ pour tout $i \in \left[10;14\right]$, alors $\left(E_{\beta i} \times 2^i\right) \ \gt \ \sum_i^{10} \ \left(E_{\alpha i} \times 2^i\right)$.
-Nous disions aussi que cela ne démontrait pas pour autant que $\left(E_{\alpha} \lt E_{\beta}\right)$.
+Commençons par définir ce que sont les _zéros anonymes capitaux_.
+Un _zéro anonyme capital_ est un bit à $0$ dans le champs $\tau$, qui a un poids supérieur au _MSB1_ de $\tau \in \left[10;14\right]$.
+Pour qu'un _zéro anonyme capital_ puisse exister, le _MSB1_ de $\tau \in \left[10;14\right]$ doit avoir un poids compris dans l'intervalle $\left[10;14\right[$, car il n'y a pas de bit de poids supérieur à $\tau_{14}$.
+Nous allons y revenir.
 
-Commençons par dire qu'un _zéro anonyme capital_ est un bit de $\tau$ qui est à $0$ et dont le poids est supérieur au _MSB1_ de $\tau \in \left[10;14\right]$.
+Reprenons de là où nous en étions dans le chapitre "_Le traitement des champs d'exposant_".
+Nous savons que du moment où $\left(\tau_i = 1\right)$ pour tout $i \in \left[10;14\right]$, alors $\left(E_{\beta i} \times 2^i\right) \ \gt \ \sum_i^{10} \ \left(E_{\alpha i} \times 2^i\right)$.
+Nous avions aussi dit que cela ne suffisait pas à démontrer que $\left(E_{\alpha} \lt E_{\beta}\right)$.
 
-Pour comprendre l'impacte qu'ont les _zéros anonymes capitaux_, partons du principe que le champs $\tau \in \left[10;14\right]$ n'est pas nul et que le _MSB1_ du champs est $\tau_i$ pour $i \in \left[10;14\right[$.
+En effet, tant que le _MSB1_ de $\tau \in \left[10;14\right]$ a un poids $i \in \left[10;14\right[$, alors nous sommes certains qu'il existe au moins le bit $\tau_{\left(i + 1\right)}$ qui est d'un poids supérieur au _MSB1_.
+Par définition, le bit $\tau_{\left(i + 1\right)}$ (et ceux d'un poids potentiellement plus grand) sont des _zéros anonymes_. 
+Nous en déduisons que pour $\tau_{\left(i + 1\right)}$ il existe ces deux possiblités $\left(E_{\alpha \left(i + 1\right)} = \ E_{\beta \left(i + 1\right)}\right)$ ou $\left(E_{\alpha \left(i + 1\right)} \gt \ E_{\beta \left(i + 1\right)}\right)$, je vous invite à relire le chapitre "_Les zéros anonymes_" si nécessaire.
+
+Pour résoudre ce conflit, il suffit de calculer la somme $\lambda_{\alpha}$ des valeurs des bits de poids supérieur à $i$ dans $E_{\alpha}$, ce qui donne $\lambda_{\alpha} = \sum_{ii = i + 1}^{14} \left(E_{\alpha ii} \times 2^{ii}\right)$.
+Puis faire de même pour $E_{\beta}$ avec $\lambda_{\beta} = \sum_{ii = i + 1}^{14} \left(E_{\beta ii} \times 2^{ii}\right)$.
+Dans le cas où l'ensemble des _zéros anonymes capitaux_ de même poids dans $E_{\alpha}$ et $E_{\beta}$ sont égaux, alors nous devrions obtenir $\left(\lambda_{\alpha} = \lambda_{\beta}\right)$.
+Cette situation nous fait dire que $\left(E_{\alpha} \lt E_{\beta}\right)$ car $\left(\lambda_{\beta} + E_{\beta i} \times 2^i\right) \gt \left(\lambda_{\alpha} + \sum_i^{10} \left(E_{\alpha i} \times 2^i\right)\right)$.
 
 //
 
