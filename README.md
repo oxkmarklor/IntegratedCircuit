@@ -621,6 +621,16 @@ N'oublions pas que la démonstration mathématique du circuit se base sur la vé
 
 ### Les zéros anonymes capitaux
 
+Reprenons là où nous nous sommes arrêter dans le chapitre "_Le traitement des champs d'exposant_".
+Nous en étions à dire que du moment où $\left(\tau_i = 1\right)$ pour tout $i \in \left[10;14\right]$, alors $\left(E_{\beta i} \times 2^i\right) \ \gt \ \sum_i^{10} \ \left(E_{\alpha i} \times 2^i\right)$.
+Nous disions aussi que cela ne démontrait pas pour autant que $\left(E_{\alpha} \lt E_{\beta}\right)$.
+
+Commençons par dire qu'un _zéro anonyme capital_ est un bit de $\tau$ qui est à $0$ et dont le poids est supérieur au _MSB1_ de $\tau \in \left[10;14\right]$.
+
+Pour comprendre l'impacte qu'ont les _zéros anonymes capitaux_, partons du principe que le champs $\tau \in \left[10;14\right]$ n'est pas nul et que le _MSB1_ du champs est $\tau_i$ pour $i \in \left[10;14\right[$.
+
+//
+
 Prenons désormais le cas dans lequel le poids du _MSB1_ de $\tau$ est $\tau_i$ pour $i \in \left[10;13\right]$.
 Dans cette situation, nous sommes certains qu'il y a _au moins_ le bit $\tau_{\left(i+1\right)}$ qui est d'un poids supérieur à $\tau_i$.
 Par définition, $\tau_{\left(i+1\right)}$ et les autres bits de poids supérieur à $\tau_i$ (si il y en a), sont des _zéros anonymes_.
