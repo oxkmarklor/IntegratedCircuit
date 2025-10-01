@@ -587,14 +587,11 @@ Cela ne démontre pas pour autant que $\left(E_{\alpha} \lt E_{\beta}\right)$.
 
 ## Les zéros anonymes
 
-// à relire
-
 Nous avons vu dans la section "_Définition de quelques opérations fondamentales à la démonstration_", que l'opération logique $Nimply$ génère un bit de résultat à $1$ sous réserve que le bit sur son paramètre $x$ vaille $1$, et que celui sur $y$ vaille $0$.
 Autrement, l'opération renvoie un bit de résultat à $0$.
 
-Sachez qu'il est possible de décliné l'opération logique $Nimply$ en une porte logique (un petit circuit électronique).
-Le FPU Configuration Unit se sert des portes logiques $Nimply$ de la même manière que ne l'a fait la démonstration plus haut, pour traiter les bits de même poids des champs d'exposant $E_{\alpha}$ ainsi que $E_{\beta}$.
-L'objectif derrière cela est de pouvoir déduire les bits d'opérandes d'une opération $Nimply$, en fonction du bit de résultat qu'elle génère.
+Sachez qu'il est possible de décliné l'opération logique $Nimply$ en une porte logique, un petit circuit électronique chargé d'effectuer une opération $Nimply$ entre deux bits.
+Le FPU Configuration Unit se sert des portes logiques $Nimply$ pour pouvoir déduire la valeur des bits d'opérandes d'une telle opération, en fonction du bit de résultat généré.
 C'est exactement ce que nous avons fait dans le chapitre précédent, nous déduisons que du moment où $\left(\tau_i = 1\right)$ alors $\left(E_{\beta i} = 1\right)$ tandis que $\left(E_{\alpha i} = 0\right)$.
 Cependant, les choses se corsent à partir du moment où une opération $Nimply$ génère un bit de résultat à $0$, ce que la documentation dédié au circuit appelle un _zéro anonyme_.
 
@@ -602,8 +599,8 @@ La raison est simple, pour une opération $Nimply$ il n'y a qu'une seule manièr
 Concrètement, une opération logique $Nimply$ génère un bit de résultat à $0$ lorsque:
   - Ces deux bits d'opérandes $\left(x, \ y\right)$ sont égaux.
   - Le bit sur le paramètre $x$ vaut $0$ pendant que celui sur $y$ vaut $1$.
-Par conséquent, un bit de résultat à $0$ ne permettant pas de déduire la valeur des bits d'opérandes, nous comprenons mieux l'origine du nom de _zéro anonyme_.
 
+Par conséquent, un bit de résultat à $0$ ne permet pas de déduire la valeur des bits d'opérandes (qui est comme anonyme), d'où le nom de _zéro anonyme_.
 Plus bas, nous allons voir que les _zéros anonymes_ sont la raison pour laquelle le chapitre précédent conclu de la sorte.
 Je précise que dans les faits il existe des _zéros anonymes capitaux_ et _non capitaux_, dissociation importante que nous allons expliqués ci-dessous.
 
