@@ -587,55 +587,25 @@ Cela ne démontre pas pour autant que $\left(E_{\alpha} \lt E_{\beta}\right)$.
 
 ## Les zéros anonymes
 
-Nous avons vu dans la section "_Définition de quelques opérations fondamentales à la démonstration_", que l'opération logique $Nimply$ genère un bit de résultat à $1$ uniquement quand le bit sur son paramètre $x$ vaut $1$ et celui sur $y$ vaut $0$.
+// à relire
+
+Nous avons vu dans la section "_Définition de quelques opérations fondamentales à la démonstration_", que l'opération logique $Nimply$ génère un bit de résultat à $1$ sous réserve que le bit sur son paramètre $x$ vaille $1$, et que celui sur $y$ vaille $0$.
 Autrement, l'opération renvoie un bit de résultat à $0$.
 
-En électronique, il est possible de décliné l'opération logique $Nimply$ en une porte logique (un petit circuit électronique).
+Sachez qu'il est possible de décliné l'opération logique $Nimply$ en une porte logique (un petit circuit électronique).
 Le FPU Configuration Unit se sert des portes logiques $Nimply$ de la même manière que ne l'a fait la démonstration plus haut, pour traiter les bits de même poids des champs d'exposant $E_{\alpha}$ ainsi que $E_{\beta}$.
-L'objectif derrière cela est de pouvoir déduire les bits d'opérandes d'une opération $Nimply$, en fonction du bit de résultat généré.
-C'est exactement le genre de déduction que nous avons pu faire dans le chapitre précédent, où nous savons que si $\left(\tau_i = 1\right)$ alors $\left(E_{\beta i} = 1\right)$ tandis que $\left(E_{\alpha i} = 0\right)$.
+L'objectif derrière cela est de pouvoir déduire les bits d'opérandes d'une opération $Nimply$, en fonction du bit de résultat qu'elle génère.
+C'est exactement ce que nous avons fait dans le chapitre précédent, nous déduisons que du moment où $\left(\tau_i = 1\right)$ alors $\left(E_{\beta i} = 1\right)$ tandis que $\left(E_{\alpha i} = 0\right)$.
+Cependant, les choses se corsent à partir du moment où une opération $Nimply$ génère un bit de résultat à $0$, ce que la documentation dédié au circuit appelle un _zéro anonyme_.
 
+La raison est simple, pour une opération $Nimply$ il n'y a qu'une seule manière de définir un bit de résultat à $1$, mais plusieurs pour un bit de résultat à $0$.
+Concrètement, une opération logique $Nimply$ génère un bit de résultat à $0$ lorsque:
+  - Ces deux bits d'opérandes $\left(x, \ y\right)$ sont égaux.
+  - Le bit sur le paramètre $x$ vaut $0$ pendant que celui sur $y$ vaut $1$.
+Par conséquent, un bit de résultat à $0$ ne permettant pas de déduire la valeur des bits d'opérandes, nous comprenons mieux l'origine du nom de _zéro anonyme_.
 
-
-La documentation dédié au circuit parle des bits de résultat à $0$ renvoyés par une porte logique $Nimply$, comme étant des _zéros anonymes_.
-
-
-//
-
-L'opération logique $Nimply$ a déjà été défini plus haut dans la section "_Définition de quelques opérations fondamentales à la démonstration_".
-Selon cette définition, nous observons que le bit de résultat d'une telle opération ne peut être à $1$ que lorsque le bit sur le paramètre $\left(x\right)$ est lui même à $1$, et que celui sur $\left(y\right)$ est à $0$.
-Pour tout les autres cas, si $\left(x = y\right)$ ou $\left(x \lt y\right)$ alors le bit de résultat sera $0$.
-Dans la documentation du circuit électronique, nous définissons le terme de "___zéro anonyme___" pour désigné tout bit de résultat à $0$, provenant d'une opération logique $Nimply$.
-
-### Qu'est ce qu'un zéro anonyme?
-
-Nous venons de voir à quoi correspond le terme de "_zéro anonyme_".
-Cependant, nous ne connaissons pas la raison derrière un nom aussi bizarre.
-
-Nous avons dit plus haut que l'opération logique $Nimply$ pouvait être facilement décliné en une porte logique (un petit circuit électronique).
-Dans les faits, le FPU Configuration Unit se sert des sorties de ses portes logiques $Nimply$, pour faire des déductions sur les entrées de celle-ci.
-La démonstration mathématique en fait autant.
-Pourtant, lorsqu'une opération logique $Nimply$ renvoie un bit de résultat à $0$, il nous est impossible de savoir si les deux bits d'opérandes sont identiques $\left(x = y\right)$, ou si le bit sur le paramètre $\left(y\right)$ est strictement supérieur à celui sur $\left(x\right)$.
-Autrement dit, un $0$ en guise de bit de résultat d'une opération logique $Nimply$ rend anonyme les bits d'opérande, d'où le terme de "_zéro anonyme_".
-En bref, les _zéros anonymes_ posent un problème que nous allons devoir prendre en charge dans la démonstration mathématique.
-
-Petite précision par ailleurs, il existe en réalité des _zéros anonymes_ dit ___capitaux___, et d'autre ___non capitaux___.
-Nous allons définir ci-bas la différence entre ces deux types là.
-
-## Les deux facettes des zéros anonymes (introduction)
-
-Revenons à l'expression qui figure au tout début du chapitre "_Le traitement des champs d'exposant_".
-Chaque bit $\tau_i$ est le résultat de $\ Nimply \ \left(E_{\beta i}, \ E_{\alpha i}\right)$ pour le poids $i \in \left[10;14\right]$.
-Si $\left(\tau_i = 1\right)$ alors nous savons que $\left(E_{\beta i} = 1\right)$ tandis que $\left(E_{\alpha i} = 0\right)$, ou autrement dit $\left(E_{\beta i} \times 2^i\right) \ \gt \ \left(E_{\alpha i} \times 2^i\right)$.
-
-De plus, rappellez vous du chapitre du nom de "_L'encodage par biais du champs d'exposant_".
-Dans ce chapitre, il est dit que la valeur d'un bit à $1$ de poids $i$ d'un champs d'exposant $E$, est _inconditionnellement_ supérieur à la somme de la valeur de chacun des bits de poids inférieur à $i$.
-En prenant au pied de la lettre ce que nous venons tout juste de dire, pour $i \in \left[11;14\right]$ si $\left(\tau_i = 1\right)$ nous obtenons alors $\left(E_{\beta i} \times 2^i\right) \ \gt \ \sum_{\sigma=i-1}^{10} \ \left(E_{\beta\sigma} \times 2^{\sigma}\right)$.
-Ceci peut également être arrangé au champs d'exposant $E_{\alpha}$, alors $\left(E_{\beta i} \times 2^i\right) \ \gt \ \sum_{\sigma=i-1}^{10} \ \left(E_{\alpha\sigma} \times 2^{\sigma}\right)$. 
-
-Au final, nous pouvons en conclure que si $\left(\tau_i = 1\right)$ alors $\left(E_{\beta i} \times 2^i\right) \ \gt \ \sum_{i}^{10} \ \left(E_{\alpha i} \times 2^i\right)$.
-
-Ce qui vient d'être dit ci-dessus ne démontre pas pour autant que $\left(E_{\alpha} \lt E_{\beta}\right)$.
+Plus bas, nous allons voir que les _zéros anonymes_ sont la raison pour laquelle le chapitre précédent conclu de la sorte.
+Je précise que dans les faits il existe des _zéros anonymes capitaux_ et _non capitaux_, dissociation importante que nous allons expliqués ci-dessous.
 
 ### Les zéros anonymes non capitaux
 
