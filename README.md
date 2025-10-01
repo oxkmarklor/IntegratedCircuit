@@ -621,24 +621,22 @@ N'oublions pas que la démonstration mathématique du circuit se base sur la vé
 
 ### Les zéros anonymes capitaux
 
-// prendre un indice différent de $i$
-
 Reprenons là où nous en étions dans le chapitre "_Le traitement des champs d'exposant_".
-Nous savons que du moment où $\left(\tau_i = 1\right)$ pour tout $i \in \left[10;14\right]$, alors $\left(E_{\beta i} \times 2^i\right) \ \gt \ \sum_i^{10} \ \left(E_{\alpha i} \times 2^i\right)$.
+Nous savons que du moment où $\left(\tau_i = 1\right)$ pour tout $i \in \left[10;14\right]$, alors $\left(E_{\beta i} \times 2^i\right) \gt \sum_i^{10} \left(E_{\alpha i} \times 2^i\right)$.
 Nous avions aussi dit que cela ne suffisait pas à démontrer que $\left(E_{\alpha} \lt E_{\beta}\right)$.
 
 Commençons par définir ce que sont les _zéros anonymes capitaux_.
 Un _zéro anonyme capital_ est un bit à $0$ dans le champs $\tau$, qui a un poids supérieur au _MSB1_ de $\tau \in \left[10;14\right]$.
-Pour qu'un _zéro anonyme capital_ existe, il faut que le _MSB1_ de $\tau \in \left[10;14\right]$ ait un poids compris dans l'intervalle $\left[10;14\right[$, car il n'y a pas de bit de poids supérieur à $14$.
-Alors, nous sommes certains qu'il existe au moins un bit $\tau_{\left(i + 1\right)}$ qui est d'un poids supérieur au _MSB1_ de $\tau \in \left[10;14\right]$.
-Par définition, $\tau_{\left(i+1\right)}$ et les autres bits de poids supérieur à $i$ (si il y en a), sont des _zéros anonymes_.
-Selon le chapitre précédent, nous en déduisons que pour $\tau_{\left(i + 1\right)}$ il existe deux possiblités $\left(E_{\alpha \left(i + 1\right)} = \ E_{\beta \left(i + 1\right)}\right)$ ou $\left(E_{\alpha \left(i + 1\right)} \gt \ E_{\beta \left(i + 1\right)}\right)$.
-Cela vaut aussi pour les potentiels autres _zéros anonymes capitaux_ de poids supérieur à $\left(i + 1\right)$.
+Par conséquent, il y a toujours un ou plusieurs _zéros anonymes capitaux_ lorsque le _MSB1_ de $\tau \in \left[10;14\right]$ a un poids $i \in \left[10;14\right[$.
+Effectivement, dans cette situation il existe au moins un bit $\tau_{\left(i + 1\right)}$ qui est d'un poids supérieur au _MSB1_ de poids $i$.
+Selon le chapitre "_Les zéros anonymes_", nous en déduisons que les bits $E_{\alpha \left(i + 1\right)}$ et $E_{\beta \left(i + 1\right)}$ sont soit égaux $\left(E_{\alpha \left(i + 1\right)} = \ E_{\beta \left(i + 1\right)}\right)$, soit que le premier est supérieur au deuxième $\left(E_{\alpha \left(i + 1\right)} \gt \ E_{\beta \left(i + 1\right)}\right)$.
+Généralisé à l'ensemble des _zéros anonymes capitaux_, cela donne $\left(E_{\alpha\sigma} \ge E_{\beta\sigma}\right)$ pour tout poids $\sigma$ (sigma) compris dans l'intervalle $\left]i;14\right]$.
 
+// Quel problème 
+// à relire
 
-
-Pour résoudre ce problème, il suffit de calculer la somme $\lambda$ (lambda) de la valeur des bits de poids supérieur à $i$ du champs d'exposants $E_{\alpha}$ avec $\left(\lambda_{\alpha} = \sum_{ii = i + 1}^{14} \ \left(E_{\alpha ii} \times 2^{ii}\right)\right)$, puis de $E_{\beta}$ avec $\left(\lambda_{\beta} = \sum_{ii = i + 1}^{14} \ \left(E_{\beta ii} \times 2^{ii}\right)\right)$.
-Nous savons que $\left(\lambda_{\alpha} \ge \lambda_{\beta}\right)$ car pour tout $\sigma$ (sigma) compris dans l'intervalle $\left]i;14\right]$, il existe $\left(E_{\alpha\sigma} \ge E_{\beta\sigma}\right)$.
+Pour résoudre ce problème, nous effectuons la somme $\lambda$ (lambda) de la valeur des bits de poids dans l'intervalle $\left]i;14\right]$ du champs d'exposants $E_{\alpha}$ avec $\left(\lambda_{\alpha} = \sum_{\sigma = i + 1}^{14} \ \left(E_{\alpha\sigma} \times 2^{\sigma}\right)\right)$, puis de $E_{\beta}$ avec $\left(\lambda_{\beta} = \sum_{\sigma = i + 1}^{14} \ \left(E_{\beta\sigma} \times 2^{\sigma}\right)\right)$.
+Par ce qui a été dit précédemment, nous comprenons que $\left(\lambda_{\alpha} \ge \lambda_{\beta}\right)$.
 
 // les deux possibilités
 
