@@ -577,18 +577,30 @@ Nous effectuons l'opération logique $Nimply$ sur l'ensemble des bits de poids $
 La variable $\tau$ (tau) représente un champs binaire de $15$ bits, dont les poids vont de $0$ à $14$.
 Chaque bit de résultat d'une opération $Nimply$ sur $E_{\beta i}$ et $E_{\alpha i}$ pour $i \in \left[10;14\right]$, est inscrit dans $\tau_i$.
 
-// à relire
-
-Avec ce que nous avons vu de l'opération logique $Nimply$ dans la section précédente, nous comprenons que du moment où $\left(\tau_i = 1\right)$ il est certain que $\left(E_{\beta i} = 1\right)$ tandis que $\left(E_{\alpha i} = 0\right)$, ou autrement dit $\left(E_{\beta i} \times 2^i\right) \gt \left(E_{\alpha i} \times 2^i\right)$.
+Avec ce que nous avons vu de l'opération logique $Nimply$ dans la section précédente, nous comprenons que pour $i \in \left[10;14\right]$ du moment où $\left(\tau_i = 1\right)$ il est certain que $\left(E_{\beta i} \times 2^i\right) \gt \left(E_{\alpha i} \times 2^i\right)$.
 Mais ce n'est pas tout, rappelez vous de la section "_L'encodage par biais du champs d'exposant_".
 Cette section explique entre autre que, je cite "_la valeur de n'importe quel bit à_ $1$ _de poids_ $i$ _dans un champs d'exposant, est strictement supérieur à la somme des valeurs des bits de poids inférieur à_ $i$".
 Par conséquent, cela traduit l'idée que du moment où $\left(\tau_i = 1\right)$ pour tout $i \in \left[11;14\right]$, nous pouvons être sûrs que $\left(E_{\beta i} \times 2^i\right) \gt \sum_{ii = i - 1}^{10} \left(E_{\alpha ii} \times 2^{ii}\right)$.
 
-Au final, nous pouvons en conclure que dans le cas où $\left(\tau_i = 1\right)$ pour tout $i \in \left[10;14\right], alors $\left(E_{\beta i} \times 2^i\right) \ \gt \ \sum_i^{10} \ \left(E_{\alpha i} \times 2^i\right)$.
+Au final, nous pouvons en conclure que dans le cas où $\left(\tau_i = 1\right)$ pour tout $i \in \left[10;14\right]$, alors $\left(E_{\beta i} \times 2^i\right) \ \gt \ \sum_i^{10} \ \left(E_{\alpha i} \times 2^i\right)$.
+Cela ne démontre pas pour autant que $\left(E_{\alpha} \lt E_{\beta}\right)$.
 
-// h2 merge ch "L'opération logique Nimply", "Qu'est ce qu'un zéro anonyme?"
+## Les zéros anonymes
 
-### L'opération logique Nimply
+Nous avons vu dans la section "_Définition de quelques opérations fondamentales à la démonstration_", que l'opération logique $Nimply$ genère un bit de résultat à $1$ uniquement quand le bit sur son paramètre $x$ vaut $1$ et celui sur $y$ vaut $0$.
+Autrement, l'opération renvoie un bit de résultat à $0$.
+
+En électronique, il est possible de décliné l'opération logique $Nimply$ en une porte logique (un petit circuit électronique).
+Le FPU Configuration Unit se sert des portes logiques $Nimply$ de la même manière que ne l'a fait la démonstration plus haut, pour traiter les bits de même poids des champs d'exposant $E_{\alpha}$ ainsi que $E_{\beta}$.
+L'objectif derrière cela est de pouvoir déduire les bits d'opérandes d'une opération $Nimply$, en fonction du bit de résultat généré.
+C'est exactement le genre de déduction que nous avons pu faire dans le chapitre précédent, où nous savons que si $\left(\tau_i = 1\right)$ alors $\left(E_{\beta i} = 1\right)$ tandis que $\left(E_{\alpha i} = 0\right)$.
+
+
+
+La documentation dédié au circuit parle des bits de résultat à $0$ renvoyés par une porte logique $Nimply$, comme étant des _zéros anonymes_.
+
+
+//
 
 L'opération logique $Nimply$ a déjà été défini plus haut dans la section "_Définition de quelques opérations fondamentales à la démonstration_".
 Selon cette définition, nous observons que le bit de résultat d'une telle opération ne peut être à $1$ que lorsque le bit sur le paramètre $\left(x\right)$ est lui même à $1$, et que celui sur $\left(y\right)$ est à $0$.
