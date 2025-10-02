@@ -621,6 +621,24 @@ N'oublions pas que la démonstration mathématique du circuit se base sur la vé
 
 ### Les zéros anonymes capitaux
 
+Un _zéro anonyme capitaul_ est un bit à $0$ du champs $\tau$, dont le poids est supérieur au _MSB1_ de $\tau \in \left[10;14\right]$.
+Par conséquent, lorsque le _MSB1_ de $\tau \in \left[10;14\right]$ a un poids $i \in \left[10;13\right]$, alors les bits de poids $\sigma$ (sigma) compris dans l'intervalle $\left]i;14\right]$ sont par définition des _zéros anonymes capitaux_.
+Selon le chapitre "_Les zéros anonymes_", nous en déduisons que $\left(E_{\alpha\sigma} \ge E_{\beta\sigma}\right)$ pour tout bit de poids $\sigma \in \left]i;14\right]$.
+
+Revenons en là où nous en étions dans le chapitre "_Le traitement des champs d'exposant_".
+Admettons que le _MSB1_ de $\tau \in \left[10;14\right]$ ait un poids $i \in \left[10;13\right]$, par conséquent $\left(\tau_i = 1\right)$ et $\left(E_{\beta i} \times 2^i\right) \gt \sum_i^{10} \left(E_{\alpha i} \times 2^i\right)$.
+Cependant, comme mentionné dans ledit chapitre, ceci ne suffit pas à démontrer que $\left(E_{\alpha} \lt E_{\beta}\right)$, voyons pourquoi.
+
+Dans un premier temps, calculons la somme $\lambda$ (lambda) de la valeur des bits de poids supérieur à $i$ du champs d'exposant $E_{\alpha}$ avec $\lambda_{\alpha} = \sum_{\sigma = i + 1}^{14} \left(E_{\alpha\sigma} \times 2^{\sigma}\right)$, puis du champs $E_{\beta}$ avec $\lambda_{\beta} = \sum_{\sigma = i + 1}^{14} \left(E_{\beta\sigma} \times 2^{\sigma}\right)$.
+Par le fait que $\left(E_{\alpha\sigma} \ge E_{\beta\sigma}\right)$ pour tout bit de poids $\sigma \in \left]i;14\right]$, nous comprenons que $\left(\lambda_{\alpha} \ge \lambda_{\beta}\right)$.
+
+Dans le cas où la somme $\lambda_{\alpha}$ est égale à $\lambda_{\beta}$, l'état de point terminal généré par le circuit est $\left(E_{\alpha} \lt E_{\beta}\right)$ car $\left(\lambda_{\beta} + E_{\beta i} \times 2^i\right) \gt \left(\lambda_{\alpha} + \sum_i^{10} \left(E_{\alpha i} \times 2^i\right)\right)$.
+// ref ch les points terminaux
+La condition sur laquelle se repose la démonstration mathématique du circuit $\left(\vert \alpha \vert \gt \vert \beta \vert\right)$ se solde par un échec.
+
+
+//
+
 Reprenons là où nous en étions dans le chapitre "_Le traitement des champs d'exposant_".
 Nous savons que du moment où $\left(\tau_i = 1\right)$ pour tout $i \in \left[10;14\right]$, alors $\left(E_{\beta i} \times 2^i\right) \gt \sum_i^{10} \left(E_{\alpha i} \times 2^i\right)$.
 Nous avions aussi dit que cela ne suffisait pas à démontrer que $\left(E_{\alpha} \lt E_{\beta}\right)$.
