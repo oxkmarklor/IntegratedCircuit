@@ -632,10 +632,12 @@ Cependant, comme mentionné dans ledit chapitre, ceci ne suffit pas à démontre
 Dans un premier temps, calculons la somme $\lambda$ (lambda) de la valeur des bits de poids supérieur à $i$ du champs d'exposant $E_{\alpha}$ avec $\lambda_{\alpha} = \sum_{\sigma = i + 1}^{14} \left(E_{\alpha\sigma} \times 2^{\sigma}\right)$, puis du champs $E_{\beta}$ avec $\lambda_{\beta} = \sum_{\sigma = i + 1}^{14} \left(E_{\beta\sigma} \times 2^{\sigma}\right)$.
 Par le fait que $\left(E_{\alpha\sigma} \ge E_{\beta\sigma}\right)$ pour tout bit de poids $\sigma \in \left]i;14\right]$, nous comprenons que $\left(\lambda_{\alpha} \ge \lambda_{\beta}\right)$.
 
-Dans le cas où la somme $\lambda_{\alpha}$ est égale à $\lambda_{\beta}$, l'état de point terminal généré par le circuit est $\left(E_{\alpha} \lt E_{\beta}\right)$ car $\left(\lambda_{\beta} + E_{\beta i} \times 2^i\right) \gt \left(\lambda_{\alpha} + \sum_i^{10} \left(E_{\alpha i} \times 2^i\right)\right)$.
-// ref ch les points terminaux
-La condition sur laquelle se repose la démonstration mathématique du circuit $\left(\vert \alpha \vert \gt \vert \beta \vert\right)$ se solde par un échec.
+// retouche de la forme
 
+Dans le cas où la somme $\lambda_{\alpha}$ est égale à $\lambda_{\beta}$ alors $\left(\lambda_{\beta} + E_{\beta i} \times 2^i\right) \gt \left(\lambda_{\alpha} + \sum_i^{10} \left(E_{\alpha i} \times 2^i\right)\right)$, nous en déduisons donc que $\left(E_{\alpha} \lt E_{\beta}\right)$.
+Rappelez vous de la section "_Les points terminaux et non terminaux_", nous y apprenons que lorsque $\left(E_{\alpha} \neq E_{\beta}\right)$ il est certain que $\left(\vert \alpha \vert \neq \vert \beta \vert\right)$.
+Je vous invite à relire ladite section si nécessaire.
+Dans notre cas, la condition sur laquelle se repose la démonstration mathématique du circuit $\left(\vert \alpha \vert \gt \vert \beta \vert\right)$ se solde par un échec, car $\left(\left(1 + T_{\alpha}\right) \times \ 2^{E_{\alpha}}\right) \lt \left(\left(1 + T_{\beta}\right) \times \ 2^{E_{\beta}}\right)$.
 
 //
 
