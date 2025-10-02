@@ -621,7 +621,7 @@ N'oublions pas que la démonstration mathématique du circuit se base sur la vé
 
 ### Les zéros anonymes capitaux
 
-Un _zéro anonyme capitaul_ est un bit à $0$ du champs $\tau$, dont le poids est supérieur au _MSB1_ de $\tau \in \left[10;14\right]$.
+Un _zéro anonyme capital_ est un bit à $0$ du champs $\tau$, dont le poids est supérieur au _MSB1_ de $\tau \in \left[10;14\right]$.
 Par conséquent, lorsque le _MSB1_ de $\tau \in \left[10;14\right]$ a un poids $i \in \left[10;13\right]$, alors les bits de poids $\sigma$ (sigma) compris dans l'intervalle $\left]i;14\right]$ sont par définition des _zéros anonymes capitaux_.
 Selon le chapitre "_Les zéros anonymes_", nous en déduisons que $\left(E_{\alpha\sigma} \ge E_{\beta\sigma}\right)$ pour tout bit de poids $\sigma \in \left]i;14\right]$.
 
@@ -632,12 +632,19 @@ Cependant, comme mentionné dans ledit chapitre, ceci ne suffit pas à démontre
 Dans un premier temps, calculons la somme $\lambda$ (lambda) de la valeur des bits de poids supérieur à $i$ du champs d'exposant $E_{\alpha}$ avec $\lambda_{\alpha} = \sum_{\sigma = i + 1}^{14} \left(E_{\alpha\sigma} \times 2^{\sigma}\right)$, puis du champs $E_{\beta}$ avec $\lambda_{\beta} = \sum_{\sigma = i + 1}^{14} \left(E_{\beta\sigma} \times 2^{\sigma}\right)$.
 Par le fait que $\left(E_{\alpha\sigma} \ge E_{\beta\sigma}\right)$ pour tout bit de poids $\sigma \in \left]i;14\right]$, nous comprenons que $\left(\lambda_{\alpha} \ge \lambda_{\beta}\right)$.
 
-// retouche de la forme
+Le circuit atteint l'état de point terminal $\left(E_{\alpha} \lt E_{\beta}\right)$ du moment où $\left(\lambda_{\alpha} = \lambda_{\beta}\right)$, car $\left(\lambda_{\beta} + E_{\beta i} \times 2^i\right) \gt \left(\lambda_{\alpha} + \sum_{i}^{10} \left(E_{\alpha i} \times 2^i\right)\right)$.
+Rappelez vous du fait que la condition sur laquelle s'appuie la démonstration mathématique du circuit est $\left(\vert \alpha \vert \gt \vert \beta \vert\right)$, condition qui se solde en échec car $\left(\left(1 + T_{\alpha}\right) \times \ 2^{E_{\alpha}}\right) \lt \left(\left(1 + T_{\beta}\right) \times \ 2^{E_{\beta}}\right)$.
+Je vous invite à relire le chapitre "_Les points terminaux et non terminaux_" dans le cas où vous n'auriez pas compris ce qui vient d'être dit.
 
-Dans le cas où la somme $\lambda_{\alpha}$ est égale à $\lambda_{\beta}$ alors $\left(\lambda_{\beta} + E_{\beta i} \times 2^i\right) \gt \left(\lambda_{\alpha} + \sum_i^{10} \left(E_{\alpha i} \times 2^i\right)\right)$, nous en déduisons donc que $\left(E_{\alpha} \lt E_{\beta}\right)$.
+//
+
 Rappelez vous de la section "_Les points terminaux et non terminaux_", nous y apprenons que lorsque $\left(E_{\alpha} \neq E_{\beta}\right)$ il est certain que $\left(\vert \alpha \vert \neq \vert \beta \vert\right)$.
 Je vous invite à relire ladite section si nécessaire.
-Dans notre cas, la condition sur laquelle se repose la démonstration mathématique du circuit $\left(\vert \alpha \vert \gt \vert \beta \vert\right)$ se solde par un échec, car $\left(\left(1 + T_{\alpha}\right) \times \ 2^{E_{\alpha}}\right) \lt \left(\left(1 + T_{\beta}\right) \times \ 2^{E_{\beta}}\right)$.
+Dans notre cas, la condition sur laquelle se repose la démonstration mathématique du circuit $\left(\vert \ \alpha \ \vert \gt \vert \ \beta \ \vert\right)$ se solde par un échec, car $\left(\left(1 + T_{\alpha}\right) \times \ 2^{E_{\alpha}}\right) \lt \left(\left(1 + T_{\beta}\right) \times \ 2^{E_{\beta}}\right)$.
+
+
+Si jamais $\left(\lambda_{\alpha} = \lambda_{\beta}\right)$ alors $\left(E_{\alpha} \lt E_{\beta}\right)$ car $\left(\lambda_{\beta} + E_{\beta i} \times 2^i\right) \ \gt \ \left(\lambda_{\alpha} + \sum_{i}^{10} \ \left(E_{\alpha i} \times 2^i\right)\right)$.
+La vérification de la condition sur laquelle se base la démonstration mathématique du circuit $\left(\vert\alpha\vert \gt \vert\beta\vert\right)$, se solde par un nouvel échec.
 
 //
 
