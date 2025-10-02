@@ -604,22 +604,9 @@ Par conséquent, un bit de résultat à $0$ ne permet pas de déduire la valeur 
 Plus bas, nous allons voir que les _zéros anonymes_ sont la raison pour laquelle le chapitre précédent conclu de la sorte.
 Je précise que dans les faits il existe des _zéros anonymes capitaux_ et _non capitaux_, dissociation importante que nous allons expliqués ci-dessous.
 
-### Les zéros anonymes non capitaux
-
-Prenons le cas de $\left(\tau_i = \tau_{14} = 1\right)$.
-Dans se cas spécifique, nous avons affaire a un point terminal car $\left(E_{\alpha} \lt E_{\beta}\right)$.
-Ce point terminal est atteint par le fait que $\left(E_{\beta 14} \times 2^{14}\right) \ \gt \ \sum_{i=14}^{10} \ \left(E_{\alpha i} \times 2^i\right)$.
-Sachant que $E_{\alpha 14}$ et $E_{\beta 14}$ sont les _MSB_ respectifs des champs d'exposant $E_{\alpha}$ et $E_{\beta}$.
-
-En bref, nous comprenons que même si $\left(\tau_{\left(i-1\right)} = \tau_{13} = 0\right)$, alors ce _zéro anonyme_ ne changera rien au fait que $\left(E_{\alpha} \lt E_{\beta}\right)$.
-La raison en est que l'inéquation qui figure ci-dessus reste valide qu'importe la valeur du bit $E_{\alpha 13}$, qu'il soit à $0$ ou à $1$.
-
-De manière plus général, nous pouvons en déduire que tout _zéro anonyme_ compris dans l'intervalle $\left[10;14\right[$ et de poids inférieur au _MSB1_ de $\tau \in \left]10;14\right]$, est ___non capital___.
-
-Grâce au chapitre "_Les points terminaux et non terminaux_", nous savons que si $\left(E_{\alpha} \lt E_{\beta}\right)$ alors $\left(\vert\alpha\vert \lt \vert\beta\vert\right)$.
-N'oublions pas que la démonstration mathématique du circuit se base sur la vérification de la condition suivante $\left(\vert\alpha\vert \gt \vert\beta\vert\right)$, qui se solde donc par un échec.
-
 ### Les zéros anonymes capitaux
+
+// à relire
 
 Un _zéro anonyme capital_ est un bit à $0$ du champs $\tau$, dont le poids est supérieur au _MSB1_ de $\tau \in \left[10;14\right]$.
 Par conséquent, lorsque le _MSB1_ de $\tau \in \left[10;14\right]$ a un poids $i \in \left[10;13\right]$, alors les bits de poids $\sigma$ (sigma) compris dans l'intervalle $\left]i;14\right]$ sont par définition des _zéros anonymes capitaux_.
@@ -636,37 +623,36 @@ Le circuit atteint l'état de point terminal $\left(E_{\alpha} \lt E_{\beta}\rig
 Rappelez vous du fait que la condition sur laquelle s'appuie la démonstration mathématique du circuit est $\left(\vert \alpha \vert \gt \vert \beta \vert\right)$, condition qui se solde en échec car $\left(\left(1 + T_{\alpha}\right) \times \ 2^{E_{\alpha}}\right) \lt \left(\left(1 + T_{\beta}\right) \times \ 2^{E_{\beta}}\right)$.
 Je vous invite à relire le chapitre "_Les points terminaux et non terminaux_" dans le cas où vous n'auriez pas compris ce qui vient d'être dit.
 
-// à revoir/relire
-
 Dans le cas où $\left(\lambda_{\alpha} \gt \lambda_{\beta}\right)$, cela veut dire qu'il y a dans $\left(E_{\alpha\sigma} \ge E_{\beta\sigma}\right)$ une ou plusieurs occurrences de $\left(E_{\alpha\sigma} \gt E_{\beta\sigma}\right)$ pour tout poids $\sigma \in \left]i;14\right]$.
 Dans le chapitre "_L'encodage par biais du champs d'exposant_", nous expliquons que la valeur de n'importe quel bit à $1$ de poids $i$ dans un champs d'exposant, est strictement supérieur à la somme des valeurs des bits de poids inférieur à $i$.
-Par conséquent, de toute occurence $\left(E_{\alpha\sigma} \times 2^{\sigma}\right) \gt \left(E_{\beta\sigma} \times 2^{\sigma}\right)$ nous en déduisons que $\left(E_{\alpha\sigma} \times 2^{\sigma}\right) \gt \sum_{\sigma}^{10} \left(E_{\beta\sigma} \times 2^{\sigma}\right)$.
-Nous pouvons conclure qu'à partir de cela $\left(E_{\alpha} \gt E_{\beta}\right)$.
-La condition sur laquelle s'appuie la démonstration mathématique du circuit $\left(\vert \alpha \vert \gt \vert \beta \vert\right)$ réussie, car $\left(\left(1 + T_{\alpha}\right) \times \ 2^{E_{\alpha}}\right) \gt \left(\left(1 + T_{\beta}\right) \times \ 2^{E_{\beta}}\right)$.
+Par conséquent, de toute les occurences $\left(E_{\alpha\sigma} \times 2^{\sigma}\right) \gt \left(E_{\beta\sigma} \times 2^{\sigma}\right)$ nous en déduisons que $\left(E_{\alpha\sigma} \times 2^{\sigma}\right) \gt \sum_{\sigma}^{10} \left(E_{\beta\sigma} \times 2^{\sigma}\right)$.
+A partir de là, nous pouvons en conclure que $\left(E_{\alpha} \gt E_{\beta}\right)$ et une conséquence à cela est que $\left(\left(1 + T_{\alpha}\right) \times \ 2^{E_{\alpha}}\right) \gt \left(\left(1 + T_{\beta}\right) \times \ 2^{E_{\beta}}\right)$.
+La condition sur laquelle s'appuie la démonstration mathématique du circuit $\left(\vert \alpha \vert \gt \vert \beta \vert\right)$ réussie.
 
-//
+### Les zéros anonymes non capitaux
 
-Prenons désormais le cas dans lequel le poids du _MSB1_ de $\tau$ est $\tau_i$ pour $i \in \left[10;13\right]$.
-Dans cette situation, nous sommes certains qu'il y a _au moins_ le bit $\tau_{\left(i+1\right)}$ qui est d'un poids supérieur à $\tau_i$.
-Par définition, $\tau_{\left(i+1\right)}$ et les autres bits de poids supérieur à $\tau_i$ (si il y en a), sont des _zéros anonymes_.
-Par exemple pour $\tau_{\left(i+1\right)}$, nous ne savons pas si $\left(E_{\alpha\left(i+1\right)} = E_{\beta\left(i+1\right)}\right)$ ou si $\left(E_{\alpha\left(i+1\right)} \gt E_{\beta\left(i+1\right)}\right)$.
-Il en va de même pour tout autre bit de poids supérieur à $\tau_i$.
+// à relire
 
-Ceci pose problème car les _zéros anonymes_ de poids supérieur à $\tau_i$ sont décisifs dans le processus de génération d'un point terminal.
-A ce stade nous savons que $\left(\tau_i = 1\right)$, par conséquent $\left(E_{\beta i} \times 2^i\right) \ \gt \ \sum_{i}^{10} \ \left(E_{\alpha i} \times 2^i\right)$.
-Mais comme mentionné plus haut ceci ne suffit pas à dire que $\left(E_{\alpha} \lt E_{\beta}\right)$, voyons pourquoi.
+Un _zéro anonyme non capital_ est un bit à $0$ du champs $\tau$, dont le poids est inférieur au _MSB1_ de $\tau \in \left[10;14\right]$.
+Par conséquent, lorsque le _MSB1_ de $\tau \in \left[10;14\right]$ a un poids $i \in \left[11;14\right]$, alors les bits de poids $\sigma$ compris dans l'intervalle $\left[10;i\right[$ sont par définition des _zéros anonymes non capitaux_.
+Selon le chapitre "_Les zéros anonymes_", nous en déduisons que $\left(E_{\alpha\sigma} \ge E_{\beta\sigma}\right)$ pour tout bit de poids $\sigma \in \left[10;i\right[$.
+Cependant, cela n'a que peu d'importance étant donné que la valeur de n'importe quel bit à $1$ de poids $i$ dans un champs d'exposant, est strictement supérieur à la somme des valeurs des bits de poids inférieur à $i$.
+Sachant que les _zéros anonymes non capitaux_ sont de poids $\sigma \in \left[10;i\right[$ (ils sont d'un poids inférieur à $i$), alors $\left(E_{\beta i} \times 2^i\right) \gt \sum_i^{10} \left(E_{\alpha i} \times 2^i\right)$.
 
-Pour commencer, calculons la somme $\lambda$ (lambda) de la valeur des bits de poids supérieur à $i$ du champs d'exposants $E_{\alpha}$ avec $\left(\lambda_{\alpha} = \sum_{\sigma=i+1}^{14} \ \left(E_{\alpha\sigma} \times 2^{\sigma}\right)\right)$, puis de $E_{\beta}$ avec $\left(\lambda_{\beta} = \sum_{\sigma=i+1}^{14} \ \left(E_{\beta\sigma} \times 2^{\sigma}\right)\right)$.
-Nous savons que $\left(\lambda_{\alpha} \ge \lambda_{\beta}\right)$ car pour tout $\sigma$ (sigma) compris dans l'intervalle $\left]i;14\right]$, il existe $\left(E_{\alpha\sigma} \ge E_{\beta\sigma}\right)$.
+// à traité
 
-Si jamais $\left(\lambda_{\alpha} = \lambda_{\beta}\right)$ alors $\left(E_{\alpha} \lt E_{\beta}\right)$ car $\left(\lambda_{\beta} + E_{\beta i} \times 2^i\right) \ \gt \ \left(\lambda_{\alpha} + \sum_{i}^{10} \ \left(E_{\alpha i} \times 2^i\right)\right)$.
-La vérification de la condition sur laquelle se base la démonstration mathématique du circuit $\left(\vert\alpha\vert \gt \vert\beta\vert\right)$, se solde par un nouvel échec.
+Prenons le cas de $\left(\tau_i = \tau_{14} = 1\right)$.
+Dans se cas spécifique, nous avons affaire a un point terminal car $\left(E_{\alpha} \lt E_{\beta}\right)$.
+Ce point terminal est atteint par le fait que $\left(E_{\beta 14} \times 2^{14}\right) \ \gt \ \sum_{i=14}^{10} \ \left(E_{\alpha i} \times 2^i\right)$.
+Sachant que $E_{\alpha 14}$ et $E_{\beta 14}$ sont les _MSB_ respectifs des champs d'exposant $E_{\alpha}$ et $E_{\beta}$.
 
-Cependant, si $\left(\lambda_{\alpha} \gt \lambda_{\beta}\right)$ alors cela veut dire que parmis les bits de poids $\sigma \in \left]i;14\right]$, il y a une ou plusieurs occurrence de $\left(E_{\alpha\sigma} \gt E_{\beta\sigma}\right)$.
-Par conséquent, nous savons que pour chacune de ces occurences $\left(E_{\alpha\sigma} \times 2^{\sigma}\right) \ \gt \ \sum_{\sigma}^{10} \ \left(E_{\beta\sigma} \times 2^{\sigma}\right)$ et donc $\left(E_{\alpha} \gt E_{\beta}\right)$.
-Comme le démontre le chapitre "_Les points terminaux et non terminaux_", lorsque $\left(E_{\alpha} \gt E_{\beta}\right)$ alors $\left(\vert\alpha\vert \gt \vert\beta\vert\right)$ et la vérification de la condition sur laquelle repose la démonstration mathématique du circuit est réussie.
+En bref, nous comprenons que même si $\left(\tau_{\left(i-1\right)} = \tau_{13} = 0\right)$, alors ce _zéro anonyme_ ne changera rien au fait que $\left(E_{\alpha} \lt E_{\beta}\right)$.
+La raison en est que l'inéquation qui figure ci-dessus reste valide qu'importe la valeur du bit $E_{\alpha 13}$, qu'il soit à $0$ ou à $1$.
 
-Nous comprenons donc que les _zéros anonymes_ de l'intervalle $\left]10;14\right]$ et de poids supérieur au _MSB1_ de $\tau \in \left[10;14\right[$, sont des _zéros anonymes_ ___capitaux___.
+De manière plus général, nous pouvons en déduire que tout _zéro anonyme_ compris dans l'intervalle $\left[10;14\right[$ et de poids inférieur au _MSB1_ de $\tau \in \left]10;14\right]$, est ___non capital___.
+
+Grâce au chapitre "_Les points terminaux et non terminaux_", nous savons que si $\left(E_{\alpha} \lt E_{\beta}\right)$ alors $\left(\vert\alpha\vert \lt \vert\beta\vert\right)$.
+N'oublions pas que la démonstration mathématique du circuit se base sur la vérification de la condition suivante $\left(\vert\alpha\vert \gt \vert\beta\vert\right)$, qui se solde donc par un échec.
 
 ### L'obtention d'un point non terminal
 
