@@ -629,13 +629,21 @@ La condition sur laquelle s'appuie la démonstration mathématique du circuit $\
 
 ### Les zéros anonymes non capitaux
 
-// à relire
-
 Un _zéro anonyme non capital_ est un bit à $0$ du champs $\tau$, dont le poids est inférieur au _MSB1_ de $\tau \in \left[10;14\right]$.
 Par conséquent, lorsque le _MSB1_ de $\tau \in \left[10;14\right]$ a un poids $i \in \left[11;14\right]$, alors les bits de poids $\sigma$ compris dans l'intervalle $\left[10;i\right[$ sont par définition des _zéros anonymes non capitaux_.
 Selon le chapitre "_Les zéros anonymes_", nous en déduisons que $\left(E_{\alpha\sigma} \ge E_{\beta\sigma}\right)$ pour tout bit de poids $\sigma \in \left[10;i\right[$.
-Cependant, cela n'a que peu d'importance étant donné que la valeur de n'importe quel bit à $1$ de poids $i$ dans un champs d'exposant, est strictement supérieur à la somme des valeurs des bits de poids inférieur à $i$.
-Sachant que les _zéros anonymes non capitaux_ sont de poids $\sigma \in \left[10;i\right[$ (ils sont d'un poids inférieur à $i$), alors $\left(E_{\beta i} \times 2^i\right) \gt \sum_i^{10} \left(E_{\alpha i} \times 2^i\right)$.
+Cependant, au contraire des _zéros anonymes capitaux_, cela n'a que peu d'importance comme nous allons le voir.
+
+Revenons en une nouvelle fois là où nous en étions dans le chapitre "_Le traitement des champs d'exposant_".
+Admettons que le _MSB1_ de $\tau \in \left[10;14\right]$ ait un poids $i \in \left[11;14\right]$, par conséquent $\left(\tau_i = 1\right)$ et nous pouvons en déduire que $\left(E_{\beta i} \times 2^i\right) \gt \sum_i^{10} \left(E_{\alpha i} \times 2^i\right)$, mais pourquoi?
+La première raison est que nous avons connaissance de la valeur des bits d'opérandes à l'origine de $\left(\tau_i = 1\right)$, ces bits valent $\left(E_{\beta i} = 1\right)$ et $\left(E_{\alpha i} = 0\right)$.
+En second, je pense avoir suffisamment dit que la valeur de n'importe quel bit à $1$ de poids $i$ dans un champs d'exposant, est strictement supérieur à la somme des valeurs des bits de poids inférieur à $i$.
+Les bits à $0$ de poids $\tau_{\sigma}$ pour tout $\sigma \in \left[10;i\right[$, sont des _zéros anonymes non capitaux_.
+Par définition, pour tout $\left(\tau_{\sigma} = 0\right)$ nous ne savons pas si les bits d'opérandes sont égaux $\left(E_{\alpha\sigma} = E_{\beta\sigma}\right)$ où si $\left(E_{\alpha\sigma} \gt E_{\beta\sigma}\right)$, autrement dit nous ne savons pas si $E_{\alpha\sigma}$ vaut $0$ ou $1$.
+Mais cela n'a pas d'importance, car rappelez vous que $E_{\alpha\sigma}$ est d'un poids $\sigma$ inférieur au poids $i$ du _MSB1_.
+Cela ne change en rien le fait que le membre gauche de l'inéquation $\left(E_{\beta i} \times 2^i\right)$ rest strictement supérieur au membre droit $\sum_i^{10} \left(E_{\alpha i} \times 2^i\right)$, peu importe les circonstances.
+
+
 
 // à traité
 
