@@ -629,52 +629,26 @@ La condition sur laquelle s'appuie la démonstration mathématique du circuit $\
 
 ### Les zéros anonymes non capitaux
 
+// à relire
+
 Un _zéro anonyme non capital_ est un bit à $0$ du champs $\tau$, dont le poids est inférieur au _MSB1_ de $\tau \in \left[10;14\right]$.
-Par conséquent, lorsque le _MSB1_ de $\tau \in \left[10;14\right]$ a un poids $i \in \left[11;14\right]$, alors les bits de poids $\sigma$ compris dans l'intervalle $\left[10;i\right[$ sont par définition des _zéros anonymes non capitaux_.
-Selon le chapitre "_Les zéros anonymes_", nous en déduisons que $\left(E_{\alpha\sigma} \ge E_{\beta\sigma}\right)$ pour tout bit de poids $\sigma \in \left[10;i\right[$.
-Cependant, au contraire des _zéros anonymes capitaux_, cela n'a que peu d'importance.
-
-Rappelons que la valeur de n'importe quel bit à $1$ de poids $i$ dans un champs d'exposant, est strictement supérieur à la somme des valeurs des bits de poids inférieur à $i$.
-
-
-
-
+Par conséquent, lorsque le _MSB1_ de $\tau \in \left[10;14\right]$ a un poids $i \in \left[11;14\right]$, alors les bits à $0$ de poids $\sigma$ compris dans l'intervalle $\left[10;i\right[$ sont par définition des _zéros anonymes non capitaux_.
+Selon le chapitre "_Les zéros anonymes_", nous en déduisons que $\left(E_{\alpha\sigma} \ge E_{\beta\sigma}\right)$ du moment où $\left(\tau_{\sigma} = 0\right)$ pour $\sigma \in \left[10;i\right[$.
+Cependant, au contraire des _zéros anonymes capitaux_, nous verrons que cela n'a que peu d'importance.
 
 Reprenons d'où nous en étions dans le chapitre "_Le traitement des champs d'exposant_".
-Admettons que le _MSB1_ de $\tau \in \left[10;14\right]$ ait un poids $i \in \left[11;14\right]$, par conséquent $\left(\tau_i = 1\right)$ et $\left(E_{\beta i} \times 2^i\right) \gt \sum_i^{10} \left(E_{\alpha i} \times 2^i\right)$.
-Nous savons qu'un _zéro anonyme non capital_ est un bit à $0$ dans $\tau$ dont le poids $\sigma \in \left[10;i\right[$.
-
-
-Par conséquent, un bit $\tau_{\sigma}$ qui vaut $0$ ne permet pas de déduire la valeur des bits $E_{\alpha\sigma}$ ainsi que $E_{\beta\sigma}$, tout ce que nous savons c'est que $\left(E_{\alpha\sigma} \ge E_{\beta\sigma}\right)$.
-Mais comme dit précédemment, cela n'a que peu d'importance étant donné que le bit $E_{\beta i}$ est à $1$ en plus d'avoir un poids supérieur aux bits $E_{\alpha\sigma}$
-
-
-Si pour $\left(\tau_i = 1\right)$ nous savons que $\left(E_{\beta i} = 1\right)$ tandis que $\left(E_{\alpha i} = 0\right)$, ce qui n'est pas le cas pour $\left(\tau_{\sigma} = 0\right)$ où $\left(E_{\alpha\sigma} \ge E_{\beta\sigma}\right)$.
+Admettons que le _MSB1_ de $\tau \in \left[10;14\right]$ ait un poids $i \in \left[11;14\right]$, par conséquent $\left(\tau_i = 1\right)$ et $\left(E_{\beta i} \times 2^i\right) \gt \left(E_{\alpha i} \times 2^i\right)$.
 Rappelons que la valeur de n'importe quel bit à $1$ de poids $i$ dans un champs d'exposant, est strictement supérieur à la somme des valeurs des bits de poids inférieur à $i$.
-Par conséquent, 
+En conclusion, nous trouvons que $\left(E_{\beta i} \times 2^i\right) \gt \sum_i^{10} \left(E_{\alpha i} \times 2^i\right)$.
 
-
-Tout bit à $0$ dans $\tau$ qui est d'un poids $\sigma \in \left[10;i\right[$ est un _zéro anonyme non capital_.
-Comme indiqué, le poids d'un _zéro anonyme non capital et 
-
-Tout bit à $0$ dans $\tau$ qui est d'un poids $\sigma \in \left[10;i\right[$ est un _zéro anonyme non capital_, un tel bit ne permet pas de déduire la valeur de ces bits d'opérandes mais seulement que $\left(E_{\alpha\sigma} \ge E_{\beta\sigma}\right)$.
-En bref, cela veut dire que le bit $E_{\alpha\sigma}$ peut être à $0$ comme à $1$, mais cela n'a aucune importance car ce bit est d'un poids $\sigma$ qui est strictement inférieur au poids $i$ du _MSB1_ de $\tau \in \left[10;14\right]$.
-C'est pourquoi l'inéquation ci-dessus n'a pas besoin de prendre en compte les _zéros anonymes capitaux_.
-
+Désormais, partons du principe que $\left(\tau_{\sigma} = 0\right)$ pour $\sigma \in \left[10;i\right[$.
+Comme dit précédemment, nous savons que $\left(E_{\alpha\sigma} \ge E_{\beta\sigma}\right)$ ce qui permet à $E_{\alpha\sigma}$ de valoir soit $1$ soit $0$.
+A vrai dire, peu importe étant donné que $\sigma$ est un poids strictement inférieur à $i$.
+La somme des valeurs des bits de poids inférieur à $i$, à laquelle prend part $\left(E_{\alpha\sigma} \times 2^{\sigma}\right)$, est inconditionellement inférieur à $\left(E_{\beta i} \times 2^i\right)$.
+L'inéquation en fin de paragraphe précédent reste donc juste qu'importe la valeur du bit $E_{\alpha\sigma}$, et qu'importe même la valeur de l'ensemble des bits de poids inférieur à $i$.
+Cela touche donc l'ensemble des bits $E_{\alpha\sigma}$, du moment où $\left(\tau_{\sigma} = 0\right)$ pour tout $\sigma \in \left[10;i\right[$.
 
 //
-
-Admettons que le _MSB1_ de $\tau \in \left[10;14\right]$ ait un poids $i \in \left[11;14\right]$, par conséquent $\left(\tau_i = 1\right)$ et nous pouvons en déduire que $\left(E_{\beta i} \times 2^i\right) \gt \sum_i^{10} \left(E_{\alpha i} \times 2^i\right)$, mais pourquoi?
-La première raison est que nous avons connaissance de la valeur des bits d'opérandes à l'origine de $\left(\tau_i = 1\right)$, ces bits valent $\left(E_{\beta i} = 1\right)$ et $\left(E_{\alpha i} = 0\right)$.
-En second, je pense avoir suffisamment dit que la valeur de n'importe quel bit à $1$ de poids $i$ dans un champs d'exposant, est strictement supérieur à la somme des valeurs des bits de poids inférieur à $i$.
-Les bits à $0$ de poids $\tau_{\sigma}$ pour tout $\sigma \in \left[10;i\right[$, sont des _zéros anonymes non capitaux_.
-Par définition, pour tout $\left(\tau_{\sigma} = 0\right)$ nous ne savons pas si les bits d'opérandes sont égaux $\left(E_{\alpha\sigma} = E_{\beta\sigma}\right)$ où si $\left(E_{\alpha\sigma} \gt E_{\beta\sigma}\right)$, autrement dit nous ne savons pas si $E_{\alpha\sigma}$ vaut $0$ ou $1$.
-Mais cela n'a pas d'importance, car rappelez vous que $E_{\alpha\sigma}$ est d'un poids $\sigma$ inférieur au poids $i$ du _MSB1_.
-Cela ne change en rien le fait que le membre gauche de l'inéquation $\left(E_{\beta i} \times 2^i\right)$ rest strictement supérieur au membre droit $\sum_i^{10} \left(E_{\alpha i} \times 2^i\right)$, peu importe les circonstances.
-
-
-
-// à traité
 
 Prenons le cas de $\left(\tau_i = \tau_{14} = 1\right)$.
 Dans se cas spécifique, nous avons affaire a un point terminal car $\left(E_{\alpha} \lt E_{\beta}\right)$.
