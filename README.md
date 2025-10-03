@@ -606,8 +606,6 @@ Je précise que dans les faits il existe des _zéros anonymes capitaux_ et _non 
 
 ### Les zéros anonymes capitaux
 
-// à relire
-
 Un _zéro anonyme capital_ est un bit à $0$ du champs $\tau$, dont le poids est supérieur au _MSB1_ de $\tau \in \left[10;14\right]$.
 Par conséquent, lorsque le _MSB1_ de $\tau \in \left[10;14\right]$ a un poids $i \in \left[10;13\right]$, alors les bits de poids $\sigma$ (sigma) compris dans l'intervalle $\left]i;14\right]$ sont par définition des _zéros anonymes capitaux_.
 Selon le chapitre "_Les zéros anonymes_", nous en déduisons que $\left(E_{\alpha\sigma} \ge E_{\beta\sigma}\right)$ pour tout bit de poids $\sigma \in \left]i;14\right]$.
@@ -626,7 +624,7 @@ Je vous invite à relire le chapitre "_Les points terminaux et non terminaux_" d
 Dans le cas où $\left(\lambda_{\alpha} \gt \lambda_{\beta}\right)$, cela veut dire qu'il y a dans $\left(E_{\alpha\sigma} \ge E_{\beta\sigma}\right)$ une ou plusieurs occurrences de $\left(E_{\alpha\sigma} \gt E_{\beta\sigma}\right)$ pour tout poids $\sigma \in \left]i;14\right]$.
 Dans le chapitre "_L'encodage par biais du champs d'exposant_", nous expliquons que la valeur de n'importe quel bit à $1$ de poids $i$ dans un champs d'exposant, est strictement supérieur à la somme des valeurs des bits de poids inférieur à $i$.
 Par conséquent, de toute les occurences $\left(E_{\alpha\sigma} \times 2^{\sigma}\right) \gt \left(E_{\beta\sigma} \times 2^{\sigma}\right)$ nous en déduisons que $\left(E_{\alpha\sigma} \times 2^{\sigma}\right) \gt \sum_{\sigma}^{10} \left(E_{\beta\sigma} \times 2^{\sigma}\right)$.
-A partir de là, nous pouvons en conclure que $\left(E_{\alpha} \gt E_{\beta}\right)$ et une conséquence à cela est que $\left(\left(1 + T_{\alpha}\right) \times \ 2^{E_{\alpha}}\right) \gt \left(\left(1 + T_{\beta}\right) \times \ 2^{E_{\beta}}\right)$.
+A partir de là, nous savons que le circuit atteint l'état de point terminal $\left(E_{\alpha} \gt E_{\beta}\right)$, et une conséquence à cela est que $\left(\left(1 + T_{\alpha}\right) \times \ 2^{E_{\alpha}}\right) \gt \left(\left(1 + T_{\beta}\right) \times \ 2^{E_{\beta}}\right)$.
 La condition sur laquelle s'appuie la démonstration mathématique du circuit $\left(\vert \alpha \vert \gt \vert \beta \vert\right)$ réussie.
 
 ### Les zéros anonymes non capitaux
