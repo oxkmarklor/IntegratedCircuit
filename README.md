@@ -580,7 +580,7 @@ Chaque bit de résultat d'une opération $Nimply$ sur $E_{\beta i}$ et $E_{\alph
 Avec ce que nous avons vu de l'opération logique $Nimply$ dans la section précédente, nous comprenons que pour $i \in \left[10;14\right]$ du moment où $\left(\tau_i = 1\right)$ il est certain que $\left(E_{\beta i} \times 2^i\right) \gt \left(E_{\alpha i} \times 2^i\right)$.
 Mais ce n'est pas tout, rappelez vous de la section "_L'encodage par biais du champs d'exposant_".
 Cette section explique entre autre que, je cite "_la valeur de n'importe quel bit à_ $1$ _de poids_ $i$ _dans un champs d'exposant, est strictement supérieur à la somme des valeurs des bits de poids inférieur à_ $i$".
-Par conséquent, cela traduit l'idée que du moment où $\left(\tau_i = 1\right)$ pour tout $i \in \left[11;14\right]$, nous pouvons être sûrs que $\left(E_{\beta i} \times 2^i\right) \gt \sum_{ii = i - 1}^{10} \left(E_{\alpha ii} \times 2^{ii}\right)$.
+Par conséquent, cela traduit l'idée que du moment où $\left(\tau_i = 1\right)$ pour tout $i \in \left[11;14\right]$, nous pouvons être sûrs que $\left(E_{\beta i} \times 2^i\right) \gt \sum_{\sigma = i - 1}^{10} \left(E_{\alpha\sigma} \times 2^{\sigma}\right)$.
 
 Au final, nous pouvons en conclure que dans le cas où $\left(\tau_i = 1\right)$ pour tout $i \in \left[10;14\right]$, alors $\left(E_{\beta i} \times 2^i\right) \ \gt \ \sum_i^{10} \ \left(E_{\alpha i} \times 2^i\right)$.
 Cela ne démontre pas pour autant que $\left(E_{\alpha} \lt E_{\beta}\right)$.
@@ -619,7 +619,7 @@ Par le fait que $\left(E_{\alpha\sigma} \ge E_{\beta\sigma}\right)$ pour tout bi
 
 Le circuit atteint l'état de point terminal $\left(E_{\alpha} \lt E_{\beta}\right)$ du moment où $\left(\lambda_{\alpha} = \lambda_{\beta}\right)$, car $\left(\lambda_{\beta} + E_{\beta i} \times 2^i\right) \gt \left(\lambda_{\alpha} + \sum_{i}^{10} \left(E_{\alpha i} \times 2^i\right)\right)$.
 Rappelez vous du fait que la condition sur laquelle s'appuie la démonstration mathématique du circuit est $\left(\vert \alpha \vert \gt \vert \beta \vert\right)$, condition qui se solde en échec car $\left(\left(1 + T_{\alpha}\right) \times \ 2^{E_{\alpha}}\right) \lt \left(\left(1 + T_{\beta}\right) \times \ 2^{E_{\beta}}\right)$.
-Je vous invite à relire le chapitre "_Les points terminaux et non terminaux_" dans le cas où vous n'auriez pas compris ce qui vient d'être dit.
+Je vous invite à relire la section "_Les points terminaux et non terminaux_" dans le cas où vous n'auriez pas compris ce qui vient d'être dit.
 
 Dans le cas où $\left(\lambda_{\alpha} \gt \lambda_{\beta}\right)$, cela veut dire qu'il y a dans $\left(E_{\alpha\sigma} \ge E_{\beta\sigma}\right)$ une ou plusieurs occurrences de $\left(E_{\alpha\sigma} \gt E_{\beta\sigma}\right)$ pour tout poids $\sigma \in \left]i;14\right]$.
 Dans le chapitre "_L'encodage par biais du champs d'exposant_", nous expliquons que la valeur de n'importe quel bit à $1$ de poids $i$ dans un champs d'exposant, est strictement supérieur à la somme des valeurs des bits de poids inférieur à $i$.
