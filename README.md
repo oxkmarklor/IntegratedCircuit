@@ -631,8 +631,8 @@ La condition sur laquelle s'appuie la démonstration mathématique du circuit $\
 
 // à relire
 
-Un _zéro anonyme non capital_ est un bit à $0$ du champs $\tau$, dont le poids est inférieur au _MSB1_ de $\tau \in \left[10;14\right]$.
-Par conséquent, lorsque le _MSB1_ de $\tau \in \left[10;14\right]$ a un poids $i \in \left[11;14\right]$, alors les bits à $0$ de poids $\sigma$ compris dans l'intervalle $\left[10;i\right[$ sont par définition des _zéros anonymes non capitaux_.
+Un _zéro anonyme non capital_ est un bit à $0$ dans le champs $\tau \in \left[10;14\right]$, dont le poids est inférieur au _MSB1_ de $\tau \in \left[10;14\right]$.
+Par conséquent, lorsque le _MSB1_ a un poids $i \in \left[11;14\right]$, alors les bits à $0$ de poids $\sigma$ compris dans l'intervalle $\left[10;i\right[$ sont par définition des _zéros anonymes non capitaux_.
 Selon le chapitre "_Les zéros anonymes_", nous en déduisons que $\left(E_{\alpha\sigma} \ge E_{\beta\sigma}\right)$ du moment où $\left(\tau_{\sigma} = 0\right)$ pour $\sigma \in \left[10;i\right[$.
 Cependant, au contraire des _zéros anonymes capitaux_, nous verrons que cela n'a que peu d'importance.
 
@@ -644,9 +644,8 @@ En conclusion, nous trouvons que $\left(E_{\beta i} \times 2^i\right) \gt \sum_i
 Désormais, partons du principe que $\left(\tau_{\sigma} = 0\right)$ pour $\sigma \in \left[10;i\right[$.
 Comme dit précédemment, nous savons que $\left(E_{\alpha\sigma} \ge E_{\beta\sigma}\right)$ ce qui permet à $E_{\alpha\sigma}$ de valoir soit $1$ soit $0$.
 A vrai dire, peu importe étant donné que $\sigma$ est un poids strictement inférieur à $i$.
-La somme des valeurs des bits de poids inférieur à $i$, à laquelle prend part $\left(E_{\alpha\sigma} \times 2^{\sigma}\right)$, est inconditionellement inférieur à $\left(E_{\beta i} \times 2^i\right)$.
-L'inéquation en fin de paragraphe précédent reste donc juste qu'importe la valeur du bit $E_{\alpha\sigma}$, et qu'importe même la valeur de l'ensemble des bits de poids inférieur à $i$.
-Cela touche donc l'ensemble des bits $E_{\alpha\sigma}$, du moment où $\left(\tau_{\sigma} = 0\right)$ pour tout $\sigma \in \left[10;i\right[$.
+La somme des valeurs des bits de poids inférieur à $i$, à laquelle prend part $\left(E_{\alpha\sigma} \times 2^{\sigma}\right)$ dans le membre droit de l'inéquation, est inconditionellement inférieur au membre gauche $\left(E_{\beta i} \times 2^i\right)$.
+L'inéquation en fin de paragraphe précédent reste donc juste qu'importe la valeur du bit $E_{\alpha\sigma}$.
 
 //
 
