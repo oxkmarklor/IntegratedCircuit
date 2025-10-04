@@ -633,6 +633,9 @@ La condition sur laquelle s'appuie la démonstration mathématique du circuit $\
 
 Un _zéro anonyme non capital_ est un bit à $0$ dans le champs $\tau \in \left[10;14\right]$, dont le poids est inférieur au _MSB1_ de $\tau \in \left[10;14\right]$.
 Par conséquent, lorsque le _MSB1_ a un poids $i \in \left[11;14\right]$, alors les bits à $0$ de poids $\sigma$ compris dans l'intervalle $\left[10;i\right[$ sont par définition des _zéros anonymes non capitaux_.
+
+// report
+
 Selon le chapitre "_Les zéros anonymes_", nous en déduisons que $\left(E_{\alpha\sigma} \ge E_{\beta\sigma}\right)$ du moment où $\left(\tau_{\sigma} = 0\right)$ pour $\sigma \in \left[10;i\right[$.
 Cependant, au contraire des _zéros anonymes capitaux_, nous verrons que cela n'a que peu d'importance.
 
