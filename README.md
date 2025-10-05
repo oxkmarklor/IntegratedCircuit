@@ -629,8 +629,7 @@ La condition sur laquelle s'appuie la démonstration mathématique du circuit $\
 
 ### Les zéros anonymes non capitaux
 
-// à relire
-
+Nous comprenons désormais l'importance des _zéros anonymes_ de poids supérieur au _MSB1_ de $\tau \in \left[10;14\right]$, voyons ce qu'il en est de ceux qui sont d'un poids inférieur au _MSB1_.
 Un _zéro anonyme non capital_ est un bit à $0$ dans le champs $\tau \in \left[10;14\right]$, dont le poids est inférieur au _MSB1_ de $\tau \in \left[10;14\right]$.
 Par conséquent, lorsque le _MSB1_ a un poids $i \in \left[11;14\right]$, alors les bits à $0$ de poids $\sigma$ compris dans l'intervalle $\left[10;i\right[$ sont par définition des _zéros anonymes non capitaux_.
 
@@ -646,17 +645,26 @@ En effet, le poids $\sigma$ est strictement inférieur au poids $i$ du _MSB1_ de
 La somme des valeurs des bits de poids inférieur à $i$, à laquelle prend part $\left(E_{\alpha\sigma} \times 2^{\sigma}\right)$, est quoi qu'il arrive inférieur à $\left(E_{\beta i} \times 2^i\right)$.
 L'inéquation en fin de paragraphe précédent est et restera juste, qu'importe la valeur du bit $E_{\alpha\sigma}$.
 
-Nous comprenons d'où vient le nom de _zéro anonyme non capital_.
-Ces derniers ne permettent pas de déduire la valeur des bits de même poids dans $E_{\alpha}$ ainsi que $E_{\beta}$, mais la démonstration (à l'instar du circuit) n'a pas besoin de connaitre la valeur de ces bits pour fonctionner.
-Ces bits sont _non capitaux_.
+Les _zéros anonymes non capitaux_ ne permettent pas de déduire la valeur des bits de poids équivalent dans $E_{\alpha}$ ainsi que $E_{\beta}$, mais la démonstration (à l'instar du circuit) n'a pas besoin de connaitre la valeur de ces bits pour fonctionner.
+D'où le fait que ces bits soient dit _non capitaux_.
 
-### L'obtention d'un point non terminal
+## L'obtention d'un point non terminal
 
-Jusqu'ici nous avions un _MSB1_ dans $\tau \in \left[10;14\right]$, mais il pourrait ne pas y en avoir.
-Dans cette situation, chaque bit de $\tau \in \left[10;14\right]$ est un _zéro anonyme_, ce qui nous permet d'affirmé que $\left(E_{\alpha} \ge E_{\beta}\right)$.
+// à relire
 
-Nous pourrions atteindre un point terminal si jamais $\left(E_{\alpha} \gt E_{\beta}\right)$, mais ce point terminal ne pourrait s'obtenir qu'à la condition qu'au moins une occurence $\left(E_{\alpha i} \gt E_{\beta i}\right)$ existe pour $i \in \left[10;14\right]$.
-Alors, la vérification de la condition sur laquelle se base la démonstration mathématique du circuit $\left(\vert\alpha\vert \gt \vert\beta\vert\right)$ réussie.
+Je précise que ce chapitre parle des états de points terminaux ainsi que non terminaux du circuit.
+Si nécessire, vous pouvez lire de nouveau le chapitre "_Les points terminaux et non terminaux_" qui explique ce que sont ces états du circuit.
+
+Dans les sections précédente nous avions toujours un _MSB1_ dans $\tau \in \left[10;14\right]$, mais il pourrait ne pas y en avoir.
+Par essence, une telle situation veut que chaque bit de $\tau \in \left[10;14\right]$ soit un _zéro anonyme_, ce qui nous permet de déduire que $\left(E_{\alpha i} \ge E_{\beta i}\right)$ pour tout bit de poids $i \in \left[10;14\right]$.
+Pour le dire autrement, nous savons que $\left(E_{\alpha} \ge E_{\beta}\right)$.
+
+Il s'avère que le circuit rentre dans un état de point terminal du moment où $\left(E_{\alpha} \gt E_{\beta}\right)$.
+Cet état de point terminal ne peut s'obtenir qu'à la condition qu'il y ait une ou plusieurs occurences de $\left(E_{\alpha i} \gt E_{\beta i}\right)$ pour tout poids $i \in \left[10;14\right]$.
+Par conséquent, nous en déduisons que $\left(E_{\alpha i} \times 2^i\right) \gt \sum_i^{10} \left(E_{\beta i} \times 2^i\right)$ et le circuit atteint l'état de point terminal $\left(E_{\alpha} \gt E_{\beta}\right)$.
+Une conséquence à cela est que la condition sur laquelle s'appuie la démonstration mathématique du circuit $\left(\vert \alpha \vert \gt \vert \beta \vert\right)$ réussie, car $\left(\left(1 + T_{\alpha}\right) \times \ 2^{E_{\alpha}}\right) \gt \left(\left(1 + T_{\beta}\right) \times \ 2^{E_{\beta}}\right)$.
+
+// continuer ici
 
 Mais nous pourrions aussi atteindre une situation inédite de ___point non terminal___, si $\left(E_{\alpha} = E_{\beta}\right)$.
 Cette situation inédite ne peut se produire que dans le cas où l'ensemble des paires de bits de même poids des champs d'exposant $E_{\alpha}$ et $E_{\beta}$ sont identiques, ou autrement dit $\forall \ i \in \left[10;14\right]$ alors $\left(E_{\alpha i} = E_{\beta i}\right)$.
