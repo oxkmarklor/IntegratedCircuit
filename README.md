@@ -646,20 +646,9 @@ En effet, le poids $\sigma$ est strictement inférieur au poids $i$ du _MSB1_ de
 La somme des valeurs des bits de poids inférieur à $i$, à laquelle prend part $\left(E_{\alpha\sigma} \times 2^{\sigma}\right)$, est quoi qu'il arrive inférieur à $\left(E_{\beta i} \times 2^i\right)$.
 L'inéquation en fin de paragraphe précédent est et restera juste, qu'importe la valeur du bit $E_{\alpha\sigma}$.
 
-//
-
-Prenons le cas de $\left(\tau_i = \tau_{14} = 1\right)$.
-Dans se cas spécifique, nous avons affaire a un point terminal car $\left(E_{\alpha} \lt E_{\beta}\right)$.
-Ce point terminal est atteint par le fait que $\left(E_{\beta 14} \times 2^{14}\right) \ \gt \ \sum_{i=14}^{10} \ \left(E_{\alpha i} \times 2^i\right)$.
-Sachant que $E_{\alpha 14}$ et $E_{\beta 14}$ sont les _MSB_ respectifs des champs d'exposant $E_{\alpha}$ et $E_{\beta}$.
-
-En bref, nous comprenons que même si $\left(\tau_{\left(i-1\right)} = \tau_{13} = 0\right)$, alors ce _zéro anonyme_ ne changera rien au fait que $\left(E_{\alpha} \lt E_{\beta}\right)$.
-La raison en est que l'inéquation qui figure ci-dessus reste valide qu'importe la valeur du bit $E_{\alpha 13}$, qu'il soit à $0$ ou à $1$.
-
-De manière plus général, nous pouvons en déduire que tout _zéro anonyme_ compris dans l'intervalle $\left[10;14\right[$ et de poids inférieur au _MSB1_ de $\tau \in \left]10;14\right]$, est ___non capital___.
-
-Grâce au chapitre "_Les points terminaux et non terminaux_", nous savons que si $\left(E_{\alpha} \lt E_{\beta}\right)$ alors $\left(\vert\alpha\vert \lt \vert\beta\vert\right)$.
-N'oublions pas que la démonstration mathématique du circuit se base sur la vérification de la condition suivante $\left(\vert\alpha\vert \gt \vert\beta\vert\right)$, qui se solde donc par un échec.
+Nous comprenons d'où vient le nom de _zéro anonyme non capital_.
+Ces derniers ne permettent pas de déduire la valeur des bits de même poids dans $E_{\alpha}$ ainsi que $E_{\beta}$, mais la démonstration (à l'instar du circuit) n'a pas besoin de connaitre la valeur de ces bits pour fonctionner.
+Ces bits sont _non capitaux_.
 
 ### L'obtention d'un point non terminal
 
