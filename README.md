@@ -671,34 +671,23 @@ C'est ce qui force le circuit à devoir traité les champs de mantisse tronquée
 
 # Le traitement des champs de mantisse tronquée
 
-// à relire
+Pour ceux qui ont besoin d'un rafraichissement de mémoire, je vous rappelle que les encodages des champs d'exposant et de mantisse tronquée ont des points en commun, ils partagent les même propriétés que l'encodage _Binary Unsigned_.
+C'est la raison derrière le fait que le circuit traite les champs de mantisse tronquée d'une façon similaire aux champs d'exposant.
+Je vous renvoie vers les sections "_L'encodage du champs de mantisse tronquée_" ainsi que "_L'encodage par biais du champs d'exposant_" si nécessaire.
 
-Le traitement des champs de mantisse tronquée est le même que celui des champs d'exposant.
-Pour ceux qui ont besoin d'un rafraichissement, je vous rappelle que l'encodage des champs d'exposant et de mantisse tronquée ont des points en commun, ils partagent les même propriétés que l'encodage _Binary Unsigned_.
-C'est la raison pour laquelle le traitement entre les champs d'exposant et de mantisse tronquée est le même.
-Je vous renvoie vers les sections "_L'encodage du champs de mantisse tronquée_" et "_L'encodage par biais du champs d'exposant_", si nécessaire.
-Voyons ce qu'il en est.
-
-Le circuit effectue une comparaison de supériorité stricte entre les champs d'exposant $E$ de ses opérandes, il fait donc de même entre les champs de mantisse tronquée $T$.
-Rappelons que la condition sur laquelle s'appuie la démonstration mathématique du circuit est $\left(\vert \alpha \vert \gt \vert \beta \vert\right)$, ce qui donne $\left(\left(1 + T_{\alpha}\right) \times \ 2^{E_{\alpha}}\right) \gt \left(\left(1 + T_{\beta}\right) \times \ 2^{E_{\beta}}\right)$.
-Cependant, si le circuit traite les champs de mantisse tronquée de ses opérandes c'est qu'il est en état de point non terminal $\left(E_{\alpha} = E_{\beta}\right)$, et la condition passe à $\left(T_{\alpha} \gt T_{\beta}\right)$.
+Rappelons que la démonstration mathématique du circuit s'appuie sur le test de la condition suivante $\left(\vert \alpha \vert \gt \vert \beta \vert\right)$, ce qui donne $\left(\left(1 + T_{\alpha}\right) \times \ 2^{E_{\alpha}}\right) \gt \left(\left(1 + T_{\beta}\right) \times \ 2^{E_{\beta}}\right)$.
+Cependant, n'oublions pas que le circuit doit être en état de point non terminal $\left(E_{\alpha} = E_{\beta}\right)$ pour traité les champs de mantisse tronquée de ses opérandes.
+Remarquons que de la condition initial il ne reste de pertinent plus que $\left(T_{\alpha} \gt T_{\beta}\right)$.
+En définitif, pour générer un résultat vérifiant ou non la condition initial que teste le circuit, ce dernier doit effectué une comparaison de supérioté stricte entre les champs de mantisse tronquée de ses opérandes.
+Comme il l'a d'ores et déjà fait avec les champs d'exposant.
 Voici la première phase du traitement des champs de mantisse tronquée.
 
 $$\forall \ i \in \left[0;9\right], \quad Write \ \left(\tau_i, \ Nimply \ \left(T_{\beta i}, \ T_{\alpha i}\right)\right)$$
 
+La variable $\tau$ est techniquement la même que celle utilisée dans la première partie de la démonstration "_Le traitement des champs d'exposant_".
+Le seul changement est que le bit de résultat de chaque opération logique $Nimply$ sur $T_{\beta i}$ et $T_{\alpha i}$ est inscrit dans $\tau_i$, pour $i \in \left[0;9\right]$.
 
 //  en travaux
-
-Voici dans un premier temps de quoi dépend le traitement des champs de mantisse tronquée $T_{\alpha}$ et $T_{\beta}$.
-Nous remarquerons que c'est la même opération (à quelques détails prêt), que pour les champs d'exposant $E$ des opérandes $\alpha$ et $\beta$.
-
-$$\forall \ i \in \left[0;9\right], \quad Write \ \left(\tau_i, \ Nimply \ \left(T_{\beta i}, \ T_{\alpha i}\right)\right)$$
-
-La variable $\tau$ est techniquement la même que celle utilisée dans la première partie de la démonstration "_Le traitement des champs d'exposant_".
-La seule différence, c'est que le bit de résultat de chaque opération logique $Nimply$ sur $T_{\beta i}$ et $T_{\alpha i}$ est inscrit dans $\tau_i$, pour $i \in \left[0;9\right]$.
-
-N'oublions pas que depuis le début, la démonstration mathématique du circuit se base entièrement sur la verification de la condition suivante $\left(\vert\alpha\vert \gt \vert\beta\vert\right)$.
-Dans les prochaines sections de ce chapitre, nous allons définir tout les cas de réussite et d'échec de cette condition que l'on peut rencontré au travers du traitement des champs de mantisse tronquée.
 
 ### Un échec certain de la condition 
 
