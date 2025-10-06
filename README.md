@@ -654,7 +654,7 @@ Je précise que ce chapitre parle des états de points terminaux ainsi que non t
 Si nécessire, vous pouvez lire de nouveau la section "_Les points terminaux et non terminaux_" qui explique ce que sont ces états.
 
 Dans les sections précédente nous avions toujours un _MSB1_ dans $\tau \in \left[10;14\right]$, mais il pourrait ne pas y en avoir.
-Par essence, une telle situation veut que chaque bit de $\tau \in \left[10;14\right]$ soit un _zéro anonyme_, ce qui nous permet de déduire que $\left(E_{\alpha\sigma} \ge E_{\beta\sigma}\right)$ pour tout bit de poids $\sigma \in \left[10;14\right]$.
+Par essence, une telle situation veut que chaque bit de $\tau \in \left[10;14\right]$ soit un _zéro anonyme_, ce qui nous permet de déduire que $\left(E_{\alpha\sigma} \ge E_{\beta\sigma}\right)$ pour tout poids $\sigma \in \left[10;14\right]$.
 Pour le dire autrement, nous savons que $\left(E_{\alpha} \ge E_{\beta}\right)$.
 
 Il s'avère que le circuit rentre dans un état de point terminal du moment où $\left(E_{\alpha} \gt E_{\beta}\right)$.
@@ -664,9 +664,9 @@ L'une des conséquences à cela est que la condition sur laquelle s'appuie la d�
 
 Cependant, le circuit rentre dans un état de point non terminal du moment où $\left(E_{\alpha} = E_{\beta}\right)$.
 Cet état de point non terminal ne peut s'obtenir que dans le cas où l'ensemble des bits de même poids des champs d'exposant $E_{\alpha}$ et $E_{\beta}$ sont identiques, ou autrement dit lorsque $\left(E_{\alpha\sigma} = E_{\beta\sigma}\right)$ pour tout poids $\sigma \in \left[10;14\right]$.
-Une conséquence à cela est que la condition sur laquelle s'appuie la démonstration mathématique du circuit $\left(\vert \alpha \vert \gt \vert \beta \vert\right)$ se solde en un échec.
-En effet, le FPU Configuration Unit n'est pas en capacité d'anticipé le résultat de la condition par le seul traitement des champs d'exposant de ses opérandes, comme l'explique la section "_Les points terminaux et non terminaux_".
-C'est pourquoi le circuit se rabat sur le traitement des champs de mantisse tronquée $T$.
+Une conséquence à cela est que le FPU Configuration Unit n'est pas en capacité d'anticipé le résultat de la condition $\left(\vert \alpha \vert \gt \vert \beta \vert\right)$, par le seul traitement des champs d'exposant de ses opérandes.
+Rappelons que cette condition ressemble plus formellement à $\left(\left(1 + T_{\alpha}\right) \times \ 2^{E_{\alpha}}\right) \gt \left(\left(1 + T_{\beta}\right) \times \ 2^{E_{\beta}}\right)$, et remarquons que les opérandes du circuit partagent la même puissance $2$.
+C'est ce qui force le circuit à devoir traité les champs de mantisse tronquée $T_{\alpha}$ ainsi que $T_{\beta}$ pour pouvoir générer un résultat, chose que nous verrons dans les prochains chapitres.
 
 Pour conclure, le champs $\tau \in \left[10;14\right]$ est entièrement composé de _zéros anonymes capitaux_.
 Ces _zéros anonymes_ sont bel et bien _capitaux_ car chacun d'eux a le pouvoir de faire basculé le circuit d'un état de point non terminal, à celui de point terminal.
