@@ -401,7 +401,7 @@ Je vous invite donc à relire le chapitre "_Les nombres à virgule flottante_", 
 
 Néanmoins, le dernier paragraphe de ce chapitre donne une information assez importante. 
 La valeur de n'importe quel bit à $1$ de poids $i$ dans un nombre à virgule flottante, est strictement supérieur à la somme des valeurs des bits de poids inférieur à $i$.
-Ce qui veut dire que n'importe quel bit à $1$ de poids $i$ dans le champs de mantisse tronquée, est lui aussi strictement supérieur à la somme des valeurs des bits de poids inférieur à $i$.
+Ce qui veut dire que n'importe quel bit à $1$ de poids $i$ dans un champs de mantisse tronquée, a une valeur qui est elle aussi strictement supérieur à la somme des valeurs des bits de poids inférieur à $i$.
 Autrement dit, le champs de mantisse tronquée partage les propriétés des nombres à virgule flottante, mais il n'est pas le seul.
 
 Cette propriété provient de l'encodage _Binary Unsigned_, et il se trouve que l'encodage du champs d'exposant en est une déclinaison.
@@ -687,9 +687,29 @@ $$\forall \ i \in \left[0;9\right], \quad Write \ \left(\tau_i, \ Nimply \ \left
 La variable $\tau$ est techniquement la même que celle utilisée dans la première partie de la démonstration "_Le traitement des champs d'exposant_".
 Le seul changement est que le bit de résultat de chaque opération logique $Nimply$ sur $T_{\beta i}$ et $T_{\alpha i}$ est inscrit dans $\tau_i$, pour $i \in \left[0;9\right]$.
 
-//  en travaux
+// à relire
+
+En outre, nous comprenons qu'avec $\left(\tau_i = 1\right)$ pour tout $i \in \left[0;9\right]$, il est certain que $\left(T_{\beta i} \times 2^i\right) \gt \left(T_{\alpha i} \times 2^i\right)$.
+Par ailleurs, en introduction j'ai dit que les encodages des champs d'exposant et de mantisse tronquée partagaient les propriétés du Binary Unsigned.
+Encore une fois, je vous conseille de relire la section "_L'encodage du champs de mantisse tronquée_", si vous en ressentez le besoin.
+En bref, cette section explique entre autre que la valeur de n'importe quel bit à $1$ de poids $i$ dans un champs de mantisse tronquée, est strictement supérieur à la somme des valeurs des bits de poids inférieur à $i$.
+Ce qui nous permet de conclure ne disant que du moment où $\left(\tau_i = 1\right)$ pour tout $i \in \left[0;9\right]$, alors $\left(T_{\beta i} \times 2^i\right) \gt \sum_i^0 \left(T_{\alpha i} \times 2^i\right)$.
+Cependant, comme dans le cas des champs d'exposant, cela ne démontre pas pour autant que $\left(T_{\alpha} \lt T_{\beta}\right)$.
+
+
+//
+
+Avec ce que nous avons vu de l'opération logique $Nimply$ dans la section précédente, nous comprenons que pour $i \in \left[10;14\right]$ du moment où $\left(\tau_i = 1\right)$ il est certain que $\left(E_{\beta i} \times 2^i\right) \gt \left(E_{\alpha i} \times 2^i\right)$.
+Mais ce n'est pas tout, rappelez vous de la section "_L'encodage par biais du champs d'exposant_".
+Cette section explique entre autre que, je cite "_la valeur de n'importe quel bit à_ $1$ _de poids_ $i$ _dans un champs d'exposant, est strictement supérieur à la somme des valeurs des bits de poids inférieur à_ $i$".
+Par conséquent, cela traduit l'idée que du moment où $\left(\tau_i = 1\right)$ pour tout $i \in \left[11;14\right]$, nous pouvons être sûrs que $\left(E_{\beta i} \times 2^i\right) \gt \sum_{\sigma = i - 1}^{10} \left(E_{\alpha\sigma} \times 2^{\sigma}\right)$.
+
+Au final, nous pouvons en conclure que dans le cas où $\left(\tau_i = 1\right)$ pour tout $i \in \left[10;14\right]$, alors $\left(E_{\beta i} \times 2^i\right) \gt \sum_i^{10} \left(E_{\alpha i} \times 2^i\right)$.
+Cela ne démontre pas pour autant que $\left(E_{\alpha} \lt E_{\beta}\right)$.
 
 ### Un échec certain de la condition 
+
+// verif la corrélation
 
 Dans le chapitre "_La mantisse tronquée, une histoire de puissance de 2_", qui introduit à l'encodage du champs de mantisse tronquée.
 Il est dit que la valeur d'un bit à $1$ de poids $i$ d'un champs de mantisse tronquée $T$, est _inconditionnellement_ supérieur à la somme de la valeur de chacun des bits de poids inférieur à $i$.
