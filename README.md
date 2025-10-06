@@ -645,7 +645,7 @@ En effet, le poids $\sigma$ est strictement inférieur au poids $i$ du _MSB1_ de
 La somme des valeurs des bits de poids inférieur à $i$, à laquelle prend part $\left(E_{\alpha\sigma} \times 2^{\sigma}\right)$, est quoi qu'il arrive inférieur à $\left(E_{\beta i} \times 2^i\right)$.
 L'inéquation en fin de paragraphe précédent est et restera juste, qu'importe la valeur du bit $E_{\alpha\sigma}$.
 
-Les _zéros anonymes non capitaux_ ne permettent pas de déduire la valeur des bits de poids équivalent dans $E_{\alpha}$ ainsi que $E_{\beta}$, mais la démonstration (à l'instar du circuit) n'a pas besoin de connaitre la valeur de ces bits pour fonctionner.
+Les _zéros anonymes non capitaux_ ne permettent pas de déduire la valeur des bits de poids équivalent dans $E_{\alpha}$ ainsi que $E_{\beta}$, mais la démonstration n'a pas besoin de connaitre la valeur de ces bits pour fonctionner.
 D'où le fait que ces bits soient dit _non capitaux_.
 
 ## L'obtention d'un point non terminal
