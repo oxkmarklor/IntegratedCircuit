@@ -380,7 +380,7 @@ Précédemment, nous avons longuement parlé de l'écriture scientifique binaire
 La raison en est que le standard IEEE-754 s'appuie sur l'écriture scientifique binaire pour définir les différents formats de nombre à virgule, tel que le Half Precision.
 Dans le champs binaire d'un nombre $F$ écrit au format Half Precision, le bit de signe (bit de poids $15$) est défini en fonction du signe $\pm$ de l'écriture scientifique binaire du nombre $F$.
 Quant aux champs d'exposant et de mantisse tronquée, ils correspondent respectivement au multiplicande ainsi qu'au significande de l'écriture scientifique de $F$.
-Malgré tout, dans les prochains chapitres dédiés aux champs d'exposant et de mantisse tronquée nous verrons que le cas de ces champs est légèrement plus complexe.
+Malgré tout, dans les prochains chapitres dédiés aux champs d'exposant et de mantisse tronquée, nous verrons que le cas de ces champs est légèrement plus complexe.
 
 Etant donné que le circuit électronique ne prend en charge que des opérandes (nombres) au format Half Precision, le reste du document ne fera plus que référence à ce format.
 
@@ -397,7 +397,7 @@ Les deux sections suivantes concernent l'ensemble de ces bits formant le champs 
 
 Le nombre $F$ codé au format Half Precision a un champs de mantisse tronquée qui correspond au significande de l'écriture scientifique binaire du même nombre $F$.
 Par conséquent, l'encodage du champs de mantisse tronquée est simplement celui d'un nombre à virgule flottante.
-Je vous invite donc à relire le chapitre "_les nombres à virgule flottante_", si nécessaire.
+Je vous invite donc à relire le chapitre "_Les nombres à virgule flottante_", si nécessaire.
 
 Néanmoins, le dernier paragraphe de ce chapitre donne une information assez importante. 
 La valeur de n'importe quel bit à $1$ de poids $i$ dans un nombre à virgule flottante, est strictement supérieur à la somme des valeurs des bits de poids inférieur à $i$.
@@ -438,7 +438,7 @@ Le champs d'exposant utilise un _encodage par biais_ qui est une déclinaison de
 
 L'encodage par biais s'appuie sur un champs binaire utilisant l'encodage Binary Unsigned, le champs en question se charge de codé un nombre entier naturel.
 Il faut ensuite ajouter ou déduire une constante appellée biais (qui est aussi un nombre entier naturel), au nombre codé par le champs binaire sous-jacent.
-Le résultat de ce calcul forme la valeur réel que représente le champs.
+Le résultat de ce calcul forme la valeur que représente réelement le champs.
 Nous comprenons donc qu'un encodage par biais est en quelque sorte un encodage Binary Unsigned déguisé.
 
 Dans le cas d'un champs d'exposant $E$ d'une taille de $N$ bits, le champs code en Binary Unsigned un nombre entier naturel dont la valeur est comprise dans l'intervalle $\left[0; \ 2^N - 1\right]$.
@@ -655,39 +655,39 @@ Si nécessire, vous pouvez lire de nouveau la section "_Les points terminaux et 
 
 Dans les sections précédente nous avions toujours un _MSB1_ dans $\tau \in \left[10;14\right]$, mais il pourrait ne pas y en avoir.
 Par essence, une telle situation veut que chaque bit de $\tau \in \left[10;14\right]$ soit un _zéro anonyme_, ce qui nous permet de déduire que $\left(E_{\alpha\sigma} \ge E_{\beta\sigma}\right)$ pour tout poids $\sigma \in \left[10;14\right]$.
+Plus précisément, ces bits sont des _zéros anonymes capitaux_, car chacun d'eux a le pouvoir de faire basculé le circuit d'un état de point non terminal à celui de point terminal, comme nous allons le voir.
 Pour le dire autrement, nous savons que $\left(E_{\alpha} \ge E_{\beta}\right)$.
 
 Il s'avère que le circuit rentre dans un état de point terminal du moment où $\left(E_{\alpha} \gt E_{\beta}\right)$.
 Cet état de point terminal ne peut s'obtenir qu'à la condition qu'il y ait une ou plusieurs occurences de $\left(E_{\alpha\sigma} \gt E_{\beta\sigma}\right)$ pour tout poids $\sigma \in \left[10;14\right]$.
-Par conséquent, nous en déduisons que pour chacune des ces occurences $\left(E_{\alpha\sigma} \times 2^{\sigma}\right) \gt \sum_{\sigma}^{10} \left(E_{\beta\sigma} \times 2^{\sigma}\right)$ et le circuit atteint l'état de point terminal $\left(E_{\alpha} \gt E_{\beta}\right)$.
+Par conséquent, nous en déduisons que pour chacune des ces occurences $\left(E_{\alpha\sigma} \times 2^{\sigma}\right) \gt \sum_{\sigma}^{10} \left(E_{\beta\sigma} \times 2^{\sigma}\right)$, et le circuit atteint l'état de point terminal $\left(E_{\alpha} \gt E_{\beta}\right)$.
 L'une des conséquences à cela est que la condition sur laquelle s'appuie la démonstration mathématique du circuit $\left(\vert \alpha \vert \gt \vert \beta \vert\right)$ réussie, car $\left(\left(1 + T_{\alpha}\right) \times \ 2^{E_{\alpha}}\right) \gt \left(\left(1 + T_{\beta}\right) \times \ 2^{E_{\beta}}\right)$.
 
 Cependant, le circuit rentre dans un état de point non terminal du moment où $\left(E_{\alpha} = E_{\beta}\right)$.
 Cet état de point non terminal ne peut s'obtenir que dans le cas où l'ensemble des bits de même poids des champs d'exposant $E_{\alpha}$ et $E_{\beta}$ sont identiques, ou autrement dit lorsque $\left(E_{\alpha\sigma} = E_{\beta\sigma}\right)$ pour tout poids $\sigma \in \left[10;14\right]$.
 Une conséquence à cela est que le FPU Configuration Unit n'est pas en capacité d'anticipé le résultat de la condition $\left(\vert \alpha \vert \gt \vert \beta \vert\right)$, par le seul traitement des champs d'exposant de ses opérandes.
 Rappelons que cette condition ressemble plus formellement à $\left(\left(1 + T_{\alpha}\right) \times \ 2^{E_{\alpha}}\right) \gt \left(\left(1 + T_{\beta}\right) \times \ 2^{E_{\beta}}\right)$, et remarquons que les opérandes du circuit partagent la même puissance $2$.
-C'est ce qui force le circuit à devoir traité les champs de mantisse tronquée $T_{\alpha}$ ainsi que $T_{\beta}$ pour pouvoir générer un résultat, chose que nous verrons dans les prochains chapitres.
-
-Pour conclure, le champs $\tau \in \left[10;14\right]$ est entièrement composé de _zéros anonymes capitaux_.
-Ces _zéros anonymes_ sont bel et bien _capitaux_ car chacun d'eux a le pouvoir de faire basculé le circuit d'un état de point non terminal, à celui de point terminal.
-
-## Rappel sur les champs d'exposant et de mantisse tronquée
-
-Le chapitre "_Les points terminaux et non terminaux_" explique pourquoi est ce que les champs d'exposant $E$ des opérandes $\alpha$ et $\beta$, sont traités avant les champs de mantisse tronquée $T$ de ces même opérandes.
-Dans ce chapitre, il y a la formule mathématique $\left(\left(1+T\right) \times 2^E\right)$ qui explique comment est ce que la valeur d'un nombre à virgule flottante est représenté en IEEE-754.
-Nous y apprenons que si deux nombres flottants $\vert \ \alpha \ \vert$ et $\vert \ \beta \ \vert$ ont des champs d'exposant égaux $\left(E_{\alpha} = E_{\beta}\right)$, alors la valeur de ces deux nombres $\left(\left(1+T_{\alpha}\right) \times 2^{E_\alpha}\right)$ et $\left(\left(1+T_{\beta}\right) \times 2^{E_\beta}\right)$ ne dépend que de $T_{\alpha}$ et $T_{\beta}$.
-Le circuit atteint alors un _point non terminal_.
-C'est à dire qu'il est incapable de généré le résultat d'une comparaison entre les opérandes $\vert \ \alpha \ \vert$ et $\vert \ \beta \ \vert$, par le seul traitement de leur champs d'exposant $E$.
-Par conséquent, le circuit électronique bascule le traitement sur les champs de mantisse tronquée $T$.
-
-Qui plus est, le traitement des champs de mantisse tronquée $T_{\alpha}$ et $T_{\beta}$ est le même que celui des champs d'exposant.
-Pour ceux qui ont besoin d'un rafraichissement, je vous rappelle que l'encodage des champs d'exposant et de mantisse tronquée ont des points en commun.
-Tout a été expliquer dans le chapitre "_Le standard IEEE-754_".
-En bref, l'encodage du champs de mantisse tronquée et du champs d'exposant partagent les même propriété que le _Binary Unsigned_.
-Grâce à cela, le processus de comparaison entre les champs de mantisse tronquée $T_{\alpha}$ et $T_{\beta}$, suit la même procédure de traitement que les champs d'exposant $E$.
-Nous allons pouvoir remarqué ça dans le chapitre suivant.
+C'est ce qui force le circuit à devoir traité les champs de mantisse tronquée $T_{\alpha}$ ainsi que $T_{\beta}$ pour pouvoir générer un résultat vérifiant cette condition ou non, chose que nous verrons dans les prochains chapitres.
 
 # Le traitement des champs de mantisse tronquée
+
+// à relire
+
+Le traitement des champs de mantisse tronquée est le même que celui des champs d'exposant.
+Pour ceux qui ont besoin d'un rafraichissement, je vous rappelle que l'encodage des champs d'exposant et de mantisse tronquée ont des points en commun, ils partagent les même propriétés que l'encodage _Binary Unsigned_.
+C'est la raison pour laquelle le traitement entre les champs d'exposant et de mantisse tronquée est le même.
+Je vous renvoie vers les sections "_L'encodage du champs de mantisse tronquée_" et "_L'encodage par biais du champs d'exposant_", si nécessaire.
+Voyons ce qu'il en est.
+
+Le circuit effectue une comparaison de supériorité stricte entre les champs d'exposant $E$ de ses opérandes, il fait donc de même entre les champs de mantisse tronquée $T$.
+Rappelons que la condition sur laquelle s'appuie la démonstration mathématique du circuit est $\left(\vert \alpha \vert \gt \vert \beta \vert\right)$, ce qui donne $\left(\left(1 + T_{\alpha}\right) \times \ 2^{E_{\alpha}}\right) \gt \left(\left(1 + T_{\beta}\right) \times \ 2^{E_{\beta}}\right)$.
+Cependant, si le circuit traite les champs de mantisse tronquée de ses opérandes c'est qu'il est en état de point non terminal $\left(E_{\alpha} = E_{\beta}\right)$, et la condition passe à $\left(T_{\alpha} \gt T_{\beta}\right)$.
+Voici la première phase du traitement des champs de mantisse tronquée.
+
+$$\forall \ i \in \left[0;9\right], \quad Write \ \left(\tau_i, \ Nimply \ \left(T_{\beta i}, \ T_{\alpha i}\right)\right)$$
+
+
+//  en travaux
 
 Voici dans un premier temps de quoi dépend le traitement des champs de mantisse tronquée $T_{\alpha}$ et $T_{\beta}$.
 Nous remarquerons que c'est la même opération (à quelques détails prêt), que pour les champs d'exposant $E$ des opérandes $\alpha$ et $\beta$.
