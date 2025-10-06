@@ -671,15 +671,18 @@ C'est ce qui force le circuit à devoir traité les champs de mantisse tronquée
 
 # Le traitement des champs de mantisse tronquée
 
+// à vérif
+
 Pour ceux qui ont besoin d'un rafraichissement de mémoire, je vous rappelle que les encodages des champs d'exposant et de mantisse tronquée ont des points en commun, ils partagent les même propriétés que l'encodage _Binary Unsigned_.
 C'est la raison derrière le fait que le circuit traite les champs de mantisse tronquée d'une façon similaire aux champs d'exposant.
 Je vous renvoie vers les sections "_L'encodage du champs de mantisse tronquée_" ainsi que "_L'encodage par biais du champs d'exposant_" si nécessaire.
 
-Rappelons que la démonstration mathématique du circuit s'appuie sur le test de la condition suivante $\left(\vert \alpha \vert \gt \vert \beta \vert\right)$, ce qui donne $\left(\left(1 + T_{\alpha}\right) \times \ 2^{E_{\alpha}}\right) \gt \left(\left(1 + T_{\beta}\right) \times \ 2^{E_{\beta}}\right)$.
-Cependant, n'oublions pas que le circuit doit être en état de point non terminal $\left(E_{\alpha} = E_{\beta}\right)$ pour traité les champs de mantisse tronquée de ses opérandes.
-Remarquons que de la condition initial il ne reste de pertinent plus que $\left(T_{\alpha} \gt T_{\beta}\right)$.
-En définitif, pour générer un résultat vérifiant ou non la condition initial que teste le circuit, ce dernier doit effectué une comparaison de supérioté stricte entre les champs de mantisse tronquée de ses opérandes.
-Comme il l'a d'ores et déjà fait avec les champs d'exposant.
+Rappelons que la démonstration mathématique du circuit s'appuie sur le test de la condition suivante $\left(\vert \alpha \vert \gt \vert \beta \vert\right)$, c'est à dire $\left(\left(1 + T_{\alpha}\right) \times \ 2^{E_{\alpha}}\right) \gt \left(\left(1 + T_{\beta}\right) \times \ 2^{E_{\beta}}\right)$.
+Ce chapitre parle du traitement des champs de mantisse tronquée, et nous savons que le circuit ne traite les champs de mantisse tronquée de ses opérandes que lorsqu'il est dans un état de point non terminal $\left(E_{\alpha} = E_{\beta}\right)$.
+Par conséquent, de la condition que test le circuit il ne reste de pertinent plus que $\left(1 + T_{\alpha}\right) \gt \left(1 + T_{\beta}\right)$, ou autrement dit $\left(T_{\alpha} \gt T_{\beta}\right)$.
+
+En définitif, le circuit est dans un état de point non terminal et génère un résultat vérifiant ou non la condition $\left(\vert \alpha \vert \gt \vert \beta \vert\right)$, par une comparaison de supérioté stricte entre les champs de mantisse tronquée de ses opérandes.
+D'où le fait qu'il soit dit plus haut que le traitement des champs de mantisse tronquée soit le même que celui des champs d'exposant.
 Voici la première phase du traitement des champs de mantisse tronquée.
 
 $$\forall \ i \in \left[0;9\right], \quad Write \ \left(\tau_i, \ Nimply \ \left(T_{\beta i}, \ T_{\alpha i}\right)\right)$$
@@ -687,35 +690,32 @@ $$\forall \ i \in \left[0;9\right], \quad Write \ \left(\tau_i, \ Nimply \ \left
 La variable $\tau$ est techniquement la même que celle utilisée dans la première partie de la démonstration "_Le traitement des champs d'exposant_".
 Le seul changement est que le bit de résultat de chaque opération logique $Nimply$ sur $T_{\beta i}$ et $T_{\alpha i}$ est inscrit dans $\tau_i$, pour $i \in \left[0;9\right]$.
 
-// à relire
-
 En outre, nous comprenons qu'avec $\left(\tau_i = 1\right)$ pour tout $i \in \left[0;9\right]$, il est certain que $\left(T_{\beta i} \times 2^i\right) \gt \left(T_{\alpha i} \times 2^i\right)$.
-Par ailleurs, en introduction j'ai dit que les encodages des champs d'exposant et de mantisse tronquée partagaient les propriétés du Binary Unsigned.
-Encore une fois, je vous conseille de relire la section "_L'encodage du champs de mantisse tronquée_", si vous en ressentez le besoin.
-En bref, cette section explique entre autre que la valeur de n'importe quel bit à $1$ de poids $i$ dans un champs de mantisse tronquée, est strictement supérieur à la somme des valeurs des bits de poids inférieur à $i$.
-Ce qui nous permet de conclure ne disant que du moment où $\left(\tau_i = 1\right)$ pour tout $i \in \left[0;9\right]$, alors $\left(T_{\beta i} \times 2^i\right) \gt \sum_i^0 \left(T_{\alpha i} \times 2^i\right)$.
+Par ailleurs, cela a été dit en introduction, l'encodage du champs de mantisse tronquée partage les propriétés du _Binary Unsigned_.
+La section du nom de "_L'encodage du champs de mantisse tronquée_", explique entre autre que la valeur de n'importe quel bit à $1$ de poids $i$ dans un champs de mantisse tronquée, est strictement supérieur à la somme des valeurs des bits de poids inférieur à $i$.
+Ce qui nous permet de conclure en disant que du moment où $\left(\tau_i = 1\right)$ pour tout $i \in \left[0;9\right]$, alors $\left(T_{\beta i} \times 2^i\right) \gt \sum_i^0 \left(T_{\alpha i} \times 2^i\right)$.
 Cependant, comme dans le cas des champs d'exposant, cela ne démontre pas pour autant que $\left(T_{\alpha} \lt T_{\beta}\right)$.
-
 
 //
 
-Avec ce que nous avons vu de l'opération logique $Nimply$ dans la section précédente, nous comprenons que pour $i \in \left[10;14\right]$ du moment où $\left(\tau_i = 1\right)$ il est certain que $\left(E_{\beta i} \times 2^i\right) \gt \left(E_{\alpha i} \times 2^i\right)$.
-Mais ce n'est pas tout, rappelez vous de la section "_L'encodage par biais du champs d'exposant_".
-Cette section explique entre autre que, je cite "_la valeur de n'importe quel bit à_ $1$ _de poids_ $i$ _dans un champs d'exposant, est strictement supérieur à la somme des valeurs des bits de poids inférieur à_ $i$".
-Par conséquent, cela traduit l'idée que du moment où $\left(\tau_i = 1\right)$ pour tout $i \in \left[11;14\right]$, nous pouvons être sûrs que $\left(E_{\beta i} \times 2^i\right) \gt \sum_{\sigma = i - 1}^{10} \left(E_{\alpha\sigma} \times 2^{\sigma}\right)$.
-
-Au final, nous pouvons en conclure que dans le cas où $\left(\tau_i = 1\right)$ pour tout $i \in \left[10;14\right]$, alors $\left(E_{\beta i} \times 2^i\right) \gt \sum_i^{10} \left(E_{\alpha i} \times 2^i\right)$.
-Cela ne démontre pas pour autant que $\left(E_{\alpha} \lt E_{\beta}\right)$.
+Par ailleurs, en introduction j'ai dit que les encodages des champs d'exposant et de mantisse tronquée partagaient les propriétés du Binary Unsigned.
+Encore une fois, je vous conseille de relire la section "_L'encodage du champs de mantisse tronquée_", si vous en ressentez le besoin.
+En bref, cette section explique entre autre que la valeur de n'importe quel bit à $1$ de poids $i$ dans un champs de mantisse tronquée, est strictement supérieur à la somme des valeurs des bits de poids inférieur à $i$.
+Ce qui au passage est aussi le cas des champs d'exposant.
+Ceci nous permet de conclure en disant que du moment où $\left(\tau_i = 1\right)$ pour tout $i \in \left[0;9\right]$, alors $\left(T_{\beta i} \times 2^i\right) \gt \sum_i^0 \left(T_{\alpha i} \times 2^i\right)$.
+Cependant, comme dans le cas des champs d'exposant, cela ne démontre pas pour autant que $\left(T_{\alpha} \lt T_{\beta}\right)$.
 
 ### Un échec certain de la condition 
 
-// verif la corrélation
+// à vérif (il faut delete je crois)
 
 Dans le chapitre "_La mantisse tronquée, une histoire de puissance de 2_", qui introduit à l'encodage du champs de mantisse tronquée.
 Il est dit que la valeur d'un bit à $1$ de poids $i$ d'un champs de mantisse tronquée $T$, est _inconditionnellement_ supérieur à la somme de la valeur de chacun des bits de poids inférieur à $i$.
 Rappellons que c'est aussi le cas des champs d'exposant, comme cela a été mentionné dans le chapitre "_L'encodage par biais du champs d'exposant_".
 Comme nous avons pu le voir dans la première partie de la démonstration, la comparaison entre les champs d'exposant utilise ces primitives mathématiques.
 Ci-dessous, nous allons voir qu'il en va de même pour la comparaison entre les champs de mantisse tronquée $T_{\alpha}$ ainsi que $T_{\beta}$. 
+
+// à traité
 
 Prenons le cas de $\left(\tau_i = \tau_9 = 1\right)$.
 Vu que $\left(\tau_9 = 1\right)$, nous savons que $\left(T_{\beta 9} = 1\right)$ tandis que $\left(T_{\alpha 9} = 0\right)$ et par conséquent $\left(T_{\beta 9} \times 2^9\right) \gt \sum_{i=9}^0 \ \left(T_{\alpha i} \times 2^i\right)$.
