@@ -617,14 +617,34 @@ Mais pour l'instant concentrons sur le cas des champs d'exposant.
 
 Reprenons là où nous en étions dans le chapitre "_Le traitement des champs d'exposant_".
 Admettons que le _MSB1_ de $\tau \in \left[10;14\right]$ ait un poids $i \in \left[10;13\right]$, alors nous savons que $\left(E_{\beta i} = 1\right)$ tandis que $\left(E_{\alpha i} = 0\right)$ pour $\left(\tau_i = 1\right)$.
-Pour le dire autrement, de tout les bits du champs d'exposant $E_{\beta}$, le bit $E_{\beta i}$ est celui de poids le plus fort à être strictement supérieur au bit de même poids dans le champs d'exposant $E_{\alpha}$.
+Pour le dire autrement, de tout les bits du champs d'exposant $E_{\beta}$, le bit $E_{\beta i}$ est celui de poids le plus fort à être strictement supérieur au bit de même poids du champs d'exposant $E_{\alpha}$.
 En outre, comme l'explique ledit chapitre, nous en déduisons alors que $\left(E_{\beta i} \times 2^i\right) \gt \sum_i^{10} \left(E_{\alpha i} \times 2^i\right)$.
-Cependant, comme cela a été mentionné dans ce même, ceci ne suffit pas à démontrer que $\left(E_{\alpha} \lt E_{\beta}\right)$.
+Cependant, comme cela a été mentionné dans ce même chapitre, ceci ne suffit pas à démontrer que $\left(E_{\alpha} \lt E_{\beta}\right)$.
 
 Dans ce cas de figure (qui n'est pas systèmatique), nous sommes assurés qu'il y ait au moins un bit $\tau_{\left(i + 1\right)}$ qui est d'un poids supérieur au _MSB1_ de $\tau \in \left[10;14\right]$.
 Par définition, le bit $\tau_{\left(i + 1\right)}$ ne peut être qu'à $0$, autrement le bit $\tau_i$ ne serait pas le _MSB1_.
-Formellement, un _zéro anonyme capital_ issu du traitement des champs d'exposant est un bit à $0$ du champs $\tau$ dont le poids est supérieur au _MSB1_ de $\tau \in \left[10;14\right]$.
-Nous en déduisons que le bit $\tau_{\left(i + 1\right)}$ est donc un _zéro anonyme capital_, comme tout les bits de poids supérieur à ce dernier (si il y en a).
+Formellement, un _zéro anonyme capital_ issu du traitement des champs d'exposant, est un bit à $0$ du champs $\tau$ dont le poids est supérieur au _MSB1_ de $\tau \in \left[10;14\right]$.
+Nous en déduisons alors que le bit $\tau_{\left(i + 1\right)}$ est un _zéro anonyme capital_, comme tout bit de poids $\sigma$ (sigma) compris dans l'intervalle $\left]i;14\right]$.
+
+// à relire
+
+A ce stade, nous savons que du bit de poids $i$ jusqu'au bit de poids $10$, le champs d'exposant $E_{\beta}$ est supérieur au champs d'exposant $E_{\alpha}$.
+Mais si cela ne suffit pas à démontrer que $\left(E_{\alpha} \lt E_{\beta}\right)$, c'est parce que les bits de poids $\sigma$ (de poids supérieur à $i$) ne sont pas pris en compte.
+Nous déduisons du chapitre "_Les zéros anonymes_" que $\left(E_{\alpha\sigma} \ge E_{\beta\sigma}\right)$ du moment où $\left(\tau_{\sigma} = 0\right)$ pour tout poids $\sigma \in \left]i;14\right]$.
+Concrètement cela veut bien pouvoir dire deux choses, voyons les l'une après l'autre.
+
+
+Nous savons par le chapitre "_Les zéros anonymes_" que du moment où $\left(\tau_{\sigma} = 0\right)$, alors $\left(E_{\alpha\sigma} \ge E_{\beta\sigma}\right)$ pour tout bit de poids $\sigma \in \left]i;14\right]$.
+
+// poursuivre sur le cas d'une égalité entre les bits de E_alpha_sigma et E_beta_sigma
+
+Dans un premier temps, si ...
+
+
+// puis le cas d'une supériorité des bits de E_alpha_sigma sur E_beta_sigma
+
+
+
 
 
 //
