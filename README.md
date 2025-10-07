@@ -583,15 +583,11 @@ En plus de cela, rappelez vous de la section "_L'encodage par biais du champs d'
 Cette section explique entre autre que, je cite "_la valeur de n'importe quel bit à_ $1$ _de poids_ $i$ _dans un champs d'exposant, est strictement supérieur à la somme des valeurs des bits de poids inférieur à_ $i$".
 Cela traduit l'idée que du moment où $\left(\tau_i = 1\right)$ pour tout $i \in \left[11;14\right]$, nous pouvons être sûrs que $\left(E_{\beta i} \times 2^i\right) \gt \sum_{\sigma = i - 1}^{10} \left(E_{\alpha\sigma} \times 2^{\sigma}\right)$.
 
-// à relire
-
 Pour conclure, nous pouvons être certains que du moment où $\left(\tau_i = 1\right)$ pour tout $i \in \left[10;14\right]$, alors $\left(E_{\beta i} \times 2^i\right) \gt \sum_i^{10} \left(E_{\alpha i} \times 2^i\right)$.
-Cette dernière inéquation transmet l'idée que des bits de poids $i$ jusqu'au bit de poids $10$, le champs d'exposant $E_{\beta}$ est supérieur au champs d'exposant $E_{\alpha}$.
+Pour le dire autrement, du bit de poids $i$ jusqu'au bit de poids $10$ le champs d'exposant $E_{\beta}$ est supérieur au champs d'exposant $E_{\alpha}$.
 Mais cela ne démontre pas pour autant que $\left(E_{\alpha} \lt E_{\beta}\right)$.
 
 ## Les zéros anonymes
-
-// importance du placement des bits d'oprandes du Nimply
 
 Nous avons vu dans la section "_Définition de quelques opérations fondamentales à la démonstration_", que l'opération logique $Nimply$ génère un bit de résultat à $1$ sous réserve que le bit sur son paramètre $x$ vaille $1$, et que celui sur $y$ vaille $0$.
 Autrement, l'opération renvoie un bit de résultat à $0$.
