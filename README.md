@@ -671,8 +671,6 @@ C'est ce qui force le circuit à devoir traité les champs de mantisse tronquée
 
 # Le traitement des champs de mantisse tronquée
 
-// à vérif
-
 Pour ceux qui ont besoin d'un rafraichissement de mémoire, je vous rappelle que les encodages des champs d'exposant et de mantisse tronquée ont des points en commun, ils partagent les même propriétés que l'encodage _Binary Unsigned_.
 C'est la raison derrière le fait que le circuit traite les champs de mantisse tronquée d'une façon similaire aux champs d'exposant.
 Je vous renvoie vers les sections "_L'encodage du champs de mantisse tronquée_" ainsi que "_L'encodage par biais du champs d'exposant_" si nécessaire.
@@ -694,15 +692,6 @@ En outre, nous comprenons qu'avec $\left(\tau_i = 1\right)$ pour tout $i \in \le
 Par ailleurs, cela a été dit en introduction, l'encodage du champs de mantisse tronquée partage les propriétés du _Binary Unsigned_.
 La section du nom de "_L'encodage du champs de mantisse tronquée_", explique entre autre que la valeur de n'importe quel bit à $1$ de poids $i$ dans un champs de mantisse tronquée, est strictement supérieur à la somme des valeurs des bits de poids inférieur à $i$.
 Ce qui nous permet de conclure en disant que du moment où $\left(\tau_i = 1\right)$ pour tout $i \in \left[0;9\right]$, alors $\left(T_{\beta i} \times 2^i\right) \gt \sum_i^0 \left(T_{\alpha i} \times 2^i\right)$.
-Cependant, comme dans le cas des champs d'exposant, cela ne démontre pas pour autant que $\left(T_{\alpha} \lt T_{\beta}\right)$.
-
-//
-
-Par ailleurs, en introduction j'ai dit que les encodages des champs d'exposant et de mantisse tronquée partagaient les propriétés du Binary Unsigned.
-Encore une fois, je vous conseille de relire la section "_L'encodage du champs de mantisse tronquée_", si vous en ressentez le besoin.
-En bref, cette section explique entre autre que la valeur de n'importe quel bit à $1$ de poids $i$ dans un champs de mantisse tronquée, est strictement supérieur à la somme des valeurs des bits de poids inférieur à $i$.
-Ce qui au passage est aussi le cas des champs d'exposant.
-Ceci nous permet de conclure en disant que du moment où $\left(\tau_i = 1\right)$ pour tout $i \in \left[0;9\right]$, alors $\left(T_{\beta i} \times 2^i\right) \gt \sum_i^0 \left(T_{\alpha i} \times 2^i\right)$.
 Cependant, comme dans le cas des champs d'exposant, cela ne démontre pas pour autant que $\left(T_{\alpha} \lt T_{\beta}\right)$.
 
 ### Un échec certain de la condition 
