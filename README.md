@@ -533,7 +533,7 @@ Il y a une documentation dédié au circuit pour comprendre son utilité ainsi q
 
 En bref, le circuit génère deux bits de sortie, l'un pour configuré un circuit soustracteur de nombre flottant et l'autre pour la sortie même de cette unité de calcul.
 Le FPU Configuration Unit (le circuit) reçoit en entrée deux opérandes Half Precision en valeur absolu, que nous nommerons $\vert \ \alpha \ \vert$ et $\vert \ \beta \ \vert$.
-La génération des deux bits de sortie du circuit passe par une vérification de supériorité stricte de la valeur absolu de l'un de ses deux opérandes, envers la valeur absolu de l'autre.
+La génération des deux bits de sortie du circuit passe par une comparaison de supériorité stricte de la valeur absolu de l'un de ses deux opérandes, envers la valeur absolu de l'autre.
 Cette démonstration mathématique n'aborde que la partie de la logique de comparaison du circuit, ce qui représente tout de même la majeur partie de la logique du FPU Configuration Unit.
 Le reste de la logique manquante ne peut pas être expliqué sans l'apport de beaucoup de nouvelle notion.
 Je vous renvoie vers la documentation dédié au circuit si vous voulez en savoir plus sur cette partie de la logique manquante.
@@ -567,25 +567,31 @@ Comme cela a été dit par le chapitre "_Introduction au FPU Configuration Unit_
 Les champs d'exposant des opérandes du circuit sont traités avant les champs de mantisse tronquée de ces même opérandes.
 Je vous invite à relire ces chapitres si nécessaire.
 
-Rappelons que le circuit effectue une comparaison de supériorité stricte entre les champs d'exposant $E$ de ses opérandes.
-Ce qui dans le cas de la condition $\left(\vert \alpha \vert \gt \vert \beta \vert\right)$, nécessite de vérifier si $\left(E_{\alpha} \gt E_{\beta}\right)$.
+Rappelons que le circuit effectue une comparaison de supériorité stricte entre les champs d'exposant de ses opérandes.
+Ce qui dans le cas de la condition sur laquelle s'appuie la démonstration mathématique du circuit $\left(\vert \alpha \vert \gt \vert \beta \vert\right)$, nécessite de vérifier si $\left(E_{\alpha} \gt E_{\beta}\right)$.
 Voici la première phase du traitement des champs d'exposant.
 
 $$\forall \ i \in \left[10;14\right], \quad Write \ \left(\tau_i, \ Nimply \ \left(E_{\beta i}, \ E_{\alpha i}\right)\right)$$
 
-Nous effectuons l'opération logique $Nimply$ sur l'ensemble des bits de poids $i$ des champs d'exposant $E$.
+Nous effectuons l'opération logique $Nimply$ sur chaque bit de même poids des champs d'exposant $E_{\alpha}$ et $E_{\beta}$.
 La variable $\tau$ (tau) représente un champs binaire de $15$ bits, dont les poids vont de $0$ à $14$.
 Chaque bit de résultat d'une opération $Nimply$ sur $E_{\beta i}$ et $E_{\alpha i}$ pour $i \in \left[10;14\right]$, est inscrit dans $\tau_i$.
 
-Avec ce que nous avons vu de l'opération logique $Nimply$ dans la section précédente, nous comprenons que pour $i \in \left[10;14\right]$ du moment où $\left(\tau_i = 1\right)$ il est certain que $\left(E_{\beta i} \times 2^i\right) \gt \left(E_{\alpha i} \times 2^i\right)$.
-Mais ce n'est pas tout, rappelez vous de la section "_L'encodage par biais du champs d'exposant_".
+Avec ce que nous avons vu de l'opération logique $Nimply$ dans la section précédente, nous comprenons que du moment où $\left(\tau_i = 1\right)$ pour tout poids $i \in \left[10;14\right]$ alors $\left(E_{\beta i} = 1\right)$ tandis que $\left(E_{\alpha i} = 0\right)$.
+Pour exprimer les choses différemment $\left(E_{\beta i} \times 2^i\right) \gt \left(E_{\alpha i} \times 2^i\right)$.
+En plus de cela, rappelez vous de la section "_L'encodage par biais du champs d'exposant_".
 Cette section explique entre autre que, je cite "_la valeur de n'importe quel bit à_ $1$ _de poids_ $i$ _dans un champs d'exposant, est strictement supérieur à la somme des valeurs des bits de poids inférieur à_ $i$".
-Par conséquent, cela traduit l'idée que du moment où $\left(\tau_i = 1\right)$ pour tout $i \in \left[11;14\right]$, nous pouvons être sûrs que $\left(E_{\beta i} \times 2^i\right) \gt \sum_{\sigma = i - 1}^{10} \left(E_{\alpha\sigma} \times 2^{\sigma}\right)$.
+Cela traduit l'idée que du moment où $\left(\tau_i = 1\right)$ pour tout $i \in \left[11;14\right]$, nous pouvons être sûrs que $\left(E_{\beta i} \times 2^i\right) \gt \sum_{\sigma = i - 1}^{10} \left(E_{\alpha\sigma} \times 2^{\sigma}\right)$.
 
-Au final, nous pouvons en conclure que dans le cas où $\left(\tau_i = 1\right)$ pour tout $i \in \left[10;14\right]$, alors $\left(E_{\beta i} \times 2^i\right) \gt \sum_i^{10} \left(E_{\alpha i} \times 2^i\right)$.
-Cela ne démontre pas pour autant que $\left(E_{\alpha} \lt E_{\beta}\right)$.
+// à relire
+
+Pour conclure, nous pouvons être certains que du moment où $\left(\tau_i = 1\right)$ pour tout $i \in \left[10;14\right]$, alors $\left(E_{\beta i} \times 2^i\right) \gt \sum_i^{10} \left(E_{\alpha i} \times 2^i\right)$.
+Cette dernière inéquation transmet l'idée que des bits de poids $i$ jusqu'au bit de poids $10$, le champs d'exposant $E_{\beta}$ est supérieur au champs d'exposant $E_{\alpha}$.
+Mais cela ne démontre pas pour autant que $\left(E_{\alpha} \lt E_{\beta}\right)$.
 
 ## Les zéros anonymes
+
+// importance du placement des bits d'oprandes du Nimply
 
 Nous avons vu dans la section "_Définition de quelques opérations fondamentales à la démonstration_", que l'opération logique $Nimply$ génère un bit de résultat à $1$ sous réserve que le bit sur son paramètre $x$ vaille $1$, et que celui sur $y$ vaille $0$.
 Autrement, l'opération renvoie un bit de résultat à $0$.
