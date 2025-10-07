@@ -604,6 +604,15 @@ Par conséquent, un bit de résultat à $0$ ne permet pas de déduire la valeur 
 Plus bas, nous allons voir que les _zéros anonymes_ sont la raison pour laquelle le chapitre précédent conclu de la sorte.
 Je précise que dans les faits il existe des _zéros anonymes capitaux_ et _non capitaux_, dissociation importante que nous allons expliqués ci-dessous.
 
+// à relire
+
+Pour finir, la section "_Les points terminaux et non terminaux_" évoque le fait que les champs d'exposant ainsi que les champs de mantisse tronquée subissent le même traitement, une comparaison de superiorité stricte entre champs.
+Nous comprenons d'ores et déjà que le traitement des champs d'exposant passe par l'application d'opération logique $Nimply$ sur les bits des champs $E_{\alpha}$ et $E_{\beta}$.
+Ce qui engendre quelques subtilités à expliqué, comme celle des _zéros anonymes_.
+Sachez que le traitement des champs de mantisse tronquée des opérandes du circuit est rigoureusement le même que celui des champs d'exposant.
+Par conséquent, nous recontextualiserons en temps voulu les concepts de _zéro anonyme capital_ et _non capital_ aux champs de mantisse tronquée, c'est à dire dans le chapitre "_Le traitement des champs de mantisse tronquée_".
+Pour l'instant, concentrons sur les cas des champs d'exposant.
+
 ### Les zéros anonymes capitaux
 
 Un _zéro anonyme capital_ est un bit à $0$ du champs $\tau$, dont le poids est supérieur au _MSB1_ de $\tau \in \left[10;14\right]$.
@@ -693,6 +702,10 @@ Par ailleurs, cela a été dit en introduction, l'encodage du champs de mantisse
 La section du nom de "_L'encodage du champs de mantisse tronquée_", explique entre autre que la valeur de n'importe quel bit à $1$ de poids $i$ dans un champs de mantisse tronquée, est strictement supérieur à la somme des valeurs des bits de poids inférieur à $i$.
 Ce qui nous permet de conclure en disant que du moment où $\left(\tau_i = 1\right)$ pour tout $i \in \left[0;9\right]$, alors $\left(T_{\beta i} \times 2^i\right) \gt \sum_i^0 \left(T_{\alpha i} \times 2^i\right)$.
 Cependant, comme dans le cas des champs d'exposant, cela ne démontre pas pour autant que $\left(T_{\alpha} \lt T_{\beta}\right)$.
+
+## La considération des zéros anonymes capitaux
+
+
 
 ### Un échec certain de la condition 
 
