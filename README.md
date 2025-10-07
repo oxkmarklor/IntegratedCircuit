@@ -604,24 +604,22 @@ Par conséquent, un bit de résultat à $0$ ne permet pas de déduire la valeur 
 Plus bas, nous allons voir que les _zéros anonymes_ sont la raison pour laquelle le chapitre précédent conclu de la sorte.
 Je précise que dans les faits il existe des _zéros anonymes capitaux_ et _non capitaux_, dissociation importante que nous allons expliqués ci-dessous.
 
-// à relire
-
-Pour finir, la section "_Les points terminaux et non terminaux_" évoque le fait que les champs d'exposant ainsi que les champs de mantisse tronquée subissent le même traitement, une comparaison de superiorité stricte entre champs.
+Pour finir, la section "_Les points terminaux et non terminaux_" évoque le fait que le traitement des champs d'exposant ainsi que des champs de mantisse tronquée soit identique ou presque.
 Nous comprenons d'ores et déjà que le traitement des champs d'exposant passe par l'application d'opération logique $Nimply$ sur les bits des champs $E_{\alpha}$ et $E_{\beta}$.
-Ce qui engendre quelques subtilités à expliqué, comme celle des _zéros anonymes_.
-Sachez que le traitement des champs de mantisse tronquée des opérandes du circuit est rigoureusement le même que celui des champs d'exposant.
-Par conséquent, nous recontextualiserons en temps voulu les concepts de _zéro anonyme capital_ et _non capital_ aux champs de mantisse tronquée, c'est à dire dans le chapitre "_Le traitement des champs de mantisse tronquée_".
-Pour l'instant, concentrons sur les cas des champs d'exposant.
+Ce qui engendre quelques subtilités qu'il faut expliqué, comme celle des _zéros anonymes_.
+Sachez que le traitement des champs de mantisse tronquée utilise aussi des opérations logiques $Nimply$.
+Par conséquent, nous recontextualiserons en temps voulu les concepts de _zéro anonyme capital_ et _non capital_ aux cas des champs de mantisse tronquée.
+Mais pour l'instant concentrons sur le cas des champs d'exposant.
 
-### Les zéros anonymes capitaux
+### Les zéros anonymes capitaux dus au traitement des champs d'exposant
 
-Un _zéro anonyme capital_ est un bit à $0$ du champs $\tau$, dont le poids est supérieur au _MSB1_ de $\tau \in \left[10;14\right]$.
+Au travers du traitement des champs d'exposant, un _zéro anonyme capital_ est un bit à $0$ du champs $\tau$ dont le poids est supérieur au _MSB1_ de $\tau \in \left[10;14\right]$.
 Par conséquent, lorsque le _MSB1_ de $\tau \in \left[10;14\right]$ a un poids $i \in \left[10;13\right]$, alors les bits de poids $\sigma$ (sigma) compris dans l'intervalle $\left]i;14\right]$ sont par définition des _zéros anonymes capitaux_.
 Selon le chapitre "_Les zéros anonymes_", nous en déduisons que $\left(E_{\alpha\sigma} \ge E_{\beta\sigma}\right)$ pour tout bit de poids $\sigma \in \left]i;14\right]$.
 
-Revenons en là où nous en étions dans le chapitre "_Le traitement des champs d'exposant_".
+Revenons en là où nous en étions dans l'introduction du chapitre "_Le traitement des champs d'exposant_".
 Admettons que le _MSB1_ de $\tau \in \left[10;14\right]$ ait un poids $i \in \left[10;13\right]$, par conséquent $\left(\tau_i = 1\right)$ et $\left(E_{\beta i} \times 2^i\right) \gt \sum_i^{10} \left(E_{\alpha i} \times 2^i\right)$.
-Cependant, comme mentionné dans ledit chapitre, ceci ne suffit pas à démontrer que $\left(E_{\alpha} \lt E_{\beta}\right)$.
+Cependant, comme mentionné dans l'introduction dudit chapitre, ceci ne suffit pas à démontrer que $\left(E_{\alpha} \lt E_{\beta}\right)$.
 
 Dans un premier temps, calculons la somme $\lambda$ (lambda) de la valeur des bits de poids supérieur à $i$ du champs d'exposant $E_{\alpha}$ avec $\lambda_{\alpha} = \sum_{\sigma = i + 1}^{14} \left(E_{\alpha\sigma} \times 2^{\sigma}\right)$, puis du champs $E_{\beta}$ avec $\lambda_{\beta} = \sum_{\sigma = i + 1}^{14} \left(E_{\beta\sigma} \times 2^{\sigma}\right)$.
 Par le fait que $\left(E_{\alpha\sigma} \ge E_{\beta\sigma}\right)$ pour tout bit de poids $\sigma \in \left]i;14\right]$, nous comprenons que $\left(\lambda_{\alpha} \ge \lambda_{\beta}\right)$.
@@ -636,7 +634,7 @@ Par conséquent, de toute les occurences $\left(E_{\alpha\sigma} \times 2^{\sigm
 A partir de là, nous savons que le circuit atteint l'état de point terminal $\left(E_{\alpha} \gt E_{\beta}\right)$, et une conséquence à cela est que $\left(\left(1 + T_{\alpha}\right) \times \ 2^{E_{\alpha}}\right) \gt \left(\left(1 + T_{\beta}\right) \times \ 2^{E_{\beta}}\right)$.
 La condition sur laquelle s'appuie la démonstration mathématique du circuit $\left(\vert \alpha \vert \gt \vert \beta \vert\right)$ réussie.
 
-### Les zéros anonymes non capitaux
+### Les zéros anonymes non capitaux dus au traitement des champs d'exposant
 
 Nous comprenons désormais l'importance des _zéros anonymes_ de poids supérieur au _MSB1_ de $\tau \in \left[10;14\right]$, voyons ce qu'il en est de ceux qui sont d'un poids inférieur au _MSB1_.
 Un _zéro anonyme non capital_ est un bit à $0$ dans le champs $\tau \in \left[10;14\right]$, dont le poids est inférieur au _MSB1_ de $\tau \in \left[10;14\right]$.
