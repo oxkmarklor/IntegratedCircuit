@@ -627,28 +627,15 @@ Par définition, le bit $\tau_{\left(i + 1\right)}$ ne peut être qu'à $0$, aut
 Formellement, un _zéro anonyme capital_ issu du traitement des champs d'exposant, est un bit à $0$ du champs $\tau$ dont le poids est supérieur au _MSB1_ de $\tau \in \left[10;14\right]$.
 Nous en déduisons alors que le bit $\tau_{\left(i + 1\right)}$ est un _zéro anonyme capital_, comme tout bit de poids $\sigma$ (sigma) compris dans l'intervalle $\left]i;14\right]$.
 
-// à relire
-
 A ce stade, l'inéquation $\left(E_{\beta i} \times 2^i\right) \gt \sum_i^{10} \left(E_{\alpha i} \times 2^i\right)$ nous montre que du bit de poids $i$ jusqu'au bit de poids $10$, le champs d'exposant $E_{\beta}$ est supérieur au champs d'exposant $E_{\alpha}$.
-Cependant, cela ne suffit pas à démontrer que $\left(E_{\alpha} \lt E_{\beta}\right)$, car les bits $E_{\alpha\sigma}$ et $E_{\beta\sigma}$ (de poids supérieur à $i$) ne sont pas pris en compte par l'inéquation.
-Selon le chapitre "_Les zéros anonymes_", nous en déduisons que $\left(E_{\alpha\sigma} \ge E_{\beta\sigma}\right)$ du moment où $\left(\tau_{\sigma} = 0\right)$, pour tout $\sigma \in \left]i;14\right]$.
-Tout ceci ne mène le circuit qu'à être dans l'un des deux états de points terminaux suivant $\left(E_{\alpha} \lt E_{\beta}\right)$ ou $\left(E_{\alpha} \gt E_{\beta}\right).
+Cependant, cela ne suffit pas à démontrer que $\left(E_{\alpha} \lt E_{\beta}\right)$, car les bits $E_{\alpha\sigma}$ et $E_{\beta\sigma}$ d'un poids $\sigma \in \left]i;14\right]$ ne sont pas pris en compte par l'inéquation.
+Malheureusement nous ne pouvons que nous faire une idée de la valeur de $E_{\alpha\sigma}$ et $E_{\beta\sigma}$ car $\tau_{\sigma}$ est un _zéro anonyme capital_, par conséquent nous en déduisons que $\left(E_{\alpha\sigma} \ge E_{\beta\sigma}\right)$.
+Tout ceci ne mène qu'à deux possibilités.
 
-Dans le cas du premier point terminal ...
-
-
-
-
-
-
-
-
-
-
+Dans un premier temps, si $\left(E_{\alpha\sigma} = E_{\beta\sigma}\right)$ pour tout les bits de poids $\sigma \in \left]i;14\right]$, alors le circuit atteint le point terminal suivant $\left(E_{\alpha} \lt E_{\beta}\right)$.
 
 // à corriger
 
-Dans un premier temps, si $\left(E_{\alpha\sigma} = E_{\beta\sigma}\right)$ pour tout les bits de poids $\sigma \in \left]i;14\right]$, alors le circuit atteint le point terminal suivant $\left(E_{\alpha} \lt E_{\beta}\right)$.
 
 En effet, la section "_L'encodage par biais du champs d'exposant_" nous fait comprendre que la valeur d'un champs d'exposant ce calcul comme celle d'un nombre _Binary Unsigned_, c'est à dire par la somme des puissances des bits à $1$ qui compose le champs.
 Vous pouvez toujours relire cette section ainsi que le chapitre "_L'encodage Binary Unsigned_" si besoin.
