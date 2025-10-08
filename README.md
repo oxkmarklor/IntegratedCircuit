@@ -621,7 +621,8 @@ Pour le dire autrement, de tout les bits du champs d'exposant $E_{\beta}$, le bi
 En outre, comme l'explique ledit chapitre, nous en déduisons alors que $\left(E_{\beta i} \times 2^i\right) \gt \sum_i^{10} \left(E_{\alpha i} \times 2^i\right)$.
 Cependant, comme cela a été mentionné dans ce même chapitre, ceci ne suffit pas à démontrer que $\left(E_{\alpha} \lt E_{\beta}\right)$.
 
-Dans ce cas de figure (qui n'est pas systèmatique), nous sommes assurés qu'il y ait au moins un bit $\tau_{\left(i + 1\right)}$ qui est d'un poids supérieur au _MSB1_ de $\tau \in \left[10;14\right]$.
+Dans ce cas de figure (qui n'est pas systèmatique), nous sommes assurés qu'il y ait au moins un 
+bit $\tau_{\left(i + 1\right)}$ qui est d'un poids supérieur au _MSB1_ de $\tau \in \left[10;14\right]$.
 Par définition, le bit $\tau_{\left(i + 1\right)}$ ne peut être qu'à $0$, autrement le bit $\tau_i$ ne serait pas le _MSB1_.
 Formellement, un _zéro anonyme capital_ issu du traitement des champs d'exposant, est un bit à $0$ du champs $\tau$ dont le poids est supérieur au _MSB1_ de $\tau \in \left[10;14\right]$.
 Nous en déduisons alors que le bit $\tau_{\left(i + 1\right)}$ est un _zéro anonyme capital_, comme tout bit de poids $\sigma$ (sigma) compris dans l'intervalle $\left]i;14\right]$.
@@ -629,10 +630,21 @@ Nous en déduisons alors que le bit $\tau_{\left(i + 1\right)}$ est un _zéro an
 // à relire
 
 A ce stade, l'inéquation $\left(E_{\beta i} \times 2^i\right) \gt \sum_i^{10} \left(E_{\alpha i} \times 2^i\right)$ nous montre que du bit de poids $i$ jusqu'au bit de poids $10$, le champs d'exposant $E_{\beta}$ est supérieur au champs d'exposant $E_{\alpha}$.
-Mais si cela ne suffit pas à démontrer que $\left(E_{\alpha} \lt E_{\beta}\right)$, c'est parce que les bits de poids $E_{\alpha\sigma}$ et $E_{\beta\sigma}$ (de poids supérieur à $i$) ne sont pas pris en compte.
-Dans les faits, le chapitre "_Les zéros anonymes_" nous renseigne sur les valeurs que peuvent interpréter ces bits.
-Nous déduisons de ce chapitre que $\left(E_{\alpha\sigma} \ge E_{\beta\sigma}\right)$ du moment où $\left(\tau_{\sigma} = 0\right)$, sachant que $\sigma \in \left]i;14\right]$.
-Concrètement, cela peut bien pouvoir dire deux choses.
+Cependant, cela ne suffit pas à démontrer que $\left(E_{\alpha} \lt E_{\beta}\right)$, car les bits $E_{\alpha\sigma}$ et $E_{\beta\sigma}$ (de poids supérieur à $i$) ne sont pas pris en compte par l'inéquation.
+Selon le chapitre "_Les zéros anonymes_", nous en déduisons que $\left(E_{\alpha\sigma} \ge E_{\beta\sigma}\right)$ du moment où $\left(\tau_{\sigma} = 0\right)$, pour tout $\sigma \in \left]i;14\right]$.
+Tout ceci ne mène le circuit qu'à être dans l'un des deux états de points terminaux suivant $\left(E_{\alpha} \lt E_{\beta}\right)$ ou $\left(E_{\alpha} \gt E_{\beta}\right).
+
+Dans le cas du premier point terminal ...
+
+
+
+
+
+
+
+
+
+
 
 // à corriger
 
