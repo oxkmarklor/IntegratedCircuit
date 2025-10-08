@@ -617,7 +617,6 @@ Mais pour l'instant concentrons sur le cas des champs d'exposant.
 
 Reprenons là où nous en étions dans le chapitre "_Le traitement des champs d'exposant_".
 Admettons que le _MSB1_ de $\tau \in \left[10;14\right]$ ait un poids $i \in \left[10;13\right]$, alors nous savons que $\left(E_{\beta i} = 1\right)$ tandis que $\left(E_{\alpha i} = 0\right)$ pour $\left(\tau_i = 1\right)$.
-Pour le dire autrement, de tout les bits du champs d'exposant $E_{\beta}$, le bit $E_{\beta i}$ est celui de poids le plus fort à être strictement supérieur au bit de même poids du champs d'exposant $E_{\alpha}$.
 En outre, comme l'explique ledit chapitre, nous en déduisons alors que $\left(E_{\beta i} \times 2^i\right) \gt \sum_i^{10} \left(E_{\alpha i} \times 2^i\right)$.
 Cependant, comme cela a été mentionné dans ce même chapitre, ceci ne suffit pas à démontrer que $\left(E_{\alpha} \lt E_{\beta}\right)$.
 
@@ -628,46 +627,17 @@ Formellement, un _zéro anonyme capital_ issu du traitement des champs d'exposan
 Nous en déduisons alors que le bit $\tau_{\left(i + 1\right)}$ est un _zéro anonyme capital_, comme tout bit de poids $\sigma$ (sigma) compris dans l'intervalle $\left]i;14\right]$.
 
 A ce stade, l'inéquation $\left(E_{\beta i} \times 2^i\right) \gt \sum_i^{10} \left(E_{\alpha i} \times 2^i\right)$ nous montre que du bit de poids $i$ jusqu'au bit de poids $10$, le champs d'exposant $E_{\beta}$ est supérieur au champs d'exposant $E_{\alpha}$.
-Cependant, cela ne suffit pas à démontrer que $\left(E_{\alpha} \lt E_{\beta}\right)$, car les bits $E_{\alpha\sigma}$ et $E_{\beta\sigma}$ d'un poids $\sigma \in \left]i;14\right]$ ne sont pas pris en compte par l'inéquation.
-Malheureusement nous ne pouvons que nous faire une idée de la valeur de $E_{\alpha\sigma}$ et $E_{\beta\sigma}$ car $\tau_{\sigma}$ est un _zéro anonyme capital_, par conséquent nous en déduisons que $\left(E_{\alpha\sigma} \ge E_{\beta\sigma}\right)$.
-Tout ceci ne mène qu'à deux possibilités.
+Cependant, cela ne suffit pas à démontrer que $\left(E_{\alpha} \lt E_{\beta}\right)$, car les bits $E_{\alpha\sigma}$ et $E_{\beta\sigma}$ d'un poids $\sigma \in \left]i;14\right]$ ne sont pas pris en compte dans l'inéquation.
+Malheureusement nous ne pouvons que nous faire une idée vague de la valeur de $E_{\alpha\sigma}$ et $E_{\beta\sigma}$, parce que $\tau_{\sigma}$ est un _zéro anonyme capital_.
+C'est pourquoi nous en déduisons que $\left(E_{\alpha\sigma} \ge E_{\beta\sigma}\right)$.
 
 Dans un premier temps, si $\left(E_{\alpha\sigma} = E_{\beta\sigma}\right)$ pour tout les bits de poids $\sigma \in \left]i;14\right]$, alors le circuit atteint le point terminal suivant $\left(E_{\alpha} \lt E_{\beta}\right)$.
-Cela veut dire que du bit de poids $\left(i + 1\right)$ jusqu'au bit de poids $14$, le codage du champs d'exposant $E_{\alpha}$ est identique à celui du champs d'exposant $E_{\beta}$.
-Pour verifier cela, il suffit de calculer la somme $\lambda$ de le valeur des bits de poids supérieur à $i$ des champs d'exposant $E_{\alpha}$ ainsi que $E_{\beta}$, puis de comparer.
+Cela veut dire que du bit de poids $\left(i + 1\right)$ jusqu'au bit de poids $14$, le champs d'exposant $E_{\alpha}$ est égale au champs d'exposant $E_{\beta}$.
+Pour verifier cela, il suffit de calculer la somme $\lambda$ (lambda) de la valeur des bits de poids supérieur à $i$ des champs d'exposant $E_{\alpha}$ ainsi que $E_{\beta}$, puis de comparer.
 Il s'avère que $\left(\lambda_{\alpha} = \lambda_{\beta}\right)$, sachant que $\lambda_{\alpha} = \sum_{\sigma = i + 1}^{14} \left(E_{\alpha\sigma} \times 2^{\sigma}\right)$ tandis que $\lambda_{\beta} = \sum_{\sigma = i + 1}^{14} \left(E_{\beta\sigma} \times 2^{\sigma}\right)$.
-En parallèle, n'oublions pas que du bit de poids $i$ jusqu'au bit de poids $10$ le champs d'exposant $E_{\beta}$ est supérieur au champs $E_{\alpha}$, ce qui veut dire que $\left(E_{\alpha} \lt E_{\beta}\right)$ car $\left(\lambda_{\beta} + E_{\beta i} \times 2^i\right) \gt \left(\lambda_{\alpha} + \sum_{i}^{10} \left(E_{\alpha i} \times 2^i\right)\right)$.
+En parallèle, n'oublions pas que du bit de poids $i$ jusqu'au bit de poids $10$, le champs d'exposant $E_{\beta}$ est supérieur au champs d'exposant $E_{\alpha}$, ce qui veut dire que $\left(E_{\alpha} \lt E_{\beta}\right)$ car $\left(\lambda_{\beta} + E_{\beta i} \times 2^i\right) \gt \left(\lambda_{\alpha} + \sum_{i}^{10} \left(E_{\alpha i} \times 2^i\right)\right)$.
 
-
-
-
-//
-
-Par conséquent, la somme $\lambda_{\alpha}$ de la valeur des bits de poids $\sigma$ du champs d'exposant $E_{\alpha}$, est égale à la somme $\lambda_{\beta}$ de la valeur des bits de poids $\sigma$ du champs $E_{\beta}$.
-Autrement dit il s'avère que $\left(\lambda_{\alpha} = \lambda_{\beta}\right)$, sachant que $\lambda_{\alpha} = \sum_{\sigma = i + 1}^{14} \left(E_{\alpha\sigma} \times 2^{\sigma}\right)$ tandis que $\lambda_{\beta} = \sum_{\sigma = i + 1}^{14} \left(E_{\beta\sigma} \times 2^{\sigma}\right)$.
-
-Dans un premier temps, si tout les bits des champs d'exposant dotés d'un même poids $\sigma \in \left]i;14\right]$ sont égaux, alors le circuit atteint l'état de point terminal suivant $\left(E_{\alpha} \lt E_{\beta}\right)$.
-
-Dans un premier temps, si $\left(E_{\alpha\sigma} = E_{\beta\sigma}\right)$ pour tout les bits de poids $\sigma \in \left]i;14\right]$, alors le circuit atteint le point terminal suivant $\left(E_{\alpha} \lt E_{\beta}\right)$.
-
-// à corriger
-
-
-En effet, la section "_L'encodage par biais du champs d'exposant_" nous fait comprendre que la valeur d'un champs d'exposant ce calcul comme celle d'un nombre _Binary Unsigned_, c'est à dire par la somme des puissances des bits à $1$ qui compose le champs.
-Vous pouvez toujours relire cette section ainsi que le chapitre "_L'encodage Binary Unsigned_" si besoin.
-Par conséquent, la somme des puissances des bits à $1$ du champs $E_{\alpha}$ est égale à celle du champs $E_{\beta}$, 
-
-Ce que nous savons c'est que les bits de poids supérieur à $i$ des champs d'exposant $E_{\alpha}$ et $E_{\beta}$ sont égaux, et donc la somme des puissances des bits à $1$ du champs $E_{\alpha}$ est égale à celle du champs $E_{\beta}$.
-
-// pour le dire autrement ... exemple des sommes
-
-// que ce passe t-il des bits de poids i jusqu'à 10?
-
-
-// puis le cas d'une supériorité des bits de E_alpha_sigma sur E_beta_sigma
-
-
-
+// lambda_alpha + sum_i^10 = sum de tout les bits de E_alpha
 
 
 //
