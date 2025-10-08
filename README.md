@@ -633,11 +633,18 @@ Malheureusement nous ne pouvons que nous faire une idée de la valeur de $E_{\al
 Tout ceci ne mène qu'à deux possibilités.
 
 Dans un premier temps, si $\left(E_{\alpha\sigma} = E_{\beta\sigma}\right)$ pour tout les bits de poids $\sigma \in \left]i;14\right]$, alors le circuit atteint le point terminal suivant $\left(E_{\alpha} \lt E_{\beta}\right)$.
-Le chapitre "_L'encodage par biais du champs d'exposant_" explique en quoi l'encodage du champs d'exposant est un dérivé de l'encodage _Binary Unsigned_, l'une des conséquences à cela est que la valeur du champs ce calcul elle aussi comme la somme des puissances dont le bit est à $1$.
-Par conséquent, la somme $\lambda_{\alpha}$ de la valeur des bits de poids supérieur à $i$ du champs d'exposant $E_{\alpha}$, est égale à la somme $\lambda_{\beta}$ de la valeur des bits de poids supérieur à $i$ du champs $E_{\beta}$.
-Autrement dit il s'avère que $\left(\lambda_{\alpha} = \lambda_{\beta}\right)$, sachant que $\lambda_{\alpha} = \sum_{\sigma = i + 1}^{14} \left(E_{\alpha\sigma} \times 2^{\sigma}\right)$ tandis que $\lambda_{\beta} = \sum_{\sigma = i + 1}^{14} \left(E_{\beta\sigma} \times 2^{\sigma}\right)$.
+Cela veut dire que du bit de poids $\left(i + 1\right)$ jusqu'au bit de poids $14$, le codage du champs d'exposant $E_{\alpha}$ est identique à celui du champs d'exposant $E_{\beta}$.
+Pour verifier cela, il suffit de calculer la somme $\lambda$ de le valeur des bits de poids supérieur à $i$ des champs d'exposant $E_{\alpha}$ ainsi que $E_{\beta}$, puis de comparer.
+Il s'avère que $\left(\lambda_{\alpha} = \lambda_{\beta}\right)$, sachant que $\lambda_{\alpha} = \sum_{\sigma = i + 1}^{14} \left(E_{\alpha\sigma} \times 2^{\sigma}\right)$ tandis que $\lambda_{\beta} = \sum_{\sigma = i + 1}^{14} \left(E_{\beta\sigma} \times 2^{\sigma}\right)$.
+En parallèle, n'oublions pas que du bit de poids $i$ jusqu'au bit de poids $10$ le champs d'exposant $E_{\beta}$ est supérieur au champs $E_{\alpha}$, ce qui veut dire que $\left(E_{\alpha} \lt E_{\beta}\right)$ car $\left(\lambda_{\beta} + E_{\beta i} \times 2^i\right) \gt \left(\lambda_{\alpha} + \sum_{i}^{10} \left(E_{\alpha i} \times 2^i\right)\right)$.
+
+
+
 
 //
+
+Par conséquent, la somme $\lambda_{\alpha}$ de la valeur des bits de poids $\sigma$ du champs d'exposant $E_{\alpha}$, est égale à la somme $\lambda_{\beta}$ de la valeur des bits de poids $\sigma$ du champs $E_{\beta}$.
+Autrement dit il s'avère que $\left(\lambda_{\alpha} = \lambda_{\beta}\right)$, sachant que $\lambda_{\alpha} = \sum_{\sigma = i + 1}^{14} \left(E_{\alpha\sigma} \times 2^{\sigma}\right)$ tandis que $\lambda_{\beta} = \sum_{\sigma = i + 1}^{14} \left(E_{\beta\sigma} \times 2^{\sigma}\right)$.
 
 Dans un premier temps, si tout les bits des champs d'exposant dotés d'un même poids $\sigma \in \left]i;14\right]$ sont égaux, alors le circuit atteint l'état de point terminal suivant $\left(E_{\alpha} \lt E_{\beta}\right)$.
 
