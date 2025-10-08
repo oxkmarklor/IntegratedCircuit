@@ -626,16 +626,22 @@ Par définition, le bit $\tau_{\left(i + 1\right)}$ ne peut être qu'à $0$, aut
 Formellement, un _zéro anonyme capital_ issu du traitement des champs d'exposant, est un bit à $0$ du champs $\tau$ dont le poids est supérieur au _MSB1_ de $\tau \in \left[10;14\right]$.
 Nous en déduisons alors que le bit $\tau_{\left(i + 1\right)}$ est un _zéro anonyme capital_, comme tout bit de poids $\sigma$ (sigma) compris dans l'intervalle $\left]i;14\right]$.
 
+// à relire
+
 A ce stade, l'inéquation $\left(E_{\beta i} \times 2^i\right) \gt \sum_i^{10} \left(E_{\alpha i} \times 2^i\right)$ nous montre que du bit de poids $i$ jusqu'au bit de poids $10$, le champs d'exposant $E_{\beta}$ est supérieur au champs d'exposant $E_{\alpha}$.
 Mais si cela ne suffit pas à démontrer que $\left(E_{\alpha} \lt E_{\beta}\right)$, c'est parce que les bits de poids $E_{\alpha\sigma}$ et $E_{\beta\sigma}$ (de poids supérieur à $i$) ne sont pas pris en compte.
 Dans les faits, le chapitre "_Les zéros anonymes_" nous renseigne sur les valeurs que peuvent interpréter ces bits.
-Nous déduisons de ce chapitre que $\left(E_{\alpha\sigma} \ge E_{\beta\sigma}\right)$ pour tout poids $\sigma \in \left]i;14\right]$, car $\tau_{\sigma}$ est un _zéro anonyme capital_.
-Concrètement, cela veut bien pouvoir dire deux choses.
+Nous déduisons de ce chapitre que $\left(E_{\alpha\sigma} \ge E_{\beta\sigma}\right)$ du moment où $\left(\tau_{\sigma} = 0\right)$, sachant que $\sigma \in \left]i;14\right]$.
+Concrètement, cela peut bien pouvoir dire deux choses.
+
+// à corriger
 
 Dans un premier temps, si $\left(E_{\alpha\sigma} = E_{\beta\sigma}\right)$ pour tout les bits de poids $\sigma \in \left]i;14\right]$, alors le circuit atteint le point terminal suivant $\left(E_{\alpha} \lt E_{\beta}\right)$.
+
 En effet, la section "_L'encodage par biais du champs d'exposant_" nous fait comprendre que la valeur d'un champs d'exposant ce calcul comme celle d'un nombre _Binary Unsigned_, c'est à dire par la somme des puissances des bits à $1$ qui compose le champs.
 Vous pouvez toujours relire cette section ainsi que le chapitre "_L'encodage Binary Unsigned_" si besoin.
-// ajout lambda pour la somme?
+Par conséquent, la somme des puissances des bits à $1$ du champs $E_{\alpha}$ est égale à celle du champs $E_{\beta}$, 
+
 Ce que nous savons c'est que les bits de poids supérieur à $i$ des champs d'exposant $E_{\alpha}$ et $E_{\beta}$ sont égaux, et donc la somme des puissances des bits à $1$ du champs $E_{\alpha}$ est égale à celle du champs $E_{\beta}$.
 
 // pour le dire autrement ... exemple des sommes
