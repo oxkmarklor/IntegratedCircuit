@@ -643,31 +643,21 @@ Tel que l'explique le chapitre "_Les points terminaux et non terminaux_", $\left
 Cependant, il suffit qu'une ou plusieurs occurences de $\left(E_{\alpha\sigma} \gt E_{\beta\sigma}\right)$ avec $\sigma \in \left]i;14\right]$, pour que le circuit atteigne l'état de point terminal $\left(E_{\alpha} \gt E_{\beta}\right)$.
 Dans le chapitre "_L'encodage par biais du champs d'exposant_", nous expliquons que la valeur de n'importe quel bit à $1$ de poids $i$ dans un champs d'exposant, est strictement supérieur à la somme des valeurs des bits de poids inférieur à $i$.
 Par conséquent, pour chacune des occurences $\left(E_{\alpha\sigma} \times 2^{\sigma}\right) \gt \left(E_{\beta\sigma} \times 2^{\sigma}\right)$ nous en déduisons que $\left(E_{\alpha\sigma} \times 2^{\sigma}\right) \gt \sum_{\sigma}^{10} \left(E_{\beta\sigma} \times 2^{\sigma}\right)$.
-A ce stade, ...
-
-Quelques chose d'important ce joue ici, si il existe $E_{\alpha\left(\sigma + 1\right)}$ et $E_{\beta\left(\sigma + 1\right)}$ alors nous savons par $\left(\tau_{\left(\sigma + 1\right)} = 0\right)$ que $\left(E_{\alpha\left(\sigma + 1\right)} \ge E_{\beta\left(\sigma + 1\right)}\right)$.
-
-
- car si il existe dans les champs d'exposant $E_{\alpha}$ et $E_{\beta}$ un bit de poids $\left(\sigma + 1\right)$, alors nous en déduisons que $\left(E_{\alpha\left(\sigma + 1\right)} \ge E_{\beta\left(\sigma + 1\right)}\right)$ car $\tau_{\left(\sigma + 1\right)}$ est un _zéro anonyme capital_.
+Dans le cas où $\sigma \in \left]i;14\right[$, alors nous savons qu'il existe $\left(\tau_{\sigma '} = 0\right)$ pour tout poids $\sigma ' \in \left]\sigma;14\right]$, ces bits sont alors des _zéros anonymes capitaux_ ce qui nous permet d'en déduire que $\left(E_{\alpha\sigma '} \ge E_{\beta\sigma '}\right)$.
 
 
 
 //
 
-C'est à partir de là que le circuit atteint l'état de point terminal $\left(E_{\alpha} \gt E_{\beta}\right)$,car si il existe un bit $\tau_{\left(\sigma + n\right)}$, alors ce dernier est un _zéro anonyme capital_ et nous en déduisons que $\left(E_{\alpha\left(\sigma + n\right)} \ge E_{\beta\left(\sigma + n\right)}\right)$.
+
+
+
+//
+
+C'est à partir de là que le circuit atteint l'état de point terminal $\left(E_{\alpha} \gt E_{\beta}\right)$, car si il existe un bit $\tau_{\left(\sigma + n\right)}$, alors ce dernier est un _zéro anonyme capital_ et nous en déduisons que $\left(E_{\alpha\left(\sigma + n\right)} \ge E_{\beta\left(\sigma + n\right)}\right)$.
 Par cet état de fait, si $\left(E_{\alpha\left(\sigma + n\right)} = E_{\beta\left(\sigma + n\right)}\right)$ pour tout les poids $\left(\sigma + n\right) \in \left]\sigma;14\right]$, alors nous nous retrouvons dans le même contexte que la paragraphe précédent et $\left(\lambda_{\alpha} + E_{\alpha\sigma} \times 2^{\sigma}\right) \gt \left(\lambda_{\beta} + \sum_{\sigma}^{10} \left(E_{\beta\sigma} \times 2^{\sigma}\right)\right)$.
 
 // si E_alpha(sigma + n) > E_beta(sigma + n) ?
-
-//
-
-la raison en est que $\left(E_{\alpha\left(\sigma + 1\right)} \ge E_{\beta\left(\sigma + 1\right)}\right)$ si jamais le poids $\left(\sigma + 1\right)$ ne dépasse pas $14$.
-
-la raison en est que tout bit de poids supérieur à $\sigma$ provenant des champs d'exposant $E_{\alpha}$ ainsi que $E_{\beta}$ (si ils existent), sont 
-
-// E_alpha_(sigma + 1) >= E_beta_(sigma + 1), donc E_alpha > E_beta
-
-...
 
 //
 
