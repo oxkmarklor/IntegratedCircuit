@@ -631,11 +631,16 @@ Cependant, cela ne suffit pas à démontrer que $\left(E_{\alpha} \lt E_{\beta}\
 Malheureusement nous ne pouvons que nous faire une idée vague de la valeur de $E_{\alpha\sigma}$ et $E_{\beta\sigma}$, parce que $\tau_{\sigma}$ est un _zéro anonyme capital_.
 C'est pourquoi nous en déduisons que $\left(E_{\alpha\sigma} \ge E_{\beta\sigma}\right)$.
 
-Dans un premier temps, si $\left(E_{\alpha\sigma} = E_{\beta\sigma}\right)$ pour tout les bits de poids $\sigma \in \left]i;14\right]$, alors le circuit atteint le point terminal suivant $\left(E_{\alpha} \lt E_{\beta}\right)$.
+Dans un premier temps, si $\left(E_{\alpha\sigma} = E_{\beta\sigma}\right)$ pour tout poids $\sigma \in \left]i;14\right]$, alors le circuit atteint le point terminal suivant $\left(E_{\alpha} \lt E_{\beta}\right)$.
 Cela veut dire que du bit de poids $\left(i + 1\right)$ jusqu'au bit de poids $14$, le champs d'exposant $E_{\alpha}$ est égale au champs d'exposant $E_{\beta}$.
 Pour verifier cela, il suffit de calculer la somme $\lambda$ (lambda) de la valeur des bits de poids supérieur à $i$ des champs d'exposant $E_{\alpha}$ ainsi que $E_{\beta}$, puis de comparer.
 Il s'avère que $\left(\lambda_{\alpha} = \lambda_{\beta}\right)$, sachant que $\lambda_{\alpha} = \sum_{\sigma = i + 1}^{14} \left(E_{\alpha\sigma} \times 2^{\sigma}\right)$ tandis que $\lambda_{\beta} = \sum_{\sigma = i + 1}^{14} \left(E_{\beta\sigma} \times 2^{\sigma}\right)$.
-En parallèle, n'oublions pas que du bit de poids $i$ jusqu'au bit de poids $10$, le champs d'exposant $E_{\beta}$ est supérieur au champs d'exposant $E_{\alpha}$, ce qui veut dire que $\left(E_{\alpha} \lt E_{\beta}\right)$ car $\left(\lambda_{\beta} + E_{\beta i} \times 2^i\right) \gt \left(\lambda_{\alpha} + \sum_{i}^{10} \left(E_{\alpha i} \times 2^i\right)\right)$.
+En parallèle, n'oublions pas que l'inéquation suivante $\left(E_{\beta i} \times 2^i\right) \gt \sum_i^{10} \left(E_{\alpha i} \times 2^i\right)$ démontre que du bit de poids $i$ jusqu'au bit de poids $10$, le champs d'exposant $E_{\beta}$ est supérieur au champs d'exposant $E_{\alpha}$.
+Ce qui insinue qu'au global $\left(E_{\alpha} \lt E_{\beta}\right)$ car $\left(\lambda_{\beta} + E_{\beta i} \times 2^i\right) \gt \left(\lambda_{\alpha} + \sum_{i}^{10} \left(E_{\alpha i} \times 2^i\right)\right)$, ou autrement dit $\sum_{\sigma = 14}^i \left(E_{\beta\sigma} \times 2^{\sigma}\right) \gt \sum_{\sigma = 14}^{10} \left(E_{\alpha\sigma} \times 2^{\sigma}\right)$.
+
+//
+
+Pour rendre la chose plus visuelle, nous pouvons développer la dernière inséquation en $\left(\lambda_{\beta} + E_{\beta i} \times 2^i\right) \gt \left(\sum_{\sigma = i + 1}^{14} \left(E_{\alpha\sigma} \times 2^{\sigma}\right) + \sum_i^{10} \left(E_{\alpha i} \times 2^i\right)\right)$.
 
 // lambda_alpha + sum_i^10 = sum de tout les bits de E_alpha
 
