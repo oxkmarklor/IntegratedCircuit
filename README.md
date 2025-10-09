@@ -640,10 +640,21 @@ Ce qui insinue que $\left(E_{\alpha} \lt E_{\beta}\right)$ car $\left(\lambda_{\
 Enfin, rappelez vous du fait que la condition sur laquelle s'appuie la démonstration mathématique du circuit est $\left(\vert \alpha \vert \gt \vert \beta \vert\right)$, condition qui se solde en échec car $\left(\left(1 + T_{\alpha}\right) \times \ 2^{E_{\alpha}}\right) \lt \left(\left(1 + T_{\beta}\right) \times \ 2^{E_{\beta}}\right)$.
 Tel que l'explique le chapitre "_Les points terminaux et non terminaux_", $\left(\left(1 + T_{\alpha}\right) \times \ 2^{E_{\alpha}}\right)$ ainsi que $\left(\left(1 + T_{\beta}\right) \times \ 2^{E_{\beta}}\right)$ représentent les valeurs respective de $\vert \ \alpha \ \vert$ et $\vert \ \beta \ \vert$.
 
-Cependant, il suffit qu'une ou plusieurs occurences de $\left(E_{\alpha\sigma} \gt E_{\beta\sigma}\right)$ avec $\sigma \in \left]i;14\right]$, pour que le circuit atteigne l'état de point terminal opposé $\left(E_{\alpha} \gt E_{\beta}\right)$.
+Cependant, il suffit qu'une ou plusieurs occurences de $\left(E_{\alpha\sigma} \gt E_{\beta\sigma}\right)$ avec $\sigma \in \left]i;14\right]$, pour que le circuit atteigne l'état de point terminal $\left(E_{\alpha} \gt E_{\beta}\right)$.
 Dans le chapitre "_L'encodage par biais du champs d'exposant_", nous expliquons que la valeur de n'importe quel bit à $1$ de poids $i$ dans un champs d'exposant, est strictement supérieur à la somme des valeurs des bits de poids inférieur à $i$.
 Par conséquent, pour chacune des occurences $\left(E_{\alpha\sigma} \times 2^{\sigma}\right) \gt \left(E_{\beta\sigma} \times 2^{\sigma}\right)$ nous en déduisons que $\left(E_{\alpha\sigma} \times 2^{\sigma}\right) \gt \sum_{\sigma}^{10} \left(E_{\beta\sigma} \times 2^{\sigma}\right)$.
-C'est à partir de là que le circuit atteint l'état de point terminal $\left(E_{\alpha} \gt E_{\beta}\right)$, car si il existe un bit $\tau_{\left(\sigma + n\right)}$, alors ce dernier est un _zéro anonymes capital_ et nous en déduisons que $\left(E_{\alpha\left(\sigma + n\right)} \ge E_{\beta\left(\sigma + n\right)}\right)$.
+A ce stade, ...
+
+Quelques chose d'important ce joue ici, si il existe $E_{\alpha\left(\sigma + 1\right)}$ et $E_{\beta\left(\sigma + 1\right)}$ alors nous savons par $\left(\tau_{\left(\sigma + 1\right)} = 0\right)$ que $\left(E_{\alpha\left(\sigma + 1\right)} \ge E_{\beta\left(\sigma + 1\right)}\right)$.
+
+
+ car si il existe dans les champs d'exposant $E_{\alpha}$ et $E_{\beta}$ un bit de poids $\left(\sigma + 1\right)$, alors nous en déduisons que $\left(E_{\alpha\left(\sigma + 1\right)} \ge E_{\beta\left(\sigma + 1\right)}\right)$ car $\tau_{\left(\sigma + 1\right)}$ est un _zéro anonyme capital_.
+
+
+
+//
+
+C'est à partir de là que le circuit atteint l'état de point terminal $\left(E_{\alpha} \gt E_{\beta}\right)$,car si il existe un bit $\tau_{\left(\sigma + n\right)}$, alors ce dernier est un _zéro anonyme capital_ et nous en déduisons que $\left(E_{\alpha\left(\sigma + n\right)} \ge E_{\beta\left(\sigma + n\right)}\right)$.
 Par cet état de fait, si $\left(E_{\alpha\left(\sigma + n\right)} = E_{\beta\left(\sigma + n\right)}\right)$ pour tout les poids $\left(\sigma + n\right) \in \left]\sigma;14\right]$, alors nous nous retrouvons dans le même contexte que la paragraphe précédent et $\left(\lambda_{\alpha} + E_{\alpha\sigma} \times 2^{\sigma}\right) \gt \left(\lambda_{\beta} + \sum_{\sigma}^{10} \left(E_{\beta\sigma} \times 2^{\sigma}\right)\right)$.
 
 // si E_alpha(sigma + n) > E_beta(sigma + n) ?
