@@ -643,14 +643,21 @@ Tel que l'explique le chapitre "_Les points terminaux et non terminaux_", $\left
 Cependant, il suffit qu'une ou plusieurs occurences de $\left(E_{\alpha\sigma} \gt E_{\beta\sigma}\right)$ avec $\sigma \in \left]i;14\right]$, pour que le circuit atteigne l'état de point terminal $\left(E_{\alpha} \gt E_{\beta}\right)$.
 Dans le chapitre "_L'encodage par biais du champs d'exposant_", nous expliquons que la valeur de n'importe quel bit à $1$ de poids $i$ dans un champs d'exposant, est strictement supérieur à la somme des valeurs des bits de poids inférieur à $i$.
 Par conséquent, pour chacune des occurences $\left(E_{\alpha\sigma} \times 2^{\sigma}\right) \gt \left(E_{\beta\sigma} \times 2^{\sigma}\right)$ nous en déduisons que $\left(E_{\alpha\sigma} \times 2^{\sigma}\right) \gt \sum_{\sigma}^{10} \left(E_{\beta\sigma} \times 2^{\sigma}\right)$.
+Nous comprenons que le circuit atteint l'état de point terminal $\left(E_{\alpha} \gt E_{\beta}\right)$ si jamais $\left(\sigma = 14\right)$, mais c'est aussi le cas lorsque $\sigma \in \left]i;14\right[$.
+Dans ce contexte, nous savons qu'il existe $\left(\tau_{\sigma '} = 0\right)$ pour tout poids $\sigma ' \in \left]\sigma;14\right]$, ce qui permet d'en déduire que $\left(E_{\alpha\sigma '} \ge E_{\beta\sigma '}\right)$.
+De ceci nous en tirons des conclusions, notamment le fait qu'une occurence tel que $\left(E_{\beta\sigma '} \times 2^{\sigma '}\right) \gt \sum_{\sigma '}^{10} \left(E_{\alpha\sigma '} \times 2^{\sigma '}\right)$ soit stictement impossible.
+Effectivement, cela est impossible car il faudrait que $E_{\beta\sigma '}$ vaille $1$, ce qui veut dire que $E_{\alpha\sigma '}$ ne peut que lui être égale $\left(E_{\alpha\sigma '} = E_{\beta\sigma '}\right)$, ce qui rend l'inéquation invalide.
+
+//
+
 
 C'est à partir de là que le circuit atteint l'état de point terminal $\left(E_{\alpha} \gt E_{\beta}\right)$.
-D'après ce qui a été dit précédemment, dans le cas où $\left(\sigma = 14\right)$ et que $\left(E_{\alpha 14} \times 2^{14}\right) \gt \left(E_{\beta 14} \times 2^{14}\right)$, alors nous en déduisons que $\left(E_{\alpha 14} \times 2^{14}\right) \gt \sum_{\sigma = 14}^{10} \left(E_{\beta\sigma} \times 2^{\sigma}\right)$.
+D'après ce qui a été dit précédemment, dans le cas où $\left(E_{\alpha 14} \times 2^{14}\right) \gt \left(E_{\beta 14} \times 2^{14}\right)$ alors nous en déduisons que $\left(E_{\alpha 14} \times 2^{14}\right) \gt \sum_{\sigma = 14}^{10} \left(E_{\beta\sigma} \times 2^{\sigma}\right)$.
+Il n'y a pas de bit de poids supérieur à $14$, par conséquent
+
+Autrement dit, du bit de poids $14$ jusqu'au bit de poids $10$ le champs d'exposant $E_{\alpha}$ est supérieur au champs $E_{\beta}$, sachant qu'il n'y a pas de bit de poids supérieur à $14$
 
 
-
-Dans le cas où $\sigma \in \left]i;14\right[$, alors nous savons qu'il existe $\left(\tau_{\sigma '} = 0\right)$ pour tout poids $\sigma ' \in \left]\sigma;14\right]$, ce qui permet d'en déduire que $\left(E_{\alpha\sigma '} \ge E_{\beta\sigma '}\right)$.
-Effectivement, 
 
 
 
