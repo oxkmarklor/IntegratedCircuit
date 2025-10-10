@@ -646,9 +646,9 @@ Cependant, il suffit qu'une ou plusieurs occurences de $\left(E_{\alpha\sigma} \
 Dans le chapitre "_L'encodage par biais du champs d'exposant_", nous expliquons que la valeur de n'importe quel bit à $1$ de poids $i$ dans un champs d'exposant, est strictement supérieur à la somme des valeurs des bits de poids inférieur à $i$.
 Par conséquent, pour chacune des occurences $\left(E_{\alpha\sigma} \times 2^{\sigma}\right) \gt \left(E_{\beta\sigma} \times 2^{\sigma}\right)$ nous en déduisons que $\left(E_{\alpha\sigma} \times 2^{\sigma}\right) \gt \sum_{\sigma}^{10} \left(E_{\beta\sigma} \times 2^{\sigma}\right)$.
 Dans le cas où $\sigma \in \left]i;14\right[$, alors nous savons qu'il existe $\left(\tau_{\sigma '} = 0\right)$ pour tout poids $\sigma ' \in \left]\sigma;14\right]$, ce qui permet d'en déduire que $\left(E_{\alpha\sigma '} \ge E_{\beta\sigma '}\right)$.
-Il y a là deux possibilités qui mènent à la même chose, le fait que le circuit atteigne l'état de point terminal $\left(E_{\alpha} \gt E_{\beta}\right)$.
+Il y a là deux possibilités qui mènent au même résultat, le fait que le circuit atteigne l'état de point terminal $\left(E_{\alpha} \gt E_{\beta}\right)$.
 Dans le premier cas, si $\left(E_{\alpha\sigma '} = E_{\beta\sigma '}\right)$ pour tout les poids $\sigma ' \in \left]\sigma;14\right]$, alors la somme $\lambda$ de la valeur des bits de poids supérieur à $\sigma$ des champs d'exposant $E_{\alpha}$ ainsi que $E_{\beta}$ donne $\left(\lambda_{\alpha} = \lambda_{\beta}\right)$.
-Situation inverse à celle que traite le paragraphe précédent, nous en concluons que $\left(\lambda_{\alpha} + E_{\alpha\sigma} \times 2^{\sigma}\right) \gt \left(\lambda_{\beta} + \sum_{\sigma}^{10} \left(E_{\beta\sigma} \times 2^{\sigma}\right)\right)$.
+Je vous invite à remarquer que ceci consiste en le cas inverse du cas traité par le paragraphe précédent, nous conclurons par dire que $\left(\lambda_{\alpha} + E_{\alpha\sigma} \times 2^{\sigma}\right) \gt \left(\lambda_{\beta} + \sum_{\sigma}^{10} \left(E_{\beta\sigma} \times 2^{\sigma}\right)\right)$.
 
 // E_alpha_sigma' > E_beta_sigma'
 
