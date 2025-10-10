@@ -643,54 +643,17 @@ Tel que l'explique le chapitre "_Les points terminaux et non terminaux_", $\left
 Cependant, il suffit qu'une ou plusieurs occurences de $\left(E_{\alpha\sigma} \gt E_{\beta\sigma}\right)$ avec $\sigma \in \left]i;14\right]$, pour que le circuit atteigne l'état de point terminal $\left(E_{\alpha} \gt E_{\beta}\right)$.
 Dans le chapitre "_L'encodage par biais du champs d'exposant_", nous expliquons que la valeur de n'importe quel bit à $1$ de poids $i$ dans un champs d'exposant, est strictement supérieur à la somme des valeurs des bits de poids inférieur à $i$.
 Par conséquent, pour chacune des occurences $\left(E_{\alpha\sigma} \times 2^{\sigma}\right) \gt \left(E_{\beta\sigma} \times 2^{\sigma}\right)$ nous en déduisons que $\left(E_{\alpha\sigma} \times 2^{\sigma}\right) \gt \sum_{\sigma}^{10} \left(E_{\beta\sigma} \times 2^{\sigma}\right)$.
-Nous comprenons que le circuit atteint l'état de point terminal $\left(E_{\alpha} \gt E_{\beta}\right)$ si jamais $\left(\sigma = 14\right)$, mais c'est aussi le cas lorsque $\sigma \in \left]i;14\right[$.
-Dans ce contexte, nous savons qu'il existe $\left(\tau_{\sigma '} = 0\right)$ pour tout poids $\sigma ' \in \left]\sigma;14\right]$, ce qui permet d'en déduire que $\left(E_{\alpha\sigma '} \ge E_{\beta\sigma '}\right)$.
-De ceci nous en tirons des conclusions, notamment le fait qu'une occurence tel que $\left(E_{\beta\sigma '} \times 2^{\sigma '}\right) \gt \sum_{\sigma '}^{10} \left(E_{\alpha\sigma '} \times 2^{\sigma '}\right)$ soit stictement impossible.
-Effectivement, cela est impossible car il faudrait que $E_{\beta\sigma '}$ vaille $1$, ce qui veut dire que $E_{\alpha\sigma '}$ ne peut que lui être égale $\left(E_{\alpha\sigma '} = E_{\beta\sigma '}\right)$, ce qui rend l'inéquation invalide.
+Dans le cas où $\sigma \in \left]i;14\right[$, alors nous savons qu'il existe $\left(\tau_{\sigma '} = 0\right)$ pour tout poids $\sigma ' \in \left]\sigma;14\right]$, ce qui permet d'en déduire que $\left(E_{\alpha\sigma '} \ge E_{\beta\sigma '}\right)$.
 
-//
+// remplacer par autre chose?
 
-
-C'est à partir de là que le circuit atteint l'état de point terminal $\left(E_{\alpha} \gt E_{\beta}\right)$.
-D'après ce qui a été dit précédemment, dans le cas où $\left(E_{\alpha 14} \times 2^{14}\right) \gt \left(E_{\beta 14} \times 2^{14}\right)$ alors nous en déduisons que $\left(E_{\alpha 14} \times 2^{14}\right) \gt \sum_{\sigma = 14}^{10} \left(E_{\beta\sigma} \times 2^{\sigma}\right)$.
-Il n'y a pas de bit de poids supérieur à $14$, par conséquent
-
-Autrement dit, du bit de poids $14$ jusqu'au bit de poids $10$ le champs d'exposant $E_{\alpha}$ est supérieur au champs $E_{\beta}$, sachant qu'il n'y a pas de bit de poids supérieur à $14$
+Nous tirons des conclusions de ceci, notamment le fait qu'il soit totalement impossible que $\left(E_{\beta\sigma '} \times 2^{\sigma '}\right) \gt \sum_{\sigma '}^{10} \left(E_{\alpha\sigma '} \times 2^{\sigma '}\right)$, car il faudrait pour cela que $\left(E_{\alpha\sigma '} \lt E_{\beta\sigma '}\right)$.
+Cependant, ceci n'est pas possible car $\left(E_{\alpha\sigma '} \ge E_{\beta\sigma '}\right)$ et l'inéquation sous-jacente ne fonctionne donc pas.
 
 
+// conclusion ici?
 
 
-
-
-
-
-Dans le premier cas, si $\left(E_{\alpha\sigma '} = E_{\beta\sigma '}\right)$ pour tout les poids $\sigma ' \in \left]\sigma;14\right]$, alors la somme $\lambda$ de la valeur des bits de poids supérieur à $\sigma$ des champs d'exposant $E_{\alpha}$ ainsi que $E_{\beta}$ donne $\left(\lambda_{\alpha} = \lambda_{\beta}\right)$.
-Je vous invite à remarquer que ceci consiste en le cas inverse du cas traité par le paragraphe précédent, nous conclurons par dire que $\left(\lambda_{\alpha} + E_{\alpha\sigma} \times 2^{\sigma}\right) \gt \left(\lambda_{\beta} + \sum_{\sigma}^{10} \left(E_{\beta\sigma} \times 2^{\sigma}\right)\right)$.
-
-
-// E_alpha_sigma' > E_beta_sigma'
-
-
-
-
-//
-
-C'est à partir de là que le circuit atteint l'état de point terminal $\left(E_{\alpha} \gt E_{\beta}\right)$, car si il existe un bit $\tau_{\left(\sigma + n\right)}$, alors ce dernier est un _zéro anonyme capital_ et nous en déduisons que $\left(E_{\alpha\left(\sigma + n\right)} \ge E_{\beta\left(\sigma + n\right)}\right)$.
-Par cet état de fait, si $\left(E_{\alpha\left(\sigma + n\right)} = E_{\beta\left(\sigma + n\right)}\right)$ pour tout les poids $\left(\sigma + n\right) \in \left]\sigma;14\right]$, alors nous nous retrouvons dans le même contexte que la paragraphe précédent et $\left(\lambda_{\alpha} + E_{\alpha\sigma} \times 2^{\sigma}\right) \gt \left(\lambda_{\beta} + \sum_{\sigma}^{10} \left(E_{\beta\sigma} \times 2^{\sigma}\right)\right)$.
-
-// si E_alpha(sigma + n) > E_beta(sigma + n) ?
-
-//
-
-Cependant, si des champs d'exposant $E_{\alpha}$ ainsi que $E_{\beta}$, tout les bits d'un même poids commun supérieur à $i$ ne sont pas égaux, alors cela veut dire qu'il y a une ou plusieurs occruences de $\left(E_{\alpha\sigma} \gt E_{\beta\sigma}\right)$ pour $\sigma \in \left]i;14\right]$.
-
-//
-
-Dans le cas où $\left(\lambda_{\alpha} \gt \lambda_{\beta}\right)$, cela veut dire qu'il y a dans $\left(E_{\alpha\sigma} \ge E_{\beta\sigma}\right)$ une ou plusieurs occurrences de $\left(E_{\alpha\sigma} \gt E_{\beta\sigma}\right)$ pour tout poids $\sigma \in \left]i;14\right]$.
-Dans le chapitre "_L'encodage par biais du champs d'exposant_", nous expliquons que la valeur de n'importe quel bit à $1$ de poids $i$ dans un champs d'exposant, est strictement supérieur à la somme des valeurs des bits de poids inférieur à $i$.
-Par conséquent, de toute les occurences $\left(E_{\alpha\sigma} \times 2^{\sigma}\right) \gt \left(E_{\beta\sigma} \times 2^{\sigma}\right)$ nous en déduisons que $\left(E_{\alpha\sigma} \times 2^{\sigma}\right) \gt \sum_{\sigma}^{10} \left(E_{\beta\sigma} \times 2^{\sigma}\right)$.
-A partir de là, nous savons que le circuit atteint l'état de point terminal $\left(E_{\alpha} \gt E_{\beta}\right)$, et une conséquence à cela est que $\left(\left(1 + T_{\alpha}\right) \times \ 2^{E_{\alpha}}\right) \gt \left(\left(1 + T_{\beta}\right) \times \ 2^{E_{\beta}}\right)$.
-La condition sur laquelle s'appuie la démonstration mathématique du circuit $\left(\vert \alpha \vert \gt \vert \beta \vert\right)$ réussie.
 
 //
 
