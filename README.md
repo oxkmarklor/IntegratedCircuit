@@ -662,12 +662,15 @@ Admettons que le _MSB1_ de $\tau \in \left[10;14\right]$ ait un poids $i \in \le
 Je vous invite à vous rappelez du fait que la valeur de n'importe quel bit à $1$ de poids $i$ dans un champs d'exposant comme $E_{\beta}$, est _inconditionellement_ supérieur à la somme des valeurs des bits de poids inférieur à $i$.
 Concrètement, cela traduit l'idée qu'avec $\left(\tau_i = 1\right)$ alors $\left(E_{\beta i} \times 2^i\right) \gt \sum_i^{10} \left(E_{\alpha i} \times 2^i\right)$.
 
+Imaginons que parmis les bits de poids inférieur à $\tau_i$ se trouve $\left(\tau_{\sigma} = 0\right)$, pour tout poids $\sigma \in \left[10;i\right[$.
+Par conséquent, $\tau_{\sigma}$ est un _zéro anonyme non capital_ et nous en déduisons que $\left(E_{\alpha\sigma} \ge E_{\beta\sigma}\right)$.
+Remarquons que le bit $E_{\alpha\sigma}$ peut être défini à $0$ comme à $1$, mais remarquons aussi que le poids $i$ du bit $E_{\beta i}$ est supérieur au poids $\sigma$ du bit $E_{\alpha\sigma}$.
 
+// faire le lien avec E_alpha_sigma dans le membre droit de l'inéquation, ou du mécanisme qui fait que la valeur de E_alpha_sigma n'importe pas
 
+En revenant sur l'inéquation précédente, nous comprenons que la valeur du bit $E_{\alpha\sigma}$ participe à la somme $\sum_i^{10} \left(E_{\alpha i} \times 2^i\right)$ que représente le membre droit.
 
-
-
-
+//
 
 Parmis les bits de poids inférieur à $i$, disons que $\left(\tau_{\sigma} = 0\right)$ pour $\sigma \in \left[10;i\right[$.
 Par définition, ce bit est un _zéro anonyme non capital_, et selon le chapitre "_Les zéros anonymes_" nous en déduisons que $\left(E_{\alpha\sigma} \ge E_{\beta\sigma}\right)$.
@@ -675,6 +678,13 @@ Cela veut dire que le bit $E_{\alpha\sigma}$ est soit à $0$ soit à $1$, mais c
 En effet, le poids du bit $E_{\alpha\sigma}$ est strictement inférieur au poids du bit $E_{\beta i}$.
 Par conséquent, la somme des valeurs des bits de poids inférieur à $i$, somme à laquelle prend part le bit $E_{\alpha\sigma}$, est quoi qu'il arrive inférieur à $\left(E_{\beta i} \times 2^i\right)$.
 L'inéquation en fin de paragraphe précédent est et restera juste, qu'importe la valeur du bit $E_{\alpha\sigma}$.
+
+
+
+
+
+
+
 
 Les _zéros anonymes non capitaux_ ne permettent pas de déduire la valeur des bits de poids équivalent dans $E_{\alpha}$ ainsi que $E_{\beta}$, mais la démonstration n'a pas besoin de connaitre la valeur de ces bits pour fonctionner.
 D'où le fait que ces bits soient dit _non capitaux_.
