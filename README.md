@@ -653,14 +653,21 @@ En outre, il me faut conclure en évoquant la réussite du test de la condition 
 
 // chapitre à traiter
 
-Nous comprenons désormais l'importance des _zéros anonymes_ de poids supérieur au _MSB1_ de $\tau \in \left[10;14\right]$, voyons ce qu'il en est de ceux qui sont d'un poids inférieur au _MSB1_.
-Au travers du traitement des champs d'exposant, un _zéro anonyme non capital_ est un bit à $0$ dans le champs $\tau \in \left[10;14\right]$ dont le poids est inférieur au _MSB1_ de $\tau \in \left[10;14\right]$.
-Par conséquent, lorsque le _MSB1_ a un poids $i \in \left[11;14\right]$, alors les bits à $0$ de poids $\sigma$ compris dans l'intervalle $\left[10;i\right[$ sont par définition des _zéros anonymes non capitaux_.
+Nous comprenons désormais l'importance des _zéros anonymes_ de poids supérieur au _MSB1_ de $\tau \in \left[10;14\right]$, voyons ce qu'il en est de ceux d'un poids inférieur au _MSB1_.
+Par le prisme du traitement des champs d'exposant, un _zéro anonyme non capital_ est un bit à $0$ dans le champs $\tau \in \left[10;14\right]$, dont le poids est inférieur au _MSB1_ de $\tau \in \left[10;14\right]$.
+Par conséquent, lorsque le _MSB1_ a un poids $i \in \left[11;14\right]$, alors les bits à $0$ de $\tau$ qui sont d'un poids $\sigma \in \left[10;i\right[$ sont par définition des _zéros anonymes non capitaux_.
 
 Reprenons d'où nous en étions dans le chapitre "_Le traitement des champs d'exposant_".
-Admettons que le _MSB1_ de $\tau \in \left[10;14\right]$ ait un poids $i \in \left[11;14\right]$, par conséquent $\left(\tau_i = 1\right)$ et $\left(E_{\beta i} \times 2^i\right) \gt \left(E_{\alpha i} \times 2^i\right)$.
-Rappelons que la valeur de n'importe quel bit à $1$ de poids $i$ dans un champs d'exposant, est strictement supérieur à la somme des valeurs des bits de poids inférieur à $i$.
-En conclusion, nous trouvons que $\left(E_{\beta i} \times 2^i\right) \gt \sum_i^{10} \left(E_{\alpha i} \times 2^i\right)$.
+Admettons que le _MSB1_ de $\tau \in \left[10;14\right]$ ait un poids $i \in \left[11;14\right]$, alors nous en déduisons que $\left(E_{\beta i} = 1\right)$ tandis que $\left(E_{\alpha i} = 0\right)$ pour $\left(\tau_i = 1\right)$.
+Je vous invite à vous rappelez du fait que la valeur de n'importe quel bit à $1$ de poids $i$ dans un champs d'exposant comme $E_{\beta}$, est _inconditionellement_ supérieur à la somme des valeurs des bits de poids inférieur à $i$.
+Concrètement, cela traduit l'idée qu'avec $\left(\tau_i = 1\right)$ alors $\left(E_{\beta i} \times 2^i\right) \gt \sum_i^{10} \left(E_{\alpha i} \times 2^i\right)$.
+
+
+
+
+
+
+
 
 Parmis les bits de poids inférieur à $i$, disons que $\left(\tau_{\sigma} = 0\right)$ pour $\sigma \in \left[10;i\right[$.
 Par définition, ce bit est un _zéro anonyme non capital_, et selon le chapitre "_Les zéros anonymes_" nous en déduisons que $\left(E_{\alpha\sigma} \ge E_{\beta\sigma}\right)$.
