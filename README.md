@@ -661,13 +661,12 @@ Reprenons d'où nous en étions dans le chapitre "_Le traitement des champs d'ex
 Admettons que le _MSB1_ de $\tau \in \left[10;14\right]$ ait un poids $i \in \left[11;14\right]$, alors nous en déduisons que $\left(E_{\beta i} = 1\right)$ tandis que $\left(E_{\alpha i} = 0\right)$ pour $\left(\tau_i = 1\right)$.
 Je vous invite à vous rappelez du fait que la valeur de n'importe quel bit à $1$ de poids $i$ dans un champs d'exposant comme $E_{\beta}$, est _inconditionnellement_ supérieur à la somme des valeurs des bits de poids inférieur à $i$.
 Le fait que ceci soit _inconditionnel_ nous fait comprendre que la valeur $\left(E_{\beta i} \times 2^i\right)$ du bit $E_{\beta i}$, est supérieur à la somme des valeurs des bits de poids inférieur à $i$, nonobstant la valeur de ces derniers.
-Ledit chapitre ce sert de cela pour en déduire que lorsque $\left(\tau_i = 1\right)$, alors $\left(E_{\beta i} \times 2^i\right) \gt \sum_i^{10} \left(E_{\alpha i} \times 2^i\right)$.
+Ledit chapitre se sert de cela pour en déduire que lorsque $\left(\tau_i = 1\right)$, alors $\left(E_{\beta i} \times 2^i\right) \gt \sum_i^{10} \left(E_{\alpha i} \times 2^i\right)$.
 
-// Dans le membre droit de l'inéquation $\sum_i^{10} \left(E_{\alpha i} \times 2^i\right)$, ...
-
-Pour le dire autrement, disons que parmis les bits de poids inférieur à $\tau_i$ se trouve $\left(\tau_{\sigma} = 0\right)$ pour $\sigma \in \left[10;i\right[$.
-Nous en déduisons donc que le bit $\tau_{\sigma}$ est un _zéro anonyme non capital_ et donc que $\left(E_{\alpha\sigma} \ge E_{\beta\sigma}\right)$, ce qui veut dire que le bit $E_{\alpha\sigma}$ peut être à $0$ comme à $1$.
-
+Abordons les choses quelques peu différemment, disons que parmis les bits de poids inférieur à $\tau_i$ se trouve $\left(\tau_{\sigma} = 0\right)$ pour $\sigma \in \left[10;i\right[$.
+Nous en déduisons donc que le bit $\tau_{\sigma}$ est un _zéro anonyme non capital_ et que $\left(E_{\alpha\sigma} \ge E_{\beta\sigma}\right)$, ce qui veut dire que le bit $E_{\alpha\sigma}$ peut être défini à $0$ comme à $1$.
+En outre, n'oublions pas que le poids $i$ du bit $E_{\beta i}$ est supérieur au poids $\sigma$ du bit $E_{\alpha\sigma}$.
+Par conséquent, peu importe que les bits de poids $\sigma$ du champs d'exposant $E_{\alpha}$ soient défini à $0$ ou à $1$, nous trouverons quoi qu'il arrive que $\left(E_{\beta i} \times 2^i\right) \gt \sum_{\sigma}^{10} \left(E_{\alpha\sigma} \times 2^{\sigma}\right)$.
 
 //
 
