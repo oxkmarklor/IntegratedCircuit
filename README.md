@@ -625,11 +625,15 @@ Par conséquent, dans ledit chapitre nous en déduisons que $\left(E_{\beta i} \
 Rappelons que cette inéquation fonctionne car la valeur de n'importe quel bit à $1$ de poids $i$ dans un champs d'exposant comme $E_{\beta}$, est _inconditionnellement_ supérieur à la somme des valeurs des bits de poids inférieur à $i$. 
 
 Dans ces conditions, nous pouvons être certains qu'il existe au moins un bit $\tau_{\left(i - 1\right)}$ qui peut être défini à $0$ comme à $1$.
-Dans le cas où $\left(\tau_{\left(i - 1\right)} = 0\right)$ alors le bit $\tau_i$ est un _zéro anonyme non capital_.
-Par le prisme du traitement des champs d'exposant, un _zéro anonyme non capital_ est plus formellement un bit à $0$ de poids $\sigma \in \left[10;i\right[$, à l'instar du bit $\tau_{\left(i - 1\right)}$ lorqu'il est à $0$.
-Grâce au chapitre précédent, nous en concluons que $\left(E_{\alpha \left(i - 1\right)} \ge E_{\beta \left(i - 1\right)}$ lorsque $\left(\tau_{\left(i - 1\right)} = 0\right).
+Par le prisme du traitement des champs d'exposant, un _zéro anonyme non capital_ est un bit à $0$ de poids $\sigma \in \left[10;i\right[$, à l'instar du bit $\tau_{\left(i - 1\right)}$ lorqu'il est à $0$.
+Le chapitre précédent nous permet donc de savoir que $\left(E_{\alpha \left(i - 1\right)} \ge E_{\beta \left(i - 1\right)}\right)$ lorsque $\left(\tau_{\left(i - 1\right)} = 0\right)$.
+Ce qui veut dire que le bit $E_{\alpha \left(i - 1\right)}$ peut être défini à $0$ comme à $1$, mais comme nous allons le voir, ceci n'a aucune importance pour l'inéquation $\left(E_{\beta i} \times 2^i\right) \gt \sum_i^{10} \left(E_{\alpha i} \times 2^i\right)$.
+Effectivement, cette inéquation se développe en $\left(E_{\beta i} \times 2^i\right) \gt \sum_{\sigma = i - 1}^{10} \left(E_{\alpha\sigma} \times 2^{\sigma}\right) + E_{\alpha i} \times 2^i$.
 
-Ce qui veut dire que le bit $E_{\alpha \left(i - 1\right)}$ peut être défini à $0$ comme à $1$, ce qui n'impacte absolument pas l'inéquation $\left(E_{\beta i} \times 2^i\right) \gt \sum_i^{10} \left(E_{\alpha i} \times 2^i\right)$ car il s'agit d'un bit de poids inférieur à $i$.
+// E_alpha_(i-1) est compris dans la somme des bits de poids sigma de E_alpha
+
+
+ce qui n'impacte absolument pas l'inéquation $\left(E_{\beta i} \times 2^i\right) \gt \sum_i^{10} \left(E_{\alpha i} \times 2^i\right)$ car il s'agit d'un bit de poids inférieur à $i$.
  
 
 
