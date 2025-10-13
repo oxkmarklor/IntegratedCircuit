@@ -608,10 +608,34 @@ Je précise que dans les faits il existe des _zéros anonymes capitaux_ et _non 
 
 Pour finir, la section "_Les points terminaux et non terminaux_" évoque le fait que le traitement des champs d'exposant ainsi que des champs de mantisse tronquée soit identique ou presque.
 Nous comprenons d'ores et déjà que le traitement des champs d'exposant passe par l'application d'opération logique $Nimply$ sur les bits des champs $E_{\alpha}$ et $E_{\beta}$.
-Ce qui engendre quelques subtilités qu'il faut expliqué, comme celle des _zéros anonymes_.
+Ce qui engendre quelques subtilités qu'il faut expliqué, comme celle des _zéros anonymes capitaux_ et _non capitaux_.
 Sachez que le traitement des champs de mantisse tronquée utilise aussi des opérations logiques $Nimply$.
 Par conséquent, nous recontextualiserons en temps voulu les concepts de _zéro anonyme capital_ et _non capital_ aux cas des champs de mantisse tronquée.
 Mais pour l'instant concentrons sur le cas des champs d'exposant.
+
+### Les zéros anonymes non capitaux dus au traitement des champs d'exposant
+
+Les _zéros anonymes capitaux_ et _non capitaux_ sont formés pour les même raison, le chapitre précédent explique très bien cela.
+Ce que le chapitre n'explique pas, c'est que les _zéros anonymes non capitaux_ n'ont aucune importance pour le traitement des champs d'exposant $E_{\alpha}$ et $E_{\beta}$, au contraire des _zéros anonymes capitaux_.
+Nous verrons plus tard que cela ne se limite pas au traitement des champs d'exposant, mais s'étend aussi au traitement des champs de mantisse tronquée.
+
+Après cette rapide introduction, reprenons là où nous nous étions arrêté dans le chapitre "_Le traitement des champs d'exposant_".
+Admettons qu'il y ait un _MSB1_ dans $\tau \in \left[10;14\right]$ et que ce dernier ait un poids $i \in \left[11;14\right]$, alors nous en déduisons que $\left(E_{\beta i} = 1\right)$ tandis que $\left(E_{\alpha i} = 0\right)$ pour $\left(\tau_i = 1\right)$.
+
+
+
+contexte
+
+// dans le cas où i -> [11;14], si tau_(i - 1) = 1 alors E_beta_i = 1 et E_alpha_i = 0, en outre si tau_(i - 1) = 0 alors E_alpha_i >= E_beta_i mais...
+
+
+
+Nous comprenons désormais l'importance des _zéros anonymes_ de poids supérieur au _MSB1_ de $\tau \in \left[10;14\right]$, voyons ce qu'il en est de ceux d'un poids inférieur au _MSB1_.
+Par le prisme du traitement des champs d'exposant, un _zéro anonyme non capital_ est un bit à $0$ dans le champs $\tau \in \left[10;14\right]$, dont le poids est inférieur au _MSB1_ de $\tau \in \left[10;14\right]$.
+Par conséquent, lorsque le _MSB1_ a un poids $i \in \left[11;14\right]$, alors les bits à $0$ de $\tau$ qui sont d'un poids $\sigma \in \left[10;i\right[$ sont par définition des _zéros anonymes non capitaux_.
+
+
+
 
 ### Les zéros anonymes capitaux dus au traitement des champs d'exposant
 
