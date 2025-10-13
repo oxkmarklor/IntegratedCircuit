@@ -615,12 +615,22 @@ Mais pour l'instant concentrons sur le cas des champs d'exposant.
 
 ### Les zéros anonymes non capitaux dus au traitement des champs d'exposant
 
-Les _zéros anonymes capitaux_ et _non capitaux_ sont formés pour les même raison, le chapitre précédent explique très bien cela.
+Les _zéros anonymes capitaux_ et _non capitaux_ sont dus aux même raisons, le chapitre précédent explique très bien cela.
 Ce que le chapitre n'explique pas, c'est que les _zéros anonymes non capitaux_ n'ont aucune importance pour le traitement des champs d'exposant $E_{\alpha}$ et $E_{\beta}$, au contraire des _zéros anonymes capitaux_.
 Nous verrons plus tard que cela ne se limite pas au traitement des champs d'exposant, mais s'étend aussi au traitement des champs de mantisse tronquée.
 
 Après cette rapide introduction, reprenons là où nous nous étions arrêté dans le chapitre "_Le traitement des champs d'exposant_".
 Admettons qu'il y ait un _MSB1_ dans $\tau \in \left[10;14\right]$ et que ce dernier ait un poids $i \in \left[11;14\right]$, alors nous en déduisons que $\left(E_{\beta i} = 1\right)$ tandis que $\left(E_{\alpha i} = 0\right)$ pour $\left(\tau_i = 1\right)$.
+Par conséquent, dans ledit chapitre nous en déduisons que $\left(E_{\beta i} \times 2^i\right) \gt \sum_i^{10} \left(E_{\alpha i} \times 2^i\right)$.
+Rappelons que cette inéquation fonctionne car la valeur de n'importe quel bit à $1$ de poids $i$ dans un champs d'exposant comme $E_{\beta}$, est _inconditionnellement_ supérieur à la somme des valeurs des bits de poids inférieur à $i$. 
+
+Dans ces conditions, nous pouvons être certains qu'il existe au moins un bit $\tau_{\left(i - 1\right)}$ qui peut être défini à $0$ comme à $1$.
+Dans le cas où $\left(\tau_{\left(i - 1\right)} = 0\right)$ alors le bit $\tau_i$ est un _zéro anonyme non capital_.
+Par le prisme du traitement des champs d'exposant, un _zéro anonyme non capital_ est plus formellement un bit à $0$ de poids $\sigma \in \left[10;i\right[$, à l'instar du bit $\tau_{\left(i - 1\right)}$ lorqu'il est à $0$.
+Grâce au chapitre précédent, nous en concluons que $\left(E_{\alpha \left(i - 1\right)} \ge E_{\beta \left(i - 1\right)}$ lorsque $\left(\tau_{\left(i - 1\right)} = 0\right).
+
+Ce qui veut dire que le bit $E_{\alpha \left(i - 1\right)}$ peut être défini à $0$ comme à $1$, ce qui n'impacte absolument pas l'inéquation $\left(E_{\beta i} \times 2^i\right) \gt \sum_i^{10} \left(E_{\alpha i} \times 2^i\right)$ car il s'agit d'un bit de poids inférieur à $i$.
+ 
 
 
 
@@ -644,8 +654,7 @@ Admettons que le _MSB1_ de $\tau \in \left[10;14\right]$ ait un poids $i \in \le
 En outre, comme l'explique ledit chapitre, nous en déduisons alors que $\left(E_{\beta i} \times 2^i\right) \gt \sum_i^{10} \left(E_{\alpha i} \times 2^i\right)$.
 Cependant, comme cela a été mentionné dans ce même chapitre, ceci ne suffit pas à démontrer que $\left(E_{\alpha} \lt E_{\beta}\right)$.
 
-Dans ce cas de figure (qui n'est pas systèmatique), nous sommes assurés qu'il y ait au moins un 
-bit $\tau_{\left(i + 1\right)}$ qui est d'un poids supérieur au _MSB1_ de $\tau \in \left[10;14\right]$.
+Dans ce cas de figure (qui n'est pas systèmatique), nous sommes assurés qu'il y ait au moins un bit $\tau_{\left(i + 1\right)}$ qui est d'un poids supérieur au _MSB1_ de $\tau \in \left[10;14\right]$.
 Par définition, le bit $\tau_{\left(i + 1\right)}$ ne peut être qu'à $0$, autrement le bit $\tau_i$ ne serait pas le _MSB1_.
 Formellement, un _zéro anonyme capital_ issu du traitement des champs d'exposant, est un bit à $0$ du champs $\tau$ dont le poids est supérieur au _MSB1_ de $\tau \in \left[10;14\right]$.
 Nous en déduisons alors que le bit $\tau_{\left(i + 1\right)}$ est un _zéro anonyme capital_, comme tout bit de poids $\sigma$ (sigma) compris dans l'intervalle $\left]i;14\right]$.
