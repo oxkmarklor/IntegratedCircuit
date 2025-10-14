@@ -625,6 +625,12 @@ Par conséquent, dans ledit chapitre nous en déduisons que $\left(E_{\beta i} \
 Rappelons que cette inéquation fonctionne car la valeur de n'importe quel bit à $1$ de poids $i$ dans un champs d'exposant comme $E_{\beta}$, est _inconditionnellement_ supérieur à la somme des valeurs des bits de poids inférieur à $i$. 
 Cela se remarque plus avec la forme suivante de l'inéquation $\left(E_{\beta i} \times 2^i\right) \gt \sum_{\sigma = i - 1}^{10} \left(E_{\alpha\sigma} \times 2^{\sigma}\right) + \ E_{\alpha i} \times 2^i$, toujours dans le cas où $\left(\tau_i = 1\right) rappelons-le.
 
+Servons nous de ceci pour définir ce qu'est un _zéro anonymne non capital_.
+Par le prisme du traitement des champs d'exposant, un _zéro anonyme non capital_ est un bit à $0$ dans $\tau$ qui est d'un poids $\sigma \in \left[10;i\right[$.
+Dans le cas dans lequel nous sommes, où le poids $i$ du _MSB1_ est compris dans l'intervalle $\left[11;14\right]$, nous sommes donc certains qu'il existe au moins un bit $\tau_{\left(i - 1\right)}$ à $0$ ou à $1$.
+
+En conséquence, il est possible de déduire deux choses lorsque $\left(\tau_{\left(i - 1\right)} = 0\right)$, premièrement le bit est un _zéro anonyme non capital_.
+
 
 //
 
