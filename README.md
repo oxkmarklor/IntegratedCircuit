@@ -631,10 +631,14 @@ Du moment où le poids $i$ du _MSB1_ est compris dans l'intervalle $\left[11;14\
 En conséquence, lorsque $\left(\tau_{\left(i - 1\right)} = 0\right)$ il est possible d'en déduire que le bit est un _zéro anonyme non capital_, et de fait que la valeur des bits d'opérandes $E_{\alpha \left(i - 1\right)}$ ainsi que $E_{\beta \left(i - 1\right)}$ ne puisse pas être déduite, nous savons seulement que $\left(E_{\alpha \left(i - 1\right)} \ge E_{\beta \left(i - 1\right)}\right)$.
 
 En reprenant l'inéquation $\left(E_{\beta i} \times 2^i\right) \gt \left(\left(E_{\alpha i} \times 2^i\right) + \sum_{\sigma = i - 1}^{10} \left(E_{\alpha\sigma} \times 2^{\sigma}\right)\right)$, nous remarquons que $\left(E_{\beta i} \times 2^i\right)$ est supérieur à la somme des valeurs des bits de poids $\sigma$ du champs d'exposant $E_{\alpha}$, nonobstant la valeur de ces bits dont celle de $\left(E_{\alpha \left(i - 1\right)} \times 2^{\left(i - 1\right)}\right)$.
-Pour le dire autrement, un _zéro anonyme non capital_ dans $\tau_{\sigma}$ pour tout poids $\sigma \in \left[10;i\right[$, ne permet pas de déduire la valeur des bits $E_{\alpha\sigma}$ ainsi que $E_{\beta\sigma}$.
-Cependant, pour pouvoir générer un état de point terminal, le circuit n'a pas besoin de prendre en compte les bits de résultat dans $\tau$ qui sont d'un poids inférieur au poids $i$ du _MSB1_ de $\tau \in \left[10;14\right]$.
+Autrement dit, peu importe que les bits de poids $\sigma$ du champs d'exposant $E_{\alpha}$ soient défini à $0$ ou à $1$, nous trouverons toujours que $\left(E_{\beta i} \times 2^i\right) \gt \sum_{\sigma}^{10} \left(E_{\alpha\sigma} \times 2^{\sigma}\right)$.
+Car n'oublions pas que la valeur d'un bit à $1$ de poids $i$ $\left(E_{\beta i}\right)$, est supérieur à la somme des valeurs des bits de poids inférieur à $i$ $\left(E_{\alpha\sigma}\right)$.
+
+Pour resumer, un _zéro anonyme non capital_ dans $\tau_{\sigma}$ pour tout poids $\sigma \in \left[10;i\right[$, ne permet pas de déduire la valeur des bits $E_{\alpha\sigma}$ ainsi que $E_{\beta\sigma}$.
+Cependant, pour pouvoir générer un état de point terminal le circuit n'a pas besoin de prendre en compte les bits dans $\tau$ qui sont d'un poids inférieur à $i$, car $E_{\beta}$ est supérieur à $E_{\alpha}$ du bit de poids $i$ jusqu'au bit de poids $10$.
 D'où le fait que ces _zéros anonymes_ soient _non capitaux_.
 
+//
 
 Pour le dire autrement, la valeur du bit $E_{\alpha \left(i - 1\right)}$ et même de façon plus général des bits de poids $\sigma \in \left[10;i\right[$, n'ont aucun impacte 
 
