@@ -627,10 +627,16 @@ Cela se remarque plus avec la formulation suivante de cette même inéquation $\
 
 Définissons désormais ce qu'est un _zéro anonyme non capital_.
 Par le prisme du traitement des champs d'exposant, un _zéro anonyme non capital_ est un bit à $0$ dans $\tau$ qui est d'un poids $\sigma \in \left[10;i\right[$.
-Dans le cas dans lequel nous sommes, où le poids $i$ du _MSB1_ est compris dans l'intervalle $\left[11;14\right]$, nous sommes donc certains qu'il existe au moins un bit $\tau_{\left(i - 1\right)}$ à $0$ ou à $1$.
-En conséquence, lorsque $\left(\tau_{\left(i - 1\right)} = 0\right)$ il est possible d'en déduire que le bit est un _zéro anonyme non capital_, et de fait que la valeur des bits d'opérandes $E_{\alpha \left(i - 1\right)}$ ainsi que $E_{\beta \left(i - 1\right)}$ ne peut pas être déduite, nous savons seulement que $\left(E_{\alpha \left(i - 1\right)} \ge E_{\beta \left(i - 1\right)}\right)$.
+Du moment où le poids $i$ du _MSB1_ est compris dans l'intervalle $\left[11;14\right]$, alors nous pouvons être certains que dans $\tau \in \left[10;14\right]$ il existe au moins un bit $\tau_{\left(i - 1\right)}$, qu'il soit à $0$ ou à $1$.
+En conséquence, lorsque $\left(\tau_{\left(i - 1\right)} = 0\right)$ il est possible d'en déduire que le bit est un _zéro anonyme non capital_, et de fait que la valeur des bits d'opérandes $E_{\alpha \left(i - 1\right)}$ ainsi que $E_{\beta \left(i - 1\right)}$ ne puisse pas être déduite, nous savons seulement que $\left(E_{\alpha \left(i - 1\right)} \ge E_{\beta \left(i - 1\right)}\right)$.
 
-En reprenant l'inéquation $\left(E_{\beta i} \times 2^i\right) \gt \left(\left(E_{\alpha i} \times 2^i\right) + \sum_{\sigma = i - 1}^{10} \left(E_{\alpha\sigma} \times 2^{\sigma}\right)\right)$, nous remarquons que $\left(E_{\beta i} \times 2^i\right)$ est supérieur à la somme des bits de poids $\sigma$ du champs d'exposant $E_{\alpha}$ nonobstant la valeur de ces bits, dont celle de $E_{\alpha \left(i - 1\right)}$.
+En reprenant l'inéquation $\left(E_{\beta i} \times 2^i\right) \gt \left(\left(E_{\alpha i} \times 2^i\right) + \sum_{\sigma = i - 1}^{10} \left(E_{\alpha\sigma} \times 2^{\sigma}\right)\right)$, nous remarquons que $\left(E_{\beta i} \times 2^i\right)$ est supérieur à la somme des valeurs des bits de poids $\sigma$ du champs d'exposant $E_{\alpha}$, nonobstant la valeur de ces bits dont celle de $\left(E_{\alpha \left(i - 1\right)} \times 2^{\left(i - 1\right)}\right)$.
+Pour le dire autrement, un _zéro anonyme non capital_ dans $\tau_{\sigma}$ pour tout poids $\sigma \in \left[10;i\right[$, ne permet pas de déduire la valeur des bits $E_{\alpha\sigma}$ ainsi que $E_{\beta\sigma}$.
+Cependant, pour pouvoir générer un état de point terminal, le circuit n'a pas besoin de prendre en compte les bits de résultat dans $\tau$ qui sont d'un poids inférieur au poids $i$ du _MSB1_ de $\tau \in \left[10;14\right]$.
+D'où le fait que ces _zéros anonymes_ soient _non capitaux_.
+
+
+Pour le dire autrement, la valeur du bit $E_{\alpha \left(i - 1\right)}$ et même de façon plus général des bits de poids $\sigma \in \left[10;i\right[$, n'ont aucun impacte 
 
 // conclusion
 
