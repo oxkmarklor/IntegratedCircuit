@@ -623,6 +623,10 @@ Après cette rapide introduction, reprenons là où nous nous étions arrêté d
 Admettons qu'il y ait un _MSB1_ dans $\tau \in \left[10;14\right]$ et que ce dernier ait un poids $i \in \left[11;14\right]$, alors nous en déduisons que $\left(E_{\beta i} = 1\right)$ tandis que $\left(E_{\alpha i} = 0\right)$ pour $\left(\tau_i = 1\right)$.
 Par conséquent, dans ledit chapitre nous en déduisons que $\left(E_{\beta i} \times 2^i\right) \gt \sum_i^{10} \left(E_{\alpha i} \times 2^i\right)$.
 Rappelons que cette inéquation fonctionne car la valeur de n'importe quel bit à $1$ de poids $i$ dans un champs d'exposant comme $E_{\beta}$, est _inconditionnellement_ supérieur à la somme des valeurs des bits de poids inférieur à $i$. 
+Cela se remarque plus avec la forme suivante de l'inéquation $\left(E_{\beta i} \times 2^i\right) \gt \sum_{\sigma = i - 1}^{10} \left(E_{\alpha\sigma} \times 2^{\sigma}\right) + \ E_{\alpha i} \times 2^i$, toujours dans le cas où $\left(\tau_i = 1\right) rappelons-le.
+
+
+//
 
 Dans ces conditions, nous pouvons être certains qu'il existe au moins un bit $\tau_{\left(i - 1\right)}$ qui peut être défini à $0$ comme à $1$.
 Par le prisme du traitement des champs d'exposant, un _zéro anonyme non capital_ est un bit à $0$ de poids $\sigma \in \left[10;i\right[$, à l'instar du bit $\tau_{\left(i - 1\right)}$ lorqu'il est à $0$.
