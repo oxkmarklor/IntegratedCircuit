@@ -642,14 +642,10 @@ Voici en quelque sorte l'étymologie du terme "_zéro anonyme non capital_".
 La section précédente explique pourquoi les bits de $\tau$ d'un poids inférieur au _MSB1_ de $\tau \in \left[10;14\right]$ ne sont pas pris en compte dans le traitement des champs d'exposant, ce qui concerne entre autre les _zéros anonymes non capitaux_.
 Voyons désormais ce qu'il en est des bits de $\tau$ qui sont d'un poids supérieur au _MSB1_. 
 
-//
-
 Reprenons là où nous en étions dans le chapitre "_Le traitement des champs d'exposant_".
 Admettons que le _MSB1_ de $\tau \in \left[10;14\right]$ ait un poids $i \in \left[10;13\right]$, alors nous savons que $\left(E_{\beta i} = 1\right)$ tandis que $\left(E_{\alpha i} = 0\right)$ pour $\left(\tau_i = 1\right)$.
 En outre, comme l'explique ledit chapitre, nous en déduisons alors que $\left(E_{\beta i} \times 2^i\right) \gt \sum_i^{10} \left(E_{\alpha i} \times 2^i\right)$.
 Cependant, comme cela a été mentionné dans ce même chapitre, ceci ne suffit pas à démontrer que $\left(E_{\alpha} \lt E_{\beta}\right)$.
-
-//
 
 Définissons désormais ce qu'est un _zéro anonyme capital_.
 Par le prisme du traitement des champs d'exposant, un _zéro anonyme capital_ est un bit à $0$ dans $\tau$ qui est d'un poids $\sigma \in \left]i;14\right]$.
@@ -660,7 +656,18 @@ En conséquence, n'importe quel bit de poids $\tau_{\sigma}$ est un _zéro anony
 // relire
 
 Rappelons que l'inéquation $\left(E_{\beta i} \times 2^i\right) \gt \sum_i^{10} \left(E_{\alpha i} \times 2^i\right)$ démontre que le champs d'exposant $E_{\beta}$ est supérieur au champs d'exposant $E_{\alpha}$, du bit de poids $i$ jusqu'au bit de poids $10$.
-Mais n'oublions pas que cette inéquation fonctionne car la valeur de n'importe quel bit à $1$ de poids $i$ dans un champs d'exposant comme $E_{\beta}$, est strictement supérieur à la somme des valeurs des bits de poids inférieur à $i$.
+N'oublions pas que cette inéquation fonctionne car la valeur de n'importe quel bit à $1$ de poids $i$ dans un champs d'exposant comme $E_{\beta}$, est strictement supérieur à la somme des valeurs des bits de poids inférieur à $i$.
+Mais n'oublions pas non plus qu'il subsiste dans $\tau$ un ou plusieurs _zéros anonymes capitaux_ de poids $\sigma$, et que nous ne savons qu'une seule chose des bits d'opérandes associés à chacun d'eux, le fait que $\left(E_{\alpha\sigma} \ge E_{\beta\sigma}\right)$.
+Il suffit alors qu'il y ait une occurrence de $\left(E_{\alpha\sigma} \gt E_{\beta\sigma}\right)$ pour que nous en déduisions que $\left(E_{\alpha\sigma} \times 2^{\sigma}\right) \gt \sum_{\sigma}^{10} \left(E_{\beta\sigma} \times 2^{\sigma}\right)$, ce qui traduit l'idée que du bit de poids $\sigma$ jusqu'au bit de poids $10$, le champs d'exposant $E_{\alpha}$ soit supérieur au champs d'exposant $E_{\beta}$.
+
+
+//
+
+Cependant, la présence de _zéros anonymes capitaux_ complique les choses car nous savons que le bit $\tau_{\sigma}$ pour $\sigma \in \left]i;14\right]$ a comme bit d'opérande $\left(E_{\alpha\sigma} \ge E_{\beta\sigma}\right)$.
+Par conséquent, nous en déduisons que $\left(E_{\alpha\sigma} \times 2^{\sigma}\right) \gt \sum_{\sigma}^{10} \left(E_{\beta\sigma} \times 2^{\sigma}\right)$ dans le cas où $\left(E_{\alpha\sigma} \gt E_{\beta\sigma}\right)$.
+c'est 
+
+
 Par conséquent, sachant que $\tau_{\sigma}$ est un _zéro anonyme capital_ et que $\left(E_{\alpha\sigma} \ge E_{\beta\sigma}\right)$ pour tout $\sigma \in \left]i;14\right]$, dans le cas où $\left(E_{\alpha\sigma} \gt E_{\beta\sigma}\right)$ nous en déduirons que $\left(E_{\alpha\sigma} \times 2^{\sigma}\right) \gt \sum_{\sigma}^{10} \left(E_{\beta\sigma} \times 2^{\sigma}\right)$.
 Ce qui veut dire que le champs d'exposant $E_{\alpha}$ est supérieur au champs d'exposant $E_{\beta}$, du bit de poids $\sigma$ jusqu'au bit de poids $10$.
 Nous pouvons donc conclure en disant que la génération d'un état de point terminal dépend entièrement de la valeur des bits d'opérandes $E_{\alpha\sigma}$ et $E_{\beta\sigma}$.
