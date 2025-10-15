@@ -621,7 +621,7 @@ Nous verrons plus tard que cela ne se limite pas au traitement des champs d'expo
 
 Après cette rapide introduction, reprenons là où nous nous étions arrêté dans le chapitre "_Le traitement des champs d'exposant_".
 Admettons qu'il y ait un _MSB1_ dans $\tau \in \left[10;14\right]$ et que ce dernier ait un poids $i \in \left[11;14\right]$, alors nous en déduisons que $\left(E_{\beta i} = 1\right)$ tandis que $\left(E_{\alpha i} = 0\right)$ pour $\left(\tau_i = 1\right)$.
-Par conséquent, dans ledit chapitre nous en déduisons que $\left(E_{\beta i} \times 2^i\right) \gt \sum_i^{10} \left(E_{\alpha i} \times 2^i\right)$.
+En outre, comme l'explique ledit chapitre, nous en déduisons que $\left(E_{\beta i} \times 2^i\right) \gt \sum_i^{10} \left(E_{\alpha i} \times 2^i\right)$.
 Rappelons que cette inéquation fonctionne car la valeur de n'importe quel bit à $1$ de poids $i$ dans un champs d'exposant comme $E_{\beta}$, est _inconditionnellement_ supérieur à la somme des valeurs des bits de poids inférieur à $i$. 
 Cela se remarque plus avec la formulation suivante de cette même inéquation $\left(E_{\beta i} \times 2^i\right) \gt \left(\left(E_{\alpha i} \times 2^i\right) + \sum_{\sigma = i - 1}^{10} \left(E_{\alpha\sigma} \times 2^{\sigma}\right)\right)$, toujours dans le cas où $\left(\tau_i = 1\right)$ rappelons-le.
 
@@ -638,6 +638,11 @@ Cependant, pour pouvoir générer un état de point terminal, le circuit n'a pas
 Voici en quelque sorte l'étymologie du terme "_zéro anonyme non capital_".
 
 ### Les zéros anonymes capitaux dus au traitement des champs d'exposant
+
+La section précédente explique pourquoi les bits de $\tau$ d'un poids inférieur au _MSB1_ de $\tau \in \left[10;14\right]$ ne sont pas pris en compte dans le traitement des champs d'exposant, ce qui concerne entre autre les _zéros anonymes non capitaux_.
+Voyons désormais ce qu'il en est des bits de $\tau$ qui sont d'un poids supérieur au _MSB1_. 
+
+//
 
 Reprenons là où nous en étions dans le chapitre "_Le traitement des champs d'exposant_".
 Admettons que le _MSB1_ de $\tau \in \left[10;14\right]$ ait un poids $i \in \left[10;13\right]$, alors nous savons que $\left(E_{\beta i} = 1\right)$ tandis que $\left(E_{\alpha i} = 0\right)$ pour $\left(\tau_i = 1\right)$.
