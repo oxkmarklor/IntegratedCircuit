@@ -657,14 +657,21 @@ Du moment où le poids $i$ du _MSB1_ est compris dans l'intervalle $\left[10;13\
 Le bit $\tau_{\left(i + 1\right)}$ ne peut être défini qu'à $0$ étant donné que $\tau_i$ incarne le _MSB1_ de $\tau \in \left[10;14\right]$, ceci se généralise à l'ensemble des bits $\tau_{\sigma}$.
 En conséquence, n'importe quel bit de poids $\tau_{\sigma}$ est un _zéro anonyme capital_, ce qui insinue que les valeurs des bits d'opérandes $E_{\alpha\sigma}$ ainsi que $E_{\beta\sigma}$ ne sont pas déductible, nous savons seulement que $\left(E_{\alpha\sigma} \ge E_{\beta\sigma}\right)$.
 
-// standby
+// relire
 
-Du moment où le poids $i$ du _MSB1_ est compris dans l'intervalle $\left[10;13\right]$, nous sommes assurés qu'il y ait au moins un bit $\tau_{\left(i + 1\right)}$ qui est d'un poids supérieur au _MSB1_ de $\tau \in \left[10;14\right]$.
-Par définition, le bit $\tau_{\left(i + 1\right)}$ ne peut être qu'à $0$, autrement le bit $\tau_i$ ne serait pas le _MSB1_.
-Formellement, un _zéro anonyme capital_ issu du traitement des champs d'exposant, est un bit à $0$ du champs $\tau$ dont le poids est supérieur au _MSB1_ de $\tau \in \left[10;14\right]$.
-Nous en déduisons alors que le bit $\tau_{\left(i + 1\right)}$ est un _zéro anonyme capital_, comme tout bit de poids $\sigma$ (sigma) compris dans l'intervalle $\left]i;14\right]$.
+Rappelons que l'inéquation $\left(E_{\beta i} \times 2^i\right) \gt \sum_i^{10} \left(E_{\alpha i} \times 2^i\right)$ démontre que le champs d'exposant $E_{\beta}$ est supérieur au champs d'exposant $E_{\alpha}$, du bit de poids $i$ jusqu'au bit de poids $10$.
+Mais n'oublions pas que cette inéquation fonctionne car la valeur de n'importe quel bit à $1$ de poids $i$ dans un champs d'exposant comme $E_{\beta}$, est strictement supérieur à la somme des valeurs des bits de poids inférieur à $i$.
+Par conséquent, sachant que $\tau_{\sigma}$ est un _zéro anonyme capital_ et que $\left(E_{\alpha\sigma} \ge E_{\beta\sigma}\right)$ pour tout $\sigma \in \left]i;14\right]$, dans le cas où $\left(E_{\alpha\sigma} \gt E_{\beta\sigma}\right)$ nous en déduirons que $\left(E_{\alpha\sigma} \times 2^{\sigma}\right) \gt \sum_{\sigma}^{10} \left(E_{\beta\sigma} \times 2^{\sigma}\right)$.
+Ce qui veut dire que le champs d'exposant $E_{\alpha}$ est supérieur au champs d'exposant $E_{\beta}$, du bit de poids $\sigma$ jusqu'au bit de poids $10$.
+Nous pouvons donc conclure en disant que la génération d'un état de point terminal dépend entièrement de la valeur des bits d'opérandes $E_{\alpha\sigma}$ et $E_{\beta\sigma}$.
 
-// verif 
+
+//
+
+A ce stade, l'inéquation $\left(E_{\beta i} \times 2^i\right) \gt \sum_i^{10} \left(E_{\alpha i} \times 2^i\right)$ démontre que le champs d'exposant $E_{\beta}$ est supérieur au champs d'exposant $E_{\alpha}$, du bit de poids $i$ jusqu'au bit de poids $10$.
+Cependant cela ne suffit pas à démontrer que $\left(E_{\alpha} \lt E_{\beta}\right)$, car il y a des bits de poids supérieur à $i$ dans les champs d'exposant ($E_{\alpha\sigma}$ ainsi que $E_{\beta\sigma}$) qui doivent être pris en compte pour savoir si $E_{\beta}$ est définitivement supérieur à $E_{\alpha}$.
+
+// 
 
 A ce stade, l'inéquation $\left(E_{\beta i} \times 2^i\right) \gt \sum_i^{10} \left(E_{\alpha i} \times 2^i\right)$ nous montre que du bit de poids $i$ jusqu'au bit de poids $10$, le champs d'exposant $E_{\beta}$ est supérieur au champs d'exposant $E_{\alpha}$.
 Cependant, cela ne suffit pas à démontrer que $\left(E_{\alpha} \lt E_{\beta}\right)$, car les bits $E_{\alpha\sigma}$ et $E_{\beta\sigma}$ d'un poids $\sigma \in \left]i;14\right]$ ne sont pas pris en compte dans l'inéquation.
