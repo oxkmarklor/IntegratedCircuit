@@ -657,9 +657,9 @@ En conséquence, n'importe quel bit de poids $\tau_{\sigma}$ est un _zéro anony
 
 Rappelons que l'inéquation $\left(E_{\beta i} \times 2^i\right) \gt \sum_i^{10} \left(E_{\alpha i} \times 2^i\right)$ démontre que le champs d'exposant $E_{\beta}$ est supérieur au champs d'exposant $E_{\alpha}$, du bit de poids $i$ jusqu'au bit de poids $10$.
 N'oublions pas que cette inéquation fonctionne car la valeur de n'importe quel bit à $1$ de poids $i$ dans un champs d'exposant comme $E_{\beta}$, est strictement supérieur à la somme des valeurs des bits de poids inférieur à $i$.
-Mais n'oublions pas non plus qu'il subsiste dans $\tau$ un ou plusieurs _zéros anonymes capitaux_ de poids $\sigma$, et que nous ne savons qu'une seule chose des bits d'opérandes associés à chacun d'eux, le fait que $\left(E_{\alpha\sigma} \ge E_{\beta\sigma}\right)$.
+Mais n'oublions pas non plus qu'il subsite dans $\tau$ des bits de poids $\sigma$ supérieur à $i$, des _zéros anonymes capitaux_, par lesquels nous déduisons que $\left(E_{\alpha\sigma} \ge E_{\beta\sigma}\right)$.
 Il suffit alors qu'il y ait une occurrence de $\left(E_{\alpha\sigma} \gt E_{\beta\sigma}\right)$ pour que nous en déduisions que $\left(E_{\alpha\sigma} \times 2^{\sigma}\right) \gt \sum_{\sigma}^{10} \left(E_{\beta\sigma} \times 2^{\sigma}\right)$, ce qui traduit l'idée que du bit de poids $\sigma$ jusqu'au bit de poids $10$, le champs d'exposant $E_{\alpha}$ soit supérieur au champs d'exposant $E_{\beta}$.
-
+Finalement, pour savoir si le champs d'exposant $E_{\beta}$ est définitivement supérieur au champs d'exposant $E_{\alpha}$ ou non, il nous faut prêter attention à la valeur des bits d'opérandes $E_{\alpha\sigma}$ et $E_{\beta\sigma}$ des _zéros anonymes capitaux_.
 
 //
 
