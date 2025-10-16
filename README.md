@@ -671,16 +671,22 @@ Tel que l'explique le chapitre "_Les points terminaux et non terminaux_", $\left
 
 // in progress
 
+Néanmoins, parmis l'ensemble des bits d'opérandes de poids $\sigma \in \left]i;14\right]$ où $\left(E_{\alpha\sigma} \ge E_{\beta\sigma}\right)$, il suffit qu'il y ait une occurrence de $\left(E_{\alpha\sigma} \gt E_{\beta\sigma}\right)$ pour que le circuit passe dans l'état de point terminal $\left(E_{\alpha} \gt E_{\beta}\right)$.
+Par conséquent, pour toute occurrence de $\left(E_{\alpha\sigma} \times 2^{\sigma}\right) \gt \left(E_{\beta\sigma} \times 2^{\sigma}\right)$ nous en déduisons que $\left(E_{\alpha\sigma} \times 2^{\sigma}\right) \gt \sum_{\sigma}^{10} \left(E_{\beta\sigma} \times 2^{\sigma}\right)$.
 
+//
 
-Cependant, il suffit qu'une ou plusieurs occurences de $\left(E_{\alpha\sigma} \gt E_{\beta\sigma}\right)$ avec $\sigma \in \left]i;14\right]$, pour que le circuit atteigne l'état de point terminal $\left(E_{\alpha} \gt E_{\beta}\right)$.
-Dans le chapitre "_L'encodage par biais du champs d'exposant_", nous expliquons que la valeur de n'importe quel bit à $1$ de poids $i$ dans un champs d'exposant, est strictement supérieur à la somme des valeurs des bits de poids inférieur à $i$.
 Par conséquent, pour chacune des occurences $\left(E_{\alpha\sigma} \times 2^{\sigma}\right) \gt \left(E_{\beta\sigma} \times 2^{\sigma}\right)$ nous en déduisons que $\left(E_{\alpha\sigma} \times 2^{\sigma}\right) \gt \sum_{\sigma}^{10} \left(E_{\beta\sigma} \times 2^{\sigma}\right)$.
 Dans le cas où $\sigma \in \left]i;14\right[$, alors nous savons qu'il existe $\left(\tau_{\sigma '} = 0\right)$ pour tout poids $\sigma ' \in \left]\sigma;14\right]$, ce qui permet d'en déduire que $\left(E_{\alpha\sigma '} \ge E_{\beta\sigma '}\right)$.
 Cela veut dire que la somme $\lambda$ de la valeur des bits de poids $\sigma '$ du champs d'exposant $E_{\alpha}$, est supérieur ou égale à celle du champs d'exposant $E_{\beta}$, ou $\left(\lambda_{\alpha} \ge \lambda_{\beta}\right)$ pour le dire autrement.
 Gardons à l'esprit que l'inéquation $\left(E_{\alpha\sigma} \times 2^{\sigma}\right) \gt \sum_{\sigma}^{10} \left(E_{\beta\sigma} \times 2^{\sigma}\right)$, démontre que du bit de poids $\sigma$ jusqu'au bit de poids $10$ le champs d'exposant $E_{\alpha}$ est supérieur au champs d'exposant $E_{\beta}$.
 Ce qui insinue que $\left(E_{\alpha} \gt E_{\beta}\right)$ car $\left(\lambda_{\alpha} + E_{\alpha\sigma} \times 2^{\sigma}\right) \gt \left(\lambda_{\beta} + \sum_{\sigma}^{10} \left(E_{\beta\sigma} \times 2^{\sigma}\right)\right)$.
 En outre, il me faut conclure en évoquant la réussite du test de la condition sur laquelle s'appuie la démonstration mathématique du circuit $\left(\vert \alpha \vert \gt \vert \beta \vert\right)$, cette réussite est due au fait que $\left(\left(1 + T_{\alpha}\right) \times \ 2^{E_{\alpha}}\right) \gt \left(\left(1 + T_{\beta}\right) \times \ 2^{E_{\beta}}\right)$.
+
+
+La seconde possibilité est celle selon laquelle il y a une (ou plusieurs) occurrence de $\left(E_{\alpha\sigma} \gt E_{\beta\sigma}\right)$ pour $\sigma \in \left]i;14\right]$, alors le circuit atteint l'état de point terminal $\left(E_{\alpha} \gt E_{\beta}\right)$.
+Une conséquence à cela est que pour chacune des occurrences $\left(E_{\alpha\sigma} \times 2^{\sigma}\right) \gt \left(E_{\beta\sigma} \times 2^{\sigma}\right)$, nous en déduisons que $\left(E_{\alpha\sigma} \times 2^{\sigma}\right) \gt \sum_{\sigma}^{10} \left(E_{\beta\sigma} \times 2^{\sigma}\right)$.
+Cependant, dans le cas où ces occurrences ont un poids $\sigma \in \left]i;14\right[$, alors nous savons qu'il existe dans $\tau$ des bits de poids $\sigma ' \in \left]\sigma;14\right]$ tel que $\left(\tau_{\sigma '} = 0\right)$.
 
 //save
 
