@@ -5,8 +5,8 @@ J'ai conceptualisé ce circuit dans le but de résoudre un problème concernant 
 La micro-architecture du circuit électronique ainsi que les compromis de conceptualisation, le problème que cherche à résoudre le FPU Configuration Unit ou encore la solution qu'il apporte, sont autant de sujets dont je parle dans une documentation dédié au circuit.
 
 Pour les curieux, si vous souhaitez voir à quoi ressemble le circuit, sachez qu'il y a un fichier du nom de _16-bit_FPU_configuration_unit_ qui le schématise.
-Le circuit a été directement schématisé en transistor de technologie CMOS, cela permet de mettre en évidence certains compromis sur le choix des portes logiques.
-Disons que l'apparence abrupte du schéma rend hommage à la (relative) complexité algorithmique du FPU Configuration Unit, cette complexité est plus tangible qu'avec des lignes de code.
+Le circuit a été directement schématisé sur la base d'un agencement de transistor PMOS ainsi que NMOS dans le cadre de la technologie CMOS (Complementary Metal Oxide Semi-conductor), cela permet de mettre en évidence certains compromis sur le choix des portes logiques.
+Disons que l'apparence abrupte du schéma rend hommage à la (relative) complexité algorithmique du FPU Configuration Unit.
 
 Le document va même au delà de la démonstration mathématique du circuit, il explique les sujets fondamentaux sur lequels la démonstration ainsi que le circuit reposent.
 Ce qui explique la préscence de la table des matières suivante:
@@ -688,10 +688,18 @@ Par essence, une telle situation veut que chaque bit de $\tau \in \left[10;14\ri
 Plus précisément, ces bits sont des _zéros anonymes capitaux_, car chacun d'eux a le pouvoir de faire basculé le circuit d'un état de point non terminal à celui de point terminal, comme nous allons le voir.
 Pour le dire autrement, nous savons que $\left(E_{\alpha} \ge E_{\beta}\right)$.
 
+// relire
+
 Il s'avère que le circuit rentre dans un état de point terminal du moment où $\left(E_{\alpha} \gt E_{\beta}\right)$.
+Nous avons déjà vu ce cas dans le chapitre précédent donc je vais être plus succint.
 Cet état de point terminal ne peut s'obtenir qu'à la condition qu'il y ait une ou plusieurs occurences de $\left(E_{\alpha\sigma} \gt E_{\beta\sigma}\right)$ pour tout poids $\sigma \in \left[10;14\right]$.
-Par conséquent, nous en déduisons que pour chacune des ces occurences $\left(E_{\alpha\sigma} \times 2^{\sigma}\right) \gt \sum_{\sigma}^{10} \left(E_{\beta\sigma} \times 2^{\sigma}\right)$, et le circuit atteint l'état de point terminal $\left(E_{\alpha} \gt E_{\beta}\right)$.
-L'une des conséquences à cela est que la condition sur laquelle s'appuie la démonstration mathématique du circuit $\left(\vert \alpha \vert \gt \vert \beta \vert\right)$ réussie, car $\left(\left(1 + T_{\alpha}\right) \times \ 2^{E_{\alpha}}\right) \gt \left(\left(1 + T_{\beta}\right) \times \ 2^{E_{\beta}}\right)$.
+Par conséquent, nous en déduisons que pour chacune des ces occurences $\left(E_{\alpha\sigma} \times 2^{\sigma}\right) \gt \sum_{\sigma}^{10} \left(E_{\beta\sigma} \times 2^{\sigma}\right)$.
+Dans le cas où $\sigma \in \left]i;14\right[$, alors nous savons qu'il existe des _zéros anonymes capitaux_ de poids $\sigma '$ dans $\tau$, tel que $\sigma' \in \left]\sigma;14\right].
+La somme $\lambda$ de la valeur des bits de poids $\sigma '$ du champs d'exposant $E_{\alpha}$, est supérieur ou égale à la somme des bits de même poids du champs d'exposant $E_{\beta}$, ou pour le dire autrement $\left(\lambda_{\alpha} \ge \lambda_{\beta}\right)$.
+Nous en concluons que le circuit atteint l'état de point terminal $\left(E_{\alpha} \gt E_{\beta}\right)$ car $\left(\lambda_{\alpha} + E_{\alpha\sigma} \times 2^{\sigma}\right) \gt \left(\lambda_{\beta} + \sum_{\sigma}^{10} \left(E_{\beta\sigma} \times 2^{\sigma}\right)\right)$.
+L'une des conséquences à cela est que la condition sur laquelle s'appuie la démonstration mathématique du circuit $\left(\vert \alpha \vert \gt \vert \beta \vert\right)$ réussie, car nous trouvons que $\left(\left(1 + T_{\alpha}\right) \times \ 2^{E_{\alpha}}\right) \gt \left(\left(1 + T_{\beta}\right) \times \ 2^{E_{\beta}}\right)$.
+
+//
 
 Cependant, le circuit rentre dans un état de point non terminal du moment où $\left(E_{\alpha} = E_{\beta}\right)$.
 Cet état de point non terminal ne peut s'obtenir que dans le cas où l'ensemble des bits de même poids des champs d'exposant $E_{\alpha}$ et $E_{\beta}$ sont identiques, ou autrement dit lorsque $\left(E_{\alpha\sigma} = E_{\beta\sigma}\right)$ pour tout poids $\sigma \in \left[10;14\right]$.
