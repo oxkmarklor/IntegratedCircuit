@@ -701,7 +701,7 @@ Cependant, le circuit passe dans un état de point non terminal du moment où $\
 Cet état de point non terminal ne peut s'obtenir que dans le cas où l'ensemble des bits de même poids des champs d'exposant $E_{\alpha}$ et $E_{\beta}$ sont identiques, ou autrement dit lorsque $\left(E_{\alpha\sigma} = E_{\beta\sigma}\right)$ pour tout les bits de poids $\sigma \in \left[10;14\right]$.
 Concrètement, cela veut dire que par le seul traitement des champs d'exposant de ses opérandes, le circuit FPU Configuration Unit n'est pas en capacité d'anticipé le résultat de la condition sur laquelle s'appuie la démonstration mathématique $\left(\vert \alpha \vert \gt \vert \beta \vert\right)$.
 Rappelons que cette condition ressemble plus formellement à $\left(\left(1 + T_{\alpha}\right) \times \ 2^{E_{\alpha}}\right) \gt \left(\left(1 + T_{\beta}\right) \times \ 2^{E_{\beta}}\right)$, et remarquons que le résultat du test de la condition ne dépend pas des champs d'exposant $E$ des opérandes lorsque $\left(E_{\alpha} = E_{\beta}\right)$, mais uniquement des champs de mantisse tronquée $T$.
-C'est pourquoi le circuit traite les champs de mantisse tronquée lorsqu'il atteint un état de point non terminal définitif.
+C'est pourquoi le circuit traite les champs de mantisse tronquée lorsqu'il atteint un état de point non terminal.
 
 # Le traitement des champs de mantisse tronquée
 
@@ -709,11 +709,13 @@ Pour ceux qui ont besoin d'un rafraichissement de mémoire, je vous rappelle que
 C'est la raison derrière le fait que le circuit traite les champs de mantisse tronquée d'une façon similaire aux champs d'exposant.
 Je vous renvoie vers les sections "_L'encodage du champs de mantisse tronquée_" ainsi que "_L'encodage par biais du champs d'exposant_" si nécessaire.
 
-Rappelons que la démonstration mathématique du circuit s'appuie sur le test de la condition suivante $\left(\vert \alpha \vert \gt \vert \beta \vert\right)$, c'est à dire $\left(\left(1 + T_{\alpha}\right) \times \ 2^{E_{\alpha}}\right) \gt \left(\left(1 + T_{\beta}\right) \times \ 2^{E_{\beta}}\right)$.
-Ce chapitre parle du traitement des champs de mantisse tronquée, et nous savons que le circuit ne traite les champs de mantisse tronquée de ses opérandes que lorsqu'il est dans un état de point non terminal $\left(E_{\alpha} = E_{\beta}\right)$.
-Par conséquent, de la condition que test le circuit il ne reste de pertinent plus que $\left(1 + T_{\alpha}\right) \gt \left(1 + T_{\beta}\right)$, ou autrement dit $\left(T_{\alpha} \gt T_{\beta}\right)$.
+// relire
 
-En définitif, le circuit est dans un état de point non terminal et génère un résultat vérifiant ou non la condition $\left(\vert \alpha \vert \gt \vert \beta \vert\right)$, par une comparaison de supérioté stricte entre les champs de mantisse tronquée de ses opérandes.
+Rappelons que la démonstration mathématique du circuit s'appuie sur le test de la condition suivante $\left(\vert \alpha \vert \gt \vert \beta \vert\right)$, c'est à dire $\left(\left(1 + T_{\alpha}\right) \times \ 2^{E_{\alpha}}\right) \gt \left(\left(1 + T_{\beta}\right) \times \ 2^{E_{\beta}}\right)$.
+Cependant, ce chapitre aborde le sujet du traitement des champs de mantisse tronquée, traitement qui n'a lieu que lorsque le circuit se retrouve dans un état de point non terminal $\left(E_{\alpha} = E_{\beta}\right)$.
+Une fois dans cet état, le circuit génère un résultat par l'évaluation de $\left(T_{\alpha} \gt T_{\beta}\right)$, car il ne reste de la condition d'origine plus que ça de pertinent.
+
+En bref, le circuit est dans un état de point non terminal et génère un résultat vérifiant ou non la condition $\left(\vert \alpha \vert \gt \vert \beta \vert\right)$, par une comparaison de supérioté stricte entre les champs de mantisse tronquée de ses opérandes.
 D'où le fait qu'il soit dit plus haut que le traitement des champs de mantisse tronquée soit le même que celui des champs d'exposant.
 Voici la première phase du traitement des champs de mantisse tronquée.
 
