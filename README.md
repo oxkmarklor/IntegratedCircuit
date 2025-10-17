@@ -709,20 +709,25 @@ Pour ceux qui ont besoin d'un rafraichissement de mémoire, je vous rappelle que
 C'est la raison derrière le fait que le circuit traite les champs de mantisse tronquée d'une façon similaire aux champs d'exposant.
 Je vous renvoie vers les sections "_L'encodage du champs de mantisse tronquée_" ainsi que "_L'encodage par biais du champs d'exposant_" si nécessaire.
 
-// relire
-
-Rappelons que la démonstration mathématique du circuit s'appuie sur le test de la condition suivante $\left(\vert \alpha \vert \gt \vert \beta \vert\right)$, c'est à dire $\left(\left(1 + T_{\alpha}\right) \times \ 2^{E_{\alpha}}\right) \gt \left(\left(1 + T_{\beta}\right) \times \ 2^{E_{\beta}}\right)$.
-Cependant, ce chapitre aborde le sujet du traitement des champs de mantisse tronquée, traitement qui n'a lieu que lorsque le circuit se retrouve dans un état de point non terminal $\left(E_{\alpha} = E_{\beta}\right)$.
-Une fois dans cet état, le circuit génère un résultat par l'évaluation de $\left(T_{\alpha} \gt T_{\beta}\right)$, car il ne reste de la condition d'origine plus que ça de pertinent.
-
-En bref, le circuit est dans un état de point non terminal et génère un résultat vérifiant ou non la condition $\left(\vert \alpha \vert \gt \vert \beta \vert\right)$, par une comparaison de supérioté stricte entre les champs de mantisse tronquée de ses opérandes.
+La démonstration mathématique du circuit s'appuie sur le test de la condition suivante $\left(\vert \alpha \vert \gt \vert \beta \vert\right)$, condition qui ressemble plus formellement à $\left(\left(1 + T_{\alpha}\right) \times \ 2^{E_{\alpha}}\right) \gt \left(\left(1 + T_{\beta}\right) \times \ 2^{E_{\beta}}\right)$.
+Nous remarquons qu'en état de point non terminal $\left(E_{\alpha} = E_{\beta}\right)$, le circuit ne peut départagé la valeur de ses deux opérandes que par l'évaluation de $\left(1 + T_{\alpha}\right) \gt \left(1 + T_{\beta}\right)$, car il ne reste plus que cela de pertinent dans la condition d'origine.
 D'où le fait qu'il soit dit plus haut que le traitement des champs de mantisse tronquée soit le même que celui des champs d'exposant.
 Voici la première phase du traitement des champs de mantisse tronquée.
 
 $$\forall \ i \in \left[0;9\right], \quad Write \ \left(\tau_i, \ Nimply \ \left(T_{\beta i}, \ T_{\alpha i}\right)\right)$$
 
 La variable $\tau$ est techniquement la même que celle utilisée dans la première partie de la démonstration "_Le traitement des champs d'exposant_".
-Le seul changement est que le bit de résultat de chaque opération logique $Nimply$ sur $T_{\beta i}$ et $T_{\alpha i}$ est inscrit dans $\tau_i$, pour $i \in \left[0;9\right]$.
+La seule distinction est que le bit de résultat de chaque opération $Nimply$ sur $T_{\beta i}$ et $T_{\alpha i}$ est inscrit dans $\tau_i$, pour $i \in \left[0;9\right]$.
+
+// parler de l'encodage des champs de mantisse tronquée, puis ensuite du reste?
+
+// 
+
+En outre, ce que nous avons vu de l'opération logique $Nimply$ dans le première partie sur le traitement des champs d'exposant, ne change pas pour le traitement des champs de mantisse tronquée.
+Par exemple, lorsque $\left(\tau_i = 1\right)$ pour tout poids $i \in \left[0;9\right]$, alors nous savons que $\left(E_{\beta i} = 1\right)$ tandis que $\left(E_{\alpha i} = 0\right)$.
+Comme mentionné en introduction de ce chapitre, n'oublions pas que l'encodage des champs de mantisse tronquée partage les propriétés de l'encodage _Binary Unsigned_.
+
+//
 
 En outre, nous comprenons qu'avec $\left(\tau_i = 1\right)$ pour tout $i \in \left[0;9\right]$, il est certain que $\left(T_{\beta i} \times 2^i\right) \gt \left(T_{\alpha i} \times 2^i\right)$.
 Par ailleurs, cela a été dit en introduction, l'encodage du champs de mantisse tronquée partage les propriétés du _Binary Unsigned_.
