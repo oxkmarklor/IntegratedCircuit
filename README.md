@@ -685,8 +685,8 @@ Si nécessire, vous pouvez lire de nouveau la section "_Les points terminaux et 
 
 Dans les sections précédente nous avions toujours un _MSB1_ dans $\tau \in \left[10;14\right]$, mais il pourrait ne pas y en avoir.
 Par essence, une telle situation veut que chaque bit de $\tau \in \left[10;14\right]$ soit un _zéro anonyme_, ce qui nous permet de déduire que $\left(E_{\alpha\sigma} \ge E_{\beta\sigma}\right)$ pour tout poids $\sigma \in \left[10;14\right]$.
-Plus précisément, ces bits sont des _zéros anonymes capitaux_, car chacun d'eux a le pouvoir de faire basculé le circuit d'un état de point non terminal à celui de point terminal, comme nous allons le voir.
-Pour le dire autrement, nous savons que $\left(E_{\alpha} \ge E_{\beta}\right)$.
+Plus précisément, ces bits sont des _zéros anonymes capitaux_ car chacun d'eux a le pouvoir de faire définitivement basculé le circuit d'un état de point non terminal, vers un état de point terminal, comme nous allons le voir.
+En somme, nous savons donc que $\left(E_{\alpha} \ge E_{\beta}\right)$.
 
 Il s'avère que le circuit passe dans un état de point terminal du moment où $\left(E_{\alpha} \gt E_{\beta}\right)$.
 Nous avons vu un cas similaire dans le chapitre précédent, je vais donc être plus succint.
@@ -700,7 +700,8 @@ L'une des conséquences à cela est que la condition sur laquelle s'appuie la d�
 Cependant, le circuit passe dans un état de point non terminal du moment où $\left(E_{\alpha} = E_{\beta}\right)$.
 Cet état de point non terminal ne peut s'obtenir que dans le cas où l'ensemble des bits de même poids des champs d'exposant $E_{\alpha}$ et $E_{\beta}$ sont identiques, ou autrement dit lorsque $\left(E_{\alpha\sigma} = E_{\beta\sigma}\right)$ pour tout les bits de poids $\sigma \in \left[10;14\right]$.
 Concrètement, cela veut dire que par le seul traitement des champs d'exposant de ses opérandes, le circuit FPU Configuration Unit n'est pas en capacité d'anticipé le résultat de la condition sur laquelle s'appuie la démonstration mathématique $\left(\vert \alpha \vert \gt \vert \beta \vert\right)$.
-Rappelons que cette condition ressemble plus formellement à $\left(\left(1 + T_{\alpha}\right) \times \ 2^{E_{\alpha}}\right) \gt \left(\left(1 + T_{\beta}\right) \times \ 2^{E_{\beta}}\right)$, et remarquons que dans le cas où $\left(E_{\alpha} = E_{\beta}\right)$ alors le résultat de la condition ne dépend pas des champs d'exposant $E$ des opérandes, mais bel et bien des champs de mantisse tronquée $T$.
+Rappelons que cette condition ressemble plus formellement à $\left(\left(1 + T_{\alpha}\right) \times \ 2^{E_{\alpha}}\right) \gt \left(\left(1 + T_{\beta}\right) \times \ 2^{E_{\beta}}\right)$, et remarquons que le résultat du test de la condition ne dépend pas des champs d'exposant $E$ des opérandes lorsque $\left(E_{\alpha} = E_{\beta}\right)$, mais uniquement des champs de mantisse tronquée $T$.
+C'est pourquoi le circuit traite les champs de mantisse tronquée lorsqu'il atteint un état de point non terminal définitif.
 
 # Le traitement des champs de mantisse tronquée
 
