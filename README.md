@@ -667,7 +667,7 @@ Dans les faits nous trouvons $\left(\lambda_{\alpha} = \lambda_{\beta}\right)$, 
 En outre, n'oublions pas que l'inéquation $\left(E_{\beta i} \times 2^i\right) \gt \sum_i^{10} \left(E_{\alpha i} \times 2^i\right)$ démontre que du bit de poids $i$ jusqu'au bit de poids $10$, le champs d'exposant $E_{\beta}$ est supérieur au champs d'exposant $E_{\alpha}$.
 Nous en déduisons donc que le circuit atteint l'état de point terminal $\left(E_{\alpha} \lt E_{\beta}\right)$, car $\left(\lambda_{\beta} + E_{\beta i} \times 2^i\right) \gt \left(\lambda_{\alpha} + \sum_i^{10} \left(E_{\alpha i} \times 2^i\right)\right)$.
 Enfin, rappelez vous du fait que la condition sur laquelle s'appuie la démonstration mathématique du circuit est $\left(\vert \alpha \vert \gt \vert \beta \vert\right)$, condition qui se solde en échec car $\left(\left(1 + T_{\alpha}\right) \times \ 2^{E_{\alpha}}\right) \lt \left(\left(1 + T_{\beta}\right) \times \ 2^{E_{\beta}}\right)$.
-Tel que l'explique le chapitre "_Les points terminaux et non terminaux_", $\left(\left(1 + T_{\alpha}\right) \times \ 2^{E_{\alpha}}\right)$ ainsi que $\left(\left(1 + T_{\beta}\right) \times \ 2^{E_{\beta}}\right)$ représentent les valeurs respective de $\vert \ \alpha \ \vert$ et $\vert \ \beta \ \vert$.
+Tel que l'explique le chapitre "_Les points terminaux et non terminaux_", les expressions que sont $\left(\left(1 + T_{\alpha}\right) \times \ 2^{E_{\alpha}}\right)$ ainsi que $\left(\left(1 + T_{\beta}\right) \times \ 2^{E_{\beta}}\right)$ représentent les valeurs respective de $\vert \ \alpha \ \vert$ et $\vert \ \beta \ \vert$.
 
 Néanmoins, parmis les bits d'opérande $E_{\alpha\sigma}$ et $E_{\beta\sigma}$ des _zéros anonymes capitaux_, pour tout poids $\sigma \in \left]i;14\right]$, il est possible qu'il y ait une (ou plusieurs) occurrence de $\left(E_{\alpha\sigma} \gt E_{\beta\sigma}\right)$.
 Auquel cas, le circuit atteint alors l'état de point terminal $\left(E_{\alpha} \gt E_{\beta}\right)$.
@@ -688,18 +688,16 @@ Par essence, une telle situation veut que chaque bit de $\tau \in \left[10;14\ri
 Plus précisément, ces bits sont des _zéros anonymes capitaux_, car chacun d'eux a le pouvoir de faire basculé le circuit d'un état de point non terminal à celui de point terminal, comme nous allons le voir.
 Pour le dire autrement, nous savons que $\left(E_{\alpha} \ge E_{\beta}\right)$.
 
-// relire
+Il s'avère que le circuit passe dans un état de point terminal du moment où $\left(E_{\alpha} \gt E_{\beta}\right)$.
+Nous avons vu un cas similaire dans le chapitre précédent, je vais donc être plus succint.
+Un tel état de point terminal ne peut s'obtenir qu'à condition qu'il y ait une (ou plusieurs) occurence de $\left(E_{\alpha\sigma} \gt E_{\beta\sigma}\right)$, pour tout poids $\sigma \in \left[10;14\right]$.
+Pour chacune des ces occurences nous en déduisons alors que $\left(E_{\alpha\sigma} \times 2^{\sigma}\right) \gt \sum_{\sigma}^{10} \left(E_{\beta\sigma} \times 2^{\sigma}\right)$.
+Cependant, admettons que $\sigma$ soit compris dans l'intervalle $\left[10;14\right[$, alors nous savons qu'il existe des _zéros anonymes capitaux_ de poids $\sigma '$ dans $\tau$, tel que $\sigma' \in \left]\sigma;14\right]$.
+Cela insinue que la somme $\lambda$ de la valeur des bits de poids $\sigma '$ du champs d'exposant $E_{\alpha}$, est supérieur ou égale à la somme des bits de même poids du champs d'exposant $E_{\beta}$, ou pour le dire autrement $\left(\lambda_{\alpha} \ge \lambda_{\beta}\right)$.
+Par conséquent, le circuit bascule dans un état de point terminal $\left(E_{\alpha} \gt E_{\beta}\right)$ car $\left(\lambda_{\alpha} + E_{\alpha\sigma} \times 2^{\sigma}\right) \gt \left(\lambda_{\beta} + \sum_{\sigma}^{10} \left(E_{\beta\sigma} \times 2^{\sigma}\right)\right)$.
+L'une des conséquences à cela est que la condition sur laquelle s'appuie la démonstration mathématique du circuit $\left(\vert \alpha \vert \gt \vert \beta \vert\right)$ réussie, parce que $\left(\left(1 + T_{\alpha}\right) \times \ 2^{E_{\alpha}}\right) \gt \left(\left(1 + T_{\beta}\right) \times \ 2^{E_{\beta}}\right)$.
 
-Il s'avère que le circuit rentre dans un état de point terminal du moment où $\left(E_{\alpha} \gt E_{\beta}\right)$.
-Nous avons déjà vu ce cas dans le chapitre précédent donc je vais être plus succint.
-Cet état de point terminal ne peut s'obtenir qu'à la condition qu'il y ait une ou plusieurs occurences de $\left(E_{\alpha\sigma} \gt E_{\beta\sigma}\right)$ pour tout poids $\sigma \in \left[10;14\right]$.
-Par conséquent, nous en déduisons que pour chacune des ces occurences $\left(E_{\alpha\sigma} \times 2^{\sigma}\right) \gt \sum_{\sigma}^{10} \left(E_{\beta\sigma} \times 2^{\sigma}\right)$.
-Dans le cas où $\sigma \in \left]i;14\right[$, alors nous savons qu'il existe des _zéros anonymes capitaux_ de poids $\sigma '$ dans $\tau$, tel que $\sigma' \in \left]\sigma;14\right].
-La somme $\lambda$ de la valeur des bits de poids $\sigma '$ du champs d'exposant $E_{\alpha}$, est supérieur ou égale à la somme des bits de même poids du champs d'exposant $E_{\beta}$, ou pour le dire autrement $\left(\lambda_{\alpha} \ge \lambda_{\beta}\right)$.
-Nous en concluons que le circuit atteint l'état de point terminal $\left(E_{\alpha} \gt E_{\beta}\right)$ car $\left(\lambda_{\alpha} + E_{\alpha\sigma} \times 2^{\sigma}\right) \gt \left(\lambda_{\beta} + \sum_{\sigma}^{10} \left(E_{\beta\sigma} \times 2^{\sigma}\right)\right)$.
-L'une des conséquences à cela est que la condition sur laquelle s'appuie la démonstration mathématique du circuit $\left(\vert \alpha \vert \gt \vert \beta \vert\right)$ réussie, car nous trouvons que $\left(\left(1 + T_{\alpha}\right) \times \ 2^{E_{\alpha}}\right) \gt \left(\left(1 + T_{\beta}\right) \times \ 2^{E_{\beta}}\right)$.
-
-//
+// à prendre en charge
 
 Cependant, le circuit rentre dans un état de point non terminal du moment où $\left(E_{\alpha} = E_{\beta}\right)$.
 Cet état de point non terminal ne peut s'obtenir que dans le cas où l'ensemble des bits de même poids des champs d'exposant $E_{\alpha}$ et $E_{\beta}$ sont identiques, ou autrement dit lorsque $\left(E_{\alpha\sigma} = E_{\beta\sigma}\right)$ pour tout poids $\sigma \in \left[10;14\right]$.
