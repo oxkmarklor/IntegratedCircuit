@@ -5,7 +5,7 @@ J'ai conceptualisé ce circuit dans le but de résoudre un problème concernant 
 La micro-architecture du circuit électronique ainsi que les compromis de conceptualisation, le problème que cherche à résoudre le FPU Configuration Unit ou encore la solution qu'il apporte, sont autant de sujets dont je parle dans une documentation dédié au circuit.
 
 Pour les curieux, si vous souhaitez voir à quoi ressemble le circuit, sachez qu'il y a un fichier du nom de _16-bit_FPU_configuration_unit_ qui le schématise.
-Le circuit a été directement schématisé sur la base d'un agencement de transistor PMOS ainsi que NMOS dans le cadre de la technologie CMOS (Complementary Metal Oxide Semi-conductor), cela permet de mettre en évidence certains compromis sur le choix des portes logiques.
+Le circuit a été directement schématisé à base de transisor, en technologie CMOS (Complementary Metal Oxide Semi-conductor), cela permet de mettre en évidence certains compromis sur le choix des portes logiques.
 Disons que l'apparence abrupte du schéma rend hommage à la (relative) complexité algorithmique du FPU Configuration Unit.
 
 Le document va même au delà de la démonstration mathématique du circuit, il explique les sujets fondamentaux sur lequels la démonstration ainsi que le circuit reposent.
@@ -697,13 +697,10 @@ Cela insinue que la somme $\lambda$ de la valeur des bits de poids $\sigma '$ du
 Par conséquent, le circuit bascule dans un état de point terminal $\left(E_{\alpha} \gt E_{\beta}\right)$ car $\left(\lambda_{\alpha} + E_{\alpha\sigma} \times 2^{\sigma}\right) \gt \left(\lambda_{\beta} + \sum_{\sigma}^{10} \left(E_{\beta\sigma} \times 2^{\sigma}\right)\right)$.
 L'une des conséquences à cela est que la condition sur laquelle s'appuie la démonstration mathématique du circuit $\left(\vert \alpha \vert \gt \vert \beta \vert\right)$ réussie, parce que $\left(\left(1 + T_{\alpha}\right) \times \ 2^{E_{\alpha}}\right) \gt \left(\left(1 + T_{\beta}\right) \times \ 2^{E_{\beta}}\right)$.
 
-// à prendre en charge
-
-Cependant, le circuit rentre dans un état de point non terminal du moment où $\left(E_{\alpha} = E_{\beta}\right)$.
-Cet état de point non terminal ne peut s'obtenir que dans le cas où l'ensemble des bits de même poids des champs d'exposant $E_{\alpha}$ et $E_{\beta}$ sont identiques, ou autrement dit lorsque $\left(E_{\alpha\sigma} = E_{\beta\sigma}\right)$ pour tout poids $\sigma \in \left[10;14\right]$.
-Une conséquence à cela est que le FPU Configuration Unit n'est pas en capacité d'anticipé le résultat de la condition $\left(\vert \alpha \vert \gt \vert \beta \vert\right)$, par le seul traitement des champs d'exposant de ses opérandes.
-Rappelons que cette condition ressemble plus formellement à $\left(\left(1 + T_{\alpha}\right) \times \ 2^{E_{\alpha}}\right) \gt \left(\left(1 + T_{\beta}\right) \times \ 2^{E_{\beta}}\right)$, et remarquons que les opérandes du circuit partagent la même puissance $2$.
-C'est ce qui force le circuit à devoir traité les champs de mantisse tronquée $T_{\alpha}$ ainsi que $T_{\beta}$ pour pouvoir générer un résultat vérifiant cette condition ou non, chose que nous verrons dans les prochains chapitres.
+Cependant, le circuit passe dans un état de point non terminal du moment où $\left(E_{\alpha} = E_{\beta}\right)$.
+Cet état de point non terminal ne peut s'obtenir que dans le cas où l'ensemble des bits de même poids des champs d'exposant $E_{\alpha}$ et $E_{\beta}$ sont identiques, ou autrement dit lorsque $\left(E_{\alpha\sigma} = E_{\beta\sigma}\right)$ pour tout les bits de poids $\sigma \in \left[10;14\right]$.
+Concrètement, cela veut dire que par le seul traitement des champs d'exposant de ses opérandes, le circuit FPU Configuration Unit n'est pas en capacité d'anticipé le résultat de la condition sur laquelle s'appuie la démonstration mathématique $\left(\vert \alpha \vert \gt \vert \beta \vert\right)$.
+Rappelons que cette condition ressemble plus formellement à $\left(\left(1 + T_{\alpha}\right) \times \ 2^{E_{\alpha}}\right) \gt \left(\left(1 + T_{\beta}\right) \times \ 2^{E_{\beta}}\right)$, et remarquons que dans le cas où $\left(E_{\alpha} = E_{\beta}\right)$ alors le résultat de la condition ne dépend pas des champs d'exposant $E$ des opérandes, mais bel et bien des champs de mantisse tronquée $T$.
 
 # Le traitement des champs de mantisse tronquée
 
