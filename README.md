@@ -716,24 +716,17 @@ Voici la première phase du traitement des champs de mantisse tronquée.
 
 $$\forall \ i \in \left[0;9\right], \quad Write \ \left(\tau_i, \ Nimply \ \left(T_{\beta i}, \ T_{\alpha i}\right)\right)$$
 
-La variable $\tau$ est techniquement la même que celle utilisée dans la première partie de la démonstration "_Le traitement des champs d'exposant_".
-La seule distinction est que le bit de résultat de chaque opération $Nimply$ sur $T_{\beta i}$ et $T_{\alpha i}$ est inscrit dans $\tau_i$, pour $i \in \left[0;9\right]$.
+Le champs $\tau$ est techniquement le même que celui utilisé dans la première partie de la démonstration "_Le traitement des champs d'exposant_".
+La seule différence est que le bit de résultat de chaque opération $Nimply$ sur $T_{\beta i}$ et $T_{\alpha i}$ est inscrit dans $\tau_i$, pour $i \in \left[0;9\right]$.
 
-// parler de l'encodage des champs de mantisse tronquée, puis ensuite du reste?
+Il est mentionné en introduction de ce chapitre que l'encodage d'un champs de mantisse tronquée partage les propriétés du _Binary Unsigned_.
+Je vous conseille une relecture des sections "_L'encodage du champs de mantisse tronquée_" ainsi que "_Une propriété du Binary Unsigned qui est fondamentale à la démonstration_" si nécessaire.
+Ce qu'il faut retenir de ces sections, c'est que la valeur de n'importe quel bit à $1$ de poids $i$ dans un champs de mantisse tronquée, est strictement supérieur à la somme des valeurs des bits de poids inférieur à $i$.
+Exactement comme pour les champs d'exposant.
 
-// 
-
-En outre, ce que nous avons vu de l'opération logique $Nimply$ dans le première partie sur le traitement des champs d'exposant, ne change pas pour le traitement des champs de mantisse tronquée.
-Par exemple, lorsque $\left(\tau_i = 1\right)$ pour tout poids $i \in \left[0;9\right]$, alors nous savons que $\left(E_{\beta i} = 1\right)$ tandis que $\left(E_{\alpha i} = 0\right)$.
-Comme mentionné en introduction de ce chapitre, n'oublions pas que l'encodage des champs de mantisse tronquée partage les propriétés de l'encodage _Binary Unsigned_.
-
-//
-
-En outre, nous comprenons qu'avec $\left(\tau_i = 1\right)$ pour tout $i \in \left[0;9\right]$, il est certain que $\left(T_{\beta i} \times 2^i\right) \gt \left(T_{\alpha i} \times 2^i\right)$.
-Par ailleurs, cela a été dit en introduction, l'encodage du champs de mantisse tronquée partage les propriétés du _Binary Unsigned_.
-La section du nom de "_L'encodage du champs de mantisse tronquée_", explique entre autre que la valeur de n'importe quel bit à $1$ de poids $i$ dans un champs de mantisse tronquée, est strictement supérieur à la somme des valeurs des bits de poids inférieur à $i$.
-Ce qui nous permet de conclure en disant que du moment où $\left(\tau_i = 1\right)$ pour tout $i \in \left[0;9\right]$, alors $\left(T_{\beta i} \times 2^i\right) \gt \sum_i^0 \left(T_{\alpha i} \times 2^i\right)$.
-Cependant, comme dans le cas des champs d'exposant, cela ne démontre pas pour autant que $\left(T_{\alpha} \lt T_{\beta}\right)$.
+En outre, avec ce que nous avons vu des opérations logiques $Nimply$ dans la première partie de la démonstration portant sur le traitement des champs d'exposant, nous comprenons que du moment où $\left(\tau_i = 1\right)$ alors $\left(T_{\beta i} = 1\right)$ tandis que $\left(T_{\alpha i} = 0\right)$, pour tout poids $i \in \left[0;9\right]$.
+Par conséquent, pour toute occurrence de $\left(\tau_i = 1\right)$ où $i \in \left[0;9\right]$, nous en déduisons que $\left(T_{\beta i} \times 2^i\right) \gt \sum_i^0 \left(T_{\alpha i} \times 2^i\right)$.
+Cependant, à l'instar des champs d'exposant, cela ne démontre pas pour autant que $\left(T_{\alpha} \lt T_{\beta}\right)$.
 
 ## La considération des zéros anonymes capitaux
 
