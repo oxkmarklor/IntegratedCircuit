@@ -705,15 +705,14 @@ C'est pourquoi le circuit traite les champs de mantisse tronquée lorsqu'il atte
 
 # Le traitement des champs de mantisse tronquée
 
-// recontextualisation
+Pour ceux qui ont besoin d'un rafraichissement de mémoire, je vous rappelle que les encodages des champs d'exposant et de mantisse tronquée ont des points en commun, ils partagent les même propriétés que l'encodage Binary Unsigned. 
+C'est la raison derrière le fait que le circuit traite les champs de mantisse tronquée d'une façon similaire aux champs d'exposant. 
+Je vous renvoie vers la section "_L'encodage du champs de mantisse tronquée_" si nécessaire.
 
-La démonstration mathématique du circuit s'appuie sur le test de la condition suivante $\left(\vert \alpha \vert \gt \vert \beta \vert\right)$, condition qui ressemble plus formellement à $\left(\left(1 + T_{\alpha}\right) \times \ 2^{E_{\alpha}}\right) \gt \left(\left(1 + T_{\beta}\right) \times \ 2^{E_{\beta}}\right)$.
-Nous remarquons qu'en état de point non terminal $\left(E_{\alpha} = E_{\beta}\right)$, le circuit ne peut départagé la valeur de ses deux opérandes que par l'évaluation de $\left(1 + T_{\alpha}\right) \gt \left(1 + T_{\beta}\right)$, car il ne reste plus que cela de pertinent dans la condition d'origine.
-
-// pourquoi les traitements se ressemblent
-
-// traitement explication etc.
-
+La démonstration mathématique du circuit s'appuie sur le test de la condition suivante $\left(\vert \alpha \vert \gt \vert \beta \vert\right)$, condition qui ressemble plus formellement à $\left(\left(1 + T_{\alpha}\right) \times \ 2^{E_{\alpha}}\right) \gt \left(\left(1 + T_{\beta}\right) \times \ 2^{E_{\beta}}\right)$. 
+Nous remarquons qu'en état de point non terminal $\left(E_{\alpha} = E_{\beta}\right)$, le circuit ne peut départagé la valeur de ses deux opérandes que par l'évaluation de $\left(1 + T_{\alpha}\right) \gt \left(1 + T_{\beta}\right)$, car il ne reste plus que cela de pertinent dans la condition d'origine. 
+D'où le fait qu'il soit dit plus haut que le traitement des champs de mantisse tronquée soit le même que celui des champs d'exposant. 
+Voici la première phase du traitement des champs de mantisse tronquée.
 
 $$\forall \ i \in \left[0;9\right], \quad Write \ \left(\tau_i, \ Nimply \ \left(T_{\beta i}, \ T_{\alpha i}\right)\right)$$
 
