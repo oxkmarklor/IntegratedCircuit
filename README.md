@@ -715,7 +715,6 @@ Je vous invite à relire la section "_L'encodage du champs de mantisse tronquée
 En bref, ce qu'il faut retenir de cette section c'est que la valeur de n'importe quel bit à $1$ de poids $i$ dans un champs de mantisse tronquée, est strictement supérieur à la somme des valeurs des bits de poids inférieur à $i$.
 Ce qui nous rappelle que c'est également la propriété qui sous-tend toute la logique de traitement des champs d'exposant.
 De surcroît, le traitement des champs d'exposant et de mantisse tronquée étant identique ou presque, nous utiliserons les même leviers logique pour le traitement des champs de mantisse tronquée que pour les champs d'exposant. 
-Comme le mentionne le chapitre "_Les zéros anonymes_", cela commence par le fait de faire usage des opérations logiques $Nimply$.
 Voici à quoi ressemble la première phase du traitement des champs de mantisse tronquée.
 
 $$\forall \ i \in \left[0;9\right], \quad Write \ \left(\tau_i, \ Nimply \ \left(T_{\beta i}, \ T_{\alpha i}\right)\right)$$
@@ -723,14 +722,8 @@ $$\forall \ i \in \left[0;9\right], \quad Write \ \left(\tau_i, \ Nimply \ \left
 Le champs $\tau$ est techniquement le même que celui utilisé dans la première partie de la démonstration "_Le traitement des champs d'exposant_".
 La seule différence est que le bit de résultat de chaque opération $Nimply$ sur $T_{\beta i}$ et $T_{\alpha i}$ est inscrit dans $\tau_i$, pour $i \in \left[0;9\right]$.
 
-Il est mentionné en introduction de ce chapitre que l'encodage d'un champs de mantisse tronquée partage les propriétés du _Binary Unsigned_.
-Je vous conseille une relecture des sections "_L'encodage du champs de mantisse tronquée_" ainsi que "_Une propriété du Binary Unsigned qui est fondamentale à la démonstration_" si nécessaire.
-Ce qu'il faut retenir de ces sections, c'est que la valeur de n'importe quel bit à $1$ de poids $i$ dans un champs de mantisse tronquée, est strictement supérieur à la somme des valeurs des bits de poids inférieur à $i$.
-Exactement comme pour les champs d'exposant.
-
-En outre, avec ce que nous avons vu des opérations logiques $Nimply$ dans la première partie de la démonstration portant sur le traitement des champs d'exposant, nous comprenons que du moment où $\left(\tau_i = 1\right)$ alors $\left(T_{\beta i} = 1\right)$ tandis que $\left(T_{\alpha i} = 0\right)$, pour tout poids $i \in \left[0;9\right]$.
-Par conséquent, pour toute occurrence de $\left(\tau_i = 1\right)$ où $i \in \left[0;9\right]$, nous en déduisons que $\left(T_{\beta i} \times 2^i\right) \gt \sum_i^0 \left(T_{\alpha i} \times 2^i\right)$.
-Cependant, à l'instar des champs d'exposant, cela ne démontre pas pour autant que $\left(T_{\alpha} \lt T_{\beta}\right)$.
+En outre, grâce au chapitre "_Définition de quelques opérations fondamentales à la démonstration_" nous savons que dans le cas d'une occurrence où $\left(\tau_i = 1\right)$, pour tout bit de poids $i \in \left[0;9\right]$, alors $\left(T_{\beta i} = 1\right)$ tandis que $\left(T_{\alpha i} = 0\right)$.
+Avec ce que nous avons dit précédemment, nous en déduisons que pour toute occurrence où $\left(\tau_i = 1\right)$ alors $\left(T_{\beta i} \times 2^i\right) \gt \sum_i^0 \left(T_{\alpha i} \times 2^i\right)$.
 
 ## La considération des zéros anonymes capitaux
 
