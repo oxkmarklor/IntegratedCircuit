@@ -705,14 +705,15 @@ C'est pourquoi le circuit traite les champs de mantisse tronquée lorsqu'il atte
 
 # Le traitement des champs de mantisse tronquée
 
-Pour ceux qui ont besoin d'un rafraichissement de mémoire, je vous rappelle que les encodages des champs d'exposant et de mantisse tronquée ont des points en commun, ils partagent les même propriétés que l'encodage _Binary Unsigned_.
-Comme nous allons le voir, c'est la raison derrière le fait que le traitement des champs de mantisse tronquée soit similaire à celui des champs d'exposant.
+// recontextualisation
 
 La démonstration mathématique du circuit s'appuie sur le test de la condition suivante $\left(\vert \alpha \vert \gt \vert \beta \vert\right)$, condition qui ressemble plus formellement à $\left(\left(1 + T_{\alpha}\right) \times \ 2^{E_{\alpha}}\right) \gt \left(\left(1 + T_{\beta}\right) \times \ 2^{E_{\beta}}\right)$.
 Nous remarquons qu'en état de point non terminal $\left(E_{\alpha} = E_{\beta}\right)$, le circuit ne peut départagé la valeur de ses deux opérandes que par l'évaluation de $\left(1 + T_{\alpha}\right) \gt \left(1 + T_{\beta}\right)$, car il ne reste plus que cela de pertinent dans la condition d'origine.
-D'où le fait qu'il soit dit plus haut que le traitement des champs de mantisse tronquée soit le même que celui des champs d'exposant, mais les ressemblances ne s'arrêtent pas là.
 
-Voici la première phase du traitement des champs de mantisse tronquée.
+// pourquoi les traitements se ressemblent
+
+// traitement explication etc.
+
 
 $$\forall \ i \in \left[0;9\right], \quad Write \ \left(\tau_i, \ Nimply \ \left(T_{\beta i}, \ T_{\alpha i}\right)\right)$$
 
