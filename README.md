@@ -610,7 +610,7 @@ Pour finir, la section "_Les points terminaux et non terminaux_" évoque le fait
 Nous comprenons d'ores et déjà que le traitement des champs d'exposant passe par l'application d'opération logique $Nimply$ sur les bits des champs $E_{\alpha}$ et $E_{\beta}$.
 Ce qui engendre quelques subtilités qu'il faut expliqué, comme celle des _zéros anonymes capitaux_ et _non capitaux_.
 Sachez que le traitement des champs de mantisse tronquée utilise aussi des opérations logiques $Nimply$.
-Par conséquent, nous recontextualiserons en temps voulu les concepts de _zéro anonyme capital_ et _non capital_ aux cas des champs de mantisse tronquée.
+Par conséquent, nous recontextualiserons en temps voulu les concepts de _zéros anonymes capitaux_ et _non capitaux_ aux cas des champs de mantisse tronquée.
 Mais pour l'instant, concentrons sur le cas des champs d'exposant.
 
 ### Les zéros anonymes non capitaux dus au traitement des champs d'exposant
@@ -725,30 +725,11 @@ La seule différence est que le bit de résultat de chaque opération $Nimply$ s
 En outre, grâce au chapitre "_Définition de quelques opérations fondamentales à la démonstration_" nous savons que dans le cas d'une occurrence où $\left(\tau_i = 1\right)$, pour tout bit de poids $i \in \left[0;9\right]$, alors $\left(T_{\beta i} = 1\right)$ tandis que $\left(T_{\alpha i} = 0\right)$.
 Avec ce que nous avons dit précédemment, nous en déduisons que pour toute occurrence où $\left(\tau_i = 1\right)$ alors $\left(T_{\beta i} \times 2^i\right) \gt \sum_i^0 \left(T_{\alpha i} \times 2^i\right)$.
 
-## La considération des zéros anonymes capitaux
+## Les zéros anonymes capitaux et non capitaux dus au traitement des champs de mantisse tronquée
 
+Comme cela a été mentionné dans le chapitre "_Les zéros anonymes_", je cite "_nous recontextualiserons en temps voulu les concepts de zéros anonymes capitaux et non capitaux aux cas des champs de mantisse tronquée_", alors faisons cela.
 
-
-### Un échec certain de la condition 
-
-// à vérif (il faut delete je crois)
-
-Dans le chapitre "_La mantisse tronquée, une histoire de puissance de 2_", qui introduit à l'encodage du champs de mantisse tronquée.
-Il est dit que la valeur d'un bit à $1$ de poids $i$ d'un champs de mantisse tronquée $T$, est _inconditionnellement_ supérieur à la somme de la valeur de chacun des bits de poids inférieur à $i$.
-Rappellons que c'est aussi le cas des champs d'exposant, comme cela a été mentionné dans le chapitre "_L'encodage par biais du champs d'exposant_".
-Comme nous avons pu le voir dans la première partie de la démonstration, la comparaison entre les champs d'exposant utilise ces primitives mathématiques.
-Ci-dessous, nous allons voir qu'il en va de même pour la comparaison entre les champs de mantisse tronquée $T_{\alpha}$ ainsi que $T_{\beta}$. 
-
-// à traité
-
-Prenons le cas de $\left(\tau_i = \tau_9 = 1\right)$.
-Vu que $\left(\tau_9 = 1\right)$, nous savons que $\left(T_{\beta 9} = 1\right)$ tandis que $\left(T_{\alpha 9} = 0\right)$ et par conséquent $\left(T_{\beta 9} \times 2^9\right) \gt \sum_{i=9}^0 \ \left(T_{\alpha i} \times 2^i\right)$.
-Etant donné que $T_{\alpha 9}$ ainsi que $T_{\beta 9}$ sont les _MSB_ respectif des champs de mantisse tronquée $T_{\alpha}$ et $T_{\beta}$, nous pouvons alors conclure que $\left(T_{\alpha} \lt T_{\beta}\right)$. 
-Sachant que $\vert \ \alpha \ \vert$ est égale à $\left(\left(1+T_{\alpha}\right) \times 2^{E_{\alpha}}\right)$ et que $\vert \ \beta \ \vert$ vaut $\left(\left(1+T_{\beta}\right) \times 2^{E_{\beta}}\right)$, avec $\left(E_{\alpha} = E_{\beta}\right)$ nous obtenons alors le résultat $\left(\vert\alpha\vert \lt \vert\beta\vert\right)$.
-Par conséquent, la vérification de la condition sur laquelle repose la démonstration mathématique du circuit $\left(\vert\alpha\vert \gt \vert\beta\vert\right)$ se solde par un échec.
-
-N'oublions pas qu'il peut y avoir des _zéros anonymes_ dans $\tau \in \left[0;8\right]$, mais ces derniers ne peuvent être que de poids inférieur au _MSB1_ de $\tau$, qui est $\tau_9$.
-Ces potentiels bit à $0$ sont alors des _zéros anonymes non capitaux_, sans aucune importance pour le résultat.
+// description succinte des zéros anonymes capitaux et non capitaux (relire les chapitres concerné)
 
 ### Lorsque les zéros anonymes rendent la génération du résultat incertain
 
