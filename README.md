@@ -727,9 +727,19 @@ Avec ce que nous avons dit précédemment, nous en déduisons que pour toute occ
 
 ## Les zéros anonymes capitaux et non capitaux dus au traitement des champs de mantisse tronquée
 
-Comme cela a été mentionné dans le chapitre "_Les zéros anonymes_", je cite "_nous recontextualiserons en temps voulu les concepts de zéros anonymes capitaux et non capitaux aux cas des champs de mantisse tronquée_", alors faisons cela.
+Comme cela a été mentionné dans le chapitre "_Les zéros anonymes_", je cite "_nous recontextualiserons en temps voulu les concepts de zéros anonymes capitaux et non capitaux aux cas des champs de mantisse tronquée_".
+Eh bien... le moment est venu.
+Cela va nous permettre de parler du traitement des champs de mantisse tronquée, comme nous l'avons finalement fait avec les champs d'exposant.
 
-// description succinte des zéros anonymes capitaux et non capitaux (relire les chapitres concerné)
+Il n'y a pas grand chose qui change entre les _zéros anonymes capitaux_ et _non capitaux_ qui sont issu du traitement des champs d'exposant, vis à vis de ceux qui sont issu du traitement des champs de mantisse tronquée.
+C'est pourquoi nous allons principalement nous concentrés sur ce qu'il y a de 'nouveau', et le reste sera plus ou moins survolé.
+En cas de trou de mémoire ou autre, je vous invite à relire le chapitre adéquat parmis ceux-ci "_Les zéros anonymes_", "_Les zéros anonymes capitaux dus au traitement des champs d'exposant_", "_Les zéros anonymes non capitaux dus au traitement des champs d'exposant_" ou encore "_L'obtention d'un point non terminal_".
+
+### Les zéros anonymes capitaux dus au traitement des champs de mantisse tronquée
+
+// faire un résumer de ce qu'il y a de nouveau dans le traitement des champs de mantissse tronquée
+
+### Les zéros anonymes non capitaux dus au traitement des champs de mantisse tronquée
 
 ### Lorsque les zéros anonymes rendent la génération du résultat incertain
 
