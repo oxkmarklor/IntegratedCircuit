@@ -728,12 +728,12 @@ Avec ce que nous avons dit précédemment, nous en déduisons que pour toute occ
 ## Les zéros anonymes capitaux et non capitaux dus au traitement des champs de mantisse tronquée
 
 Comme cela a été mentionné dans le chapitre "_Les zéros anonymes_", je cite "_nous recontextualiserons en temps voulu les concepts de zéros anonymes capitaux et non capitaux aux cas des champs de mantisse tronquée_".
-Eh bien... le moment est venu.
-Cela va nous permettre de parler du traitement des champs de mantisse tronquée, comme nous l'avons finalement fait avec les champs d'exposant.
+Eh bien... le moment est venu de le faire.
+Par la même occasion, cela va nous permettre de parler du traitement des champs de mantisse tronquée, comme nous l'avons finalement fait avec les champs d'exposant.
 
-Il n'y a pas grand chose qui change entre les _zéros anonymes capitaux_ et _non capitaux_ qui sont issu du traitement des champs d'exposant, vis à vis de ceux qui sont issu du traitement des champs de mantisse tronquée.
-C'est pourquoi nous allons principalement nous concentrés sur ce qu'il y a de 'nouveau', et le reste sera plus ou moins survolé.
-En cas de trou de mémoire ou autre, je vous invite à relire le chapitre adéquat parmis ceux-ci "_Les zéros anonymes_", "_Les zéros anonymes capitaux dus au traitement des champs d'exposant_", "_Les zéros anonymes non capitaux dus au traitement des champs d'exposant_" ou encore "_L'obtention d'un point non terminal_".
+Sachez qu'il n'y a pas grand chose qui change entre les _zéros anonymes capitaux_ et _non capitaux_ qui sont issu du traitement des champs d'exposant, vis à vis de ceux qui sont issu du traitement des champs de mantisse tronquée.
+C'est pourquoi nous allons nous concentrés sur ce qui change et moins sur le reste.
+En cas de trou de mémoire, je vous invite à relire les sections qui expliquent en détails ce que sont les _zéros anonymes capitaux_ et _non capitaux_ dus au traitement des champs d'exposant, ainsi que l'impacte qu'ils ont sur une phase de traitement.
 
 ### Les zéros anonymes capitaux dus au traitement des champs de mantisse tronquée
 
