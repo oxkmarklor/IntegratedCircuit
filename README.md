@@ -741,10 +741,19 @@ Comme cela a été dit et démontrer dans la section "_Les zéros anonymes non c
 En somme, il s'avère que c'est aussi le cas pour le traitement des champs de mantisse tronquée $T_{\alpha}$ et $T_{\beta}$.
 
 Revenons en où nous en étions dans le chapitre "_Le traitement des champs de mantisse tronquée_".
-Admettons qu'il y ait un _MSB1_ dans $\tau \in \left[0;9\right]$ et que ce dernier ait un poids $i \in \left[1;9\right]$, alors selon ledit chapitre nous en déduisons que $\left(T_{\beta i} \times 2^i\right) \gt \sum_i^0 \left(T_{\alpha i} \times 2^i\right)$ pour $\left(\tau_i = 1\right)$.
-Pour finir, par le prisme du traitement des champs de mantisse tronquée, un _zéro anonyme non capital_ est un bit à $0$ dans $\tau$ qui est d'un poids $\sigma \in \left[0;i\right[$.
-Nous savons alors qu'il existe au moins un bit $\tau_{\left(i - 1\right)}$ qui peut être défini à $0$ comme à $1$, ou autrement dit ce bit peut être un _zéro anonyme non capital_ comme ne pas en être un.
-Par conséquent, dans le cas où $\left(\tau_{\left(i - 1\right)} = 0\right)$ nous en déduisons que $\left(T_{\alpha \left(i - 1\right)} \ge T_{\beta \left(i - 1\right)}\right)$.
+Admettons qu'il y ait un _MSB1_ dans $\tau \in \left[0;9\right]$ et que ce dernier ait un poids $i \in \left[1;9\right]$, alors selon ledit chapitre nous en déduisons que $\left(T_{\beta i} \times 2^i\right) \gt \sum_i^0 \left(T_{\alpha i} \times 2^i\right)$ avec $\left(\tau_i = 1\right)$.
+En bref, par le prisme du traitement des champs de mantisse tronquée, un _zéro anonyme non capital_ est un bit à $0$ dans $\tau$ qui est d'un poids $\sigma \in \left[0;i\right[$.
+Nous savons alors qu'il existe au moins un bit $\tau_{\left(i - 1\right)}$ qui peut être défini à $0$ comme à $1$.
+Par conséquent, dans le cas où $\left(\tau_{\left(i - 1\right)} = 0\right)$ alors c'est un _zéro anonyme non capital_ et il devient déductible que $\left(T_{\alpha \left(i - 1\right)} \ge T_{\beta \left(i - 1\right)}\right)$.
+
+Changons la formulation de l'inéquation $\left(T_{\beta i} \times 2^i\right) \gt \sum_i^0 \left(T_{\alpha i} \times 2^i\right)$, en ce qui suit $\left(T_{\beta i} \times 2^i\right) \gt \left(\left(T_{\alpha i} \times 2^i\right) + \sum_{\sigma = i - 1}^0 \left(T_{\alpha\sigma} \times 2^{\sigma}\right)\right)$.
+Nous remarquons que $\left(T_{\beta i} \times 2^i\right)$ est supérieur à la somme des valeurs des bits de poids $\sigma$ du champs de mantisse tronquée $T_{\alpha}$, nonobstant la valeur de ces bits dont celle de $\left(T_{\alpha \left(i - 1\right)} \times 2^{\left(i - 1\right)}\right)$.
+Autrement dit, ce n'est pas important que les bits de poids $\sigma$ du champs de mantisse tronquée $T_{\alpha}$ soient définis à $0$ ou à $1$ (ce qui concerne le bit $T_{\alpha \left(i - 1\right)}$ entre autre), car nous trouverons toujours que $\left(T_{\beta i} \times 2^i\right) \gt \sum_{\sigma = i - 1}^0 \left(T_{\alpha\sigma} \times 2^{\sigma}\right)$.
+
+//
+
+En reprenant l'inéquation $\left(E_{\beta i} \times 2^i\right) \gt \left(\left(E_{\alpha i} \times 2^i\right) + \sum_{\sigma = i - 1}^{10} \left(E_{\alpha\sigma} \times 2^{\sigma}\right)\right)$, nous remarquons que $\left(E_{\beta i} \times 2^i\right)$ est supérieur à la somme des valeurs des bits de poids $\sigma$ du champs d'exposant $E_{\alpha}$, nonobstant la valeur de ces bits dont celle de $\left(E_{\alpha \left(i - 1\right)} \times 2^{\left(i - 1\right)}\right)$.
+Autrement dit, ce n'est pas important que les bits de poids $\sigma$ du champs d'exposant $E_{\alpha}$ soient définis à $0$ ou à $1$ (ce qui concerne le bit $E_{\alpha \left(i - 1\right)}$ entre autre), car nous trouverons toujours que $\left(E_{\beta i} \times 2^i\right) \gt \sum_{\sigma = i - 1}^{10} \left(E_{\alpha\sigma} \times 2^{\sigma}\right)$.
 
 //
 
