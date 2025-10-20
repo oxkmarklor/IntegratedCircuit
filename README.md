@@ -733,24 +733,33 @@ Par la même occasion, cela va nous permettre de parler du traitement des champs
 
 Sachez qu'il n'y a pas grand chose qui change entre les _zéros anonymes capitaux_ et _non capitaux_ qui sont issu du traitement des champs d'exposant, vis à vis de ceux qui sont issu du traitement des champs de mantisse tronquée.
 C'est pourquoi nous allons nous concentrés sur ce qui change et moins sur le reste.
-En cas de trou de mémoire, je vous invite à relire les sections qui expliquent en détails ce que sont les _zéros anonymes capitaux_ et _non capitaux_ dus au traitement des champs d'exposant, ainsi que l'impacte qu'ils ont sur une phase de traitement.
+En cas de trou de mémoire, je vous invite à relire les sections qui expliquent en détails ce que sont les _zéros anonymes capitaux_ et _non capitaux_ dus au traitement des champs d'exposant, ainsi que l'impacte qu'ils ont.
 
 ### Les zéros anonymes non capitaux dus au traitement des champs de mantisse tronquée
 
 Comme cela a été dit et démontrer dans la section "_Les zéros anonymes non capitaux dus au traitement des champs d'exposant_", les _zéros anonymes non capitaux_ n'ont aucune importance pour le traitement des champs d'exposant.
-En somme, il s'avère que c'est aussi le cas du traitement des champs de mantisse tronquée $T_{\alpha}$ et $T_{\beta}$.
+En somme, il s'avère que c'est aussi le cas pour le traitement des champs de mantisse tronquée $T_{\alpha}$ et $T_{\beta}$.
 
-Après cette rapide introduction, reprenons là où nous nous étions arrêté dans le chapitre "_Le traitement des champs de mantisse tronquée_".
-Admettons qu'il y ait un _MSB1_ dans $\tau \in \left[0;9\right]$ et que ce dernier ait un poids $i \in \left[1;9\right]$, alors pour $\left(\tau_i = 1\right)$ nous en déduisons que $\left(T_{\beta i} \times 2^i\right) \gt \sum_i^0 \left(T_{\alpha i} \times 2^i\right)$ ou autrement dit $\left(T_{\beta i} \times 2^i\right) \gt \left(\left(T_{\alpha i} \times 2^i\right) + \sum_{\sigma = i - 1}^{10} \left(T_{\alpha\sigma} \times 2^{\sigma}\right)\right)$.
-
-Par le biais du traitement des champs de mantisse tronquée, un _zéro anonyme non capital_ est un bit à $0$ dans $\tau$ qui est d'un poids $\sigma \in \left[0;i\right[$.
-Du moment où le poids $i$ du _MSB1_ est compris dans l'intervalle $\left[1;9\right]$, alors nous pouvons être certain que dans $\tau \in \left[0;9\right]$ il existe au moins un bit $\tau_{\left(i - 1\right)}$, qu'il soit à $0$ ou à $1$.
-En conséquence, lorsque $\left(\tau_{\left(i - 1\right)} = 0\right)$ il est possible d'en déduire que le bit est un _zéro anonyme non capital_, ce qui veut dire que $\left(T_{\alpha \left(i - 1\right)} \ge T_{\beta \left(i - 1\right)}\right)$.
+Revenons en où nous en étions dans le chapitre "_Le traitement des champs de mantisse tronquée_".
+Admettons qu'il y ait un _MSB1_ dans $\tau \in \left[0;9\right]$ et que ce dernier ait un poids $i \in \left[1;9\right]$, alors selon ledit chapitre nous en déduisons que $\left(T_{\beta i} \times 2^i\right) \gt \sum_i^0 \left(T_{\alpha i} \times 2^i\right)$ pour $\left(\tau_i = 1\right)$.
 
 
 //
 
+Les _zéros anonymes capitaux_ et _non capitaux_ sont dus aux même raisons, le chapitre précédent explique très bien cela.
+Ce que le chapitre n'explique pas, c'est que les _zéros anonymes non capitaux_ n'ont aucune importance pour le traitement des champs d'exposant $E_{\alpha}$ et $E_{\beta}$, au contraire des _zéros anonymes capitaux_.
+Nous verrons plus tard que cela ne se limite pas au traitement des champs d'exposant, mais s'étend aussi au traitement des champs de mantisse tronquée.
 
+Après cette rapide introduction, reprenons là où nous nous étions arrêté dans le chapitre "_Le traitement des champs d'exposant_".
+Admettons qu'il y ait un _MSB1_ dans $\tau \in \left[10;14\right]$ et que ce dernier ait un poids $i \in \left[11;14\right]$, alors nous en déduisons que $\left(E_{\beta i} = 1\right)$ tandis que $\left(E_{\alpha i} = 0\right)$ pour $\left(\tau_i = 1\right)$.
+En outre, comme l'explique ledit chapitre, nous en déduisons que $\left(E_{\beta i} \times 2^i\right) \gt \sum_i^{10} \left(E_{\alpha i} \times 2^i\right)$.
+Rappelons que cette inéquation fonctionne car la valeur de n'importe quel bit à $1$ de poids $i$ dans un champs d'exposant comme $E_{\beta}$, est _inconditionnellement_ supérieur à la somme des valeurs des bits de poids inférieur à $i$. 
+Cela se remarque plus avec la formulation suivante de cette même inéquation $\left(E_{\beta i} \times 2^i\right) \gt \left(\left(E_{\alpha i} \times 2^i\right) + \sum_{\sigma = i - 1}^{10} \left(E_{\alpha\sigma} \times 2^{\sigma}\right)\right)$, toujours dans le cas où $\left(\tau_i = 1\right)$ rappelons-le.
+
+Définissons désormais ce qu'est un _zéro anonyme non capital_.
+Par le prisme du traitement des champs d'exposant, un _zéro anonyme non capital_ est un bit à $0$ dans $\tau$ qui est d'un poids $\sigma \in \left[10;i\right[$.
+Du moment où le poids $i$ du _MSB1_ est compris dans l'intervalle $\left[11;14\right]$, alors nous pouvons être certain que dans $\tau \in \left[10;14\right]$ il existe au moins un bit $\tau_{\left(i - 1\right)}$, qu'il soit à $0$ ou à $1$.
+En conséquence, lorsque $\left(\tau_{\left(i - 1\right)} = 0\right)$ il est possible d'en déduire que le bit est un _zéro anonyme non capital_, et de fait que les valeurs des bits d'opérandes $E_{\alpha \left(i - 1\right)}$ ainsi que $E_{\beta \left(i - 1\right)}$ ne sont pas déductible, nous savons seulement que $\left(E_{\alpha \left(i - 1\right)} \ge E_{\beta \left(i - 1\right)}\right)$.
 
 En reprenant l'inéquation $\left(E_{\beta i} \times 2^i\right) \gt \left(\left(E_{\alpha i} \times 2^i\right) + \sum_{\sigma = i - 1}^{10} \left(E_{\alpha\sigma} \times 2^{\sigma}\right)\right)$, nous remarquons que $\left(E_{\beta i} \times 2^i\right)$ est supérieur à la somme des valeurs des bits de poids $\sigma$ du champs d'exposant $E_{\alpha}$, nonobstant la valeur de ces bits dont celle de $\left(E_{\alpha \left(i - 1\right)} \times 2^{\left(i - 1\right)}\right)$.
 Autrement dit, ce n'est pas important que les bits de poids $\sigma$ du champs d'exposant $E_{\alpha}$ soient définis à $0$ ou à $1$ (ce qui concerne le bit $E_{\alpha \left(i - 1\right)}$ entre autre), car nous trouverons toujours que $\left(E_{\beta i} \times 2^i\right) \gt \sum_{\sigma = i - 1}^{10} \left(E_{\alpha\sigma} \times 2^{\sigma}\right)$.
