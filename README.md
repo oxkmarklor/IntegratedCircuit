@@ -742,13 +742,17 @@ En somme, il s'avère que c'est aussi le cas pour le traitement des champs de ma
 
 Revenons en où nous en étions dans le chapitre "_Le traitement des champs de mantisse tronquée_".
 Admettons qu'il y ait un _MSB1_ dans $\tau \in \left[0;9\right]$ et que ce dernier ait un poids $i \in \left[1;9\right]$, alors selon ledit chapitre nous en déduisons que $\left(T_{\beta i} \times 2^i\right) \gt \sum_i^0 \left(T_{\alpha i} \times 2^i\right)$ pour $\left(\tau_i = 1\right)$.
-
+Pour finir, par le prisme du traitement des champs de mantisse tronquée, un _zéro anonyme non capital_ est un bit à $0$ dans $\tau$ qui est d'un poids $\sigma \in \left[0;i\right[$.
+Nous savons alors qu'il existe au moins un bit $\tau_{\left(i - 1\right)}$ qui peut être défini à $0$ comme à $1$, ou autrement dit ce bit peut être un _zéro anonyme non capital_ comme ne pas en être un.
+Par conséquent, dans le cas où $\left(\tau_{\left(i - 1\right)} = 0\right)$ nous en déduisons que $\left(T_{\alpha \left(i - 1\right)} \ge T_{\beta \left(i - 1\right)}\right)$.
 
 //
 
-Les _zéros anonymes capitaux_ et _non capitaux_ sont dus aux même raisons, le chapitre précédent explique très bien cela.
-Ce que le chapitre n'explique pas, c'est que les _zéros anonymes non capitaux_ n'ont aucune importance pour le traitement des champs d'exposant $E_{\alpha}$ et $E_{\beta}$, au contraire des _zéros anonymes capitaux_.
-Nous verrons plus tard que cela ne se limite pas au traitement des champs d'exposant, mais s'étend aussi au traitement des champs de mantisse tronquée.
+Nous savons alors qu'il existe un bit $\tau_{\left(i - 1\right)}$ pour lequel nous pouvons déduire que $\left(T_{\alpha \left(i - 1\right)} \ge T_{\beta \left(i - 1\right)}\right)$ si ce dernier est à $0$.
+
+En conséquence, lorsque $\left(\tau_{\left(i - 1\right)} = 0\right)$ il est possible d'en déduire que le bit est un _zéro anonyme non capital_, et de fait que les valeurs des bits d'opérandes $E_{\alpha \left(i - 1\right)}$ ainsi que $E_{\beta \left(i - 1\right)}$ ne sont pas déductible, nous savons seulement que $\left(E_{\alpha \left(i - 1\right)} \ge E_{\beta \left(i - 1\right)}\right)$.
+
+//
 
 Après cette rapide introduction, reprenons là où nous nous étions arrêté dans le chapitre "_Le traitement des champs d'exposant_".
 Admettons qu'il y ait un _MSB1_ dans $\tau \in \left[10;14\right]$ et que ce dernier ait un poids $i \in \left[11;14\right]$, alors nous en déduisons que $\left(E_{\beta i} = 1\right)$ tandis que $\left(E_{\alpha i} = 0\right)$ pour $\left(\tau_i = 1\right)$.
