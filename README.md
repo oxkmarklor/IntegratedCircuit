@@ -746,9 +746,12 @@ En bref, par le prisme du traitement des champs de mantisse tronquée, un _zéro
 Nous savons alors qu'il existe au moins un bit $\tau_{\left(i - 1\right)}$ qui peut être défini à $0$ comme à $1$.
 Par conséquent, dans le cas où $\left(\tau_{\left(i - 1\right)} = 0\right)$ alors c'est un _zéro anonyme non capital_ et il devient déductible que $\left(T_{\alpha \left(i - 1\right)} \ge T_{\beta \left(i - 1\right)}\right)$.
 
-Changons la formulation de l'inéquation $\left(T_{\beta i} \times 2^i\right) \gt \sum_i^0 \left(T_{\alpha i} \times 2^i\right)$, en ce qui suit $\left(T_{\beta i} \times 2^i\right) \gt \left(\left(T_{\alpha i} \times 2^i\right) + \sum_{\sigma = i - 1}^0 \left(T_{\alpha\sigma} \times 2^{\sigma}\right)\right)$.
+Dérivons l'inéquation suivante $\left(T_{\beta i} \times 2^i\right) \gt \sum_i^0 \left(T_{\alpha i} \times 2^i\right)$ en ceci $\left(T_{\beta i} \times 2^i\right) \gt \left(\left(T_{\alpha i} \times 2^i\right) + \sum_{\sigma = i - 1}^0 \left(T_{\alpha\sigma} \times 2^{\sigma}\right)\right)$.
 Nous remarquons que $\left(T_{\beta i} \times 2^i\right)$ est supérieur à la somme des valeurs des bits de poids $\sigma$ du champs de mantisse tronquée $T_{\alpha}$, nonobstant la valeur de ces bits dont celle de $\left(T_{\alpha \left(i - 1\right)} \times 2^{\left(i - 1\right)}\right)$.
-Autrement dit, ce n'est pas important que les bits de poids $\sigma$ du champs de mantisse tronquée $T_{\alpha}$ soient définis à $0$ ou à $1$ (ce qui concerne le bit $T_{\alpha \left(i - 1\right)}$ entre autre), car nous trouverons toujours que $\left(T_{\beta i} \times 2^i\right) \gt \sum_{\sigma = i - 1}^0 \left(T_{\alpha\sigma} \times 2^{\sigma}\right)$.
+Pour le dire autrement, il n'est pas important que les bits de poids $\sigma$ du champs de mantisse tronquée $T_{\alpha}$ soient définis à $0$ ou à $1$ (ce qui concerne le bit $T_{\alpha \left(i - 1\right)}$ entre autre), car nous trouverons toujours que $\left(T_{\beta i} \times 2^i\right) \gt \sum_{\sigma = i - 1}^0 \left(T_{\alpha\sigma} \times 2^{\sigma}\right)$.
+
+Pour resumer, un _zéro anonyme non capital_ dans $\tau_{\sigma}$ pour tout poids $\sigma \in \left[0;i\right[$, ne permet pas de déduire la valeur des bits d'opérandes $T_{\alpha\sigma}$ ainsi que $T_{\beta\sigma}$.
+Néanmoins, le circuit n'a pas besoin de prendre en charge les bits de poids $\tau_{\sigma}$, car il déductible que le champs de mantisse tronquée $T_{\beta}$ est supérieur au champs de mantisse tronquée $T_{\alpha}$, du bit de poids $i$ jusqu'au bit de poids $0$.
 
 //
 
