@@ -593,7 +593,7 @@ Nous avons vu dans la section "_Définition de quelques opérations fondamentale
 Autrement, l'opération renvoie un bit de résultat à $0$.
 
 Sachez qu'il est possible de décliné l'opération logique $Nimply$ en une porte logique, un petit circuit électronique chargé d'effectuer une opération $Nimply$ entre deux bits.
-Le FPU Configuration Unit se sert des portes logiques $Nimply$ pour pouvoir déduire la valeur des bits d'opérandes d'une porte en fonction du bit de résultat qu'elle génère.
+Le FPU Configuration Unit se sert des portes logiques $Nimply$ pour pouvoir déduire la valeur des bits d'opérandes d'une porte, en fonction du bit de résultat qu'elle génère.
 C'est exactement ce que nous avons fait dans le chapitre précédent, nous déduisons que du moment où $\left(\tau_i = 1\right)$ alors $\left(E_{\beta i} = 1\right)$ tandis que $\left(E_{\alpha i} = 0\right)$.
 Cependant, les choses se corsent à partir du moment où une opération $Nimply$ génère un bit de résultat à $0$, ce que la documentation dédié au circuit appelle un _zéro anonyme_.
 
@@ -606,7 +606,7 @@ Par conséquent, un bit de résultat à $0$ ne permet pas de déduire la valeur 
 Plus bas, nous allons voir que les _zéros anonymes_ sont la raison pour laquelle le chapitre précédent conclu de la sorte.
 Je précise que dans les faits il existe des _zéros anonymes capitaux_ et _non capitaux_, dissociation importante que nous allons expliqués ci-dessous.
 
-Pour finir, la section "_Les points terminaux et non terminaux_" évoque le fait que le traitement des champs d'exposant ainsi que des champs de mantisse tronquée soit identique ou presque.
+Pour finir, la section "_Les points terminaux et non terminaux_" évoque le fait que le traitement des champs d'exposant ainsi que des champs de mantisse tronquée soit identique, ou presque.
 Nous comprenons d'ores et déjà que le traitement des champs d'exposant passe par l'application d'opération logique $Nimply$ sur les bits des champs $E_{\alpha}$ et $E_{\beta}$.
 Ce qui engendre quelques subtilités qu'il faut expliqué, comme celle des _zéros anonymes capitaux_ et _non capitaux_.
 Sachez que le traitement des champs de mantisse tronquée utilise aussi des opérations logiques $Nimply$.
@@ -631,10 +631,10 @@ Du moment où le poids $i$ du _MSB1_ est compris dans l'intervalle $\left[11;14\
 En conséquence, lorsque $\left(\tau_{\left(i - 1\right)} = 0\right)$ il est possible d'en déduire que le bit est un _zéro anonyme non capital_, et de fait que les valeurs des bits d'opérandes $E_{\alpha \left(i - 1\right)}$ ainsi que $E_{\beta \left(i - 1\right)}$ ne sont pas déductible, nous savons seulement que $\left(E_{\alpha \left(i - 1\right)} \ge E_{\beta \left(i - 1\right)}\right)$.
 
 En reprenant l'inéquation $\left(E_{\beta i} \times 2^i\right) \gt \left(\left(E_{\alpha i} \times 2^i\right) + \sum_{\sigma = i - 1}^{10} \left(E_{\alpha\sigma} \times 2^{\sigma}\right)\right)$, nous remarquons que $\left(E_{\beta i} \times 2^i\right)$ est supérieur à la somme des valeurs des bits de poids $\sigma$ du champs d'exposant $E_{\alpha}$, nonobstant la valeur de ces bits dont celle de $\left(E_{\alpha \left(i - 1\right)} \times 2^{\left(i - 1\right)}\right)$.
-Autrement dit, peu importe que les bits de poids $\sigma$ du champs d'exposant $E_{\alpha}$ soient définis à $0$ ou à $1$ (ce qui concerne $E_{\alpha \left(i - 1\right)}$), car nous trouverons toujours que $\left(E_{\beta i} \times 2^i\right) \gt \sum_{\sigma = i - 1}^{10} \left(E_{\alpha\sigma} \times 2^{\sigma}\right)$.
+Autrement dit, ce n'est pas important que les bits de poids $\sigma$ du champs d'exposant $E_{\alpha}$ soient définis à $0$ ou à $1$ (ce qui concerne le bit $E_{\alpha \left(i - 1\right)}$ entre autre), car nous trouverons toujours que $\left(E_{\beta i} \times 2^i\right) \gt \sum_{\sigma = i - 1}^{10} \left(E_{\alpha\sigma} \times 2^{\sigma}\right)$.
 
 Pour resumer, un _zéro anonyme non capital_ dans $\tau_{\sigma}$ pour tout poids $\sigma \in \left[10;i\right[$, ne permet pas de déduire la valeur des bits d'opérandes $E_{\alpha\sigma}$ ainsi que $E_{\beta\sigma}$.
-Cependant, pour pouvoir générer un état de point terminal, le circuit n'a pas besoin de prendre en compte les bits de poids $\tau_{\sigma}$ car il est déductible que le champs d'exposant $E_{\beta}$ est supérieur à $E_{\alpha}$ du bit de poids $i$, le poids du _MSB1_ de $\tau \in \left[10;14\right]$, jusqu'au bit de poids $10$.
+Néanmoins, la génération d'un état de point terminal ne requiert pas que le circuit prenne en charge les bits de poids $\tau_{\sigma}$, car il déductible que le champs d'exposant $E_{\beta}$ est supérieur au champs d'exposant $E_{\alpha}$, du bit de poids $i$ jusqu'au bit de poids $10$.
 Voici en quelque sorte l'étymologie du terme "_zéro anonyme non capital_".
 
 ### Les zéros anonymes capitaux dus au traitement des champs d'exposant
@@ -735,11 +735,60 @@ Sachez qu'il n'y a pas grand chose qui change entre les _zéros anonymes capitau
 C'est pourquoi nous allons nous concentrés sur ce qui change et moins sur le reste.
 En cas de trou de mémoire, je vous invite à relire les sections qui expliquent en détails ce que sont les _zéros anonymes capitaux_ et _non capitaux_ dus au traitement des champs d'exposant, ainsi que l'impacte qu'ils ont sur une phase de traitement.
 
-### Les zéros anonymes capitaux dus au traitement des champs de mantisse tronquée
-
-// faire un résumer de ce qu'il y a de nouveau dans le traitement des champs de mantissse tronquée
-
 ### Les zéros anonymes non capitaux dus au traitement des champs de mantisse tronquée
+
+
+Nous avons vu dans la section "_Définition de quelques opérations fondamentales à la démonstration_", que l'opération logique $Nimply$ génère un bit de résultat à $1$ sous réserve que le bit sur son paramètre $x$ vaille $1$, et que celui sur $y$ vaille $0$.
+Autrement, l'opération renvoie un bit de résultat à $0$.
+
+Sachez qu'il est possible de décliné l'opération logique $Nimply$ en une porte logique, un petit circuit électronique chargé d'effectuer une opération $Nimply$ entre deux bits.
+Le FPU Configuration Unit se sert des portes logiques $Nimply$ pour pouvoir déduire la valeur des bits d'opérandes d'une porte, en fonction du bit de résultat qu'elle génère.
+C'est exactement ce que nous avons fait dans le chapitre précédent, nous déduisons que du moment où $\left(\tau_i = 1\right)$ alors $\left(E_{\beta i} = 1\right)$ tandis que $\left(E_{\alpha i} = 0\right)$.
+Cependant, les choses se corsent à partir du moment où une opération $Nimply$ génère un bit de résultat à $0$, ce que la documentation dédié au circuit appelle un _zéro anonyme_.
+
+La raison est simple, pour une opération $Nimply$ il n'y a qu'une seule manière de définir un bit de résultat à $1$, mais plusieurs pour un bit de résultat à $0$.
+Concrètement, une opération logique $Nimply$ génère un bit de résultat à $0$ lorsque:
+  - Ces deux bits d'opérandes $\left(x, \ y\right)$ sont égaux.
+  - Le bit sur le paramètre $x$ vaut $0$ pendant que celui sur $y$ vaut $1$.
+
+Par conséquent, un bit de résultat à $0$ ne permet pas de déduire la valeur des bits d'opérandes (qui est comme anonyme), d'où le nom de _zéro anonyme_.
+Plus bas, nous allons voir que les _zéros anonymes_ sont la raison pour laquelle le chapitre précédent conclu de la sorte.
+Je précise que dans les faits il existe des _zéros anonymes capitaux_ et _non capitaux_, dissociation importante que nous allons expliqués ci-dessous.
+
+Pour finir, la section "_Les points terminaux et non terminaux_" évoque le fait que le traitement des champs d'exposant ainsi que des champs de mantisse tronquée soit identique, ou presque.
+Nous comprenons d'ores et déjà que le traitement des champs d'exposant passe par l'application d'opération logique $Nimply$ sur les bits des champs $E_{\alpha}$ et $E_{\beta}$.
+Ce qui engendre quelques subtilités qu'il faut expliqué, comme celle des _zéros anonymes capitaux_ et _non capitaux_.
+Sachez que le traitement des champs de mantisse tronquée utilise aussi des opérations logiques $Nimply$.
+Par conséquent, nous recontextualiserons en temps voulu les concepts de _zéros anonymes capitaux_ et _non capitaux_ aux cas des champs de mantisse tronquée.
+Mais pour l'instant, concentrons sur le cas des champs d'exposant.
+
+### Les zéros anonymes non capitaux dus au traitement des champs d'exposant
+
+// faire le tri
+
+Les _zéros anonymes capitaux_ et _non capitaux_ sont dus aux même raisons, le chapitre précédent explique très bien cela.
+Ce que le chapitre n'explique pas, c'est que les _zéros anonymes non capitaux_ n'ont aucune importance pour le traitement des champs d'exposant $E_{\alpha}$ et $E_{\beta}$, au contraire des _zéros anonymes capitaux_.
+Nous verrons plus tard que cela ne se limite pas au traitement des champs d'exposant, mais s'étend aussi au traitement des champs de mantisse tronquée.
+
+Après cette rapide introduction, reprenons là où nous nous étions arrêté dans le chapitre "_Le traitement des champs d'exposant_".
+Admettons qu'il y ait un _MSB1_ dans $\tau \in \left[10;14\right]$ et que ce dernier ait un poids $i \in \left[11;14\right]$, alors nous en déduisons que $\left(E_{\beta i} = 1\right)$ tandis que $\left(E_{\alpha i} = 0\right)$ pour $\left(\tau_i = 1\right)$.
+En outre, comme l'explique ledit chapitre, nous en déduisons que $\left(E_{\beta i} \times 2^i\right) \gt \sum_i^{10} \left(E_{\alpha i} \times 2^i\right)$.
+Rappelons que cette inéquation fonctionne car la valeur de n'importe quel bit à $1$ de poids $i$ dans un champs d'exposant comme $E_{\beta}$, est _inconditionnellement_ supérieur à la somme des valeurs des bits de poids inférieur à $i$. 
+Cela se remarque plus avec la formulation suivante de cette même inéquation $\left(E_{\beta i} \times 2^i\right) \gt \left(\left(E_{\alpha i} \times 2^i\right) + \sum_{\sigma = i - 1}^{10} \left(E_{\alpha\sigma} \times 2^{\sigma}\right)\right)$, toujours dans le cas où $\left(\tau_i = 1\right)$ rappelons-le.
+
+Définissons désormais ce qu'est un _zéro anonyme non capital_.
+Par le prisme du traitement des champs d'exposant, un _zéro anonyme non capital_ est un bit à $0$ dans $\tau$ qui est d'un poids $\sigma \in \left[10;i\right[$.
+Du moment où le poids $i$ du _MSB1_ est compris dans l'intervalle $\left[11;14\right]$, alors nous pouvons être certain que dans $\tau \in \left[10;14\right]$ il existe au moins un bit $\tau_{\left(i - 1\right)}$, qu'il soit à $0$ ou à $1$.
+En conséquence, lorsque $\left(\tau_{\left(i - 1\right)} = 0\right)$ il est possible d'en déduire que le bit est un _zéro anonyme non capital_, et de fait que les valeurs des bits d'opérandes $E_{\alpha \left(i - 1\right)}$ ainsi que $E_{\beta \left(i - 1\right)}$ ne sont pas déductible, nous savons seulement que $\left(E_{\alpha \left(i - 1\right)} \ge E_{\beta \left(i - 1\right)}\right)$.
+
+En reprenant l'inéquation $\left(E_{\beta i} \times 2^i\right) \gt \left(\left(E_{\alpha i} \times 2^i\right) + \sum_{\sigma = i - 1}^{10} \left(E_{\alpha\sigma} \times 2^{\sigma}\right)\right)$, nous remarquons que $\left(E_{\beta i} \times 2^i\right)$ est supérieur à la somme des valeurs des bits de poids $\sigma$ du champs d'exposant $E_{\alpha}$, nonobstant la valeur de ces bits dont celle de $\left(E_{\alpha \left(i - 1\right)} \times 2^{\left(i - 1\right)}\right)$.
+Autrement dit, ce n'est pas important que les bits de poids $\sigma$ du champs d'exposant $E_{\alpha}$ soient définis à $0$ ou à $1$ (ce qui concerne le bit $E_{\alpha \left(i - 1\right)}$ entre autre), car nous trouverons toujours que $\left(E_{\beta i} \times 2^i\right) \gt \sum_{\sigma = i - 1}^{10} \left(E_{\alpha\sigma} \times 2^{\sigma}\right)$.
+
+Pour resumer, un _zéro anonyme non capital_ dans $\tau_{\sigma}$ pour tout poids $\sigma \in \left[10;i\right[$, ne permet pas de déduire la valeur des bits d'opérandes $E_{\alpha\sigma}$ ainsi que $E_{\beta\sigma}$.
+Néanmoins, la génération d'un état de point terminal ne requiert pas que le circuit prenne en charge les bits de poids $\tau_{\sigma}$, car il déductible que le champs d'exposant $E_{\beta}$ est supérieur au champs d'exposant $E_{\alpha}$, du bit de poids $i$ jusqu'au bit de poids $10$.
+Voici en quelque sorte l'étymologie du terme "_zéro anonyme non capital_".
+
+### Les zéros anonymes capitaux dus au traitement des champs de mantisse tronquée
 
 ### Lorsque les zéros anonymes rendent la génération du résultat incertain
 
