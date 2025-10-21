@@ -639,7 +639,8 @@ Voici en quelque sorte l'étymologie du terme "_zéro anonyme non capital_".
 
 ### Les zéros anonymes capitaux dus au traitement des champs d'exposant
 
-La section précédente explique pourquoi les bits de $\tau$ d'un poids inférieur au _MSB1_ de $\tau \in \left[10;14\right]$ ne sont pas pris en compte dans le traitement des champs d'exposant, ce qui concerne entre autre les _zéros anonymes non capitaux_.
+La section précédente explique pourquoi les bits de $\tau$, d'un poids inférieur au _MSB1_ de $\tau \in \left[10;14\right]$, ne sont pas pris en compte dans le traitement des champs d'exposant.
+Ce qui concerne entre autre les _zéros anonymes non capitaux_.
 Voyons désormais ce qu'il en est des bits de $\tau$ qui sont d'un poids supérieur au _MSB1_. 
 
 Reprenons là où nous en étions dans le chapitre "_Le traitement des champs d'exposant_".
