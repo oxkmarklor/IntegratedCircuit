@@ -761,6 +761,22 @@ La section précédente explique pourquoi les _zéros anonymes non capitaux_ ne 
 Voyons désormais ce qu'il en est des _zéros anonymes capitaux_. 
 
 Reprenons là où nous en étions dans le chapitre "_Le traitement des champs de mantisse tronquée_".
+Admettons qu'il y ait un _MSB1_ dans $\tau \in \left[0;9\right]$ et qu'il soit d'un poids $i \in \left[0;8\right]$, alors pour $\left(\tau_i = 1\right)$ ledit chapitre nous permet d'en déduire que $\left(T_{\beta i} \times 2^i\right) \gt \sum_i^0 \left(T_{\alpha i} \times 2^i\right)$.
+En outre, par le biais du traitement des champs de mantisse tronquée, un _zéro anonyme capital_ est un bit à $0$ dans $\tau$ qui est d'un poids $\sigma \in \left]i;9\right]$.
+Donc nous en déduisons que dans $\tau \in \left[0;9\right]$, il existe au moins un bit $\tau_{\left(i + 1\right)}$ qui vaille $0$.
+Le bit $\tau_{\left(i + 1\right)}$ ne peut être défini qu'à $0$ étant donné que $\tau_i$ incarne le _MSB1_ de $\tau \in \left[0;9\right]$, ceci se généralise à l'ensemble des bits $\tau_{\sigma}$.
+En conséquence, n'importe quel bit de poids $\tau_{\sigma}$ est un _zéro anonyme capital_, ce qui insinue que les valeurs des bits d'opérandes $T_{\alpha\sigma}$ ainsi que $T_{\beta\sigma}$ ne sont pas déductible, nous savons seulement que $\left(T_{\alpha\sigma} \ge T_{\beta\sigma}\right)$.
+
+// reprendre ici (relecture et modif)
+
+L'inéquation $\left(T_{\beta i} \times 2^i\right) \gt \sum_i^{10} \left(T_{\alpha i} \times 2^i\right)$ démontre que le champs de mantisse tronquée $T_{\beta}$ est supérieur au champs de mantisse tronquée $T_{\alpha}$, du bit de poids $i$ jusqu'au bit de poids $0$.
+N'oublions pas que cette inéquation fonctionne car la valeur de n'importe quel bit à $1$ de poids $i$ dans un champs de mantisse tronquée comme $T_{\beta}$, est strictement supérieur à la somme des valeurs des bits de poids inférieur à $i$.
+Cependant, il suffit qu'il y ait une occurrence de $\left(T_{\alpha\sigma} \gt T_{\beta\sigma}\right)$ parmis l'ensemble des bits $\tau_{\sigma}$, pour qu'il en soit déduit que $\left(T_{\alpha\sigma} \times 2^{\sigma}\right) \gt \sum_{\sigma}^0 \left(T_{\beta\sigma} \times 2^{\sigma}\right)$.
+En définitif, pour savoir si le champs de mantisse tronquée $T_{\beta}$ est supérieur au champs $T_{\alpha}$ ou non, il nous faut prêter attention à la valeur des bits d'opérandes $T_{\alpha\sigma}$ et $T_{\beta\sigma}$ des _zéros anonymes capitaux_.
+
+//
+
+Reprenons là où nous en étions dans le chapitre "_Le traitement des champs de mantisse tronquée_".
 Admettons que le _MSB1_ de $\tau \in \left[0;9\right]$ ait un poids $i \in \left[0;8\right]$, alors pour $\left(\tau_i = 1\right)$ ledit chapitre nous permet d'en déduire que $\left(T_{\beta i} \times 2^i\right) \gt \sum_i^0 \left(T_{\alpha i} \times 2^i\right)$.
 Par le prisme du traitement des champs de mantisse tronquée, un _zéro anonyme capital_ est un bit à $0$ dans $\tau$ qui est d'un poids $\sigma \in \left]i;9\right]$.
 Donc nous en déduisons que dans $\tau \in \left[0;9\right]$, il existe au moins un bit $\tau_{\left(i + 1\right)}$ qui vaille $0$.
