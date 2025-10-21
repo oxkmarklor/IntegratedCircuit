@@ -757,6 +757,58 @@ C'est pourquoi les _zéros anonymes non capitaux_ ne sont pas utiles pour le tra
 
 ### Les zéros anonymes capitaux dus au traitement des champs de mantisse tronquée
 
+La section précédente explique pourquoi les _zéros anonymes non capitaux_ ne sont pas pris en compte dans le traitement des champs de mantisse tronquée.
+Voyons désormais ce qu'il en est des _zéros anonymes capitaux_. 
+
+Reprenons là où nous en étions dans le chapitre "_Le traitement des champs de mantisse tronquée_".
+Admettons que le _MSB1_ de $\tau \in \left[0;9\right]$ ait un poids $i \in \left[0;8\right]$, alors pour $\left(\tau_i = 1\right)$ ledit chapitre nous permet d'en déduire que $\left(T_{\beta i} \times 2^i\right) \gt \sum_i^0 \left(T_{\alpha i} \times 2^i\right)$.
+Par le prisme du traitement des champs de mantisse tronquée, un _zéro anonyme capital_ est un bit à $0$ dans $\tau$ qui est d'un poids $\sigma \in \left]i;9\right]$.
+Donc nous en déduisons que dans $\tau \in \left[0;9\right]$, il existe au moins un bit $\tau_{\left(i + 1\right)}$ qui vaille $0$.
+Par conséquent, nous comprenons que le bit $\tau_{\left(i + 1\right)}$ est un _zéro anonyme capital_, ce qui rend déductible le fait que $\left(T_{\alpha \left(i + 1\right)} \ge T_{\beta \left(i + 1\right)}\right)$.
+Ceci se généralise à l'ensemble des bits de poids $\tau_{\sigma}$.
+
+//
+
+La section précédente explique pourquoi les bits de $\tau$, d'un poids inférieur au _MSB1_ de $\tau \in \left[10;14\right]$, ne sont pas pris en compte dans le traitement des champs d'exposant.
+Ce qui concerne entre autre les _zéros anonymes non capitaux_.
+Voyons désormais ce qu'il en est des bits de $\tau$ qui sont d'un poids supérieur au _MSB1_. 
+
+Reprenons là où nous en étions dans le chapitre "_Le traitement des champs d'exposant_".
+Admettons que le _MSB1_ de $\tau \in \left[10;14\right]$ ait un poids $i \in \left[10;13\right]$, alors nous savons que $\left(E_{\beta i} = 1\right)$ tandis que $\left(E_{\alpha i} = 0\right)$ pour $\left(\tau_i = 1\right)$.
+En outre, comme l'explique ledit chapitre, nous en déduisons alors que $\left(E_{\beta i} \times 2^i\right) \gt \sum_i^{10} \left(E_{\alpha i} \times 2^i\right)$.
+Cependant, comme cela a été mentionné dans ce même chapitre, ceci ne suffit pas à démontrer que $\left(E_{\alpha} \lt E_{\beta}\right)$.
+
+Définissons désormais ce qu'est un _zéro anonyme capital_.
+Par le prisme du traitement des champs d'exposant, un _zéro anonyme capital_ est un bit à $0$ dans $\tau$ qui est d'un poids $\sigma \in \left]i;14\right]$.
+Du moment où le poids $i$ du _MSB1_ est compris dans l'intervalle $\left[10;13\right]$, alors nous pouvons être certain que dans $\tau \in \left[10;14\right]$ il existe au moins un bit $\tau_{\left(i + 1\right)}$ qui vaille $0$.
+Le bit $\tau_{\left(i + 1\right)}$ ne peut être défini qu'à $0$ étant donné que $\tau_i$ incarne le _MSB1_ de $\tau \in \left[10;14\right]$, ceci se généralise à l'ensemble des bits $\tau_{\sigma}$.
+En conséquence, n'importe quel bit de poids $\tau_{\sigma}$ est un _zéro anonyme capital_, ce qui insinue que les valeurs des bits d'opérandes $E_{\alpha\sigma}$ ainsi que $E_{\beta\sigma}$ ne sont pas déductible, nous savons seulement que $\left(E_{\alpha\sigma} \ge E_{\beta\sigma}\right)$.
+
+Rappelons que l'inéquation $\left(E_{\beta i} \times 2^i\right) \gt \sum_i^{10} \left(E_{\alpha i} \times 2^i\right)$ démontre que le champs d'exposant $E_{\beta}$ est supérieur au champs d'exposant $E_{\alpha}$, du bit de poids $i$ jusqu'au bit de poids $10$.
+N'oublions pas que cette inéquation fonctionne car la valeur de n'importe quel bit à $1$ de poids $i$ dans un champs d'exposant comme $E_{\beta}$, est strictement supérieur à la somme des valeurs des bits de poids inférieur à $i$.
+Mais n'oublions pas non plus qu'il subsite dans $\tau$ des bits de poids $\sigma$ supérieur à $i$, des _zéros anonymes capitaux_, par lesquels nous déduisons que $\left(E_{\alpha\sigma} \ge E_{\beta\sigma}\right)$.
+Il suffit alors qu'il y ait une occurrence de $\left(E_{\alpha\sigma} \gt E_{\beta\sigma}\right)$ pour que nous en déduisions que $\left(E_{\alpha\sigma} \times 2^{\sigma}\right) \gt \sum_{\sigma}^{10} \left(E_{\beta\sigma} \times 2^{\sigma}\right)$, ce qui traduit l'idée que du bit de poids $\sigma$ jusqu'au bit de poids $10$, le champs d'exposant $E_{\alpha}$ soit supérieur au champs d'exposant $E_{\beta}$.
+Finalement, pour savoir si le champs d'exposant $E_{\beta}$ est définitivement supérieur au champs d'exposant $E_{\alpha}$ ou non, il nous faut prêter attention à la valeur des bits d'opérandes $E_{\alpha\sigma}$ et $E_{\beta\sigma}$ des _zéros anonymes capitaux_.
+
+Il y a grosso modo deux possibilités dont la première est la suivante.
+Le circuit atteint l'état de point terminal $\left(E_{\alpha} \lt E_{\beta}\right)$ lorsque $\left(E_{\alpha\sigma} = E_{\beta\sigma}\right)$ pour tout les bits de poids $\sigma \in \left]i;14\right]$.
+Cela insinue que les champs d'exposant $E_{\alpha}$ ainsi que $E_{\beta}$ sont égaux du bit de poids $\left(i + 1\right)$ jusqu'au bit de poids $14$.
+Pour verifier cela, il suffit de calculer la somme $\lambda$ (lambda) de la valeur des bits de poids $\sigma$ des champs d'exposant $E_{\alpha}$ ainsi que $E_{\beta}$, puis de comparer.
+Dans les faits nous trouvons $\left(\lambda_{\alpha} = \lambda_{\beta}\right)$, en sachant que $\lambda_{\alpha} = \sum_{\sigma = i + 1}^{14} \left(E_{\alpha\sigma} \times 2^{\sigma}\right)$ tandis que $\lambda_{\beta} = \sum_{\sigma = i + 1}^{14} \left(E_{\beta\sigma} \times 2^{\sigma}\right)$.
+En outre, n'oublions pas que l'inéquation $\left(E_{\beta i} \times 2^i\right) \gt \sum_i^{10} \left(E_{\alpha i} \times 2^i\right)$ démontre que du bit de poids $i$ jusqu'au bit de poids $10$, le champs d'exposant $E_{\beta}$ est supérieur au champs d'exposant $E_{\alpha}$.
+Nous en déduisons donc que le circuit atteint l'état de point terminal $\left(E_{\alpha} \lt E_{\beta}\right)$, car $\left(\lambda_{\beta} + E_{\beta i} \times 2^i\right) \gt \left(\lambda_{\alpha} + \sum_i^{10} \left(E_{\alpha i} \times 2^i\right)\right)$.
+Enfin, rappelez vous du fait que la condition sur laquelle s'appuie la démonstration mathématique du circuit est $\left(\vert \alpha \vert \gt \vert \beta \vert\right)$, condition qui se solde en échec car $\left(\left(1 + T_{\alpha}\right) \times \ 2^{E_{\alpha}}\right) \lt \left(\left(1 + T_{\beta}\right) \times \ 2^{E_{\beta}}\right)$.
+Tel que l'explique le chapitre "_Les points terminaux et non terminaux_", les expressions que sont $\left(\left(1 + T_{\alpha}\right) \times \ 2^{E_{\alpha}}\right)$ ainsi que $\left(\left(1 + T_{\beta}\right) \times \ 2^{E_{\beta}}\right)$ représentent les valeurs respective de $\vert \ \alpha \ \vert$ et $\vert \ \beta \ \vert$.
+
+Néanmoins, parmis les bits d'opérande $E_{\alpha\sigma}$ et $E_{\beta\sigma}$ des _zéros anonymes capitaux_, pour tout poids $\sigma \in \left]i;14\right]$, il est possible qu'il y ait une (ou plusieurs) occurrence de $\left(E_{\alpha\sigma} \gt E_{\beta\sigma}\right)$.
+Auquel cas, le circuit atteint alors l'état de point terminal $\left(E_{\alpha} \gt E_{\beta}\right)$.
+Pour chacune des occurrences $\left(E_{\alpha\sigma} \times 2^{\sigma}\right) \gt \left(E_{\beta\sigma} \times 2^{\sigma}\right)$ nous en déduisons que $\left(E_{\alpha\sigma} \times 2^{\sigma}\right) \gt \sum_{\sigma}^{10} \left(E_{\beta\sigma} \times 2^{\sigma}\right)$, ce qui traduit l'idée que le champs d'exposant $E_{\alpha}$ soit supérieur au champs d'exposant $E_{\beta}$, du bit de poids $\sigma$ jusqu'au bit de poids $10$.
+Cependant, admettons que $\sigma$ soit compris dans l'intervalle $\left]i;14\right[$, alors nous savons qu'il existe des _zéros anonymes capitaux_ de poids $\sigma '$ dans $\tau$, tel que $\sigma ' \in \left]\sigma;14\right]$.
+En bref, cela veut dire que tout bit $\tau_{\sigma '}$ a pour bit d'opérande $E_{\alpha\sigma '}$ ainsi que $E_{\beta\sigma '}$ dont il est déductible que $\left(E_{\alpha\sigma '} \ge E_{\beta\sigma '}\right)$. 
+Ce qui insinue que la somme $\lambda$ de la valeur des bits de poids $\sigma '$ du champs d'exposant $E_{\alpha}$, est supérieur ou égale à la somme des bits de même poids du champs d'exposant $E_{\beta}$, ou pour le dire autrement $\left(\lambda_{\alpha} \ge \lambda_{\beta}\right)$.
+Par conséquent, le circuit atteint l'état de point terminal $\left(E_{\alpha} \gt E_{\beta}\right)$ car $\left(\lambda_{\alpha} + E_{\alpha\sigma} \times 2^{\sigma}\right) \gt \left(\lambda_{\beta} + \sum_{\sigma}^{10} \left(E_{\beta\sigma} \times 2^{\sigma}\right)\right)$.
+Cette fois-ci, la condition sur laquelle s'appuie la démonstration mathématique du circuit $\left(\vert \alpha \vert \gt \vert \beta \vert\right)$ réussie, car nous trouvons que $\left(\left(1 + T_{\alpha}\right) \times \ 2^{E_{\alpha}}\right) \gt \left(\left(1 + T_{\beta}\right) \times \ 2^{E_{\beta}}\right)$.
+
 ### Lorsque les zéros anonymes rendent la génération du résultat incertain
 
 Prenons désormais le cas dans lequel le poids du _MSB1_ de $\tau$ est $\tau_i$ pour $i \in \left[0;8\right]$.
