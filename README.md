@@ -781,14 +781,10 @@ D'où le fait que la condition se solde en échec.
 
 En revanche, l'évaluation de cette même condition se solde par un succès lorsqu'il y a une (ou plusieurs) occurence de $\left(T_{\alpha\sigma} \gt T_{\beta\sigma}\right)$, pour tout poids $\sigma \in \left]i;9\right]$.
 Par conséquent, pour chacune des occurences de $\left(T_{\alpha\sigma} \times 2^{\sigma}\right) \gt \left(T_{\beta\sigma} \times 2^{\sigma}\right)$ nous en déduisons que $\left(T_{\alpha\sigma} \times 2^{\sigma}\right) \gt \sum_{\sigma}^0 \left(T_{\beta\sigma} \times 2^{\sigma}\right)$. 
-
-
-
-//
-
-Néanmoins, parmis les bits d'opérande $E_{\alpha\sigma}$ et $E_{\beta\sigma}$ des _zéros anonymes capitaux_, pour tout poids $\sigma \in \left]i;14\right]$, il est possible qu'il y ait une (ou plusieurs) occurrence de $\left(E_{\alpha\sigma} \gt E_{\beta\sigma}\right)$.
-Auquel cas, le circuit atteint alors l'état de point terminal $\left(E_{\alpha} \gt E_{\beta}\right)$.
-Pour chacune des occurrences $\left(E_{\alpha\sigma} \times 2^{\sigma}\right) \gt \left(E_{\beta\sigma} \times 2^{\sigma}\right)$ nous en déduisons que $\left(E_{\alpha\sigma} \times 2^{\sigma}\right) \gt \sum_{\sigma}^{10} \left(E_{\beta\sigma} \times 2^{\sigma}\right)$, ce qui traduit l'idée que le champs d'exposant $E_{\alpha}$ soit supérieur au champs d'exposant $E_{\beta}$, du bit de poids $\sigma$ jusqu'au bit de poids $10$.
+Admettons cependant que $\sigma$ soit compris dans l'intervalle $\left]i;9\right[$, alors nous savons qu'il existe des _zéros anonymes capitaux_ de poids $\sigma '$ dans $\tau$, tel que $\sigma ' \in \left]\sigma;9\right]$.
+En bref, nous pouvons déduire de tout bit $\tau_{\sigma '}$ que $\left(T_{\alpha\sigma '} \ge T_{\beta\sigma '}\right)$, ce qui insinue que la somme $\lambda$ de la valeur des bits de poids $\sigma '$ du champs de mantisse tronquée $T_{\alpha}$, est supérieur ou égale à la somme des bits de même poids du champs $T_{\beta}$, ou pour le dire autrement $\left(\lambda_{\alpha} \ge \lambda_{\beta}\right)$.
+Par conséquent, le circuit détermine que $\left(T_{\alpha} \gt T_{\beta}\right)$ parce que $\left(\lambda_{\alpha} + T_{\alpha\sigma} \times 2^{\sigma}\right) \gt \left(\lambda_{\beta} + \sum_{\sigma}^0 \left(T_{\beta\sigma} \times 2^{\sigma}\right)\right)$.
+En conclusion, il se trouve que l'évaluation de la condition se solde par un succès car $\left(\left(1 + T_{\alpha}\right) \times \ 2^{E_{\alpha}}\right) \gt \left(\left(1 + T_{\beta}\right) \times \ 2^{E_{\beta}}\right)$, sans oublier que $\left(E_{\alpha} = E_{\beta}\right)$.
 
 // reprendre ici
 
