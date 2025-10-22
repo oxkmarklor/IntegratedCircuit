@@ -773,28 +773,25 @@ Cela traduit l'idée que pour savoir si un champs de mantisse tronquée est sup�
 
 Rappelons que la condition sur laquelle s'appuie la démonstration mathématique du circuit est $\left(\vert \alpha \vert \gt \vert \beta \vert\right)$.
 
-L'évaluation de cette condition se solde par un succès lorsque $\left(T_{\alpha\sigma} = T_{\beta\sigma}\right)$ pour tout les bits de poids $\sigma \in \left]i;9\right]$.
-La raison à cela est que la somme $\lambda$ des valeurs des bits de poids $\sigma$ des champs de mantisse tronquée $T_{\alpha}$ ainsi que $T_{\beta}$ sont identiques, pour le dire autrement $\left(\lambda_{\alpha} = \lambda_{\beta}\right)$ car $\lambda_{\alpha} = \sum_{\sigma = i + 1}^9 \left(T_{\alpha\sigma} \times 2^{\sigma}\right)$ en sachant que $\lambda_{\beta} = \sum_{\sigma = i + 1}^9 \left(T_{\beta\sigma} \times 2^{\sigma}\right)$.
+L'évaluation de cette condition se solde par un échec lorsque $\left(T_{\alpha\sigma} = T_{\beta\sigma}\right)$ pour tout les bits de poids $\sigma \in \left]i;9\right]$.
+La raison à cela est que les sommes respectives des valeurs des bits de poids $\sigma$ des champs de mantisse tronquée $T_{\alpha}$ ainsi que $T_{\beta}$ sont égales, ou pour le dire autrement $\left(\lambda_{\alpha} = \lambda_{\beta}\right)$ tout en sachant que $\lambda_{\alpha} = \sum_{\sigma = i + 1}^9 \left(T_{\alpha\sigma} \times 2^{\sigma}\right)$ tandis que $\lambda_{\beta} = \sum_{\sigma = i + 1}^9 \left(T_{\beta\sigma} \times 2^{\sigma}\right)$.
+En conséquence, nous déduisons de tout ceci que $\left(T_{\alpha} \lt T_{\beta}\right)$ parce que  $\left(\lambda_{\beta} + T_{\beta i} \times 2^i\right) \gt \left(\lambda_{\alpha} + \sum_i^0 \left(T_{\alpha i} \times 2^i\right)\right)$.
+Sachant que $\left(E_{\alpha} = E_{\beta}\right)$ rappelons le, cela nous permet finalement d'en déduire que $\left(\left(1 + T_{\alpha}\right) \times 2^{E_{\alpha}}\right) \lt \left(\left(1 + T_{\beta}\right) \times 2^{E_{\beta}}\right)$. 
+D'où le fait que la condition se solde en échec.
+
+En revanche, l'évaluation de cette même condition se solde par un succès lorsqu'il y a une (ou plusieurs) occurence de $\left(T_{\alpha\sigma} \gt T_{\beta\sigma}\right)$, pour tout poids $\sigma \in \left]i;9\right]$.
+Par conséquent, pour chacune des occurences de $\left(T_{\alpha\sigma} \times 2^{\sigma}\right) \gt \left(T_{\beta\sigma} \times 2^{\sigma}\right)$ nous en déduisons que $\left(T_{\alpha\sigma} \times 2^{\sigma}\right) \gt \sum_{\sigma}^0 \left(T_{\beta\sigma} \times 2^{\sigma}\right)$. 
+
+
 
 //
-
-Par conséquent, nous en déduisons que $\left(\lambda_{\beta} + T_{\beta i} \times 2^i\right) \gt \left(\lambda_{\alpha} + \sum_i^0 \left(T_{\alpha i} \times 2^i\right)\right)$, en sachant que $\left(\lambda_{\alpha} = \lambda_{\beta}\right)$ car $\lambda_{\alpha} = \sum_{\sigma = i + 1}^9 \left(T_{\alpha\sigma} \times 2^{\sigma}\right)$ tandis que $\lambda_{\beta} = \sum_{\sigma = i + 1}^9 \left(T_{\beta\sigma} \times 2^{\sigma}\right)$.
-
-//
-
-Il y a grosso modo deux possibilités dont la première est la suivante.
-Le circuit atteint l'état de point terminal $\left(E_{\alpha} \lt E_{\beta}\right)$ lorsque $\left(E_{\alpha\sigma} = E_{\beta\sigma}\right)$ pour tout les bits de poids $\sigma \in \left]i;14\right]$.
-Cela insinue que les champs d'exposant $E_{\alpha}$ ainsi que $E_{\beta}$ sont égaux du bit de poids $\left(i + 1\right)$ jusqu'au bit de poids $14$.
-Pour verifier cela, il suffit de calculer la somme $\lambda$ (lambda) de la valeur des bits de poids $\sigma$ des champs d'exposant $E_{\alpha}$ ainsi que $E_{\beta}$, puis de comparer.
-Dans les faits nous trouvons $\left(\lambda_{\alpha} = \lambda_{\beta}\right)$, en sachant que $\lambda_{\alpha} = \sum_{\sigma = i + 1}^{14} \left(E_{\alpha\sigma} \times 2^{\sigma}\right)$ tandis que $\lambda_{\beta} = \sum_{\sigma = i + 1}^{14} \left(E_{\beta\sigma} \times 2^{\sigma}\right)$.
-En outre, n'oublions pas que l'inéquation $\left(E_{\beta i} \times 2^i\right) \gt \sum_i^{10} \left(E_{\alpha i} \times 2^i\right)$ démontre que du bit de poids $i$ jusqu'au bit de poids $10$, le champs d'exposant $E_{\beta}$ est supérieur au champs d'exposant $E_{\alpha}$.
-Nous en déduisons donc que le circuit atteint l'état de point terminal $\left(E_{\alpha} \lt E_{\beta}\right)$, car $\left(\lambda_{\beta} + E_{\beta i} \times 2^i\right) \gt \left(\lambda_{\alpha} + \sum_i^{10} \left(E_{\alpha i} \times 2^i\right)\right)$.
-Enfin, rappelez vous du fait que la condition sur laquelle s'appuie la démonstration mathématique du circuit est $\left(\vert \alpha \vert \gt \vert \beta \vert\right)$, condition qui se solde en échec car $\left(\left(1 + T_{\alpha}\right) \times \ 2^{E_{\alpha}}\right) \lt \left(\left(1 + T_{\beta}\right) \times \ 2^{E_{\beta}}\right)$.
-Tel que l'explique le chapitre "_Les points terminaux et non terminaux_", les expressions que sont $\left(\left(1 + T_{\alpha}\right) \times \ 2^{E_{\alpha}}\right)$ ainsi que $\left(\left(1 + T_{\beta}\right) \times \ 2^{E_{\beta}}\right)$ représentent les valeurs respective de $\vert \ \alpha \ \vert$ et $\vert \ \beta \ \vert$.
 
 Néanmoins, parmis les bits d'opérande $E_{\alpha\sigma}$ et $E_{\beta\sigma}$ des _zéros anonymes capitaux_, pour tout poids $\sigma \in \left]i;14\right]$, il est possible qu'il y ait une (ou plusieurs) occurrence de $\left(E_{\alpha\sigma} \gt E_{\beta\sigma}\right)$.
 Auquel cas, le circuit atteint alors l'état de point terminal $\left(E_{\alpha} \gt E_{\beta}\right)$.
 Pour chacune des occurrences $\left(E_{\alpha\sigma} \times 2^{\sigma}\right) \gt \left(E_{\beta\sigma} \times 2^{\sigma}\right)$ nous en déduisons que $\left(E_{\alpha\sigma} \times 2^{\sigma}\right) \gt \sum_{\sigma}^{10} \left(E_{\beta\sigma} \times 2^{\sigma}\right)$, ce qui traduit l'idée que le champs d'exposant $E_{\alpha}$ soit supérieur au champs d'exposant $E_{\beta}$, du bit de poids $\sigma$ jusqu'au bit de poids $10$.
+
+// reprendre ici
+
 Cependant, admettons que $\sigma$ soit compris dans l'intervalle $\left]i;14\right[$, alors nous savons qu'il existe des _zéros anonymes capitaux_ de poids $\sigma '$ dans $\tau$, tel que $\sigma ' \in \left]\sigma;14\right]$.
 En bref, cela veut dire que tout bit $\tau_{\sigma '}$ a pour bit d'opérande $E_{\alpha\sigma '}$ ainsi que $E_{\beta\sigma '}$ dont il est déductible que $\left(E_{\alpha\sigma '} \ge E_{\beta\sigma '}\right)$. 
 Ce qui insinue que la somme $\lambda$ de la valeur des bits de poids $\sigma '$ du champs d'exposant $E_{\alpha}$, est supérieur ou égale à la somme des bits de même poids du champs d'exposant $E_{\beta}$, ou pour le dire autrement $\left(\lambda_{\alpha} \ge \lambda_{\beta}\right)$.
