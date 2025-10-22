@@ -773,13 +773,12 @@ Cela traduit l'idée que pour savoir si un champs de mantisse tronquée est sup�
 
 Rappelons que la condition sur laquelle s'appuie la démonstration mathématique du circuit est $\left(\vert \alpha \vert \gt \vert \beta \vert\right)$.
 
-// revoir ce paragraphe
-
-L'évaluation de cette condition se solde par un échec lorsque $\left(T_{\alpha\sigma} = T_{\beta\sigma}\right)$ pour tout les bits de poids $\sigma \in \left]i;9\right]$.
-La raison à cela est que les sommes respectives des valeurs des bits de poids $\sigma$ des champs de mantisse tronquée $T_{\alpha}$ ainsi que $T_{\beta}$ sont égales, ou pour le dire autrement $\left(\lambda_{\alpha} = \lambda_{\beta}\right)$ tout en sachant que $\lambda_{\alpha} = \sum_{\sigma = i + 1}^9 \left(T_{\alpha\sigma} \times 2^{\sigma}\right)$ tandis que $\lambda_{\beta} = \sum_{\sigma = i + 1}^9 \left(T_{\beta\sigma} \times 2^{\sigma}\right)$.
-En conséquence, nous déduisons de tout ceci que $\left(T_{\alpha} \lt T_{\beta}\right)$ parce que  $\left(\lambda_{\beta} + T_{\beta i} \times 2^i\right) \gt \left(\lambda_{\alpha} + \sum_i^0 \left(T_{\alpha i} \times 2^i\right)\right)$.
-Sachant que $\left(E_{\alpha} = E_{\beta}\right)$, cela nous permet finalement d'en déduire que $\left(\left(1 + T_{\alpha}\right) \times 2^{E_{\alpha}}\right) \lt \left(\left(1 + T_{\beta}\right) \times 2^{E_{\beta}}\right)$. 
-D'où le fait que la condition se solde en échec.
+L'évaluation de cette condition se solde par un échec lorsque $\left(T_{\alpha\sigma} = T_{\beta\sigma}\right)$, pour tout bit de poids $\sigma \in \left]i;9\right]$.
+Cela est dû au fait que la somme $\lambda$ de la valeur des bits de poids $\sigma$ du champs de mantisse tronquée $T_{\alpha}$, est égale à la somme de la valeur des bits de même poids du champs de mantisse tronquée $T_{\beta}$.
+Pour le dire autrement $\left(\lambda_{\alpha} = \lambda_{\beta}\right)$, en sachant que $\lambda_{\alpha} = \sum_{\sigma = i + 1}^9 \left(T_{\alpha\sigma} \times 2^{\sigma}\right)$ tandis que $\lambda_{\beta} = \sum_{\sigma = i + 1}^9 \left(T_{\beta\sigma} \times 2^{\sigma}\right)$.
+Par conséquent, le circuit détermine que $\left(T_{\alpha} \lt T_{\beta}\right)$ car $\left(\lambda_{\beta} + T_{\beta i} \times 2^i\right) \gt \left(\lambda_{\alpha} + \sum_i^0 \left(T_{\alpha i} \times 2^i\right)\right)$.
+Sachant que $\left(E_{\alpha} = E_{\beta}\right)$, nous en déduisons finalement que $\left(\left(1 + T_{\alpha}\right) \times 2^{E_{\alpha}}\right) \lt \left(\left(1 + T_{\beta}\right) \times 2^{E_{\beta}}\right)$. 
+D'où le fait que l'évaluation de la condition se solde par un échec.
 
 // facto?
 
