@@ -691,8 +691,8 @@ En somme, nous savons donc que $\left(E_{\alpha} \ge E_{\beta}\right)$.
 
 Il s'avère que le circuit passe dans un état de point terminal du moment où $\left(E_{\alpha} \gt E_{\beta}\right)$.
 Nous avons vu un cas similaire dans le chapitre précédent, je vais donc être plus succint.
-Un tel état de point terminal ne peut s'obtenir qu'à condition qu'il y ait une (ou plusieurs) occurence de $\left(E_{\alpha\sigma} \gt E_{\beta\sigma}\right)$, pour tout poids $\sigma \in \left[10;14\right]$.
-Pour chacune des ces occurences nous en déduisons alors que $\left(E_{\alpha\sigma} \times 2^{\sigma}\right) \gt \sum_{\sigma}^{10} \left(E_{\beta\sigma} \times 2^{\sigma}\right)$.
+Un tel état de point terminal ne peut s'obtenir qu'à condition qu'il y ait une (ou plusieurs) occurrence de $\left(E_{\alpha\sigma} \gt E_{\beta\sigma}\right)$, pour tout poids $\sigma \in \left[10;14\right]$.
+Pour chacune des ces occurrences nous en déduisons alors que $\left(E_{\alpha\sigma} \times 2^{\sigma}\right) \gt \sum_{\sigma}^{10} \left(E_{\beta\sigma} \times 2^{\sigma}\right)$.
 Cependant, admettons que $\sigma$ soit compris dans l'intervalle $\left[10;14\right[$, alors nous savons qu'il existe des _zéros anonymes capitaux_ de poids $\sigma '$ dans $\tau$, tel que $\sigma' \in \left]\sigma;14\right]$.
 Cela insinue que la somme $\lambda$ de la valeur des bits de poids $\sigma '$ du champs d'exposant $E_{\alpha}$, est supérieur ou égale à la somme des bits de même poids du champs d'exposant $E_{\beta}$, ou pour le dire autrement $\left(\lambda_{\alpha} \ge \lambda_{\beta}\right)$.
 Par conséquent, le circuit bascule dans un état de point terminal $\left(E_{\alpha} \gt E_{\beta}\right)$ car $\left(\lambda_{\alpha} + E_{\alpha\sigma} \times 2^{\sigma}\right) \gt \left(\lambda_{\beta} + \sum_{\sigma}^{10} \left(E_{\beta\sigma} \times 2^{\sigma}\right)\right)$.
@@ -757,6 +757,8 @@ C'est pourquoi les _zéros anonymes non capitaux_ ne sont pas utiles pour le tra
 
 ### Les zéros anonymes capitaux dus au traitement des champs de mantisse tronquée
 
+// relire
+
 La section précédente explique pourquoi les _zéros anonymes non capitaux_ ne sont pas pris en compte dans le traitement des champs de mantisse tronquée.
 Voyons désormais ce qu'il en est des _zéros anonymes capitaux_. 
 
@@ -796,34 +798,20 @@ En bref, nous en déduisons alors que $\left(T_{\alpha\sigma} \ge T_{\beta\sigma
 Par conséquent, nous savons que l'évaluation de la condition sur laquelle s'appuie la démonstration du circuit échoue lorsque $\left(T_{\alpha\sigma} = T_{\beta\sigma}\right)$, pour tout les bits de poids $\sigma \in \left[0;9\right]$.
 Autrement dit, cela manifeste le fait que $\left(T_{\alpha} = T_{\beta}\right)$.
 Sachant que $\left(E_{\alpha} = E_{\beta}\right)$, nous en déduisons finalement que $\left(\left(1 + T_{\alpha}\right) \times 2^{E_{\alpha}}\right) = \left(\left(1 + T_{\beta}\right) \times 2^{E_{\beta}}\right)$.
-D'où le fait que l'évaluation de ladite condition se solde par un échec.
+D'où le fait que l'évaluation de la condition échoue.
 
-
-
-//
-
-
-
-Cependant, le circuit passe dans un état de point non terminal du moment où $\left(E_{\alpha} = E_{\beta}\right)$.
-Cet état de point non terminal ne peut s'obtenir que dans le cas où l'ensemble des bits de même poids des champs d'exposant $E_{\alpha}$ et $E_{\beta}$ sont identiques, ou autrement dit lorsque $\left(E_{\alpha\sigma} = E_{\beta\sigma}\right)$ pour tout les bits de poids $\sigma \in \left[10;14\right]$.
-Concrètement, cela veut dire que par le seul traitement des champs d'exposant de ses opérandes, le circuit FPU Configuration Unit n'est pas en capacité d'anticipé le résultat de la condition sur laquelle s'appuie la démonstration mathématique $\left(\vert \alpha \vert \gt \vert \beta \vert\right)$.
-Rappelons que cette condition ressemble plus formellement à $\left(\left(1 + T_{\alpha}\right) \times \ 2^{E_{\alpha}}\right) \gt \left(\left(1 + T_{\beta}\right) \times \ 2^{E_{\beta}}\right)$, et remarquons que l'évaluation de la condition ne dépend pas des champs d'exposant $E$ lorsque $\left(E_{\alpha} = E_{\beta}\right)$, mais uniquement des champs de mantisse tronquée $T$.
-C'est pourquoi le circuit traite les champs de mantisse tronquée lorsqu'il atteint un état de point non terminal.
-
-Il s'avère que le circuit passe dans un état de point terminal du moment où $\left(E_{\alpha} \gt E_{\beta}\right)$.
-Nous avons vu un cas similaire dans le chapitre précédent, je vais donc être plus succint.
-Un tel état de point terminal ne peut s'obtenir qu'à condition qu'il y ait une (ou plusieurs) occurence de $\left(E_{\alpha\sigma} \gt E_{\beta\sigma}\right)$, pour tout poids $\sigma \in \left[10;14\right]$.
-Pour chacune des ces occurences nous en déduisons alors que $\left(E_{\alpha\sigma} \times 2^{\sigma}\right) \gt \sum_{\sigma}^{10} \left(E_{\beta\sigma} \times 2^{\sigma}\right)$.
-Cependant, admettons que $\sigma$ soit compris dans l'intervalle $\left[10;14\right[$, alors nous savons qu'il existe des _zéros anonymes capitaux_ de poids $\sigma '$ dans $\tau$, tel que $\sigma' \in \left]\sigma;14\right]$.
-Cela insinue que la somme $\lambda$ de la valeur des bits de poids $\sigma '$ du champs d'exposant $E_{\alpha}$, est supérieur ou égale à la somme des bits de même poids du champs d'exposant $E_{\beta}$, ou pour le dire autrement $\left(\lambda_{\alpha} \ge \lambda_{\beta}\right)$.
-Par conséquent, le circuit bascule dans un état de point terminal $\left(E_{\alpha} \gt E_{\beta}\right)$ car $\left(\lambda_{\alpha} + E_{\alpha\sigma} \times 2^{\sigma}\right) \gt \left(\lambda_{\beta} + \sum_{\sigma}^{10} \left(E_{\beta\sigma} \times 2^{\sigma}\right)\right)$.
-L'une des conséquences à cela est que la condition sur laquelle s'appuie la démonstration mathématique du circuit $\left(\vert \alpha \vert \gt \vert \beta \vert\right)$ réussie, parce que $\left(\left(1 + T_{\alpha}\right) \times \ 2^{E_{\alpha}}\right) \gt \left(\left(1 + T_{\beta}\right) \times \ 2^{E_{\beta}}\right)$.
-
-
-
-
+Finalement, l'évaluation de ladite condition se solde par un succès lorsqu'il y a une (ou plusieurs) occurrence de $\left(T_{\alpha\sigma} \gt T_{\beta\sigma}\right)$, pour tout poids $\sigma \in \left[0;9\right]$.
+Pour chacune des ces occurrences nous en déduisons alors que $\left(E_{\alpha\sigma} \times 2^{\sigma}\right) \gt \sum_{\sigma}^0 \left(E_{\beta\sigma} \times 2^{\sigma}\right)$.
+Cependant, admettons que $\sigma$ soit compris dans l'intervalle $\left[0;9\right[$, alors nous savons qu'il existe des _zéros anonymes capitaux_ de poids $\sigma '$ dans $\tau$, tel que $\sigma ' \in \left]\sigma;9\right]$.
+En bref, cela veut dire que $\left(T_{\alpha\sigma '} \ge T_{\beta\sigma '}\right)$ pour tout bit $\tau_{\sigma '}$.
+Ce qui insinue que la somme $\lambda$ de la valeur des bits de poids $\sigma '$ du champs de mantisse tronquée $T_{\alpha}$, est supérieur ou égale à la somme des bits de même poids du champs de mantisse tronquée $T_{\beta}$, ou pour le dire autrement $\left(\lambda_{\alpha} \ge \lambda_{\beta}\right)$.
+Par conséquent, le circuit détermine que $\left(T_{\alpha} \gt T_{\beta}\right)$ car $\left(\lambda_{\alpha} + T_{\alpha\sigma} \times 2^{\sigma}\right) \gt \left(\lambda_{\beta} + \sum_{\sigma}^0 \left(T_{\beta\sigma} \times 2^{\sigma}\right)\right)$.
+Sachant que $\left(E_{\alpha} = E_{\beta}\right)$, nous en déduisons finalement que $\left(\left(1 + T_{\alpha}\right) \times 2^{E_{\alpha}}\right) \gt \left(\left(1 + T_{\beta}\right) \times 2^{E_{\beta}}\right)$.
+D'où le fait que l'évaluation de ladite condition se solde par un succès.
 
 ### Lorsque les zéros anonymes rendent la génération du résultat incertain
+
+// relire puis delete
 
 Prenons désormais le cas dans lequel le poids du _MSB1_ de $\tau$ est $\tau_i$ pour $i \in \left[0;8\right]$.
 Dans cette situation, nous sommes certains qu'il y a _au moins_ le bit $\tau_{\left(i+1\right)}$ qui est d'un poids supérieur à $\tau_i$.
