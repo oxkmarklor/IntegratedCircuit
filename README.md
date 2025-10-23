@@ -780,8 +780,6 @@ Par conséquent, le circuit détermine que $\left(T_{\alpha} \lt T_{\beta}\right
 Sachant que $\left(E_{\alpha} = E_{\beta}\right)$, nous en déduisons finalement que $\left(\left(1 + T_{\alpha}\right) \times 2^{E_{\alpha}}\right) \lt \left(\left(1 + T_{\beta}\right) \times 2^{E_{\beta}}\right)$. 
 D'où le fait que l'évaluation de la condition se solde par un échec.
 
-// facto?
-
 En revanche, l'évaluation de cette même condition se solde par un succès lorsqu'il y a une (ou plusieurs) occurence de $\left(T_{\alpha\sigma} \gt T_{\beta\sigma}\right)$, pour tout poids $\sigma \in \left]i;9\right]$.
 Il s'avère que pour chaque occurence de $\left(T_{\alpha\sigma} \times 2^{\sigma}\right) \gt \left(T_{\beta\sigma} \times 2^{\sigma}\right)$ nous en déduisons que $\left(T_{\alpha\sigma} \times 2^{\sigma}\right) \gt \sum_{\sigma}^0 \left(T_{\beta\sigma} \times 2^{\sigma}\right)$. 
 Cependant, admettons que $\sigma$ soit compris dans l'intervalle $\left]i;9\right[$, alors nous savons qu'il existe des _zéros anonymes capitaux_ de poids $\sigma '$ dans $\tau$, tel que $\sigma ' \in \left]\sigma;9\right]$.
