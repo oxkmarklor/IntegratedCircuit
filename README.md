@@ -757,8 +757,6 @@ C'est pourquoi les _zéros anonymes non capitaux_ ne sont pas utiles pour le tra
 
 ### Les zéros anonymes capitaux dus au traitement des champs de mantisse tronquée
 
-// relire
-
 La section précédente explique pourquoi les _zéros anonymes non capitaux_ ne sont pas pris en compte dans le traitement des champs de mantisse tronquée.
 Voyons désormais ce qu'il en est des _zéros anonymes capitaux_. 
 
@@ -771,7 +769,7 @@ Ceci se généralise à l'ensemble des bits $\tau_{\sigma}$, desquels nous dédu
 
 Il s'avère que l'inéquation $\left(T_{\beta i} \times 2^i\right) \gt \sum_i^0 \left(T_{\alpha i} \times 2^i\right)$ démontre que le champs de mantisse tronquée $T_{\beta}$ est supérieur au champs de mantisse tronquée $T_{\alpha}$, du bit de poids $i$ jusqu'au bit de poids $0$.
 Cependant, il suffit qu'il y ait une occurrence de $\tau_{\sigma}$ due au fait que $\left(T_{\alpha\sigma} \gt T_{\beta\sigma}\right)$, pour qu'il en soit déduit que $\left(T_{\alpha\sigma} \times 2^{\sigma}\right) \gt \sum_{\sigma}^0 \left(T_{\beta\sigma} \times 2^{\sigma}\right)$.
-Cela nous fait comprendre que pour savoir si le champs de mantisse tronquée $T_{\beta}$ est supérieur au champs de mantisse tronquée $T_{\alpha}$, il nous faut prêter attention à la valeur des bits d'opérandes $T_{\alpha\sigma}$ et $T_{\beta\sigma}$ de l'ensemble des _zéros anonymes capitaux_.
+Par conséquent, pour savoir si le champs de mantisse tronquée $T_{\beta}$ est supérieur au champs de mantisse tronquée $T_{\alpha}$, il nous faut prêter attention à la valeur des bits d'opérandes $T_{\alpha\sigma}$ et $T_{\beta\sigma}$ de l'ensemble des _zéros anonymes capitaux_.
 
 Rappelons que la condition sur laquelle s'appuie la démonstration mathématique du circuit est $\left(\vert \alpha \vert \gt \vert \beta \vert\right)$.
 
@@ -789,25 +787,26 @@ En bref, cela veut dire que $\left(T_{\alpha\sigma '} \ge T_{\beta\sigma '}\righ
 Ce qui insinue que la somme $\lambda$ de la valeur des bits de poids $\sigma '$ du champs de mantisse tronquée $T_{\alpha}$, est supérieur ou égale à la somme des bits de même poids du champs de mantisse tronquée $T_{\beta}$, ou pour le dire autrement $\left(\lambda_{\alpha} \ge \lambda_{\beta}\right)$.
 Par conséquent, le circuit détermine que $\left(T_{\alpha} \gt T_{\beta}\right)$ car $\left(\lambda_{\alpha} + T_{\alpha\sigma} \times 2^{\sigma}\right) \gt \left(\lambda_{\beta} + \sum_{\sigma}^0 \left(T_{\beta\sigma} \times 2^{\sigma}\right)\right)$.
 Sachant que $\left(E_{\alpha} = E_{\beta}\right)$, nous en déduisons finalement que $\left(\left(1 + T_{\alpha}\right) \times 2^{E_{\alpha}}\right) \gt \left(\left(1 + T_{\beta}\right) \times 2^{E_{\beta}}\right)$.
-D'où le fait que l'évaluation de la condition se solde par un succès.
+Voici pourquoi l'évaluation de la condition se solde par un succès.
 
 Précédemment, nous partions du principe qu'il y avait un _MSB1_ dans $\tau \in \left[0;9\right]$, mais il est possible qu'il n'y en ait pas.
-Par essence, une telle situation veut que chaque bit de $\tau \in \left[0;9\right]$ soit un _zéro anonyme capital_, comme si ces bits étaient d'un poids supérieur au _MSB1_ malgré le fait que ce dernier n'existe pas.
+Par essence, une telle situation veut que chaque bit de $\tau \in \left[0;9\right]$ soit un _zéro anonyme capital_, car ces bits sont inévitablement à $0$ et qu'ils ne peuvent pas être d'un poids inférieur à un _MSB1_, étant donné qu'il n'en n'existe pas.
 En bref, nous en déduisons alors que $\left(T_{\alpha\sigma} \ge T_{\beta\sigma}\right)$ pour tout poids $\sigma \in \left[0;9\right]$, ce qui veut intrinséquement dire que $\left(T_{\alpha} \ge T_{\beta}\right)$.
 
 Par conséquent, nous savons que l'évaluation de la condition sur laquelle s'appuie la démonstration du circuit échoue lorsque $\left(T_{\alpha\sigma} = T_{\beta\sigma}\right)$, pour tout les bits de poids $\sigma \in \left[0;9\right]$.
-Autrement dit, cela manifeste le fait que $\left(T_{\alpha} = T_{\beta}\right)$.
-Sachant que $\left(E_{\alpha} = E_{\beta}\right)$, nous en déduisons finalement que $\left(\left(1 + T_{\alpha}\right) \times 2^{E_{\alpha}}\right) = \left(\left(1 + T_{\beta}\right) \times 2^{E_{\beta}}\right)$.
+Dès lors, nous en déduisons que les champs de mantisse tronquée sont égaux $\left(T_{\alpha} = T_{\beta}\right)$.
+Sachant que $\left(E_{\alpha} = E_{\beta}\right)$, nous en tirons finalement comme conséquence que $\left(\left(1 + T_{\alpha}\right) \times 2^{E_{\alpha}}\right) = \left(\left(1 + T_{\beta}\right) \times 2^{E_{\beta}}\right)$.
 D'où le fait que l'évaluation de la condition échoue.
 
-Finalement, l'évaluation de ladite condition se solde par un succès lorsqu'il y a une (ou plusieurs) occurrence de $\left(T_{\alpha\sigma} \gt T_{\beta\sigma}\right)$, pour tout poids $\sigma \in \left[0;9\right]$.
-Pour chacune des ces occurrences nous en déduisons alors que $\left(E_{\alpha\sigma} \times 2^{\sigma}\right) \gt \sum_{\sigma}^0 \left(E_{\beta\sigma} \times 2^{\sigma}\right)$.
+Finalement, l'évaluation de cette même condition se solde par un succès lorsqu'il y a une (ou plusieurs) occurence de $\left(T_{\alpha\sigma} \gt T_{\beta\sigma}\right)$, pour tout poids $\sigma \in \left[0;9\right]$.
+Il s'avère que pour chaque occurence de $\left(T_{\alpha\sigma} \times 2^{\sigma}\right) \gt \left(T_{\beta\sigma} \times 2^{\sigma}\right)$ nous en déduisons que $\left(T_{\alpha\sigma} \times 2^{\sigma}\right) \gt \sum_{\sigma}^0 \left(T_{\beta\sigma} \times 2^{\sigma}\right)$. 
 Cependant, admettons que $\sigma$ soit compris dans l'intervalle $\left[0;9\right[$, alors nous savons qu'il existe des _zéros anonymes capitaux_ de poids $\sigma '$ dans $\tau$, tel que $\sigma ' \in \left]\sigma;9\right]$.
 En bref, cela veut dire que $\left(T_{\alpha\sigma '} \ge T_{\beta\sigma '}\right)$ pour tout bit $\tau_{\sigma '}$.
 Ce qui insinue que la somme $\lambda$ de la valeur des bits de poids $\sigma '$ du champs de mantisse tronquée $T_{\alpha}$, est supérieur ou égale à la somme des bits de même poids du champs de mantisse tronquée $T_{\beta}$, ou pour le dire autrement $\left(\lambda_{\alpha} \ge \lambda_{\beta}\right)$.
 Par conséquent, le circuit détermine que $\left(T_{\alpha} \gt T_{\beta}\right)$ car $\left(\lambda_{\alpha} + T_{\alpha\sigma} \times 2^{\sigma}\right) \gt \left(\lambda_{\beta} + \sum_{\sigma}^0 \left(T_{\beta\sigma} \times 2^{\sigma}\right)\right)$.
 Sachant que $\left(E_{\alpha} = E_{\beta}\right)$, nous en déduisons finalement que $\left(\left(1 + T_{\alpha}\right) \times 2^{E_{\alpha}}\right) \gt \left(\left(1 + T_{\beta}\right) \times 2^{E_{\beta}}\right)$.
-D'où le fait que l'évaluation de ladite condition se solde par un succès.
+En somme, c'est la raison qui fait que l'évaluation de ladite condition se solde par un succès.
+
 
 ### Lorsque les zéros anonymes rendent la génération du résultat incertain
 
