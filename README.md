@@ -743,9 +743,9 @@ En somme, il s'avère que c'est aussi le cas pour le traitement des champs de ma
 Revenons en où nous en étions dans le chapitre "_Le traitement des champs de mantisse tronquée_".
 Admettons qu'il y ait un _MSB1_ dans $\tau \in \left[0;9\right]$ et que ce dernier ait un poids $i \in \left[1;9\right]$, alors pour $\left(\tau_i = 1\right)$ ledit chapitre nous permet d'en déduire que $\left(T_{\beta i} \times 2^i\right) \gt \sum_i^0 \left(T_{\alpha i} \times 2^i\right)$.
 En outre, par le prisme du traitement des champs de mantisse tronquée, un _zéro anonyme non capital_ est un bit à $0$ dans $\tau$ qui est d'un poids $\sigma \in \left[0;i\right[$.
-Nous en déduisons donc que dans $\tau \in \left[0;9\right]$, il existe au moins un bit $\tau_{\left(i - 1\right)}$ qui vaille $0$ ou $1$.
-Il est aisé de comprendre que le bit $\tau_{\left(i - 1\right)}$ incarne un _zéro anonyme non capital_ dans le cas où ce dernier vaut $0$.
-Ce qui se généralise à l'ensemble des bits $\left(\tau_{\sigma} = 0\right)$, desquels nous déduisons alors que $\left(E_{\alpha\sigma} \ge E_{\beta\sigma}\right)$.
+Il s'avère qu'il existe au moins un bit $\tau_{\left(i - 1\right)}$ qui vaille $0$ ou $1$ dans $\tau \in \left[0;9\right]$.
+Nous en concluons alors que le bit $\tau_{\left(i - 1\right)}$ incarne un _zéro anonyme non capital_ dans le cas où ce dernier vaut $0$.
+Ce qui se généralise à l'ensemble des bits $\tau_{\sigma}$, desquels nous déduisons alors que $\left(T_{\alpha\sigma} \ge T_{\beta\sigma}\right)$.
 
 // première version
 
@@ -753,7 +753,13 @@ Par le prisme du traitement des champs de mantisse tronquée, un _zéro anonyme 
 Donc nous en déduisons que dans $\tau \in \left[0;9\right]$, il existe au moins un bit $\tau_{\left(i - 1\right)}$ pouvant être défini à $0$ ou à $1$.
 Par conséquent, nous comprenons que le bit $\tau_{\left(i - 1\right)}$ est un _zéro anonyme non capital_ du moment où il vaut $0$, auquel cas il devient alors déductible que $\left(T_{\alpha \left(i - 1\right)} \ge T_{\beta \left(i - 1\right)}\right)$.
 
-// continuer ici
+// à relire
+
+En fin de compte, nous savons que pour $\left(\tau_i = 1\right)$ alors $\left(T_{\beta i} \times 2^i\right) \gt \sum_i^0 \left(T_{\alpha i} \times 2^i\right)$, mais nous pouvons également exprimé les choses de la manière suivante $\left(T_{\beta i} \times 2^i\right) \gt \left(\left(T_{\alpha i} \times 2^i\right) + \sum_{\sigma = i - 1}^0 \left(T_{\alpha\sigma} \times 2^{\sigma}\right)\right)$.
+Remarquons que $\left(T_{\beta i} \times 2^i\right)$ est supérieur à la somme des valeurs des bits de poids $\sigma$ du champs de mantisse tronquée $T_{\alpha}$, nonobstant la valeur de ces bits.
+Nous savons désormais que le bit d'opérande $T_{\alpha\sigma}$ de tout _zéro anonyme non capital_ de $\tau\sigma$ peut être défini à $0$ comme à $1$, mais cela n'a pas d'importance car nous trouverons toujours que $\left(T_{\beta i} \times 2^i\right) \gt \sum_{\sigma = i - 1}^0 \left(T_{\alpha\sigma} \times 2^{\sigma}\right)$.
+
+// poursuivre
 
 Finalement, dérivons l'inéquation suivante $\left(T_{\beta i} \times 2^i\right) \gt \sum_i^0 \left(T_{\alpha i} \times 2^i\right)$ en ceci $\left(T_{\beta i} \times 2^i\right) \gt \left(\left(T_{\alpha i} \times 2^i\right) + \sum_{\sigma = i - 1}^0 \left(T_{\alpha\sigma} \times 2^{\sigma}\right)\right)$.
 Nous remarquons que $\left(T_{\beta i} \times 2^i\right)$ est supérieur à la somme des valeurs des bits de poids $\sigma$ du champs de mantisse tronquée $T_{\alpha}$, nonobstant la valeur de ces bits dont celle de $\left(T_{\alpha \left(i - 1\right)} \times 2^{\left(i - 1\right)}\right)$.
