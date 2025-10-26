@@ -808,39 +808,6 @@ Par conséquent, le circuit détermine que $\left(T_{\alpha} \gt T_{\beta}\right
 Sachant que $\left(E_{\alpha} = E_{\beta}\right)$, nous en déduisons finalement que $\left(\left(1 + T_{\alpha}\right) \times 2^{E_{\alpha}}\right) \gt \left(\left(1 + T_{\beta}\right) \times 2^{E_{\beta}}\right)$.
 En somme, c'est la raison qui fait que l'évaluation de ladite condition se solde par un succès.
 
-
-### Lorsque les zéros anonymes rendent la génération du résultat incertain
-
-// relire puis delete
-
-Prenons désormais le cas dans lequel le poids du _MSB1_ de $\tau$ est $\tau_i$ pour $i \in \left[0;8\right]$.
-Dans cette situation, nous sommes certains qu'il y a _au moins_ le bit $\tau_{\left(i+1\right)}$ qui est d'un poids supérieur à $\tau_i$.
-Les bits de poids supérieur à $\tau_i$ sont tous des _zéros anonymes capitaux_, nous devons donc y prêté attention.
-
-Calculons la somme $\varphi$ (phi) de la valeur des bits de poids supérieur à $i$ du champs de mantisse tronquée $T_{\alpha}$ avec $\left(\varphi_{\alpha} = \sum_{\sigma=i+1}^9 \ \left(T_{\alpha\sigma} \times 2^{\sigma}\right)\right)$, puis de $T_{\beta}$ avec $\left(\varphi_{\beta} = \sum_{\sigma=i+1}^9 \ \left(T_{\beta\sigma} \times 2^{\sigma}\right)\right)$.
-Nous savons que $\left(\varphi_{\alpha} \ge \varphi_{\beta}\right)$ car les bits dans $\tau$ de poids $\sigma \in \left]i;9\right]$ sont tous des _zéros anonymes capitaux_.
-Ce qui veut dire que toute occurence de $T_{\alpha\sigma}$ est supérieur ou égale à $T_{\beta\sigma}$.
-
-Dans le cas où $\left(\varphi_{\alpha} = \varphi_{\beta}\right)$ alors $\left(T_{\alpha} \lt T_{\beta}\right)$ car $\left(\varphi_{\beta} + T_{\beta i} \times 2^i\right) \gt \left(\varphi_{\alpha} + \sum_i^0 \ \left(T_{\alpha i} \times 2^i\right)\right)$.
-Etant donné que $\left(E_{\alpha} = E_{\beta}\right)$ alors $\left(\left(1+T_{\alpha}\right) \times 2^{E_{\alpha}}\right) \lt \left(\left(1+T_{\beta}\right) \times 2^{E_{\beta}}\right)$, ou autrement dit $\left(\vert\alpha\vert \lt \vert\beta\vert\right)$.
-La vérification de la condition sur laquelle se base la démonstration mathématique du circuit $\left(\vert\alpha\vert \gt \vert\beta\vert\right)$, se solde par un échec.
-
-Il est cependant possible que $\left(\varphi_{\alpha} \gt \varphi_{\beta}\right)$, à l'unique condition qu'il existe au moins une occurence de $\left(T_{\alpha\sigma} \gt T_{\beta\sigma}\right)$ pour $\sigma \in \left]i;9\right]$.
-Pour chacune de ces occurences $\left(T_{\alpha\sigma} \times 2^{\sigma}\right) \gt \sum_{\sigma}^0 \ \left(T_{\beta\sigma} \times 2^{\sigma}\right)$ et donc $\left(T_{\alpha} \gt T_{\beta}\right)$.
-Nous savons que $\left(E_{\alpha} = E_{\beta}\right)$, mais cette fois-ci $\left(\left(1+T_{\alpha}\right) \times 2^{E_{\alpha}}\right) \gt \left(\left(1+T_{\beta}\right) \times 2^{E_{\beta}}\right)$ et la condition sur laquelle repose la démonstration mathématique du circuit $\left(\vert\alpha\vert \gt \vert\beta\vert\right)$ réussie.
-
-Pour finir, il est possible qu'il n'y ait pas de _MSB1_ dans $\tau \in \left[0;9\right]$, tout ces bits sont alors des _zéros anonymes capitaux_.
-Nous pouvons donc affirmé que $\left(T_{\alpha} \ge T_{\beta}\right)$.
-
-Si jamais il existe au moins une occurence de $\left(T_{\alpha i} \gt T_{\beta i}\right)$ pour $i \in \left[0;9\right]$, alors $\left(T_{\alpha} \gt T_{\beta}\right)$.
-Les champs d'exposant $E$ des opérandes $\alpha$ et $\beta$ sont égaux, par conséquent $\left(\left(1+T_{\alpha}\right) \times 2^{E_{\alpha}}\right) \gt \left(\left(1+T_{\beta}\right) \times 2^{E_{\beta}}\right)$.
-La vérification de la condition sur laquelle se base la démonstration mathématique du circuit $\left(\vert\alpha\vert \gt \vert\beta\vert\right)$ réussie.
-
-En outre, $\left(T_{\alpha} = T_{\beta}\right)$ si jamais $\forall \ i \in \left[0;9\right]$ $\left(T_{\alpha i} = T_{\beta i}\right)$.
-Sachant que $\left(E_{\alpha} = E_{\beta}\right)$.
-La valeur de $\vert \ \alpha \ \vert$ vaut $\left(\left(1+T_{\alpha}\right) \times 2^{E_{\alpha}}\right)$ et est égale à $\vert \ \beta \ \vert$ qui vaut $\left(\left(1+T_{\beta}\right) \times 2^{E_{\beta}}\right)$.
-La vérification de la condition sur laquelle se repose la démonstration mathématique du circuit $\left(\vert\alpha\vert \gt \vert\beta\vert\right)$, se solde par un échec.
-
 # Conclusion de la démonstration
 
 Comme nous avons pu le voir dans la première partie de la démonstration "_Le traitement des champs d'exposant_", ainsi que dans la seconde partie "_Le traitement des champs de mantisse tronquée_".
