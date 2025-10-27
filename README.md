@@ -631,6 +631,7 @@ Définissons désormais ce qu'est un _zéro anonyme non capital_.
 Par le prisme du traitement des champs d'exposant, un _zéro anonyme non capital_ est un bit à $0$ dans $\tau$ qui est d'un poids $\sigma \in \left[10;i\right[$.
 Du moment où le poids $i$ du _MSB1_ est compris dans l'intervalle $\left[11;14\right]$, alors nous pouvons être certain que dans $\tau \in \left[10;14\right]$ il existe au moins un bit $\tau_{\left(i - 1\right)}$, qu'il soit à $0$ ou à $1$.
 En conséquence, lorsque $\left(\tau_{\left(i - 1\right)} = 0\right)$ alors nous comprenons que c'est un _zéro anonyme non capital_, et de fait que les valeurs des bits d'opérandes $E_{\alpha \left(i - 1\right)}$ ainsi que $E_{\beta \left(i - 1\right)}$ ne sont pas déductible, nous savons seulement que $\left(E_{\alpha \left(i - 1\right)} \ge E_{\beta \left(i - 1\right)}\right)$.
+Ce qui est intéressant à souligné, c'est le fait que le bit $E_{\alpha \left(i - 1\right)}$ soit libre d'être défini à $0$ comme à $1$.
 
 En reprenant l'inéquation $\left(E_{\beta i} \times 2^i\right) \gt \left(\left(E_{\alpha i} \times 2^i\right) + \sum_{\sigma = i - 1}^{10} \left(E_{\alpha\sigma} \times 2^{\sigma}\right)\right)$, nous remarquons que $\left(E_{\beta i} \times 2^i\right)$ est supérieur à la somme des valeurs des bits de poids $\sigma$ du champs d'exposant $E_{\alpha}$, nonobstant la valeur de ces bits dont celle de $\left(E_{\alpha \left(i - 1\right)} \times 2^{\left(i - 1\right)}\right)$.
 Pour le dire autrement, il n'est pas important de prendre en compte les bits de poids $\sigma$ du champs d'exposant $E_{\alpha}$, car peu importe qu'ils soient à $0$ ou à $1$, nous trouverons toujours que $\left(E_{\beta i} \times 2^i\right) \gt \sum_{\sigma = i - 1}^{10} \left(E_{\alpha\sigma} \times 2^{\sigma}\right)$.
@@ -638,17 +639,7 @@ Pour le dire autrement, il n'est pas important de prendre en compte les bits de 
 Pour resumer, un _zéro anonyme non capital_ de poids $\sigma \in \left[10;i\right[$ ne permet pas de déduire la valeur de ses bits d'opérandes $E_{\alpha\sigma}$ ainsi que $E_{\beta\sigma}$.
 Néanmoins, le circuit n'a pas besoin de prendre en charge les bits d'opérandes des _zéros anonymes non capitaux_ pour pouvoir générer un état de point terminal.
 Ceci est dû au fait qu'il est déductible que le champs d'exposant $E_{\beta}$ est supérieur au champs d'exposant $E_{\alpha}$, du bit de poids $i$ jusqu'au bit de poids $10$.
-Voici en quelque sorte l'étymologie du terme "_zéro anonyme non capital_".
-
-// delete?
-
-Pour resumer, un _zéro anonyme non capital_ de poids $\sigma \in \left[10;i\right[$ ne permet pas de déduire la valeur de ses bits d'opérandes $E_{\alpha\sigma}$ ainsi que $E_{\beta\sigma}$.
-Néanmoins, le circuit n'a pas besoin de prendre en charge les _zéros anonymes non capitaux_, car il est déductible que le champs de mantisse tronquée $T_{\beta}$ est supérieur au champs de mantisse tronquée $T_{\alpha}$, du bit de poids $i$ jusqu'au bit de poids $0$.
-Qu'importe ce que l'ont peut déduire des bits d'opérande des _zéros anonymes capitaux_, cela ne changerait rien à ce qui vient d'être dit.
-
-Pour resumer, un _zéro anonyme non capital_ dans $\tau_{\sigma}$ pour tout poids $\sigma \in \left[10;i\right[$, ne permet pas de déduire la valeur des bits d'opérandes $E_{\alpha\sigma}$ ainsi que $E_{\beta\sigma}$.
-Néanmoins, la génération d'un état de point terminal ne requiert pas que le circuit prenne en charge les bits de poids $\tau_{\sigma}$, car il déductible que le champs d'exposant $E_{\beta}$ est supérieur au champs d'exposant $E_{\alpha}$, du bit de poids $i$ jusqu'au bit de poids $10$.
-Voici en quelque sorte l'étymologie du terme "_zéro anonyme non capital_".
+Voici la raison derrière le fait que ces bits de résultat à $0$ soient définis comme _zéros anonymes non capitaux_.
 
 ### Les zéros anonymes capitaux dus au traitement des champs d'exposant
 
