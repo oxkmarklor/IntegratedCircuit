@@ -1,6 +1,3 @@
-
-
-
 Bonjour,
 
 Ce document est une preuve mathématique d'un circuit électronique du nom de FPU Configuration Unit.
@@ -627,14 +624,13 @@ Cela se remarque plus avec la formulation suivante de cette même inéquation $\
 
 Définissons désormais ce qu'est un _zéro anonyme non capital_.
 Par le prisme du traitement des champs d'exposant, un _zéro anonyme non capital_ est un bit à $0$ dans $\tau$ qui est d'un poids $\sigma \in \left[10;i\right[$.
-Du moment où le poids $i$ du _MSB1_ est compris dans l'intervalle $\left[11;14\right]$, alors nous pouvons être certain que dans $\tau \in \left[10;14\right]$ il existe au moins un bit $\tau_{\left(i - 1\right)}$, qu'il soit à $0$ ou à $1$.
-En conséquence, lorsque $\left(\tau_{\left(i - 1\right)} = 0\right)$ alors nous comprenons que c'est un _zéro anonyme non capital_, et de fait que les valeurs des bits d'opérandes $E_{\alpha \left(i - 1\right)}$ ainsi que $E_{\beta \left(i - 1\right)}$ ne sont pas déductible, nous savons seulement que $\left(E_{\alpha \left(i - 1\right)} \ge E_{\beta \left(i - 1\right)}\right)$.
-Ce qui est intéressant à souligné, c'est le fait que le bit $E_{\alpha \left(i - 1\right)}$ soit libre d'être défini à $0$ comme à $1$.
+Du moment où le poids $i$ du _MSB1_ est compris dans l'intervalle $\left[11;14\right]$, alors nous pouvons être certain que dans $\tau \in \left[10;14\right]$ il existe au moins un bit $\tau_{\left(i - 1\right)}$, qu'il soit défini à $0$ ou à $1$.
+Par conséquent, lorsque $\left(\tau_{\left(i - 1\right)} = 0\right)$ alors nous en déduisons que le bit de résultat est un _zéro anonyme non capital_, et de fait que les valeurs de ses bits d'opérandes $E_{\alpha \left(i - 1\right)}$ ainsi que $E_{\beta \left(i - 1\right)}$ ne sont pas déductible, nous savons seulement que $\left(E_{\alpha \left(i - 1\right)} \ge E_{\beta \left(i - 1\right)}\right)$.
+Il est intéressant de souligné que le bit $E_{\alpha \left(i - 1\right)}$ est donc libre d'être défini à $0$ comme à $1$.
 
-En reprenant l'inéquation $\left(E_{\beta i} \times 2^i\right) \gt \left(\left(E_{\alpha i} \times 2^i\right) + \sum_{\sigma = i - 1}^{10} \left(E_{\alpha\sigma} \times 2^{\sigma}\right)\right)$, nous remarquons que $\left(E_{\beta i} \times 2^i\right)$ est supérieur à la somme des valeurs des bits de poids $\sigma$ du champs d'exposant $E_{\alpha}$, nonobstant la valeur de ces bits dont $\left(E_{\alpha \left(i - 1\right)} \times 2^{\left(i - 1\right)}\right)$.
-Pour le dire autrement, le fait que les bits de poids $\sigma$ du champs d'exposant $E_{\alpha}$ soient définis à $0$ ou à $1$ ne changera rien au fait que $\left(E_{\beta i} \times 2^i\right) \gt \sum_{\sigma = i - 1}^{10} \left(E_{\alpha\sigma} \times 2^{\sigma}\right)$.
-C'est pourquoi le circuit n'a pas besoin de prendre en charge les bits d'opérandes des _zéros anonymes non capitaux_, cela n'apporterait rien de plus que ce que l'ont sait déjà.
-D'où le fait que ces _zéros anonymes_ soient "_non capitaux_".
+En reprenant l'inéquation $\left(E_{\beta i} \times 2^i\right) \gt \left(\left(E_{\alpha i} \times 2^i\right) + \sum_{\sigma = i - 1}^{10} \left(E_{\alpha\sigma} \times 2^{\sigma}\right)\right)$, nous remarquons que $\left(E_{\beta i} \times 2^i\right)$ est supérieur à la somme des valeurs des bits de poids $\sigma$ du champs d'exposant $E_{\alpha}$, nonobstant la valeur de ces bits dont celle de $\left(E_{\alpha \left(i - 1\right)} \times 2^{\left(i - 1\right)}\right)$.
+Autrement dit, que les bits de poids $\sigma$ du champs d'exposant $E_{\alpha}$ soient définis à $0$ ou à $1$, cela ne change rien au fait que $\left(E_{\beta i} \times 2^i\right) \gt \sum_{\sigma = i - 1}^{10} \left(E_{\alpha\sigma} \times 2^{\sigma}\right)$.
+Le circuit n'a donc pas besoin de prendre en charge les _zéros anonymes non capitaux_, car il est déductible que le champs d'exposant $E_{\beta}$ est supérieur au champs d'exposant $E_{\alpha}$, du bit de poids $i$ jusqu'au bit de poids $10$.
 
 ### Les zéros anonymes capitaux dus au traitement des champs d'exposant
 
