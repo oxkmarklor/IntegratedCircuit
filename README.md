@@ -628,6 +628,11 @@ Du moment où le poids $i$ du _MSB1_ est compris dans l'intervalle $\left[11;14\
 Par conséquent, lorsque $\left(\tau_{\left(i - 1\right)} = 0\right)$ alors nous en déduisons que le bit de résultat est un _zéro anonyme non capital_, et de fait que les valeurs de ses bits d'opérandes $E_{\alpha \left(i - 1\right)}$ ainsi que $E_{\beta \left(i - 1\right)}$ ne sont pas déductible, nous savons seulement que $\left(E_{\alpha \left(i - 1\right)} \ge E_{\beta \left(i - 1\right)}\right)$.
 Il est intéressant de souligné que le bit $E_{\alpha \left(i - 1\right)}$ est donc libre d'être défini à $0$ comme à $1$.
 
+Finalement, revenons en à l'inéquation $\left(E_{\beta i} \times 2^i\right) \gt \left(\left(E_{\alpha i} \times 2^i\right) + \sum_{\sigma = i - 1}^{10} \left(E_{\alpha\sigma} \times 2^{\sigma}\right)\right)$, depuis laquelle nous remarquons que $\left(E_{\beta i} \times 2^i\right)$ est supérieur à la somme des valeurs des bits de poids $\sigma \in \left[10;i\right[$ du champs d'exposant $E_{\alpha}$, nonobstant la valeur de chacun de ces bits.
+
+
+//
+
 En reprenant l'inéquation $\left(E_{\beta i} \times 2^i\right) \gt \left(\left(E_{\alpha i} \times 2^i\right) + \sum_{\sigma = i - 1}^{10} \left(E_{\alpha\sigma} \times 2^{\sigma}\right)\right)$, nous remarquons que $\left(E_{\beta i} \times 2^i\right)$ est supérieur à la somme des valeurs des bits de poids $\sigma$ du champs d'exposant $E_{\alpha}$, nonobstant la valeur de chacun de ces bits.
 N'oublions pas que savons que le bit $\left(\tau_{\left(i - 1\right)} = 0\right)$ ce qui nous permet d'en déduire que $\left(E_{\alpha \left(i - 1\right)} \ge E_{\beta \left(i - 1\right)}\right)$.
 Mais cela n'a que peu d'importance étant donné que le bit $E_{\alpha \left(i - 1\right)}$ est d'un poids compris dans l'intervalle $\left[10;i\right[$, desquels nous savons que $\left(E_{\beta i} \times 2^i\right) \gt \sum_{\sigma = i - 1}^{10} \left(E_{\alpha\sigma} \times 2^{\sigma}\right)$.
