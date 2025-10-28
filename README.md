@@ -631,8 +631,8 @@ Ce qui se généralise à l'ensemble des bits de résultat $\left(\tau_{\sigma} 
 Finalement, revenons en à l'inéquation $\left(E_{\beta i} \times 2^i\right) \gt \left(\left(E_{\alpha i} \times 2^i\right) + \sum_{\sigma = i - 1}^{10} \left(E_{\alpha\sigma} \times 2^{\sigma}\right)\right)$. 
 Inéquation depuis laquelle nous remarquons que $\left(E_{\beta i} \times 2^i\right)$ est supérieur à la somme des valeurs des bits de poids $\sigma \in \left[10;i\right[$ du champs d'exposant $E_{\alpha}$, nonobstant la valeur de chacun des bits $E_{\alpha\sigma}$.
 Dit autrement, rappelez vous du fait que $\left(E_{\alpha\sigma} \ge E_{\beta\sigma}\right)$ pour tout bit $\left(\tau_{\sigma} = 0\right)$, ce qui sous-entend que $E_{\alpha\sigma}$ peut être défini à $0$ comme à $1$.
-Néanmoins, les valeurs de ces bits n'ont aucune importance car nous trouverons toujours que $\left(E_{\beta i} \times 2^i\right) \gt \sum_{\sigma = i - 1}^{10} \left(E_{\alpha\sigma} \times 2^{\sigma}\right)$.
-D'où le fait que les _zéros anonymes non capitaux_, ainsi que les autres bits dans $\tau$ qui sont également d'un poids $\sigma \in \left[10;i\right[$, ne soient pas pris en charge par le circuit.
+Néanmoins, la valeur de ces bits n'a aucune importance car nous trouverons toujours que $\left(E_{\beta i} \times 2^i\right) \gt \sum_{\sigma = i - 1}^{10} \left(E_{\alpha\sigma} \times 2^{\sigma}\right)$.
+D'où le fait que le circuit n'ait pas à se soucier des _zéros anonymes non capitaux_, et par corollaire des bits d'opérandes de ces derniers.
 
 ### Les zéros anonymes capitaux dus au traitement des champs d'exposant
 
