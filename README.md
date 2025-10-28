@@ -626,38 +626,22 @@ Définissons désormais ce qu'est un _zéro anonyme non capital_.
 Par le prisme du traitement des champs d'exposant, un _zéro anonyme non capital_ est un bit à $0$ dans $\tau$ qui est d'un poids $\sigma \in \left[10;i\right[$.
 Du moment où le poids $i$ du _MSB1_ est compris dans l'intervalle $\left[11;14\right]$, alors nous pouvons être certain que dans $\tau \in \left[10;14\right]$ il existe au moins un bit $\tau_{\left(i - 1\right)}$, qu'il soit défini à $0$ ou à $1$.
 Par conséquent, lorsque $\left(\tau_{\left(i - 1\right)} = 0\right)$ alors nous en déduisons que le bit de résultat est un _zéro anonyme non capital_, et de fait que les valeurs de ses bits d'opérandes $E_{\alpha \left(i - 1\right)}$ ainsi que $E_{\beta \left(i - 1\right)}$ ne sont pas déductible, nous savons seulement que $\left(E_{\alpha \left(i - 1\right)} \ge E_{\beta \left(i - 1\right)}\right)$.
-Il est intéressant de souligné que le bit $E_{\alpha \left(i - 1\right)}$ est donc libre d'être défini à $0$ comme à $1$.
+Ce qui se généralise à l'ensemble des bits de résultat $\left(\tau_{\sigma} = 0\right)$, desquels nous déduisons alors que $\left(E_{\alpha\sigma} \ge E_{\beta\sigma}\right)$.
 
-Finalement, revenons en à l'inéquation $\left(E_{\beta i} \times 2^i\right) \gt \left(\left(E_{\alpha i} \times 2^i\right) + \sum_{\sigma = i - 1}^{10} \left(E_{\alpha\sigma} \times 2^{\sigma}\right)\right)$ depuis laquelle nous remarquons que $\left(E_{\beta i} \times 2^i\right)$ est supérieur à la somme des valeurs des bits de poids $\sigma \in \left[10;i\right[$ du champs d'exposant $E_{\alpha}$, nonobstant la valeur de chacun de ces bits.
+Finalement, revenons en à l'inéquation $\left(E_{\beta i} \times 2^i\right) \gt \left(\left(E_{\alpha i} \times 2^i\right) + \sum_{\sigma = i - 1}^{10} \left(E_{\alpha\sigma} \times 2^{\sigma}\right)\right)$. 
+Inéquation depuis laquelle nous remarquons que $\left(E_{\beta i} \times 2^i\right)$ est supérieur à la somme des valeurs des bits de poids $\sigma \in \left[10;i\right[$ du champs d'exposant $E_{\alpha}$, nonobstant la valeur de chacun des bits $E_{\alpha\sigma}$.
+
+//
+
+En fin de compte, nous savons que $\left(T_{\beta i} \times 2^i\right) \gt \sum_i^0 \left(T_{\alpha i} \times 2^i\right)$ lorsque $\left(\tau_i = 1\right)$, ce que nous allons exprimé différemment pour des raisons pratique $\left(T_{\beta i} \times 2^i\right) \gt \left(\left(T_{\alpha i} \times 2^i\right) + \sum_{\sigma = i - 1}^0 \left(T_{\alpha\sigma} \times 2^{\sigma}\right)\right)$.
+Remarquons que $\left(T_{\beta i} \times 2^i\right)$ est supérieur à la somme des valeurs des bits de poids $\sigma$ du champs de mantisse tronquée $T_{\alpha}$, nonobstant la valeur de ces bits.
+Pour le dire autrement, rappelez vous du fait que $\left(T_{\alpha\sigma} \ge T_{\beta\sigma}\right)$ pour tout bit $\left(\tau_{\sigma} = 0\right)$, ce qui sous-entend que $T_{\alpha\sigma}$ peut être défini à $0$ comme à $1$.
+Mais cela n'a pas d'importance car nous trouverons toujours que $\left(T_{\beta i} \times 2^i\right) \gt \sum_{\sigma = i - 1}^0 \left(T_{\alpha\sigma} \times 2^{\sigma}\right)$.
+
+//
+
 Tout cela insinue que la valeur du bit $\left(E_{\alpha \left(i - 1\right)} \times 2^{\left(i - 1\right)}\right)$ ne change rien au fait que $\left(E_{\beta i} \times 2^i\right) \gt \sum_{\sigma = i - 1}^{10} \left(E_{\alpha\sigma} \times 2^{\sigma}\right)$.
 Ceci se généralise à l'ensemble des bits de poids inférieur à $i$ du champs d'exposant $E_{\alpha}$, ce qui concerne également les occurrences de $E_{\alpha\sigma}$ dont $\left(\tau_{\sigma} = 0\right)$.
-
-
-//
-
-Mais nous pouvons nous rappelés du fait, tant qu'en déduire, que le bit de résultat $\tau_{\left(i - 1\right)}$ est un _zéro anonyme non capital_.
-
-//
-
-Cela insinue qu'il n'y a aucune importance à ce que le bit $E_{\alpha \left(i - 1\right)}$ soit défini à $0$ ou à $1$, car nous trouverons toujours que $\left(E_{\beta i} \times 2^i\right) \gt \sum_{\sigma = i - 1}^{10} \left(E_{\alpha\sigma} \times 2^{\sigma}\right)$.
-D'une façon plus général, il est déductible que ceci est valable pour l'ensemble des bits d'opérande $E_{\alpha\sigma}$ dont $\left(\tau_{\sigma} = 0\right)$, ou autrement dit pour tout les _zéros anonymes non capitaux_.
-
-//
-
-En reprenant l'inéquation $\left(E_{\beta i} \times 2^i\right) \gt \left(\left(E_{\alpha i} \times 2^i\right) + \sum_{\sigma = i - 1}^{10} \left(E_{\alpha\sigma} \times 2^{\sigma}\right)\right)$, nous remarquons que $\left(E_{\beta i} \times 2^i\right)$ est supérieur à la somme des valeurs des bits de poids $\sigma$ du champs d'exposant $E_{\alpha}$, nonobstant la valeur de chacun de ces bits.
-N'oublions pas que savons que le bit $\left(\tau_{\left(i - 1\right)} = 0\right)$ ce qui nous permet d'en déduire que $\left(E_{\alpha \left(i - 1\right)} \ge E_{\beta \left(i - 1\right)}\right)$.
-Mais cela n'a que peu d'importance étant donné que le bit $E_{\alpha \left(i - 1\right)}$ est d'un poids compris dans l'intervalle $\left[10;i\right[$, desquels nous savons que $\left(E_{\beta i} \times 2^i\right) \gt \sum_{\sigma = i - 1}^{10} \left(E_{\alpha\sigma} \times 2^{\sigma}\right)$.
-Nous en concluons que cela vaut donc pour tout les _zéros anonymes non capitaux_.
-
-
-//
-
-Cela veut dire que $\left(E_{\beta i} \times 2^i\right) \gt \sum_{\sigma = i - 1}^{10} \left(E_{\alpha\sigma} \times 2^{\sigma}\right)$, et ce même lorsque $\left(E_{\alpha \left(i - 1\right)} \gt E_{\beta \left(i - 1\right)}\right)$ pour $\left(\tau_{\left(i - 1\right)} = 0\right)$.
-Ce raisonnement s'étend également à tout les autres _zéros anonymes non capitaux_ d'un poids $\sigma \in \left[10;i\right[$.
-
-//
-
-Cela veut dire qu'il importe peu que le bit $E_{\alpha \left(i - 1\right)}$ soit défini à $0$ ou à $1$, car nous savons que quoi qu'il arrive $\left(E_{\beta i} \times 2^i\right) \gt \sum_{\sigma = i - 1}^{10} \left(E_{\alpha\sigma} \times 2^{\sigma}\right)$.
 
 //
 
