@@ -628,8 +628,16 @@ Du moment où le poids $i$ du _MSB1_ est compris dans l'intervalle $\left[11;14\
 Par conséquent, lorsque $\left(\tau_{\left(i - 1\right)} = 0\right)$ alors nous en déduisons que le bit de résultat est un _zéro anonyme non capital_, et de fait que les valeurs de ses bits d'opérandes $E_{\alpha \left(i - 1\right)}$ ainsi que $E_{\beta \left(i - 1\right)}$ ne sont pas déductible, nous savons seulement que $\left(E_{\alpha \left(i - 1\right)} \ge E_{\beta \left(i - 1\right)}\right)$.
 Il est intéressant de souligné que le bit $E_{\alpha \left(i - 1\right)}$ est donc libre d'être défini à $0$ comme à $1$.
 
-Finalement, revenons en à l'inéquation $\left(E_{\beta i} \times 2^i\right) \gt \left(\left(E_{\alpha i} \times 2^i\right) + \sum_{\sigma = i - 1}^{10} \left(E_{\alpha\sigma} \times 2^{\sigma}\right)\right)$, depuis laquelle nous remarquons que $\left(E_{\beta i} \times 2^i\right)$ est supérieur à la somme des valeurs des bits de poids $\sigma \in \left[10;i\right[$ du champs d'exposant $E_{\alpha}$, nonobstant la valeur de chacun de ces bits.
+Finalement, revenons en à l'inéquation $\left(E_{\beta i} \times 2^i\right) \gt \left(\left(E_{\alpha i} \times 2^i\right) + \sum_{\sigma = i - 1}^{10} \left(E_{\alpha\sigma} \times 2^{\sigma}\right)\right)$ depuis laquelle nous remarquons que $\left(E_{\beta i} \times 2^i\right)$ est supérieur à la somme des valeurs des bits de poids $\sigma \in \left[10;i\right[$ du champs d'exposant $E_{\alpha}$, nonobstant la valeur de chacun de ces bits.
+Par ailleurs, nous savons que le bit $E_{\alpha \left(i - 1\right)}$ est compris dans l'intervalle de poids $\left[10;i\right[$.
+Ce qui insinue que la valeur du bit $\left(E_{\alpha \left(i - 1\right)} \times 2^{\left(i - 1\right)}\right)$ ne change rien au fait que $\left(E_{\beta i} \times 2^i\right) \gt \sum_{\sigma = i - 1}^{10} \left(E_{\alpha\sigma} \times 2^{\sigma}\right)$, malgré le fait que le bit puisse être défini à $0$ comme à $1$.
 
+
+
+//
+
+Cela insinue qu'il n'y a aucune importance à ce que le bit $E_{\alpha \left(i - 1\right)}$ soit défini à $0$ ou à $1$, car nous trouverons toujours que $\left(E_{\beta i} \times 2^i\right) \gt \sum_{\sigma = i - 1}^{10} \left(E_{\alpha\sigma} \times 2^{\sigma}\right)$.
+D'une façon plus général, il est déductible que ceci est valable pour l'ensemble des bits d'opérande $E_{\alpha\sigma}$ dont $\left(\tau_{\sigma} = 0\right)$, ou autrement dit pour tout les _zéros anonymes non capitaux_.
 
 //
 
