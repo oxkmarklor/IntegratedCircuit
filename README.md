@@ -630,24 +630,9 @@ Ce qui se généralise à l'ensemble des bits de résultat $\left(\tau_{\sigma} 
 
 Finalement, revenons en à l'inéquation $\left(E_{\beta i} \times 2^i\right) \gt \left(\left(E_{\alpha i} \times 2^i\right) + \sum_{\sigma = i - 1}^{10} \left(E_{\alpha\sigma} \times 2^{\sigma}\right)\right)$. 
 Inéquation depuis laquelle nous remarquons que $\left(E_{\beta i} \times 2^i\right)$ est supérieur à la somme des valeurs des bits de poids $\sigma \in \left[10;i\right[$ du champs d'exposant $E_{\alpha}$, nonobstant la valeur de chacun des bits $E_{\alpha\sigma}$.
-
-//
-
-En fin de compte, nous savons que $\left(T_{\beta i} \times 2^i\right) \gt \sum_i^0 \left(T_{\alpha i} \times 2^i\right)$ lorsque $\left(\tau_i = 1\right)$, ce que nous allons exprimé différemment pour des raisons pratique $\left(T_{\beta i} \times 2^i\right) \gt \left(\left(T_{\alpha i} \times 2^i\right) + \sum_{\sigma = i - 1}^0 \left(T_{\alpha\sigma} \times 2^{\sigma}\right)\right)$.
-Remarquons que $\left(T_{\beta i} \times 2^i\right)$ est supérieur à la somme des valeurs des bits de poids $\sigma$ du champs de mantisse tronquée $T_{\alpha}$, nonobstant la valeur de ces bits.
-Pour le dire autrement, rappelez vous du fait que $\left(T_{\alpha\sigma} \ge T_{\beta\sigma}\right)$ pour tout bit $\left(\tau_{\sigma} = 0\right)$, ce qui sous-entend que $T_{\alpha\sigma}$ peut être défini à $0$ comme à $1$.
-Mais cela n'a pas d'importance car nous trouverons toujours que $\left(T_{\beta i} \times 2^i\right) \gt \sum_{\sigma = i - 1}^0 \left(T_{\alpha\sigma} \times 2^{\sigma}\right)$.
-
-//
-
-Tout cela insinue que la valeur du bit $\left(E_{\alpha \left(i - 1\right)} \times 2^{\left(i - 1\right)}\right)$ ne change rien au fait que $\left(E_{\beta i} \times 2^i\right) \gt \sum_{\sigma = i - 1}^{10} \left(E_{\alpha\sigma} \times 2^{\sigma}\right)$.
-Ceci se généralise à l'ensemble des bits de poids inférieur à $i$ du champs d'exposant $E_{\alpha}$, ce qui concerne également les occurrences de $E_{\alpha\sigma}$ dont $\left(\tau_{\sigma} = 0\right)$.
-
-//
-
-En reprenant l'inéquation $\left(E_{\beta i} \times 2^i\right) \gt \left(\left(E_{\alpha i} \times 2^i\right) + \sum_{\sigma = i - 1}^{10} \left(E_{\alpha\sigma} \times 2^{\sigma}\right)\right)$, nous remarquons que $\left(E_{\beta i} \times 2^i\right)$ est supérieur à la somme des valeurs des bits de poids $\sigma$ du champs d'exposant $E_{\alpha}$, nonobstant la valeur de ces bits dont fait partie $\left(E_{\alpha \left(i - 1\right)} \times 2^{\left(i - 1\right)}\right)$.
-Autrement dit, que les bits de poids $\sigma$ du champs d'exposant $E_{\alpha}$ soient définis à $0$ ou à $1$, cela ne change rien au fait que $\left(E_{\beta i} \times 2^i\right) \gt \sum_{\sigma = i - 1}^{10} \left(E_{\alpha\sigma} \times 2^{\sigma}\right)$.
-Le circuit n'a donc pas besoin de prendre en charge les _zéros anonymes non capitaux_, car il est déductible que le champs d'exposant $E_{\beta}$ est supérieur au champs d'exposant $E_{\alpha}$, du bit de poids $i$ jusqu'au bit de poids $10$.
+Dit autrement, rappelez vous du fait que $\left(E_{\alpha\sigma} \ge E_{\beta\sigma}\right)$ pour tout bit $\left(\tau_{\sigma} = 0\right)$, ce qui sous-entend que $E_{\alpha\sigma}$ peut être défini à $0$ comme à $1$.
+Néanmoins, les valeurs de ces bits n'ont aucune importance car nous trouverons toujours que $\left(E_{\beta i} \times 2^i\right) \gt \sum_{\sigma = i - 1}^{10} \left(E_{\alpha\sigma} \times 2^{\sigma}\right)$.
+D'où le fait que les _zéros anonymes non capitaux_, ainsi que les autres bits dans $\tau$ qui sont également d'un poids $\sigma \in \left[10;i\right[$, ne soient pas pris en charge par le circuit.
 
 ### Les zéros anonymes capitaux dus au traitement des champs d'exposant
 
@@ -766,7 +751,7 @@ Mais cela n'a pas d'importance car nous trouverons toujours que $\left(T_{\beta 
 
 Pour resumer, un _zéro anonyme non capital_ de poids $\sigma \in \left[0;i\right[$ ne permet pas de déduire la valeur de ses bits d'opérandes $T_{\alpha\sigma}$ ainsi que $T_{\beta\sigma}$.
 Néanmoins, le circuit n'a pas besoin de prendre en charge les _zéros anonymes non capitaux_, car il est déductible que le champs de mantisse tronquée $T_{\beta}$ est supérieur au champs de mantisse tronquée $T_{\alpha}$, du bit de poids $i$ jusqu'au bit de poids $0$.
-Qu'importe ce que l'ont peut déduire des bits d'opérande des _zéros anonymes capitaux_, cela ne changerait rien à ce qui vient d'être dit.
+Qu'importe ce que l'ont peut déduire des bits d'opérande des _zéros anonymes non capitaux_, cela ne changerait rien à ce qui vient d'être dit.
 
 ### Les zéros anonymes capitaux dus au traitement des champs de mantisse tronquée
 
