@@ -652,7 +652,7 @@ Le bit $\tau_{\left(i + 1\right)}$ ne peut être défini qu'à $0$ étant donné
 En conséquence, tout bit de poids $\sigma$ dans $\tau$ est un _zéro anonyme capital_, ce qui insinue que les valeurs des bits d'opérandes $E_{\alpha\sigma}$ ainsi que $E_{\beta\sigma}$ ne sont pas déductible, nous savons seulement que $\left(E_{\alpha\sigma} \ge E_{\beta\sigma}\right)$.
 
 Rappelons que l'inéquation $\left(E_{\beta i} \times 2^i\right) \gt \sum_i^{10} \left(E_{\alpha i} \times 2^i\right)$ démontre que le champs d'exposant $E_{\beta}$ est supérieur au champs d'exposant $E_{\alpha}$, du bit de poids $i$ jusqu'au bit de poids $10$.
-Cependant, n'oublions pas qu'il subsite dans $\tau$ des bits de poids $\sigma$ supérieur à $i$, des _zéros anonymes capitaux_, par lesquels nous déduisons que $\left(E_{\alpha\sigma} \ge E_{\beta\sigma}\right)$.
+Cependant, n'oublions pas qu'il subsiste dans $\tau$ des bits de poids $\sigma$ supérieur à $i$, des _zéros anonymes capitaux_, par lesquels nous déduisons que $\left(E_{\alpha\sigma} \ge E_{\beta\sigma}\right)$.
 Il suffit alors qu'il y ait une occurrence de $\left(E_{\alpha\sigma} \gt E_{\beta\sigma}\right)$ pour tout bit $\tau_{\sigma}$, afin que nous en déduisions que $\left(E_{\alpha\sigma} \times 2^{\sigma}\right) \gt \sum_{\sigma}^{10} \left(E_{\beta\sigma} \times 2^{\sigma}\right)$.
 Ce qui traduit l'idée que du bit de poids $\sigma$ jusqu'au bit de poids $10$, le champs d'exposant $E_{\alpha}$ est supérieur au champs d'exposant $E_{\beta}$.
 Finalement, pour savoir si le champs d'exposant $E_{\beta}$ est définitivement supérieur au champs d'exposant $E_{\alpha}$, il nous faut prêter attention aux valeurs des bits d'opérandes $E_{\alpha\sigma}$ ainsi que $E_{\beta\sigma}$ de chaque _zéro anonyme capital_.
@@ -660,14 +660,23 @@ Nous en déduisons alors qu'il y a deux possibilités, dont la première est la 
 
 // ok
 
-Le circuit atteint l'état de point terminal $\left(E_{\alpha} \lt E_{\beta}\right)$ lorsque $\left(E_{\alpha\sigma} = E_{\beta\sigma}\right)$ pour tout les bits de poids $\sigma \in \left]i;14\right]$.
+Le circuit atteint l'état de point terminal $\left(E_{\alpha} \lt E_{\beta}\right)$ lorsque $\left(E_{\alpha\sigma} = E_{\beta\sigma}\right)$, pour tout poids $\sigma \in \left]i;14\right]$.
 Ce qui insinue que la somme $\lambda_{\alpha}$ de la valeur des bits de poids $\sigma$ du champs d'exposant $E_{\alpha}$, est égale à la somme $\lambda_{\beta}$ de la valeur des bits de même poids du champs d'exposant $E_{\beta}$.
-Pour le dire autrement, nous savons que $\left(\lambda_{\alpha} = \lambda_{\beta}\right)$ tout en sachant que $\lambda_{\alpha} = \sum_{\sigma = i + 1}^{14} \left(E_{\alpha\sigma} \times 2^{\sigma}\right)$ tandis que $\lambda_{\beta} = \sum_{\sigma = i + 1}^{14} \left(E_{\beta\sigma} \times 2^{\sigma}\right)$.
+Pour le dire autrement nous savons que $\left(\lambda_{\alpha} = \lambda_{\beta}\right)$, tout en sachant que $\ \lambda_{\alpha} = \sum_{\sigma = i + 1}^{14} \left(E_{\alpha\sigma} \times 2^{\sigma}\right)$ tandis que $\ \lambda_{\beta} = \sum_{\sigma = i + 1}^{14} \left(E_{\beta\sigma} \times 2^{\sigma}\right)$.
+En nous rappelant du fait que $\left(E_{\beta i} \times 2^i\right) \gt \sum_i^{10} \left(E_{\alpha i} \times 2^i\right)$, nous comprenons de surcroît que $\left(\lambda_{\beta} + E_{\beta i} \times 2^i\right) \gt \left(\lambda_{\alpha} + \sum_i^{10} \left(E_{\alpha i} \times 2^i\right)\right)$.
+Ce qui nous permet d'en déduire que le circuit atteint bel et bien l'état de point terminal $\left(E_{\alpha} \lt E_{\beta}\right)$.
 
-// modif la forme
+//
 
-En outre, n'oublions pas que l'inéquation $\left(E_{\beta i} \times 2^i\right) \gt \sum_i^{10} \left(E_{\alpha i} \times 2^i\right)$ démontre que du bit de poids $i$ jusqu'au bit de poids $10$, le champs d'exposant $E_{\beta}$ est supérieur au champs d'exposant $E_{\alpha}$.
-Nous en déduisons donc que le circuit atteint l'état de point terminal $\left(E_{\alpha} \lt E_{\beta}\right)$, car $\left(\lambda_{\beta} + E_{\beta i} \times 2^i\right) \gt \left(\lambda_{\alpha} + \sum_i^{10} \left(E_{\alpha i} \times 2^i\right)\right)$.
+De surcroît, nous comprenons que depuis l'inéquation $\left(E_{\beta i} \times 2^i\right) \gt \sum_i^{10} \left(E_{\alpha i} \times 2^i\right)$ il est possible d'en déduire que $\left(\lambda_{\beta} + E_{\beta i} \times 2^i\right) \gt \left(\lambda_{\alpha} + \sum_i^{10} \left(E_{\alpha i} \times 2^i\right)\right)$.
+
+Pour conclure, depuis l'inéquation suivante $\left(E_{\beta i} \times 2^i\right) \gt \sum_i^{10} \left(E_{\alpha i} \times 2^i\right)$ nous en déduisons que $\left(\lambda_{\beta} + E_{\beta i} \times 2^i\right) \gt \left(\lambda_{\alpha} + \sum_i^{10} \left(E_{\alpha i} \times 2^i\right)\right)$.
+
+
+Pour conclure, nous comprenons que le circuit atteint l'état de point terminal $\left(E_{\alpha} \lt E_{\beta}\right)$, car depuis l'inéquation $\left(E_{\beta i} \times 2^i\right) \gt \sum_i^{10} \left(E_{\alpha i} \times 2^i\right)$ nous sommes en capacité de déduire que $\left(\lambda_{\beta} + E_{\beta i} \times 2^i\right) \gt \left(\lambda_{\alpha} + \sum_i^{10} \left(E_{\alpha i} \times 2^i\right)\right)$.
+
+
+Concrètement, le membre droit de cette inéquation représente la valeur du champs d'exposant $E_{\alpha}$, qui est inférieur au membre gauche représentant la valeur du champs d'exposant $E_{\beta}$ allant des bits de poids $14$ jusqu'à $i$.
 Enfin, rappelez vous du fait que la condition sur laquelle s'appuie la démonstration mathématique du circuit est $\left(\vert \alpha \vert \gt \vert \beta \vert\right)$, condition qui se solde en échec car $\left(\left(1 + T_{\alpha}\right) \times \ 2^{E_{\alpha}}\right) \lt \left(\left(1 + T_{\beta}\right) \times \ 2^{E_{\beta}}\right)$.
 Tel que l'explique le chapitre "_Les points terminaux et non terminaux_", les expressions que sont $\left(\left(1 + T_{\alpha}\right) \times \ 2^{E_{\alpha}}\right)$ ainsi que $\left(\left(1 + T_{\beta}\right) \times \ 2^{E_{\beta}}\right)$ représentent les valeurs respective de $\vert \ \alpha \ \vert$ et $\vert \ \beta \ \vert$.
 
