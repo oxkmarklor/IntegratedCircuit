@@ -670,20 +670,11 @@ Tel que l'explique le chapitre "_Les points terminaux et non terminaux_", les ex
 Cependant, le circuit atteint l'état de point terminal $\left(E_{\alpha} \gt E_{\beta}\right)$ lorsqu'il y a une (ou plusieurs) occurrence de $\left(E_{\alpha\sigma} \gt E_{\beta\sigma}\right)$, pour tout poids $\sigma \in \left]i;14\right]$.
 Pour chacune de ces occurrences où $\left(E_{\alpha\sigma} \times 2^{\sigma}\right) \gt \left(E_{\beta\sigma} \times 2^{\sigma}\right)$, nous en déduisons que $\left(E_{\alpha\sigma} \times 2^{\sigma}\right) \gt \sum_{\sigma}^{10} \left(E_{\beta\sigma} \times 2^{\sigma}\right)$.
 Ce qui traduit l'idée que du bit de poids $\sigma$ jusqu'au bit de poids $10$, le champs d'exposant $E_{\alpha}$ est supérieur au champs d'exposant $E_{\beta}$.
-A ce stade, nous savons définitivement que $\left(E_{\alpha} \gt E_{\beta}\right)$ dans le cas où $\left(\sigma = 14\right)$ pour l'une de ces occurrences.
-
-// puis, qu'est ce qui se passe lorsque sigma ne vaut pas 14?
-
-Néanmoins, admettons ...
-
-//
-
-Cependant, admettons que $\sigma$ soit compris dans l'intervalle $\left]i;14\right[$, alors nous savons qu'il existe des _zéros anonymes capitaux_ de poids $\sigma '$ dans $\tau$, tel que $\sigma ' \in \left]\sigma;14\right]$.
-En bref, cela veut dire que tout bit $\tau_{\sigma '}$ a pour bit d'opérande $E_{\alpha\sigma '}$ ainsi que $E_{\beta\sigma '}$ dont il est déductible que $\left(E_{\alpha\sigma '} \ge E_{\beta\sigma '}\right)$. 
-Ce qui insinue que la somme $\lambda$ de la valeur des bits de poids $\sigma '$ du champs d'exposant $E_{\alpha}$, est supérieur ou égale à la somme des bits de même poids du champs d'exposant $E_{\beta}$, ou pour le dire autrement $\left(\lambda_{\alpha} \ge \lambda_{\beta}\right)$.
-Par conséquent, le circuit atteint l'état de point terminal $\left(E_{\alpha} \gt E_{\beta}\right)$ car $\left(\lambda_{\alpha} + E_{\alpha\sigma} \times 2^{\sigma}\right) \gt \left(\lambda_{\beta} + \sum_{\sigma}^{10} \left(E_{\beta\sigma} \times 2^{\sigma}\right)\right)$.
-Cette fois-ci, la condition sur laquelle s'appuie la démonstration mathématique du circuit $\left(\vert \alpha \vert \gt \vert \beta \vert\right)$ réussie, car nous trouvons que $\left(\left(1 + T_{\alpha}\right) \times \ 2^{E_{\alpha}}\right) \gt \left(\left(1 + T_{\beta}\right) \times \ 2^{E_{\beta}}\right)$.
-
+A ce stade, nous savons que $\left(E_{\alpha} \gt E_{\beta}\right)$ dans le cas où l'une de ces occurrences défini $\left(\sigma = 14\right)$.
+Néanmoins, admettons que $\sigma$ soit compris dans l'intervalle $\left]i;14\right[$, alors nous en déduisons qu'il existe des _zéros anonymes capitaux_ de poids $\sigma '$ dans $\tau$, tel que $\sigma ' \in \left]\sigma;14\right]$.
+Par conséquent, cela insinue que $\left(E_{\alpha\sigma '} \ge E_{\beta\sigma '}\right)$ pour tout bit $\tau_{\sigma '}$, et donc que la somme $\lambda$ de la valeur des bits de poids $\sigma '$ du champs d'exposant $E_{\alpha}$ est supérieur ou égale à la somme des bits de même poids du champs d'exposant $E_{\beta}$, ou autrement dit $\left(\lambda_{\alpha} \ge \lambda_{\beta}\right)$.
+En définitif, nous comprenons que le circuit atteint l'état de point terminal $\left(E_{\alpha} \gt E_{\beta}\right)$ car $\left(\lambda_{\alpha} + E_{\alpha\sigma} \times 2^{\sigma}\right) \gt \left(\lambda_{\beta} + \sum_{\sigma}^{10} \left(E_{\beta\sigma} \times 2^{\sigma}\right)\right)$.
+Ce qui nous permet d'en conclure que la condition sur laquelle s'appuie la démonstration du circuit $\left(\vert \alpha \vert \gt \vert \beta \vert\right)$ se solde par un succès, car $\left(\left(1 + T_{\alpha}\right) \times \ 2^{E_{\alpha}}\right) \gt \left(\left(1 + T_{\beta}\right) \times \ 2^{E_{\beta}}\right)$.
 
 // save
 
