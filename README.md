@@ -1,14 +1,14 @@
 Bonjour,
 
-Ce document est une preuve mathématique d'un circuit électronique du nom de FPU Configuration Unit.
+Ce document est une preuve mathématique du bon fonctionnement d'un circuit électronique du nom de FPU Configuration Unit.
 J'ai conceptualisé ce circuit dans le but de résoudre un problème concernant le traitement des nombres flottants dans les unités de calculs flottantes (FPUs) d'un ordinateur.
 La micro-architecture du circuit électronique ainsi que les compromis de conceptualisation, le problème que cherche à résoudre le FPU Configuration Unit ou encore la solution qu'il apporte, sont autant de sujets dont je parle dans une documentation dédiée au circuit.
 
 Pour les curieux, si vous souhaitez voir à quoi ressemble le circuit, sachez qu'il y a un fichier du nom de _16-bit_FPU_configuration_unit_ qui le schématise.
-Le circuit a été directement schématisé à base de transisor, en technologie CMOS (Complementary Metal Oxide Semi-conductor), cela permet de mettre en évidence certains compromis sur le choix des portes logiques.
+Le circuit a été directement schématisé à base de transisor, principalement en technologie CMOS (Complementary Metal Oxide Semi-conductor), permettant ainsi de mettre en évidence certains compromis sur le choix des portes logiques.
 Disons que l'apparence abrupte du schéma rend hommage à la (relative) complexité algorithmique du FPU Configuration Unit.
 
-Le document va même au-delà de la démonstration mathématique du circuit ; il explique les sujets fondamentaux sur lesquels la démonstration ainsi que le circuit reposent.
+Le document va même au-delà de la démonstration mathématique du circuit ; il parle des sujets fondamentaux sur lesquels la démonstration mathématique ainsi que le circuit reposent.
 Ce qui explique la présence de la table des matières suivante:
   - Les encodages
     - L'encodage Binary Unsigned
@@ -43,7 +43,7 @@ Ce qui explique la présence de la table des matières suivante:
     - Recontextualisation des zéros anonymes capitaux ainsi que non capitaux dus au traitement des champs de mantisse tronquée
       - Les zéros anonymes non capitaux dus au traitement des champs de mantisse tronquée
       - Les zéros anonymes capitaux dus au traitement des champs de mantisse tronquée
-
+  - Conclusion de la démonstration
 ...
 
 # Les encodages
