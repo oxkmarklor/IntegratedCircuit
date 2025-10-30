@@ -32,6 +32,17 @@ Ce qui explique la présence de la table des matières suivante:
       - Le codage du champ d'exposant
   - Introduction au FPU Configuration Unit
     - Les points terminaux et non terminaux
+  - Démonstration mathématique
+    - Définition de quelques opérations fondamentales à la démonstration
+  - Le traitement des champs d'exposant
+    - Les zéros anonymes
+      - Les zéros anonymes non capitaux dus au traitement des champs d'exposant
+      - Les zéros anonymes capitaux dus au traitement des champs d'exposant
+    - L'obtention d'un point non terminal
+  - Le traitement des champs de mantisse tronquée
+    - Recontextualisation des zéros anonymes capitaux ainsi que non capitaux dus au traitement des champs de mantisse tronquée
+      - Les zéros anonymes non capitaux dus au traitement des champs de mantisse tronquée
+      - Les zéros anonymes capitaux dus au traitement des champs de mantisse tronquée
 
 ...
 
@@ -537,7 +548,7 @@ Je vous renvoie vers la documentation dédié au circuit si vous voulez en savoi
 
 __Tout ce qui va suivre de la démonstration, part du principe que le FPU Configuration Unit cherche à verifié la condition__ $\left(\vert \alpha \vert \gt \vert \beta \vert\right)$.
 
-### Définition de quelques opérations fondamentales à la démonstration 
+## Définition de quelques opérations fondamentales à la démonstration 
 
 Pour commencer, l'opération __Write__ sert de fonction d'affectation.
 L'argument sur le paramètre $y$ est copié dans l'argument sur le paramètre $x$.
@@ -678,8 +689,8 @@ De surcroît, ceci nous permet de savoir que $\left(\left(1 + T_{\alpha}\right) 
 
 ## L'obtention d'un point non terminal
 
-Je précise que ce chapitre parle des états de points terminaux ainsi que non terminaux du circuit.
-Si nécessire, vous pouvez lire de nouveau la section "_Les points terminaux et non terminaux_" qui explique ce que sont ces états.
+Je précise que ce chapitre parle des états de points non terminaux du circuit.
+En cas de besoin, je vous invite à lire la section "_Les points terminaux et non terminaux_" pour en savoir plus sur cet état.
 
 Dans les sections précédente nous avions toujours un _MSB1_ dans $\tau \in \left[10;14\right]$, mais il pourrait ne pas y en avoir.
 Par essence, une telle situation veut que chaque bit de $\tau \in \left[10;14\right]$ soit un _zéro anonyme capital_, car ces bits sont inévitablement à $0$ et qu'ils ne peuvent pas être d'un poids inférieur à un _MSB1_, étant donné qu'il n'en n'existe pas.
@@ -722,15 +733,14 @@ La seule différence est que le bit de résultat de chaque opération $Nimply$ s
 En outre, grâce au chapitre "_Définition de quelques opérations fondamentales à la démonstration_" nous savons que dans le cas d'une occurrence où $\left(\tau_i = 1\right)$, pour tout bit de poids $i \in \left[0;9\right]$, alors $\left(T_{\beta i} = 1\right)$ tandis que $\left(T_{\alpha i} = 0\right)$.
 Avec ce que nous avons dit précédemment, nous en déduisons que pour toute occurrence où $\left(\tau_i = 1\right)$ alors $\left(T_{\beta i} \times 2^i\right) \gt \sum_i^0 \left(T_{\alpha i} \times 2^i\right)$.
 
-## Les zéros anonymes capitaux et non capitaux dus au traitement des champs de mantisse tronquée
+## Recontextualisation des zéros anonymes capitaux ainsi que non capitaux dus au traitement des champs de mantisse tronquée
 
 Comme cela a été mentionné dans le chapitre "_Les zéros anonymes_", je cite "_nous recontextualiserons en temps voulu les concepts de zéros anonymes capitaux et non capitaux aux cas des champs de mantisse tronquée_".
 Eh bien... le moment est venu de le faire.
 Par la même occasion, cela va nous permettre de parler du traitement des champs de mantisse tronquée, comme nous l'avons finalement fait avec les champs d'exposant.
 
-Sachez qu'il n'y a pas grand chose qui change entre les _zéros anonymes capitaux_ et _non capitaux_ qui sont issu du traitement des champs d'exposant, vis à vis de ceux qui sont issu du traitement des champs de mantisse tronquée.
-C'est pourquoi nous allons nous concentrés sur ce qui change et moins sur le reste.
-En cas de trou de mémoire, je vous invite à relire les sections qui expliquent en détails ce que sont les _zéros anonymes capitaux_ et _non capitaux_ dus au traitement des champs d'exposant, ainsi que l'impacte qu'ils ont.
+Sachez qu'il n'y a pas grand chose qui change entre les _zéros anonymes capitaux_ et _non capitaux_ qui sont issu du traitement des champs d'exposant, vis à vis de ceux qui sont issus du traitement des champs de mantisse tronquée.
+C'est pourquoi nous survolerons ce qui a déjà été expliqué plus en amont, en rentrant moins dans le détails.
 
 ### Les zéros anonymes non capitaux dus au traitement des champs de mantisse tronquée
 
