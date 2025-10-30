@@ -817,21 +817,15 @@ En somme, c'est la raison qui fait que l'évaluation de ladite condition se sold
 
 # Conclusion de la démonstration
 
-Comme nous avons pu le voir dans la première partie de la démonstration "_Le traitement des champs d'exposant_", ainsi que dans la seconde partie "_Le traitement des champs de mantisse tronquée_".
-Les procédures de traitement des champs d'exposant $E$ et des champs de mantisse tronquée $T$ des opérandes $\alpha$ et $\beta$ sont identiques.
-Dans les faits, le circuit électronique n'est composé que d'un seul ensemble de circuit logique, prenant ainsi en charge le traitement de chacun des champs de ses opérandes.
-La documentation du circuit électronique aborde le sujet de l'architecture de cet ensemble de circuit.
+Comme nous avons pu le voir dans la première partie de la démonstration "_Le traitement des champs d'exposant_", ainsi que dans la seconde partie "_Le traitement des champs de mantisse tronquée_", les procédés de traitement des champs d'exposant et de mantisse tronquée sont identiques ou presque.
+Dans les faits, le circuit électronique n'est composé que d'un seul ensemble de circuit logique, prenant ainsi en charge le traitement des champs d'exposant ainsi que des champs de mantisse tronquée.
+La documentation du FPU Configuration Unit aborde le sujet de l'architecture du circuit lui même.
 
-Je tient aussi à rappellé que tout ce que nous avons vu jusqu'ici, n'est qu'une preuve mathématique du bon fonctionnement de la logique de comparaison du FPU Configuration Unit.
-Cependant, les calculs que produit réelement le circuit ne sont pas les même que ceux qui ont été utilisés dans la démonstration ci-dessus.
-Par exemple, le circuit électronique ne contient pas d'unité additionneur flottante pour faire des calculs de somme.
-La raison à cela est qu'il est plus optimal de faire usage de circuit plus simple, plus rapide, moins énergivore, et nécessitant moins de câblage ainsi que de transistor pour leur fabrication.
-Par ailleurs, le FPU Configuartion Unit génère deux bits de sortie dont l'un directement par le biais de son comparateur.
-Dû à cela, le circuit comparateur doit suivre une architecture quelque peu spécifique et non n'importe laquelle.
-Quant au second bit de sortie, il est pris en charge par une porte logique _Xor_ qui l'aggrège avec un autre bit dont il est trop difficile d'expliqué l'origine ici.
-Tout ces sujets sont abordés dans la documentation du circuit électronique.
-
-Tout ça pour dire qu'il y a un réel décalage entre la démonstration mathématique et l'architecture du circuit lui même.
+Je tient aussi à rappellé que tout ce que nous avons vu jusqu'ici n'est qu'une preuve mathématique du bon fonctionnement de la logique de comparaison du circuit.
+Cependant, les circuits logiques du FPU Configuration Unit n'effectuent pas les même calculs que ceux utilisés dans la démonstration, par exemple, le circuit ne comporte pas d'additionneur pour effectuer des calculs de somme.
+Les raisons à cela sont multiples.
+En effet, il est plus globalement plus optimal que le circuit fasse usage de circuit simple, plus rapide, moins énergivore et nécessitant moins de câblage ainsi que de transitor qu'un additionneur à propagation de retenue, qui est un circuit d'une certaine complexité.
+In fine, ceci me permet de mentionné le fait qu'il y ait un réel décalage entre la démonstration mathématique du circuit, et son architecture.
 
 # Annexe: Les différents types nombres du standard IEEE-754
 
