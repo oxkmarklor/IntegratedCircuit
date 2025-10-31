@@ -1,3 +1,4 @@
+
 Bonjour,
 
 Ce document est une preuve mathématique du bon fonctionnement d'un circuit électronique du nom de FPU Configuration Unit.
@@ -178,34 +179,26 @@ Les chapitres suivants se focalisent sur la notation scientifique _en base binai
 
 ## Le significande
 
-L'écriture scientifique en base binaire peut représenter n'importe quel nombre $F$ codé en virgule flottante, qu'il soit positif ou bien négatif.
-Le nombre flottant $F$ à représenter en notation scientifique binaire permet à lui seul de définir deux des trois éléments de sa propre écriture scientifique, le signe et le significande.
-Comme son nom l'indique, l'élément qu'est le "signe" ne représente que le signe $\pm$ du nombre flottant $F$.
-Tandis que le significande s'obtient depuis une modification (non systématique) de la valeur absolu du nombre à virgule flottante $F$.
+L'écriture scientifique en base binaire peut représenter n'importe quel nombre $F$ écrit en virgule flottante, qu'il soit positif ou bien négatif.
+Le nombre flottant $F$ à représenter en notation scientifique binaire permet à lui seul de définir deux des trois éléments de sa propre écriture scientifique, le __signe__ et le __significande__.
+Comme son nom l'indique, l'élément qu'est le "__signe__" ne représente que le signe $\pm$ du nombre flottant $F$.
+Tandis que le __significande__ s'obtient depuis une modification (non systématique) de la valeur absolu du nombre à virgule flottante $F$.
 
 Nous savons qu'en notation scientifique binaire, le significande ne peut interpréter que des valeurs comprises dans l'intervalle $\left[1;2\right[$.
-Lorsque la valeur du nombre à virgule flottante $\vert \ F \ \vert$ est comprise dans cette intervalle, alors la valeur de $\vert \ F \ \vert$ forme le significande du nombre $F$.
+Lorsque la valeur du nombre à virgule flottante $\vert \ F \ \vert$ est comprise dans cette intervalle, alors la valeur de $\vert \ F \ \vert$ forme lui même le significande.
 Cependant, si ce n'est pas le cas, il faut modifier la valeur du nombre $\vert \ F \ \vert$ de sorte que le résultat soit compris dans l'intervalle $\left[1;2\right[$.
-Néanmoins, ces modifications ne s'effectuent pas n'importe comment.
+Néanmoins, les modifications de la valeur de $\vert \ F \ \vert$ ne s'effectuent pas n'importe comment.
 
 Une modification consiste en un déplacement de la virgule du nombre flottant $\vert \ F \ \vert$.
-Dans le cas où $\left(\vert F \vert \ge \ 2\right)$, alors la virgule de $\vert \ F \ \vert$ subit un décalage vers la gauche jusqu'à ce que cette dernière se retrouve devant le _MSB1_.
-Mais ce n'est pas tout car dans le cas où $\left(\vert F \vert \lt \ 1\right)$, alors la virgule de $\vert \ F \ \vert$ subit aussi un décalage vers la droite jusqu'à qu'elle se retrouve devant le _MSB1_.
-En déplaçant la virgule de $\vert \ F \ \vert$ jusque devant le bit de poids le plus fort à $1$, nous nous assurons du fait que le résultat de la modification du nombre $\vert \ F \ \vert$ soit compris dans l'intervalle de valeur $\left[1;2\right[$.
+Dans le cas où $\left(\vert F \vert \ge \ 2 \ \right)$, la virgule de $\vert \ F \ \vert$ doit être décalée vers la gauche jusqu'à qu'elle se retrouve devant le MSB1 ; et inversement dans le cas où $\left(\vert F \vert \lt \ 1 \ \right)$, alors la virgule de $\vert \ F \ \vert$ doit être décalée vers la droite jusqu'à qu'elle se retrouve devant le MSB1.
+En déplaçant la virgule de $\vert \ F \ \vert$ jusque devant le bit de poids le plus fort à $1$, nous nous assurons du fait que le résultat de la modification soit compris dans l'intervalle de valeur $\left[1;2\right[$.
 
-Je me permets de faire une aparté.
-Rappelons que le nombre à virgule flottante $F$ peut être positif comme négatif, tandis que le significande ne peut interpréter que des valeurs positives de l'intervalle $\left[1;2\right[$.
-Pour tout $\left(F \lt 0\right)$, le nombre ne pourrait, quoiqu'il arrive, jamais être dans l'intervalle de valeur licite d'un significande, car un déplacement de sa virgule ne changerait rien au fait que le nombre soit négatif.
-C'est pourquoi la formation d'un significande s'appuie sur $\vert \ F \ \vert$, et non directement sur le nombre signé $F$.
-Malgré cela, n'oubliez pas que le signe $\pm$ du nombre flottant $F$ est pris en compte par l'écriture scientifique binaire du nombre.
+Il faut cependant faire une exception dans le cas où $\left(F = 0\right)$.
+Comme la valeur absolu du nombre n'est pas comprise dans l'intervalle de valeur licite d'un __significande__ $\left[1;2\right[$ alors il faudrait déplacer la virgule du nombre jusque devant son MSB1 ; cependant, le nombre n'a pas de MSB1 car son écriture ne contient aucun bit à $1$.
+Par conséquent, nous devons faire une entorce à la règle et considérer que le significande peut être excpetionnellement nulle dans cette situation.
+Sachez que nous retrouvons la même problèmatique pour toutes les représentations du chiffre $0$ en notation scientifique, qu'importe la base numérique.
 
-Il subsiste cependant une exception, la représentation du nombre $0$ en notation scientifique binaire.
-La valeur de ce nombre n'étant pas comprise dans l'intervalle de valeur licite d'un significande $\left[1;2\right[$, il faudrait alors apporter des modifications au nombre.
-Cela demanderait de déplacer la virgule du nombre jusque devant son _MSB1_, mais il n'y a pas de _MSB1_ dans le codage de $0$ en virgule flottante.
-__Par conséquent, le significande est alors exceptionnellement nulle pour pouvoir représenter la valeur__ $0$ __en notation scientifique binaire.__
-Par ailleurs, ceci est commun à chaque écriture scientifique, pour n'importe quelle base numérique.
-
-La section suivante cherche à préciser l'impact qu'a un déplacement de la virgule d'un nombre flottant sur sa valeur.
+La section suivante cherche à préciser l'impact d'un déplacement de la virgule du nombre à virgule flottante $\vert \ F \ \vert$, sur sa valeur.
 
 ### La transformation d'un nombre à virgule flottante en un significande
 
