@@ -44,6 +44,7 @@ Ce qui explique la présence de la table des matières suivante:
       - Les zéros anonymes non capitaux dus au traitement des champs de mantisse tronquée
       - Les zéros anonymes capitaux dus au traitement des champs de mantisse tronquée
   - Conclusion de la démonstration
+
 ...
 
 # Les encodages
@@ -55,9 +56,8 @@ Pour la culture, je précise que le terme _bit_ vient de la contraction de _Bina
 Un champ binaire est quant à lui composé d'un ensemble de bit, c'est-à-dire d'un ensemble de $0$ et de $1$.
 
 Ce sont ces champs binaires qui nous permettent de représenter des nombres dans un ordinateur, faire des calculs, mémoriser des résultats.
-Il y a cependant plein de (de nombreuses façons ?) façons de représenter des nombres dans un champ binaire ; nous parlons d'_encodage_ des nombres.
-Tous les encodages ne se valent pas car il y en a des plus efficaces que d'autres en fonction des besoins ; prenons un exemple :
-Pour un champ de $16$ bits, nous pourrions calculer la somme des bits pour représenter un nombre.
+Il y a cependant de nombreuses façons de représenter des nombres dans un champ binaire ; nous parlons d'_encodage_ des nombres.
+Tous les encodages ne se valent pas car il y en a des plus efficaces que d'autres en fonction des besoins ; prenons un exemple : pour un champ de $16$ bits, nous pourrions calculer la somme des bits pour représenter un nombre.
 Avec cet encodage nous ne pourrions coder que des valeurs entre $0$ et $16$ inclus, ce qui n'est pas optimal pour bien des situations.
 Mais parmi les multiples encodages existants, le plus connu de tous porte le nom de __Binary Unsigned__.
 
@@ -67,43 +67,45 @@ Le _Binary Unsigned_ est un encodage permettant de coder des nombres entiers nat
 Techniquement, cet encodage se base sur les même primitives mathématiques que la base décimale pour représenter des nombres.
 En décimale, chaque chiffre qui compose la valeur $103$ est le facteur d'une puissance de $10_{10}$, puis nous faisons la somme des produits pour représenter le nombre sous-jacent.
 Veuillez noter que l'indice $X_{10}$ représente la base numérique dans laquelle le nombre $X$ est écrit, $10$ pour la base décimale et $2$ pour la base binaire.
+Cette syntaxe ne sera utilisée que lorsqu'il y aura une ambiguïté dans l'écriture d'un nombre composé uniquement de $0$ et de $1$.
 
-$$103 = \left(1 \times 10^2 + 0 \times 10^1 + 3 \times 10^0\right)$$
+$$103 \ = \left(1 \times 10^2 + 0 \times 10^1 + 3 \times 10^0\right)$$
 
 Le chiffre des unités $3$ est facteur de $10$ à la puissance $0$ ; le chiffre des dizaines $0$ est facteur de $10$ à la puissance $1$, tandis que le chiffre des centaines $1$ est le facteur de $10$ à la puissance $2$.
 Remarquons que la valeur des puissances commence à partir de $0$ pour le chiffre des unités et croît en fonction de la position du chiffre.
 Mais ceci n'est pas propre à la base décimale.
 
 La base binaire (ou base $2$) permet également de représenter des nombres d'une façon équivalente, mais comme mentionné plus haut, qui dit représentation de nombre dit encodage de nombre.
-Vous l'aurez compris, l'encodage qui permet de représenter des nombres de la sorte est le ___Binary Unsigned___.
-Chaque bit d'un nombre écrit en _Binary Unsigned_ est le facteur d'une puissance de $2$ positive ou nul.
+Vous l'aurez compris, l'encodage qui permet de représenter des nombres de la sorte est le __Binary Unsigned__.
+Chaque bit d'un nombre écrit en __Binary Unsigned__ est le facteur d'une puissance de $2$ positive ou nul.
 Le nombre ainsi représenté se calcule par la somme de chacun de ces produits.
-De plus, la représentation des nombres n'est pas " _signé_ ", ce qui veut dire qu'il n'y a pas de bit permettant le codage explicite d'un signe $\pm$, et ainsi les nombres codés sont naturellement positifs.
+De plus, la représentation des nombres n'est pas "_signé_", ce qui veut dire qu'il n'y a pas de bit permettant le codage explicite d'un signe $\pm$, et ainsi les nombres codés sont naturellement positifs.
 
-$$103 = 1100111_2 = 1 \times 2^6 + 1 \times 2^5 + 0 \times 2^4 + 0 \times 2^3 + 1 \times 2^2 + 1 \times 2^1 + 1 \times 2^0$$
+$$103 \ = \ 1100111_2 \ = \left(1 \times 2^6 + 1 \times 2^5 + 0 \times 2^4 + 0 \times 2^3 + 1 \times 2^2 + 1 \times 2^1 + 1 \times 2^0\right)$$
 
-Nous ne parlons pas de bit des unités, des dizaines, centaines ou encore milliers dans un champ binaire, mais il y a ce que l'on appelle le " _poids_ " d'un bit qui est à prendre en compte.
+Nous ne parlons pas de bit des unités, des dizaines, centaines ou encore milliers dans un champ binaire, mais il y a ce que l'on appelle le "_poids_" d'un bit qui est à prendre en compte.
 Plus un bit est le facteur d'une grande puissance de $2$, plus le poids de ce bit est important dans le calcul de la valeur d'un nombre.
 Par exemple, le bit qui multiplie $2^6$ fait fluctuer la valeur du nombre représenté de $64$, contre une fluctuation de seulement $8$ pour le bit facteur de $2^3$.
 Le bit qui multiplie $2^6$ est donc d'un poids (d'une importance) supérieur à celui qui multiplie $2^3$.
 
 Par conséquent, il est très commun d'indicer les bits d'un champ binaire par leurs poids ; le bit de poids $3$ fait référence au bit qui multiplie la puissance $2^3$.
 Il s'avère que certains termes sont rentrés dans le langage commun et représentent des bits d'un poids bien précis à l'intérieur d'un champ.
-Par exemple, le terme de _LSB_ pour _Least Significant Bit_ fait référence au bit de poids le plus faible d'un champs binaire, le bit de poids $0$ pour tout nombre représenté en _Binary Unsigned_.
-Il existe aussi le terme de _MSB_ pour _Most Significant Bit_ qui fait référence au bit de poids le plus fort d'un champ binaire.
-D'autres termes comme _LSB1_ pour le bit à $1$ de poids le plus faible, ou encore _MSB1_ pour le bit à $1$ de poids le plus fort, existent aussi.
+Par exemple, le terme de __LSB__ pour __Least Significant Bit__ fait référence au bit de poids le plus faible d'un champs binaire, le bit de poids $0$ pour tout nombre écrit en __Binary Unsigned__.
+Il existe aussi le terme de __MSB__ pour __Most Significant Bit__ qui à contrario fait référence au bit de poids le plus fort d'un tel nombre.
+D'autres termes comme __LSB1__ pour le bit à $1$ de poids le plus faible, ou encore __MSB1__ pour le bit à $1$ de poids le plus fort, existent aussi.
 
-Pour finir, comme cela a été dit plus haut, la valeur d'un nombre _Binary Unsigned_ se calcule par la somme des produits entre chaque bit et sa puissance de $2$ correspondante. Ce qui donne lieu à des calculs inutiles car la valeur d'un bit étant de $0$ ou $1$, chaque produit génère alors un résultat qui est nul ou égal à la puissance de $2$ du bit en question.
-C'est pourquoi vous entendrez souvent dire (y compris dans ce document), que la valeur d'un nombre _Binary Unsigned_ se calcule comme la somme des puissances de $2$ dont le bit est à $1$.
+Pour finir, comme cela a été dit plus haut, la valeur d'un nombre __Binary Unsigned__ se calcule par la somme des produits entre chaque bit et sa puissance de $2$ correspondante. 
+Ce qui donne lieu à des calculs inutiles car la valeur d'un bit étant de $0$ ou $1$, chaque produit génère alors un résultat qui est nul ou égal à la puissance de $2$ du bit en question.
+C'est pourquoi vous entendrez souvent dire (y compris dans ce document), que la valeur d'un nombre __Binary Unsigned__ se calcule comme la somme des puissances de $2$ dont le bit est à $1$.
 
 ### Une propriété du Binary Unsigned qui est fondamentale à la démonstration
 
-Avec un champ binaire d'encodage _Binary Unsigned_, nous pouvons être certains qu'un bit à $1$ de poids $i$ ait une valeur strictement supérieure à la somme des valeurs de chaque bit de poids inférieur à $i$.
-Prenons comme exemple le codage _Binary Unsigned_ du nombre $103$, c'est-à- dire $1100111_2$, que nous nommerons désormais $B$.
-Si nous prêtons attention au bit de poids $5$ du champs $B$, nous remarquons que ce dernier a une valeur $\left(1 \times 2^5\right)$ qui est strictement supérieure à la somme des valeurs des bits de poids inférieur à $5$.
-De manière plus générale, pour tout bit de poids $i$ à $1$:
+Dans un champ binaire d'encodage __Binary Unsigned__, nous pouvons être certains qu'un bit à $1$ de poids $i$ ait une valeur $\left(1 \times 2^i\right)$ strictement supérieure à la somme des valeurs de chaque bit de poids inférieur à $i$.
+Prenons comme exemple le codage __Binary Unsigned__ du nombre $103$, c'est-à-dire $1100111_2$, que nous nommerons $N$.
+Si nous prêtons attention au bit de poids $5$ du champs $N$, nous remarquons que ce dernier a une valeur $\left(1 \times 2^5\right)$ qui est strictement supérieure à la somme des valeurs des bits de poids inférieur à $5$.
+De manière plus générale, nous trouvons que pour tout bit à $1$ de poids $i$ du nombre $N$ :
 
-$$\left(1 \times 2^i\right) \gt \sum_{ii = i - 1}^0 \ \left(B_{ii} \times 2^{ii}\right)$$
+$$\left(1 \times 2^i\right) \gt \sum_{\sigma = i - 1}^0 \ \left(N_{\sigma} \times 2^{\sigma}\right)$$
 
 Ce qui vient d'être dit ci-dessus est inconditionnel, qu'importe la valeur des bits de poids inférieurs à $i$.
 Par ailleurs, ceci n'est pas propre à la base binaire.
