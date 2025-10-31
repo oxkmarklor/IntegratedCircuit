@@ -115,46 +115,45 @@ Par ailleurs, ceci n'est pas propre à la base binaire.
 Il existe en informatique de multiples façons de représenter des nombres à virgule ; les nombres à virgule fixe, les nombres à virgule flottante ou encore le standard IEEE-754 sont, à ma connaissance, les principaux encodages.
 L'usage des nombres à virgule fixe se fait très rare de nos jours en 2025.
 Malgré tout, les systèmes informatiques bancaires utilisent souvent ces derniers pour représenter le solde des déposants et autres.
-Les nombres à virgule flottante sont, quant à eux, une évolution des nombres à virgule fixe ; ces derniers permettent principalement aux humains de pouvoir écrire facilement des nombres à virgule en base binaire.
+Les nombres à virgule flottante sont, quant à eux, une adaptation des nombres à virgule fixe ; ces derniers permettent principalement aux humains de pouvoir écrire facilement des nombres à virgule en base binaire.
 De plus, ils sont utilisés indirectement par la notation scientifique binaire des nombres, dont nous parlerons plus tard.
 Pour finir, le standard IEEE-754 permet de normaliser la représentation des nombres à virgule dans un ordinateur, c'est un sujet absolument fondamental à ce document que nous aborderons plus tard également.
 
 Pour le moment, intéressons-nous à l'encodage des nombres à virgule flottante.
 Je n'apprends rien à personne en disant qu'un nombre à virgule est scindé en deux parties, la partie entière composée des chiffres derrière la virgule, et la partie fractionnaire composée des chiffres devant la virgule.
-La partie entière d'un nombre à virgule flottante est codé en _Binary Unsigned_.
-Par conséquent, pour pouvoir représenter des nombres à virgule flottante positif ou négatif, il faut rajouté un signe $\pm$ à la partie entière du nombre.
-C'est pourquoi le bit de poids le plus fort de la partie entière d'un nombre flottant, code le signe $-$ lorsqu'il est à $1$, et $+$ quand il vaut $0$.
-Cependant, l'encodage de la partie fractionnaire est tout nouveau, malgré une ressemblance avec le _Binary Unsigned_.
+La partie entière d'un nombre à virgule flottante est écrite en Binary Unsigned ; par conséquent, pour pouvoir représenter des nombres à virgule flottante positif ou négatif il faut rajouté un signe $\pm$ à la partie entière du nombre.
+Ce qui explique l'ajout d'un bit de poids supérieur au MSB de la partie entière d'un nombre flottant, qui interprète le signe $-$ quand il est à $1$ ou $+$ lorsqu'il vaut $0$.
+Cependant, l'encodage de la partie fractionnaire est tout nouveau, malgré une ressemblance avec le Binary Unsigned.
 Chaque bit de la partie fractionnaire est le facteur d'une puissance de $2$ négative ; la partie fractionnaire a comme valeur la somme de ces produits.
 Il sera plus simple de comprendre tout cela au travers d'une illustration, regardez ci-bas.
 
 $$+ \ 103.3125 = 0 \ 1100111.0101_2$$
 
-Dans la partie entière du nombre nous retrouvons le bit de poids le plus fort qui est à $0$ (ce dernier représente le signe $+$), ainsi que le codage _Binary Unsigned_ du nombre $103$, qui commence à nous être familier.
+Dans la partie entière du nombre nous retrouvons le bit de poids le plus fort qui est à $0$ (ce dernier représente le signe $+$), ainsi que le codage Binary Unsigned du nombre $103$, qui commence à nous être familier.
 Rien d'étonnant pour la partie fractionnaire, nous avons des bits... mais regardons dans le détails ce que valent ces bits.
 
 $$ 0.0101_2 = Integer \ Part\left(0 \times 2^0\right) + Fractional \ Part\left(0 \times 2^{-1} + 1 \times 2^{-2} + 0 \times 2^{-3} + 1 \times 2^{-4}\right)$$
 
-Nous remarquons que le bit de poids le plus fort de la partie fractionnaire est celui de poids $-1$, et que la valeur des puissances de $2$ négatives vont décroissant en fonction de la position du bit correspondant dans le nombre.
+Nous remarquons que le bit de poids le plus fort de la partie fractionnaire est celui de poids $-1$, et que la valeur des puissances de $2$ négatives vont décroissant en fonction de la position du bit correspondant dans le champs.
 
-Dans la section précédente nous parlions d'une propriété propre à l'encodage _Binary Unsigned_.
-Cette propriété peut être mise en oeuvre dans la partie entière d'un nombre à virgule flottante, car rappelons-le, cette partie est codée en _Binary Unsigned_.
-Malgré cela, l'encodage de la partie fractionnaire permet lui aussi de faire usage de cette propriété.
-Pour rappel, cela veut dire que tout bit à $1$ de poids $i$ compris dans la partie fractionnaire a une valeur strictement supérieure à la somme des valeurs de chaque bit de poids inférieur à $i$.
-De fait, il y a une continuité de cette propriété entre la partie entière et fractionnaire d'un nombre à virgule flottante.
-Autrement dit, un bit à $1$ de poids $i$ dans la partie entière a une valeur strictement supérieure à la somme des valeurs des bits de poids inférieur à $i$ de la partie entière et fractionnaire.
+Dans la section précédente nous parlions d'une propriété de l'encodage Binary Unsigned.
+Cette propriété peut être mise en oeuvre dans la partie entière d'un nombre à virgule flottante, car rappelons-le, cette partie est codée en Binary Unsigned.
+En outre, il s'avère que l'encodage de la partie fractionnaire permet lui aussi de faire usage de cette propriété.
+Pour rappel, cela veut dire que tout bit à $1$ de poids $i$ compris dans la partie fractionnaire a une valeur $\left(1 \times 2^i\right)$ strictement supérieure à la somme des valeurs des bits de poids inférieur à $i$.
+Ce qui insinue qu'il y a une continuité de cette propriété entre les bits de la partie entière et fractionnaire d'un nombre à virgule flottante.
+Autrement dit, un bit à $1$ de poids $i$ dans la partie entière a une valeur strictement supérieure à la somme des valeurs des bits de poids inférieur à $i$ compris dans la partie entière et fractionnaire.
 
 ### L'étymologie du terme de nombre à virgule flottante
 
-Par ailleurs, si ces nombres sont dits à virgule flottante, c'est parce que la virgule du nombre peut être déplacée sans que cela ne pose de problème.
-C'est la solution qui à ce jour, pour l'Homme, est la plus intuitive ainsi que la plus flexible pour représenter des nombres à virgule en base $2$.
-Il n'y a pas de contrainte spécifique, le nombre de bits avant et après la virgule peut varié.
-Malgré des encodages identiques pour la partie entière et fractionnaire des nombres à virgule flottante et à virgule fixe, ces derniers gèrent la virgule d'une façon bien différente.
-Les nombres à virgule fixe ont une certaine quantité de bits devant et derrière la virgule, il ne peut pas y avoir un bit de plus ou de moins, la virgule ne peut pas être déplacée.
-Le fait que la partie entière et fractionnaire soit composée d'un nombre fixe de bits fixe également la précision de codage d'un tel nombre.
-Ceci est un frein à beaucoup de cas d'usage mais c'est aussi un avantage dans de rare cas, comme avec les systèmes informatiques des banques.
-En effet, il est nécessaire que la précision d'affichage d'un solde soit de l'ordre du centième de centime près, admettons, mais il n'y a pas besoin de plus.
-La praticité derrière les nombres à virgule fixe c'est que la précision reste constante, elle ne varie pas en fonction du solde comme ce pourrait être le cas avec des nombres à virgule flottante.
+Ces nombres sont dits à virgule flottante parce que la virgule du nombre peut être déplacée sans que cela ne pose de problème.
+C'est la solution qui à ce jour, pour l'Homme, est la plus intuitive ainsi que la plus flexible pour l'écriture des nombres à virgule en binaire.
+Il n'y a pas de contrainte spécifique sur la virgule d'un tel nombre, au contraire de l'écriture des nombres en virgule fixe.
+Les nombres à virgule fixe ont une quantité fixe de bits qui composent la partie entière ainsi que fractionnaire du nombre, ce qui insinue que la virgule ne peut pas être déplacée.
+Par conséquent, ces nombres sont assez simple à représenter dans un ordinateur mais sont inutilement restrictifs pour l'Homme.
+De surcroît, la précision de codage d'un tel nombre est pré-fixée par la quantité de bits composant la partie fractionnaire, ceci est un frein à beaucoup de cas d'usage mais pas pour les systèmes informatiques des banques.
+En effet, il est tout à fait plausible que la précision d'affichage du solde d'un compte courant soit de l'ordre du centième de centime près, mais qu'il n'y ait pas besoin de plus de précision.
+L'avantage des nombres à virgule fixe est que la précision de codage reste donc constante, et ce, indépendamment de la valeur du solde ; ce qui ne serait pas le cas si les soldes étaient codés en virgule flottante.
+Votre seul ennui est alors d'avoir trop d'argent dans votre compte en banque, de sorte à ce que la précision de codage de votre solde devienne limitante et ne permette plus de quantifier votre fortune.
 
 # L'écriture scientifique binaire
 
