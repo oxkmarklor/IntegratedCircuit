@@ -242,11 +242,11 @@ Nous savons désormais que n'importe quel déplacement de la virgule d'un nombre
 Si vous avez déjà compris le fonctionnement de l'équation, vous pouvez vous rendre au chapitre suivant.
 
 L'équation du chapitre précédent semble être parfaitement appropriée pour les décalages vers la droite de la virgule d'un nombre flottant.
-En effet, je vous rappelle qu'un déplacement de $c$ rangs vers la droite de la virgule du nombre $\vert \ F \ \vert$  multiplie la valeur du nombre par $2^c$, avec $\left(c \gt 0\right)$.
+En effet, je vous rappelle qu'un déplacement de $c$ rangs vers la droite de la virgule du nombre $\vert \ F \ \vert$ multiplie $c$ fois la valeur du nombre par $2$, avec $\left(c \gt 0\right)$.
 Ce qui colle avec le membre droit de l'équation $\left(\vert F \vert \times \ 2^c \ \right)$.
 
 En parallèle, cette même équation utilise des valeurs négatives de $c$ lors des décalages vers la gauche de la virgule d'un nombre flottant.
-Pourtant, le plus simple aurait été de définir les mêmes valeurs de $c$, peu importe la direction des décalages, accompagné de deux équations différentes : une équation pour les décalages de la virgule vers la droite (celle déjà défini), ainsi qu'une autre équation plus appropriée pour les décalages de la virgule vers la gauche.
+Pourtant, le plus simple aurait été de définir les mêmes valeurs de $c$, peu importe la direction des décalages, accompagné de deux équations différentes : une équation pour les décalages de la virgule vers la droite (qui est défini ci-dessus), ainsi qu'une autre équation plus appropriée pour les décalages de la virgule vers la gauche.
 Cette seconde équation ressemblerait à ce qui suit.
 
 $$\sum_{i = msb\left(F\right) - 1}^{lsb\left(F\right)} \left(F_i \ \times \ 2^{\left(i - c\right)}\right) = \vert F \vert \div \ 2^c$$
@@ -254,7 +254,7 @@ $$\sum_{i = msb\left(F\right) - 1}^{lsb\left(F\right)} \left(F_i \ \times \ 2^{\
 Dans cette seconde équation, le terme $c$ représente donc le nombre de rang de décalage vers la gauche à induire sur la virgule du nombre $\vert \ F \ \vert$, et nous savons que $\left(c \gt 0\right)$.
 Remarquez qu'un décalage d'un rang vers la gauche de la virgule de $\vert \ F \ \vert$ $\left(c = 1\right)$, divise la valeur du nombre par $2$.
 De façon plus générale, pour tout décalage de la virgule de $c$ rangs vers la gauche, la valeur de $\vert \ F \ \vert$ est divisée par $2^c$.
-Ce qui colle parfaitement avec le membre droit de la seconde équation $\left(\vert F \vert \div \ 2^c \ \right)$, libre à vous de vérifier que le membre de gauche de cette même équation fonctionne bien.
+Ce qui colle parfaitement avec le membre droit de la seconde équation $\left(\vert F \vert \div \ 2^c \ \right)$, libre à vous de vérifier que le membre gauche de cette même équation fonctionne bien.
 
 Ce qui suit explique comment il est possible de passer d'un tel raisonnement à deux équations, à un raisonnement plus singulier d'une seule.
 
@@ -262,11 +262,7 @@ Nous allons essayer de réduire la forme de la seconde équation que nous venons
 Remarquons que le membre droit de cette seconde équation $\left(\vert F \vert \div \ 2^c \ \right)$ pourrait être remplacé par $\left(\vert F \vert \times \left(1 \div 2^c \ \right)\right)$ et que $\left(1 \div 2^c\right) = \ 2^{-c}$.
 Par définition, il est donc possible de remplacer $\left(\vert F \vert \times \ 2^{-c} \ \right)$ avec $\left(c \gt 0\right)$, par le membre de droite de la première équation $\left(\vert F \vert \times \ 2^c \ \right)$.
 Pour cela, il suffit de faire en sorte que tout déplacement vers la gauche de la virgule du nombre $\vert \ F \ \vert$ soit interprété par une valeur négative de $c$, et non positive.
-
-// trouver une alternative
-
-En outre, le membre de gauche de la première équation procède au calcul d'exposant $\left(i + c\right)$, lorsque $\left(c \lt 0\right)$.
-Ce qui revient au même que le calcul d'exposant du membre de gauche de la seconde équation $\left(i - c\right)$ pour $\left(c \gt 0\right)$.
+Quant au membre gauche de la première équation, il y figure un calcul $\left(i + c\right)$ qui lorsque $\left(c \lt 0\right)$ est équivalent au calcul $\left(i - c\right)$ avec $\left(c \gt 0\right)$ du membre gauche de la seconde équation.
 
 En bref, le fait que la variable $c$ puisse être positive ainsi que négative permet de ne faire usage que d'une seule équation, qu'importe la direction du décalage de la virgule qui est à faire.
 
@@ -282,7 +278,7 @@ Parce que $\left(S \ = \vert F \vert\right)$, nous en déduisons que dans cette 
 
 Je tiens à vous faire remarquer que si $\vert \ F \vert = \left(S \times M\right)$, alors la représentation du nombre flottant $F$ en écriture scientifique binaire est $F \ = \pm \left(S \times M\right)$.
 Le signe $\pm$ est celui du nombre flottant $F$, ce dont nous parlons au début du chapitre "_Le significande_".
-En bref, nous retrouvons les trois éléments de l'écriture scientifique, le _signe_ $\pm$, le _significande_ $S$ ainsi que le _multiplicande_ $M$.
+En bref, nous retrouvons les trois éléments de l'écriture scientifique, le __signe__ $\pm$, le __significande__ $S$ ainsi que le __multiplicande__ $M$.
 
 Les sections suivantes expliquent comment le multiplicande réajuste la valeur du significande à celle du nombre $F$ en valeur absolue.
 En outre, sachez que ces dernières font référence à l'équation définie dans le chapitre "_La transformation d'un nombre à virgule flottante en un significande_".
@@ -291,10 +287,10 @@ En outre, sachez que ces dernières font référence à l'équation définie dan
 
 En écriture scientifique binaire, la représentation d'un nombre à virgule flottante $F$ dont la valeur absolue est supérieure à l'intervalle $\left[1;2\right[$ d'un significande, s'accompagne d'une transformation du nombre $\vert \ F \ \vert$ en un significande $S$.
 La formation du significande passe par un décalage vers la gauche de la virgule du nombre $\vert \ F \ \vert$, ce qui divise par une puissance de $2$ la valeur du nombre.
-L'équation nous dit que la formation du significande $S$ passe par $\left(\vert F \vert \times \ 2^c\right)$ avec $\left(c \lt 0\right)$, ce qui est équivalent au fait de dire que $S \ = \left(\vert F \vert \div \ 2^{-c}\right)$.
-Le significande, par le fait que $\left(S \ \lt \vert F \vert\right)$, est un terme de l'écriture scientifique qui à lui seul ne peut pas représenter la valeur du nombre flottant $\vert \ F \ \vert$.
+L'équation nous dit que la formation du significande $S$ passe par $\left(\vert F \vert \times \ 2^c \ \right)$ avec $\left(c \lt 0\right)$, ce qui est équivalent au fait de dire que $S \ = \left(\vert F \vert \div \ 2^{-c} \ \right)$.
+Le significande, par le fait que $\left( \ S \ \lt \vert F \vert\right)$, est un terme de l'écriture scientifique qui à lui seul ne peut pas représenter la valeur du nombre flottant $\vert \ F \ \vert$.
 C'est pourquoi un multiplicande $M$ multiplie le significande $S$ de sorte que $\vert \ F \vert = \left(S \times M\right)$.
-Parce que $S \ = \left(\vert F \vert \div \ 2^{-c}\right)$, le multiplicande $M$ multiplie donc le significande $S$ par la même puissance de $2$ que celle ayant divisé $\vert \ F \ \vert$ pour former le significande.
+Parce que $S \ = \left(\vert F \vert \div \ 2^{-c} \ \right)$, le multiplicande $M$ multiplie donc le significande $S$ par la même puissance de $2$ que celle ayant divisé $\vert \ F \ \vert$ pour former le significande.
 Ce qui donne $\vert \ F \vert = \left(S \ \times \ 2^{-c}\right)$.
 Par conséquent, la représentation du nombre flottant $F$ en écriture scientifique binaire est $F \ = \pm \left(S \ \times \ 2^{-c}\right)$, comme nous l'avons vu plus haut.
 
@@ -303,8 +299,8 @@ Voici comme exemple l'écriture scientifique binaire du nombre $F = 5.5$, qui en
 $$+ \ 1.011_2 \ \times \ 2^2$$
 
 Le significande $1.011_2$ (ou $1.375$ en décimale) résulte du décalage de $2$ rangs vers la gauche de la virgule du nombre flottant $\vert \ F \ \vert$.
-La formation du significande engendre une division de la valeur du nombre $\vert \ F \ \vert$, ce que l'équation traduit par $\left(\vert F \vert \times \ 2^c\right)$ avec $\left(c = -2\right)$, ou encore $\left(\vert F \vert \div \ 2^{-c}\right)$.
-Sachant que $\left(1.375 \ \lt \vert 5.5 \vert\right)$, le multiplicande $M$ doit multiplier le significande $1.375$ par $2^{-c}$ de sorte que $\vert \ 5.5 \vert = \left(1.375 \ \times \ M\right)$.
+La formation du significande engendre une division de la valeur du nombre $\vert \ F \ \vert$, ce que l'équation traduit par $\left(\vert F \vert \times \ 2^c \ \right)$ avec $\left(c = -2\right)$, ou encore $\left(\vert F \vert \div \ 2^{-c} \ \right)$.
+Sachant que $\left( \ 1.375 \ \lt \vert 5.5 \vert\right)$, alors le multiplicande $M$ doit multiplier le significande $1.375$ par $2^{-c}$ de sorte que $\vert \ 5.5 \vert = \left(1.375 \ \times \ M\right)$.
 L'écriture scientifique du nombre à virgule flottante $F$ est donc bel et bien $5.5 \ = + \ 1.375 \ \times \ 2^2$.
 
 ### Lorsque le multiplicande divise la valeur du significande
