@@ -328,15 +328,25 @@ L'écriture scientifique du nombre à virgule flottante $F$ est donc bel et bien
 
 ### Un autre regard sur le multiplicande
 
+// tout revoir, expliquer plus simple que pour S = |F| >> c donc |F| = S << c
+
 Je vous invite à voir les choses d'une manière différente ; ceci nous sera utile pour plus tard.
 
-Nous savons que la formation du significande d'un nombre flottant $F$ dont $\vert \ F \vert \notin \left[1;2\right[$, requiert de décaler de $c$ rangs la virgule du nombre $\vert \ F \ \vert$.
+Nous savons que la formation du significande d'un nombre flottant $\vert \ F \vert \notin \left[1;2\right[$, requiert de décaler de $c$ rangs la virgule du nombre $\vert \ F \ \vert$.
 Selon l'équation, le significande $S$ ainsi obtenu vaut $\left(\vert F \vert \times \ 2^c\right)$.
 Pour le dire autrement, obtenir le significande $S$ par l'intermédiaire du calcul $\left(\vert F \vert \times \ 2^c\right)$, revient au même que de décaler la virgule du nombre $\vert \ F \ \vert$ de $log_2\left(2^c\right)$ rangs.
 
-Rappelons que le rôle du multiplicande est de réajuster la valeur du significande à la valeur absolue du nombre $F$.
-Nous avons vu dans les deux précédentes sections que le multiplicande réajuste toujours la valeur du significande en le multipliant par $2^{-c}$, ce qui donne $\vert \ F \vert = \left(S \times 2^{-c}\right)$.
-Une nouvelle fois, retrouver la valeur de $\vert \ F \ \vert$ par l'intermédiaire du calcul $\left(S \times 2^{-c}\right)$, revient au même que de décaler la virgule du significande $S$ de $log_2\left(2^{-c}\right)$ rangs.
+//
+
+Nous savons qu'en notation scientifique binaire, la représentation d'un nombre à virgule flottante $F$ dont la valeur absolue n'est pas comprise dans l'intervalle $\left[1;2\right[$, s'accompagne d'un déplacement de la virgule du nombre $\vert \ F \ \vert$ pour pouvoir former le significande.
+L'équation calcul la valeur du significande $S$ par $\left(\vert F \vert \times \ 2^c \ \right)$, où je rappelle que le terme $c$ représente le nombre de rang de décalage à induire sur la virgule du nombre $\vert \ F \ \vert$.
+Pour le dire autrement, le significande $S$ est obtensible par un décalage de la virgule du nombre $\vert \ F \ \vert$ de $log_2 \left(2^c\right)$ rangs.
+
+Désormais, rappelons que le rôle du multiplicande est de réajuster la valeur du significande $S$ à la valeur absolue du nombre $F$.
+Nous avons vu dans les deux sections précédentes que le multiplicande réajuste toujours la valeur du significande en le multipliant par $2^{-c}$, ce qui donne $\vert \ F \vert = \left(S \times 2^{-c}\right)$ avec $-c$ qui représente le nombre de rang de décalage à induire sur la virgule du significande.
+Dès lors, nous comprenons que la valeur de $\vert \ F \ \vert$ est réobtensible par un décalage de la virgule du signficande $S$ de $log_2 \left(2^{-c}\right)$ rangs.
+
+// une citation ici dans "Le codage du champ d'exposant"
 
 Cette section explique que pour remplir le rôle d'un multiplicande, il suffit de décaler la virgule du significande $S$ par le même nombre de rangs que ne l'a été celle de $\vert \ F \ \vert$ pour former le significande, mais dans la direction opposée.
 Rendons cela le plus clair possible avec un exemple.
@@ -440,7 +450,7 @@ Par ailleurs, tout ce qui vient d'être dit est valable pour tous les formats de
 Il s'avère que le circuit et sa démonstration mathématique sont amenés à effectuer des comparaisons entre deux champs d'exposant $E_1$ et $E_2$, ayant un même biais $B$.
 Ces comparaisons n'ont pas besoin de la valeur réelle des champs d'exposant comme avec $\left(E_1 - B\right) \gt \left(E_2 - B\right)$, car le biais $B$ est constant.
 Cette comparaison se transforme alors en $\left(E_1 \gt E_2\right)$, seule la valeur des nombres codés dans les champs d'exposant compte.
-En outre, n'oublions pas que l'_encodage par biais_ est une déclinaison du _Binary Unsigned_.
+En outre, n'oublions pas que l'_encodage par biais_ est une déclinaison du Binary Unsigned.
 Cela veut dire que les deux encodages partagent les même propriétés, notamment celle dont il a été question dans la section "_Une propriété du Binary Unsigned qui est fondamentale à la démonstration_".
 En bref, cela veut dire que la valeur de n'importe quel bit à $1$ de poids $i$ dans un champ d'exposant, est strictement supérieure à la somme des valeurs des bits de poids inférieur à $i$.
 Nous le verrons plus tard, mais c'est cette propriété qui permet à la démonstration mathématique d'effectuer entre autre des comparaisons entre des champs d'exposant.
