@@ -211,7 +211,7 @@ $$\sum_{i = msb\left(F\right) - 1}^{lsb\left(F\right)} \left(F_i \ \times \ 2^{\
 
 Les fonctions $msb$ et $lsb$ retournent respectivement le poids le plus fort ainsi que le plus faible du nombre passé en argument.
 Quant au terme $c$, il représente le nombre de rang de décalage à induire sur la virgule du nombre $\vert \ F \ \vert$.
-Qui plus est, lorsque $\left(c \lt 0\right)$ , cela signifie que la virgule doit être décalée vers la gauche et inversement quand $\left(c \gt 0\right)$, cela signifie que la virgule doit être décalée vers la droite.
+Qui plus est, lorsque $\left(c \lt 0\right)$, cela signifie que la virgule doit être décalée vers la gauche et inversement quand $\left(c \gt 0\right)$, cela signifie que la virgule doit être décalée vers la droite.
 
 Essayons de comprendre pourquoi est-ce qu'un décalage d'un rang vers la gauche de la virgule de $\vert \ F \ \vert$ $\left(c = -1\right)$ divise la valeur du nombre par $2$ comme le démontre l'équation ci-dessus.
 Comme nous l'avons vu précédemment, nous savons qu'avec un décalage d'un rang vers la gauche de la virgule de $F$, je cite "_chaque bit de la partie entière comme de la partie fractionnaire du nombre_ $F$, _voit son poids être décrémenté de_ $1$".
@@ -229,11 +229,11 @@ Désormais, nous sommes en capacité de comprendre toutes les implications qu'un
 Prenons comme exemple un décalage quelconque de la virgule vers la droite $\left(c \gt 0\right)$.
 Nous venons tout juste de voir qu'un décalage d'un rang vers la droite de la virgule de $\vert \ F \ \vert$ $\left(c = 1\right)$  multiplie par $2$ la valeur du nombre.
 Par conséquent, pour tout autre décalage de la virgule de $c$ rangs vers la droite, il suffit alors de multiplier $c$ fois par $2$ la valeur de $\vert \ F \ \vert$.
-Ce qui est équivalent au membre droit de l'équation $\left(\vert F \vert \times \ 2^c\right)$.
+Ce qui est équivalent au membre droit de l'équation $\left(\vert F \vert \times \ 2^c \ \right)$.
 Voyons maintenant le cas d'un décalage quelconque de la virgule vers la gauche $\left(c \lt 0\right)$.
 Nous savons qu'un décalage d'un rang vers la gauche de la virgule de $\vert \ F \ \vert$ $\left(c = -1\right)$  divise par $2$ la valeur du nombre.
 Donc dans le cas de tout autre décalage de la virgule vers la gauche, il suffit alors de diviser $\vert \ c \ \vert$ fois la valeur du nombre $\vert \ F \ \vert$ par $2$.
-Cela est une nouvelle fois équivalent au membre droit de l'équation $\left(\vert F \vert \times \ 2^c\right)$, nous verrons pourquoi dans le chapitre suivant.
+Cela est une nouvelle fois équivalent au membre droit de l'équation $\left(\vert F \vert \times \ 2^c \ \right)$, nous verrons pourquoi dans le chapitre suivant.
 
 Nous savons désormais que n'importe quel déplacement de la virgule d'un nombre flottant engendre une multiplication ou une division de la valeur du nombre par une puissance de $2$.
 
@@ -241,33 +241,32 @@ Nous savons désormais que n'importe quel déplacement de la virgule d'un nombre
 
 Si vous avez déjà compris le fonctionnement de l'équation, vous pouvez vous rendre au chapitre suivant.
 
-Dans la section précédente, je dis que la valeur du nombre $\vert \ F \ \vert$ est divisée par une puissance de $2$ lorsque sa virgule subit un décalage vers la gauche.
-L'équation sur laquelle ces calculs s'effectuent ne fait pourtant pas usage de division, essayons de comprendre pourquoi.
-
 L'équation du chapitre précédent semble être parfaitement appropriée pour les décalages vers la droite de la virgule d'un nombre flottant.
 En effet, je vous rappelle qu'un déplacement de $c$ rangs vers la droite de la virgule du nombre $\vert \ F \ \vert$  multiplie la valeur du nombre par $2^c$, avec $\left(c \gt 0\right)$.
-Ce qui colle avec le membre droit de l'équation $\left(\vert F \vert \times \ 2^c\right)$.
+Ce qui colle avec le membre droit de l'équation $\left(\vert F \vert \times \ 2^c \ \right)$.
 
 En parallèle, cette même équation utilise des valeurs négatives de $c$ lors des décalages vers la gauche de la virgule d'un nombre flottant.
-Pourtant, le plus simple aurait été de définir les mêmes valeurs de $c$, peu importe la direction des décalages, accompagné de deux équations différentes :
-une équation pour les décalages de la virgule vers la droite (celle déjà défini), ainsi qu'une autre équation plus appropriée pour les décalages de la virgule vers la gauche.
+Pourtant, le plus simple aurait été de définir les mêmes valeurs de $c$, peu importe la direction des décalages, accompagné de deux équations différentes : une équation pour les décalages de la virgule vers la droite (celle déjà défini), ainsi qu'une autre équation plus appropriée pour les décalages de la virgule vers la gauche.
 Cette seconde équation ressemblerait à ce qui suit.
 
 $$\sum_{i = msb\left(F\right) - 1}^{lsb\left(F\right)} \left(F_i \ \times \ 2^{\left(i - c\right)}\right) = \vert F \vert \div \ 2^c$$
 
-Avec cette équation $\left(c \gt 0\right)$, le terme représente toujours le nombre de rang de décalage à induire sur la virgule du nombre $\vert \ F \ \vert$.
+Dans cette seconde équation, le terme $c$ représente donc le nombre de rang de décalage vers la gauche à induire sur la virgule du nombre $\vert \ F \ \vert$, et nous savons que $\left(c \gt 0\right)$.
 Remarquez qu'un décalage d'un rang vers la gauche de la virgule de $\vert \ F \ \vert$ $\left(c = 1\right)$, divise la valeur du nombre par $2$.
 De façon plus générale, pour tout décalage de la virgule de $c$ rangs vers la gauche, la valeur de $\vert \ F \ \vert$ est divisée par $2^c$.
-Ce qui colle parfaitement avec le membre droit de la seconde équation $\left(\vert F \vert \div \ 2^c\right)$, libre à vous de vérifier que le membre de gauche de cette même équation fonctionne bien.
+Ce qui colle parfaitement avec le membre droit de la seconde équation $\left(\vert F \vert \div \ 2^c \ \right)$, libre à vous de vérifier que le membre de gauche de cette même équation fonctionne bien.
 
 Ce qui suit explique comment il est possible de passer d'un tel raisonnement à deux équations, à un raisonnement plus singulier d'une seule.
 
 Nous allons essayer de réduire la forme de la seconde équation que nous venons tout juste de définir, en la forme de la première équation ayant été définie dans le chapitre précédent.
-Remarquons que le membre droit de cette seconde équation $\left(\vert F \vert \div \ 2^c\right)$ pourrait être remplacé par $\left(\vert F \vert \times \left(1 \div 2^c\right)\right)$ et que $\left(1 \div 2^c\right) = 2^{-c}$.
-Par définition, il est donc possible de remplacer $\left(\vert F \vert \times \ 2^{-c}\right)$ avec $\left(c \gt 0\right)$, par le membre de droite de la première équation $\left(\vert F \vert \times \ 2^c\right)$.
-Pour cela, il suffit de faire en sorte que tout déplacement vers la gauche de la virgule du nombre $\vert \ F \ \vert$, soit interprété par une valeur négative de $c$, et non positive.
-Par ailleurs, le membre de gauche de la première équation procède au calcul d'exposant $\left(i + c\right)$, avec $\left(c \lt 0\right)$.
-Ce qui revient au même que le calcul d'exposant du membre de gauche de la seconde équation $\left(i - c\right)$, lorsque $\left(c \gt 0\right)$.
+Remarquons que le membre droit de cette seconde équation $\left(\vert F \vert \div \ 2^c \ \right)$ pourrait être remplacé par $\left(\vert F \vert \times \left(1 \div 2^c \ \right)\right)$ et que $\left(1 \div 2^c\right) = \ 2^{-c}$.
+Par définition, il est donc possible de remplacer $\left(\vert F \vert \times \ 2^{-c} \ \right)$ avec $\left(c \gt 0\right)$, par le membre de droite de la première équation $\left(\vert F \vert \times \ 2^c \ \right)$.
+Pour cela, il suffit de faire en sorte que tout déplacement vers la gauche de la virgule du nombre $\vert \ F \ \vert$ soit interprété par une valeur négative de $c$, et non positive.
+
+// trouver une alternative
+
+En outre, le membre de gauche de la première équation procède au calcul d'exposant $\left(i + c\right)$, lorsque $\left(c \lt 0\right)$.
+Ce qui revient au même que le calcul d'exposant du membre de gauche de la seconde équation $\left(i - c\right)$ pour $\left(c \gt 0\right)$.
 
 En bref, le fait que la variable $c$ puisse être positive ainsi que négative permet de ne faire usage que d'une seule équation, qu'importe la direction du décalage de la virgule qui est à faire.
 
