@@ -333,24 +333,16 @@ L'écriture scientifique du nombre à virgule flottante $F$ est donc bel et bien
 Je vous invite à voir les choses d'une manière différente ; ceci nous sera utile pour plus tard.
 
 Nous savons que le significande de l'écriture scientifique binaire d'un nombre à virgule flottante $F$, s'obtient par un déplacement de la virgule du nombre lorsque la valeur absolu de celui-ci n'est pas comprise dans l'intervalle $\left[1;2\right[$.
-Comme l'explique le chapitre "_La transformation d'un nombre à virgule flottante en un significande_" : n'importe quel décalage de $c$ rangs de la virgule du nombre $\vert \ F \ \vert$ multiplie ou divise la valeur dudit nombre par une puissance de $2$, ce que l'équation du même chapitre traduit par le calcul $\left(\vert F \vert \times \ 2^c \ \right)$.
+Comme l'explique le chapitre "_La transformation d'un nombre à virgule flottante en un significande_" : un décalage de $c$ rangs de la virgule du nombre $\vert \ F \ \vert$ multiplie ou divise la valeur dudit nombre par une puissance de $2$, ce que l'équation du même chapitre traduit par le calcul $\left(\vert F \vert \times \ 2^c \ \right)$.
 Je rappelle que le terme $c$ représente le nombre de rang de décalage à induire sur la virgule du nombre $\vert \ F \ \vert$, ce terme est positif pour les décalages vers la droite et négatif pour ceux vers la gauche.
 En résumé, le significande $S$ est obtensible par le calcul $\left(\vert F \vert \times \ 2^c \ \right)$ ou autrement dit par un décalage de la virgule du nombre $\vert \ F \ \vert$ de $\log_2 \left(2^c\right)$ rangs, lorsque la valeur dudit nombre $\vert \ F \vert \notin \left[1;2\right[$.
 
 Rappelons que le rôle du multiplicande $M$ et de réajuster la valeur du significande $S$ à la valeur absolue du nombre $F$ lorsque $\left( \ S \ \neq \vert F \vert\right)$, de sorte à ce que $\vert \ F \vert = \left(S \times M\right)$.
-Le multiplicande doit alors permettre de déplacer la virgule du significande $S$ du même nombre de rangs que ne l'a été celle de $\vert \ F \ \vert$ pour former le significande lui-même (c'est à dire de $c$ rangs), mais dans la direction opposée (donc de $-c$ rangs).
-Les sections précédentes démontrent que pour ce faire le multiplicande doit alors multiplié le significande par $2^{-c}$, ce qui traduit l'idée que $\vert \ F \vert = \left(S \times 2^{-c}\right)$.
-En définitive, cela veut bel et bien dire que la valeur absolue du nombre $F$ est obtensible par un décalage de la virgule du significande $S$ de $\log_2 \left(2^{-c}\right)$ rangs.
+Le multiplicande doit alors permettre de déplacer la virgule du significande $S$ du même nombre de rangs que ne l'a été celle de $\vert \ F \ \vert$ pour former le significande (c'est à dire de $c$ rangs), mais dans la direction opposée (donc de $-c$ rangs).
+Les sections précédentes démontrent que pour ce faire le multiplicande doit alors multiplié le significande par $2^{-c}$, signifiant ainsi que $\vert \ F \vert = \left(S \times 2^{-c}\right)$, ce qui est équivalent au fait de déplacer la virgule du significande $S$ de $\log_2 \left(2^{-c}\right)$ rangs.
 
-//
-
-Nous savons qu'en notation scientifique binaire, la représentation d'un nombre à virgule flottante $F$ dont la valeur absolue n'est pas comprise dans l'intervalle $\left[1;2\right[$, s'accompagne d'un déplacement de la virgule du nombre $\vert \ F \ \vert$ pour pouvoir former le significande.
-L'équation calcul la valeur du significande $S$ par $\left(\vert F \vert \times \ 2^c \ \right)$, où je rappelle que le terme $c$ représente le nombre de rang de décalage à induire sur la virgule du nombre $\vert \ F \ \vert$.
-Pour le dire autrement, le significande $S$ est obtensible par un décalage de la virgule du nombre $\vert \ F \ \vert$ de $log_2 \left(2^c\right)$ rangs.
-
-Désormais, rappelons que le rôle du multiplicande est de réajuster la valeur du significande $S$ à la valeur absolue du nombre $F$.
-Nous avons vu dans les deux sections précédentes que le multiplicande réajuste toujours la valeur du significande en le multipliant par $2^{-c}$, ce qui donne $\vert \ F \vert = \left(S \times 2^{-c}\right)$ avec $-c$ qui représente le nombre de rang de décalage à induire sur la virgule du significande.
-Dès lors, nous comprenons que la valeur de $\vert \ F \ \vert$ est réobtensible par un décalage de la virgule du signficande $S$ de $log_2 \left(2^{-c}\right)$ rangs.
+En bref, cette section explique que le multiplicande peut se contenté d'appliquer à la virgule du significande le décalage inverse de ce qu'a pu subir la virgule du nombre $\vert \ F \ \vert$.
+Nous verrons plus bas que savoir ceci va nous être utile.
 
 // une citation ici dans "Le codage du champ d'exposant"
 
