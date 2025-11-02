@@ -328,29 +328,19 @@ L'écriture scientifique du nombre à virgule flottante $F$ est donc bel et bien
 
 ### Un autre regard sur le multiplicande
 
-// à relire
-
 Je vous invite à voir les choses d'une manière différente ; ceci nous sera utile pour plus tard.
 
-Nous savons que le significande de l'écriture scientifique binaire d'un nombre à virgule flottante $F$, s'obtient par un déplacement de la virgule du nombre lorsque la valeur absolu de celui-ci n'est pas comprise dans l'intervalle $\left[1;2\right[$.
+Nous savons que le significande $S$ de l'écriture scientifique binaire d'un nombre à virgule flottante $F$, s'obtient par un déplacement de la virgule du nombre lorsque la valeur absolue de celui-ci n'est pas comprise dans l'intervalle $\left[1;2\right[$.
 Comme l'explique le chapitre "_La transformation d'un nombre à virgule flottante en un significande_" : un décalage de $c$ rangs de la virgule du nombre $\vert \ F \ \vert$ multiplie ou divise la valeur dudit nombre par une puissance de $2$, ce que l'équation du même chapitre traduit par le calcul $\left(\vert F \vert \times \ 2^c \ \right)$.
 Je rappelle que le terme $c$ représente le nombre de rang de décalage à induire sur la virgule du nombre $\vert \ F \ \vert$, ce terme est positif pour les décalages vers la droite et négatif pour ceux vers la gauche.
-En résumé, le significande $S$ est obtensible par le calcul $\left(\vert F \vert \times \ 2^c \ \right)$ ou autrement dit par un décalage de la virgule du nombre $\vert \ F \ \vert$ de $\log_2 \left(2^c\right)$ rangs, lorsque la valeur dudit nombre $\vert \ F \vert \notin \left[1;2\right[$.
+En résumé, le significande $S$ est obtensible par le calcul $\left(\vert F \vert \times \ 2^c \ \right)$ ce qui est équivalent au fait de déplacer la virgule du nombre $\vert \ F \ \vert$ de $log_2 \left(2^c\right)$ rangs.
 
 Rappelons que le rôle du multiplicande $M$ et de réajuster la valeur du significande $S$ à la valeur absolue du nombre $F$ lorsque $\left( \ S \ \neq \vert F \vert\right)$, de sorte à ce que $\vert \ F \vert = \left(S \times M\right)$.
 Le multiplicande doit alors permettre de déplacer la virgule du significande $S$ du même nombre de rangs que ne l'a été celle de $\vert \ F \ \vert$ pour former le significande (c'est à dire de $c$ rangs), mais dans la direction opposée (donc de $-c$ rangs).
-Les sections précédentes démontrent que pour ce faire le multiplicande doit alors multiplié le significande par $2^{-c}$, signifiant ainsi que $\vert \ F \vert = \left(S \times 2^{-c}\right)$, ce qui est équivalent au fait de déplacer la virgule du significande $S$ de $\log_2 \left(2^{-c}\right)$ rangs.
+Les sections précédentes démontrent que pour ce faire le multiplicande doit alors multiplié le significande par $2^{-c}$, signifiant ainsi que $\vert \ F \vert = \left(S \times 2^{-c}\right)$ ce qui est équivalent au fait de déplacer la virgule du significande $S$ de $\log_2 \left(2^{-c}\right)$ rangs.
 
-En bref, cette section explique que le multiplicande peut se contenté d'appliquer à la virgule du significande le décalage inverse de ce qu'a pu subir la virgule du nombre $\vert \ F \ \vert$.
-Nous verrons plus bas que savoir ceci va nous être utile.
-
-// une citation ici dans "Le codage du champ d'exposant"
-
-Cette section explique que pour remplir le rôle d'un multiplicande, il suffit de décaler la virgule du significande $S$ par le même nombre de rangs que ne l'a été celle de $\vert \ F \ \vert$ pour former le significande, mais dans la direction opposée.
-Rendons cela le plus clair possible avec un exemple.
-Imaginons que la formation d'un significande $S$ soit obtenu par un décalage de ___trois rangs vers la gauche___ de la virgule du nombre $\vert \ F \ \vert$, donc $\left(c = -3\right)$.
-Retrouver la valeur du nombre $\vert \ F \ \vert$ depuis le significande $S$ requiert un décalage de ___trois rangs vers la droite___ de la virgule du significande, ou, autrement dit, il s’agit de décaler la virgule du significande $S$ de $-c$ rangs.
-Bien entendu, cela fonctionne aussi quand $c$ est positif.
+En bref, cette section explique que le multiplicande peut se contenté d'appliquer à la virgule du significande, le décalage inverse de ce qu'a subit la virgule du nombre $\vert \ F \ \vert$.
+Plus bas, nous verrons en quoi cela peut bien nous être utile.
 
 # Le standard IEEE-754
 
