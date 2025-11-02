@@ -328,9 +328,21 @@ L'écriture scientifique du nombre à virgule flottante $F$ est donc bel et bien
 
 ### Un autre regard sur le multiplicande
 
-// tout revoir, expliquer plus simple que pour S = |F| >> c donc |F| = S << c
-
 Je vous invite à voir les choses d'une manière différente ; ceci nous sera utile pour plus tard.
+
+Nous savons que le significande de l'écriture scientifique binaire d'un nombre à virgule flottante $F$, s'obtient par un déplacement de la virgule du nombre lorsque la valeur absolu de celui-ci n'est pas comprise dans l'intervalle $\left[1;2\right[$.
+Comme l'explique le chapitre "_La transformation d'un nombre à virgule flottante en un significande_" : n'importe quel décalage de $c$ rangs de la virgule du nombre $\vert \ F \ \vert$ multiplie ou divise la valeur dudit nombre par une puissance de $2$, ce que l'équation du même chapitre traduit par le calcul $\left(\vert F \vert \times \ 2^c \ \right)$.
+Je rappelle que le terme $c$ représente le nombre de rang de décalage à induire sur la virgule du nombre $\vert \ F \ \vert$, ce terme est positif pour les décalages vers la droite et négatif pour ceux vers la gauche.
+En résumé, le significande $S$ est obtensible par le calcul $\left(\vert F \vert \times \ 2^c \ \right)$ ou autrement dit par un décalage de la virgule du nombre $\vert \ F \ \vert$ de $\log_2 \left(2^c\right)$ rangs, lorsque ledit nombre $\vert \ F \vert \notin \left[1;2\right[$.
+
+Ceci nous intéresse tout particulièrement car rappelons que le multiplicande $M$ a pour rôle de réajuster la valeur du significande $S$ à la valeur absolue du nombre $F$, ce que les sections précédentes expriment par $\vert F \vert = \left(S \times M\right)$.
+Qui plus est, ces sections démontrent que le multiplicande multiplie toujours le significande par $2^{-c}$, autrement dit cela donne $\vert F \vert = \left(S \times 2^{-c}\right)$ ce qui revient à déplacer la virgule du significande $S$ de $log_2 \left(2^{-c}\right)$ rangs.
+Le multiplicande doit simplement déplacer la virgule du significande $S$ par le même nombre de rangs que ne l'a été celle de $\vert \ F \ \vert$ pour former le significande, mais dans la direction opposée.
+D'où la négation du terme $c$.
+
+
+
+//
 
 Nous savons que la formation du significande d'un nombre flottant $\vert \ F \vert \notin \left[1;2\right[$, requiert de décaler de $c$ rangs la virgule du nombre $\vert \ F \ \vert$.
 Selon l'équation, le significande $S$ ainsi obtenu vaut $\left(\vert F \vert \times \ 2^c\right)$.
