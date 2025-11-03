@@ -381,14 +381,13 @@ Les deux sections suivantes concernent l'ensemble de ces bits formant le champ d
 
 ### L'encodage du champ de mantisse tronquée
 
-Le champs binaire du nombre $F$ codé au format Half Precision a un champ de __mantisse tronquée__ qui correspond au __significande__ de l'écriture scientifique binaire de $F$.
-Grâce au chapitre "_Le significande_", rappelons que le __significande__ s'obtient depuis une modification (non systématique) de la valeur absolue du nombre à virgule flottante $F$.
-Par conséquent, nous en déduisons que l'encodage du champ de __mantisse tronquée__ est simplement celui d'un nombre à virgule flottante.
-Je vous invite donc à relire le chapitre "_Les nombres à virgule flottante_", si nécessaire.
+Nous savons que le champs de __mantisse tronquée__ du nombre $F$ codé au format Half Precision correspond au __significande__ de l'écriture scientifique binaire de ce même nombre.
+Rappelons que le __significande__ s'obtient en modifiant (non de manière systématique) la valeur absolue du nombre à virgule flottante $F$.
+Par conséquent, nous en déduisons que l'encodage du champ de __mantisse tronquée__ est celui d'un nombre à virgule flottante, et vous invite à relire le chapitre "_Les nombres à virgule flottante_" si nécessaire.
 
-Il s'avère que le dernier paragraphe du chapitre "_Les nombres à virgule flottante_" nous donne accès à une information assez importante.
-La valeur de n'importe quel bit à $1$ de poids $i$ dans un nombre à virgule flottante, est strictement supérieure à la somme des valeurs des bits de poids inférieur à $i$.
-Ce qui insinue que n'importe quel bit à $1$ de poids $i$ dans un champ de mantisse tronquée $\left(T_i = 1\right)$, a une valeur $\left(T_i \times 2^i\right)$ qui est elle aussi strictement supérieure à la somme des valeurs des bits de poids inférieur à $i$ du champs.
+Il s'avère que le dernier paragraphe dudit chapitre nous donne accès à une information assez importante.
+La valeur de n'importe quel bit à $1$ de poids $i$ dans un nombre à virgule flottante $\left(1 \times 2^i\right)$, est strictement supérieure à la somme des valeurs des bits de poids inférieur à $i$.
+Ce qui insinue que n'importe quel bit à $1$ de poids $i$ dans un champ de mantisse tronquée $\left(T_i = 1\right)$, a une valeur $\left(T_i \times 2^i\right)$ qui est elle aussi strictement supérieure à la somme des valeurs des bits de poids inférieur à $i$.
 Autrement dit, le champ de __mantisse tronquée__ partage les propriétés des nombres à virgule flottante... mais il n'est pas le seul.
 
 Cette propriété provient de l'encodage Binary Unsigned, et il se trouve que l'encodage du champ d'__exposant__ en est une déclinaison.
