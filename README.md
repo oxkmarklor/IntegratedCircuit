@@ -349,8 +349,8 @@ Ce document est une démonstration mathématique du fonctionnement d'un circuit 
 Il existe plusieurs formats de nombre défini par le standard __IEEE-754__, seul la taille change d'un format à un autre.
 Tout format défini par la norme est composé des trois éléments suivant :
   - Le __bit de signe__
-  - Le champs d'__exposant__
-  - Le champs de __mantisse tronquée__
+  - Le champ d'__exposant__
+  - Le champ de __mantisse tronquée__
 
 Les deux formats les plus connus sont le __Simple Precision__ ainsi que le __Double Precision__, qui permettent le codage de nombre à virgule sur des champs binaires de, respectivement, $32$ et $64$ bits.
 Cependant, le circuit électronique que j'ai conceptualisé ne prend en charge que les opérandes de format __Half Precision__, ceci est principalement dû aux complexités de schématisation du circuit.
@@ -381,7 +381,7 @@ Les deux sections suivantes concernent l'ensemble de ces bits formant le champ d
 
 ### L'encodage du champ de mantisse tronquée
 
-Nous savons que le champs de __mantisse tronquée__ du nombre $F$ codé au format Half Precision correspond au __significande__ de l'écriture scientifique binaire de ce même nombre.
+Nous savons que le champ de __mantisse tronquée__ du nombre $F$ codé au format Half Precision correspond au __significande__ de l'écriture scientifique binaire de ce même nombre.
 Rappelons que le __significande__ s'obtient en modifiant (non de manière systématique) la valeur absolue du nombre à virgule flottante $F$.
 Par conséquent, nous en déduisons que l'encodage du champ de __mantisse tronquée__ est celui d'un nombre à virgule flottante, et vous invite à relire le chapitre "_Les nombres à virgule flottante_" si nécessaire.
 
@@ -397,47 +397,57 @@ Nous en reparlerons d'ici là.
 
 ### Le codage du champ de mantisse tronquée
 
-Précédemment, nous avons vu que le champs de __mantisse tronquée__ du nombre $F$ codé au format Half Precision correspondait au __significande__ de l'écriture scientifique binaire de ce même nombre.
+Précédemment, nous avons vu que le champ de __mantisse tronquée__ du nombre $F$ codé au format Half Precision correspondait au __significande__ de l'écriture scientifique binaire de ce même nombre.
 Ce qui est faux, ou plus exactement presque vrai.
 
 En écriture scientifique binaire, le __significande__ ne peut interpréter que des valeurs comprises dans l'intervalle $\left[1;2\right[$ ; cela insinue que la partie entière d'un tel __significande__ est toujours composée d'un seul et unique bit à $1$.
 Le standard IEEE-754 a donc fait le choix de ne pas coder la partie entière des __significandes__ dans les champs de __mantisse tronquée__, cela permettant un gain de précision d'un bit sur le codage des __significandes__.
-Pour autant, il faut prendre en compte la valeur de ce bit $\left(1 \times 2^0\right)$ lors de l'évaluation de la valeur d'un champs de __mantisse tronquée__, d'où son nom de __bit implicite__.
+Pour autant, il faut prendre en compte la valeur de ce bit $\left(1 \times 2^0\right)$ lors de l'évaluation de la valeur d'un champ de __mantisse tronquée__, d'où son nom de __bit implicite__.
 Aussi, sachez que cette optimisation est appliquée à l'ensemble des formats définis par le standrard IEEE-754.
 
 Finalement, je vous rappelle qu'en écriture scientifique le __significande__ porte également le nom de __mantisse__.
-Ce qui nous permet d'en déduire que le nom de __mantisse tronquée__ est dû au fait que ce champs ne code qu'une partie du __significande__ (de la __mantisse__).
+Ce qui nous permet d'en déduire que le nom de __mantisse tronquée__ est dû au fait que ce champ ne code qu'une partie du __significande__ (de la __mantisse__).
 
 ## Le champ d'exposant
 
-En introduction se trouve une illustration de la disposition des bits qui composent le format Half Precision ; cette illustration montre que le champ d'exposant $E$ est composé de $5$ bits.
-Voici les poids de chacun des bits qui compose le champ d'exposant :
+En introduction se trouve une illustration de la disposition de chacun des bits des trois éléments qui composent le format Half Precision ; cette illustration montre que le champs d'__exposant__ $E$ est composé de $5$ bits.
+Voici les poids de chacun des bits qui compose le champ d'__exposant__ :
 
 $$\left[ \quad .. \quad , \quad E_{14}, \ E_{13}, \ E_{12}, \ E_{11}, \ E_{10}, \quad .. \quad \right]$$
 
-Les deux sections suivantes concernent l'ensemble de ces bits formant le champ d'exposant.
+Les deux sections suivantes concernent l'ensemble de ces bits formant le champ d'__exposant__.
 
 ### L'encodage par biais du champ d'exposant
 
-Le champ d'exposant utilise un _encodage par biais_ qui est une déclinaison de l'encodage _Binary Unsigned_.
+Le champ d'__exposant__ utilise un __encodage par biais__ qui est une déclinaison de l'encodage __Binary Unsigned__.
 
-L'encodage par biais s'appuie sur un champ binaire utilisant l'encodage Binary Unsigned ; le champ en question se charge de coder un nombre entier naturel.
-Il faut ensuite ajouter ou déduire une constante appelée biais (qui est aussi un nombre entier naturel), au nombre codé par le champ binaire sous-jacent.
-Le résultat de ce calcul forme la valeur que représente réellement le champ.
-Nous comprenons donc qu'un encodage par biais est en quelque sorte un encodage Binary Unsigned déguisé.
+L'__encodage par biais__ s'appuie sur un champ binaire utilisant l'encodage __Binary Unsigned__ ; le champ en question se charge de coder un nombre entier naturel.
+Il faut ensuite ajouter ou déduire une constante appelée biais (qui est aussi un nombre entier naturel), au nombre codé par le champ binaire sous-jacent ; le résultat de ce calcul est alors la valeur qu'interprète réellement le champ.
+Désormais, nous comprenons pourquoi est-ce que l'__encodage par biais__ est décrit comme une déclinaison de l'encodage __Binary Unsigned__.
 
-Dans le cas d'un champ d'exposant $E$ d'une taille de $N$ bits, le champ code en Binary Unsigned un nombre entier naturel dont la valeur est comprise dans l'intervalle $\left[0; \ 2^N - 1\right]$.
-La valeur que représente un champ d'exposant $E$ est issu du calcul $\left(E - B\right)$, pour un biais $B$ d'une valeur de $\left(2^{\left(N - 1\right)} - 1\right)$.
-Un champ d'exposant peut donc représenter des valeurs positives comme négatives.
-Par ailleurs, tout ce qui vient d'être dit est valable pour tous les formats de nombre à virgule ayant été établis par le standard IEEE-754.
+Prenons le cas d'un champ d'__exposant__ $E$ d'une taille de $N$ bits, le champ code en __Binary Unsigned__ un nombre entier naturel dont la valeur est comprise dans l'intervalle $\left[0;2^N - 1\right]$.
+En parallèle, la valeur du biais $B$ se calcul par la formule $\left(2^{\left(N - 1\right)} - 1\right)$, pour qu'au final la valeur qu'interprète le champ d'__exposant__ soit $\left(E - B\right)$.
+Dès lors, nous comprenons que le champ d'__exposant__ peut interpréter des valeurs positives comme négatives.
+Sachez que tout ce qui vient d'être dit est valable pour l'ensemble des formats ayant été établis par le standard IEEE-754.
 
-Il s'avère que le circuit et sa démonstration mathématique sont amenés à effectuer des comparaisons entre deux champs d'exposant $E_1$ et $E_2$, ayant un même biais $B$.
-Ces comparaisons n'ont pas besoin de la valeur réelle des champs d'exposant comme avec $\left(E_1 - B\right) \gt \left(E_2 - B\right)$, car le biais $B$ est constant.
-Cette comparaison se transforme alors en $\left(E_1 \gt E_2\right)$, seule la valeur des nombres codés dans les champs d'exposant compte.
-En outre, n'oublions pas que l'_encodage par biais_ est une déclinaison du Binary Unsigned.
+Pour conclure, il s'avère que le circuit est amené à effectuer des comparaisons entre les champs d'__exposant__ de ses deux opérandes.
+Dans les faits, ces comparaisons n'ont pas besoin de la réel valeur qu'interprète les champs d'__exposant__ $\left(E_1 - B\right)$ ainsi que $\left(E_2 - B\right)$, car le biais $B$ est constant.
+Par exemple la comparaison $\left(E_1 - B\right) \gt \left(E_2 - B\right)$ est inutilement complexe, il suffit que le circuit compare $\left(E_1 \gt E_2\right)$.
+Pour ce faire, le circuit utilise une propriété de l'encodage des champs d'__exposant__ qui est rappelons-le l'encodage __Binary Unsigned__.
+Cette propriété est celle dont il est le sujet dans la section "_Une propriété du Binary Unsigned qui est fondamentale à la démonstration_" ; concrètement, cette dernière nous dit que la valeur de n'importe quel bit à $1$ de poids $i$ dans un champ d'__exposant__, est strictement supérieure à la somme des valeurs des bits de poids inférieur à $i$.
+Nous verrons plus tard par le prisme de la démonstration mathématique, que c'est cette propriété qui permet au circuit d'effectuer (entre autre) des comparaisons entre des champs d'__exposant__.
+
+
+
+//
+
+Il s'avère que le circuit et sa démonstration mathématique sont amenés à effectuer des comparaisons entre deux champs d'__exposant__ $E_1$ et $E_2$, ayant un même biais $B$.
+Ces comparaisons n'ont pas besoin de la valeur réelle des champs d'__exposant__ comme avec $\left(E_1 - B\right) \gt \left(E_2 - B\right)$, car le biais $B$ est constant.
+Cette comparaison se transforme alors en $\left(E_1 \gt E_2\right)$, seule la valeur des nombres codés dans les champs d'__exposant__ compte.
+En outre, n'oublions pas que l'__encodage par biais__ est une déclinaison du __Binary Unsigned__.
 Cela veut dire que les deux encodages partagent les même propriétés, notamment celle dont il a été question dans la section "_Une propriété du Binary Unsigned qui est fondamentale à la démonstration_".
-En bref, cela veut dire que la valeur de n'importe quel bit à $1$ de poids $i$ dans un champ d'exposant, est strictement supérieure à la somme des valeurs des bits de poids inférieur à $i$.
-Nous le verrons plus tard, mais c'est cette propriété qui permet à la démonstration mathématique d'effectuer entre autre des comparaisons entre des champs d'exposant.
+En bref, cela veut dire que la valeur de n'importe quel bit à $1$ de poids $i$ dans un champ d'__exposant__, est strictement supérieure à la somme des valeurs des bits de poids inférieur à $i$.
+Nous le verrons plus tard, mais c'est cette propriété qui permet à la démonstration mathématique d'effectuer entre autre des comparaisons entre des champs d'__exposant__.
 
 ### Le codage du champ d'exposant
 
