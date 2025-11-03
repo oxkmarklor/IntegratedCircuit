@@ -344,34 +344,31 @@ Plus bas, nous verrons en quoi cela peut bien nous être utile.
 
 # Le standard IEEE-754
 
-La norme IEEE-754 standardise la représentation (l'encodage) des nombres à virgule dans un ordinateur.
-Ce document est une démonstration mathématique d'un circuit électronique qui a pour fonction principale de produire des comparaisons entre deux opérandes de standard IEEE-754.
-Pour plus d'informations sur le circuit électronique, jetez un oeil à la documentation dédiée au circuit.
-Il existe plusieurs formats de nombre défini par le standard IEEE-754, chaque format étant différent des autres que par sa taille.
-Un format de nombre à virgule défini par la norme est composé des trois éléments suivant :
-  - Le ___bit de signe___
-  - Le champs d'___exposant___
-  - Le champs de ___mantisse tronquée___
+La norme __IEEE-754__ standardise la représentation (l'encodage) des nombres à virgule dans un ordinateur.
+Ce document est une démonstration mathématique du fonctionnement d'un circuit électronique qui a pour but principale de produire des comparaisons entre deux opérandes définis par le standard __IEEE-754__ ; pour plus d'informations sur le circuit électronique, jetez un oeil à la documentation dédiée.
+Il existe plusieurs formats de nombre défini par le standard __IEEE-754__, seul la taille change d'un format à un autre.
+Tout format défini par la norme est composé des trois éléments suivant :
+  - Le __bit de signe__
+  - Le champs d'__exposant__
+  - Le champs de __mantisse tronquée__
 
-Les deux formats les plus connus sont le _Simple Precision_ ainsi que le _Double Precision_, qui permettent le codage de nombre à virgule sur des champs binaires de, respectivement, $32$ et $64$ bits.
-Cependant, le circuit électronique que j'ai conceptualisé ne prend en charge que les opérandes de format _Half Precision_, ceci est principalement dû aux complexités de schématisation du circuit.
-Le format Half Precision permet de coder des nombres à virgule sur des champs binaires de $16$ bits.
-Voici la disposition de chacun des bits des trois éléments composant le format Half Precision :
+Les deux formats les plus connus sont le __Simple Precision__ ainsi que le __Double Precision__, qui permettent le codage de nombre à virgule sur des champs binaires de, respectivement, $32$ et $64$ bits.
+Cependant, le circuit électronique que j'ai conceptualisé ne prend en charge que les opérandes de format __Half Precision__, ceci est principalement dû aux complexités de schématisation du circuit.
+Le format __Half Precision__ permet de coder des nombres à virgule sur des champs binaires de $16$ bits.
+Voici la disposition de chacun des bits des trois éléments composant le format __Half Precision__ :
 
 $$\left[S_{15}, \quad E_{14}, \ E_{13}, \ E_{12}, \ E_{11}, \ E_{10}, \quad T_9, \ T_8, \ T_7, \ T_6, \ T_5, \ T_4, \ T_3, \ T_2, \ T_1, \ T_0\right]$$
 
-$\quad S$: Sign bit, $\quad E$: Exponent, $\quad T$: Truncated mantissa
+$\quad S$: Sign bit, $\quad E$: Exponent field bit, $\quad T$: Truncated mantissa field bit
 
-Chaque indice $i$ de la forme $X_i$ qui est compris dans l'intervalle $\left[0;15\right]$, représente le poids d'un bit précis dans le champ binaire d'un nombre codé au format Half Precision.
-Il est en effet très commun d'indicer les bits d'un champ binaire par leurs poids.
+Chaque indice $i$ de la forme $X_i$ qui est compris dans l'intervalle $\left[0;15\right]$, représente le poids d'un bit $X$ dans le champ binaire d'un nombre codé au format __Half Precision__.
 
-Précédemment, nous avons longuement parlé de l'écriture scientifique binaire des nombres à virgule flottante.
-La raison en est que le standard IEEE-754 s'appuie sur l'écriture scientifique binaire pour définir les différents formats de nombres à virgule, tel que le Half Precision.
-Dans le champs binaire d'un nombre $F$ écrit au format Half Precision, le bit de signe (bit de poids $15$) est défini en fonction du signe $\pm$ de l'écriture scientifique binaire du nombre $F$.
-Quant aux champs d'exposant et de mantisse tronquée, ils correspondent respectivement au multiplicande ainsi qu'au significande de l'écriture scientifique de $F$.
-Malgré tout, dans les prochains chapitres dédiés aux champs d'exposant et de mantisse tronquée, nous verrons que le cas de ces champs est légèrement plus complexe.
+Précédemment, nous avons longuement parlé de l'écriture scientifique binaire ; la raison en est que le standard __IEEE-754__ s'appuie sur l'écriture scientifique binaire pour définir les différents formats de nombres à virgule, tel que le __Half Precision__.
+Dans le champs binaire d'un nombre $F$ écrit au format __Half Precision__, le __bit de signe__ (bit de poids $15$) est défini en fonction du signe $\pm$ de l'écriture scientifique binaire du nombre $F$.
+Quant aux champs d'__exposant__ et de __mantisse tronquée__, ils correspondent respectivement au __multiplicande__ ainsi qu'au __significande__ de l'écriture scientifique binaire de $F$.
+Malgré tout, dans les prochains chapitres dédiés aux champs d'__exposant__ et de __mantisse tronquée__, nous verrons que le cas de ces champs est légèrement plus complexe.
 
-Etant donné que le circuit électronique ne prend en charge que des opérandes (nombres) au format Half Precision, le reste du document ne fera plus que référence à ce format.
+Etant donné que le circuit électronique ne prend en charge que des opérandes (nombres) au format __Half Precision__, le reste du document ne fera plus que référence à ce format.
 
 ## Le champ de mantisse tronquée
 
