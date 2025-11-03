@@ -397,17 +397,16 @@ Nous en reparlerons d'ici là.
 
 ### Le codage du champ de mantisse tronquée
 
-Précédemment, nous disions que le nombre $F$ codé au format Half Precision, avait un champ de mantisse tronquée qui correspondait au significande de l'écriture scientifique binaire de ce même nombre $F$.
-Ce qui est faux, ou plutôt presque vrai.
+Précédemment, nous avons vu que le champs de __mantisse tronquée__ du nombre $F$ codé au format Half Precision correspondait au __significande__ de l'écriture scientifique binaire de ce même nombre.
+Ce qui est faux, ou plus exactement presque vrai.
 
-En écriture scientifique binaire, le significande ne peut interpréter que des valeurs comprises dans l'intervalle $\left[1;2\right[$.
-Cela insinue que la partie entière d'un tel significande est toujours composée d'un seul et unique bit à $1$.
-Le standard IEEE-754 a donc fait le choix de ne pas coder la partie entière des significandes dans les champs de mantisse tronquée, cela permettant un gain de précision de $1$ bit sur le codage des significandes.
-Pour autant, la valeur du bit de la partie entière d'un significande est toujours prise en compte, ce dernier ne porte pas le nom de _bit implicite_ pour rien.
-Cette optimisation est appliquée peu importe le format.
+En écriture scientifique binaire, le __significande__ ne peut interpréter que des valeurs comprises dans l'intervalle $\left[1;2\right[$ ; cela insinue que la partie entière d'un tel __significande__ est toujours composée d'un seul et unique bit à $1$.
+Le standard IEEE-754 a donc fait le choix de ne pas coder la partie entière des __significandes__ dans les champs de __mantisse tronquée__, cela permettant un gain de précision d'un bit sur le codage des __significandes__.
+Pour autant, il faut prendre en compte la valeur de ce bit $\left(1 \times 2^0\right)$ lors de l'évaluation de la valeur d'un champs de __mantisse tronquée__, d'où son nom de __bit implicite__.
+Aussi, sachez que cette optimisation est appliquée à l'ensemble des formats définis par le standrard IEEE-754.
 
-Je vous rappelle qu'en écriture scientifique, le significande s'appelle aussi une _mantisse_.
-C'est dû au fait que le champ de mantisse tronquée ne code qu'une partie du significande (de la mantisse), qui a valu un tel nom à ce champ.
+Finalement, je vous rappelle qu'en écriture scientifique le __significande__ porte également le nom de __mantisse__.
+Ce qui nous permet d'en déduire que le nom de __mantisse tronquée__ est dû au fait que ce champs ne code qu'une partie du __significande__ (de la __mantisse__).
 
 ## Le champ d'exposant
 
