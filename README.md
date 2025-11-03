@@ -423,31 +423,20 @@ Le champ d'__exposant__ utilise un __encodage par biais__ qui est une déclinais
 
 L'__encodage par biais__ s'appuie sur un champ binaire utilisant l'encodage __Binary Unsigned__ ; le champ en question se charge de coder un nombre entier naturel.
 Il faut ensuite ajouter ou déduire une constante appelée biais (qui est aussi un nombre entier naturel), au nombre codé par le champ binaire sous-jacent ; le résultat de ce calcul est alors la valeur qu'interprète réellement le champ.
-Désormais, nous comprenons pourquoi est-ce que l'__encodage par biais__ est décrit comme une déclinaison de l'encodage __Binary Unsigned__.
+Désormais, nous comprenons pourquoi est-ce que l'__encodage par biais__ est décrit comme étant une déclinaison de l'encodage __Binary Unsigned__.
 
 Prenons le cas d'un champ d'__exposant__ $E$ d'une taille de $N$ bits, le champ code en __Binary Unsigned__ un nombre entier naturel dont la valeur est comprise dans l'intervalle $\left[0;2^N - 1\right]$.
 En parallèle, la valeur du biais $B$ se calcul par la formule $\left(2^{\left(N - 1\right)} - 1\right)$, pour qu'au final la valeur qu'interprète le champ d'__exposant__ soit $\left(E - B\right)$.
 Dès lors, nous comprenons que le champ d'__exposant__ peut interpréter des valeurs positives comme négatives.
 Sachez que tout ce qui vient d'être dit est valable pour l'ensemble des formats ayant été établis par le standard IEEE-754.
 
-Pour conclure, il s'avère que le circuit est amené à effectuer des comparaisons entre les champs d'__exposant__ de ses deux opérandes.
-Dans les faits, ces comparaisons n'ont pas besoin de la réel valeur qu'interprète les champs d'__exposant__ $\left(E_1 - B\right)$ ainsi que $\left(E_2 - B\right)$, car le biais $B$ est constant.
-Par exemple la comparaison $\left(E_1 - B\right) \gt \left(E_2 - B\right)$ est inutilement complexe, il suffit que le circuit compare $\left(E_1 \gt E_2\right)$.
-Pour ce faire, le circuit utilise une propriété de l'encodage des champs d'__exposant__ qui est rappelons-le l'encodage __Binary Unsigned__.
-Cette propriété est celle dont il est le sujet dans la section "_Une propriété du Binary Unsigned qui est fondamentale à la démonstration_" ; concrètement, cette dernière nous dit que la valeur de n'importe quel bit à $1$ de poids $i$ dans un champ d'__exposant__, est strictement supérieure à la somme des valeurs des bits de poids inférieur à $i$.
+Pour conclure, il s'avère que le circuit est amené à effectuer des comparaisons entre deux champs d'__exposant__ $E_1$ et $E_2$, ayant chacun un même biais $B$.
+Ces comparaisons n'ont pas besoin de la valeur réelle des champs d'__exposant__, comme avec $\left(E_1 - B\right) \gt \left(E_2 - B\right)$ par exemple, car le biais $B$ est constant.
+Le circuit doit plutôt effectuer le calcul suivant à la place $\left(E_1 \gt E_2\right)$.
+Pour ce faire, le circuit utilise l'une des propriétés de l'encodage des champs d'__exposant__, qui est le __Binary Unsigned__ rappelons-le.
+Cette propriété est celle dont il est le sujet dans la section "_Une propriété du Binary Unsigned qui est fondamentale à la démonstration_".
+En bref, la valeur de n'importe quel bit à $1$ de poids $i$ dans un champ d'__exposant__, est strictement supérieure à la somme des valeurs des bits de poids inférieur à $i$.
 Nous verrons plus tard par le prisme de la démonstration mathématique, que c'est cette propriété qui permet au circuit d'effectuer (entre autre) des comparaisons entre des champs d'__exposant__.
-
-
-
-//
-
-Il s'avère que le circuit et sa démonstration mathématique sont amenés à effectuer des comparaisons entre deux champs d'__exposant__ $E_1$ et $E_2$, ayant un même biais $B$.
-Ces comparaisons n'ont pas besoin de la valeur réelle des champs d'__exposant__ comme avec $\left(E_1 - B\right) \gt \left(E_2 - B\right)$, car le biais $B$ est constant.
-Cette comparaison se transforme alors en $\left(E_1 \gt E_2\right)$, seule la valeur des nombres codés dans les champs d'__exposant__ compte.
-En outre, n'oublions pas que l'__encodage par biais__ est une déclinaison du __Binary Unsigned__.
-Cela veut dire que les deux encodages partagent les même propriétés, notamment celle dont il a été question dans la section "_Une propriété du Binary Unsigned qui est fondamentale à la démonstration_".
-En bref, cela veut dire que la valeur de n'importe quel bit à $1$ de poids $i$ dans un champ d'__exposant__, est strictement supérieure à la somme des valeurs des bits de poids inférieur à $i$.
-Nous le verrons plus tard, mais c'est cette propriété qui permet à la démonstration mathématique d'effectuer entre autre des comparaisons entre des champs d'__exposant__.
 
 ### Le codage du champ d'exposant
 
