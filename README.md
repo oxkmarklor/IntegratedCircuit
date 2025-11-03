@@ -157,7 +157,7 @@ Votre seul ennui est alors d'avoir trop d'argent dans votre compte en banque, de
 
 # L'écriture scientifique binaire
 
-Pour commencer, qu'est-ce-que l'_écriture scientifique_?
+Pour commencer, qu'est-ce-que l'__écriture scientifique__?
 
 L'écriture scientifique est une façon comme une autre de représenter des nombres, elle existe pour chaque base numérique comme pour la base binaire.
 Le but de la notation scientifique des nombres est double : elle ne permet d'écrire des nombres que d'une seule et unique façon tout en simplifiant la lecture des très grands ainsi que des très petits nombres.
@@ -181,7 +181,7 @@ Les chapitres suivants se focalisent sur la notation scientifique _en base binai
 L'écriture scientifique en base binaire peut représenter n'importe quel nombre $F$ écrit en virgule flottante, qu'il soit positif ou bien négatif.
 Le nombre flottant $F$ à représenter en notation scientifique binaire permet à lui seul de définir deux des trois éléments de sa propre écriture scientifique, le __signe__ et le __significande__.
 Comme son nom l'indique, l'élément qu'est le "__signe__" ne représente que le signe $\pm$ du nombre flottant $F$.
-Tandis que le __significande__ s'obtient depuis une modification (non systématique) de la valeur absolu du nombre à virgule flottante $F$.
+Tandis que le __significande__ s'obtient depuis une modification (non systématique) de la valeur absolue du nombre à virgule flottante $F$.
 
 Nous savons qu'en notation scientifique binaire, le significande ne peut interpréter que des valeurs comprises dans l'intervalle $\left[1;2\right[$.
 Lorsque la valeur du nombre à virgule flottante $\vert \ F \ \vert$ est comprise dans cette intervalle, alors la valeur de $\vert \ F \ \vert$ forme lui même le significande.
@@ -372,27 +372,28 @@ Etant donné que le circuit électronique ne prend en charge que des opérandes 
 
 ## Le champ de mantisse tronquée
 
-En introduction se trouve une illustration de la disposition des bits qui composent le format Half Precision ; cette illustration montre que le champs de mantisse tronquée $T$ est composé de $10$ bits.
-Voici les poids de chacun des bits qui compose le champ de mantisse tronquée :
+En introduction se trouve une illustration de la disposition de chacun des bits des trois éléments qui composent le format Half Precision ; cette illustration montre que le champs de __mantisse tronquée__ $T$ est composé de $10$ bits.
+Voici les poids de chacun des bits qui compose le champ de __mantisse tronquée__ :
 
 $$\left[ \quad .. \quad , \quad T_9, \ T_8, \ T_7, \ T_6, \ T_5, \ T_4, \ T_3, \ T_2, \ T_1, \ T_0\right]$$
 
-Les deux sections suivantes concernent l'ensemble de ces bits formant le champ de mantisse tronquée.
+Les deux sections suivantes concernent l'ensemble de ces bits formant le champ de __mantisse tronquée__.
 
 ### L'encodage du champ de mantisse tronquée
 
-Le nombre $F$ codé au format Half Precision a un champ de mantisse tronquée qui correspond au significande de l'écriture scientifique binaire du même nombre $F$.
-Par conséquent, l'encodage du champ de mantisse tronquée est simplement celui d'un nombre à virgule flottante.
+Le champs binaire du nombre $F$ codé au format Half Precision a un champ de __mantisse tronquée__ qui correspond au __significande__ de l'écriture scientifique binaire de $F$.
+Grâce au chapitre "_Le significande_", rappelons que le __significande__ s'obtient depuis une modification (non systématique) de la valeur absolue du nombre à virgule flottante $F$.
+Par conséquent, nous en déduisons que l'encodage du champ de __mantisse tronquée__ est simplement celui d'un nombre à virgule flottante.
 Je vous invite donc à relire le chapitre "_Les nombres à virgule flottante_", si nécessaire.
 
-Néanmoins, le dernier paragraphe de ce chapitre donne une information assez importante.
+Il s'avère que le dernier paragraphe du chapitre "_Les nombres à virgule flottante_" nous donne accès à une information assez importante.
 La valeur de n'importe quel bit à $1$ de poids $i$ dans un nombre à virgule flottante, est strictement supérieure à la somme des valeurs des bits de poids inférieur à $i$.
-Ce qui veut dire que n'importe quel bit à $1$ de poids $i$ dans un champ de mantisse tronquée a une valeur qui est elle aussi strictement supérieure à la somme des valeurs des bits de poids inférieur à $i$.
-Autrement dit, le champ de mantisse tronquée partage les propriétés des nombres à virgule flottante, mais il n'est pas le seul.
+Ce qui insinue que n'importe quel bit à $1$ de poids $i$ dans un champ de mantisse tronquée $\left(T_i = 1\right)$, a une valeur $\left(T_i \times 2^i\right)$ qui est elle aussi strictement supérieure à la somme des valeurs des bits de poids inférieur à $i$ du champs.
+Autrement dit, le champ de __mantisse tronquée__ partage les propriétés des nombres à virgule flottante... mais il n'est pas le seul.
 
-Cette propriété provient de l'encodage _Binary Unsigned_, et il se trouve que l'encodage du champ d'exposant en est une déclinaison.
-Nous verrons cela plus en détail dans le chapitre dédié au champ d'exposant, mais il faut savoir que tout cela a un impact.
-La logique du circuit traite les champs de mantisse tronquée comme les champs d'exposant, avec le même sous ensemble de circuit, ce qui se reflète aussi dans la démonstration mathématique.
+Cette propriété provient de l'encodage Binary Unsigned, et il se trouve que l'encodage du champ d'__exposant__ en est une déclinaison.
+Nous verrons cela plus en détail dans le chapitre dédié au champ d'__exposant__, mais il faut savoir que tout cela a un impact.
+De par cette propriété commune entre les encodages des champs de __mantisse tronquée__ et d'__exposant__, la logique du circuit se retrouve à traité ces champs de la même manière (avec le même sous ensemble de circuit électronique), ce qui se reflète dans la démonstration mathématique.
 Nous en reparlerons d'ici là.
 
 ### Le codage du champ de mantisse tronquée
