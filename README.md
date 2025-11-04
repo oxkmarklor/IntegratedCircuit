@@ -802,35 +802,20 @@ In fine, ceci me permet de mentionné le fait qu'il y ait un réel décalage ent
 
 # Annexe: Les spécificités des formats du standard IEEE-754
 
-Du début jusqu'à la fin, la démonstration mathématique part du principe que le FPU Configuration Unit ne prend en charge que deux opérandes $\alpha$ et $\beta$ de format __Half Precision__.
+Du début jusqu'à la fin, la démonstration mathématique part du principe que le FPU Configuration Unit ne prend en charge que deux opérandes de format __Half Precision__.
 Il n'y a rien de faux là dedans, mais cela ne laisse pas transparaitre le fait que les formats définis par le standard IEEE-754 puissent coder différents types de nombre.
-Chaque format comme le __Half Precision__ peut coder :
+Enfaite, chaque format comme le __Half Precision__ peut coder :
 
   - des nombres __normaux__,
   - des nombres __dénormaux__,
   - des __NaN__,
   - ou encore l'__infini positif/négatif__
 
-Dans la démonstration mathématique, nous sommes partis implicitement du principe que les opérandes du circuit $\alpha$ et $\beta$ codaient des nombres __normaux__, ce qui n'est pas forcé d'être le cas dans les faits.
-La suite du document explique comment est-ce que le FPU Configuration Unit prend (ou ne prend pas) en charge ces différents types de nombres, allant des nombres __normaux__ jusqu'aux nombres __dénormaux__.
+Précédemment dans la démonstration mathématique, nous sommes implicitement partis du principe que les opérandes du circuit codaient des nombres __normaux__, ce qui n'est pas forcé d'être le cas dans les faits.
+La suite du document explique pourquoi est-ce que le FPU Configuration Unit prend (ou ne prend pas) en charge ces différents types de nombres, allant des nombres __normaux__ jusqu'aux nombres __dénormaux__.
 
-Pour commencer, comprenons que chaque type de nombre se différencie des autres par le biais d'une plage de codage propre dans le champ d'exposant ainsi que dans le champ de mantisse tronquée.
-Il y a bien évidemment d'autres différences fondamentales qui existent entre de ces types de nombres, nous parlerons de tout cela dans des chapitres dédiés.
-
-
-
-//
-
-Il me faut précisé que le standard IEEE-754 peut représenté plusieurs type de nombre:
-  - Les nombres _normaux_ (ceux dont nous parlons implicitement depuis le début du document)
-  - Les nombres ___dénormaux___
-  - Les _NaN_ (Not a Number)
-  - L'_infini_ positif ou négatif
-
-Chacun de ces types de nombre peut être codé dans n'importe quel format de nombre flottant IEEE-754.
-Chaque type de nombre se différencie des autres en utilisant une certaine plage de codage dans le champs d'exposant ainsi que le champs de mantisse tronquée.
-Plage de codage qui a été fixé dans le standard IEEE-754.
-Le but de cet annexe est d'évoqué le sujet des nombres _dénormaux_, ce que nous ferons après avoir brièvement défini les autres types de nombres.
+Pour commencer, comprenons que chacun de ces types de nombres se différencie des autres par le biais d'une plage de codage qui lui est propre dans les champs d'exposant et de mantisse tronquée.
+Il y a bien évidemment d'autres différences fondamentale qui existent entre ces types de nombres, nous parlerons de tout cela dans des chapitres dédiés.
 
 ### Les nombres normaux
 
