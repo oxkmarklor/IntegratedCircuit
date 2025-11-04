@@ -519,7 +519,7 @@ Cette démonstration mathématique n'aborde que la partie de la logique de compa
 Le reste de la logique manquante ne peut pas être expliqué sans l'apport de beaucoup de nouvelle notion.
 Je vous renvoie vers la documentation dédié au circuit si vous voulez en savoir plus sur cette partie de la logique manquante.
 
-__Tout ce qui va suivre de la démonstration, part du principe que le FPU Configuration Unit cherche à verifié la condition__ $\left(\vert \alpha \vert \gt \vert \beta \vert\right)$.
+Tout ce qui va suivre de la démonstration, part du principe que le FPU Configuration Unit cherche à verifié la condition $\left(\vert \alpha \vert \gt \vert \beta \vert\right)$.
 
 ## Définition de quelques opérations fondamentales à la démonstration 
 
@@ -797,10 +797,20 @@ La documentation du FPU Configuration Unit aborde le sujet de l'architecture du 
 Je tient aussi à rappellé que tout ce que nous avons vu jusqu'ici n'est qu'une preuve mathématique du bon fonctionnement de la logique de comparaison du circuit.
 Cependant, les circuits logiques du FPU Configuration Unit n'effectuent pas les même calculs que ceux utilisés dans la démonstration, par exemple, le circuit ne comporte pas d'additionneur pour effectuer des calculs de somme.
 Les raisons à cela sont multiples.
-En effet, il est plus globalement plus optimal que le circuit fasse usage de circuit simple, plus rapide, moins énergivore et nécessitant moins de câblage ainsi que de transitor qu'un additionneur à propagation de retenue, qui est un circuit d'une certaine complexité.
+En effet, il est globalement plus optimal que le circuit fasse usage de circuit simple, plus rapide, moins énergivore et nécessitant moins de câblage ainsi que de transitor qu'un additionneur à propagation de retenue, qui est un circuit d'une certaine complexité.
 In fine, ceci me permet de mentionné le fait qu'il y ait un réel décalage entre la démonstration mathématique du circuit, et son architecture.
 
-# Annexe: Les différents types nombres du standard IEEE-754
+# Annexe: Les spécificités des formats du standard IEEE-754
+
+Du début jussqu'à la fin, la démonstration mathématique part du principe que le FPU Configuration Unit ne prend en charge que deux opérandes $\alpha$ et $\beta$ de format __Half Precision__.
+Il n'y a rien de faux là dedans, mais cela ne laisse pas transparaitre un détails et pas des moindres : l'ensemble des formats définis par le standard IEEE-754 peuvent interpréter plusieurs types de nombres.
+Voici les différents types de nombres que peuvent interpréter les formats :
+  - Les nombres _normaux_ (ceux dont nous parlons implicitement depuis le début du document)
+  - Les nombres ___dénormaux___
+  - Les _NaN_ (Not a Number)
+  - L'_infini_ positif ou négatif
+
+//
 
 Il me faut précisé que le standard IEEE-754 peut représenté plusieurs type de nombre:
   - Les nombres _normaux_ (ceux dont nous parlons implicitement depuis le début du document)
