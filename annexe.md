@@ -1,21 +1,22 @@
-# Annexe: Les spécificités des formats du standard IEEE-754
+# Annexe: Les différents types de nombres du format Half Precision
 
-Du début jusqu'à la fin, la démonstration mathématique part du principe que le FPU Configuration Unit ne prend en charge que deux opérandes de format __Half Precision__.
-Il n'y a rien de faux là dedans, mais cela ne laisse pas transparaitre le fait que les formats définis par le standard IEEE-754 puissent coder différents types de nombre.
-Enfaite, chaque format comme le __Half Precision__ peut coder :
+Depuis le début de ce document, nous avons toujours évoquer le fait que le FPU Configuration Unit traite deux opérandes de format Half Precision, mais dans les faits cela manque de précision.
+Il s'avère que le format Half Precision, à l'instar de tout les autres formats définis par le standard IEEE-754, peut coder des nombres de "type" distinct :
 
-  - des nombres __normaux__,
-  - des nombres __dénormaux__,
-  - des __NaN__,
-  - ou encore l'__infini positif/négatif__
+  - des nombres __nomaux__ ;
+  - des __NaN__ ;
+  - l'__infini positif/négatif__ ;
+  - ou encore des nombres __dénormaux__
 
-Précédemment dans la démonstration mathématique, nous sommes implicitement partis du principe que les opérandes du circuit codaient des nombres __normaux__, ce qui n'est pas forcé d'être le cas dans les faits.
-La suite du document explique pourquoi est-ce que le FPU Configuration Unit prend (ou ne prend pas) en charge ces différents types de nombres, allant des nombres __normaux__ jusqu'aux nombres __dénormaux__.
+Chaque type de nombre utilise une plage de codage spécifique du champ d'exposant, et parfois même du champ de mantisse tronquée ; ces dernières seront dévoilés à l'intérieur de chapitres dédiés.
+La suite du document explique pourquoi est-ce que le circuit prend en charge certains de ces types de nombres et pas d'autre.
 
-Pour commencer, comprenons que chacun de ces types de nombres se différencie des autres par le biais d'une plage de codage qui lui est propre dans les champs d'exposant et de mantisse tronquée.
-Il y a bien évidemment d'autres différences fondamentale qui existent entre ces types de nombres, nous parlerons de tout cela dans des chapitres dédiés.
+## Le codage des nombres normaux
 
-### Les nombres normaux
+Commençons par dire que les nombres __normaux__ sont ceux dont nous faisions implicitement allusion durant toute la démonstration mathématique, et même dans ce qui la précède.
+
+
+//
 
 Les nombres _normaux_ (ou nombres _normalisés_) utilisent une certaine partie de la plage de codage du champs d'exposant.
 
