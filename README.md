@@ -193,7 +193,7 @@ Dans le cas où $\left(\vert F \vert \ge \ 2 \ \right)$, la virgule de $\vert \ 
 En déplaçant la virgule de $\vert \ F \ \vert$ jusque devant le bit de poids le plus fort à $1$, nous nous assurons du fait que le résultat de la modification soit compris dans l'intervalle de valeur $\left[1;2\right[$.
 
 Il faut cependant faire une exception dans le cas où $\left(F = 0\right)$.
-Comme la valeur absolu du nombre n'est pas comprise dans l'intervalle de valeur licite d'un __significande__ $\left[1;2\right[$ alors il faudrait déplacer la virgule du nombre jusque devant son MSB1 ; cependant, le nombre n'a pas de MSB1 car son écriture ne contient aucun bit à $1$.
+Comme la valeur absolu du nombre n'est pas comprise dans l'intervalle de valeur licite d'un significande $\left[1;2\right[$ alors il faudrait déplacer la virgule du nombre jusque devant son MSB1 ; cependant, le nombre n'a pas de MSB1 car son écriture ne contient aucun bit à $1$.
 Par conséquent, nous devons faire une entorce à la règle et considérer que le significande peut être excpetionnellement nulle dans cette situation.
 Sachez que nous retrouvons la même problèmatique pour toutes les représentations du chiffre $0$ en notation scientifique, qu'importe la base numérique.
 
@@ -201,7 +201,7 @@ La section suivante cherche à préciser l'impact qu'a un déplacement de la vir
 
 ### La transformation d'un nombre à virgule flottante en un significande
 
-Pour tout nombre à virgule flottante $F$, nous savons que la virgule se trouve entre le _LSB_ de la partie entière (le bit de poids $0$), et le _MSB_ de la partie fractionnaire (bit de poids $-1$).
+Pour tout nombre à virgule flottante $F$, nous savons que la virgule se trouve entre le LSB de la partie entière (le bit de poids $0$), et le MSB de la partie fractionnaire (bit de poids $-1$).
 Par conséquent, un déplacement de la virgule d'un rang vers la gauche force le bit de poids $1$ à devenir le bit de poids $0$, le bit de poids $0$ à devenir celui de poids $-1$, et celui de poids $-1$ devient le bit de poids $-2$, etc.
 Autrement dit, chaque bit de la partie entière comme de la partie fractionnaire du nombre $F$, voit son poids être _décrémenté_ de $1$.
 
@@ -446,7 +446,7 @@ Il s'agit cependant d'une approximation.
 Rappelons que le rôle d'un __multiplicande__ $M$ est de réajuster la valeur du __significande__ $S$ à la valeur absolue du nombre $F$ à représenter en écriture scientifique, ce qui correspond à $\vert \ F \vert = \left(S \times M\right)$.
 Néanmoins, au travers du chapitre "_Le multiplicande_" et des deux sections qui le suivent, nous avons vu que le __multiplicande__ réajustait toujours la valeur du __significande__ en le multipliant par $2^{-c}$, ce qui donne plus précisément $\vert \ F \vert = \left(S \times 2^{-c}\right)$.
 
-Il s'avère que la section "_Un autre regard sur le multiplicande_", explique pourquoi est-ce que la valeur du significande n'a pas besoin d'être multiplié par $2^{-c}$ pour être réajusté à la valeur absolue de $F$.
+Il s'avère que la section "_Un autre regard sur le multiplicande_", explique pourquoi est-ce que la valeur du __significande__ n'a pas besoin d'être multiplié par $2^{-c}$ pour être réajusté à la valeur absolue de $F$.
 Dans cette section il est dit je cite : "_Le multiplicande doit alors permettre de déplacer la virgule du significande_ $S$ _par le même nombre de rangs que ne l'a été celle de_ $\vert \ F \ \vert$ _pour former le significande (c'est à dire de_ $c$ _rangs), mais dans la direction opposée (donc de_ $-c$ _rangs)_".
 Je vous invite à relire ladite section si vous souhaitez plus d'explications.
 En bref, le significande $S$ est obtensible par un décalage de $c$ rangs de la virgule du nombre $\vert \ F \vert \notin \left[1;2\right[$, rappelons que le terme $c$ quantifie le nombre de rang de décalage à appliquer à la virgule ainsi que le sens de décalage grâce à son signe. 
@@ -802,13 +802,22 @@ In fine, ceci me permet de mentionné le fait qu'il y ait un réel décalage ent
 
 # Annexe: Les spécificités des formats du standard IEEE-754
 
-Du début jussqu'à la fin, la démonstration mathématique part du principe que le FPU Configuration Unit ne prend en charge que deux opérandes $\alpha$ et $\beta$ de format __Half Precision__.
-Il n'y a rien de faux là dedans, mais cela ne laisse pas transparaitre un détails et pas des moindres : l'ensemble des formats définis par le standard IEEE-754 peuvent interpréter plusieurs types de nombres.
-Voici les différents types de nombres que peuvent interpréter les formats :
-  - Les nombres _normaux_ (ceux dont nous parlons implicitement depuis le début du document)
-  - Les nombres ___dénormaux___
-  - Les _NaN_ (Not a Number)
-  - L'_infini_ positif ou négatif
+Du début jusqu'à la fin, la démonstration mathématique part du principe que le FPU Configuration Unit ne prend en charge que deux opérandes $\alpha$ et $\beta$ de format __Half Precision__.
+Il n'y a rien de faux là dedans, mais cela ne laisse pas transparaitre le fait que les formats définis par le standard IEEE-754 puissent coder différents types de nombre.
+Chaque format comme le __Half Precision__ peut coder :
+
+  - des nombres __normaux__,
+  - des nombres __dénormaux__,
+  - des __NaN__,
+  - ou encore l'__infini positif/négatif__
+
+Dans la démonstration mathématique, nous sommes partis implicitement du principe que les opérandes du circuit $\alpha$ et $\beta$ codaient des nombres __normaux__, ce qui n'est pas forcé d'être le cas dans les faits.
+La suite du document explique comment est-ce que le FPU Configuration Unit prend (ou ne prend pas) en charge ces différents types de nombres, allant des nombres __normaux__ jusqu'aux nombres __dénormaux__.
+
+Pour commencer, comprenons que chaque type de nombre se différencie des autres par le biais d'une plage de codage propre dans le champ d'exposant ainsi que dans le champ de mantisse tronquée.
+Il y a bien évidemment d'autres différences fondamentales qui existent entre de ces types de nombres, nous parlerons de tout cela dans des chapitres dédiés.
+
+
 
 //
 
