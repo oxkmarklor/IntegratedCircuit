@@ -452,27 +452,10 @@ Je vous invite à relire ladite section si vous souhaitez plus d'explications.
 En bref, le significande $S$ est obtensible par un décalage de $c$ rangs de la virgule du nombre $\vert \ F \vert \notin \left[1;2\right[$, rappelons que le terme $c$ quantifie le nombre de rang de décalage à appliquer à la virgule ainsi que le sens de décalage grâce à son signe. 
 Ainsi, le multiplicande a tout intérêt à déplacer la virgule du significande $S$ de $-c$ rangs plutôt que de multiplier ce dernier par $2^{-c}$, ce qui mène au même résultat (la valeur absolue de $F$) mais n'a pas les même conséquences pour le champ d'exposant.
 
-
-//
-
-En résumer, le champs d'exposant ne code que la puissance $-c$ du multiplicande $2^{-c}$, car multiplier le significande $S$ par $2^{-c}$ revient au même que de déplacer la virgule du significande de $-c$ rangs.
-
-Je cite "_Il suffit de décaler la virgule du significande_ $S$ _par le même nombre de rang que ne l'a été celle de_ $\vert \ F \ \vert$ _pour former le significande, mais dans la direction opposée_".
-Le multiplicande interprète la puissance $2^{-c}$, où le terme $c$ quantifie le nombre de rang de décalage à induire sur la virgule du nombre $\vert \ F \ \vert$, ainsi que la direction du décalage.
-C'est pourquoi le champ d'exposant ne code que l'exposant $-c$ du multiplicande, la négation de $c$ inverse simplement le sens du décalage.
-D'où le fait que les propos tenus précédemment soient approximatifs, le champ d'exposant ne correspond qu'à une partie du multiplicande et non à l'entièreté de celui-ci.
-Je vous redirige vers ladite section si vous souhaitez plus d'explications.
-
-//
-
-En bref, cette section explique que le multiplicande peut se contenté d'appliquer à la virgule du significande, le décalage inverse de ce qu'a subit la virgule du nombre $\vert \ F \ \vert$.
-
-Il y a de nombreux avantages à ce que le champ d'exposant ne code que l'exposant et non la puissance de $2$ elle-même.
-Dans un premier temps, la valeur de l'exposant $-c$ croît de façon linéaire, tandis que la valeur de la puissance qu'interprète le multiplicande $\left(2^{-c}\right)$ croît exponentiellement.
-Cela veut dire que le champ d'exposant devrait être composé de (beaucoup) plus de bits pour coder la puissance $2^{-c}$, que pour coder l'exposant $-c$ lui-même.
-En outre, il faudrait que les puissances de $2$ soient codées sous la forme de nombre à virgule dans le chams d'exposant, afin de pouvoir prendre en charge les puissances de $2$ négatives que peut interpréter le multiplicande.
-Enfin, pour finir, le traitement des nombres par les unités de calcul arithmétique (FPUs) serait probablement plus complexe avec un champ d'exposant codant une puissance de $2$.
-L'alignement des virgules de deux opérandes à soustraire serait plus complexe par exemple.
+En effet, la valeur de l'exposant $-c$ croît de façon linéaire tandis que la valeur de la puissance $2^{-c}$ croît exponentiellement.
+Ce qui insinue que le champ d'exposant devrait être composé de (beaucoup) plus de bits en moyenne pour coder la valeur de la puissance $2^{-c}$, que pour coder l'exposant $-c$ lui-même.
+Aussi, il faudrait que les puissances de $2$ soient codées sous la forme de nombre à virgule dans le champ d'exposant, afin de pouvoir prendre en charge les puissances de $2$ négatives que peut interpréter le multiplicande.
+Enfin, pour finir, la gestion des opérandes dans les unités de calcul arithmétique flottantes (FPUs) serait probablement plus complexe avec un champ d'exposant codant une puissance de $2$ : l'alignement des virgules de deux opérandes à soustraire serait plus complexe par exemple.
 
 # Introduction au FPU Configuration Unit
 
