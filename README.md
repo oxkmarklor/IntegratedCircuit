@@ -336,7 +336,7 @@ Je rappelle que le terme $c$ représente le nombre de rang de décalage à indui
 En résumé, le significande $S$ est obtensible par le calcul $\left(\vert F \vert \times \ 2^c \ \right)$ ce qui est équivalent au fait de déplacer la virgule du nombre $\vert \ F \ \vert$ de $log_2 \left(2^c\right)$ rangs.
 
 Rappelons que le rôle du multiplicande $M$ et de réajuster la valeur du significande $S$ à la valeur absolue du nombre $F$ lorsque $\left( \ S \ \neq \vert F \vert\right)$, de sorte à ce que $\vert \ F \vert = \left(S \times M\right)$.
-Le multiplicande doit alors permettre de déplacer la virgule du significande $S$ du même nombre de rangs que ne l'a été celle de $\vert \ F \ \vert$ pour former le significande (c'est à dire de $c$ rangs), mais dans la direction opposée (donc de $-c$ rangs).
+Le multiplicande doit alors permettre de déplacer la virgule du significande $S$ par le même nombre de rangs que ne l'a été celle de $\vert \ F \ \vert$ pour former le significande (c'est à dire de $c$ rangs), mais dans la direction opposée (donc de $-c$ rangs).
 Les sections précédentes démontrent que pour ce faire le multiplicande doit alors multiplié le significande par $2^{-c}$, signifiant ainsi que $\vert \ F \vert = \left(S \times 2^{-c}\right)$ ce qui est équivalent au fait de déplacer la virgule du significande $S$ de $\log_2 \left(2^{-c}\right)$ rangs.
 
 En bref, cette section explique que le multiplicande peut se contenté d'appliquer à la virgule du significande, le décalage inverse de ce qu'a subit la virgule du nombre $\vert \ F \ \vert$.
@@ -444,21 +444,28 @@ Dans l'introduction, il a été dit que le champs d'__exposant__ du nombre $F$ c
 Il s'agit cependant d'une approximation.
 
 Rappelons que le rôle d'un __multiplicande__ $M$ est de réajuster la valeur du __significande__ $S$ à la valeur absolue du nombre $F$ à représenter en écriture scientifique, ce qui correspond à $\vert \ F \vert = \left(S \times M\right)$.
-Néanmoins, au travers du chapitre "_Le multiplicande_" ainsi que des deux sections qui le suivent, nous avons vu que le __multiplicande__ réajustait toujours la valeur du __significande__ en le multipliant par $2^{-c}$, ce qui donne plus précisément $\vert \ F \vert = \left(S \times 2^{-c}\right)$.
+Néanmoins, au travers du chapitre "_Le multiplicande_" et des deux sections qui le suivent, nous avons vu que le __multiplicande__ réajustait toujours la valeur du __significande__ en le multipliant par $2^{-c}$, ce qui donne plus précisément $\vert \ F \vert = \left(S \times 2^{-c}\right)$.
 
-La section du nom de "_Un autre regard sur le multiplicande_" dit que, je cite "_le multiplicande peut se contenté d'appliquer à la virgule du significande, le décalage inverse de ce qu'a subit la virgule du nombre_ $\vert \ F \ \vert$".
+Il s'avère que la section "_Un autre regard sur le multiplicande_", explique pourquoi est-ce que la valeur du significande n'a pas besoin d'être multiplié par $2^{-c}$ pour être réajusté à la valeur absolue de $F$.
+Dans cette section il est dit je cite : "_Le multiplicande doit alors permettre de déplacer la virgule du significande_ $S$ _par le même nombre de rangs que ne l'a été celle de_ $\vert \ F \ \vert$ _pour former le significande (c'est à dire de_ $c$ _rangs), mais dans la direction opposée (donc de_ $-c$ _rangs)_".
+Je vous invite à relire ladite section si vous souhaitez plus d'explications.
+En bref, le significande $S$ est obtensible par un décalage de $c$ rangs de la virgule du nombre $\vert \ F \vert \notin \left[1;2\right[$, rappelons que le terme $c$ quantifie le nombre de rang de décalage à appliquer à la virgule ainsi que le sens de décalage grâce à son signe. 
+Ainsi, le multiplicande a tout intérêt à déplacer la virgule du significande $S$ de $-c$ rangs plutôt que de multiplier ce dernier par $2^{-c}$, ce qui mène au même résultat (la valeur absolue de $F$) mais n'a pas les même conséquences pour le champ d'exposant.
 
-
-En bref, cette section explique que le multiplicande peut se contenté d'appliquer à la virgule du significande, le décalage inverse de ce qu'a subit la virgule du nombre $\vert \ F \ \vert$.
 
 //
 
-Cependant, la section du nom de "_Un autre regard sur le multiplicande_", explique pourquoi la valeur du significande $S$ n'a pas besoin d'être multiplié par $2^{-c}$ pour être réajusté à la valeur de $\vert \ F \ \vert$.
+En résumer, le champs d'exposant ne code que la puissance $-c$ du multiplicande $2^{-c}$, car multiplier le significande $S$ par $2^{-c}$ revient au même que de déplacer la virgule du significande de $-c$ rangs.
+
 Je cite "_Il suffit de décaler la virgule du significande_ $S$ _par le même nombre de rang que ne l'a été celle de_ $\vert \ F \ \vert$ _pour former le significande, mais dans la direction opposée_".
 Le multiplicande interprète la puissance $2^{-c}$, où le terme $c$ quantifie le nombre de rang de décalage à induire sur la virgule du nombre $\vert \ F \ \vert$, ainsi que la direction du décalage.
 C'est pourquoi le champ d'exposant ne code que l'exposant $-c$ du multiplicande, la négation de $c$ inverse simplement le sens du décalage.
 D'où le fait que les propos tenus précédemment soient approximatifs, le champ d'exposant ne correspond qu'à une partie du multiplicande et non à l'entièreté de celui-ci.
 Je vous redirige vers ladite section si vous souhaitez plus d'explications.
+
+//
+
+En bref, cette section explique que le multiplicande peut se contenté d'appliquer à la virgule du significande, le décalage inverse de ce qu'a subit la virgule du nombre $\vert \ F \ \vert$.
 
 Il y a de nombreux avantages à ce que le champ d'exposant ne code que l'exposant et non la puissance de $2$ elle-même.
 Dans un premier temps, la valeur de l'exposant $-c$ croît de façon linéaire, tandis que la valeur de la puissance qu'interprète le multiplicande $\left(2^{-c}\right)$ croît exponentiellement.
