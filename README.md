@@ -440,11 +440,18 @@ Nous verrons plus tard, par le prisme de la démonstration mathématique, que c'
 
 ### Le codage du champ d'exposant
 
-Dans l'introduction, il est dit qu'un nombre $F$ codé au format Half Precision a un champ d'exposant qui correspond au multiplicande de l'écriture scientifique binaire de ce même nombre.
+Dans l'introduction, il a été dit que le champs d'__exposant__ du nombre $F$ codé au format Half Precision correspondait au __multiplicande__ de l'écriture scientifique binaire de ce même nombre.
 Il s'agit cependant d'une approximation.
 
-Rappelons que le rôle d'un multiplicande $M$ est de réajuster la valeur du significande $S$ à la valeur absolue du nombre $F$ à représenter en écriture scientifique, ce qui correspond à $\vert \ F \vert = \left(S \times M\right)$.
-Au travers du chapitre "_Le multiplicande_" et des deux sections qui le suivent, nous avons vu que le multiplicande réajustait toujours la valeur du significande en le multipliant par $2^{-c}$, ce qui donne $\vert \ F \vert = \left(S \times 2^{-c}\right)$.
+Rappelons que le rôle d'un __multiplicande__ $M$ est de réajuster la valeur du __significande__ $S$ à la valeur absolue du nombre $F$ à représenter en écriture scientifique, ce qui correspond à $\vert \ F \vert = \left(S \times M\right)$.
+Néanmoins, au travers du chapitre "_Le multiplicande_" ainsi que des deux sections qui le suivent, nous avons vu que le __multiplicande__ réajustait toujours la valeur du __significande__ en le multipliant par $2^{-c}$, ce qui donne plus précisément $\vert \ F \vert = \left(S \times 2^{-c}\right)$.
+
+La section du nom de "_Un autre regard sur le multiplicande_" dit que, je cite "_le multiplicande peut se contenté d'appliquer à la virgule du significande, le décalage inverse de ce qu'a subit la virgule du nombre_ $\vert \ F \ \vert$".
+
+
+En bref, cette section explique que le multiplicande peut se contenté d'appliquer à la virgule du significande, le décalage inverse de ce qu'a subit la virgule du nombre $\vert \ F \ \vert$.
+
+//
 
 Cependant, la section du nom de "_Un autre regard sur le multiplicande_", explique pourquoi la valeur du significande $S$ n'a pas besoin d'être multiplié par $2^{-c}$ pour être réajusté à la valeur de $\vert \ F \ \vert$.
 Je cite "_Il suffit de décaler la virgule du significande_ $S$ _par le même nombre de rang que ne l'a été celle de_ $\vert \ F \ \vert$ _pour former le significande, mais dans la direction opposée_".
