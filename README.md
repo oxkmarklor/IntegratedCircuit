@@ -436,7 +436,7 @@ Le circuit doit plutôt effectuer le calcul suivant à la place $\left(E_1 \gt E
 Pour ce faire, le circuit utilise l'une des propriétés de l'encodage des champs d'__exposant__, qui est le __Binary Unsigned__ rappelons-le.
 Cette propriété est celle dont il est le sujet dans la section "_Une propriété du Binary Unsigned qui est fondamentale à la démonstration_".
 En bref, la valeur de n'importe quel bit à $1$ de poids $i$ dans un champ d'__exposant__, est strictement supérieure à la somme des valeurs des bits de poids inférieur à $i$.
-Nous verrons plus tard par le prisme de la démonstration mathématique, que c'est cette propriété qui permet au circuit d'effectuer (entre autre) des comparaisons entre des champs d'__exposant__.
+Nous verrons plus tard, par le prisme de la démonstration mathématique, que c'est cette propriété qui permet au circuit d'effectuer (entre autre) des comparaisons entre des champs d'__exposant__.
 
 ### Le codage du champ d'exposant
 
