@@ -13,7 +13,17 @@ La suite du document explique pourquoi est-ce que le circuit prend en charge cer
 
 ## Le codage des nombres normaux
 
-Commençons par dire que les nombres __normaux__ sont ceux dont nous faisions implicitement allusion durant toute la démonstration mathématique, et même dans ce qui la précède.
+Commençons par mentionner le fait que les nombres __normaux__ sont ceux dont nous faisions implicitement allusion durant toute la démonstration mathématique, et même dans ce qui la précède.
+
+Il s'avère que les nombres __normaux__ ont une plage de codage restreinte dans le champ d'exposant, de sorte à ce qu'un nombre soit considérer comme __normalisé__ du moment où un champ d'exposant $E$ d'une taille de $N$ bits code une valeur comprise dans l'intervalle $\left[1;2^N - 1\right[$.
+Attention, nous ne parlons pas de la valeur qu'interprète le champ d'exposant car cela impliquerait de déduire un biais à la valeur Binary Unsigned que code le champ.
+Je vous redirige vers le chapitre "_Le champ d'exposant_" ainsi que vers les deux sections qui le suivent si vous souhaitez plus de détails.
+
+Nous prenons en compte la valeur que code le champ d'exposant $E$ et non la valeur qu'il interprète, cela impliquerait de dévoir déduire du biais à 
+
+Rappelons qu
+
+Cependant, les nombres __normaux__ n'ont pas de plage de codage restrictive dans le champ de mantisse tronquée.
 
 
 //
