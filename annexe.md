@@ -9,9 +9,18 @@ Il s'avère que le format Half Precision, à l'instar de tout les autres formats
   - ou encore des nombres __dénormaux__
 
 Chaque type de nombre utilise une plage de codage spécifique du champ d'exposant, et parfois même du champ de mantisse tronquée ; ces dernières seront dévoilés à l'intérieur de chapitres dédiés.
-La suite du document explique pourquoi est-ce que le circuit prend en charge certains de ces types de nombres et pas d'autre.
+La suite du document explique ce que ces différents types de nombres ainsi que la raison derrière le fait que le circuit ne prenne en charge que certains d'entre eux et pas d'autre.
 
-## Le codage des nombres normaux
+## Les nombres normaux
+
+// diff entre les nombres normaux et dénormaux par le champs de mantisse tronquée
+
+Voici les sujets évoqués dans ce chapitre :
+
+  - La plage de codage des nombres __normaux__
+  - 
+
+//
 
 Il s'avère que les nombres __normaux__ ont une plage de codage restreinte dans le champ d'exposant, de sorte à ce qu'un nombre soit considérer comme __normalisé__ du moment où un champ d'exposant $E$ d'une taille de $N$ bits code une valeur comprise dans l'intervalle $\left[1;2^N - 1\right[$.
 Attention, nous ne parlons pas de la valeur qu'interprète le champ d'exposant, car cela impliquerait de déduire un biais à la valeur codée par ledit champ.
@@ -26,14 +35,6 @@ Une nouvelle fois, je vous redirige vers les chapitres sus-mentionné si vous so
 Mentionnons le fait que durant toute la démonstration mathématique, nous sommes implicitement partis du principe que les champs de mantisse tronquée $T_{\alpha}$ ainsi que $T_{\beta}$ étaient __normalisés__, et par extension les opérandes du circuit $\alpha$ et $\beta$ également.
 Il est important de mentionner cela, car nous verrons plus tard que les nombres __dénormaux__ ne prennent pas en charge les champs de mantisse tronquée de la même manière que les nombres __normaux__.
 Dans un chapitre dédié aux nombres __dénormaux__, nous verrons pourquoi est-ce que que cela n'invalide pas pour autant la démonstration mathématique.
-
-
-
-//
-
-Au sujet des champs de mantisse tronquée, la valeur de ces champs n'est pas impactée par les nombres __normaux__ ; au contraire des nombres __dénormaux__, chose que nous verrons dans un chapitre dédié.
-Encore une fois, si vous souhaitez plus de détails, je vous redirige vers le chapitre "_Le champ de mantisse tronquée_" ainsi que les deux sections lui succédant.
-En bref, les champs de mantisse tronquée $T$ des nombres __normaux__ ne codent pas le seul et unique bit à $1$ de la partie entière d'un significande, ce qui n'empêche pas de prendre en compte la valeur de ce bit (_bit implicite_ de son nom) lors de l'évaluation de la valeur des champs de mantisse tronquée $\left(1 + T\right)$.
 
 //
 
