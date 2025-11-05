@@ -34,16 +34,15 @@ Si vous souhaitez plus de détails, je vous redirige vers le chapitre "_Le champ
 
 ### La valeur du champ de mantisse tronquée d'un nombre normalisé
 
-Les chapitres "_Le champ de mantisse tronquée_" jusqu'à "_Le codage du champ de mantisse tronquée_" expliquent ce qu'est un champ de mantisse tronquée par le prisme du format Half Precision.
-Ces lignes parlent implicitement du cas des champs de mantisse tronquée des nombres __normaux__ codés au format Half Precision.
-Grâce à ces chapitres, nous en déduisons que le champ de mantisse tronquée $T$ d'un nombre __normalisé__ a une valeur de $\left(1 + T\right)$, où le terme $1$ représente la valeur du bit implicite (le bit de la partie entière d'un significande).
+// relire
 
-//
+Avant la démonstration mathématique se trouve un chapitre du nom de "_Le champ de mantisse tronquée_", suivi de deux sections.
+Ces lignes cherchent à expliquer ce qu'est un champ de mantisse tronquée par le prisme d'un nombre codé au format Half Precision, plus précisément, ces lignes expliquent implicitement ce qu'est le champ de mantisse tronquée d'un nombre __normalisé__ de format Half Precision.
 
-Nous savons que le champs de mantisse tronquée $T$ d'un nombre __normalisé__ correspond au significande de l'écriture scientifique binaire de ce même nombre, ce qui insinue que la valeur de $T \in \left[1;2\right[$.
+En résumer, nous déduisons de ces sections que la valeur du champ de mantisse tronquée $T$ d'un nombre __normalisé__ $\left(1 + T\right)$, correspond à la valeur du significande de l'écriture scientifique binaire de ce même nombre.
+Rappelons que le terme $1$ additionné à la valeur du champ $T$ est la valeur du bit implicite (le bit de la partie entière du significande).
+Je vous invite à relire les chapitres susmentionné si vous avez besoin de plus de détails.
 
-
-// le ch "Le champs de mantisse tronquée" fait implicitement allusion aux nombres normaux
 
 //
 
@@ -55,6 +54,14 @@ Une nouvelle fois, je vous redirige vers les chapitres sus-mentionné si vous so
 Mentionnons le fait que durant toute la démonstration mathématique, nous sommes implicitement partis du principe que les champs de mantisse tronquée $T_{\alpha}$ ainsi que $T_{\beta}$ étaient __normalisés__, et par extension les opérandes du circuit $\alpha$ et $\beta$ également.
 Il est important de mentionner cela, car nous verrons plus tard que les nombres __dénormaux__ ne prennent pas en charge les champs de mantisse tronquée de la même manière que les nombres __normaux__.
 Dans un chapitre dédié aux nombres __dénormaux__, nous verrons pourquoi est-ce que que cela n'invalide pas pour autant la démonstration mathématique.
+
+//
+
+Nous savons que le champs de mantisse tronquée $T$ d'un nombre __normalisé__ correspond au significande de l'écriture scientifique binaire de ce même nombre, ce qui insinue que la valeur de $T \in \left[1;2\right[$.
+
+
+// le ch "Le champs de mantisse tronquée" fait implicitement allusion aux nombres normaux
+
 
 //
 
