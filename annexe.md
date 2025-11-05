@@ -13,12 +13,22 @@ La suite du document explique ce que ces différents types de nombres ainsi que 
 
 ## Les nombres normaux
 
-// diff entre les nombres normaux et dénormaux par le champs de mantisse tronquée
+// à relire
 
-Voici les sujets évoqués dans ce chapitre :
+Les nombres __normaux__ et __dénormaux__ sont complémentaires, même si ces termes là laisse croire le contraire.
+Il y a deux différences entre un nombre __normalisé__ et __dénormalisé__ :
 
-  - La plage de codage des nombres __normaux__
-  - 
+  - la plage de codage du champs d'exposant, ce qui est le plus évident ;
+  - ainsi que la valeur du champs de mantisse tronquée
+
+Le codage d'un nombre $F$ est __normalisé__ lorsque la valeur de son champ de mantisse tronquée correspond à la valeur du significande de sa propre écriture scientifique binaire.
+Nous l'aurons compris, dans le cas où le nombre $F$ est __dénormalisé__ alors la valeur de son champ de mantisse tronquée ne correspond pas à celle d'un significande, qui est rappelons-le comprise dans l'intervalle $\left[1;2\right[$.
+Je précise que le champ de mantisse tronquée d'un nombre __dénormalisé__ ne peut pas pour autant interpréter n'importe quel valeur, nous verrons cela dans un chapitre dédié aux nombres __dénormaux__.
+En bref, un nombre est __dénormalisé__ parcqu'il n'est justement pas __normalisé__ par les règles de l'écriture scientifique binaire, particulièrement celles qui portent sur le champs le significande.
+
+Commençons par voir ce que sont les nombres __normaux__ par le biais des deux sections suivantes.
+
+### La plage de codage du champs d'exposant d'un nombre normalisé
 
 //
 
