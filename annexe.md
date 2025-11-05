@@ -16,15 +16,13 @@ La suite du document explique pourquoi est-ce que le circuit prend en charge cer
 Commençons par mentionner le fait que les nombres __normaux__ sont ceux dont nous faisions implicitement allusion durant toute la démonstration mathématique, et même dans ce qui la précède.
 
 Il s'avère que les nombres __normaux__ ont une plage de codage restreinte dans le champ d'exposant, de sorte à ce qu'un nombre soit considérer comme __normalisé__ du moment où un champ d'exposant $E$ d'une taille de $N$ bits code une valeur comprise dans l'intervalle $\left[1;2^N - 1\right[$.
-Attention, nous ne parlons pas de la valeur qu'interprète le champ d'exposant car cela impliquerait de déduire un biais à la valeur Binary Unsigned que code le champ.
-Je vous redirige vers le chapitre "_Le champ d'exposant_" ainsi que vers les deux sections qui le suivent si vous souhaitez plus de détails.
+Attention, nous ne parlons pas de la valeur qu'interprète le champ d'exposant, car cela impliquerait de déduire un biais à la valeur codée par ledit champ.
+Si vous souhaitez plus de détails, je vous redirige vers le chapitre "_Le champ d'exposant_" ainsi que vers les deux sections qui le suivent.
+Il n'y a cependant aucune contrainte sur la plage de codage du champ de mantisse tronquée, pas de plage restrictive donc.
 
-Nous prenons en compte la valeur que code le champ d'exposant $E$ et non la valeur qu'il interprète, cela impliquerait de dévoir déduire du biais à 
-
-Rappelons qu
-
-Cependant, les nombres __normaux__ n'ont pas de plage de codage restrictive dans le champ de mantisse tronquée.
-
+Au sujet des champs de mantisse tronquée, la valeur de ces champs n'est pas impactée par les nombres __normaux__ ; au contraire des nombres __dénormaux__, chose que nous verrons dans un chapitre dédié.
+Encore une fois, si vous souhaitez plus de détails, je vous redirige vers le chapitre "_Le champ de mantisse tronquée_" ainsi que les deux sections lui succédant.
+En bref, les champs de mantisse tronquée $T$ des nombres __normaux__ ne codent pas le seul et unique bit à $1$ de la partie entière d'un significande, ce qui n'empêche pas de prendre en compte la valeur de ce bit (_bit implicite_ de son nom) lors de l'évaluation de la valeur des champs de mantisse tronquée $\left(1 + T\right)$.
 
 //
 
