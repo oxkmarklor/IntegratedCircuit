@@ -13,22 +13,33 @@ La suite du document explique ce que ces différents types de nombres ainsi que 
 
 ## Les nombres normaux
 
-// à relire
-
-Les nombres __normaux__ et __dénormaux__ sont complémentaires, même si ces termes là laisse croire le contraire.
+Les nombres __normaux__ et __dénormaux__ sont complémentaires, même si ces appellations laissent croire le contraire.
 Il y a deux différences entre un nombre __normalisé__ et __dénormalisé__ :
 
-  - la plage de codage du champs d'exposant, ce qui est le plus évident ;
-  - ainsi que la valeur du champs de mantisse tronquée
+  - la plage de codage du champ d'exposant
+  - la valeur du champ de mantisse tronquée
 
-Le codage d'un nombre $F$ est __normalisé__ lorsque la valeur de son champ de mantisse tronquée correspond à la valeur du significande de sa propre écriture scientifique binaire.
-Nous l'aurons compris, dans le cas où le nombre $F$ est __dénormalisé__ alors la valeur de son champ de mantisse tronquée ne correspond pas à celle d'un significande, qui est rappelons-le comprise dans l'intervalle $\left[1;2\right[$.
+Le codage d'un nombre $F$ est défini comme __normalisé__ lorsque la valeur de son champ de mantisse tronquée correspond à la valeur du significande de sa propre écriture scientifique binaire.
+Nous l'aurons compris, dans le cas où le nombre $F$ est défini comme __dénormalisé__ alors la valeur de son champ de mantisse tronquée ne correspond pas à celle d'un significande, qui est rappelons-le comprise dans l'intervalle $\left[1;2\right[$.
 Je précise que le champ de mantisse tronquée d'un nombre __dénormalisé__ ne peut pas pour autant interpréter n'importe quel valeur, nous verrons cela dans un chapitre dédié aux nombres __dénormaux__.
-En bref, un nombre est __dénormalisé__ parcqu'il n'est justement pas __normalisé__ par les règles de l'écriture scientifique binaire, particulièrement celles qui portent sur le champs le significande.
+En bref, un nombre est défini comme __dénormalisé__ parcqu'il n'est justement pas __normalisé__ par les règles de l'écriture scientifique binaire, particulièrement par celles qui portent sur le significande.
 
-Commençons par voir ce que sont les nombres __normaux__ par le biais des deux sections suivantes.
+Commençons par voir ce que sont les nombres __normaux__ au travers des deux sections suivantes.
 
-### La plage de codage du champs d'exposant d'un nombre normalisé
+### La plage de codage du champ d'exposant d'un nombre normalisé
+
+Il s'avère que les champs d'exposant des nombres __normaux__ ont une plage de codage restreinte, de sorte à ce qu'un nombre soit considérer comme __normalisé__ dès qu'un champ d'exposant $E$ d'une taille de $N$ bits code une valeur comprise dans l'intervalle $\left[1;2^N - 1\right[$.
+Nous parlons bien de la valeur Binary Unsigned que code le champs d'exposant et non de la valeur que le champ interprète, car l'intervalle ci-dessus ne prend pas en compte la déduction du biais des champs d'exposant.
+Si vous souhaitez plus de détails, je vous redirige vers le chapitre "_Le champ d'exposant_" et vers les deux sections qui le suivent.
+
+### La valeur du champ de mantisse tronquée d'un nombre normalisé
+
+//
+
+Il s'avère que les nombres __normaux__ ont une plage de codage restreinte dans le champ d'exposant, de sorte à ce qu'un nombre soit considérer comme __normalisé__ du moment où un champ d'exposant $E$ d'une taille de $N$ bits code une valeur comprise dans l'intervalle $\left[1;2^N - 1\right[$.
+Attention, nous ne parlons pas de la valeur qu'interprète le champ d'exposant, car cela impliquerait de déduire un biais à la valeur codée par ledit champ.
+Si vous souhaitez plus de détails, je vous redirige vers le chapitre "_Le champ d'exposant_" ainsi que vers les deux sections qui le suivent.
+Sachez qu'il n'y a cependant aucune contrainte sur la plage de codage du champ de mantisse tronquée.
 
 //
 
