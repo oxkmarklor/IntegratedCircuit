@@ -19,13 +19,13 @@ Si vous souhaitez plus de détails, je vous redirige vers le chapitre "_Le champ
 Sachez qu'il n'y a cependant aucune contrainte sur la plage de codage du champ de mantisse tronquée.
 
 Au sujet des champs de mantisse tronquée, le chapitre "_Le champ de mantisse tronquée_" et les deux sections suivantes parlent implicitement de la façon dont ces champs sont pris en charge par les nombres __normaux__.
-Pour résumer, dans un nombre __normalisé__ le champ de mantisse tronquée $T$ interprète de la sorte $\left(1 + T\right)$ la valeur d'un significande.
-Rappelons que cette somme est dû au fait que le champs de mantisse tronquée ne code pas directement le bit de la partie entière d'un significande (_bit implicite_ de son nom), le terme $1$ représente alors la valeur de ce bit qui doit malgré tout être prise en compte par le champs.
-Je vous redirige vers les chapitres sus-mentionné si vous souhaitez plus de détails.
+Pour résumer, dans un nombre __normalisé__ le champ de mantisse tronquée $T$ interprète la valeur d'un significande par le calcul $\left(1 + T\right)$.
+Rappelons que ce calcul est dû au fait que le champs de mantisse tronquée ne code pas directement le bit de la partie entière d'un significande (_bit implicite_ de son nom), le terme $1$ représente alors la valeur de ce bit qui doit malgré tout être prise en compte par le champs.
+Une nouvelle fois, je vous redirige vers les chapitres sus-mentionné si vous souhaitez plus de détails.
 
 Mentionnons le fait que durant toute la démonstration mathématique, nous sommes implicitement partis du principe que les champs de mantisse tronquée $T_{\alpha}$ ainsi que $T_{\beta}$ étaient __normalisés__, et par extension les opérandes du circuit $\alpha$ et $\beta$ également.
 Il est important de mentionner cela, car nous verrons plus tard que les nombres __dénormaux__ ne prennent pas en charge les champs de mantisse tronquée de la même manière que les nombres __normaux__.
-Plus tard, nous verrons dans un chapitre dédié aux nombres __dénormaux__ pourquoi est-ce que que cela n'ambiguïse/invalide pas la démonstration mathématique pour autant.
+Dans un chapitre dédié aux nombres __dénormaux__, nous verrons pourquoi est-ce que que cela n'invalide pas pour autant la démonstration mathématique.
 
 
 
