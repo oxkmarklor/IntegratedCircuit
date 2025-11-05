@@ -13,12 +13,23 @@ La suite du document explique pourquoi est-ce que le circuit prend en charge cer
 
 ## Le codage des nombres normaux
 
-Commençons par mentionner le fait que les nombres __normaux__ sont ceux dont nous faisions implicitement allusion durant toute la démonstration mathématique, et même dans ce qui la précède.
-
 Il s'avère que les nombres __normaux__ ont une plage de codage restreinte dans le champ d'exposant, de sorte à ce qu'un nombre soit considérer comme __normalisé__ du moment où un champ d'exposant $E$ d'une taille de $N$ bits code une valeur comprise dans l'intervalle $\left[1;2^N - 1\right[$.
 Attention, nous ne parlons pas de la valeur qu'interprète le champ d'exposant, car cela impliquerait de déduire un biais à la valeur codée par ledit champ.
 Si vous souhaitez plus de détails, je vous redirige vers le chapitre "_Le champ d'exposant_" ainsi que vers les deux sections qui le suivent.
-Il n'y a cependant aucune contrainte sur la plage de codage du champ de mantisse tronquée, pas de plage restrictive donc.
+Sachez qu'il n'y a cependant aucune contrainte sur la plage de codage du champ de mantisse tronquée.
+
+Au sujet des champs de mantisse tronquée, le chapitre "_Le champ de mantisse tronquée_" et les deux sections suivantes parlent implicitement de la façon dont ces champs sont pris en charge par les nombres __normaux__.
+Pour résumer, dans un nombre __normalisé__ le champ de mantisse tronquée $T$ interprète de la sorte $\left(1 + T\right)$ la valeur d'un significande.
+Rappelons que cette somme est dû au fait que le champs de mantisse tronquée ne code pas directement le bit de la partie entière d'un significande (_bit implicite_ de son nom), le terme $1$ représente alors la valeur de ce bit qui doit malgré tout être prise en compte par le champs.
+Je vous redirige vers les chapitres sus-mentionné si vous souhaitez plus de détails.
+
+Mentionnons le fait que durant toute la démonstration mathématique, nous sommes implicitement partis du principe que les champs de mantisse tronquée $T_{\alpha}$ ainsi que $T_{\beta}$ étaient __normalisés__, et par extension les opérandes du circuit $\alpha$ et $\beta$ également.
+Il est important de mentionner cela, car nous verrons plus tard que les nombres __dénormaux__ ne prennent pas en charge les champs de mantisse tronquée de la même manière que les nombres __normaux__.
+Plus tard, nous verrons dans un chapitre dédié aux nombres __dénormaux__ pourquoi est-ce que que cela n'ambiguïse/invalide pas la démonstration mathématique pour autant.
+
+
+
+//
 
 Au sujet des champs de mantisse tronquée, la valeur de ces champs n'est pas impactée par les nombres __normaux__ ; au contraire des nombres __dénormaux__, chose que nous verrons dans un chapitre dédié.
 Encore une fois, si vous souhaitez plus de détails, je vous redirige vers le chapitre "_Le champ de mantisse tronquée_" ainsi que les deux sections lui succédant.
