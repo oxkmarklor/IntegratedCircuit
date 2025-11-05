@@ -3,9 +3,9 @@
 Depuis le début de ce document, nous avons toujours évoquer le fait que le FPU Configuration Unit traite deux opérandes de format Half Precision, mais dans les faits cela manque de précision.
 Il s'avère que le format Half Precision, à l'instar de tout les autres formats définis par le standard IEEE-754, peut coder des nombres de "type" distinct :
 
-  - des nombres __nomaux__ ;
-  - des __NaN__ ;
-  - l'__infini positif/négatif__ ;
+  - des nombres __nomaux__
+  - des __NaN__
+  - l'__infini positif/négatif__
   - ou encore des nombres __dénormaux__
 
 Chaque type de nombre utilise une plage de codage spécifique du champ d'exposant, et parfois même du champ de mantisse tronquée ; ces dernières seront dévoilés à l'intérieur de chapitres dédiés.
@@ -30,16 +30,31 @@ Commençons par voir ce que sont les nombres __normaux__ au travers des deux sec
 
 Il s'avère que les champs d'exposant des nombres __normaux__ ont une plage de codage restreinte, de sorte à ce qu'un nombre soit considérer comme __normalisé__ dès qu'un champ d'exposant $E$ d'une taille de $N$ bits code une valeur comprise dans l'intervalle $\left[1;2^N - 1\right[$.
 Nous parlons bien de la valeur Binary Unsigned que code le champs d'exposant et non de la valeur que le champ interprète, car l'intervalle ci-dessus ne prend pas en compte la déduction du biais des champs d'exposant.
-Si vous souhaitez plus de détails, je vous redirige vers le chapitre "_Le champ d'exposant_" et vers les deux sections qui le suivent.
+Si vous souhaitez plus de détails, je vous redirige vers le chapitre "_Le champ d'exposant_" et ses sections subséquentes.
 
 ### La valeur du champ de mantisse tronquée d'un nombre normalisé
 
+Les chapitres "_Le champ de mantisse tronquée_" jusqu'à "_Le codage du champ de mantisse tronquée_" expliquent ce qu'est un champ de mantisse tronquée par le prisme du format Half Precision.
+Ces lignes parlent implicitement du cas des champs de mantisse tronquée des nombres __normaux__ codés au format Half Precision.
+Grâce à ces chapitres, nous en déduisons que le champ de mantisse tronquée $T$ d'un nombre __normalisé__ a une valeur de $\left(1 + T\right)$, où le terme $1$ représente la valeur du bit implicite (le bit de la partie entière d'un significande).
+
 //
 
-Il s'avère que les nombres __normaux__ ont une plage de codage restreinte dans le champ d'exposant, de sorte à ce qu'un nombre soit considérer comme __normalisé__ du moment où un champ d'exposant $E$ d'une taille de $N$ bits code une valeur comprise dans l'intervalle $\left[1;2^N - 1\right[$.
-Attention, nous ne parlons pas de la valeur qu'interprète le champ d'exposant, car cela impliquerait de déduire un biais à la valeur codée par ledit champ.
-Si vous souhaitez plus de détails, je vous redirige vers le chapitre "_Le champ d'exposant_" ainsi que vers les deux sections qui le suivent.
-Sachez qu'il n'y a cependant aucune contrainte sur la plage de codage du champ de mantisse tronquée.
+Nous savons que le champs de mantisse tronquée $T$ d'un nombre __normalisé__ correspond au significande de l'écriture scientifique binaire de ce même nombre, ce qui insinue que la valeur de $T \in \left[1;2\right[$.
+
+
+// le ch "Le champs de mantisse tronquée" fait implicitement allusion aux nombres normaux
+
+//
+
+Au sujet des champs de mantisse tronquée, le chapitre "_Le champ de mantisse tronquée_" et les deux sections suivantes parlent implicitement de la façon dont ces champs sont pris en charge par les nombres __normaux__.
+Pour résumer, dans un nombre __normalisé__ le champ de mantisse tronquée $T$ interprète la valeur d'un significande par le calcul $\left(1 + T\right)$.
+Rappelons que ce calcul est dû au fait que le champs de mantisse tronquée ne code pas directement le bit de la partie entière d'un significande (_bit implicite_ de son nom), le terme $1$ représente alors la valeur de ce bit qui doit malgré tout être prise en compte par le champs.
+Une nouvelle fois, je vous redirige vers les chapitres sus-mentionné si vous souhaitez plus de détails.
+
+Mentionnons le fait que durant toute la démonstration mathématique, nous sommes implicitement partis du principe que les champs de mantisse tronquée $T_{\alpha}$ ainsi que $T_{\beta}$ étaient __normalisés__, et par extension les opérandes du circuit $\alpha$ et $\beta$ également.
+Il est important de mentionner cela, car nous verrons plus tard que les nombres __dénormaux__ ne prennent pas en charge les champs de mantisse tronquée de la même manière que les nombres __normaux__.
+Dans un chapitre dédié aux nombres __dénormaux__, nous verrons pourquoi est-ce que que cela n'invalide pas pour autant la démonstration mathématique.
 
 //
 
