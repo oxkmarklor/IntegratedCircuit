@@ -34,14 +34,19 @@ Si vous souhaitez plus de détails, je vous redirige vers le chapitre "_Le champ
 
 ### La valeur du champ de mantisse tronquée d'un nombre normalisé
 
-Avant la démonstration mathématique se trouve un chapitre du nom de "_Le champ de mantisse tronquée_", suivi de deux sections.
-En l'occurrence, ces lignes cherchent à expliquer, de façon implicite, ce qu'est le champ de mantisse tronquée d'un nombre __normalisé__ codé au format Half Precision.
-Je vous redirige vers ces lignes si nécessaire.
+Pour commencer, précisons que le champs de mantisse tronquée d'un nombre __normalisé__ n'a pas de plage de codage restreinte, au contraire du champs d'exposant de ce même type de nombre.
+
+Cependant, faisons mention du fait qu'avant la démonstration mathématique se trouve un chapitre du nom de "_Le champ de mantisse tronquée_", suivi de deux sections.
+Ces lignes expliquent, de façon implicite, ce qu'est le champ de mantisse tronquée d'un nombre __normalisé__ codé au format Half Precision.
+
+Pour résumer, nous savons que la valeur du champ de mantisse tronquée d'un nombre __normalisé__ correspond à la valeur du significande de l'écriture scientifique binaire de ce même nombre.
+
 
 Pour résumer, nous savons que la valeur du champ de mantisse tronquée $T$ d'un nombre __normalisé__ $\left(1 + T\right)$, correspond à la valeur du significande de l'écriture scientifique binaire de ce même nombre.
 Rappelons que le terme $1$, que l'on additionne à la valeur du champs de mantisse tronquée $T$, représente la valeur du bit implicite (le bit de la partie entière d'un significande).
 Les chapitres susmentionnés parlent plus profondément de tout cela.
 
+Je vous redirige vers ces lignes si nécessaire.
 
 
 //
