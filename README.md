@@ -403,8 +403,10 @@ Ce qui est faux, ou plus exactement presque vrai.
 En écriture scientifique binaire, le __significande__ ne peut interpréter que des valeurs comprises dans l'intervalle $\left[1;2\right[$ ; cela insinue que la partie entière d'un tel __significande__ est toujours composée d'un seul et unique bit à $1$.
 Le standard IEEE-754 a donc fait le choix de ne pas coder la partie entière des __significandes__ dans les champs de __mantisse tronquée__, cela permettant un gain de précision d'un bit sur le codage des __significandes__.
 Pour autant, il faut prendre en compte la valeur de ce bit $\left(1 \times 2^0\right)$ lors de l'évaluation de la valeur d'un champ de __mantisse tronquée__ $T$, ce qui mène au calcul $\left(1 + T\right)$.
-D'où le nom de __bit implicite__ que l'on donne à ce dernier.
+D'où le fait que ce bit porte le nom de __bit implicite__.
 Aussi, sachez que cette optimisation est appliquée à l'ensemble des formats définis par le standrard IEEE-754.
+
+Je tiens à mentionner le fait que le champ de mantisse tronquée $T$ ne vaut exceptionnellement pas $\left(1 + T\right)$ lorsque le significande est nul, nous verrons cela dans un chapitre dédié en fin de document.
 
 Finalement, je vous rappelle qu'en écriture scientifique le __significande__ porte également le nom de __mantisse__.
 Ce qui nous permet d'en déduire que le nom de __mantisse tronquée__ est dû au fait que ce champ ne code qu'une partie du __significande__ (de la __mantisse__).
