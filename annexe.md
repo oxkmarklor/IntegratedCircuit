@@ -39,102 +39,15 @@ Pour commencer, précisons que le champs de mantisse tronquée d'un nombre __nor
 Cependant, faisons mention du fait qu'avant la démonstration mathématique se trouve un chapitre du nom de "_Le champ de mantisse tronquée_", suivi de deux sections.
 Ces lignes expliquent, de façon implicite, ce qu'est le champ de mantisse tronquée d'un nombre __normalisé__ codé au format Half Precision.
 
-// à relire
-
 Pour résumer, nous savons que la valeur du champ de mantisse tronquée d'un nombre __normalisé__ correspond à la valeur du significande de l'écriture scientifique binaire de ce même nombre.
-Qui plus est, il est expliqué qu'un champ de mantisse tronquée $T$ ne code pas le bit de la partie entière d'un significande (_bit implicite_ de son nom), pour des fins d'optimisation ; ce qui nous fait dire que la valeur du champ est $\left(1 + T\right)$.
-Nous l'aurons compris, le terme $1$ que l'on additionne à la valeur du champs de mantisse tronquée $T$ représente la valeur du bit implicite, qui doit malgré tout être prise en compte.
+Qui plus est, à des fins d'optimisation, un champ de mantisse tronquée ne code pas le bit de la partie entière d'un significande (_bit implicite_ de son nom).
+Ce qui n'exempte pas le fait de prendre en compte la valeur de ce bit $\left(1 \times 2^0\right)$ lors de l'évaluation de la valeur du champ de mantisse tronquée.
+Par conséquent, nous en concluons que la valeur du champ de mantisse tronquée $T$ d'un nombre __normalisé__ est de $\left(1 + T\right)$, avec nous l'aurons compris, le terme $1$ qui représente la valeur du bit implicite.
+Seul un significande nul entraine exceptionnelle une dérogation à la règle.
 
-// le champs de mantisse tronquée ne colle donc pas parfaitement avec le significande
+// faire référence à la démonstration
 
-
-
-Pour résumer, nous savons que la valeur du champ de mantisse tronquée $T$ d'un nombre __normalisé__ $\left(1 + T\right)$, correspond à la valeur du significande de l'écriture scientifique binaire de ce même nombre.
-Rappelons que le terme $1$, que l'on additionne à la valeur du champs de mantisse tronquée $T$, représente la valeur du bit implicite (le bit de la partie entière d'un significande).
-Les chapitres susmentionnés parlent plus profondément de tout cela.
-
-Je vous redirige vers ces lignes si nécessaire.
-
-//
-
-Précédemment, nous avons vu que le champ de __mantisse tronquée__ du nombre $F$ codé au format Half Precision correspondait au __significande__ de l'écriture scientifique binaire de ce même nombre.
-Ce qui est faux, ou plus exactement presque vrai.
-
-En écriture scientifique binaire, le __significande__ ne peut interpréter que des valeurs comprises dans l'intervalle $\left[1;2\right[$ ; cela insinue que la partie entière d'un tel __significande__ est toujours composée d'un seul et unique bit à $1$.
-Le standard IEEE-754 a donc fait le choix de ne pas coder la partie entière des __significandes__ dans les champs de __mantisse tronquée__, cela permettant un gain de précision d'un bit sur le codage des __significandes__.
-Pour autant, il faut prendre en compte la valeur de ce bit $\left(1 \times 2^0\right)$ lors de l'évaluation de la valeur d'un champ de __mantisse tronquée__ $T$, ce qui mène au calcul $\left(1 + T\right)$.
-D'où le nom de __bit implicite__ que l'on donne à ce dernier.
-Aussi, sachez que cette optimisation est appliquée à l'ensemble des formats définis par le standrard IEEE-754.
-
-
-//
-
-Avant la démonstration mathématique se trouve un chapitre du nom de "_Le champ de mantisse tronquée_", suivi de deux sections.
-Ces lignes cherchent à expliquer ce qu'est le champ de mantisse tronquée d'un nombre codé au format Half Precision, mais nous comprenons désormais que cela ne veut pas dire grand chose.
-Plus précisément, ces lignes expliquent de façon implicite ce qu'est le champ de mantisse tronquée d'un nombre __normalisé__ de format Half Precision.
-
-//
-
-Au sujet des champs de mantisse tronquée, le chapitre "_Le champ de mantisse tronquée_" et les deux sections suivantes parlent implicitement de la façon dont ces champs sont pris en charge par les nombres __normaux__.
-Pour résumer, dans un nombre __normalisé__ le champ de mantisse tronquée $T$ interprète la valeur d'un significande par le calcul $\left(1 + T\right)$.
-Rappelons que ce calcul est dû au fait que le champs de mantisse tronquée ne code pas directement le bit de la partie entière d'un significande (_bit implicite_ de son nom), le terme $1$ représente alors la valeur de ce bit qui doit malgré tout être prise en compte par le champs.
-Une nouvelle fois, je vous redirige vers les chapitres sus-mentionné si vous souhaitez plus de détails.
-
-Mentionnons le fait que durant toute la démonstration mathématique, nous sommes implicitement partis du principe que les champs de mantisse tronquée $T_{\alpha}$ ainsi que $T_{\beta}$ étaient __normalisés__, et par extension les opérandes du circuit $\alpha$ et $\beta$ également.
-Il est important de mentionner cela, car nous verrons plus tard que les nombres __dénormaux__ ne prennent pas en charge les champs de mantisse tronquée de la même manière que les nombres __normaux__.
-Dans un chapitre dédié aux nombres __dénormaux__, nous verrons pourquoi est-ce que que cela n'invalide pas pour autant la démonstration mathématique.
-
-//
-
-Nous savons que le champs de mantisse tronquée $T$ d'un nombre __normalisé__ correspond au significande de l'écriture scientifique binaire de ce même nombre, ce qui insinue que la valeur de $T \in \left[1;2\right[$.
-
-
-// le ch "Le champs de mantisse tronquée" fait implicitement allusion aux nombres normaux
-
-
-//
-
-Il s'avère que les nombres __normaux__ ont une plage de codage restreinte dans le champ d'exposant, de sorte à ce qu'un nombre soit considérer comme __normalisé__ du moment où un champ d'exposant $E$ d'une taille de $N$ bits code une valeur comprise dans l'intervalle $\left[1;2^N - 1\right[$.
-Attention, nous ne parlons pas de la valeur qu'interprète le champ d'exposant, car cela impliquerait de déduire un biais à la valeur codée par ledit champ.
-Si vous souhaitez plus de détails, je vous redirige vers le chapitre "_Le champ d'exposant_" ainsi que vers les deux sections qui le suivent.
-Sachez qu'il n'y a cependant aucune contrainte sur la plage de codage du champ de mantisse tronquée.
-
-Au sujet des champs de mantisse tronquée, le chapitre "_Le champ de mantisse tronquée_" et les deux sections suivantes parlent implicitement de la façon dont ces champs sont pris en charge par les nombres __normaux__.
-Pour résumer, dans un nombre __normalisé__ le champ de mantisse tronquée $T$ interprète la valeur d'un significande par le calcul $\left(1 + T\right)$.
-Rappelons que ce calcul est dû au fait que le champs de mantisse tronquée ne code pas directement le bit de la partie entière d'un significande (_bit implicite_ de son nom), le terme $1$ représente alors la valeur de ce bit qui doit malgré tout être prise en compte par le champs.
-Une nouvelle fois, je vous redirige vers les chapitres sus-mentionné si vous souhaitez plus de détails.
-
-Mentionnons le fait que durant toute la démonstration mathématique, nous sommes implicitement partis du principe que les champs de mantisse tronquée $T_{\alpha}$ ainsi que $T_{\beta}$ étaient __normalisés__, et par extension les opérandes du circuit $\alpha$ et $\beta$ également.
-Il est important de mentionner cela, car nous verrons plus tard que les nombres __dénormaux__ ne prennent pas en charge les champs de mantisse tronquée de la même manière que les nombres __normaux__.
-Dans un chapitre dédié aux nombres __dénormaux__, nous verrons pourquoi est-ce que que cela n'invalide pas pour autant la démonstration mathématique.
-
-//
-
-Les nombres _normaux_ (ou nombres _normalisés_) utilisent une certaine partie de la plage de codage du champs d'exposant.
-
-N'oublions pas que le champs d'exposant a un encodage quelques peu spéciale, ce qui est le sujet du chapitre "_L'encodage par biais du champs d'exposant_".
-En bref, avec l'encodage par biais du champs d'exposant il faut faire la distinction entre le nombre codé dans le champs binaire, et la valeur que représente réelement le champs d'exposant lui même.
-Le champs d'exposant $E$ code un nombre en _Binary Unsigned_ et possède un biais dont la valeur se calcul comme $\left(2^{\left(N - 1\right)} - 1\right)$, avec $N$ le nombre de bits qui compose le champs.
-Pour obtenir la valeur que représente le champs d'exposant, il faut soustraire le biais du champs au nombre codé dans le champs lui même $\left(E - biais\right)$.
-
-Tout nombre _normalisé_ a un champs d'exposant $E$ dans lequel il peut codé un nombre dont la valeur se situe entre $\left[1;\left(2^N - 1\right)\right[$.
-C'est ce que nous appelons _une plage de codage_.
-Maintenant que nous connaissons la borne minimal du codage de ce nombre, nous pouvons calculé quel est la plus petite valeur pouvant être représentée par le champs d'exposant avec $\left(1 - \left(2^{\left(N - 1\right)} - 1\right)\right)$.
-Nous pouvons aussi faire ceci avec la borne maximal, ce qui donne $\left(\left(2^N - 2\right) - \left(2^{\left(N - 1\right)} - 1\right)\right)$.
-Il n'y a pas de plage de codage restreinte pour le champs de mantisse tronquée, les nombres _normaux_ sont identifiés par la seule valeur du champs d'exposant.
-Quant au bit de signe, il remplit simplement son rôle en indiquant si le nombre est positif ou négatif (pas de contrainte non plus).
-
-Un nombre est dit "_normalisé_" lorsque dans son codage, le champs de mantisse tronquée est contraint de la même manière que peut l'être un significande de la notation scientifique binaire.
-Autrement dit, un nombre est _normalisé_ quand la valeur de son champs de mantisse tronquée oscille entre $\left[1;2\right[$, même si dans les faits ce n'est pas tout à fait le cas.
-Le codage d'un nombre _normalisé_ sollicte la notation scientifique binaire de ce nombre.
-Le signe $\pm$ de la notation scientifique est convertit en le bit de signe, tandis que le champs d'exposant code la puissance auquel la base $2$ du multiplicande est élevée (dans la mesure du possible car le champs d'exposant doit rappelons-le respecté une plage de codage).
-Enfin, le significande binaire est recopié dans le champs de mantisse tronquée.
-Un significande est un nombre réel compris dans l'intervalle $\left[1;2\right[$, _sa partie entière est donc toujours composée d'un seul et unique bit à_ $1$.
-Pour gagner en précision sur le codage d'un significande, le champs de mantisse tronquée d'un nombre _normalisé_ ne code pas le bit de la partie entière (qui est toujours à $1$), ce bit devient dès lors implicite.
-En pratique, le champs de mantisse tronquée $T$ d'un nombre _normalisé_ a une valeur comprise dans l'intervalle $\left[0;1\right[$.
-Dans les faits, sa valeur doit être interprétée comme $\left(1 + T\right)$, où le terme $1$ est la valeur du bit rendu implicite.
-
-Comme nous pouvons le remarqué, tout ceci fait échos aux notions des chapitres précédents.
+Je vous redirige vers les chapitres susmentionnés dans le cas où vous souhaiteriez plus de détails.
 
 ### Les nombres NaN
 
