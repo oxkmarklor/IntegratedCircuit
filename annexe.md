@@ -1,15 +1,16 @@
 # Annexe: Les différents types de nombres du format Half Precision
 
-Depuis le début de ce document, nous avons toujours évoquer le fait que le FPU Configuration Unit traite deux opérandes de format Half Precision, mais dans les faits cela manque de précision.
-Il s'avère que le format Half Precision, à l'instar de tout les autres formats définis par le standard IEEE-754, peut coder des nombres de "type" distinct :
+Depuis le début de ce document, nous avons toujours évoquer le fait que le FPU Configuration Unit traite deux opérandes de format Half Precision, mais dans les faits ces propos manquent de précision.
+Il s'avère que le format Half Precision, à l'instar de tout les autres formats définis par le standard IEEE-754, peut coder des nombres de ' type ' distincts :
 
   - des nombres __nomaux__
+  - des nombres __dénormaux__
   - des __NaN__
   - l'__infini positif/négatif__
-  - ou encore des nombres __dénormaux__
+  - ou encore le __zéro positif/négatif__
 
 Chaque type de nombre utilise une plage de codage spécifique du champ d'exposant, et parfois même du champ de mantisse tronquée ; ces dernières seront dévoilés à l'intérieur de chapitres dédiés.
-La suite du document explique ce que ces différents types de nombres ainsi que la raison derrière le fait que le circuit ne prenne en charge que certains d'entre eux et pas d'autre.
+La suite du document explique ce que sont ces différents types de nombres, ainsi que la raison derrière le fait que le circuit ne prenne en charge que certains d'entre eux et pas d'autre.
 
 ## Les nombres normaux
 
@@ -34,20 +35,24 @@ Si vous souhaitez plus de détails, je vous redirige vers le chapitre "_Le champ
 
 ### La valeur du champ de mantisse tronquée d'un nombre normalisé
 
+// à relire
+
 Pour commencer, précisons que le champs de mantisse tronquée d'un nombre __normalisé__ n'a pas de plage de codage restreinte, au contraire du champs d'exposant de ce même type de nombre.
 
-Cependant, faisons mention du fait qu'avant la démonstration mathématique se trouve un chapitre du nom de "_Le champ de mantisse tronquée_", suivi de deux sections.
+Cependant, faisons mention du fait qu'avant la démonstration mathématique se trouve un chapitre du nom "_Le champ de mantisse tronquée_", suivi de deux sections.
 Ces lignes expliquent, de façon implicite, ce qu'est le champ de mantisse tronquée d'un nombre __normalisé__ codé au format Half Precision.
 
 Pour résumer, nous savons que la valeur du champ de mantisse tronquée d'un nombre __normalisé__ correspond à la valeur du significande de l'écriture scientifique binaire de ce même nombre.
 Qui plus est, à des fins d'optimisation, un champ de mantisse tronquée ne code pas le bit de la partie entière d'un significande (_bit implicite_ de son nom).
 Ce qui n'exempte pas le fait de prendre en compte la valeur de ce bit $\left(1 \times 2^0\right)$ lors de l'évaluation de la valeur du champ de mantisse tronquée.
 Par conséquent, nous en concluons que la valeur du champ de mantisse tronquée $T$ d'un nombre __normalisé__ est de $\left(1 + T\right)$, avec nous l'aurons compris, le terme $1$ qui représente la valeur du bit implicite.
-Seul un significande nul entraine exceptionnelle une dérogation à la règle.
-
-// faire référence à la démonstration
+Seul un significande nul entraine une exceptionnelle dérogation à la règle.
 
 Je vous redirige vers les chapitres susmentionnés dans le cas où vous souhaiteriez plus de détails.
+
+Clôturons cette section par une précision à propos de la démonstration mathématique.
+Remarquez que dans cette dernière, les champs de mantisse tronquée $T_{\alpha}$ ainsi que $T_{\beta}$ ont respectivement une valeur de $\left(1 + T_{\alpha}\right)$ et $\left(1 + T_{\beta}\right)$, ce qui insinue que la démonstration mathématique part du principe que les opérandes $\alpha$ et $\beta$ codent des nombres __normaux__ de format Half Precision.
+Cela ne rend pas pour autant invalide la démonstration mathématique, nous expliquerons pourquoi dans les chapitres suivants.
 
 ### Les nombres NaN
 
