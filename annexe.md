@@ -39,7 +39,14 @@ Pour commencer, précisons que le champs de mantisse tronquée d'un nombre __nor
 Cependant, faisons mention du fait qu'avant la démonstration mathématique se trouve un chapitre du nom de "_Le champ de mantisse tronquée_", suivi de deux sections.
 Ces lignes expliquent, de façon implicite, ce qu'est le champ de mantisse tronquée d'un nombre __normalisé__ codé au format Half Precision.
 
+// à relire
+
 Pour résumer, nous savons que la valeur du champ de mantisse tronquée d'un nombre __normalisé__ correspond à la valeur du significande de l'écriture scientifique binaire de ce même nombre.
+Qui plus est, il est expliqué qu'un champ de mantisse tronquée $T$ ne code pas le bit de la partie entière d'un significande (_bit implicite_ de son nom), pour des fins d'optimisation ; ce qui nous fait dire que la valeur du champ est $\left(1 + T\right)$.
+Nous l'aurons compris, le terme $1$ que l'on additionne à la valeur du champs de mantisse tronquée $T$ représente la valeur du bit implicite, qui doit malgré tout être prise en compte.
+
+// le champs de mantisse tronquée ne colle donc pas parfaitement avec le significande
+
 
 
 Pour résumer, nous savons que la valeur du champ de mantisse tronquée $T$ d'un nombre __normalisé__ $\left(1 + T\right)$, correspond à la valeur du significande de l'écriture scientifique binaire de ce même nombre.
@@ -47,6 +54,17 @@ Rappelons que le terme $1$, que l'on additionne à la valeur du champs de mantis
 Les chapitres susmentionnés parlent plus profondément de tout cela.
 
 Je vous redirige vers ces lignes si nécessaire.
+
+//
+
+Précédemment, nous avons vu que le champ de __mantisse tronquée__ du nombre $F$ codé au format Half Precision correspondait au __significande__ de l'écriture scientifique binaire de ce même nombre.
+Ce qui est faux, ou plus exactement presque vrai.
+
+En écriture scientifique binaire, le __significande__ ne peut interpréter que des valeurs comprises dans l'intervalle $\left[1;2\right[$ ; cela insinue que la partie entière d'un tel __significande__ est toujours composée d'un seul et unique bit à $1$.
+Le standard IEEE-754 a donc fait le choix de ne pas coder la partie entière des __significandes__ dans les champs de __mantisse tronquée__, cela permettant un gain de précision d'un bit sur le codage des __significandes__.
+Pour autant, il faut prendre en compte la valeur de ce bit $\left(1 \times 2^0\right)$ lors de l'évaluation de la valeur d'un champ de __mantisse tronquée__ $T$, ce qui mène au calcul $\left(1 + T\right)$.
+D'où le nom de __bit implicite__ que l'on donne à ce dernier.
+Aussi, sachez que cette optimisation est appliquée à l'ensemble des formats définis par le standrard IEEE-754.
 
 
 //
