@@ -35,24 +35,22 @@ Si vous souhaitez plus de détails, je vous redirige vers le chapitre "_Le champ
 
 ### La valeur du champ de mantisse tronquée d'un nombre normalisé
 
-// à relire
+Pour commencer, précisons que le champ de __mantisse tronquée__ d'un nombre __normalisé__ n'a pas de plage de codage restreinte, au contraire du champ d'__exposant__ de ce même type de nombre.
 
-Pour commencer, précisons que le champs de mantisse tronquée d'un nombre __normalisé__ n'a pas de plage de codage restreinte, au contraire du champs d'exposant de ce même type de nombre.
+En outre, faisons mention du fait qu'avant la démonstration mathématique se trouve un chapitre du nom de "_Le champ de mantisse tronquée_", suivi de deux sections.
+Ces sections expliquent, de façon implicite, ce qu'est le champ de mantisse tronquée d'un nombre __normalisé__ codé au format Half Precision.
 
-Cependant, faisons mention du fait qu'avant la démonstration mathématique se trouve un chapitre du nom "_Le champ de mantisse tronquée_", suivi de deux sections.
-Ces lignes expliquent, de façon implicite, ce qu'est le champ de mantisse tronquée d'un nombre __normalisé__ codé au format Half Precision.
-
-Pour résumer, nous savons que la valeur du champ de mantisse tronquée d'un nombre __normalisé__ correspond à la valeur du significande de l'écriture scientifique binaire de ce même nombre.
-Qui plus est, à des fins d'optimisation, un champ de mantisse tronquée ne code pas le bit de la partie entière d'un significande (_bit implicite_ de son nom).
-Ce qui n'exempte pas le fait de prendre en compte la valeur de ce bit $\left(1 \times 2^0\right)$ lors de l'évaluation de la valeur du champ de mantisse tronquée.
+Pour résumer, nous y apprenons que la valeur du champ de mantisse tronquée d'un nombre __normalisé__ correspond à la valeur du significande de l'écriture scientifique binaire de ce même nombre.
+De plus, à des fins d'optimisation, un champ de mantisse tronquée ne code pas le bit de la partie entière d'un significande (_bit implicite_ de son nom).
+Ce qui n'exempte pas le fait de prendre en compte la valeur de ce bit $\left(1 \times 2^0\right)$ lors de l'évaluation de la valeur d'un champ de mantisse tronquée.
 Par conséquent, nous en concluons que la valeur du champ de mantisse tronquée $T$ d'un nombre __normalisé__ est de $\left(1 + T\right)$, avec nous l'aurons compris, le terme $1$ qui représente la valeur du bit implicite.
 Seul un significande nul entraine une exceptionnelle dérogation à la règle.
 
 Je vous redirige vers les chapitres susmentionnés dans le cas où vous souhaiteriez plus de détails.
 
 Clôturons cette section par une précision à propos de la démonstration mathématique.
-Remarquez que dans cette dernière, les champs de mantisse tronquée $T_{\alpha}$ ainsi que $T_{\beta}$ ont respectivement une valeur de $\left(1 + T_{\alpha}\right)$ et $\left(1 + T_{\beta}\right)$, ce qui insinue que la démonstration mathématique part du principe que les opérandes $\alpha$ et $\beta$ codent des nombres __normaux__ de format Half Precision.
-Cela ne rend pas pour autant invalide la démonstration mathématique, nous expliquerons pourquoi dans les chapitres suivants.
+Remarquez que dans cette dernière, les champs de mantisse tronquée $T_{\alpha}$ ainsi que $T_{\beta}$ ont respectivement une valeur de $\left(1 + T_{\alpha}\right)$ et $\left(1 + T_{\beta}\right)$, ce qui insinue que la démonstration mathématique part de l'hypothèse que les opérandes $\alpha$ et $\beta$ codent des nombres __normaux__ de format Half Precision.
+Cela ne rend pas pour autant ambigu la démonstration mathématique vis à vis des autres types de nombres, nous expliquerons pourquoi dans les chapitres suivants.
 
 ### Les nombres NaN
 
