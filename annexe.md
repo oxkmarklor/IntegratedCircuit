@@ -34,15 +34,21 @@ Si vous souhaitez plus de détails, je vous redirige vers le chapitre "_Le champ
 
 ### La valeur du champ de mantisse tronquée d'un nombre normalisé
 
-// relire
+Avant la démonstration mathématique se trouve un chapitre du nom de "_Le champ de mantisse tronquée_", suivi de deux sections.
+En l'occurrence, ces lignes cherchent à expliquer, de façon implicite, ce qu'est le champ de mantisse tronquée d'un nombre __normalisé__ codé au format Half Precision.
+Je vous redirige vers ces lignes si nécessaire.
+
+Pour résumer, nous savons que la valeur du champ de mantisse tronquée $T$ d'un nombre __normalisé__ $\left(1 + T\right)$, correspond à la valeur du significande de l'écriture scientifique binaire de ce même nombre.
+Rappelons que le terme $1$, que l'on additionne à la valeur du champs de mantisse tronquée $T$, représente la valeur du bit implicite (le bit de la partie entière d'un significande).
+Les chapitres susmentionnés parlent plus profondément de tout cela.
+
+
+
+//
 
 Avant la démonstration mathématique se trouve un chapitre du nom de "_Le champ de mantisse tronquée_", suivi de deux sections.
-Ces lignes cherchent à expliquer ce qu'est un champ de mantisse tronquée par le prisme d'un nombre codé au format Half Precision, plus précisément, ces lignes expliquent implicitement ce qu'est le champ de mantisse tronquée d'un nombre __normalisé__ de format Half Precision.
-
-En résumer, nous déduisons de ces sections que la valeur du champ de mantisse tronquée $T$ d'un nombre __normalisé__ $\left(1 + T\right)$, correspond à la valeur du significande de l'écriture scientifique binaire de ce même nombre.
-Rappelons que le terme $1$ additionné à la valeur du champ $T$ est la valeur du bit implicite (le bit de la partie entière du significande).
-Je vous invite à relire les chapitres susmentionné si vous avez besoin de plus de détails.
-
+Ces lignes cherchent à expliquer ce qu'est le champ de mantisse tronquée d'un nombre codé au format Half Precision, mais nous comprenons désormais que cela ne veut pas dire grand chose.
+Plus précisément, ces lignes expliquent de façon implicite ce qu'est le champ de mantisse tronquée d'un nombre __normalisé__ de format Half Precision.
 
 //
 
