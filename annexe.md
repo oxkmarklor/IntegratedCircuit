@@ -17,32 +17,21 @@ La suite du document explique ce que sont ces différents types de nombres, ains
 L'introduction explique que les formats définis par le standard IEEE-754, tel que le Half Precision, peuvent coder différents types de nombres dont figure parmis ceux-ci les __NaN__, abréviation de __Not a Number__.
 Commençons par parler de la plage de codage du champ d'exposant et du champ de mantisse tronquée d'un nombre __NaN__, avant de parler de quoique ce soit d'autre.
 
-Les plages de codage des champs d'exposant et de mantisse tronquée d'un nombre __NaN__ sont restreintes, de sorte à ce qu'un nombre $\alpha$ soit considéré comme __NaN__ lorsque le champ d'exposant $E_{\alpha}$, d'une taille de $N$ bits, code la valeur $\left(2^N - 1\right)$ ; tandis que le champ de mantisse tronquée $T_{\alpha}$, d'une taille de $K$ bits, code une valeur comprise de l'intervalle $\left]0;2^K - 1\right]$.
+Les plages de codage des champs d'exposant et de mantisse tronquée d'un nombre __NaN__ sont toutes les deux restreintes. 
+Pour qu'un nombre soit considéré comme __NaN__, il faut que son champ d'exposant d'une taille de $N$ bits code la valeur $\left(2^N - 1\right)$ et que son champ de mantisse tronquée, d'une taille de $K$ bits, code une valeur comprise dans l'intervalle $\left]0;2^K - 1\right]$.
+
+Aussi étrange que cela puisse être, le standard IEEE-754 considère qu'un nombre __NaN__ ne représente pas un nombre, d'où le fait que ces nombres aient comme nom l'abréviation de __Not a Number__.
+Il s'avère que les nombres __NaN__ peuvent être générés en lieu et place d'un résultat de calcul supposé comme invalide, que ce soit par le standard IEEE-754 et/ou par les mathématiques elles même.
+Prenons pour exemple le quotient $\left(NaN \div 0\right) = \ NaN$.
+
+Nous savons d'ores et déjà que le calcul est mathématiquement invalide, du fait de la divison par $0$.
+De surcroît, la division d'un nombre qui n'en est pas un (un nombre __NaN__) donne lieu à un calcul arithmétique ambigu ; ce sont les raisons pour lesquelles le quotient mène quoiqu'il arrive à la génération d'un nombre __NaN__ en guise de résultat.
 
 
 //
 
-La plage de codage du champ d'exposant d'un nombre __NaN__ est restreinte.
-Sans se limiter à cette condition, un nombre $\alpha$ ne peut être considérer comme __NaN__ que lorsque son champ d'exposant $E_{\alpha}$ code la valeur $\left(2^N - 1\right)$, pour $N$ le nombre de bits qui compose le champ d'exposant.
-Remarquez que techniquement, il ne s'agit même pas d'une plage de codage.
+Maintenant que nous avons passés ces formalités, expliquons ce qu'est un __NaN__.
 
-Il faut ajouter à cela le fait que la plage de codage du champ de mantisse tronquée d'un nombre __NaN__ est elle aussi restreinte.
-
-
-
-A cela il faut ajouter le fait que la plage de codage du champ de mantisse tronquée $T$ d'un nombre __NaN__ soit également restreinte, ledit champ d'une taille de $K$ bits ne peut coder que des valeurs comprises dans l'intervalle $\left]0;2^K - 1\right]$.
-
-//
-
-La plage de codage du champ d'exposant d'un nombre __NaN__ est restreinte.
-Sans s'y limiter, un nombre ne peut être considérer comme __NaN__ qu'à la condition qu'un champ d'exposant $E$ d'une taille de $N$ bits code la valeur $\left(2^N - 1\right)$, techniquement il ne s'agit même pas d'une plage de codage.
-A cela il faut ajouter le fait que la plage de codage du champ de mantisse tronquée $T$ d'un nombre __NaN__ soit également restreinte, ledit champ d'une taille de $K$ bits ne peut coder que des valeurs comprises dans l'intervalle $\left]0;2^K - 1\right]$.
-
-//
-
-Il s'avère que les champs d'exposant des nombres __normaux__ ont une plage de codage restreinte, de sorte à ce qu'un nombre soit considérer comme __normalisé__ dès qu'un champ d'exposant $E$ d'une taille de $N$ bits code une valeur comprise dans l'intervalle $\left[1;2^N - 1\right[$.
-
-//
 
 ### Les nombres NaN
 
