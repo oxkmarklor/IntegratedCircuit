@@ -14,21 +14,31 @@ La suite du document explique ce que sont ces différents types de nombres, ains
 
 ## Les NaN
 
-L'introduction explique que les formats définis par le standard IEEE-754, tel que le Half Precision, peuvent coder différents types de nombres dont figure parmis ceux-ci les __NaN__, de l'abréviation de __Not a Number__.
-Commençons par parler de la plage de codage du champ d'exposant et du champ de mantisse tronquée d'un nombre __NaN__, avant de parler que quoique ce soit d'autre.
+L'introduction explique que les formats définis par le standard IEEE-754, tel que le Half Precision, peuvent coder différents types de nombres dont figure parmis ceux-ci les __NaN__, abréviation de __Not a Number__.
+Commençons par parler de la plage de codage du champ d'exposant et du champ de mantisse tronquée d'un nombre __NaN__, avant de parler de quoique ce soit d'autre.
 
-La plage de codage du champ d'exposant d'un nombre __NaN__ est très limitée.
-Dans les faits, pour qu'un nombre ait une chance d'être considérer comme un __NaN__ il faut qu'un champ d'exposant $E$ d'une taille de $N$ bits code la valeur $\left(2^N - 1\right)$, mais ce n'est pas une fin en soi.
-
-La plage de codage du champ d'exposant d'un nombre __NaN__ est très limitée.
-Dans les faits, un nombre ne peut être considérer comme un __NaN__ qu'à la condition qu'un champ d'exposant $E$ d'une taille de $N$ bits code la valeur $\left(2^N - 1\right)$, mais ce n'est pas une fin en soi.
-
-La plage de codage du champ d'exposant d'un nombre __NaN__ est très restreinte.
-Sans s'y limiter, un nombre ne peut être considérer comme un __NaN__ qu'à la condition qu'un champ d'exposant $E$ d'une taille de $N$ bits code la valeur $\left(2^N - 1\right)$.
-En outre, la plage de codage du champ de mantisse tronquée d'un nombre __NaN__ est elle aussi restreinte, de sorte à ce qu'un nombre soit considérer comme un __NaN__ dès lors qu'en plus du champs d'exposant, un champ de mantisse tronquée $T$ d'une taille de $N'$ bits code une valeur comprise dans l'intervalle $\left]0;2^{N'} - 1\right]$.
+Les plages de codage des champs d'exposant et de mantisse tronquée d'un nombre __NaN__ sont restreintes, de sorte à ce qu'un nombre $\alpha$ soit considéré comme __NaN__ lorsque le champ d'exposant $E_{\alpha}$, d'une taille de $N$ bits, code la valeur $\left(2^N - 1\right)$ ; tandis que le champ de mantisse tronquée $T_{\alpha}$, d'une taille de $K$ bits, code une valeur comprise de l'intervalle $\left]0;2^K - 1\right]$.
 
 
+//
 
+La plage de codage du champ d'exposant d'un nombre __NaN__ est restreinte.
+Sans se limiter à cette condition, un nombre $\alpha$ ne peut être considérer comme __NaN__ que lorsque son champ d'exposant $E_{\alpha}$ code la valeur $\left(2^N - 1\right)$, pour $N$ le nombre de bits qui compose le champ d'exposant.
+Remarquez que techniquement, il ne s'agit même pas d'une plage de codage.
+
+Il faut ajouter à cela le fait que la plage de codage du champ de mantisse tronquée d'un nombre __NaN__ est elle aussi restreinte.
+
+
+
+A cela il faut ajouter le fait que la plage de codage du champ de mantisse tronquée $T$ d'un nombre __NaN__ soit également restreinte, ledit champ d'une taille de $K$ bits ne peut coder que des valeurs comprises dans l'intervalle $\left]0;2^K - 1\right]$.
+
+//
+
+La plage de codage du champ d'exposant d'un nombre __NaN__ est restreinte.
+Sans s'y limiter, un nombre ne peut être considérer comme __NaN__ qu'à la condition qu'un champ d'exposant $E$ d'une taille de $N$ bits code la valeur $\left(2^N - 1\right)$, techniquement il ne s'agit même pas d'une plage de codage.
+A cela il faut ajouter le fait que la plage de codage du champ de mantisse tronquée $T$ d'un nombre __NaN__ soit également restreinte, ledit champ d'une taille de $K$ bits ne peut coder que des valeurs comprises dans l'intervalle $\left]0;2^K - 1\right]$.
+
+//
 
 Il s'avère que les champs d'exposant des nombres __normaux__ ont une plage de codage restreinte, de sorte à ce qu'un nombre soit considérer comme __normalisé__ dès qu'un champ d'exposant $E$ d'une taille de $N$ bits code une valeur comprise dans l'intervalle $\left[1;2^N - 1\right[$.
 
@@ -66,7 +76,7 @@ Commençons par voir ce que sont les nombres __normaux__ au travers des deux sec
 
 ### La plage de codage du champ d'exposant d'un nombre normalisé
 
-Il s'avère que les champs d'exposant des nombres __normaux__ ont une plage de codage restreinte, de sorte à ce qu'un nombre soit considérer comme __normalisé__ dès qu'un champ d'exposant $E$ d'une taille de $N$ bits code une valeur comprise dans l'intervalle $\left[1;2^N - 1\right[$.
+Il s'avère que les champs d'exposant des nombres __normaux__ ont une plage de codage restreinte, de sorte à ce qu'un nombre soit considéré comme __normalisé__ dès qu'un champ d'exposant $E$ d'une taille de $N$ bits code une valeur comprise dans l'intervalle $\left[1;2^N - 1\right[$.
 Nous parlons bien de la valeur Binary Unsigned que code le champs d'exposant et non de la valeur que le champ interprète, car l'intervalle ci-dessus ne prend pas en compte la déduction du biais des champs d'exposant.
 Si vous souhaitez plus de détails, je vous redirige vers le chapitre "_Le champ d'exposant_" et ses sections subséquentes.
 
