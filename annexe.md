@@ -12,6 +12,43 @@ Il s'avère que le format Half Precision, à l'instar de tout les autres formats
 Chaque type de nombre utilise une plage de codage spécifique du champ d'exposant, et parfois même du champ de mantisse tronquée ; ces dernières seront dévoilés à l'intérieur de chapitres dédiés.
 La suite du document explique ce que sont ces différents types de nombres, ainsi que la raison derrière le fait que le circuit ne prenne en charge que certains d'entre eux et pas d'autre.
 
+## Les NaN
+
+L'introduction explique que les formats définis par le standard IEEE-754, tel que le Half Precision, peuvent coder différents types de nombres dont figure parmis ceux-ci les __NaN__, de l'abréviation de __Not a Number__.
+Commençons par parler de la plage de codage du champ d'exposant et du champ de mantisse tronquée d'un nombre __NaN__, avant de parler que quoique ce soit d'autre.
+
+La plage de codage du champ d'exposant d'un nombre __NaN__ est très limitée.
+Dans les faits, pour qu'un nombre ait une chance d'être considérer comme un __NaN__ il faut qu'un champ d'exposant $E$ d'une taille de $N$ bits code la valeur $\left(2^N - 1\right)$, mais ce n'est pas une fin en soi.
+
+La plage de codage du champ d'exposant d'un nombre __NaN__ est très limitée.
+Dans les faits, un nombre ne peut être considérer comme un __NaN__ qu'à la condition qu'un champ d'exposant $E$ d'une taille de $N$ bits code la valeur $\left(2^N - 1\right)$, mais ce n'est pas une fin en soi.
+
+La plage de codage du champ d'exposant d'un nombre __NaN__ est très restreinte.
+Sans s'y limiter, un nombre ne peut être considérer comme un __NaN__ qu'à la condition qu'un champ d'exposant $E$ d'une taille de $N$ bits code la valeur $\left(2^N - 1\right)$.
+En outre, la plage de codage du champ de mantisse tronquée d'un nombre __NaN__ est elle aussi restreinte, de sorte à ce qu'un nombre soit considérer comme un __NaN__ dès lors qu'en plus du champs d'exposant, un champ de mantisse tronquée $T$ d'une taille de $N'$ bits code une valeur comprise dans l'intervalle $\left]0;2^{N'} - 1\right]$.
+
+
+
+
+Il s'avère que les champs d'exposant des nombres __normaux__ ont une plage de codage restreinte, de sorte à ce qu'un nombre soit considérer comme __normalisé__ dès qu'un champ d'exposant $E$ d'une taille de $N$ bits code une valeur comprise dans l'intervalle $\left[1;2^N - 1\right[$.
+
+//
+
+### Les nombres NaN
+
+Pour le standard IEEE-754, il existe des nombres invalides du nom de ___NaN___ (_Not a Number_).
+Un nombre _NaN_ est généré par un calcul considéré comme invalide par le standard lui même et/ou par les mathématiques, c'est parfois une sorte d'alternative à la génération d'exception matériel.
+Par exemple, le calcul $\left(\left(+ \ \infty\right) \div 0\right)$ génère un _NaN_ pour deux raisons.
+Premièrement, divisé par $X$ l'infini positif ne donne pas de résultat concret, de plus si $\left(X = 0\right)$ alors le calcul se retrouve soudainement à être invalide mathématiquement parlant. 
+Comme autre exemple, si un calcul se base sur un opérande qui est un _NaN_, alors il génère également _NaN_ en résultat $\left(NaN - 3.5\right) = NaN$.
+
+En bref, le codage d'un _NaN_ recquière que le champs d'exposant code la valeur $\left(2^N - 1\right)$, pour $N$ le nombre de bits qui compose le champs.
+Parallèlement, le champs de mantisse tronquée doit être non nul.
+Aussi, comme cela a été mentionné ci-dessus, un nombre _NaN_ utilisé en tant qu'opérande d'un calcul arithmétique ne génère jamais de résultat valide.
+Donc la FPU Configuration Unit ne prend pas en charge les nombres _NaN_.
+
+//
+
 ## Les nombres normaux
 
 Les nombres __normaux__ et __dénormaux__ sont complémentaires, même si ces appellations laissent croire le contraire.
