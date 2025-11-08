@@ -33,13 +33,17 @@ Par conséquent, nous en déduisons que dans une telle situation le soustracteur
 
 ## L'infini positif/négatif
 
-Parmis les autres types de nombres que peuvent coder les formats définis par le standard IEEE-754, tel que le Half Precision, il y a l'__infini positif__ ainsi que l'__infini négatif__.
+Les formats définis par le standard IEEE-754, tel que le Half Precision, peuvent également coder deux valeurs assez spéciales : l'__infini positif__ ainsi que l'__infini négatif__.
+Faisons de même que le chapitre précédent, commençons d'abord par parler de la plage de codage du champ d'exposant et du champ de mantisse tronquée d'un nombre __infini positif/négatif__, avant d'aborder le reste.
 
+Les plages de codage des champs d'exposant et de mantisse tronquée d'un nombre __infini positif/négatif__ sont toutes les deux restreintes. 
+Pour qu'un nombre soit considéré comme l'__infini positif__ ou __négatif__, il faut que son champ d'exposant d'une taille de $N$ bits code la valeur $\left(2^N - 1\right)$ et que son champ de mantisse tronquée soit nul.
+Le codage de ces nombres joue cependant sur la valeur du bit de signe pour coder un __infini positif__ ou un __infini négatif__ ; ce qui n'impacte pas le circuit qui ne prend pas en compte le bit de signe de ses opérandes.
+
+// partie de la logique calculatoire
 
 //
 
-L'introduction explique que les formats définis par le standard IEEE-754, tel que le Half Precision, peuvent coder différents types de nombres parmis lesquels figurent les __NaN__.
-Commençons par parler de la plage de codage du champ d'exposant et du champ de mantisse tronquée d'un nombre __NaN__, avant de parler de quoique ce soit d'autre.
 
 
 /// résumer: blabla l'encodage blabla. Comme nous l'avons vu un calcul arithmétique utilisant un ou plusieurs opérande infini (positif/négatif) génère systèmatiquement un NaN en résultat. Le circuit ne prend pas en charge les NaN et il ne prend pas non plus en charge l'infini positif/négatif car tout calcul arithmétique ayant pour opérande l'infini se termine par NaN.
