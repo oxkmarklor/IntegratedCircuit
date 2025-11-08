@@ -14,7 +14,7 @@ La suite du document explique ce que sont ces différents types de nombres, ains
 
 ## Les NaN
 
-L'introduction explique que les formats définis par le standard IEEE-754, tel que le Half Precision, peuvent coder différents types de nombres dont figure parmis ceux-ci les __NaN__.
+L'introduction explique que les formats définis par le standard IEEE-754, tel que le Half Precision, peuvent coder différents types de nombres parmis lesquels figurent les __NaN__.
 Commençons par parler de la plage de codage du champ d'exposant et du champ de mantisse tronquée d'un nombre __NaN__, avant de parler de quoique ce soit d'autre.
 
 Les plages de codage des champs d'exposant et de mantisse tronquée d'un nombre __NaN__ sont toutes les deux restreintes. 
@@ -27,22 +27,35 @@ Nous savons d'ores et déjà que le calcul est mathématiquement invalide, du fa
 De surcroît, la division d'un nombre qui n'en est pas un (un nombre __NaN__) donne lieu à un calcul arithmétique ambigu ; ce sont les raisons pour lesquelles ce quotient mène quoiqu'il arrive à la génération d'un nombre __NaN__ en guise de résultat.
 
 Pour conclure ce chapitre, il va me falloir donner quelques détails à propos du FPC Unit, ce qui m'amène à vous redirigé vers la documentation dédiée au circuit si vous souhaitez plus d'information.
-Dans les grandes lignes, sachez que l'une des fonctionnalités du circuit est d'acheminé convenablement les opérandes d'un calcul arithmétique flottant, sur les bonnes entrées d'un soustracteur flottant.
+Dans les grandes lignes, sachez que l'une des fonctionnalités du circuit est d'acheminer convenablement les opérandes d'un calcul arithmétique flottant, sur les bonnes entrées d'un soustracteur flottant.
 Cependant, nous savons qu'un tel calcul arithmétique génère un nombre __NaN__ comme résultat, lorsqu'un des deux opérandes (si ce n'est les deux) est lui-même __NaN__, et ce, indépendamment du positionnement des deux opérandes sur les entrées du soustracteur flottant.
-Par conséquent, nous en déduisons que dans une telle situation le soustracteur flottant ne peut pas commettre d'erreur (malgré lui) à l'exécution, ce qui explique le fait que le FPU Configuration Unit n'ait pas besoin de prendre en charge les nombres __NaN__. 
+Par conséquent, nous en déduisons que dans une telle situation le soustracteur flottant ne peut pas commettre d'erreur (malgré lui) à l'exécution ; ce qui jusitifie le fait que le Floating Point Configuration Unit n'ait pas besoin de prendre en charge les nombres __NaN__. 
 
-### Les nombres NaN
+## L'infini positif/négatif
 
-Pour le standard IEEE-754, il existe des nombres invalides du nom de ___NaN___ (_Not a Number_).
-Un nombre _NaN_ est généré par un calcul considéré comme invalide par le standard lui même et/ou par les mathématiques, c'est parfois une sorte d'alternative à la génération d'exception matériel.
-Par exemple, le calcul $\left(\left(+ \ \infty\right) \div 0\right)$ génère un _NaN_ pour deux raisons.
-Premièrement, divisé par $X$ l'infini positif ne donne pas de résultat concret, de plus si $\left(X = 0\right)$ alors le calcul se retrouve soudainement à être invalide mathématiquement parlant. 
-Comme autre exemple, si un calcul se base sur un opérande qui est un _NaN_, alors il génère également _NaN_ en résultat $\left(NaN - 3.5\right) = NaN$.
+Parmis les autres types de nombres que peuvent coder les formats définis par le standard IEEE-754, tel que le Half Precision, il y a l'__infini positif__ ainsi que l'__infini négatif__.
 
-En bref, le codage d'un _NaN_ recquière que le champs d'exposant code la valeur $\left(2^N - 1\right)$, pour $N$ le nombre de bits qui compose le champs.
-Parallèlement, le champs de mantisse tronquée doit être non nul.
-Aussi, comme cela a été mentionné ci-dessus, un nombre _NaN_ utilisé en tant qu'opérande d'un calcul arithmétique ne génère jamais de résultat valide.
-Donc la FPU Configuration Unit ne prend pas en charge les nombres _NaN_.
+
+//
+
+L'introduction explique que les formats définis par le standard IEEE-754, tel que le Half Precision, peuvent coder différents types de nombres parmis lesquels figurent les __NaN__.
+Commençons par parler de la plage de codage du champ d'exposant et du champ de mantisse tronquée d'un nombre __NaN__, avant de parler de quoique ce soit d'autre.
+
+
+/// résumer: blabla l'encodage blabla. Comme nous l'avons vu un calcul arithmétique utilisant un ou plusieurs opérande infini (positif/négatif) génère systèmatiquement un NaN en résultat. Le circuit ne prend pas en charge les NaN et il ne prend pas non plus en charge l'infini positif/négatif car tout calcul arithmétique ayant pour opérande l'infini se termine par NaN.
+
+//
+
+### L'infini positif et négatif
+
+Aussi, il se trouve que le standard IEEE-754 définit un moyen de codé un nombre infini positif comme négatif $\left(\pm \ \infty\right)$.
+Premièrement, pour le codage de l'infini $\left(\infty\right)$, le champs d'exposant doit codé la valeur est $\left(2^N - 1\right)$, avec $N$ le nombre de bits qui compose le champs.
+De plus, il faut que le champs de mantisse tronquée soit nul (composé uniquement de bits à $0$), au contraire d'un nombre _NaN_.
+Ce qui permet de différencié efficassement un nombre $\left(\pm \ \infty\right)$, d'un nombre _NaN_.
+Ajoutons à cela le bit de signe qui code le signe $\left(\pm\right)$.
+
+Comme nous avons pu le voir avec l'un des exemples de la section précédente "_les nombres NaN_", un calcul arithmétique ayant pour opérande l'infini positif ou négatif génère systèmatiquement un _NaN_ en résultat.
+La FPU Configuration Unit ne prend pas non plus en charge les opérandes de valeur infini positif comme négatif.
 
 //
 
@@ -85,19 +98,6 @@ Je vous redirige vers les chapitres susmentionnés dans le cas où vous souhaite
 Clôturons cette section par une précision à propos de la démonstration mathématique.
 Remarquez que dans cette dernière, les champs de __mantisse tronquée__ $T_{\alpha}$ ainsi que $T_{\beta}$ ont respectivement une valeur de $\left(1 + T_{\alpha}\right)$ et $\left(1 + T_{\beta}\right)$, ce qui insinue que la démonstration mathématique part de l'hypothèse que les opérandes $\alpha$ et $\beta$ codent des nombres __normaux__ de format Half Precision.
 Cela ne rend pas pour autant ambigu la démonstration mathématique vis à vis des autres types de nombres, nous expliquerons pourquoi dans les chapitres suivants.
-
-### Les nombres NaN
-
-Pour le standard IEEE-754, il existe des nombres invalides du nom de ___NaN___ (_Not a Number_).
-Un nombre _NaN_ est généré par un calcul considéré comme invalide par le standard lui même et/ou par les mathématiques, c'est parfois une sorte d'alternative à la génération d'exception matériel.
-Par exemple, le calcul $\left(\left(+ \ \infty\right) \div 0\right)$ génère un _NaN_ pour deux raisons.
-Premièrement, divisé par $X$ l'infini positif ne donne pas de résultat concret, de plus si $\left(X = 0\right)$ alors le calcul se retrouve soudainement à être invalide mathématiquement parlant. 
-Comme autre exemple, si un calcul se base sur un opérande qui est un _NaN_, alors il génère également _NaN_ en résultat $\left(NaN - 3.5\right) = NaN$.
-
-En bref, le codage d'un _NaN_ recquière que le champs d'exposant code la valeur $\left(2^N - 1\right)$, pour $N$ le nombre de bits qui compose le champs.
-Parallèlement, le champs de mantisse tronquée doit être non nul.
-Aussi, comme cela a été mentionné ci-dessus, un nombre _NaN_ utilisé en tant qu'opérande d'un calcul arithmétique ne génère jamais de résultat valide.
-Donc la FPU Configuration Unit ne prend pas en charge les nombres _NaN_.
 
 ### L'infini positif et négatif
 
