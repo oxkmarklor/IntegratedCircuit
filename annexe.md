@@ -1,6 +1,6 @@
 # Annexe: Les différents types de nombres du format Half Precision
 
-Depuis le début de ce document, nous avons toujours évoquer le fait que le FPU Configuration Unit traite deux opérandes de format Half Precision, mais dans les faits ces propos manquent de précision.
+Depuis le début de ce document, nous avons toujours évoquer le fait que le Floating Point Configuration Unit traite deux opérandes de format Half Precision, mais dans les faits ces propos manquent de précision.
 Il s'avère que le format Half Precision, à l'instar de tout les autres formats définis par le standard IEEE-754, peut coder des nombres de ' type ' distincts :
 
   - des nombres __nomaux__
@@ -26,7 +26,7 @@ Prenons pour exemple le quotient suivant $\left(NaN \div 0\right)$.
 Nous savons d'ores et déjà que le calcul est mathématiquement invalide, du fait de la divison par $0$.
 De surcroît, la division d'un nombre qui n'en est pas un (un nombre __NaN__) donne lieu à un calcul arithmétique ambigu ; ce sont les raisons pour lesquelles ce quotient mène quoiqu'il arrive à la génération d'un nombre __NaN__ en guise de résultat.
 
-Pour conclure ce chapitre, il va me falloir donner quelques détails à propos du FPU Configuration Unit, ce qui m'amène à vous redirigé vers la documentation dédiée au circuit si vous souhaitez plus d'information.
+Pour conclure ce chapitre, il va me falloir donner quelques détails à propos du FPC Unit, ce qui m'amène à vous redirigé vers la documentation dédiée au circuit si vous souhaitez plus d'information.
 Dans les grandes lignes, sachez que l'une des fonctionnalités du circuit est d'acheminé convenablement les opérandes d'un calcul arithmétique flottant, sur les bonnes entrées d'un soustracteur flottant.
 Cependant, nous savons qu'un tel calcul arithmétique génère un nombre __NaN__ comme résultat, lorsqu'un des deux opérandes (si ce n'est les deux) est lui-même __NaN__, et ce, indépendamment du positionnement des deux opérandes sur les entrées du soustracteur flottant.
 Par conséquent, nous en déduisons que dans une telle situation le soustracteur flottant ne peut pas commettre d'erreur (malgré lui) à l'exécution, ce qui explique le fait que le FPU Configuration Unit n'ait pas besoin de prendre en charge les nombres __NaN__. 
