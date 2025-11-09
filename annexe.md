@@ -34,13 +34,19 @@ Par conséquent, nous en déduisons que dans une telle situation le soustracteur
 ## L'infini positif/négatif
 
 Les formats définis par le standard IEEE-754, tel que le Half Precision, peuvent également coder deux valeurs assez spéciales : l'__infini positif__ ainsi que l'__infini négatif__.
-Faisons de même que le chapitre précédent, commençons d'abord par parler de la plage de codage du champ d'exposant et du champ de mantisse tronquée d'un nombre __infini positif/négatif__, avant d'aborder le reste.
+Faisons de même que le chapitre précédent et commençons d'abord par parler de la plage de codage du champ d'exposant ainsi que du champ de mantisse tronquée d'un nombre __infini positif/négatif__, avant d'aborder le reste.
 
-Les plages de codage des champs d'exposant et de mantisse tronquée d'un nombre __infini positif/négatif__ sont toutes les deux restreintes. 
-Pour qu'un nombre soit considéré comme l'__infini positif__ ou __négatif__, il faut que son champ d'exposant d'une taille de $N$ bits code la valeur $\left(2^N - 1\right)$ et que son champ de mantisse tronquée soit nul.
-Le codage de ces nombres joue cependant sur la valeur du bit de signe pour coder un __infini positif__ ou un __infini négatif__ ; ce qui n'impacte pas le circuit qui ne prend pas en compte le bit de signe de ses opérandes.
+Les plages de codage du champ d'exposant et de mantisse tronquée d'un nombre __infini positif/négatif__ sont toutes les deux restreintes. 
+Pour qu'un nombre soit considéré comme l'__infini positif__ ou __négatif__, il faut que son champ d'exposant d'une taille de $N$ bits code la valeur $\left(2^N - 1\right)$ tout en ayant un champ de mantisse tronquée nul.
+Le codage de ces nombres joue cependant sur la valeur du bit de signe pour coder un __infini positif__ ou un __infini négatif__ ; ce qui n'impacte pas le circuit car rappelons que ce dernier ne prend pas en compte le bit de ses opérandes, et ce n'est pas la seule raison.
 
-// partie de la logique calculatoire
+Nous apprenons dans le chapitre précédent que les nombres __NaN__ ne sont pas considérés comme des nombres par le standard IEEE-754, il en va plus ou moins de même pour l'__infini positif__ ainsi que __négatif__.
+Cela ne vous surprendra pas d'apprendre que l'__infini positif__ comme l'__infini négatif__ ne représentent pas de valeurs particulière, mais plutôt des nombres ayant pour point commun le fait d'être trop grand, ou trop petit, pour pouvoir être codé.
+
+Par conséquent, nous comprenons le fait qu'un calcul arithmétique soit ambigu du moment où l'un de ses opérandes est l'__infini positif__ ou l'__infini négatif__.
+
+// exemple
+
 
 //
 
