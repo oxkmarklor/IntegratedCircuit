@@ -14,6 +14,8 @@ La suite du document explique ce que sont ces différents types de nombres, ains
 
 ## Les NaN
 
+// parler de - NaN et + NaN ?
+
 L'introduction explique que les formats définis par le standard IEEE-754, tel que le Half Precision, peuvent coder différents types de nombres parmis lesquels figurent les __NaN__.
 Commençons par parler de la plage de codage du champ d'exposant et du champ de mantisse tronquée d'un nombre __NaN__, avant de parler de quoique ce soit d'autre.
 
@@ -33,28 +35,23 @@ Par conséquent, nous en déduisons que dans une telle situation le soustracteur
 
 ## L'infini positif/négatif
 
+// à relire
+
 Les formats définis par le standard IEEE-754, tel que le Half Precision, peuvent également coder deux valeurs assez spéciales : l'__infini positif__ ainsi que l'__infini négatif__.
 Faisons de même que le chapitre précédent et commençons d'abord par parler de la plage de codage du champ d'exposant ainsi que du champ de mantisse tronquée d'un nombre __infini positif/négatif__, avant d'aborder le reste.
 
-Les plages de codage du champ d'exposant et de mantisse tronquée d'un nombre __infini positif/négatif__ sont toutes les deux restreintes. 
-Pour qu'un nombre soit considéré comme l'__infini positif__ ou __négatif__, il faut que son champ d'exposant d'une taille de $N$ bits code la valeur $\left(2^N - 1\right)$ tout en ayant un champ de mantisse tronquée nul.
-Le codage de ces nombres joue cependant sur la valeur du bit de signe pour coder un __infini positif__ ou un __infini négatif__ ; ce qui n'impacte pas le circuit car rappelons que ce dernier ne prend pas en compte le bit de ses opérandes, et ce n'est pas la seule raison.
+Les plages de codage du champ d'exposant et de mantisse tronquée d'un nombre __infini positif\négatif__ sont toutes les deux restreintes. 
+Pour qu'un nombre soit considéré comme l'__infini positif__ ou __négatif__, il faut que son champ d'exposant d'une taille de $N$ bits code la valeur $\left(2^N - 1\right)$, tout en ayant un champ de mantisse tronquée nul.
+Le codage de ces nombres joue cependant sur la valeur du bit de signe pour pouvoir coder un __infini positif__ ou un __infini négatif__.
 
 Nous apprenons dans le chapitre précédent que les nombres __NaN__ ne sont pas considérés comme des nombres par le standard IEEE-754, il en va plus ou moins de même pour l'__infini positif__ ainsi que __négatif__.
-Cela ne vous surprendra pas d'apprendre que l'__infini positif__ comme l'__infini négatif__ ne représentent pas de valeurs particulière, mais plutôt des nombres ayant pour point commun le fait d'être trop grand, ou trop petit, pour pouvoir être codé.
+Il s'avère que l'infini permet de représenter d'une façon non formelle la valeur d'un nombre qui ne peut pas être représentée ; donc il ne vous surprendra pas d'apprendre que l'__infini positif__ comme l'__infini négatif__ ne représentent que des nombres ayant pour point commun le fait d'être trop grand, ou trop petit, pour pouvoir être codé.
+En outre, le standard IEEE-754 prévoit alors de générer un nombre __NaN__ comme résultat à tout calcul arithmétique dont l'un des opérandes serait infini.
+Prenons pour exemple le calcul de réduction suivant $\left(2 - \infty\right)$.
+Cette opération est autant considéré comme invalide par le standrard IEEE-754 que par les mathématiques elles même car, à l'instar des calculs sur les __NaN__, son résultat n'est pas calculable.
+D'où le fait qu'un __NaN__ soit attendu en guise de résultat.
 
-Par conséquent, nous comprenons le fait qu'un calcul arithmétique soit ambigu du moment où l'un de ses opérandes est l'__infini positif__ ou l'__infini négatif__.
-
-// exemple
-
-
-//
-
-
-
-/// résumer: blabla l'encodage blabla. Comme nous l'avons vu un calcul arithmétique utilisant un ou plusieurs opérande infini (positif/négatif) génère systèmatiquement un NaN en résultat. Le circuit ne prend pas en charge les NaN et il ne prend pas non plus en charge l'infini positif/négatif car tout calcul arithmétique ayant pour opérande l'infini se termine par NaN.
-
-//
+Ceci explique pourquoi est-ce que le Floating Point Configuration Unit ne prend pas en charge les nombres __infinis positifs__ comme __négatifs__.
 
 ### L'infini positif et négatif
 
