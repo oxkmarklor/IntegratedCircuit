@@ -57,15 +57,26 @@ Cela veut dire que dans une telle situation, le soustracteur flottant ne peut pa
 Les nombres __normaux__ et __dénormaux__ sont deux autres types de nombres que peuvent coder les divers formats définis par le standrard IEEE-754.
 Sachez que la plage de codage des champs d'exposant de ces nombres sont toutes les deux restreintes mais pas de la même manière, a contrario, les plages de codage des champs de mantisse tronquée de ces même nombres ne le sont pas.
 
-En outre, les nombres __normaux__ interprètent différemment des nombres __dénormaux__ les valeurs des champs d'exposant et de mantisse tronquée.
+En outre, les nombres __normaux__ interprètent les valeurs des champs d'exposant et de mantisse tronquée différemment des nombres __dénormaux__.
 
-### La plage de codage et l'interprétation du champ d'exposant des nombres normaux
+Commençons par le cas des nombres __normaux__.
 
-// commencer ici
+### Interprétation et plage de codage du champ d'exposant des nombres normaux
+
+Comme dit précédemment, les plages de codage des champs d'exposant des nombres __normaux__ sont restreintes.
+Pour qu'un nombre soit considéré comme __normalisé__, il faut que son champ d'exposant d'une taille de $N$ bits code une valeur comprise dans l'intervalle $\left[1;2^N - 1\right[$.
+
+En somme, le chapitre du nom de "_L'encodage par biais du champ d'exposant_" parle entre autre de l'interprétation de la valeur du champ d'exposant d'un nombre Half Precision, nombre implicitement considéré comme __normalisé__ car à ce stade du document nous ne parlions pas encore de nombres __normaux__, __dénormaux__ et autres.
+
+
+//
+
+En outre, faisons mention du fait qu'avant la démonstration mathématique se trouve un chapitre du nom de "_Le champ de mantisse tronquée_", suivi de deux sections.
+Ces sections expliquent ce qu'est le champ de __mantisse tronquée__ d'un nombre Half Precision, nombre implicitement considéré comme __normalisé__ car à ce stade du document nous ne parlions pas encore de nombres __normaux__, __dénormaux__ et autres...
 
 ### L'interprétation du champ de mantisse tronquée des nombres normaux
 
-### La plage de codage et l'interprétation du champ d'exposant des nombres dénormaux
+### Interprétation et plage de codage du champ d'exposant des nombres dénormaux
 
 ### L'interprétation du champ de mantisse tronquée des nombres dénormaux
 
