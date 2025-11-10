@@ -52,26 +52,49 @@ Pour finir, rappelez vous du fait que l'une des fonctionnalités du FPC Unit est
 Néanmoins, nous savons que ledit soustracteur flottant génère un nombre __NaN__ lorsque l'un de ses opérandes est __infini__, nonobstant le positionnement des opérandes.
 Cela veut dire que dans une telle situation, le soustracteur flottant ne peut pas commettre d'erreur dû au mauvais placement des opérandes ; justifiant ainsi le fait que le Floating Point Configuration Unit n'ait pas besoin de prendre en charge les nombres __infinis positifs/négatifs__.
 
+## Les nombres normaux et dénormaux
+
+// les plages de codages des champs d'exposants sont différentes, pas pour les champs de mantisse tronquée
+
+### La plage de codage et l'interprétation du champ d'exposant des nombres normaux
+
+### L'interprétation du champ de mantisse tronquée des nombres normaux
+
+### La plage de codage et l'interprétation du champ d'exposant des nombres dénormaux
+
+### L'interprétation du champ de mantisse tronquée des nombres dénormaux
+
+////////
+
 ## Les nombres normaux
 
 Les nombres __normaux__ et __dénormaux__ sont complémentaires, même si ces appellations laissent croire le contraire.
-Il y a deux différences entre un nombre __normalisé__ et __dénormalisé__ :
-
-  - la plage de codage du champ d'exposant ainsi que l'interprétation de la valeur qu'il code
-  - la valeur du champ de mantisse tronquée
+Ces nombres se différencient par une plage de codage distincte de leurs champs d'exposant, ainsi que par deux interprétations différentes de la valeur que code leurs champs d'exposant et de mantisse tronquée.
 
 Le codage d'un nombre $F$ est défini comme __normalisé__ lorsque la valeur de son champ de mantisse tronquée correspond à la valeur du significande de sa propre écriture scientifique binaire.
 Nous l'aurons compris, dans le cas où le nombre $F$ est défini comme __dénormalisé__ alors la valeur de son champ de mantisse tronquée ne correspond pas à celle d'un significande, qui est rappelons-le comprise dans l'intervalle $\left[1;2\right[$.
 Je précise que le champ de mantisse tronquée d'un nombre __dénormalisé__ ne peut pas pour autant interpréter n'importe quel valeur, nous verrons cela dans un chapitre dédié aux nombres __dénormaux__.
 En bref, un nombre est défini comme __dénormalisé__ parcqu'il n'est justement pas __normalisé__ par les règles de l'écriture scientifique binaire, particulièrement par celles qui portent sur le significande.
 
-Commençons par voir ce que sont les nombres __normaux__ au travers des deux sections suivantes.
+Nous reviendrons séparément au sujet 
 
-### La plage de codage du champ d'exposant d'un nombre normalisé
+### Plage de codage et interprétation du champ d'exposant d'un nombre normalisé
+
+Il s'avère qu'il n'y a que la plage de codage du champ d'exposant d'un nombre __normalisé__ qui est restreinte, celle du champ de mantisse tronquée ne l'est pas.
+Pour qu'un nombre soit considéré comme __normalisé__, il faut que son champ d'exposant $E$ d'une taille de $N$ bits code une valeur comprise dans l'intervalle $\left[1;2^N - 1\right[$.
+
+En amont de la démonstration mathématique se trouve une section du nom de "_L'encodage par biais du champ d'exposant_"
+
+//
+
+Les plages de codage des champs d'exposant et de mantisse tronquée des nombres __infinis positifs__ et __infinis négatifs__ sont toutes les deux restreintes. 
+Pour qu'un nombre soit considéré comme l'__infini positif__ ou __négatif__, il faut que son champ d'exposant d'une taille de $N$ bits code la valeur $\left(2^N - 1\right)$, et que son champ de mantisse tronquée soit nul.
+En outre, le codage d'un __infini positif__ ou __négatif__ se joue sur la valeur du bit de signe.
 
 Il s'avère que les champs d'exposant des nombres __normaux__ ont une plage de codage restreinte, de sorte à ce qu'un nombre soit considéré comme __normalisé__ dès qu'un champ d'exposant $E$ d'une taille de $N$ bits code une valeur comprise dans l'intervalle $\left[1;2^N - 1\right[$.
 Nous parlons bien de la valeur Binary Unsigned que code le champs d'exposant et non de la valeur que le champ interprète, car l'intervalle ci-dessus ne prend pas en compte la déduction du biais des champs d'exposant.
 Si vous souhaitez plus de détails, je vous redirige vers le chapitre "_Le champ d'exposant_" et ses sections subséquentes.
+
 
 ### La valeur du champ de mantisse tronquée d'un nombre normalisé
 
