@@ -35,12 +35,24 @@ Par conséquent, nous en déduisons que dans une telle situation le soustracteur
 
 ## L'infini positif/négatif
 
-// à relire
+Les formats définis par le standard IEEE-754, tel que le Half Precision, peuvent également coder deux valeurs assez spéciales : l'__infini positif__ ainsi que l'__infini négatif__.
+Faisons de même que le chapitre précédent et commençons d'abord par parler de la plage de codage du champ d'exposant ainsi que du champ de mantisse tronquée d'un nombre __infini positif/négatif__, avant d'aborder le reste.
+
+Les plages de codage des champs d'exposant et de mantisse tronquée des nombres __infinis positifs__ et __infinis négatifs__ sont toutes les deux restreintes. 
+Pour qu'un nombre soit considéré comme l'__infini positif__ ou __négatif__, il faut que son champ d'exposant d'une taille de $N$ bits code la valeur $\left(2^N - 1\right)$ et son champ de mantisse tronquée soit nul.
+Cependant, le codage de ces nombres joue sur la valeur du bit de signe pour pouvoir coder un __infini positif__ ainsi qu'un __infini négatif__.
+
+Il ne vous surprendra pas d'apprendre que l'__infini positif__ comme __négatif__ ne représentent que des nombres ayant pour point commun le fait d'être trop grand, ou trop petit, pour pouvoir être codé.
+A l'instar des __NaN__, le standard IEEE-754 ne considère donc pas vraiment l'__infini positif/négatif__ comme des nombres ; ce qui a pour effet de rendre invalide tout calcul arithmétique sur ceux-ci.
+Il s'avère qu'un nombre __NaN__ est généré à la place du résultat de tout calcul ayant un opérande __infini__ (si ce n'est plus), et ce, indépendamment du positionnement des opérandes dans le calcul.
+
+
+//
 
 Les formats définis par le standard IEEE-754, tel que le Half Precision, peuvent également coder deux valeurs assez spéciales : l'__infini positif__ ainsi que l'__infini négatif__.
 Faisons de même que le chapitre précédent et commençons d'abord par parler de la plage de codage du champ d'exposant ainsi que du champ de mantisse tronquée d'un nombre __infini positif/négatif__, avant d'aborder le reste.
 
-Les plages de codage du champ d'exposant et de mantisse tronquée d'un nombre __infini positif\négatif__ sont toutes les deux restreintes. 
+Les plages de codage du champ d'exposant et de mantisse tronquée d'un nombre __infini positif/négatif__ sont toutes les deux restreintes. 
 Pour qu'un nombre soit considéré comme l'__infini positif__ ou __négatif__, il faut que son champ d'exposant d'une taille de $N$ bits code la valeur $\left(2^N - 1\right)$, tout en ayant un champ de mantisse tronquée nul.
 Le codage de ces nombres joue cependant sur la valeur du bit de signe pour pouvoir coder un __infini positif__ ou un __infini négatif__.
 
