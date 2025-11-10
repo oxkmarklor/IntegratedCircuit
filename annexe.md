@@ -57,7 +57,7 @@ Cela veut dire que dans une telle situation, le soustracteur flottant ne peut pa
 Les nombres __normaux__ et __dénormaux__ sont complémentaires, même si ces appellations laissent croire le contraire.
 Il y a deux différences entre un nombre __normalisé__ et __dénormalisé__ :
 
-  - la plage de codage du champ d'exposant
+  - la plage de codage du champ d'exposant ainsi que l'interprétation de la valeur qu'il code
   - la valeur du champ de mantisse tronquée
 
 Le codage d'un nombre $F$ est défini comme __normalisé__ lorsque la valeur de son champ de mantisse tronquée correspond à la valeur du significande de sa propre écriture scientifique binaire.
