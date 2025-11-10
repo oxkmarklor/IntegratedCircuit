@@ -31,9 +31,9 @@ Dans les grandes lignes, sachez que l'une des fonctionnalités du circuit est d'
 Néanmoins, nous savons que ledit soustracteur flottant génère un nombre __NaN__ lorsque l'un de ses opérandes est __NaN__, et ce, indépendamment du positionnement des opérandes sur les entrées de l'unité de calcul.
 Par conséquent, nous en déduisons que pour de tels opérations, le soustracteur flottant ne peut pas commettre d'erreur dû au mauvais placement des opérandes ; ce qui justifie le fait que le FPC Unit n'ait pas besoin de prendre en charge les nombres __NaN__.
 
-Petit point culture : il existe deux codages valides d'un nombre __NaN__, ces derniers étant dû au fait que la valeur du bit de signe peut varier.
-Cependant, il n'existe pas pour autant de __NaN__ positif ou négatif en fonction du codage, car les __NaN__ ne sont pas des nombres, rappelons-le.
-Autrement dit, il n'y a pas de différence d'interprétation entre ces deux codages, les unités de calculs traitent tout les __NaN__ de la même façon.
+Pour la culture général, sachez que le codage d'un nombre __NaN__ peut varier en fonction de la valeur que l'on donne au bit de signe.
+Pourtant, rappelons qu'un __NaN__ n'est pas un nombre, ce qui insinue qu'il n'existe pas de __NaN__ positif d'une part et négatif de l'autre.
+En outre, l'ensemble des circuits d'un ordinateur interprètent de la même manière deux nombres __NaN__ aux codages distincts.
 
 ## L'infini positif/négatif
 
