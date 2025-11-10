@@ -52,19 +52,6 @@ Pour finir, rappelez vous du fait que l'une des fonctionnalités du FPC Unit est
 Néanmoins, nous savons que ledit soustracteur flottant génère un nombre __NaN__ lorsque l'un de ses opérandes est __infini__, nonobstant le positionnement des opérandes.
 Cela veut dire que dans une telle situation, le soustracteur flottant ne peut pas commettre d'erreur dû au mauvais placement des opérandes ; justifiant ainsi le fait que le Floating Point Configuration Unit n'ait pas besoin de prendre en charge les nombres __infinis positifs/négatifs__.
 
-### L'infini positif et négatif
-
-Aussi, il se trouve que le standard IEEE-754 définit un moyen de codé un nombre infini positif comme négatif $\left(\pm \ \infty\right)$.
-Premièrement, pour le codage de l'infini $\left(\infty\right)$, le champs d'exposant doit codé la valeur est $\left(2^N - 1\right)$, avec $N$ le nombre de bits qui compose le champs.
-De plus, il faut que le champs de mantisse tronquée soit nul (composé uniquement de bits à $0$), au contraire d'un nombre _NaN_.
-Ce qui permet de différencié efficassement un nombre $\left(\pm \ \infty\right)$, d'un nombre _NaN_.
-Ajoutons à cela le bit de signe qui code le signe $\left(\pm\right)$.
-
-Comme nous avons pu le voir avec l'un des exemples de la section précédente "_les nombres NaN_", un calcul arithmétique ayant pour opérande l'infini positif ou négatif génère systèmatiquement un _NaN_ en résultat.
-La FPU Configuration Unit ne prend pas non plus en charge les opérandes de valeur infini positif comme négatif.
-
-//
-
 ## Les nombres normaux
 
 Les nombres __normaux__ et __dénormaux__ sont complémentaires, même si ces appellations laissent croire le contraire.
@@ -105,16 +92,7 @@ Clôturons cette section par une précision à propos de la démonstration math�
 Remarquez que dans cette dernière, les champs de __mantisse tronquée__ $T_{\alpha}$ ainsi que $T_{\beta}$ ont respectivement une valeur de $\left(1 + T_{\alpha}\right)$ et $\left(1 + T_{\beta}\right)$, ce qui insinue que la démonstration mathématique part de l'hypothèse que les opérandes $\alpha$ et $\beta$ codent des nombres __normaux__ de format Half Precision.
 Cela ne rend pas pour autant ambigu la démonstration mathématique vis à vis des autres types de nombres, nous expliquerons pourquoi dans les chapitres suivants.
 
-### L'infini positif et négatif
-
-Aussi, il se trouve que le standard IEEE-754 définit un moyen de codé un nombre infini positif comme négatif $\left(\pm \ \infty\right)$.
-Premièrement, pour le codage de l'infini $\left(\infty\right)$, le champs d'exposant doit codé la valeur est $\left(2^N - 1\right)$, avec $N$ le nombre de bits qui compose le champs.
-De plus, il faut que le champs de mantisse tronquée soit nul (composé uniquement de bits à $0$), au contraire d'un nombre _NaN_.
-Ce qui permet de différencié efficassement un nombre $\left(\pm \ \infty\right)$, d'un nombre _NaN_.
-Ajoutons à cela le bit de signe qui code le signe $\left(\pm\right)$.
-
-Comme nous avons pu le voir avec l'un des exemples de la section précédente "_les nombres NaN_", un calcul arithmétique ayant pour opérande l'infini positif ou négatif génère systèmatiquement un _NaN_ en résultat.
-La FPU Configuration Unit ne prend pas non plus en charge les opérandes de valeur infini positif comme négatif.
+//
 
 ## La plage de codage des nombres dénormaux
 
