@@ -14,24 +14,26 @@ La suite du document explique ce que sont ces différents types de nombres, ains
 
 ## Les NaN
 
-// parler de - NaN et + NaN ?
-
 L'introduction explique que les formats définis par le standard IEEE-754, tel que le Half Precision, peuvent coder différents types de nombres parmis lesquels figurent les __NaN__.
 Commençons par parler de la plage de codage du champ d'exposant et du champ de mantisse tronquée d'un nombre __NaN__, avant de parler de quoique ce soit d'autre.
 
 Les plages de codage des champs d'exposant et de mantisse tronquée d'un nombre __NaN__ sont toutes les deux restreintes. 
-Pour qu'un nombre soit considéré comme __NaN__, il faut que son champ d'exposant d'une taille de $N$ bits code la valeur $\left(2^N - 1\right)$ et que son champ de mantisse tronquée, d'une taille de $K$ bits, code une valeur comprise dans l'intervalle $\left]0;2^K - 1\right]$.
+Pour qu'un nombre soit considéré comme __NaN__, il faut que son champ d'exposant d'une taille de $N$ bits code la valeur $\left(2^N - 1\right)$, et que son champ de mantisse tronquée soit non nul.
 
 Aussi étrange que cela puisse être, le standard IEEE-754 considère qu'un nombre __NaN__ n'est pas un nombre, d'où le fait que ces derniers aient pour nom l'abréviation de __Not a Number__.
-Dans les faits, les nombres __NaN__ sont générés à la place des résultats des calculs considérés comme invalide pour le standard IEEE-754 et/ou pour les mathématiques elles même.
+Dans les faits, les nombres __NaN__ sont générés à la place des résultats des calculs considérés comme invalide par le standard IEEE-754 et/ou par les mathématiques elles même.
 Prenons pour exemple le quotient suivant $\left(NaN \div 0\right)$.
 Nous savons d'ores et déjà que le calcul est mathématiquement invalide, du fait de la divison par $0$.
 De surcroît, la division d'un nombre qui n'en est pas un (un nombre __NaN__) donne lieu à un calcul arithmétique ambigu ; ce sont les raisons pour lesquelles ce quotient mène quoiqu'il arrive à la génération d'un nombre __NaN__ en guise de résultat.
 
-Pour conclure ce chapitre, il va me falloir donner quelques détails à propos du FPC Unit, ce qui m'amène à vous redirigé vers la documentation dédiée au circuit si vous souhaitez plus d'information.
+Pour conclure ce chapitre, il va me falloir donner quelques détails à propos du Floating Point Configuration Unit, ce qui m'amène à vous redirigé vers la documentation dédiée au circuit si vous souhaitez plus d'information.
 Dans les grandes lignes, sachez que l'une des fonctionnalités du circuit est d'acheminer convenablement les opérandes d'un calcul arithmétique flottant, sur les bonnes entrées d'un soustracteur flottant.
-Cependant, nous savons qu'un tel calcul arithmétique génère un nombre __NaN__ comme résultat, lorsqu'un des deux opérandes (si ce n'est les deux) est lui-même __NaN__, et ce, indépendamment du positionnement des deux opérandes sur les entrées du soustracteur flottant.
-Par conséquent, nous en déduisons que dans une telle situation le soustracteur flottant ne peut pas commettre d'erreur (malgré lui) à l'exécution ; ce qui jusitifie le fait que le Floating Point Configuration Unit n'ait pas besoin de prendre en charge les nombres __NaN__. 
+Néanmoins, nous savons que ledit soustracteur flottant génère un nombre __NaN__ lorsque l'un de ses opérandes est __NaN__, et ce, indépendamment du positionnement des opérandes sur les entrées de l'unité de calcul.
+Par conséquent, nous en déduisons que pour de tels opérations, le soustracteur flottant ne peut pas commettre d'erreur dû au mauvais placement des opérandes ; ce qui justifie le fait que le FPC Unit n'ait pas besoin de prendre en charge les nombres __NaN__.
+
+Petit point culture : il existe deux codages valides d'un nombre __NaN__, ces derniers étant dû au fait que la valeur du bit de signe peut varier.
+Cependant, il n'existe pas pour autant de __NaN__ positif ou négatif en fonction du codage, car les __NaN__ ne sont pas des nombres, rappelons-le.
+Autrement dit, il n'y a pas de différence d'interprétation entre ces deux codages, les unités de calculs traitent tout les __NaN__ de la même façon.
 
 ## L'infini positif/négatif
 
