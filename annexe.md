@@ -54,9 +54,14 @@ Cela veut dire que dans une telle situation, le soustracteur flottant ne peut pa
 
 ## Les nombres normaux et dénormaux
 
-// les plages de codages des champs d'exposants sont différentes, pas pour les champs de mantisse tronquée
+Les nombres __normaux__ et __dénormaux__ sont deux autres types de nombres que peuvent coder les divers formats définis par le standrard IEEE-754.
+Sachez que la plage de codage des champs d'exposant de ces nombres sont toutes les deux restreintes mais pas de la même manière, a contrario, les plages de codage des champs de mantisse tronquée de ces même nombres ne le sont pas.
+
+En outre, les nombres __normaux__ interprètent différemment des nombres __dénormaux__ les valeurs des champs d'exposant et de mantisse tronquée.
 
 ### La plage de codage et l'interprétation du champ d'exposant des nombres normaux
+
+// commencer ici
 
 ### L'interprétation du champ de mantisse tronquée des nombres normaux
 
