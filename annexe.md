@@ -39,8 +39,8 @@ Les formats définis par le standard IEEE-754, tel que le Half Precision, peuven
 Faisons de même que le chapitre précédent et commençons d'abord par parler de la plage de codage du champ d'exposant ainsi que du champ de mantisse tronquée d'un nombre __infini positif/négatif__, avant d'aborder le reste.
 
 Les plages de codage des champs d'exposant et de mantisse tronquée des nombres __infinis positifs__ et __infinis négatifs__ sont toutes les deux restreintes. 
-Pour qu'un nombre soit considéré comme l'__infini positif__ ou __négatif__, il faut que son champ d'exposant d'une taille de $N$ bits code la valeur $\left(2^N - 1\right)$ et son champ de mantisse tronquée soit nul.
-Cependant, le codage de ces nombres joue sur la valeur du bit de signe pour pouvoir coder un __infini positif__ ainsi qu'un __infini négatif__.
+Pour qu'un nombre soit considéré comme l'__infini positif__ ou __négatif__, il faut que son champ d'exposant d'une taille de $N$ bits code la valeur $\left(2^N - 1\right)$, et que son champ de mantisse tronquée soit nul.
+En outre, le codage d'un __infini positif__ ou __négatif__ se joue sur la valeur du bit de signe.
 
 Il ne vous surprendra pas d'apprendre que l'__infini positif__ comme __négatif__ ne représentent que des nombres ayant pour point commun le fait d'être trop grand, ou trop petit, pour pouvoir être codé.
 A l'instar des __NaN__, le standard IEEE-754 ne considère pas vraiment l'__infini positif__ ou __négatif__ comme des nombres ; ce qui a pour effet de rendre invalide tout calcul arithmétique sur ceux-ci.
@@ -48,25 +48,7 @@ Par conséquent, il s'avère qu'un nombre __NaN__ est généré à la place du r
 
 Pour finir, rappelez vous du fait que l'une des fonctionnalités du FPC Unit est d'acheminer convenablement les opérandes d'un calcul arithmétique flottant, sur les bonnes entrées d'un soustracteur flottant.
 Néanmoins, nous savons que ledit soustracteur flottant génère un nombre __NaN__ lorsque l'un de ses opérandes est __infini__, nonobstant le positionnement des opérandes.
-Cela veut dire que dans une telle situation, le soustracteur flottant ne peut pas commettre d'erreur dû au mauvais placement des opérandes ; justifiant ainsi le fait que le Floating Point Configuration Unit n'ait pas besoin de prendre en charge les nombres __infinis positifs/négatifs__. 
-
-//
-
-Les formats définis par le standard IEEE-754, tel que le Half Precision, peuvent également coder deux valeurs assez spéciales : l'__infini positif__ ainsi que l'__infini négatif__.
-Faisons de même que le chapitre précédent et commençons d'abord par parler de la plage de codage du champ d'exposant ainsi que du champ de mantisse tronquée d'un nombre __infini positif/négatif__, avant d'aborder le reste.
-
-Les plages de codage du champ d'exposant et de mantisse tronquée d'un nombre __infini positif/négatif__ sont toutes les deux restreintes. 
-Pour qu'un nombre soit considéré comme l'__infini positif__ ou __négatif__, il faut que son champ d'exposant d'une taille de $N$ bits code la valeur $\left(2^N - 1\right)$, tout en ayant un champ de mantisse tronquée nul.
-Le codage de ces nombres joue cependant sur la valeur du bit de signe pour pouvoir coder un __infini positif__ ou un __infini négatif__.
-
-Nous apprenons dans le chapitre précédent que les nombres __NaN__ ne sont pas considérés comme des nombres par le standard IEEE-754, il en va plus ou moins de même pour l'__infini positif__ ainsi que __négatif__.
-Il s'avère que l'infini permet de représenter d'une façon non formelle la valeur d'un nombre qui ne peut pas être représentée ; donc il ne vous surprendra pas d'apprendre que l'__infini positif__ comme l'__infini négatif__ ne représentent que des nombres ayant pour point commun le fait d'être trop grand, ou trop petit, pour pouvoir être codé.
-En outre, le standard IEEE-754 prévoit alors de générer un nombre __NaN__ comme résultat à tout calcul arithmétique dont l'un des opérandes serait infini.
-Prenons pour exemple le calcul de réduction suivant $\left(2 - \infty\right)$.
-Cette opération est autant considéré comme invalide par le standrard IEEE-754 que par les mathématiques elles même car, à l'instar des calculs sur les __NaN__, son résultat n'est pas calculable.
-D'où le fait qu'un __NaN__ soit attendu en guise de résultat.
-
-Ceci explique pourquoi est-ce que le Floating Point Configuration Unit ne prend pas en charge les nombres __infinis positifs__ comme __négatifs__.
+Cela veut dire que dans une telle situation, le soustracteur flottant ne peut pas commettre d'erreur dû au mauvais placement des opérandes ; justifiant ainsi le fait que le Floating Point Configuration Unit n'ait pas besoin de prendre en charge les nombres __infinis positifs/négatifs__.
 
 ### L'infini positif et négatif
 
