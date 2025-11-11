@@ -52,6 +52,20 @@ Pour finir, rappelez vous du fait que l'une des fonctionnalités du FPC Unit est
 Néanmoins, nous savons que ledit soustracteur flottant génère un nombre __NaN__ lorsque l'un de ses opérandes est __infini__, nonobstant le positionnement des opérandes.
 Cela veut dire que dans une telle situation, le soustracteur flottant ne peut pas commettre d'erreur dû au mauvais placement des opérandes ; justifiant ainsi le fait que le Floating Point Configuration Unit n'ait pas besoin de prendre en charge les nombres __infinis positifs/négatifs__.
 
+## Les nombres normaux
+
+Les nombres __normaux__ font partie des ' types ' de nombres que peuvent coder les divers formats définis par le standard IEEE-754.
+
+Il s'avère que nous avons déjà longuement parlé des nombres __normaux__ dans les chapitres qui précèdent la démonstration mathématique, mais de manière totalement implicite car à ce stade de la documentation nous ne parlions que des formats du standard IEEE-754, tel que le Half Precision.
+En effet, dans les chapitres évoquant le standard IEEE-754 nous expliquons ce qu'est le format Half Precision, et plus précisément ce qu'est un nombre __normalisé__ codé au format Half Precision.
+Voyons cela plus en détails dans les sections suivantes.
+
+### La plage de codage du champ d'exposant des nombres normaux
+
+
+
+/// nouveau test
+
 ## Les nombres normaux et dénormaux
 
 Les nombres __normaux__ et __dénormaux__ sont deux autres types de nombres que peuvent coder les divers formats définis par le standrard IEEE-754.
@@ -102,10 +116,6 @@ Pour qu'un nombre soit considéré comme __normalisé__, il faut que son champ d
 En amont de la démonstration mathématique se trouve une section du nom de "_L'encodage par biais du champ d'exposant_"
 
 //
-
-Les plages de codage des champs d'exposant et de mantisse tronquée des nombres __infinis positifs__ et __infinis négatifs__ sont toutes les deux restreintes. 
-Pour qu'un nombre soit considéré comme l'__infini positif__ ou __négatif__, il faut que son champ d'exposant d'une taille de $N$ bits code la valeur $\left(2^N - 1\right)$, et que son champ de mantisse tronquée soit nul.
-En outre, le codage d'un __infini positif__ ou __négatif__ se joue sur la valeur du bit de signe.
 
 Il s'avère que les champs d'exposant des nombres __normaux__ ont une plage de codage restreinte, de sorte à ce qu'un nombre soit considéré comme __normalisé__ dès qu'un champ d'exposant $E$ d'une taille de $N$ bits code une valeur comprise dans l'intervalle $\left[1;2^N - 1\right[$.
 Nous parlons bien de la valeur Binary Unsigned que code le champs d'exposant et non de la valeur que le champ interprète, car l'intervalle ci-dessus ne prend pas en compte la déduction du biais des champs d'exposant.
