@@ -1,7 +1,18 @@
 # Annexe: à propos du standard IEEE-754
 
-Je vous rappelle que nous avons déjà parlé du standard IEEE-754 dans ce document, cependant j'ai expressément survolé beaucoup de choses à ce sujet pour rendre les chapitres et sections concernés le plus lisible possible.
-En autre, il s'avère que nous n'avons pas parlé du fait que les divers formats du standard IEEE-754 ne codent que des nombres __normaux__ ou __dénormaux__, à quelques exception près.
+Je vous rappelle que nous avons déjà parlé du standard IEEE-754 dans ce document, cependant j'ai expressément survolé beaucoup de choses à ce sujet afin que les chapitres et sections concernés soient le plus lisible possible.
+Nous n'avons entre autre pas parlé du fait que les divers formats du standard IEEE-754 ne codent que des nombres __normaux__ ou __dénormaux__, à quelques exception près.
+
+Les nombres __normaux__ permettent de coder des valeurs plus ou moins grandes/petites, de façon général ce sont les nombres les plus utilisés.
+Les nombres __dénormaux__, quant à eux, permettent le codage de nombre très proche de $0$, plus proche que ne pourrait l'être n'importe quel nombre __normalisé__.
+
+Il s'avère que ces nombres se différencient les uns des autres par de multiples facteurs.
+Pour commencer, la plage de codage du champ d'exposant d'un nombre __normalisé__ n'est pas la même que celle d'un nombre __dénormalisé__, pour le dire autrement les nombres __normaux__ et __dénormaux__ ne peuvent pas coder les même valeurs dans un champ d'exposant.
+De surcroît, les nombres __normaux__ et __dénormaux__ n'interprètent pas la valeur d'un champ d'exposant de la même manière, nous verrons plus tard en quoi cela est indispensable. 
+Enfin, la valeur des champs de mantisse tronquée est également interprétée différemment par les nombres __normaux__ et __dénormaux__.
+
+// Toute ces différences sont nécessaires pour ...
+
 
 //
 
