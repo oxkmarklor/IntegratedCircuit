@@ -56,6 +56,19 @@ Cela veut dire que dans une telle situation, le soustracteur flottant ne peut pa
 
 Les nombres __normaux__ font partie des ' types ' de nombres que peuvent coder les divers formats définis par le standard IEEE-754.
 
+Plus en amont, ce document aborde déjà le sujet des nombres __normaux__.
+Rappelez vous du chapitre "_Le standard IEEE-754_" et de ses sections subséquentes, ces lignes expliquent ce qu'est le format Half Precision du standard IEEE-754
+
+
+Il s'avère que, plus en amont, ce document abordre le sujet du standard IEEE-754 par le biais du format Half Precision, et plus particulièrement par le biais des nombres __normaux__ que peut coder un Half Precision. 
+
+//
+
+En outre, faisons mention du fait qu'avant la démonstration mathématique se trouve un chapitre du nom de "_Le champ de mantisse tronquée_", suivi de deux sections.
+Ces sections expliquent ce qu'est le champ de __mantisse tronquée__ d'un nombre Half Precision, nombre implicitement considéré comme __normalisé__ car à ce stade du document nous ne parlions pas encore de nombres __normaux__, __dénormaux__ et autres...
+
+//
+
 Il s'avère que nous avons déjà longuement parlé des nombres __normaux__ dans les chapitres qui précèdent la démonstration mathématique, mais de manière totalement implicite car à ce stade de la documentation nous ne parlions que des formats du standard IEEE-754, tel que le Half Precision.
 En effet, dans les chapitres évoquant le standard IEEE-754 nous expliquons ce qu'est le format Half Precision, et plus précisément ce qu'est un nombre __normalisé__ codé au format Half Precision.
 Voyons cela plus en détails dans les sections suivantes.
