@@ -1,6 +1,15 @@
-# Annexe: Les différents types de nombres du format Half Precision
+# Annexe: à propos du standard IEEE-754
 
-Je rappelle que nous avons déjà abordé le sujet du standard IEEE-754 dans ce document, cependant nous sommes volontairement passés à côté de beaucoup de détails afin que les chapitres concernés soient le plus lisible possible.
+Je vous rappelle que nous avons déjà parlé du standard IEEE-754 dans ce document, cependant j'ai expressément survolé beaucoup de choses à ce sujet pour rendre les chapitres et sections concernés le plus lisible possible.
+En autre, il s'avère que nous n'avons pas parlé du fait que les divers formats du standard IEEE-754 ne codent que des nombres __normaux__ ou __dénormaux__, à quelques exception près.
+
+//
+
+
+
+
+
+
 Par exemple, j'ai consciemment omis le fait de dire que les formats définis par le standard IEEE-754, tel que le Half Precision, codent différents types de nombres en fonction des valeurs de leurs champs d'exposant et de mantisse tronquée.
 Dans les faits, il n'existe que deux types de nombres :
 
