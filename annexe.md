@@ -1,5 +1,33 @@
 # Annexe: Les différents types de nombres du format Half Precision
 
+Je rappelle que nous avons déjà abordé le sujet du standard IEEE-754 dans ce document, cependant nous sommes volontairement passés à côté de beaucoup de détails afin que les chapitres concernés soient le plus lisible possible.
+Par exemple, j'ai consciemment omis le fait de dire que les formats définis par le standard IEEE-754, tel que le Half Precision, codent différents types de nombres en fonction des valeurs de leurs champs d'exposant et de mantisse tronquée.
+Dans les faits, il n'existe que deux types de nombres :
+
+  - les nombres __normaux__
+  - les nombres __dénormaux__
+
+Il s'avère que ...
+
+ainsi que quelques nombres dont le codage a été exceptionnellement fixé par le standard IEEE-754, tel que :
+
+  - les __NaN__
+  - le __zéro positif/négatif__
+  - ou encore l'__infini positif/négatif__
+
+
+
+
+
+
+
+
+
+
+///
+
+# Annexe: Les différents types de nombres du format Half Precision
+
 Depuis le début de ce document, nous avons toujours évoquer le fait que le Floating Point Configuration Unit traite deux opérandes de format Half Precision, mais dans les faits ces propos manquent de précision.
 Il s'avère que le format Half Precision, à l'instar de tout les autres formats définis par le standard IEEE-754, peut coder des nombres de ' type ' distincts :
 
