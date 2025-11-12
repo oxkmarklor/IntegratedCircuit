@@ -3,16 +3,13 @@
 Je vous rappelle que nous avons déjà parlé du standard IEEE-754 dans ce document, cependant j'ai expressément survolé beaucoup de choses à ce sujet afin que les chapitres et sections concernés soient le plus lisible possible.
 Nous n'avons entre autre pas parlé du fait que les divers formats du standard IEEE-754 ne codent que des nombres __normaux__ ou __dénormaux__, à quelques exception près.
 
-Dans la théorie, tout nombre codé en IEEE-754 est initialement censé être __normalisé__, cette appellation est dû au fait que la formation de ces nombres est contrainte par l'écriture scientifique binaire.
+Dans la théorie, tout nombre codé en IEEE-754 est initialement censé être __normalisé__.
+Les nombres __normaux__ portent une telle appellation car l'écriture scientifique binaire normalise la formation de ces derniers.
 Cependant, dans la pratique, certains nombres assez spéciaux codés en IEEE-754 peuvent être __dénormalisés__.
 Il s'avère que le codage des nombres __dénormaux__ ainsi que l'interprétation qu'ils ont de la valeur de leurs champs d'exposant et de mantisse tronquée, diverge en tout point des bases __normalisées__ sur lesquels reposent les nombres __normaux__.
-Par conséquent, ces nombres sont ___dénormalisés___ car la formation de ces derniers n'est pas contrainte par les règles de l'écriture scientifique binaire.
+Par conséquent, ces nombres sont ___dénormalisés___ car la formation de ces derniers n'est pas contrainte par l'écriture scientifique binaire.
 
-Dans la théorie, tout nombre codé en IEEE-754 est initialement censé être __normalisé__.
-Les nombres __normaux__ portent une telle appellation car leurs codages est contraint par les règles de l'écriture scientifique binaire, ils sont donc ___normalisés___ par l'écriture scientifique binaire.
-Cependant, dans la pratique, certains nombres assez spéciaux codés en IEEE-754 peuvent être __dénormalisés__.
-Il s'avère que le codage des nombres __dénormaux__ ainsi que l'interprétation qu'ils ont de la valeur de leurs champs d'exposant et de mantisse tronquée, diverge en tout point des bases standardisés sur lesquels reposent les nombres __normaux__.
-Par conséquent, ces nombres sont ___dénormalisés___ car la formation de ces derniers n'est pas contrainte par les règles de l'écriture scientifique binaire.
+// qu'est ce que sont les nombres normaux et dénormaux
 
 // quelques excpetion tel que les NaN et autres?
 
