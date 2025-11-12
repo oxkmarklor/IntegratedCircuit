@@ -7,57 +7,15 @@ Dans la théorie, tout nombre codé en IEEE-754 est initialement censé être __
 Les nombres __normaux__ portent une telle appellation car l'écriture scientifique binaire normalise la formation de ces derniers.
 Cependant, dans la pratique, certains nombres assez spéciaux codés en IEEE-754 peuvent être __dénormalisés__.
 Il s'avère que le codage des nombres __dénormaux__ ainsi que l'interprétation qu'ils ont de la valeur de leurs champs d'exposant et de mantisse tronquée, diverge en tout point des bases __normalisées__ sur lesquels reposent les nombres __normaux__.
-Par conséquent, ces nombres sont ___dénormalisés___ car la formation de ces derniers n'est pas contrainte par l'écriture scientifique binaire.
+Ces nombres sont ___dénormalisés___ car la formation de ces derniers n'est pas contrainte par l'écriture scientifique binaire.
 
 Dans les faits, les nombres __normaux__ sont très polyvalents : ils offrent la possibilité de coder des valeurs plus ou moins grandes/petites ainsi que plus ou moins proche de $0$.
 Les nombres __dénormaux__, quant à eux, sont beaucoup plus spécifiques car ils ne permettent que le codage de valeurs très proche de $0$, plus proche que ne pourrait l'être n'importe quel nombre __normalisé__.
 Pour parvenir à ceci, les nombres __dénormaux__ doivent interpréter la valeur d'un champ de mantisse tronquée d'une manière différente de la normale, comme cela a été mentionné dans le paragraphe précédent.
 
-// remarquez que les normaux et dénormaux ne codent pas la valeur zéro car ...
-
-//
-
-Les nombres __normaux__ permettent de coder des valeurs plus ou moins grandes/petites, de façon général ce sont les nombres les plus utilisés.
-Les nombres __dénormaux__, quant à eux, permettent le codage de nombre très proche de $0$, plus proche que ne pourrait l'être n'importe quel nombre __normalisé__.
-
-Il s'avère que ces nombres se différencient les uns des autres par de multiples facteurs.
-Pour commencer, la plage de codage du champ d'exposant d'un nombre __normalisé__ n'est pas la même que celle d'un nombre __dénormalisé__, pour le dire autrement les nombres __normaux__ et __dénormaux__ ne peuvent pas coder les même valeurs dans un champ d'exposant.
-De surcroît, les nombres __normaux__ et __dénormaux__ n'interprètent pas la valeur d'un champ d'exposant de la même manière, nous verrons plus tard en quoi cela est indispensable.
-Enfin, la valeur des champs de mantisse tronquée est également interprétée différemment en fonction du fait qu'un nombre soit __normalisé__ ou __dénormalisé__.
-
-
-// Toute ces différences sont nécessaires pour ...
-
-
-//
-
-
-
-
-
-
-Par exemple, j'ai consciemment omis le fait de dire que les formats définis par le standard IEEE-754, tel que le Half Precision, codent différents types de nombres en fonction des valeurs de leurs champs d'exposant et de mantisse tronquée.
-Dans les faits, il n'existe que deux types de nombres :
-
-  - les nombres __normaux__
-  - les nombres __dénormaux__
-
-Il s'avère que ...
-
-ainsi que quelques nombres dont le codage a été exceptionnellement fixé par le standard IEEE-754, tel que :
-
-  - les __NaN__
-  - le __zéro positif/négatif__
-  - ou encore l'__infini positif/négatif__
-
-
-
-
-
-
-
-
-
+Veuillez remarquer que les nombres __normaux__ comme __dénormaux__ ne peuvent pas coder le chiffre $0$.
+Le chiffre $0$, à l'instar des nombres __NaN__ et de l'__infini positif/négatif__, sont les fameuses valeurs exceptionnelles que tout format défini par le standard IEEE-754 peut coder, ce qui a été mentionné dans le premier paragraphe de ce chapitre.
+Avant d'aborder le sujet des nombres __normaux__ et __dénormaux__, commençons par comprendre ce que sont ces trois valeurs exceptionnelles par le biais des sections subséquentes.
 
 ///
 
