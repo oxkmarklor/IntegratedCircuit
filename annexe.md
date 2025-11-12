@@ -9,9 +9,11 @@ Cependant, dans la pratique, certains nombres assez spéciaux codés en IEEE-754
 Il s'avère que le codage des nombres __dénormaux__ ainsi que l'interprétation qu'ils ont de la valeur de leurs champs d'exposant et de mantisse tronquée, diverge en tout point des bases __normalisées__ sur lesquels reposent les nombres __normaux__.
 Par conséquent, ces nombres sont ___dénormalisés___ car la formation de ces derniers n'est pas contrainte par l'écriture scientifique binaire.
 
-// qu'est ce que sont les nombres normaux et dénormaux
+Dans les faits, les nombres __normaux__ sont très polyvalents : ils offrent la possibilité de coder des valeurs plus ou moins grandes/petites ainsi que plus ou moins proche de $0$.
+Les nombres __dénormaux__, quant à eux, sont beaucoup plus spécifiques car ils ne permettent que le codage de valeurs très proche de $0$, plus proche que ne pourrait l'être n'importe quel nombre __normalisé__.
+Pour parvenir à ceci, les nombres __dénormaux__ doivent interpréter la valeur d'un champ de mantisse tronquée d'une manière différente de la normale, comme cela a été mentionné dans le paragraphe précédent.
 
-// quelques excpetion tel que les NaN et autres?
+// remarquez que les normaux et dénormaux ne codent pas la valeur zéro car ...
 
 //
 
