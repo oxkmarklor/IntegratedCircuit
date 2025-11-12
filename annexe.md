@@ -14,8 +14,9 @@ Les nombres __dénormaux__, quant à eux, sont beaucoup plus spécifiques car il
 Pour parvenir à ceci, les nombres __dénormaux__ doivent interpréter la valeur d'un champ de mantisse tronquée d'une manière différente de la normale, comme cela a été mentionné dans le paragraphe précédent.
 
 Veuillez remarquer que les nombres __normaux__ comme __dénormaux__ ne peuvent pas coder le chiffre $0$.
-Le chiffre $0$, à l'instar des nombres __NaN__ et de l'__infini positif/négatif__, sont les fameuses valeurs exceptionnelles que tout format défini par le standard IEEE-754 peut coder, ce qui a été mentionné dans le premier paragraphe de ce chapitre.
-Avant d'aborder le sujet des nombres __normaux__ et __dénormaux__, commençons par comprendre ce que sont ces trois valeurs exceptionnelles par le biais des sections subséquentes.
+Il s'avère que le codage d'une valeur nulle a été fixé par le standard IEEE-754 lui-même, mais ce n'est pas la seule valeur à être dans ce cas.
+Les __NaN__ ainsi que l'__infini positif__ et l'__infini négatif__ sont des valeurs qui ne peuvent pas non plus être codées par les nombres __normaux__ et __dénormaux__, leurs codages est ainsi fixé par le standard IEEE-754.
+Avant d'aborder le sujet des nombres __normaux__ et __dénormaux__, intéressons nous (par le biais des sections suivantes) à ces trois cas quelques peu exceptionnelles. 
 
 ///
 
