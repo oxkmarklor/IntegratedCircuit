@@ -18,6 +18,16 @@ Il s'avère que le codage d'une valeur nulle a été fixé par le standard IEEE-
 Les __NaN__ ainsi que l'__infini positif__ et l'__infini négatif__ sont des valeurs qui ne peuvent pas non plus être codées par les nombres __normaux__ et __dénormaux__, leurs codages a ainsi été fixé par le standard IEEE-754.
 Avant d'aborder le sujet des nombres __normaux__ et __dénormaux__, intéressons nous (par le biais des sections suivantes) à ces cas quelques peu exceptionnelles.
 
+## L'infini positif/négatif et les NaN
+
+L'introduction explique que tout format défini par le standard IEEE-754 peut coder des valeurs spéciales, parmis lesquels figure l'__infini positif__, l'__infini négatif__ ainsi que les __NaN__.
+Cependant, nous savons que le codage de ces valeurs a lui-même été fixé par le standard IEEE-754, plus particulièrement le codage des champs d'exposant et de mantisse tronquée.
+
+Pour qu'un format du standard IEEE-754 puisse coder une valeur __NaN__ ou __infini positif/négatif__, il est impératif que son champs d'exposant d'une taille de $N$ bits code la valeur $\left(2^N - 1\right)$.
+C'est un point en commun qu'ont ces deux valeurs exceptionnelles, mais pas une fin en soit.
+Il s'avère que le champs de mantisse tronquée est lui aussi restreint par les valeurs qu'il doit coder, mais pas de la même manière en fonction de si l'ont cherchent à obtenir un __NaN__ ou un __infini positif/négatif__. 
+C'est pourquoi nous aborderons le sujet du codage du champ de mantisse tronquée, ainsi que le reste, dans les sections dédiées subséquentes.
+
 ## Les NaN
 
 L'introduction explique que tout format défini par le standard IEEE-754 peut coder des valeurs spéciales, parmis lesquels figure __NaN__.
@@ -26,9 +36,7 @@ Cependant, nous savons que le codage d'une valeur __NaN__ a lui-même été fix�
 Pour le codage d'une valeur __NaN__, le strandard IEEE-754 restreint les valeurs possibles des champs d'exposant ainsi que de mantisse tronquée.
 Considérer une valeur comme __NaN__ requière que le champ d'exposant de n'importe quel format code la valeur $\left(2^N - 1\right)$, pour $N$ la taille du champ en bits, tandis que le champ de mantisse tronquée associé doit être non nul.
 
-Le standard IEEE-754 considère qu'une valeur est __NaN__ lorsque le champ d'exposant de n'importe quel format code la valeur $\left(2^N - 1\right)$, pour $N$ la taille du champ en bits, tandis que son champ de mantisse tronquée doit être non nul.
 
-Pour qu'un nombre soit considéré comme __NaN__, il faut que son champ d'exposant d'une taille de $N$ bits code la valeur $\left(2^N - 1\right)$, tandis que son champ de mantisse tronquée doit être non nul.
 
 
 //
