@@ -14,14 +14,25 @@ Les nombres __dénormaux__, quant à eux, sont beaucoup plus spécifiques car il
 Pour parvenir à ceci, les nombres __dénormaux__ doivent interpréter la valeur d'un champ de mantisse tronquée différemment de la normale, comme cela a été mentionné dans le paragraphe précédent.
 
 Veuillez remarquer que les nombres __normaux__ comme __dénormaux__ ne peuvent pas coder le chiffre $0$.
-Il s'avère que le codage d'une valeur nulle a été fixé par le standard IEEE-754 lui-même, mais ce n'est pas la seule valeur à être dans ce cas.
-Les __NaN__ ainsi que l'__infini positif__ et l'__infini négatif__ sont des valeurs qui ne peuvent pas non plus être codées par les nombres __normaux__ et __dénormaux__, leurs codages a ainsi été fixé par le standard IEEE-754.
+Il s'avère que le codage d'une valeur nulle a été prédéfini par le standard IEEE-754 lui-même, mais ce n'est pas la seule valeur à être dans ce cas.
+Les __NaN__ ainsi que l'__infini positif__ et l'__infini négatif__ sont des valeurs qui ne peuvent pas non plus être codées par les nombres __normaux__ et __dénormaux__, leurs codages a ainsi été prédéfini par le standard IEEE-754.
 Avant d'aborder le sujet des nombres __normaux__ et __dénormaux__, intéressons nous (par le biais des sections suivantes) à ces cas quelques peu exceptionnelles.
 
 ## L'infini positif/négatif et les NaN
 
 L'introduction explique que tout format défini par le standard IEEE-754 peut coder des valeurs spéciales, parmis lesquels figure l'__infini positif__, l'__infini négatif__ ainsi que les __NaN__.
-Cependant, nous savons que le codage de ces valeurs a lui-même été fixé par le standard IEEE-754, plus particulièrement le codage des champs d'exposant et de mantisse tronquée.
+De surcroît, nous savons que le standard IEEE-754 a prédéfini le codage de toute ces valeurs spéciales.
+
+En l'occurrence, il s'avère que l'obtention des nombres __NaN__ et __infini positif__ ou __négatif__ requière pour tout format de coder dans un champ d'exposant de $N$ bits la valeur $\left(2^N - 1\right)$.
+
+
+En l'occurrence, il s'avère que le codage d'un __NaN__ ainsi que d'un __infini positif__ ou __négatif__ requière de coder dans un champ d'exposant de $N$ bits la valeur $\left(2^N - 1\right)$.
+
+Il s'avère que pour représenter un __NaN__ ou un __infini positif/négatif__, tout format doit coder dans
+
+Il s'avère que les __NaN__ ainsi que l'__infini positif__ et __négatif__ partagent le même codage du champ d'exposant.
+
+//
 
 Pour qu'un format du standard IEEE-754 puisse coder une valeur __NaN__ ou __infini positif/négatif__, il est impératif que son champs d'exposant d'une taille de $N$ bits code la valeur $\left(2^N - 1\right)$.
 C'est un point en commun qu'ont ces deux valeurs exceptionnelles, mais pas une fin en soit.
