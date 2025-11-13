@@ -18,32 +18,10 @@ Il s'avère que le codage d'une valeur nulle a été prédéfini par le standard
 Les __NaN__ ainsi que l'__infini positif__ et l'__infini négatif__ sont des valeurs qui ne peuvent pas non plus être codées par les nombres __normaux__ et __dénormaux__, leurs codages a ainsi été prédéfini par le standard IEEE-754.
 Avant d'aborder le sujet des nombres __normaux__ et __dénormaux__, intéressons nous (par le biais des sections suivantes) à ces cas quelques peu exceptionnelles.
 
-## L'infini positif/négatif et les NaN
-
-L'introduction explique que tout format défini par le standard IEEE-754 peut coder des valeurs spéciales, parmis lesquels figure l'__infini positif__, l'__infini négatif__ ainsi que les __NaN__.
-En outre, nous savons que le codage de toute ces valeurs a été prédéfini par le standard IEEE-754.
-
-Pour tout format du standard IEEE-754, le codage de la valeur __NaN__ ou de l'__infini positif__ et __négatif__ requière de coder $\left(2^N - 1\right)$ dans le champ d'exposant de $N$ bits composant ledit format.
-
-
-Dans les faits, le codage de __NaN__ ou de l'__infini positif__ et __négatif__ requière de coder la valeur $\left(2^N - 1\right)$ dans le champ d'exposant de $N$ bits composant tout format IEEE-754.
-
-
-
-Cependant, le codage de ces nombres se départage par la valeur que code le champ de mantisse tronquée, voyons ce qu'il en est dans les sections subséquentes.
-
 ## Les NaN
 
 L'introduction explique que tout format défini par le standard IEEE-754 peut coder des valeurs spéciales, parmis lesquels figure __NaN__.
 Cependant, nous savons que le codage d'une valeur __NaN__ a lui-même été fixé par le standard IEEE-754, alors commençons par voir quel est le codage d'un __NaN__ avant de parler de quoique ce soit d'autre à ce sujet.
-
-Pour le codage d'une valeur __NaN__, le strandard IEEE-754 restreint les valeurs possibles des champs d'exposant ainsi que de mantisse tronquée.
-Considérer une valeur comme __NaN__ requière que le champ d'exposant de n'importe quel format code la valeur $\left(2^N - 1\right)$, pour $N$ la taille du champ en bits, tandis que le champ de mantisse tronquée associé doit être non nul.
-
-
-
-
-//
 
 Les plages de codage des champs d'exposant et de mantisse tronquée d'un nombre __NaN__ sont toutes les deux restreintes. 
 Pour qu'un nombre soit considéré comme __NaN__, il faut que son champ d'exposant d'une taille de $N$ bits code la valeur $\left(2^N - 1\right)$, et que son champ de mantisse tronquée soit non nul.
