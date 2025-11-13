@@ -21,7 +21,11 @@ Avant d'aborder le sujet des nombres __normaux__ et __dénormaux__, intéressons
 ## Les NaN
 
 L'introduction explique que tout format défini par le standard IEEE-754 peut coder des valeurs spéciales, parmis lesquels figurent les __NaN__.
-Comme dit précédemment, le codage d'un __NaN__ a été formellement fixé par le standard lui-même ; ce qui explique que nous commençions par parler de la plage de codage des champs d'exposant et de mantisse tronquée d'un nombre __NaN__, avant de parler de quoique ce soit d'autre.
+Rappelons que le codage des __NaN__ à lui-même été défini par le standard IEEE-754, c'est pourquoi nous allons commencer par l'étudier 
+
+Comme dit précédemment, le codage d'un __NaN__ est lui-même défini par le standard IEEE-754, 
+
+alors commençons par parler de la plage de codage des champs d'exposant et de mantisse tronquée d'un nombre __NaN__ avant de parler de quoique ce soit d'autre.
 
 Les plages de codage des champs d'exposant et de mantisse tronquée d'un nombre __NaN__ sont toutes les deux restreintes. 
 Pour qu'un nombre soit considéré comme __NaN__, il faut que son champ d'exposant d'une taille de $N$ bits code la valeur $\left(2^N - 1\right)$, et que son champ de mantisse tronquée soit non nul.
