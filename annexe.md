@@ -21,23 +21,16 @@ Avant d'aborder le sujet des nombres __normaux__ et __dénormaux__, intéressons
 ## L'infini positif/négatif et les NaN
 
 L'introduction explique que tout format défini par le standard IEEE-754 peut coder des valeurs spéciales, parmis lesquels figure l'__infini positif__, l'__infini négatif__ ainsi que les __NaN__.
-De surcroît, nous savons que le standard IEEE-754 a prédéfini le codage de toute ces valeurs spéciales.
+En outre, nous savons que le codage de toute ces valeurs a été prédéfini par le standard IEEE-754.
 
-En l'occurrence, il s'avère que l'obtention des nombres __NaN__ et __infini positif__ ou __négatif__ requière pour tout format de coder dans un champ d'exposant de $N$ bits la valeur $\left(2^N - 1\right)$.
+Pour tout format du standard IEEE-754, le codage de la valeur __NaN__ ou de l'__infini positif__ et __négatif__ requière de coder $\left(2^N - 1\right)$ dans le champ d'exposant de $N$ bits composant ledit format.
 
 
-En l'occurrence, il s'avère que le codage d'un __NaN__ ainsi que d'un __infini positif__ ou __négatif__ requière de coder dans un champ d'exposant de $N$ bits la valeur $\left(2^N - 1\right)$.
+Dans les faits, le codage de __NaN__ ou de l'__infini positif__ et __négatif__ requière de coder la valeur $\left(2^N - 1\right)$ dans le champ d'exposant de $N$ bits composant tout format IEEE-754.
 
-Il s'avère que pour représenter un __NaN__ ou un __infini positif/négatif__, tout format doit coder dans
 
-Il s'avère que les __NaN__ ainsi que l'__infini positif__ et __négatif__ partagent le même codage du champ d'exposant.
 
-//
-
-Pour qu'un format du standard IEEE-754 puisse coder une valeur __NaN__ ou __infini positif/négatif__, il est impératif que son champs d'exposant d'une taille de $N$ bits code la valeur $\left(2^N - 1\right)$.
-C'est un point en commun qu'ont ces deux valeurs exceptionnelles, mais pas une fin en soit.
-Il s'avère que le champs de mantisse tronquée est lui aussi restreint par les valeurs qu'il doit coder, mais pas de la même manière en fonction de si l'ont cherchent à obtenir un __NaN__ ou un __infini positif/négatif__. 
-C'est pourquoi nous aborderons le sujet du codage du champ de mantisse tronquée, ainsi que le reste, dans les sections dédiées subséquentes.
+Cependant, le codage de ces nombres se départage par la valeur que code le champ de mantisse tronquée, voyons ce qu'il en est dans les sections subséquentes.
 
 ## Les NaN
 
