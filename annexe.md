@@ -17,7 +17,7 @@ Il s'avère que le codage d'une valeur nulle a été prédéfini par le standard
 Les __NaN__ ainsi que l'__infini positif__ et l'__infini négatif__ sont des valeurs qui ne peuvent pas non plus être codées par les nombres __normaux__ et __dénormaux__, leurs codages a ainsi été prédéfini par le standard IEEE-754.
 Avant d'aborder le sujet des nombres __normaux__ et __dénormaux__, intéressons nous (par le biais des sections suivantes) à ces cas quelques peu exceptionnelles.
 
-## Les NaN ainsi que l'infini positif et l'infini négatif
+## Les NaN ainsi que l'infini positif et négatif
 
 Le premier paragraphe du chapitre précédent explique que tout format défini par le standard IEEE-754 peut coder des valeurs spéciales, parmis lesquels figure les valeurs __NaN__ ainsi que l'__infini positif__ et l'__infini négatif__.
 Cependant, nous savons que le codage de ces valeurs spéciales a lui-même été prédéfini par le standard IEEE-754, alors commençons par voir quel est le codage des valeurs susmentionnés avant de parler de quoique ce soit d'autre à leurs sujets.
@@ -25,13 +25,13 @@ Cependant, nous savons que le codage de ces valeurs spéciales a lui-même été
 Pour coder une valeur __NaN__, à l'instar de l'__infini positif__ et __négatif__, il faut déjà que le champ d'exposant d'une taille de $N$ bits, composant tout format IEEE-754, code le nombre $\left(2^N - 1\right)$.
 Cependant, il s'avère que le codage de ces valeurs se départage par le biais du champ de mantisse tronquée, la plage de codage de ce champ n'est pas la même d'une valeur à l'autre ; c'est pourquoi nous parlons du codage du champ de mantisse tronquée (ainsi que du reste) dans des sections dédiés ci-bas.
 
-### Le codage et l'origine des NaN
+### Origine et codage du champ de mantisse tronquée des NaN
 
-// codage des champs de mantisse tronquée
+Nous savons ce que le codage d'une valeur __NaN__ requière d'un champ d'exposant, mais à cela il faut ajouter le fait que le champ de mantisse tronquée d'une taille de $K$ bits, composant tout format IEEE-754, doive coder un nombre de l'intervalle $\left]0;2^K - 1\right]$.
 
-//
+//?
 
-Aussi étrange que cela puisse être, le standard IEEE-754 considère qu'un nombre __NaN__ n'est pas un nombre, d'où le fait que ces derniers aient pour nom l'abréviation de __Not a Number__.
+Aussi étrange que cela puisse être, le standard IEEE-754 considère que les nombres __NaN__ ne sont pas des nombres, d'où le fait que ces derniers aient pour nom l'abréviation de __Not a Number__.
 Dans les faits, les nombres __NaN__ sont générés à la place des résultats des calculs considérés comme invalide par le standard IEEE-754 et/ou par les mathématiques elles même.
 Prenons pour exemple le quotient suivant $\left(NaN \div 0\right)$.
 Nous savons d'ores et déjà que le calcul est mathématiquement invalide, du fait de la divison par $0$.
