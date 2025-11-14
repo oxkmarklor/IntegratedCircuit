@@ -26,26 +26,25 @@ Pour coder une valeur __NaN__ ou bien l'__infini positif__ et __négatif__, il f
 Il s'avère que le codage de ces valeurs se départage par le biais du champ de mantisse tronquée, la plage de codage de ce champ n'est pas la même d'une valeur à l'autre.
 C'est pourquoi nous parlons du codage du champ de mantisse tronquée ainsi que de l'origine de ces valeurs dans les sections dédiés suivantes.
 
-### Origine et codage du champ de mantisse tronquée des NaN
+### Origine et codage du champ de mantisse tronquée d'un NaN
 
-Nous savons ce que le codage d'une valeur __NaN__ requière d'un champ d'exposant, mais à cela il faut ajouter le fait que le champ de mantisse tronquée d'une taille de $K$ bits, composant tout format IEEE-754, doive coder un nombre de l'intervalle $\left]0;2^K - 1\right]$.
+A ce stade, nous savons ce que le codage d'un __NaN__ requière d'un champ d'exposant, mais il faut ajouter à cela le fait que le champ de mantisse tronquée associé, d'une taille de $K$ bits, doive coder un nombre de l'intervalle $\left]0;2^K - 1\right]$.
+En bref, le champ de mantisse tronquée doit être non nul.
 
-//?
-
-Aussi étrange que cela puisse être, le standard IEEE-754 considère que les nombres __NaN__ ne sont pas des nombres, d'où le fait que ces derniers aient pour nom l'abréviation de __Not a Number__.
-Dans les faits, les nombres __NaN__ sont générés à la place des résultats des calculs considérés comme invalide par le standard IEEE-754 et/ou par les mathématiques elles même.
+Aussi étrange que cela puisse être, le standard IEEE-754 considère que la valeur __NaN__ n'est pas un nombre, d'où le fait que cette dernière ait pour nom l'abréviation de __Not a Number__.
+Dans les faits, les valeurs __NaN__ sont générées à la place des résultats des calculs considérés comme invalide par le standard IEEE-754 et/ou par les mathématiques elles même.
 Prenons pour exemple le quotient suivant $\left(NaN \div 0\right)$.
 Nous savons d'ores et déjà que le calcul est mathématiquement invalide, du fait de la divison par $0$.
-De surcroît, la division d'un nombre qui n'en est pas un (un nombre __NaN__) donne lieu à un calcul arithmétique ambigu ; ce sont les raisons pour lesquelles ce quotient mène quoiqu'il arrive à la génération d'un nombre __NaN__ en guise de résultat.
+De surcroît, la division d'une valeur qui n'est pas un nombre (la valeur __NaN__) donne lieu à un calcul arithmétique ambigu ; ce sont les raisons pour lesquelles ce quotient mène quoiqu'il arrive à la génération d'un __NaN__ en guise de résultat.
 
-Pour conclure ce chapitre, il va me falloir donner quelques détails à propos du Floating Point Configuration Unit, ce qui m'amène à vous redirigé vers la documentation dédiée au circuit si vous souhaitez plus d'information.
+Pour conclure cette section, il va me falloir donner quelques détails à propos du Floating Point Configuration Unit, ce qui m'amène à vous redirigé vers la documentation dédiée au circuit si vous souhaitez plus d'information.
 Dans les grandes lignes, sachez que l'une des fonctionnalités du circuit est d'acheminer convenablement les opérandes d'un calcul arithmétique flottant, sur les bonnes entrées d'un soustracteur flottant.
-Néanmoins, nous savons que ledit soustracteur flottant génère un nombre __NaN__ lorsque l'un de ses opérandes est __NaN__, et ce, indépendamment du positionnement des opérandes sur les entrées de l'unité de calcul.
-Par conséquent, nous en déduisons que pour de tels opérations, le soustracteur flottant ne peut pas commettre d'erreur dû au mauvais placement des opérandes ; ce qui justifie le fait que le FPC Unit n'ait pas besoin de prendre en charge les nombres __NaN__.
+Néanmoins, nous savons que ledit soustracteur flottant génère __NaN__ sur sa sortie lorsque l'un de ses opérandes est un __NaN__, et ce, indépendamment du positionnement des opérandes sur les entrées de l'unité de calcul.
+Par conséquent, nous en déduisons que pour de tels opérations, le soustracteur flottant ne peut pas commettre d'erreur dû au mauvais placement des opérandes ; ce qui justifie le fait que le circuit n'ait pas besoin de prendre en charge les __NaN__.
 
-Pour la culture général, sachez que le codage d'un nombre __NaN__ peut varier en fonction de la valeur que l'on donne au bit de signe.
+Pour la culture général, sachez que le codage d'un __NaN__ peut varier en fonction de la valeur que l'on donne au bit de signe.
 Pourtant, rappelons qu'un __NaN__ n'est pas un nombre, ce qui insinue qu'il n'existe pas de __NaN__ positif d'une part et négatif de l'autre.
-En outre, l'ensemble des circuits d'un ordinateur interprètent de la même manière deux nombres __NaN__ aux codages distincts.
+En outre, l'ensemble des circuits d'un ordinateur interprètent de la même manière deux valeurs __NaN__ aux codages distincts.
 
 ## Les NaN
 
