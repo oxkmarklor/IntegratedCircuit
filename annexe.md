@@ -1,10 +1,9 @@
 # Annexe : Approfondissement du standard IEEE-754
 
 Je vous rappelle que nous avons déjà parlé du standard IEEE-754 dans ce document, cependant j'ai expressément survolé beaucoup de choses à ce sujet afin que les chapitres et sections concernés soient le plus lisible possible.
-Nous n'avons, entre autre, pas parlé du fait que les formats définis par le standard IEEE-754 ne codent que des nombres __normaux__ ou __dénormaux__, à quelques exception près.
+Nous avons, entre autre, pas parlé du fait que les formats définis par le standard IEEE-754 ne codent que des nombres __normaux__ ou __dénormaux__, à quelques exception près.
 
-Dans la théorie, tout nombre codé en IEEE-754 est initialement censé être __normalisé__.
-Les nombres __normaux__ portent une telle appellation car l'écriture scientifique binaire normalise la formation de ces derniers.
+Dans la théorie, tout nombre codé en IEEE-754 est initialement censé être __normalisé__, les nombres __normaux__ portent une telle appellation car l'écriture scientifique binaire normalise ces derniers.
 Cependant, dans la pratique, certains nombres assez spéciaux codés en IEEE-754 peuvent être __dénormalisés__.
 Il s'avère que le codage des nombres __dénormaux__ ainsi que l'interprétation qu'ils ont de la valeur de leurs champs d'exposant et de mantisse tronquée, diverge en tout point des bases __normalisées__ sur lesquels reposent les nombres __normaux__.
 Ces nombres sont ___dénormalisés___ parcqu'ils ne sont pas contraint par l'écriture scientifique binaire, au contraire des nombres __normaux__.
@@ -17,6 +16,36 @@ Veuillez remarquer que les nombres __normaux__ comme __dénormaux__ ne peuvent p
 Il s'avère que le codage d'une valeur nulle a été prédéfini par le standard IEEE-754 lui-même, mais ce n'est pas la seule valeur à être dans ce cas.
 Les __NaN__ ainsi que l'__infini positif__ et l'__infini négatif__ sont des valeurs qui ne peuvent pas non plus être codées par les nombres __normaux__ et __dénormaux__, leurs codages a ainsi été prédéfini par le standard IEEE-754.
 Avant d'aborder le sujet des nombres __normaux__ et __dénormaux__, intéressons nous (par le biais des sections suivantes) à ces cas quelques peu exceptionnelles.
+
+## Les NaN ainsi que l'infini positif et l'infini négatif
+
+Le premier paragraphe du chapitre précédent explique que tout format défini par le standard IEEE-754 peut coder des valeurs spéciales, parmis lesquels figure les valeurs __NaN__ ainsi que l'__infini positif__ et l'__infini négatif__.
+Cependant, nous savons que le codage de ces valeurs spéciales a lui-même été prédéfini par le standard IEEE-754, alors commençons par voir quel est le codage des valeurs susmentionnés avant de parler de quoique ce soit d'autre à leurs sujets.
+
+Pour pouvoir être codé, ces valeurs contraignent la plage de codage des champs d'exposant et de mantisse tronquée de tout format défini par le standard IEEE-754.
+
+Ces valeurs contraignent la plage de codage des champs d'exposant et de mantisse tronquée de tout format défini par le standard IEEE-754.
+En particulier ...
+
+Par le support de ces valeurs, les champs d'exposant et de mantisse tronquée de tout format défini par le standard IEEE-754 se retrouve à avoir une plage de codage 
+
+
+//
+
+Aussi étrange que cela puisse être, le standard IEEE-754 considère qu'un nombre __NaN__ n'est pas un nombre, d'où le fait que ces derniers aient pour nom l'abréviation de __Not a Number__.
+Dans les faits, les nombres __NaN__ sont générés à la place des résultats des calculs considérés comme invalide par le standard IEEE-754 et/ou par les mathématiques elles même.
+Prenons pour exemple le quotient suivant $\left(NaN \div 0\right)$.
+Nous savons d'ores et déjà que le calcul est mathématiquement invalide, du fait de la divison par $0$.
+De surcroît, la division d'un nombre qui n'en est pas un (un nombre __NaN__) donne lieu à un calcul arithmétique ambigu ; ce sont les raisons pour lesquelles ce quotient mène quoiqu'il arrive à la génération d'un nombre __NaN__ en guise de résultat.
+
+Pour conclure ce chapitre, il va me falloir donner quelques détails à propos du Floating Point Configuration Unit, ce qui m'amène à vous redirigé vers la documentation dédiée au circuit si vous souhaitez plus d'information.
+Dans les grandes lignes, sachez que l'une des fonctionnalités du circuit est d'acheminer convenablement les opérandes d'un calcul arithmétique flottant, sur les bonnes entrées d'un soustracteur flottant.
+Néanmoins, nous savons que ledit soustracteur flottant génère un nombre __NaN__ lorsque l'un de ses opérandes est __NaN__, et ce, indépendamment du positionnement des opérandes sur les entrées de l'unité de calcul.
+Par conséquent, nous en déduisons que pour de tels opérations, le soustracteur flottant ne peut pas commettre d'erreur dû au mauvais placement des opérandes ; ce qui justifie le fait que le FPC Unit n'ait pas besoin de prendre en charge les nombres __NaN__.
+
+Pour la culture général, sachez que le codage d'un nombre __NaN__ peut varier en fonction de la valeur que l'on donne au bit de signe.
+Pourtant, rappelons qu'un __NaN__ n'est pas un nombre, ce qui insinue qu'il n'existe pas de __NaN__ positif d'une part et négatif de l'autre.
+En outre, l'ensemble des circuits d'un ordinateur interprètent de la même manière deux nombres __NaN__ aux codages distincts.
 
 ## Les NaN
 
