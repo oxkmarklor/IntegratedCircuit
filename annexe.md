@@ -51,18 +51,13 @@ En outre, l'ensemble des circuits d'un ordinateur interprètent de la même mani
 A ce stade, nous savons ce que le codage de l'__infini positif__ et __négatif__ requière d'un champ d'exposant, mais il faut ajouter à cela le fait que le champ de mantisse tronquée associé doive être nul.
 En outre, le codage d'un __infini positif__ ou __négatif__ se joue sur la valeur du bit de signe.
 
-Il ne vous surprendra pas d'apprendre que l'__infini positif__ comme __négatif__ ne symbolisent que des nombres ayant pour point commun le fait d'être trop grand, ou trop petit, pour pouvoir être codé.
-Le standard IEEE-754 ne considère pas pour autant l'__infini positif__ ou __négatif__ comme des nombres, ce qui a pour effet de rendre invalide tout calcul arithmétique sur ceux-ci.
-Seulement, grâce à la section précédente, nous savons que tout calcul arithmétique invalide génère un __NaN__ comme résultat, et ces calculs là n'y échappent pas.
-
 Il ne vous surprendra pas d'apprendre que l'__infini positif__ comme __négatif__ ne représentent que des nombres ayant pour point commun le fait d'être trop grand, ou trop petit, pour pouvoir être codé.
-A l'instar des __NaN__, le standard IEEE-754 ne considère pas vraiment l'__infini positif__ ou __négatif__ comme des nombres ; ce qui a pour effet de rendre invalide tout calcul arithmétique sur ceux-ci.
-Par conséquent, il s'avère qu'un nombre __NaN__ est généré à la place du résultat de tout calcul ayant pour opérande l'__infini__, et ce, indépendamment du positionnement des opérandes dans le calcul.
+Le standard IEEE-754 ne considère pas pour autant l'__infini positif__ ou __négatif__ comme des nombres, ce qui a pour effet de rendre invalide tout calcul arithmétique sur ceux-ci.
+Seulement, grâce à la section précédente, nous savons que tout calcul arithmétique invalide génère un résultat __NaN__, et ces calculs là n'y échappent pas.
 
-
-Pour finir, rappelez vous du fait que l'une des fonctionnalités du FPC Unit est d'acheminer convenablement les opérandes d'un calcul arithmétique flottant, sur les bonnes entrées d'un soustracteur flottant.
-Néanmoins, nous savons que ledit soustracteur flottant génère un nombre __NaN__ lorsque l'un de ses opérandes est __infini__, nonobstant le positionnement des opérandes.
-Cela veut dire que dans une telle situation, le soustracteur flottant ne peut pas commettre d'erreur dû au mauvais placement des opérandes ; justifiant ainsi le fait que le Floating Point Configuration Unit n'ait pas besoin de prendre en charge les nombres __infinis positifs/négatifs__.
+En définitive, rappelez vous du fait que l'une des fonctionnalités du FPC Unit est d'acheminer convenablement les opérandes d'un calcul arithmétique flottant, sur les bonnes entrées d'un soustracteur flottant.
+Néanmoins, nous savons que ledit soustracteur flottant génère un __NaN__ lorsqu'un de ses opérandes est __infini__, nonobstant le positionnement desdites opérandes.
+Par conséquent, nous en déduisons que pour de tels calculs, le soustracteur flottant ne peut pas commettre d'erreur dû au mauvais placement des opérandes ; justifiant ainsi le fait que le Floating Point Configuration Unit n'ait pas besoin de prendre en charge l'__infini positif/négatif__.
 
 ## L'infini positif/négatif
 
