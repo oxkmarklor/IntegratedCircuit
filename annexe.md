@@ -19,8 +19,12 @@ Avant d'aborder le sujet des nombres __normaux__ et __dénormaux__, intéressons
 
 ## Les NaN ainsi que l'infini positif et négatif
 
-Le premier paragraphe du chapitre précédent explique que tout format défini par le standard IEEE-754 peut coder des valeurs spéciales, parmis lesquels figure les valeurs __NaN__ ainsi que l'__infini positif__ et l'__infini négatif__.
+Le premier paragraphe du chapitre précédent explique que tout format défini par le standard IEEE-754 peut coder des valeurs spéciales, parmis lesquels figure les __NaN__ ainsi que l'__infini positif__ et l'__infini négatif__.
 Cependant, nous savons que le codage de ces valeurs spéciales a lui-même été prédéfini par le standard IEEE-754, alors commençons par voir quel est le codage des valeurs susmentionnés avant de parler de quoique ce soit d'autre à leurs sujets.
+
+Pour coder une valeur __NaN__ mais également l'__infini positif__ et __négatif__, il faut déjà que le champ d'exposant d'une taille de $N$ bits, qui compose tout format IEEE-754, code le nombre $\left(2^N - 1\right)$.
+Cependant, il s'avère que le codage de ces valeurs se départage par le biais du champ de mantisse tronquée, la plage de codage de ce champ n'est pas la même d'une valeur à l'autre ; c'est pourquoi nous parlons du codage du champ de mantisse tronquée (ainsi que du reste) dans des sections dédiés ci-bas.
+
 
 Pour coder une valeur __NaN__, à l'instar de l'__infini positif__ et __négatif__, il faut déjà que le champ d'exposant d'une taille de $N$ bits, composant tout format IEEE-754, code le nombre $\left(2^N - 1\right)$.
 Cependant, il s'avère que le codage de ces valeurs se départage par le biais du champ de mantisse tronquée, la plage de codage de ce champ n'est pas la même d'une valeur à l'autre ; c'est pourquoi nous parlons du codage du champ de mantisse tronquée (ainsi que du reste) dans des sections dédiés ci-bas.
