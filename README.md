@@ -1,8 +1,8 @@
 Bonjour,
 
-Ce document est une preuve mathématique du bon fonctionnement d'un circuit électronique du nom de Floating Point Configuration Unit ou FPC Unit.
+Ce document est une preuve mathématique du bon fonctionnement d'un circuit électronique du nom de Floating Point Substractor Configuration Unit ou FPS Configuration Unit.
 J'ai conceptualisé ce circuit dans le but de résoudre un problème concernant le traitement des nombres flottants dans les unités de calculs flottantes (FPUs) d'un ordinateur.
-La micro-architecture du circuit électronique ainsi que les compromis de conceptualisation, le problème que cherche à résoudre le FPC Unit ou encore la solution qu'il apporte, sont autant de sujets dont je parle dans une documentation dédiée au circuit.
+La micro-architecture du circuit électronique ainsi que les compromis de conceptualisation, le problème que cherche à résoudre le FPS Configuration Unit ou encore la solution qu'il apporte, sont autant de sujets dont je parle dans une documentation dédiée au circuit.
 
 Pour les curieux, si vous souhaitez voir à quoi ressemble le circuit, sachez qu'il y a un fichier du nom de _16-bit_FPU_configuration_unit_ qui le schématise.
 Le circuit a été directement schématisé à base de transisor, principalement en technologie CMOS (Complementary Metal Oxide Semi-conductor), permettant ainsi de mettre en évidence certains compromis sur le choix des portes logiques.
@@ -30,7 +30,7 @@ Ce qui explique la présence de la table des matières suivante:
     - Le champ d'exposant
       - L'encodage par biais du champ d'exposant
       - Le codage du champ d'exposant
-  - Introduction au Floating Point Configuration Unit
+  - Introduction au Floating Point Substractor Configuration Unit
     - Les points terminaux et non terminaux
   - Démonstration mathématique
     - Définition de quelques opérations fondamentales à la démonstration
@@ -460,13 +460,13 @@ Ce qui insinue que le champ d'exposant devrait être composé de (beaucoup) plus
 Aussi, il faudrait que les puissances de $2$ soient codées sous la forme de nombre à virgule dans le champ d'exposant, afin de pouvoir prendre en charge les puissances de $2$ négatives que peut interpréter le multiplicande.
 Enfin, pour finir, la gestion des opérandes dans les unités de calcul arithmétique flottantes (FPUs) serait probablement plus complexe avec un champ d'exposant codant une puissance de $2$ : l'alignement des virgules de deux opérandes à soustraire serait plus complexe par exemple.
 
-# Introduction au Floating Point Configuration Unit
+# Introduction au Floating Point Substractor Configuration Unit
 
 Comme dit dans le chapitre "_Le standard IEEE-754_", le circuit électronique à l'étude dans ce document compare deux opérandes $\alpha$ et $\beta$ entre elle, deux opérandes de format Half Precision.
-Je vous rappel que le circuit, du nom de Floating Point Configuration Unit (FPC Unit), ne prend en charge que ce format pour des raisons de complexité de schématisation.
+Je vous rappel que le circuit, du nom de Floating Point Substractor Configuration Unit (ou FPS Configuartion Unit), ne prend en charge que ce format pour des raisons de complexité de schématisation.
 
 Ladite comparaison est une vérification de supériorité stricte de la valeur absolu de l'un des deux opérandes envers la valeur absolu de l'autre.
-Le FPC Unit n'utilise que la valeur absolu de ses opérandes $\vert \ \alpha \ \vert$ et $\vert \ \beta \ \vert$, le bit de signe des opérandes (bit de poids $15$) n'est pas transmis au circuit.
+Le FPS Configuration Unit n'utilise que la valeur absolu de ses opérandes $\vert \ \alpha \ \vert$ et $\vert \ \beta \ \vert$, le bit de signe des opérandes (bit de poids $15$) n'est pas transmis au circuit.
 Je vous renvoie vers le chapitre "_Le standard IEEE-754_", si vous souhaitez visualiser l'illustration du codage Half Precision d'un nombre.
 
 En bref, le circuit peut être mis dans deux états, l'état de _point terminal_ et de _point non terminal_.
@@ -480,7 +480,7 @@ Cette section aborde les sujets suivants:
   - Les états de points terminaux et non terminaux dans lesquels peut se retrouvé le circuit.
   - La raison du traitement prioritaire des champs d'exposant vis à vis des champs de mantisse tronquée.
 
-Nous savons que le FPC Unit effectue une vérification de supériorité stricte de la valeur absolu de l'un de ses deux opérandes, envers la valeur absolu de l'autre.
+Nous savons que le FPS Configuration Unit effectue une vérification de supériorité stricte de la valeur absolu de l'un de ses deux opérandes, envers la valeur absolu de l'autre.
 Cependant, le tout est de savoir comment est ce que cette comparaison peut réelement avoir lieu, sachant que les opérandes du circuit sont composés de multiples champs.
 La réponse est simple, il suffit d'effectuer une vérification de supériorité stricte entre les champs d'exposant $E$ des opérandes $\vert \ \alpha \ \vert$ et $\vert \ \beta \ \vert$, et de faire de même entre les champs de mantisse tronquée $T_{\alpha}$ et $T_{\beta}$.
 Nous verrons ci-bas comment cela se traduit.
@@ -491,7 +491,7 @@ N'oubliez pas que le champs de mantisse tronquée $T$ rend implicite le bit à $
 D'où le fait qu'il faille ajouté la valeur de ce bit à celle du champs de mantisse tronquée $\left(1 + T\right)$.
 Je vous invite à relire la section "_Le codage du champs de mantisse tronquée_", si nécessaire.
 
-Extrapolons aux opérandes du FPC Unit ce qu'explique le paragraphe ci-dessus, cela donne $\vert \ \alpha \vert = \left(\left(1 + T_{\alpha}\right) \times \ 2^{E_{\alpha}}\right)$ ainsi que $\vert \ \beta \vert = \left(\left(1 + T_{\beta}\right) \times \ 2^{E_{\beta}}\right)$.
+Extrapolons aux opérandes du FPS Configuration Unit ce qu'explique le paragraphe ci-dessus, cela donne $\vert \ \alpha \vert = \left(\left(1 + T_{\alpha}\right) \times \ 2^{E_{\alpha}}\right)$ ainsi que $\vert \ \beta \vert = \left(\left(1 + T_{\beta}\right) \times \ 2^{E_{\beta}}\right)$.
 Remarquons qu'à partir du moment où $\left(E_{\alpha} \neq E_{\beta}\right)$, nous pouvons avoir la certitude que $\left(\vert \alpha \vert \neq \vert \beta \vert\right)$.
 Dans cette situation, le circuit atteint soudainement l'état de point terminal.
 Ce qui traduit l'idée qu'il puisse générer le résultat de la condition qu'il teste, par le seul traitement des champs d'exposant $E$ de ses opérandes.
@@ -518,11 +518,11 @@ Il y a une documentation dédié au circuit pour comprendre son utilité ainsi q
 En bref, le circuit génère deux bits de sortie, l'un pour configuré un circuit soustracteur de nombre flottant et l'autre pour la sortie même de cette unité de calcul.
 Le Floating Point Configuartion Unit (le circuit) reçoit en entrée deux opérandes Half Precision en valeur absolu, que nous nommerons $\vert \ \alpha \ \vert$ et $\vert \ \beta \ \vert$.
 La génération des deux bits de sortie du circuit passe par une comparaison de supériorité stricte de la valeur absolu de l'un de ses deux opérandes, envers la valeur absolu de l'autre.
-Cette démonstration mathématique n'aborde que la partie de la logique de comparaison du circuit, ce qui représente tout de même la majeur partie de la logique du FPC Unit.
+Cette démonstration mathématique n'aborde que la partie de la logique de comparaison du circuit, ce qui représente tout de même la majeur partie de la logique du FPS Configuration Unit.
 Le reste de la logique manquante ne peut pas être expliqué sans l'apport de beaucoup de nouvelle notion.
 Je vous renvoie vers la documentation dédié au circuit si vous voulez en savoir plus sur cette partie de la logique manquante.
 
-Tout ce qui va suivre de la démonstration, part du principe que le FPC Unit cherche à verifié la condition $\left(\vert \alpha \vert \gt \vert \beta \vert\right)$.
+Tout ce qui va suivre de la démonstration, part du principe que le FPS Configuration Unit cherche à verifié la condition $\left(\vert \alpha \vert \gt \vert \beta \vert\right)$.
 
 ## Définition de quelques opérations fondamentales à la démonstration 
 
@@ -547,7 +547,7 @@ $$Nimply \ \left(x, \ y\right) \rightarrow \ x \ \wedge \ \overline{y}$$
 
 # Le traitement des champs d'exposant
 
-Comme cela a été dit par le chapitre "_Introduction au Floating Point Configuration Unit_", puis expliquer par la section "_Les points terminaux et non terminaux_".
+Comme cela a été dit par le chapitre "_Introduction au Floating Point Substractor Configuration Unit_", puis expliquer par la section "_Les points terminaux et non terminaux_".
 Les champs d'exposant des opérandes du circuit sont traités avant les champs de mantisse tronquée de ces même opérandes.
 Je vous invite à relire ces chapitres si nécessaire.
 
@@ -577,7 +577,7 @@ Nous avons vu dans la section "_Définition de quelques opérations fondamentale
 Autrement, l'opération renvoie un bit de résultat à $0$.
 
 Sachez qu'il est possible de décliné l'opération logique $Nimply$ en une porte logique, un petit circuit électronique chargé d'effectuer une opération $Nimply$ entre deux bits.
-Le FPC Unit se sert des portes logiques $Nimply$ pour pouvoir déduire la valeur des bits d'opérandes d'une porte, en fonction du bit de résultat qu'elle génère.
+Le FPS Configuration Unit se sert des portes logiques $Nimply$ pour pouvoir déduire la valeur des bits d'opérandes d'une porte, en fonction du bit de résultat qu'elle génère.
 C'est exactement ce que nous avons fait dans le chapitre précédent, nous déduisons que du moment où $\left(\tau_i = 1\right)$ alors $\left(E_{\beta i} = 1\right)$ tandis que $\left(E_{\alpha i} = 0\right)$.
 Cependant, les choses se corsent à partir du moment où une opération $Nimply$ génère un bit de résultat à $0$, ce que la documentation dédié au circuit appelle un _zéro anonyme_.
 
@@ -683,7 +683,7 @@ Au final, l'évaluation de la condition sur laquelle s'appuie la démonstration 
 
 Cependant, le circuit passe dans un état de point non terminal du moment où $\left(E_{\alpha} = E_{\beta}\right)$.
 Cet état de point non terminal ne peut s'obtenir que dans le cas où l'ensemble des bits de même poids des champs d'exposant $E_{\alpha}$ et $E_{\beta}$ sont identiques, ou autrement dit lorsque $\left(E_{\alpha\sigma} = E_{\beta\sigma}\right)$ pour tout les bits de poids $\sigma \in \left[10;14\right]$.
-Concrètement, cela veut dire que par le seul traitement des champs d'exposant de ses opérandes, le circuit FPC Unit n'est pas en capacité d'anticipé le résultat de la condition sur laquelle s'appuie la démonstration mathématique $\left(\vert \alpha \vert \gt \vert \beta \vert\right)$.
+Concrètement, cela veut dire que par le seul traitement des champs d'exposant de ses opérandes, le circuit FPS Configuration Unit n'est pas en capacité d'anticipé le résultat de la condition sur laquelle s'appuie la démonstration mathématique $\left(\vert \alpha \vert \gt \vert \beta \vert\right)$.
 Rappelons que cette condition ressemble plus formellement à $\left(\left(1 + T_{\alpha}\right) \times \ 2^{E_{\alpha}}\right) \gt \left(\left(1 + T_{\beta}\right) \times \ 2^{E_{\beta}}\right)$, et remarquons que l'évaluation de la condition ne dépend pas des champs d'exposant lorsque $\left(E_{\alpha} = E_{\beta}\right)$, mais uniquement des champs de mantisse tronquée $T$.
 C'est pourquoi le circuit traite les champs de mantisse tronquée lorsqu'il atteint un état de point non terminal.
 
@@ -795,10 +795,10 @@ En somme, c'est la raison qui fait que l'évaluation de ladite condition se sold
 
 Comme nous avons pu le voir dans la première partie de la démonstration "_Le traitement des champs d'exposant_", ainsi que dans la seconde partie "_Le traitement des champs de mantisse tronquée_", les procédés de traitement des champs d'exposant et de mantisse tronquée sont identiques ou presque.
 Dans les faits, le circuit électronique n'est composé que d'un seul ensemble de circuit logique, prenant ainsi en charge le traitement des champs d'exposant ainsi que des champs de mantisse tronquée.
-La documentation du Floating Point Configuration Unit aborde le sujet de l'architecture du circuit lui même.
+La documentation du Floating Point Substractor Configuration Unit aborde le sujet de l'architecture du circuit lui même.
 
 Je tient aussi à rappellé que tout ce que nous avons vu jusqu'ici n'est qu'une preuve mathématique du bon fonctionnement de la logique de comparaison du circuit.
-Cependant, les circuits logiques du FPC Unit n'effectuent pas les même calculs que ceux utilisés dans la démonstration, par exemple, le circuit ne comporte pas d'additionneur pour effectuer des calculs de somme.
+Cependant, les circuits logiques du FPS Configuration Unit n'effectuent pas les même calculs que ceux utilisés dans la démonstration, par exemple, le circuit ne comporte pas d'additionneur pour effectuer des calculs de somme.
 Les raisons à cela sont multiples.
 En effet, il est globalement plus optimal que le circuit fasse usage de circuit simple, plus rapide, moins énergivore et nécessitant moins de câblage ainsi que de transitor qu'un additionneur à propagation de retenue, qui est un circuit d'une certaine complexité.
 In fine, ceci me permet de mentionné le fait qu'il y ait un réel décalage entre la démonstration mathématique du circuit, et son architecture.
