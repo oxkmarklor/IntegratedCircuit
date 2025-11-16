@@ -59,6 +59,19 @@ En définitive, rappelez vous du fait que l'une des fonctionnalités du FPS Conf
 Néanmoins, nous savons que ledit soustracteur flottant génère un __NaN__ lorsqu'un de ses opérandes est __infini__, nonobstant le positionnement desdites opérandes.
 Par conséquent, nous en déduisons que pour de tels calculs, le soustracteur flottant ne peut pas commettre d'erreur dû au mauvais placement des opérandes ; justifiant ainsi le fait que le FPS Configuration Unit n'ait pas besoin de prendre en charge l'__infini positif/négatif__.
 
+## Les nombres normaux
+
+// intro + ref?
+
+### Plage de codage et interprétation de la valeur du champ d'exposant des nombres normaux
+
+// faire ref au ch "L'encodage par biais du champ d'exposant"?
+
+### Plage de codage et interprétation de la valeur du champ de mantisse tronquée des nombres normaux
+
+// faire ref au ch "Le codage du champ de mantisse tronquée"?
+
+
 ///
 
 # Annexe: Les différents types de nombres du format Half Precision
