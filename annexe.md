@@ -64,18 +64,36 @@ Par conséquent, nous en déduisons que pour de tels calculs, le soustracteur fl
 Rappelons que dans la théorie, tout nombre que code un format IEEE-754 est initialement censé être __normalisé__, cependant dans la pratique nous savons que ces même formats peuvent coder des valeurs exceptionnelles ainsi que des nombres __dénormaux__.
 De ce fait, la plage de codage des nombres __normaux__ et plus particulièrement celle du champ d'exposant en est directement impacté.
 
-En outre, l'interprétation de la valeur du champ d'exposant et du champ de mantisse tronquée des nombres __normaux__ suit une approche standard, nous verrons ci-bas en quoi cette approche est standard.
+En outre, les nombres __normaux__ suivent une approche standard dans l'interprétation de la valeur des champs d'exposant et de mantisse tronquée, nous verrons ci-bas en quoi cette approche est standard.
 N'oubliez pas que l'une des différences majeur entre les nombres __normaux__ et __dénormaux__ est l'interprétation de la valeur de ces champs, cela consiste donc en un sujet important à comprendre.
 
-
-
-
-
-// intro + ref?
+Nous allons parler de tout cela au travers de deux sections dédiés au champ d'exposant et au champ de mantisse tronquée des nombres __normaux__.
 
 ### Plage de codage et interprétation de la valeur du champ d'exposant des nombres normaux
 
-// faire ref au ch "L'encodage par biais du champ d'exposant"?
+Commençons par définir la plage de codage du champ d'exposant des nombres __normaux__.
+
+// améliorer la forme de ceci
+
+Pour coder un __normalisé__, il faut s'assurer du fait que le champ d'exposant qui compose tout format IEEE-754, d'une taille de $N$ bits, code l'une des valeurs de l'intervalle $\left[1;2^N - 1\right[$.
+Rappelez vous du fait que les __NaN__ ainsi que l'__infini positif__ et __négatif__ utilisent déjà la valeur $\left(2^N - 1\right)$ du champ d'exposant, d'où le fait que cette dernière soit rendu indisponible au codage des nombres __normaux__.
+
+
+
+
+Dans les faits, un nombre peut être considéré comme __normalisé__ dès que son champ d'exposant d'une taille de $N$ bits code une valeur comprise dans l'intervalle $\left[1;2^N - 1\right[$.
+Rappelez vous du fait que les __NaN__ ainsi que l'__infini positif__ et __négatif__ utilisent déjà la valeur $\left(2^N - 1\right)$ du champ d'exposant, d'où le fait que cette dernière ait été rendu indisponible au codage des nombres __normaux__.
+
+
+
+Pour coder une valeur __NaN__ ou bien l'__infini positif__ et __négatif__, il faut déjà que le champ d'exposant qui compose tout format IEEE-754, d'une taille de $N$ bits, code le nombre $\left(2^N - 1\right)$.
+
+
+// plage de codage du champ d'exposant 
+
+// interprétation de la valeur du champ + ref
+
+// mention du fait que ce chapitre évoque l'interprétation du champ d'exposant des nombres normaux
 
 ### Plage de codage et interprétation de la valeur du champ de mantisse tronquée des nombres normaux
 
