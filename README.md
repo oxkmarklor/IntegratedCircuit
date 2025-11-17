@@ -436,7 +436,7 @@ Sachez que tout ce qui vient d'être dit est valable pour l'ensemble des formats
 Pour conclure, il s'avère que le circuit est amené à effectuer des comparaisons entre deux champs d'__exposant__ $E_1$ et $E_2$, ayant chacun un même biais $B$.
 Ces comparaisons n'ont pas besoin de la valeur réelle des champs d'__exposant__, comme avec $\left(E_1 - B\right) \gt \left(E_2 - B\right)$ par exemple, car le biais $B$ est constant.
 Le circuit doit plutôt effectuer le calcul suivant à la place $\left(E_1 \gt E_2\right)$.
-Pour ce faire, le circuit utilise l'une des propriétés de l'encodage des champs d'__exposant__, qui est le __Binary Unsigned__ rappelons-le.
+Pour ce faire, le circuit utilise l'une des propriétés de l'encodage __Binary Unsigned__ qui, rappelons-le, code la valeur des champs $E_1$ et $E_2$.
 Cette propriété est celle dont il est le sujet dans la section "_Une propriété du Binary Unsigned qui est fondamentale à la démonstration_".
 En bref, la valeur de n'importe quel bit à $1$ de poids $i$ dans un champ d'__exposant__, est strictement supérieure à la somme des valeurs des bits de poids inférieur à $i$.
 Nous verrons plus tard, par le prisme de la démonstration mathématique, que c'est cette propriété qui permet au circuit d'effectuer (entre autre) des comparaisons entre des champs d'__exposant__.
