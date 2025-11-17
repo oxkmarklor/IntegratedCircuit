@@ -61,6 +61,13 @@ Par conséquent, nous en déduisons que pour de tels calculs, le soustracteur fl
 
 ## Les nombres normaux
 
+Nous savons que tout format défini par le standard IEEE-754 peut coder des valeurs exceptionnelles, cependant, n'oublions pas qu'initialement tout les nombres codés par ces formats sont __normalisés__.
+
+N'oublions pas que tout les nombres codés par un format IEEE-754 sont initialement __normalisés__, cependant, dans les faits nous savons que ces même formats peuvent coder des valeurs exceptionnelles ainsi que des nombres __dénormaux__.
+
+comme nous l'avons déjà évoquer 
+
+
 // intro + ref?
 
 ### Plage de codage et interprétation de la valeur du champ d'exposant des nombres normaux
