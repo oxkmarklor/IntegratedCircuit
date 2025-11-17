@@ -74,12 +74,13 @@ Nous allons parler de tout cela au travers de deux sections dédiés au champ d'
 Pour coder un nombre __normalisé__, il faut s'assurer du fait que le champ d'exposant qui compose tout format IEEE-754, d'une taille de $N$ bits, code l'une des valeurs de l'intervalle suivante $\left[1;2^N - 1\right[$.
 Si la valeur $\left(2^N - 1 \right)$ est indisponible pour le codage des nombres __normaux__, c'est parce qu'elle est, rappelons-le, utilisée pour le codage des __NaN__ ainsi que de l'__infini positif__ et __négatif__ ; qui à eux seul font usage de l'entièreté de la plage de codage du champ de mantisse tronquée.
 
-En somme, cherchons à comprendre en quoi les nombres __normaux__ suivent une approche standard dans l'interprétation de la valeur de leur champ d'exposant.
+Cherchons désormais à comprendre en quoi les nombres __normaux__ suivent une approche standard dans l'interprétation de la valeur de leur champ d'exposant.
 Pour cela, nous allons avoir besoin de revenir sur le chapitre "_Le standard IEEE-754_", et plus particulièrement sur l'une de ses sections qui porte le nom de "_L'encodage par biais du champ d'exposant_".
 
-Pour résumer, nous savons que le champ d'exposant de tout format IEEE-754 utilise un __encodage par biais__, cette section explique ce qu'est cet encodage au travers d'un cas concret qui est celui des champs d'exposant.
-Dans les grandes lignes, nous y apprenons qu'un champ d'exposant $E$ code un entier naturel auquel nous soustrayons un biais $B$, un autre entier naturel qui se calcul par l'intermédiaire du champ ; la valeur qu'interprète le champ se calcul comme suit $\left(E - B\right)$.
-Il s'avère que les nombres __normaux__ interprètent la valeur de leur champ d'exposant exactement de cette manière, au contraire des nombres __dénormaux__, d'où une interprétation dites standard.
+Il s'avère que le champ d'exposant de tout format IEEE-754 a un encodage dérivé du __Binary Unsigned__, l'__encodage par biais__.
+Dans les grandes lignes, cette section explique ce qu'est l'__encodage par biais__ au travers d'un cas concret qui est celui des champs d'exposant ; nous y apprenons qu'un champ d'exposant $E$ code un entier naturel auquel nous soustrayons un biais $B$, un autre entier naturel, pour obtenir la valeur qu'interprète le champ $\left(E - B\right)$.
+Dans les faits, les nombres __normaux__ interprètent la valeur de leur champ d'exposant de cette manière, d'où une interprétation dites standard.
+Cependant, nous verrons plus tard que ce n'est pas le cas des nombres __dénormaux__.
 
 
 
