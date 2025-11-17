@@ -77,18 +77,9 @@ Si la valeur $\left(2^N - 1 \right)$ est indisponible pour le codage des nombres
 Cherchons désormais à comprendre en quoi les nombres __normaux__ suivent une approche standard dans l'interprétation de la valeur de leur champ d'exposant.
 Pour cela, nous allons avoir besoin de revenir sur le chapitre "_Le standard IEEE-754_", et plus particulièrement sur l'une de ses sections qui porte le nom de "_L'encodage par biais du champ d'exposant_".
 
-Il s'avère que le champ d'exposant de tout format IEEE-754 a un encodage dérivé du __Binary Unsigned__, l'__encodage par biais__.
-Dans les grandes lignes, cette section explique ce qu'est l'__encodage par biais__ au travers d'un cas concret qui est celui des champs d'exposant ; nous y apprenons qu'un champ d'exposant $E$ code un entier naturel auquel nous soustrayons un biais $B$, un autre entier naturel, pour obtenir la valeur qu'interprète le champ $\left(E - B\right)$.
-Dans les faits, les nombres __normaux__ interprètent la valeur de leur champ d'exposant de cette manière, d'où une interprétation dites standard.
-Cependant, nous verrons plus tard que ce n'est pas le cas des nombres __dénormaux__.
-
-
-
-
-
-
-
-
+Dans les grandes lignes, cette section explique ce qu'est l'__encodage par biais__ au travers d'un cas concret, celui du champ d'exposant de tout format défini par le standard IEEE-754.
+Rappelez-vous en, nous y apprenons que tout champ d'exposant $E$ code un entier naturel auquel nous soustrayons un biais $B$, qui est un autre entier naturel, afin de calculer la valeur que le champ d'exposant interprète $\left(E - B\right)$.
+Il s'avère que les nombres __normaux__ se contentent d'interprèter tel quel la valeur de leur champ d'exposant, ce qui n'est pas le cas des nombres __dénormaux__ mais nous en parlerons plus tard ; d'où le fait qu'il soit dit que les nombres __normaux__ interprètent de façon standard la valeur des champs d'exposant.
 
 
 
