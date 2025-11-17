@@ -424,7 +424,7 @@ Les deux sections suivantes concernent l'ensemble de ces bits formant le champ d
 
 Le champ d'__exposant__ utilise un __encodage par biais__ qui est une déclinaison de l'encodage __Binary Unsigned__.
 
-L'__encodage par biais__ s'appuie sur un champ binaire utilisant l'encodage __Binary Unsigned__ ; le champ en question se charge de coder un nombre entier naturel.
+L'__encodage par biais__ s'appuie sur un champ binaire utilisant l'encodage __Binary Unsigned__, champ qui se charge de coder un nombre entier naturel.
 Il faut ensuite ajouter ou déduire une constante appelée biais (qui est aussi un nombre entier naturel), au nombre codé par le champ binaire sous-jacent ; le résultat de ce calcul est alors la valeur qu'interprète réellement le champ.
 Désormais, nous comprenons pourquoi est-ce que l'__encodage par biais__ est décrit comme étant une déclinaison de l'encodage __Binary Unsigned__.
 
