@@ -72,23 +72,18 @@ Nous allons parler de tout cela au travers de deux sections dédiés au champ d'
 ### Plage de codage et interprétation de la valeur du champ d'exposant des nombres normaux
 
 Pour coder un nombre __normalisé__, il faut s'assurer du fait que le champ d'exposant qui compose tout format IEEE-754, d'une taille de $N$ bits, code l'une des valeurs de l'intervalle suivante $\left[1;2^N - 1\right[$.
-Si la valeur $\left(2^N - 1 \right)$ est indisponible pour le codage des nombres __normaux__, c'est parce qu'elle est, rappelons-le, utilisée pour le codage des __NaN__ ainsi que de l'__infini positif__ et __négatif__ ; qui usent à eux seul l'entièreté de la plage de codage du champ de mantisse tronquée.
+Si la valeur $\left(2^N - 1 \right)$ est indisponible pour le codage des nombres __normaux__, c'est parce qu'elle est, rappelons-le, utilisée pour le codage des __NaN__ ainsi que de l'__infini positif__ et __négatif__ ; qui à eux seul font usage de l'entièreté de la plage de codage du champ de mantisse tronquée.
 
-
-//
-
-Rappelez vous du fait que les __NaN__ ainsi que l'__infini positif__ et __négatif__ utilisent déjà la valeur $\left(2^N - 1\right)$ du champ d'exposant, d'où le fait que cette dernière soit indisponible pour le codage des nombres __normaux__.
-
+Plus en amont, nous disions que l'interprétation de la valeur du champ d'exposant d'un nombre __normalisé__ était standard.
+Pour comprendre ce que cela implique, il faut revenir en arrière avec la section "_L'encodage par biais du champ d'exposant_".
 
 
 
 
 
 
-Pour coder une valeur __NaN__ ou bien l'__infini positif__ et __négatif__, il faut déjà que le champ d'exposant qui compose tout format IEEE-754, d'une taille de $N$ bits, code le nombre $\left(2^N - 1\right)$.
 
 
-// plage de codage du champ d'exposant 
 
 // interprétation de la valeur du champ + ref
 
