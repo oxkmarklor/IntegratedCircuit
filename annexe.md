@@ -83,6 +83,15 @@ Il s'avère que les nombres __normaux__ se contentent d'interprèter tel quel la
 
 ### Plage de codage et interprétation de la valeur du champ de mantisse tronquée des nombres normaux
 
+Sachez que les champs de mantisse tronquée des nombres __normaux__ ont une plage de codage qui n'est pas restreinte.
+Cela veut dire que le champ de mantisse tronquée composant tout format IEEE-754, d'une taille de $K$ bits, code une valeur faisant partie de l'intervalle $\left[0;2^K - 1\right]$.
+
+
+Sachez que la plage de codage du champ de mantisse tronquée des nombres __normaux__ n'est pas restreinte
+
+
+
+
 // faire ref au ch "Le codage du champ de mantisse tronquée"?
 
 
