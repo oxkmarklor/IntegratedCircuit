@@ -90,7 +90,16 @@ Pour le dire autrement, du moment qu'un nombre est __normalisé__ alors son cham
 Cherchons désormais à comprendre en quoi les nombres __normaux__ suivent une approche standard dans l'interprétation de la valeur de leur champ de mantisse tronquée.
 Pour cela, nous allons avoir besoin de revenir une nouvelle fois sur le chapitre "_Le standard IEEE-754_", et plus particulièrement sur l'une de ses sections qui cette fois-ci porte le nom de "_Le codage du champ de mantisse tronquée_".
 
-Cette section explique comment est-ce que les nombres __normaux__ interprètent la valeur de leur champ de mantisse tronquée, sans pour autant faire référence aux nombres __normaux__ vu que nous n'en parlions pas encore à ce stade du document.
+Cette section explique comment est-ce que les nombres __normaux__ codent et interprètent la valeur de leur champ de mantisse tronquée, sans pour autant faire référence aux nombres __normaux__ vu que nous n'en parlions pas encore à ce stade du document.
+Mentionnons le fait que les formats du standard IEEE-754 ont initialement été conçus pour coder des nombres __normalisés__ par l'écriture scientifique binaire, c'est à dire des nombres __normaux__ ; c'est pourquoi, à des fins de simplification, cette section ne parle que du cas des nombres __normaux__.
+
+Comme le mentionne l'introduction à cet annexe, les nombres __normaux__ sont normalisés par l'écriture scientifique binaire
+
+Mentionnons le fait que cette section ne parle que du cas des nombres __normaux__ car la fonction initial du standard IEEE-754 est de coder des nombres __normalisés__ par l'écriture scientifique binaire ; ce que sont les nombres __normaux__ comme l'explique l'introduction de cet annexe.
+
+//
+
+
 Mentionnons le fait que cette section ne prend le partis d'expliquer que le cas des nombres __normaux__, car ce sont les principaux nombres à être pris en charge par les formats IEEE-754.
 
 Rappelez-vous du fait qu'il y a plusieurs interprétation possible de la valeur d'un champ de mantisse tronquée.
@@ -98,6 +107,7 @@ En l'occurrence, cette section explique comment est-ce que ces nombres interprè
 Mentionnons le fait que cette section ne prend le partis d'expliquer que le cas des nombres __normaux__, car ce sont les principaux nombres à être pris en charge par les formats IEEE-754.
 
 
+*Rappelons qu'initialement le standard IEEE-754 a pour fonction de coder des nombres normalisés par l'écriture scientifique binaire, c'est pourquoi le ch en parle...
 
 
 // faire ref au ch "Le codage du champ de mantisse tronquée"?
