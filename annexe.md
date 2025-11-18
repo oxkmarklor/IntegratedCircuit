@@ -87,6 +87,15 @@ Rappelez vous du fait que les __NaN__ ainsi que l'__infini positif__ et __négat
 Cependant, les nombres __normaux__ sont, quant à eux, identifiés par la valeur que code leur champ d'exposant, ce qui insinue que la plage de codage du champ mantisse tronquée de ces même nombres n'est pas restreinte.
 Pour le dire autrement, du moment qu'un nombre est __normalisé__ alors son champ de mantisse tronquée, d'une taille de $K$ bits, peut coder n'importe quel valeur parmis cette intervalle $\left[0;2^K - 1\right]$.
 
+Cherchons désormais à comprendre en quoi les nombres __normaux__ suivent une approche standard dans l'interprétation de la valeur de leur champ de mantisse tronquée.
+Pour cela, nous allons avoir besoin de revenir une nouvelle fois sur le chapitre "_Le standard IEEE-754_", et plus particulièrement sur l'une de ses sections qui cette fois-ci porte le nom de "_Le codage du champ de mantisse tronquée_".
+
+Rappelez-vous du fait qu'il y a plusieurs interprétation possible de la valeur d'un champ de mantisse tronquée.
+En l'occurrence, sans pouvoir explicitement faire référence aux nombres __normaux__, cette section explique comment est-ce que ces nombres interprètent la valeur des champs de mantisse tronquée.
+
+Sachez que cette section parle de la manière dont les nombres __normaux__ interprètent la valeur d'un champ de mantisse tronquée, mais sans faire explicitement référence aux nombres __normaux__.
+Ce partis pris est dû au fait que, ne l'oublions pas, les nombres __normaux__ sont les principaux nombres à être pris en charge par les formats définis par le standard IEEE-754.
+
 
 
 // faire ref au ch "Le codage du champ de mantisse tronquée"?
