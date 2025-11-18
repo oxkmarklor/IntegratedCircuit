@@ -64,7 +64,7 @@ Par conséquent, nous en déduisons que pour de tels calculs, le soustracteur fl
 Rappelons que dans la théorie, tout nombre que code un format IEEE-754 est initialement censé être __normalisé__, cependant dans la pratique nous savons que ces même formats peuvent coder des valeurs exceptionnelles ainsi que des nombres __dénormaux__.
 De ce fait, la plage de codage des nombres __normaux__ et plus particulièrement celle du champ d'exposant en est directement impacté.
 
-En outre, les nombres __normaux__ suivent une approche standard dans l'interprétation de la valeur des champs d'exposant et de mantisse tronquée, nous verrons ci-bas en quoi cette approche est standard.
+En outre, les nombres __normaux__ suivent une approche standard dans l'interprétation de la valeur de leurs champs d'exposant et de mantisse tronquée, nous verrons ci-bas en quoi cette approche est standard.
 N'oubliez pas que l'une des différences majeur entre les nombres __normaux__ et __dénormaux__ est l'interprétation de la valeur de ces champs, cela consiste donc en un sujet important à comprendre.
 
 Nous allons parler de tout cela au travers de deux sections dédiés au champ d'exposant et au champ de mantisse tronquée des nombres __normaux__.
@@ -80,13 +80,6 @@ Pour cela, nous allons avoir besoin de revenir sur le chapitre "_Le standard IEE
 Dans les grandes lignes, cette section explique ce qu'est l'__encodage par biais__ au travers d'un cas concret, celui du champ d'exposant de tout format défini par le standard IEEE-754.
 Rappelez-vous en, nous y apprenons que tout champ d'exposant $E$ code un entier naturel auquel nous soustrayons un biais $B$, qui est un autre entier naturel, afin de calculer la valeur que le champ d'exposant interprète $\left(E - B\right)$.
 Il s'avère que les nombres __normaux__ se contentent d'interprèter tel quel la valeur de leur champ d'exposant, ce qui n'est pas le cas des nombres __dénormaux__ mais nous en parlerons plus tard ; d'où le fait qu'il soit dit que les nombres __normaux__ interprètent de façon standard la valeur des champs d'exposant.
-
-
-
-
-// interprétation de la valeur du champ + ref
-
-// mention du fait que ce chapitre évoque l'interprétation du champ d'exposant des nombres normaux
 
 ### Plage de codage et interprétation de la valeur du champ de mantisse tronquée des nombres normaux
 
