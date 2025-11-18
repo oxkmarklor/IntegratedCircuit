@@ -83,23 +83,9 @@ Il s'avère que les nombres __normaux__ se contentent d'interprèter tel quel la
 
 ### Plage de codage et interprétation de la valeur du champ de mantisse tronquée des nombres normaux
 
-Les nombres __normaux__ sont identifiés par la seule valeur des champs d'exposant, ce qui explique le fait que la plage de codage des champs de mantisse tronquée de ces même nombres ne soit pas restreinte.
-Pour le dire autrement, le champs de mantisse tronquée de tout nombre __normalisé__, d'une taille de $K$ bits, code une valeur faisant partie de l'intervalle $\left[0;2^K - 1\right]$.
-
-
-Pour le dire autrement, le champ de mantisse tronquée composant tout format IEEE-754, d'une taille de $K$ bits, code une valeur faisant partie de l'intervalle $\left[0;2^K - 1\right]$.
-
-
-Un nombre __normalisé__ peut être identifié par la seule valeur de son champ d'exposant, ce qui explique le fait que les champs de mantisse tronquée des nombres __normaux__ n'aient pas de restriction sur leurs plage de codage.
-Pour le dire autrement, dès lors que nous savons qu'un nombre est __normalisé__ grâce à son champ d'exposant, alors nous en déduisons que le champ de mantisse tronquée composant tout format IEEE-754, d'une taille de $K$ bits, code une valeur faisant partie de l'intervalle $\left[0;2^K - 1\right]$.
-
-Pour le dire autrement, nous en déduisons que le champ de mantisse tronquée composant tout format IEEE-754, d'une taille de $K$ bits, code une valeur faisant partie de l'intervalle $\left[0;2^K - 1\right]$, dès le moment où le champ d'exposant permet de savoir qu'un nombre est __normalisé__.
-
-
-
-
-Sachez que la plage de codage du champ de mantisse tronquée des nombres __normaux__ n'est pas restreinte
-
+Rappelez vous du fait que les __NaN__ ainsi que l'__infini positif__ et __négatif__ codent un unique nombre commun dans leur champ d'exposant, ce qui oblige à restreindre la plage de codage du champ de mantisse des ces même valeurs pour pouvoir les départager l'une de l'autre.
+Cependant, les nombres __normaux__ sont, quant à eux, identifiés par la valeur que code leur champ d'exposant, ce qui insinue que la plage de codage du champ mantisse tronquée de ces même nombres n'est pas restreinte.
+Pour le dire autrement, du moment qu'un nombre est __normalisé__ alors son champ de mantisse tronquée, d'une taille de $K$ bits, peut coder n'importe quel valeur parmis cette intervalle $\left[0;2^K - 1\right]$.
 
 
 
