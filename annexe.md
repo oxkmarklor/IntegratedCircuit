@@ -83,8 +83,19 @@ Il s'avère que les nombres __normaux__ se contentent d'interprèter tel quel la
 
 ### Plage de codage et interprétation de la valeur du champ de mantisse tronquée des nombres normaux
 
-Sachez que les champs de mantisse tronquée des nombres __normaux__ ont une plage de codage qui n'est pas restreinte.
-Cela veut dire que le champ de mantisse tronquée composant tout format IEEE-754, d'une taille de $K$ bits, code une valeur faisant partie de l'intervalle $\left[0;2^K - 1\right]$.
+Les nombres __normaux__ sont identifiés par la seule valeur des champs d'exposant, ce qui explique le fait que la plage de codage des champs de mantisse tronquée de ces même nombres ne soit pas restreinte.
+Pour le dire autrement, le champs de mantisse tronquée de tout nombre __normalisé__, d'une taille de $K$ bits, code une valeur faisant partie de l'intervalle $\left[0;2^K - 1\right]$.
+
+
+Pour le dire autrement, le champ de mantisse tronquée composant tout format IEEE-754, d'une taille de $K$ bits, code une valeur faisant partie de l'intervalle $\left[0;2^K - 1\right]$.
+
+
+Un nombre __normalisé__ peut être identifié par la seule valeur de son champ d'exposant, ce qui explique le fait que les champs de mantisse tronquée des nombres __normaux__ n'aient pas de restriction sur leurs plage de codage.
+Pour le dire autrement, dès lors que nous savons qu'un nombre est __normalisé__ grâce à son champ d'exposant, alors nous en déduisons que le champ de mantisse tronquée composant tout format IEEE-754, d'une taille de $K$ bits, code une valeur faisant partie de l'intervalle $\left[0;2^K - 1\right]$.
+
+Pour le dire autrement, nous en déduisons que le champ de mantisse tronquée composant tout format IEEE-754, d'une taille de $K$ bits, code une valeur faisant partie de l'intervalle $\left[0;2^K - 1\right]$, dès le moment où le champ d'exposant permet de savoir qu'un nombre est __normalisé__.
+
+
 
 
 Sachez que la plage de codage du champ de mantisse tronquée des nombres __normaux__ n'est pas restreinte
