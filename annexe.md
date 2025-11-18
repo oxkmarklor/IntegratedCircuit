@@ -90,18 +90,9 @@ Pour le dire autrement, du moment qu'un nombre est __normalisé__ alors son cham
 Cherchons désormais à comprendre en quoi les nombres __normaux__ suivent une approche standard dans l'interprétation de la valeur de leur champ de mantisse tronquée.
 Pour cela, nous allons avoir besoin de revenir une nouvelle fois sur le chapitre "_Le standard IEEE-754_", et plus particulièrement sur l'une de ses sections qui cette fois-ci porte le nom de "_Le codage du champ de mantisse tronquée_".
 
-Rappelez-vous du fait qu'il y a deux interprétations possible de la valeur d'un champ de mantisse tronquée, celle des nombres __normaux__ et __dénormaux__.
-En l'occurrence, sans pouvoir explicitement faire référence aux nombres __normaux__, cette section explique comment est-ce que ces nombres interprètent la valeur des champs de mantisse tronquée.
-Mentionnons que cette section ne parle que du cas des nombres __normaux__ car, ne l'oublions pas, tout nombre codé en IEEE-754 est initialement censé être __normalisé__ ; nous parlerons plus tard du cas plus spécifique des nombres __dénormaux__.
-
-Mentionnons le fait que cette section ne parle que du cas des nombres __normaux__ car ce sont les principaux nombres à être pris en charge par les formats IEEE-754.
-
-
-Dans la théorie, tout nombre codé en IEEE-754 est initialement censé être __normalisé__
-
 Rappelez-vous du fait qu'il y a plusieurs interprétation possible de la valeur d'un champ de mantisse tronquée.
-En l'occurrence, sans pouvoir explicitement faire référence aux nombres __normaux__, cette section explique comment est-ce que ces nombres interprètent la valeur des champs de mantisse tronquée.
-C'est un partis pris qui est dû au fait que, ne l'oublions pas, les nombres __normaux__ sont les principaux nombres à être pris en charge par les formats IEEE-754.
+En l'occurrence, sans pouvoir explicitement faire référence aux nombres __normaux__, cette section explique comment est-ce que ces nombres interprètent la valeur de leur champ de mantisse tronquée.
+Mentionnons le fait que cette section ne prend le partis d'expliquer que le cas des nombres __normaux__, car ce sont les principaux nombres à être pris en charge par les formats IEEE-754.
 
 
 
