@@ -83,6 +83,8 @@ Il s'avère que les nombres __normaux__ se contentent d'interprèter tel quel la
 
 ### Plage de codage et interprétation de la valeur du champ de mantisse tronquée des nombres normaux
 
+// à relire
+
 Rappelez vous du fait que les __NaN__ ainsi que l'__infini positif__ et __négatif__ codent un unique nombre commun dans leur champ d'exposant, ce qui oblige à restreindre la plage de codage du champ de mantisse tronquée de ces même valeurs pour pouvoir les départager l'une de l'autre.
 Cependant, les nombres __normaux__ sont identifiés par la seule valeur que code leur champ d'exposant, ce qui insinue que la plage de codage du champ mantisse tronquée de ces même nombres n'est pas restreinte.
 Pour le dire autrement, tout nombre __normalisé__ a un champ de mantisse tronquée, d'une taille de $K$ bits, qui peut coder n'importe quel valeur parmis cette intervalle $\left[0;2^K - 1\right]$.
@@ -90,29 +92,19 @@ Pour le dire autrement, tout nombre __normalisé__ a un champ de mantisse tronqu
 Cherchons désormais à comprendre en quoi les nombres __normaux__ suivent une approche standard dans l'interprétation de la valeur de leur champ de mantisse tronquée.
 Pour cela, nous allons avoir besoin de revenir une nouvelle fois sur le chapitre "_Le standard IEEE-754_", et plus particulièrement sur l'une de ses sections qui porte le nom de "_Le codage du champ de mantisse tronquée_".
 
-Ladite section explique comment est-ce que les nombres __normaux__ codent et interprètent la valeur d'un champ de mantisse tronquée, et ce, sans faire explicitement référence aux nombres __normaux__ vu que nous n'en parlions pas encore à ce stade du document.
-Il s'avère que cette section prend le partis d'expliquer le cas des nombres __normaux__ plutôt que celui des nombres __dénormaux__ car, rappelez-vous en, les divers formats définis par le standard IEEE-754 ont tous pour fonction permière : le codage des nombres __normaux__.
+Ladite section explique comment est-ce qu'un nombre code et interprète la valeur d'un champ de mantisse tronquée, nombre implicitement considéré comme __normalisé__ car à ce stade du document nous ne parlions pas encore de nombres __normaux__, __dénormaux__ et autres...
 
-Pour résumer, n'oubliez pas que les nombres __normaux__ sont __normalisés__ par l'écriture scientifique binaire, ce qui dans le détails veut entre autre dire que le champ de mantisse tronquée d'un nombre __normalisé__ correspond à un significande.
-Ladite section précise alors qu'à des fins d'optimisation le champ de mantisse tronquée d'un nombre __normalisé__ ne code pas entièrement un significande.
-Par conséquent, il faut lors de l'évaluation de la valeur d'un champ de mantisse tronquée $T$, que la valeur de la partie du significande qui n'a pas été codé dans le champ soit ajouté à celle du champ lui-même, ce qui donne $\left(1 + T\right)$.
+Pour résumer, cette section nous apprend que le champ de __mantisse tronquée__ d'un nombre __normalisé__ ne correspond qu'à une partie du __significande__ de l'écriture scientifique binaire de ce même nombre.
+Ce qui n'exempte pas le fait de prendre en compte la valeur manquante du __significande__ $\left(1 \times 2^0\right)$ lors de l'évaluation de la valeur du champ de __mantisse tronquée__.
+Par conséquent, nous en concluons que la valeur du champ de __mantisse tronquée__ $T$ de tout nombre __normalisé__ est de $\left(1 + T\right)$, avec nous l'aurons compris, le terme $1$ qui représente la valeur de la partie manquante du significande.
+Seul un __significande__ nul entraine une exceptionnelle dérogation à la règle.
 
-En résumer, cette section nous dit que le champ de mantisse tronquée d'un nombre __normalisé__ ne correspond qu'à une partie du significande de l'écriture scientifique binaire de ce même nombre.
-Pour autant, la valeur de la partie du significande qui n'a pas été codé doit être prise en compte lors de l'évaluation de la valeur du champ de mantisse tronquée $T$ d'un nombre __normalisé__, de sorte à ce que le champ vaille $\left(1 + T\right)$.
+Je vous redirige vers la section susmentionné dans le cas où vous souhaiteriez plus de détails.
 
-
-Une conséquence de cela est que l'évaluation de la valeur du champ de mantisse tronquée $T$ d'un nombre __normalisé__, nécessite de prendre en compte la valeur de la partie du significande n'ayant pas été codé, ce qui nous mène au calcul $\left(1 + T\right)$.
-
-//
-
-Précédemment, nous avons vu que le champ de __mantisse tronquée__ du nombre $F$ codé au format Half Precision correspondait au __significande__ de l'écriture scientifique binaire de ce même nombre.
-Ce qui est faux, ou plus exactement presque vrai.
-
-En écriture scientifique binaire, le __significande__ ne peut interpréter que des valeurs comprises dans l'intervalle $\left[1;2\right[$ ; cela insinue que la partie entière d'un tel __significande__ est toujours composée d'un seul et unique bit à $1$.
-Le standard IEEE-754 a donc fait le choix de ne pas coder la partie entière des __significandes__ dans les champs de __mantisse tronquée__, cela permettant un gain de précision d'un bit sur le codage des __significandes__.
-Pour autant, il faut prendre en compte la valeur de ce bit $\left(1 \times 2^0\right)$ lors de l'évaluation de la valeur d'un champ de __mantisse tronquée__ $T$, ce qui mène au calcul $\left(1 + T\right)$.
-D'où le fait que ce bit porte le nom de __bit implicite__.
-Aussi, sachez que cette optimisation est appliquée à l'ensemble des formats définis par le standrard IEEE-754.
+Clôturons cette section par une précision à propos de la démonstration mathématique.
+Remarquez que dans cette dernière, les champs de __mantisse tronquée__ $T_{\alpha}$ ainsi que $T_{\beta}$ ont respectivement une valeur de $\left(1 + T_{\alpha}\right)$ et $\left(1 + T_{\beta}\right)$.
+En somme, cela insinue que la démonstration mathématique part du principe que les opérandes $\alpha$ et $\beta$ codent des nombres __normaux__ de format Half Precision.
+Cela ne rend pas pour autant ambigu la démonstration mathématique vis à vis des autres types de nombres que prend en charge le circuit, nous expliquerons pourquoi dans les chapitres/sections dédiés à ces types nombres.
 
 ///
 
