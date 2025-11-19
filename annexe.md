@@ -90,8 +90,8 @@ Pour le dire autrement, tout nombre __normalisé__ a un champ de mantisse tronqu
 Cherchons désormais à comprendre en quoi les nombres __normaux__ suivent une approche standard dans l'interprétation de la valeur de leur champ de mantisse tronquée.
 Pour cela, nous allons avoir besoin de revenir une nouvelle fois sur le chapitre "_Le standard IEEE-754_", et plus particulièrement sur l'une de ses sections qui porte le nom de "_Le codage du champ de mantisse tronquée_".
 
-Cette section explique comment est-ce que les nombres __normaux__ codent et interprètent la valeur de leur champ de mantisse tronquée, sans pour autant faire allusion aux nombres __normaux__ vu que nous n'en parlions pas encore à ce stade du document.
-J'en profite pour faire mention du fait que ladite section prend le partis d'expliquer le cas des nombres __normaux__ car, rappelez-vous en, le standard IEEE-754 défini divers formats qui ont tous pour fonction permière : le codage des nombres __normaux__.
+Ladite section explique comment est-ce que les nombres __normaux__ codent et interprètent la valeur de leur champ de mantisse tronquée, sans pour autant faire allusion aux nombres __normaux__ vu que nous n'en parlions pas encore à ce stade du document.
+Il s'avère que cette section prend le partis d'expliquer le cas des nombres __normaux__ plutôt que des nombres __dénormaux__ car, rappelez-vous en, les divers formats définis par le standard IEEE-754 ont tous pour fonction permière : le codage des nombres __normaux__.
 
 Pour résumer, n'oubliez pas que les nombres __normaux__ sont __normalisés__ par l'écriture scientifique binaire, ce qui dans le détails veut entre autre dire que le champ de mantisse tronquée d'un nombre __normalisé__ correspond à un significande.
 Ladite section précise alors qu'à des fins d'optimisation le champ de mantisse tronquée d'un nombre __normalisé__ ne code pas entièrement un significande.
