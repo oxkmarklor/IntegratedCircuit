@@ -91,6 +91,15 @@ Cherchons désormais à comprendre en quoi les nombres __normaux__ suivent une a
 Pour cela, nous allons avoir besoin de revenir une nouvelle fois sur le chapitre "_Le standard IEEE-754_", et plus particulièrement sur l'une de ses sections qui cette fois-ci porte le nom de "_Le codage du champ de mantisse tronquée_".
 
 Cette section explique comment est-ce que les nombres __normaux__ codent et interprètent la valeur de leur champ de mantisse tronquée, sans pour autant faire référence aux nombres __normaux__ vu que nous n'en parlions pas encore à ce stade du document.
+Rappelons que le standard IEEE-754 défini divers formats qui ont pour fonction permière de permettre le codage de nombre __normalisé__ par l'écriture scientifique binaire, ce que sont les nombres __normaux__ je le rappelle.
+C'est pourquoi au travers de cette section j'ai pris le partis d'expliquer le cas des nombres __normaux__.
+
+C'est pourquoi j'ai pris le partis de parler du cas des nombres __normaux__ au travers de cette section.
+
+C'est pourquoi au travers de cette section je n'ai choisit de parler que du cas des nombres __normaux__
+
+C'est pourquoi ladite section fait simple en évoquant seulement le cas des nombres __normaux__.
+
 Elle n'aborde que le cas des nombres __normaux__ car, ne l'oublions pas, ce sont les principaux nombres que peuvent coder les divers formats définis par le standard IEEE-754.
 
 tout nombre codé en IEEE-754 est initialement censé être __normalisé__
