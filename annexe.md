@@ -85,12 +85,20 @@ Il s'avère que les nombres __normaux__ se contentent d'interprèter tel quel la
 
 Rappelez vous du fait que les __NaN__ ainsi que l'__infini positif__ et __négatif__ codent un unique nombre commun dans leur champ d'exposant, ce qui oblige à restreindre la plage de codage du champ de mantisse tronquée de ces même valeurs pour pouvoir les départager l'une de l'autre.
 Cependant, les nombres __normaux__ sont, quant à eux, identifiés par la valeur que code leur champ d'exposant, ce qui insinue que la plage de codage du champ mantisse tronquée de ces même nombres n'est pas restreinte.
-Pour le dire autrement, du moment qu'un nombre est __normalisé__ alors son champ de mantisse tronquée, d'une taille de $K$ bits, peut coder n'importe quel valeur parmis cette intervalle $\left[0;2^K - 1\right]$.
+Pour le dire autrement, tout nombre __normalisé__ a un champ de mantisse tronquée, d'une taille de $K$ bits, qui peut coder n'importe quel valeur parmis cette intervalle $\left[0;2^K - 1\right]$.
 
 Cherchons désormais à comprendre en quoi les nombres __normaux__ suivent une approche standard dans l'interprétation de la valeur de leur champ de mantisse tronquée.
 Pour cela, nous allons avoir besoin de revenir une nouvelle fois sur le chapitre "_Le standard IEEE-754_", et plus particulièrement sur l'une de ses sections qui cette fois-ci porte le nom de "_Le codage du champ de mantisse tronquée_".
 
 Cette section explique comment est-ce que les nombres __normaux__ codent et interprètent la valeur de leur champ de mantisse tronquée, sans pour autant faire référence aux nombres __normaux__ vu que nous n'en parlions pas encore à ce stade du document.
+Elle n'aborde que le cas des nombres __normaux__ car, ne l'oublions pas, ce sont les principaux nombres que peuvent coder les divers formats définis par le standard IEEE-754.
+
+tout nombre codé en IEEE-754 est initialement censé être __normalisé__
+
+
+Rappelons que cette section ne parle que du cas des nombres __normaux__ car ce sont les principaux nombres pris en charge par les formats du standard IEEE-754.
+
+
 Mentionnons le fait que les formats du standard IEEE-754 ont initialement été conçus pour coder des nombres __normalisés__ par l'écriture scientifique binaire, c'est à dire des nombres __normaux__ ; c'est pourquoi, à des fins de simplification, cette section ne parle que du cas des nombres __normaux__.
 
 Comme le mentionne l'introduction à cet annexe, les nombres __normaux__ sont normalisés par l'écriture scientifique binaire
