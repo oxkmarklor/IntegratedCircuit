@@ -6,7 +6,7 @@ Nous avons, entre autre, pas parlé du fait que les formats définis par le stan
 Dans la théorie, tout nombre codé en IEEE-754 est initialement censé être __normalisé__, les nombres __normaux__ portent une telle appellation car l'écriture scientifique binaire normalise ces derniers.
 Cependant, dans la pratique, certains nombres assez spéciaux codés en IEEE-754 peuvent être __dénormalisés__.
 Il s'avère que le codage des nombres __dénormaux__ ainsi que l'interprétation qu'ils ont de la valeur de leurs champs d'exposant et de mantisse tronquée, diverge en tout point des bases __normalisées__ sur lesquels reposent les nombres __normaux__.
-Ces nombres sont ___dénormalisés___ parcqu'ils ne sont pas contraint par l'écriture scientifique binaire, au contraire des nombres __normaux__.
+Ces nombres portent cette appellation car ils ne sont pas __normalisé__ par l'écriture scientifique binaire, au contraire des nombres __normaux__.
 
 Dans les faits, les nombres __normaux__ sont très polyvalents : ils offrent la possibilité de coder des valeurs plus ou moins grandes/petites ainsi que plus ou moins proche de $0$.
 Les nombres __dénormaux__, quant à eux, sont beaucoup plus spécifiques car ils ne permettent que le codage de valeurs très proche de $0$, plus proche que ne pourrait l'être n'importe quel nombre __normalisé__.
@@ -15,50 +15,7 @@ Pour parvenir à ceci, les nombres __dénormaux__ doivent interpréter la valeur
 Veuillez remarquer que les nombres __normaux__ comme __dénormaux__ ne peuvent pas coder le chiffre $0$.
 Il s'avère que le codage d'une valeur nulle a été prédéfini par le standard IEEE-754 lui-même, mais ce n'est pas la seule valeur à être dans ce cas.
 Les __NaN__ ainsi que l'__infini positif__ et l'__infini négatif__ sont des valeurs qui ne peuvent pas non plus être codées par les nombres __normaux__ et __dénormaux__, leurs codages a également été prédéfini par le standard IEEE-754.
-Avant d'aborder le sujet des nombres __normaux__ et __dénormaux__, intéressons nous (par le biais des sections suivantes) à ces cas quelques peu exceptionnelles.
-
-## Comprendre ce qu'est un NaN ainsi que l'infini positif et négatif
-
-Le premier paragraphe du chapitre précédent explique que tout format défini par le standard IEEE-754 peut coder des valeurs spéciales, parmis lesquels figure les __NaN__ ainsi que l'__infini positif__ et l'__infini négatif__.
-Cependant, nous savons que le codage de ces valeurs spéciales a lui-même été prédéfini par le standard IEEE-754, alors commençons par voir quel est le codage des valeurs susmentionnés avant de parler de quoique ce soit d'autre à leurs sujets.
-
-Pour coder une valeur __NaN__ ou bien l'__infini positif__ et __négatif__, il faut déjà que le champ d'exposant qui compose tout format IEEE-754, d'une taille de $N$ bits, code le nombre $\left(2^N - 1\right)$.
-En outre, il s'avère que le codage de ces valeurs se départage par le biais du champ de mantisse tronquée, la plage de codage de ce champ n'est pas la même d'une valeur à l'autre.
-C'est pourquoi nous parlons du codage du champ de mantisse tronquée ainsi que de l'origine de ces valeurs dans les sections dédiés suivantes.
-
-### Codage du champ de mantisse tronquée et origine des NaN
-
-A ce stade, nous savons ce que le codage d'un __NaN__ requière d'un champ d'exposant, mais il faut ajouter à cela le fait que le champ de mantisse tronquée associé doive coder un nombre de l'intervalle $\left]0;1\right]$.
-Je vous rappelle que le champ de mantisse tronquée code un nombre à virgule flottante, qui plus est, la partie fractionnaire d'un nombre à virgule flottante
-En bref, le champ de mantisse tronquée doit être non nul.
-
-Par ailleurs, aussi étrange que cela puisse être, le standard IEEE-754 considère que la valeur __NaN__ n'est pas un nombre, d'où le fait que cette dernière ait pour nom l'abréviation de __Not a Number__.
-Dans les faits, les valeurs __NaN__ sont générées à la place des résultats des calculs considérés comme invalide par le standard IEEE-754 et/ou par les mathématiques elles même.
-Prenons pour exemple le quotient suivant $\left(NaN \div 0\right)$.
-Nous savons d'ores et déjà que le calcul est mathématiquement invalide, du fait de la divison par $0$.
-De surcroît, la division d'une valeur qui n'est pas un nombre (la valeur __NaN__) donne lieu à un calcul arithmétique ambigu ; ce sont les raisons pour lesquelles ce quotient mène quoiqu'il arrive à la génération d'un __NaN__ en guise de résultat.
-
-Pour conclure cette section, il va me falloir donner quelques détails à propos du FPS Configuration Unit, ce qui m'amène à vous redirigé vers la documentation dédiée au circuit si vous souhaitez plus d'information.
-Dans les grandes lignes, sachez que l'une des fonctionnalités du circuit est d'acheminer convenablement les opérandes d'un calcul arithmétique flottant, sur les bonnes entrées d'un soustracteur flottant.
-Néanmoins, nous savons que ledit soustracteur flottant génère __NaN__ sur sa sortie lorsque l'un de ses opérandes est un __NaN__, et ce, indépendamment du positionnement des opérandes sur les entrées de l'unité de calcul.
-Par conséquent, nous en déduisons que le soustracteur flottant ne peut pas commettre d'erreur de calcul dû au mauvais placement de ses opérandes, lorsqu'un d'entre eux est un __NaN__ ; ce qui justifie le fait que le circuit n'ait pas besoin de prendre en charge les valeurs __NaN__.
-
-Pour la culture général, sachez que le codage d'un __NaN__ peut varier en fonction de la valeur que l'on donne au bit de signe.
-Pourtant, rappelons qu'un __NaN__ n'est pas un nombre, ce qui insinue qu'il n'existe pas de __NaN__ positif d'une part et négatif de l'autre.
-En outre, l'ensemble des circuits d'un ordinateur interprètent de la même manière deux valeurs __NaN__ aux codages distincts.
-
-### Codage du champ de mantisse tronquée et origine de l'infini positif/négatif
-
-A ce stade, nous savons ce que le codage de l'__infini positif__ et __négatif__ requière d'un champ d'exposant, mais il faut ajouter à cela le fait que le champ de mantisse tronquée associé doive être nul.
-En outre, le codage d'un __infini positif__ ou __négatif__ se joue sur la valeur du bit de signe.
-
-Il ne vous surprendra pas d'apprendre que l'__infini positif__ comme __négatif__ ne représentent que des nombres ayant pour point commun le fait d'être trop grand, ou trop petit, pour pouvoir être codé.
-Le standard IEEE-754 ne considère pas pour autant l'__infini positif__ ou __négatif__ comme des nombres, ce qui a pour effet de rendre invalide tout calcul arithmétique sur ceux-ci.
-Seulement, grâce à la section précédente, nous savons que tout calcul arithmétique invalide génère un résultat __NaN__, et ces calculs là n'y échappent pas.
-
-En définitive, rappelez vous du fait que l'une des fonctionnalités du FPS Configuration Unit est d'acheminer convenablement les opérandes d'un calcul arithmétique flottant, sur les bonnes entrées d'un soustracteur flottant.
-Néanmoins, nous savons que ledit soustracteur flottant génère un __NaN__ lorsqu'un de ses opérandes est __infini__, nonobstant le positionnement desdites opérandes.
-Par conséquent, nous en déduisons que pour de tels calculs, le soustracteur flottant ne peut pas commettre d'erreur dû au mauvais placement des opérandes ; justifiant ainsi le fait que le FPS Configuration Unit n'ait pas besoin de prendre en charge l'__infini positif/négatif__.
+Nous parlerons dans le détails de ces excpetions à la fin de cet annexe.
 
 ## Les nombres normaux
 
@@ -72,7 +29,11 @@ Nous allons parler de tout cela au travers de deux sections dédiés au champ d'
 
 ### Plage de codage et interprétation de la valeur du champ d'exposant des nombres normaux
 
-Pour coder un nombre __normalisé__, il faut s'assurer du fait que le champ d'exposant qui compose tout format IEEE-754, d'une taille de $N$ bits, code l'une des valeurs de l'intervalle suivante $\left[1;2^N - 1\right[$.
+Pour coder un nombre __normalisé__, il faut s'assurer du fait que le champ d'exposant qui compose tout format IEEE-754, d'une taille de $N$ bits, code l'un des entiers de l'intervalle suivante $\left[1;2^N - 1\right[$.
+Remarquez que cette plage de codage est bel et bien restreinte par le fait qu'il est aussi possible de coder des nombres __dénormaux__ ou même des valeurs exceptionnelles.
+
+// reprendre ici
+
 Si la valeur $\left(2^N - 1 \right)$ est indisponible pour le codage des nombres __normaux__, c'est parce qu'elle est, rappelons-le, utilisée pour le codage des __NaN__ ainsi que de l'__infini positif__ et __négatif__ ; qui à eux seul font usage de l'entièreté de la plage de codage du champ de mantisse tronquée.
 
 Cherchons désormais à comprendre en quoi les nombres __normaux__ suivent une approche standard dans l'interprétation de la valeur de leur champ d'exposant.
@@ -104,6 +65,52 @@ Clôturons cette section par une précision à propos de la démonstration math�
 Remarquez que dans cette dernière, les champs de __mantisse tronquée__ $T_{\alpha}$ ainsi que $T_{\beta}$ ont respectivement une valeur de $\left(1 + T_{\alpha}\right)$ et $\left(1 + T_{\beta}\right)$.
 En somme, cela insinue que la démonstration mathématique part du principe que les opérandes $\alpha$ et $\beta$ codent des nombres __normaux__ de format Half Precision.
 Cela ne rend pas pour autant ambigu la démonstration mathématique vis à vis des autres types de nombres que prend en charge le circuit, nous expliquerons pourquoi dans les chapitres/sections dédiés à ces types nombres.
+
+// les nombres dénormaux
+
+// la continuité de codage entre normaux et dénormaux
+
+## Comprendre ce qu'est un NaN ainsi que l'infini positif et négatif
+
+Le premier paragraphe du chapitre précédent explique que tout format défini par le standard IEEE-754 peut coder des valeurs spéciales, parmis lesquels figure les __NaN__ ainsi que l'__infini positif__ et l'__infini négatif__.
+Cependant, nous savons que le codage de ces valeurs spéciales a lui-même été prédéfini par le standard IEEE-754, alors commençons par voir quel est le codage des valeurs susmentionnés avant de parler de quoique ce soit d'autre à leurs sujets.
+
+Pour coder une valeur __NaN__ ou bien l'__infini positif__ et __négatif__, il faut déjà que le champ d'exposant qui compose tout format IEEE-754, d'une taille de $N$ bits, code le nombre $\left(2^N - 1\right)$.
+En outre, il s'avère que le codage de ces valeurs se départage par le biais du champ de mantisse tronquée, la plage de codage de ce champ n'est pas la même d'une valeur à l'autre.
+C'est pourquoi nous parlons du codage du champ de mantisse tronquée ainsi que de l'origine de ces valeurs dans les sections dédiés suivantes.
+
+### Codage du champ de mantisse tronquée et origine des NaN
+
+A ce stade, nous savons ce que le codage d'un __NaN__ requière d'un champ d'exposant, mais il faut ajouter à cela le fait que le champ de mantisse tronquée associé, d'une taille de $K$ bits, doive coder un nombre de l'intervalle $\left]0;2^K - 1\right]$.
+En bref, le champ de mantisse tronquée doit être non nul.
+
+Par ailleurs, aussi étrange que cela puisse être, le standard IEEE-754 considère que la valeur __NaN__ n'est pas un nombre, d'où le fait que cette dernière ait pour nom l'abréviation de __Not a Number__.
+Dans les faits, les valeurs __NaN__ sont générées à la place des résultats des calculs considérés comme invalide par le standard IEEE-754 et/ou par les mathématiques elles même.
+Prenons pour exemple le quotient suivant $\left(NaN \div 0\right)$.
+Nous savons d'ores et déjà que le calcul est mathématiquement invalide, du fait de la divison par $0$.
+De surcroît, la division d'une valeur qui n'est pas un nombre (la valeur __NaN__) donne lieu à un calcul arithmétique ambigu ; ce sont les raisons pour lesquelles ce quotient mène quoiqu'il arrive à la génération d'un __NaN__ en guise de résultat.
+
+Pour conclure cette section, il va me falloir donner quelques détails à propos du FPS Configuration Unit, ce qui m'amène à vous redirigé vers la documentation dédiée au circuit si vous souhaitez plus d'information.
+Dans les grandes lignes, sachez que l'une des fonctionnalités du circuit est d'acheminer convenablement les opérandes d'un calcul arithmétique flottant, sur les bonnes entrées d'un soustracteur flottant.
+Néanmoins, nous savons que ledit soustracteur flottant génère __NaN__ sur sa sortie lorsque l'un de ses opérandes est un __NaN__, et ce, indépendamment du positionnement des opérandes sur les entrées de l'unité de calcul.
+Par conséquent, nous en déduisons que le soustracteur flottant ne peut pas commettre d'erreur de calcul dû au mauvais placement de ses opérandes, lorsqu'un d'entre eux est un __NaN__ ; ce qui justifie le fait que le circuit n'ait pas besoin de prendre en charge les valeurs __NaN__.
+
+Pour la culture général, sachez que le codage d'un __NaN__ peut varier en fonction de la valeur que l'on donne au bit de signe.
+Pourtant, rappelons qu'un __NaN__ n'est pas un nombre, ce qui insinue qu'il n'existe pas de __NaN__ positif d'une part et négatif de l'autre.
+En outre, l'ensemble des circuits d'un ordinateur interprètent de la même manière deux valeurs __NaN__ aux codages distincts.
+
+### Codage du champ de mantisse tronquée et origine de l'infini positif/négatif
+
+A ce stade, nous savons ce que le codage de l'__infini positif__ et __négatif__ requière d'un champ d'exposant, mais il faut ajouter à cela le fait que le champ de mantisse tronquée associé doive être nul.
+En outre, le codage d'un __infini positif__ ou __négatif__ se joue sur la valeur du bit de signe.
+
+Il ne vous surprendra pas d'apprendre que l'__infini positif__ comme __négatif__ ne représentent que des nombres ayant pour point commun le fait d'être trop grand, ou trop petit, pour pouvoir être codé.
+Le standard IEEE-754 ne considère pas pour autant l'__infini positif__ ou __négatif__ comme des nombres, ce qui a pour effet de rendre invalide tout calcul arithmétique sur ceux-ci.
+Seulement, grâce à la section précédente, nous savons que tout calcul arithmétique invalide génère un résultat __NaN__, et ces calculs là n'y échappent pas.
+
+En définitive, rappelez vous du fait que l'une des fonctionnalités du FPS Configuration Unit est d'acheminer convenablement les opérandes d'un calcul arithmétique flottant, sur les bonnes entrées d'un soustracteur flottant.
+Néanmoins, nous savons que ledit soustracteur flottant génère un __NaN__ lorsqu'un de ses opérandes est __infini__, nonobstant le positionnement desdites opérandes.
+Par conséquent, nous en déduisons que pour de tels calculs, le soustracteur flottant ne peut pas commettre d'erreur dû au mauvais placement des opérandes ; justifiant ainsi le fait que le FPS Configuration Unit n'ait pas besoin de prendre en charge l'__infini positif/négatif__.
 
 ///
 
