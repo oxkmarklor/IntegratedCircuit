@@ -61,6 +61,15 @@ Remarquez que dans cette dernière, les champs de __mantisse tronquée__ $T_{\al
 En somme, cela insinue que la démonstration mathématique part du principe que les opérandes $\alpha$ et $\beta$ codent des nombres __normaux__ de format Half Precision.
 Cela ne rend pas pour autant invalide et/ou ambigu la démonstration mathématique vis à vis des autres types de nombres que prend en charge le circuit, nous expliquerons pourquoi dans les chapitres et sections dédiés à ces types nombres.
 
+## Les nombres dénormaux
+
+Outre le codage de nombres __normaux__, nous savons que les formats définis par le standard IEEE-754 peuvent également coder des nombres __dénormaux__.
+Comme cela a été mentionné en introduction de l'annexe, ces derniers codent des valeurs plus proche de $0$ que ne le permettent les nombres __normaux__ eux même, d'où leur intérêt.
+Cependant, pour parvenir à de tel résultat, il faut que les nombres __dénormaux__ interprètent la valeur du champ de mantisse tronquée différemment de la normale, différemment des nombres __normaux__.
+
+/* continuité de codage */
+/* interprétation du champ d'exposant */
+
 // les nombres dénormaux
 
 // la continuité de codage entre normaux et dénormaux
