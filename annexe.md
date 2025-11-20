@@ -41,10 +41,8 @@ Il s'avère que les nombres __normaux__ se contentent d'interprèter tel quel la
 
 ### Plage de codage et interprétation de la valeur du champ de mantisse tronquée des nombres normaux
 
-Il s'avère que les nombres __normaux__ se distinguent par la seule valeur que code leur champ d'exposant, ce qui insinue que la plage de codage du champ mantisse tronquée de ces même nombres n'est pas restreinte.
+Il s'avère que les nombres __normaux__ se distinguent des autres nombres par la valeur que code leur champ d'exposant, ce qui insinue que la plage de codage du champ mantisse tronquée des nombres __normaux__ n'est pas restreinte.
 Pour le dire autrement, un nombre __normalisé__ a un champ de mantisse tronquée qui, dans les limites du possible, peut coder n'importe quel nombre réel de l'intervalle $\left[0;1\right[$.
-
-// reprendre ici
 
 Cherchons désormais à comprendre en quoi les nombres __normaux__ suivent une approche standard dans l'interprétation de la valeur de leur champ de mantisse tronquée.
 Pour cela, nous allons avoir besoin de revenir une nouvelle fois sur le chapitre "_Le standard IEEE-754_", et plus particulièrement sur l'une de ses sections qui porte le nom de "_Le codage du champ de mantisse tronquée_".
@@ -52,7 +50,7 @@ Pour cela, nous allons avoir besoin de revenir une nouvelle fois sur le chapitre
 Ladite section explique comment est-ce qu'un nombre code et interprète la valeur d'un champ de mantisse tronquée, nombre implicitement considéré comme __normalisé__ car à ce stade du document nous ne parlions pas encore de nombres __normaux__, __dénormaux__ et autres...
 
 Pour résumer, cette section nous apprend que le champ de __mantisse tronquée__ d'un nombre __normalisé__ ne correspond qu'à une partie du __significande__ de l'écriture scientifique binaire de ce même nombre.
-Ce qui n'exempte pas le fait de prendre en compte la valeur manquante du __significande__ $\left(1 \times 2^0\right)$ lors de l'évaluation de la valeur du champ de __mantisse tronquée__.
+Ce qui n'exempte pas le fait de prendre en compte la valeur manquante du __significande__ $\left(1 \times 2^0\right)$, lors de l'évaluation de la valeur du champ de __mantisse tronquée__.
 Par conséquent, nous en concluons que la valeur du champ de __mantisse tronquée__ $T$ de tout nombre __normalisé__ est de $\left(1 + T\right)$, avec nous l'aurons compris, le terme $1$ qui représente la valeur de la partie manquante du significande.
 Seul un __significande__ nul entraine une exceptionnelle dérogation à la règle.
 
@@ -61,7 +59,7 @@ Je vous redirige vers la section susmentionné dans le cas où vous souhaiteriez
 Clôturons cette section par une précision à propos de la démonstration mathématique.
 Remarquez que dans cette dernière, les champs de __mantisse tronquée__ $T_{\alpha}$ ainsi que $T_{\beta}$ ont respectivement une valeur de $\left(1 + T_{\alpha}\right)$ et $\left(1 + T_{\beta}\right)$.
 En somme, cela insinue que la démonstration mathématique part du principe que les opérandes $\alpha$ et $\beta$ codent des nombres __normaux__ de format Half Precision.
-Cela ne rend pas pour autant ambigu la démonstration mathématique vis à vis des autres types de nombres que prend en charge le circuit, nous expliquerons pourquoi dans les chapitres/sections dédiés à ces types nombres.
+Cela ne rend pas pour autant invalide et/ou ambigu la démonstration mathématique vis à vis des autres types de nombres que prend en charge le circuit, nous expliquerons pourquoi dans les chapitres et sections dédiés à ces types nombres.
 
 // les nombres dénormaux
 
