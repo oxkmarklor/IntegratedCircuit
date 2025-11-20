@@ -26,9 +26,10 @@ Pour coder une valeur __NaN__ ou bien l'__infini positif__ et __négatif__, il f
 En outre, il s'avère que le codage de ces valeurs se départage par le biais du champ de mantisse tronquée, la plage de codage de ce champ n'est pas la même d'une valeur à l'autre.
 C'est pourquoi nous parlons du codage du champ de mantisse tronquée ainsi que de l'origine de ces valeurs dans les sections dédiés suivantes.
 
-### Origine et codage du champ de mantisse tronquée d'un NaN
+### Codage du champ de mantisse tronquée et origine des NaN
 
-A ce stade, nous savons ce que le codage d'un __NaN__ requière d'un champ d'exposant, mais il faut ajouter à cela le fait que le champ de mantisse tronquée associé, d'une taille de $K$ bits, doive coder un nombre de l'intervalle $\left]0;2^K - 1\right]$.
+A ce stade, nous savons ce que le codage d'un __NaN__ requière d'un champ d'exposant, mais il faut ajouter à cela le fait que le champ de mantisse tronquée associé doive coder un nombre de l'intervalle $\left]0;1\right]$.
+Je vous rappelle que le champ de mantisse tronquée code un nombre à virgule flottante, qui plus est, la partie fractionnaire d'un nombre à virgule flottante
 En bref, le champ de mantisse tronquée doit être non nul.
 
 Par ailleurs, aussi étrange que cela puisse être, le standard IEEE-754 considère que la valeur __NaN__ n'est pas un nombre, d'où le fait que cette dernière ait pour nom l'abréviation de __Not a Number__.
@@ -46,7 +47,7 @@ Pour la culture général, sachez que le codage d'un __NaN__ peut varier en fonc
 Pourtant, rappelons qu'un __NaN__ n'est pas un nombre, ce qui insinue qu'il n'existe pas de __NaN__ positif d'une part et négatif de l'autre.
 En outre, l'ensemble des circuits d'un ordinateur interprètent de la même manière deux valeurs __NaN__ aux codages distincts.
 
-### Origine et codage du champ de mantisse tronquée de l'infini positif/négatif
+### Codage du champ de mantisse tronquée et origine de l'infini positif/négatif
 
 A ce stade, nous savons ce que le codage de l'__infini positif__ et __négatif__ requière d'un champ d'exposant, mais il faut ajouter à cela le fait que le champ de mantisse tronquée associé doive être nul.
 En outre, le codage d'un __infini positif__ ou __négatif__ se joue sur la valeur du bit de signe.
@@ -82,8 +83,6 @@ Rappelez-vous en, nous y apprenons que tout champ d'exposant $E$ code un entier 
 Il s'avère que les nombres __normaux__ se contentent d'interprèter tel quel la valeur de leur champ d'exposant, ce qui n'est pas le cas des nombres __dénormaux__ mais nous en parlerons plus tard ; d'où le fait qu'il soit dit que les nombres __normaux__ interprètent de façon standard la valeur des champs d'exposant.
 
 ### Plage de codage et interprétation de la valeur du champ de mantisse tronquée des nombres normaux
-
-// à relire
 
 Rappelez vous du fait que les __NaN__ ainsi que l'__infini positif__ et __négatif__ codent un unique nombre commun dans leur champ d'exposant, ce qui oblige à restreindre la plage de codage du champ de mantisse tronquée de ces même valeurs pour pouvoir les départager l'une de l'autre.
 Cependant, les nombres __normaux__ sont identifiés par la seule valeur que code leur champ d'exposant, ce qui insinue que la plage de codage du champ mantisse tronquée de ces même nombres n'est pas restreinte.
