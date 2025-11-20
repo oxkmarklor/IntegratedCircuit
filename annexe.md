@@ -22,19 +22,15 @@ Nous parlerons dans le détails de ces excpetions à la fin de cet annexe.
 Rappelons que dans la théorie, tout nombre que code un format IEEE-754 est initialement censé être __normalisé__, cependant dans la pratique nous savons que ces même formats peuvent coder des valeurs exceptionnelles ainsi que des nombres __dénormaux__.
 De ce fait, la plage de codage des nombres __normaux__ et plus particulièrement celle du champ d'exposant en est directement impacté.
 
-En outre, les nombres __normaux__ suivent une approche standard dans l'interprétation de la valeur de leurs champs d'exposant et de mantisse tronquée, nous verrons ci-bas en quoi cette approche est standard.
+En outre, les nombres __normaux__ suivent une approche standard dans l'interprétation de la valeur de leurs champs d'exposant et de mantisse tronquée, nous verrons ci-bas en quoi ces approches sont standard.
 N'oubliez pas que l'une des différences majeur entre les nombres __normaux__ et __dénormaux__ est l'interprétation de la valeur de ces champs, cela consiste donc en un sujet important à comprendre.
 
 Nous allons parler de tout cela au travers de deux sections dédiés au champ d'exposant et au champ de mantisse tronquée des nombres __normaux__.
 
 ### Plage de codage et interprétation de la valeur du champ d'exposant des nombres normaux
 
-Pour coder un nombre __normalisé__, il faut s'assurer du fait que le champ d'exposant qui compose tout format IEEE-754, d'une taille de $N$ bits, code l'un des entiers de l'intervalle suivante $\left[1;2^N - 1\right[$.
-Remarquez que cette plage de codage est bel et bien restreinte par le fait qu'il est aussi possible de coder des nombres __dénormaux__ ou même des valeurs exceptionnelles.
-
-// reprendre ici
-
-Si la valeur $\left(2^N - 1 \right)$ est indisponible pour le codage des nombres __normaux__, c'est parce qu'elle est, rappelons-le, utilisée pour le codage des __NaN__ ainsi que de l'__infini positif__ et __négatif__ ; qui à eux seul font usage de l'entièreté de la plage de codage du champ de mantisse tronquée.
+Pour coder un nombre __normalisé__, il faut s'assurer du fait que le champ d'exposant qui compose tout format IEEE-754, d'une taille de $N$ bits, code l'un des entiers de l'intervalle $\left[1;2^N - 1\right[$.
+Comme cela a été mentionné en amont, cette plage de codage semble bien restreinte par les nombres __dénormaux__ ainsi que par les quelques valeurs exceptionnelles que peuvent coder ces même formats.
 
 Cherchons désormais à comprendre en quoi les nombres __normaux__ suivent une approche standard dans l'interprétation de la valeur de leur champ d'exposant.
 Pour cela, nous allons avoir besoin de revenir sur le chapitre "_Le standard IEEE-754_", et plus particulièrement sur l'une de ses sections qui porte le nom de "_L'encodage par biais du champ d'exposant_".
