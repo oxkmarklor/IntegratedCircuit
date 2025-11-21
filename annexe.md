@@ -67,11 +67,13 @@ Outre le codage de nombres __normaux__, nous savons que les formats définis par
 Comme cela a été mentionné en introduction de l'annexe, ces derniers codent des valeurs plus proche de $0$ que ne le permettent les nombres __normaux__ eux même, d'où leur intérêt.
 Cependant, pour parvenir à de tel résultat, il faut que les nombres __dénormaux__ interprètent la valeur du champ de mantisse tronquée composant tout format IEEE-754 différemment de la normale, différemment des nombres __normaux__ donc.
 
-En plus de tout cela, il se trouve que les nombres __dénormaux__ permettent d'avoir une __continuité de codage__ entre les nombres __normaux__ et eux même.
-La __continuité de codage__ est le fait que l'écriture binaire des nombres __dénormaux__ soit contingüe à celle des nombres __normaux__, nous verrons cela plus en détails dans les chapitres suivants.
-Néanmoins, sachez que nous devons cette __continuité de codage__ au fait que les nombres __dénormaux__ interprètent la valeur du champ d'exposant, composant tout format IEEE-754, différemment des nombres __normaux__.
+En plus de cela, les nombres __dénormaux__ se différencient des nombres __normaux__ par la plage de codage qu'ils utilisent du champ d'exposant composant tout format IEEE-754.
 
-A l'instar du chapitre sur les nombres __normaux__, nous allons aborder tout ces sujets dans les sections dédiés suivante.
+En somme, les nombres __dénormaux__ permettent d'avoir une __continuité de codage__ avec les nombres __normaux__.
+La __continuité de codage__ est le fait que l'écriture binaire des nombres __dénormaux__ soit contingüe à celle des nombres __normaux__, nous verrons cela plus en détails dans les chapitres suivants.
+Néanmoins, sachez que nous devons cette __continuité de codage__ au fait que les nombres __dénormaux__ interprètent différemment des nombres __normaux__ la valeur de leur champ d'exposant.
+
+Nous abordons l'ensemble de ces sujets au travers deux sections suivantes, qui sont dédiés au champ d'exposant et au champ de mantisse tronquée des nombres __dénormaux__.
 
 ### Plage de codage et interprétation de la valeur du champ d'exposant des nombres dénormaux
 
