@@ -20,7 +20,7 @@ Nous parlerons dans le détails de ces excpetions à la fin de cet annexe.
 ## Les nombres normaux
 
 Rappelons que dans la théorie, tout nombre que code un format IEEE-754 est initialement censé être __normalisé__, cependant dans la pratique nous savons que ces même formats peuvent coder des valeurs exceptionnelles ainsi que des nombres __dénormaux__.
-De ce fait, la plage de codage des nombres __normaux__ et plus particulièrement celle du champ d'exposant en est directement impacté.
+De ce fait, la plage de codage des nombres __normaux__, et plus particulièrement celle du champ d'exposant, en est directement impacté.
 
 En outre, les nombres __normaux__ suivent une approche standard dans l'interprétation de la valeur de leurs champs d'exposant et de mantisse tronquée, nous verrons ci-bas en quoi ces approches sont standard.
 N'oubliez pas que l'une des différences majeur entre les nombres __normaux__ et __dénormaux__ est l'interprétation de la valeur de ces champs, cela consiste donc en un sujet important à comprendre.
@@ -52,7 +52,13 @@ Ladite section explique comment est-ce qu'un nombre code et interprète la valeu
 Pour résumer, cette section nous apprend que le champ de __mantisse tronquée__ d'un nombre __normalisé__ ne correspond qu'à une partie du __significande__ de l'écriture scientifique binaire de ce même nombre.
 Ce qui n'exempte pas le fait de prendre en compte la valeur manquante du __significande__ $\left(1 \times 2^0\right)$, lors de l'évaluation de la valeur du champ de __mantisse tronquée__.
 Par conséquent, nous en concluons que la valeur du champ de __mantisse tronquée__ $T$ de tout nombre __normalisé__ est de $\left(1 + T\right)$, avec nous l'aurons compris, le terme $1$ qui représente la valeur de la partie manquante du significande.
-Seul un __significande__ nul entraine une exceptionnelle dérogation à la règle.
+
+//
+
+L'interprétation de la valeur que code le champ de mantisse tronquée d'un nombre __normalisé__ est standard, car elle permet de représenter la valeur d'un significande binaire.
+Ce n'est pas le cas des nombres __dénormaux__, mais nous en parlerons plus tard.
+
+//
 
 Je vous redirige vers la section susmentionné dans le cas où vous souhaiteriez plus de détails.
 
@@ -77,11 +83,13 @@ Au travers des deux sections suivantes, nous abordons le sujet du codage ainsi q
 
 ### Plage de codage et interprétation de la valeur du champ d'exposant des nombres dénormaux
 
-Le codage d'un nombre __dénormalisé__ requière entre autre que le champ d'exposant, composant tout format IEEE-754, soit nul.
+Le codage des nombres __dénormaux__ requière entre autre que le champ d'exposant composant tout format IEEE-754 soit nul.
 
-//
 
-Pour coder un nombre __normalisé__, il faut s'assurer du fait que le champ d'exposant qui compose tout format IEEE-754, d'une taille de $N$ bits, code l'un des entiers de l'intervalle $\left[1;2^N - 1\right[$.
+
+
+
+
 
 ### Plage de codage et interprétation de la valeur du champ de mantisse tronquée des nombres dénormaux
 
