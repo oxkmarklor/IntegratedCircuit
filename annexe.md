@@ -80,11 +80,24 @@ Au travers des deux sections suivantes, nous abordons le sujet du codage ainsi q
 
 Le codage des nombres __dénormaux__ requière entre autre que le champ d'exposant composant tout format IEEE-754 soit nul.
 
+De plus, comme cela a été mentionné ci-dessus : les nombres __dénormaux__ interprètent différemment des nombres __normaux__ la valeur d'un champ d'exposant.
+Rappelons que les nombres __normaux__ interprètent la valeur de leur champ d'exposant $E$ suivant le calcul $\left(E - B\right)$, avec le terme $B$ qui représente le biais du champ d'exposant.
+Si les nombres __dénormaux__ suivaient la même interprétation, alors le champ d'exposant de ces nombres interpréterait la valeur $\left(0 - B\right)$ ; car je vous rappelle que le champ d'exposant des __dénormaux__ ne peut qu'être nul.
+
+Cependant, pour des raisons que je ne peux fondamentalement expliquer ici, les nombres __dénormaux__ interprètent la valeur de leur champ d'exposant par le calcul suivant $\left(1 - B\right)$, où le terme $B$ représente toujours le biais tout à fait ordinaire d'un champ d'exposant.
+Pour le dire autrement, c'est comme si le champ d'exposant des nombres __dénormaux__ interprétait le plus petit exposant pouvant être interprété par le champ d'exposant d'un nombre __normalisé__.
+
+En bref, rappelez-vous du fait que la __continuité de codage__ entre les nombres __normaux__ et __dénormaux__ est à la base de cette interprétation distincte de la valeur du champ d'exposant des nombres __dénormaux__.
+Nous verrons dans un chapitre ultérieur en quoi consiste réelement cette __continuité de codage__ et en quoi est-ce que cette interprétation est absolument indispensable.
 
 
 
 
+//
 
+Dans les grandes lignes, cette section explique ce qu'est l'__encodage par biais__ au travers d'un cas concret, celui du champ d'exposant de tout format défini par le standard IEEE-754.
+Rappelez-vous en, nous y apprenons que tout champ d'exposant $E$ code un entier naturel auquel nous soustrayons un biais $B$, qui est un autre entier naturel, afin de calculer la valeur que le champ d'exposant interprète $\left(E - B\right)$.
+Il s'avère que les nombres __normaux__ se contentent d'interprèter tel quel la valeur de leur champ d'exposant, ce qui n'est pas le cas des nombres __dénormaux__ mais nous en parlerons plus tard ; d'où le fait qu'il soit dit que les nombres __normaux__ interprètent de façon standard la valeur des champs d'exposant.
 
 ### Plage de codage et interprétation de la valeur du champ de mantisse tronquée des nombres dénormaux
 
