@@ -65,17 +65,23 @@ Cela ne rend pas pour autant invalide et/ou ambigu la démonstration mathématiq
 
 Outre le codage de nombres __normaux__, nous savons que les formats définis par le standard IEEE-754 peuvent également coder des nombres __dénormaux__.
 Comme cela a été mentionné en introduction de l'annexe, ces derniers codent des valeurs plus proche de $0$ que ne le permettent les nombres __normaux__ eux même, d'où leur intérêt.
-Cependant, pour parvenir à de tel résultat, il faut que les nombres __dénormaux__ interprètent différemment des nombres __normaux__ la valeur du champ de mantisse tronquée composant tout format IEEE-754.
+Cependant, pour parvenir à de tel résultat, il faut que les nombres __dénormaux__ interprètent différemment des nombres __normaux__ la valeur que codent les champs de mantisse tronquée composant tout format IEEE-754.
 
-En outre, sachez que les nombres __dénormaux__ utilisent une plage de codage dans le champ d'exposant, qui est différente de celle des nombres __normaux__.
+A propos du codage, les nombres __dénormaux__ font usage d'une plage de codage pour le champ d'exposant et pour le champ de mantisse tronquée qui sont toutes les deux restreintes.
 
-Par ailleurs, il s'avère que les nombres __dénormaux__ permettent d'avoir une __continuité de codage__ avec les nombres __normaux__.
+En outre, il s'avère que les nombres __dénormaux__ permettent d'avoir une __continuité de codage__ avec les nombres __normaux__.
 La __continuité de codage__ est le fait que l'écriture binaire des nombres __dénormaux__ soit contingüe à celle des nombres __normaux__, nous verrons cela plus dans le détails avec les chapitres suivants.
 Néanmoins, sachez que nous devons cette __continuité de codage__ au fait que les nombres __dénormaux__ interprètent différemment des nombres __normaux__ la valeur d'un champ d'exposant.
 
 Au travers des deux sections suivantes, nous abordons le sujet du codage ainsi que de l'interprétation de la valeur que code le champ d'exposant et le champ de mantisse tronquée des nombres __dénormaux__.
 
 ### Plage de codage et interprétation de la valeur du champ d'exposant des nombres dénormaux
+
+Le codage d'un nombre __dénormalisé__ requière entre autre que le champ d'exposant, composant tout format IEEE-754, soit nul.
+
+//
+
+Pour coder un nombre __normalisé__, il faut s'assurer du fait que le champ d'exposant qui compose tout format IEEE-754, d'une taille de $N$ bits, code l'un des entiers de l'intervalle $\left[1;2^N - 1\right[$.
 
 ### Plage de codage et interprétation de la valeur du champ de mantisse tronquée des nombres dénormaux
 
