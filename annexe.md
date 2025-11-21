@@ -53,13 +53,8 @@ Pour résumer, cette section nous apprend que le champ de __mantisse tronquée__
 Ce qui n'exempte pas le fait de prendre en compte la valeur manquante du __significande__ $\left(1 \times 2^0\right)$, lors de l'évaluation de la valeur du champ de __mantisse tronquée__.
 Par conséquent, nous en concluons que la valeur du champ de __mantisse tronquée__ $T$ de tout nombre __normalisé__ est de $\left(1 + T\right)$, avec nous l'aurons compris, le terme $1$ qui représente la valeur de la partie manquante du significande.
 
-//
-
-L'interprétation de la valeur que code le champ de mantisse tronquée d'un nombre __normalisé__ est standard, car elle permet de représenter la valeur d'un significande binaire.
-Ce n'est pas le cas des nombres __dénormaux__, mais nous en parlerons plus tard.
-
-//
-
+Cette interprétation de la valeur du champ de mantisse tronquée permet de représenter la valeur d'un significande, d'où le fait qu'elle soit décrite comme standard.
+Nous verrons plus tard que ce n'est pas le cas du champ de mantisse tronquée des nombres __dénormaux__.
 Je vous redirige vers la section susmentionné dans le cas où vous souhaiteriez plus de détails.
 
 Clôturons cette section par une précision à propos de la démonstration mathématique.
