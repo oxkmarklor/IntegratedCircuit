@@ -78,13 +78,13 @@ Au travers des deux sections suivantes, nous abordons le sujet du codage ainsi q
 
 ### Plage de codage et interprétation de la valeur du champ d'exposant des nombres dénormaux
 
-Le codage des nombres __dénormaux__ requière entre autre que le champ d'exposant composant tout format IEEE-754 soit nul.
+Le codage des nombres __dénormaux__ requière entre autre que le champ d'exposant qui compose tout format IEEE-754 soit nul.
+Par ailleurs, remarquez que ci-dessus il a été fait mention du fait que : les nombres __dénormaux__ interprètent différemment des nombres __normaux__ la valeur d'un champ d'exposant.
 
-Par ailleurs, ci-dessus il a été fait mention du fait que : les nombres __dénormaux__ interprètent différemment des nombres __normaux__ la valeur d'un champ d'exposant.
+Rappelez-vous en, les nombres __normaux__ interprètent la valeur d'un champ d'exposant $E$ suivant le calcul $\left(E - B\right)$, le terme $B$ représente le biais du champ d'exposant.
+Cependant, pour des raisons de __continuité de codage__ que nous aborderons ultérieurement, les nombres __dénormaux__ ne peuvent pas interpréter de la sorte la valeur de leur champ d'exposant, ce qui donnerait $\left(0 - B\right)$.
 
-De plus, comme cela a été mentionné ci-dessus : les nombres __dénormaux__ interprètent différemment des nombres __normaux__ la valeur d'un champ d'exposant.
-Rappelons que les nombres __normaux__ interprètent la valeur de leur champ d'exposant $E$ suivant le calcul $\left(E - B\right)$, avec le terme $B$ qui représente le biais du champ d'exposant.
-Si les nombres __dénormaux__ suivaient la même interprétation, alors le champ d'exposant de ces nombres interpréterait la valeur $\left(0 - B\right)$ ; car je vous rappelle que le champ d'exposant des __dénormaux__ ne peut qu'être nul.
+// reprendre ici
 
 Cependant, pour des raisons que je ne peux fondamentalement expliquer ici, les nombres __dénormaux__ interprètent la valeur de leur champ d'exposant par le calcul suivant $\left(1 - B\right)$, où le terme $B$ représente toujours le biais tout à fait ordinaire d'un champ d'exposant.
 Pour le dire autrement, c'est comme si le champ d'exposant des nombres __dénormaux__ interprétait le plus petit exposant pouvant être interprété par le champ d'exposant d'un nombre __normalisé__.
