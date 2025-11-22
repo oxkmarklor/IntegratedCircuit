@@ -80,6 +80,8 @@ Au travers des deux sections suivantes, nous abordons le sujet du codage ainsi q
 
 Le codage des nombres __dénormaux__ requière entre autre que le champ d'exposant composant tout format IEEE-754 soit nul.
 
+Par ailleurs, ci-dessus il a été fait mention du fait que : les nombres __dénormaux__ interprètent différemment des nombres __normaux__ la valeur d'un champ d'exposant.
+
 De plus, comme cela a été mentionné ci-dessus : les nombres __dénormaux__ interprètent différemment des nombres __normaux__ la valeur d'un champ d'exposant.
 Rappelons que les nombres __normaux__ interprètent la valeur de leur champ d'exposant $E$ suivant le calcul $\left(E - B\right)$, avec le terme $B$ qui représente le biais du champ d'exposant.
 Si les nombres __dénormaux__ suivaient la même interprétation, alors le champ d'exposant de ces nombres interpréterait la valeur $\left(0 - B\right)$ ; car je vous rappelle que le champ d'exposant des __dénormaux__ ne peut qu'être nul.
@@ -91,7 +93,16 @@ En bref, rappelez-vous du fait que la __continuité de codage__ entre les nombre
 Nous verrons dans un chapitre ultérieur en quoi consiste réelement cette __continuité de codage__ et en quoi est-ce que cette interprétation est absolument indispensable.
 
 
+//
 
+Rappelons que la plage de codage du champs d'exposant des nombres _normaux_ est de $\left[1;\left(2^N - 1\right)\right[$, avec $N$ le nombre de bits du champs.
+Le codage d'un nombre _dénormalisé_ se démarque de celui d'un nombre _normalisé_, par le fait que le champs d'exposant doit être obligatoirement nul.
+
+La valeur que représente le champs d'exposant $E$ d'un nombre _normalisé_ se calcul comme suit $\left(E - biais\right)$.
+En outre, la valeur qu'interprète le champs d'exposant d'un nombre _dénormalisé_ est la plus petite puissance dont peut faire usage un nombre _normalisé_.
+Autrement dit, le champs d'exposant des nombres _dénormaux_ représente la valeur $\left(1 - biais\right)$.
+Nous verrons plus bas dans le chapitre du nom de "_La continuité de représentation entre les nombres normaux et dénormaux_", qu'il existe une continuité de codage assez fondamentale entre les nombres _normaux_ et _dénormaux_.
+Nous devons cette continuité de codage aux interprétations distinctes que l'ont fait des champs d'exposant des nombres _normaux_ et _dénormaux_.
 
 //
 
