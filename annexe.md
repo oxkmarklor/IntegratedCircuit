@@ -90,6 +90,8 @@ Nous verrons pourquoi plus tard.
 
 ### Plage de codage et interprétation de la valeur du champ de mantisse tronquée des nombres dénormaux
 
+/* ré-introduire au fonctionnement du standard IEEE-754 pour justifier l'interprétation spéciale du champ de mantisse tronquée des nombres dénormaux (raisonnement : le champ de mantisse tronquée code des valeurs plus petite que ne le permet un significande ...) */
+
 
 // la continuité de codage entre normaux et dénormaux
 
