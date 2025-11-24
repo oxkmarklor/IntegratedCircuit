@@ -90,9 +90,11 @@ Nous verrons pourquoi plus tard.
 
 ### Plage de codage et interprétation de la valeur du champ de mantisse tronquée des nombres dénormaux
 
-A ce stade, nous savons ce que le codage des nombres __dénormaux__ requière d'un champ d'exposant, mais il faut ajouter à cela le fait que le champ de mantisse tronquée associé doive coder un nombre de l'intervalle $\left]0;1\right[$.
-Rappelons que le codage de certaine valeur a été prédéfini par le standard IEEE-754, en l'occurrence, parmis ces dernières figure le codage de la valeur zéro.
-Dans les faits, il s'avère que cette valeur ainsi que les nombres __dénormaux__ partagent une unique plage de codage dans le champ d'exposant ; d'où le fait que la plage de codage du champ de mantisse tronquée des nombres __dénormaux__ soit restreinte, ceci permet de départager les nombres __dénormaux__ du codage de la valeur zéro.
+A ce stade, nous savons ce que le codage des nombres __dénormaux__ requière d'un champ d'exposant, mais il faut ajouter à cela le fait que le champ de mantisse tronquée associé doive coder, dans les limites du possible, un nombre réel de l'intervalle $\left]0;1\right[$.
+En outre, rappelez-vous du fait que les formats IEEE-754 codent quelques valeurs exceptionnelles dont la valeur zéro, en l'occurrence, il s'avère que cette dernière ainsi que les nombres __dénormaux__ codent la même valeur dans leur champ d'exposant.
+Cela explique le fait que le plage de codage du champ de mantisse tronquée des nombres __dénormaux__, figurant ci-dessus, soit restreinte ; permettant ainsi de départager le codage des nombres __dénormaux__ de celui du zéro.
+
+// disclaimer zéro
 
 //
 
