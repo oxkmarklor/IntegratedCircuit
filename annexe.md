@@ -41,7 +41,7 @@ Il s'avère que les nombres __normaux__ se contentent d'interprèter tel quel la
 
 ### Plage de codage et interprétation de la valeur du champ de mantisse tronquée des nombres normaux
 
-Il s'avère que les nombres __normaux__ se distinguent des autres nombres par la valeur que code leur champ d'exposant, ce qui insinue que la plage de codage du champ mantisse tronquée des nombres __normaux__ n'est pas restreinte.
+Il s'avère que les nombres __normaux__ se distinguent des autres nombres par la valeur que code leur champ d'exposant, ce qui insinue que la plage de codage du champ de mantisse tronquée des nombres __normaux__ n'est pas restreinte.
 Pour le dire autrement, un nombre __normalisé__ a un champ de mantisse tronquée qui, dans les limites du possible, peut coder n'importe quel nombre réel de l'intervalle $\left[0;1\right[$.
 
 Cherchons désormais à comprendre en quoi les nombres __normaux__ suivent une approche standard dans l'interprétation de la valeur de leur champ de mantisse tronquée.
@@ -89,6 +89,15 @@ Pour le dire autrement, le champ d'exposant de tout nombre __dénormalisé__ int
 Nous verrons pourquoi plus tard.
 
 ### Plage de codage et interprétation de la valeur du champ de mantisse tronquée des nombres dénormaux
+
+A ce stade, nous savons ce que le codage des nombres __dénormaux__ requière d'un champ d'exposant, mais il faut ajouter à cela le fait que le champ de mantisse tronquée associé doive coder un nombre de l'intervalle $\left]0;1\right[$.
+Il s'avère que ...
+
+Comme nous pouvons l'observer avec l'intervalle figurant ci-dessus
+
+
+Il s'avère que les nombres __dénormaux__ ne se distinguent pas par la valeur que code leur champ d'exposant, ce qui insinue que la plage de codage du champ de mantisse tronquée des nombres __dénormaux__ est restreinte.
+Pour le dire autrement, un nombre __normalisé__ a un champ de mantisse tronquée qui, dans les limites du possible, peut coder n'importe quel nombre réel de l'intervalle $\left[0;1\right[$.
 
 /* ré-introduire au fonctionnement du standard IEEE-754 pour justifier l'interprétation spéciale du champ de mantisse tronquée des nombres dénormaux (raisonnement : le champ de mantisse tronquée code des valeurs plus petite que ne le permet un significande ...) */
 
