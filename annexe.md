@@ -100,6 +100,13 @@ Nous parlerons ultérieurement du codage de la valeur zéro dans un chapitre dé
 Il s'avère que les nombres __dénormaux__ ne se distinguent pas par la valeur que code leur champ d'exposant, ce qui insinue que la plage de codage du champ de mantisse tronquée des nombres __dénormaux__ est restreinte.
 Pour le dire autrement, un nombre __normalisé__ a un champ de mantisse tronquée qui, dans les limites du possible, peut coder n'importe quel nombre réel de l'intervalle $\left[0;1\right[$.
 
+///
+
+l'interprétation du champ de mantisse tronquée est de 0 + T.
+
+interprétation d'un nombre normalisé par le standard IEEE-754 (1 + T) * 2^E et d'un nombre dénormalisé T * 2^E, expliquer pourquoi (T * 2^E < (1 + T) * 2^E).
+
+
 /* ré-introduire au fonctionnement du standard IEEE-754 pour justifier l'interprétation spéciale du champ de mantisse tronquée des nombres dénormaux (raisonnement : le champ de mantisse tronquée code des valeurs plus petite que ne le permet un significande ...) */
 
 
