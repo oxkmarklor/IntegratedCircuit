@@ -95,12 +95,8 @@ En outre, rappelez-vous du fait que les formats IEEE-754 codent quelques valeurs
 C'est ce qui explique le fait que la plage de codage du champ de mantisse tronquée des nombres __dénormaux__ soit restreinte, permettant ainsi de départager le codage d'un nombre __dénormalisé__ de celui d'un zéro.
 Nous parlerons ultérieurement du codage de la valeur zéro dans un chapitre dédié.
 
-//
-
-Il s'avère que les nombres __dénormaux__ ne se distinguent pas par la valeur que code leur champ d'exposant, ce qui insinue que la plage de codage du champ de mantisse tronquée des nombres __dénormaux__ est restreinte.
-Pour le dire autrement, un nombre __normalisé__ a un champ de mantisse tronquée qui, dans les limites du possible, peut coder n'importe quel nombre réel de l'intervalle $\left[0;1\right[$.
-
-///
+De plus, il a été fait mention ci-dessus que : les nombres __dénormaux__ interprètent différemment des nombres __normaux__ la valeur que codent les champs de mantisse tronquée.
+Le champ de mantisse tronquée des nombres __dénormaux__ ne représente que des nombres fractionnaire ...
 
 l'interprétation du champ de mantisse tronquée est de 0 + T.
 
