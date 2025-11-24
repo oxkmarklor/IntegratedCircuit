@@ -465,8 +465,8 @@ Enfin, pour finir, la gestion des opérandes dans les unités de calcul arithmé
 Comme dit dans le chapitre "_Le standard IEEE-754_", le circuit électronique à l'étude dans ce document compare deux opérandes $\alpha$ et $\beta$ entre elle, deux opérandes de format Half Precision.
 Je vous rappel que le circuit, du nom de Floating Point Substractor Configuration Unit (ou FPS Configuartion Unit), ne prend en charge que ce format pour des raisons de complexité de schématisation.
 
-Ladite comparaison est une vérification de supériorité stricte de la valeur absolu de l'un des deux opérandes envers la valeur absolu de l'autre.
-Le FPS Configuration Unit n'utilise que la valeur absolu de ses opérandes $\vert \ \alpha \ \vert$ et $\vert \ \beta \ \vert$, le bit de signe des opérandes (bit de poids $15$) n'est pas transmis au circuit.
+Ladite comparaison est une évaluation de supériorité stricte de la valeur absolu de l'un des deux opérandes envers la valeur absolu de l'autre.
+Le FPS Configuration Unit n'utilise que la valeur absolu de ses opérandes $\alpha$ et $\beta$, le bit de signe des opérandes (bit de poids $15$) n'est pas transmis au circuit.
 Je vous renvoie vers le chapitre "_Le standard IEEE-754_", si vous souhaitez visualiser l'illustration du codage Half Precision d'un nombre.
 
 En bref, le circuit peut être mis dans deux états, l'état de _point terminal_ et de _point non terminal_.
@@ -480,9 +480,9 @@ Cette section aborde les sujets suivants:
   - Les états de points terminaux et non terminaux dans lesquels peut se retrouvé le circuit.
   - La raison du traitement prioritaire des champs d'exposant vis à vis des champs de mantisse tronquée.
 
-Nous savons que le FPS Configuration Unit effectue une vérification de supériorité stricte de la valeur absolu de l'un de ses deux opérandes, envers la valeur absolu de l'autre.
+Nous savons que le FPS Configuration Unit effectue une évaluation de supériorité stricte de la valeur absolu de l'un de ses deux opérandes, envers la valeur absolu de l'autre.
 Cependant, le tout est de savoir comment est ce que cette comparaison peut réelement avoir lieu, sachant que les opérandes du circuit sont composés de multiples champs.
-La réponse est simple, il suffit d'effectuer une vérification de supériorité stricte entre les champs d'exposant $E$ des opérandes $\vert \ \alpha \ \vert$ et $\vert \ \beta \ \vert$, et de faire de même entre les champs de mantisse tronquée $T_{\alpha}$ et $T_{\beta}$.
+La réponse est simple, il suffit d'effectuer une évaluation de supériorité stricte entre les champs d'exposant $E$ des opérandes $\vert \ \alpha \ \vert$ et $\vert \ \beta \ \vert$, et de faire de même entre les champs de mantisse tronquée $T_{\alpha}$ et $T_{\beta}$.
 Nous verrons ci-bas comment cela se traduit.
 
 Au travers du chapitre "_le multiplicande_" ainsi que dans les deux sections qui le suivent, nous avons vus que la représentation en écriture scientifique binaire du nombre $F$ en valeur absolu était $\vert \ F \vert = \left(S \times 2^{-c}\right)$.
@@ -506,9 +506,9 @@ Au contraire, le circuit n'est pas dans un état de point terminal mais de point
 Du point de vue des mathématiques, les opérandes du circuit $\left(\left(1 + T_{\alpha}\right) \times \ 2^{E_{\alpha}}\right)$ et $\left(\left(1 + T_{\beta}\right) \times \ 2^{E_{\beta}}\right)$ partagent la même puissance $2$.
 Ce qui force le circuit à devoir traité les champs de mantisse tronquée $T_{\alpha}$ ainsi que $T_{\beta}$ pour pouvoir générer un résultat.
 
-Nous l'aurons compris, le circuit atteint un état de point non terminal lorsque le traitement des champs d'exposant $E_{\alpha}$ et $E_{\beta}$ ne l'amène à un état de point terminal.
+Nous l'aurons compris, le circuit atteint un état de point non terminal lorsque le traitement des champs d'exposant $E_{\alpha}$ et $E_{\beta}$ ne l'amène pas à un état de point terminal.
 Dans un état de point non terminal, le circuit doit effectuer le traitement des champs de mantisse tronquée $T_{\alpha}$ ainsi que $T_{\beta}$.
-Comme cela a été dit en introduction de cette section, le traitement des champs de mantisse tronquée, à l'instar de celui des champs d'exposant, consiste en une vérification de supériorité stricte entre la valeur des champs.
+Comme cela a été dit en introduction de cette section, le traitement des champs de mantisse tronquée, à l'instar de celui des champs d'exposant, consiste en une évaluation de supériorité stricte entre la valeur des champs.
 
 # Démonstration mathématique
 
