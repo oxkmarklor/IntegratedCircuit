@@ -27,7 +27,7 @@ N'oubliez pas que l'une des différences majeur entre les nombres __normaux__ et
 
 Nous allons parler de tout cela au travers de deux sections dédiés au champ d'exposant et au champ de mantisse tronquée des nombres __normaux__.
 
-### Plage de codage et interprétation de la valeur du champ d'exposant des nombres normaux
+### Plage de codage et interprétation du champ d'exposant des nombres normaux
 
 Pour coder un nombre __normalisé__, il faut s'assurer du fait que le champ d'exposant qui compose tout format IEEE-754, d'une taille de $N$ bits, code l'un des entiers de l'intervalle $\left[1;2^N - 1\right[$.
 Comme cela a été mentionné en amont, cette plage de codage semble bien restreinte par les nombres __dénormaux__ ainsi que par les quelques valeurs exceptionnelles que peuvent coder ces même formats.
@@ -39,7 +39,7 @@ Dans les grandes lignes, cette section explique ce qu'est l'__encodage par biais
 Rappelez-vous en, nous y apprenons que tout champ d'exposant $E$ code un entier naturel auquel nous soustrayons un biais $B$, qui est un autre entier naturel, afin de calculer la valeur que le champ d'exposant interprète $\left(E - B\right)$.
 Il s'avère que les nombres __normaux__ se contentent d'interprèter tel quel la valeur de leur champ d'exposant, ce qui n'est pas le cas des nombres __dénormaux__ mais nous en parlerons plus tard ; d'où le fait qu'il soit dit que les nombres __normaux__ interprètent de façon standard la valeur des champs d'exposant.
 
-### Plage de codage et interprétation de la valeur du champ de mantisse tronquée des nombres normaux
+### Plage de codage et interprétation du champ de mantisse tronquée des nombres normaux
 
 Il s'avère que les nombres __normaux__ se distinguent des autres nombres par la valeur que code leur champ d'exposant, ce qui insinue que la plage de codage du champ de mantisse tronquée des nombres __normaux__ n'est pas restreinte.
 Pour le dire autrement, un nombre __normalisé__ a un champ de mantisse tronquée qui, dans les limites du possible, peut coder n'importe quel nombre réel de l'intervalle $\left[0;1\right[$.
@@ -76,7 +76,7 @@ Néanmoins, sachez que nous devons cette __continuité de codage__ au fait que l
 
 Au travers des deux sections suivantes, nous abordons le sujet du codage ainsi que de l'interprétation de la valeur que code le champ d'exposant et le champ de mantisse tronquée des nombres __dénormaux__.
 
-### Plage de codage et interprétation de la valeur du champ d'exposant des nombres dénormaux
+### Plage de codage et interprétation du champ d'exposant des nombres dénormaux
 
 Le codage des nombres __dénormaux__ requière (entre autre) que le champ d'exposant qui compose tout format IEEE-754 soit nul.
 
@@ -88,13 +88,12 @@ Dans les faits, il s'avère que le champ d'exposant des nombres __dénormaux__ e
 Pour le dire autrement, le champ d'exposant de tout nombre __dénormalisé__ interprète le plus petit exposant pouvant être interprété par le champ d'exposant des nombres __normaux__.
 Nous verrons pourquoi plus tard.
 
-### Plage de codage et interprétation de la valeur du champ de mantisse tronquée des nombres dénormaux
+### Plage de codage et interprétation du champ de mantisse tronquée des nombres dénormaux
 
 A ce stade, nous savons ce que le codage des nombres __dénormaux__ requière d'un champ d'exposant, mais il faut ajouter à cela le fait que le champ de mantisse tronquée associé doive coder, dans les limites du possible, un nombre réel de l'intervalle $\left]0;1\right[$.
 En outre, rappelez-vous du fait que les formats IEEE-754 codent quelques valeurs exceptionnelles dont la valeur zéro, en l'occurrence, il s'avère que cette dernière ainsi que les nombres __dénormaux__ codent la même valeur dans leur champ d'exposant.
-Cela explique le fait que le plage de codage du champ de mantisse tronquée des nombres __dénormaux__, figurant ci-dessus, soit restreinte ; permettant ainsi de départager le codage des nombres __dénormaux__ de celui du zéro.
-
-// disclaimer zéro
+C'est ce qui explique le fait que la plage de codage du champ de mantisse tronquée des nombres __dénormaux__ soit restreinte, permettant ainsi de départager le codage d'un nombre __dénormalisé__ de celui d'un zéro.
+Nous parlerons ultérieurement du codage de la valeur zéro dans un chapitre dédié.
 
 //
 
