@@ -101,12 +101,18 @@ Cela concerne bien évidemment tout les nombres __dénormaux__ de tout les forma
 Voyons désormais en quoi l'interprétation des champs de mantisse tronquée des nombres __dénormaux__ permet à ces nombres de coder des valeurs plus proche de $0$ que ne le
 peuvent les nombres __normaux__.
 
+// reprendre ici
+
 Pour commencer, rappelons que tout les formats définis par le standard IEEE-754 représentent la valeur absolue d'un nombre __normalisé__ par le biais de la formule $\left(\left(1 + T\right) \times 2^E\right)$, nous en parlions vers le début du document.
-La représentation de la valeur absolue d'un nombre __dénormalisé__ s'obtient, quant à elle, par le biais de cet autre formule $\left(\left(0 + T\right) \times 2^E\right)$.
+La valeur absolue d'un nombre __dénormalisé__ est représentée, quant à elle, par le biais de cet autre formule $\left(\left(0 + T\right) \times 2^E\right)$.
+Au stade où nous en sommes dans le document, nous savons que la valeur qu'interprète le champ de mantisse tronquée d'un nombre __normalisé__ $\left(1 + T\right)$, est strictement supérieur à la valeur qu'interprète le champ de mantisse tronquée d'un nombre __dénormalisé__ $\left(0 + T\right)$.
+Souvenez-vous du fait que la plage de codage du champ de mantisse tronquée $T$ d'un nombre __normalisé__ est de $\left[0;1\right[$, tandis que celle du champ de mantisse tronquée $T$ d'un nombre __dénormalisé__ est à $\left]0;1\right[$.
+De surcroît, nous savons que le champ d'exposant $E$ de tout nombre __dénormalisé__ interprète le plus petit exposant pouvant être interprété par le champ d'exposant des nombres __normaux__.
+Pour le dire autrement, dans le meilleur des cas la puissance $2^E$ d'un nombre __dénormalisé__ est égale à celle des nombres __normaux__, ce qui nous fait dire que quoi qu'il advienne $\left(\left(1 + T\right) \times 2^E\right) \gt \left(\left(0 + T\right) \times 2^E\right)$.
 
+Voilà en quoi l'interprétation de la valeur du champ de mantisse tronquée des nombres __dénormaux__ impacte les valeurs que codent ces nombres.
 
-
-
+// parler du cas des nombres négatifs?
 
 
 
