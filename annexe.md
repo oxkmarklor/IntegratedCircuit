@@ -93,7 +93,11 @@ Nous verrons pourquoi plus tard.
 A ce stade, nous savons ce que le codage des nombres __dénormaux__ requière d'un champ d'exposant, mais il faut ajouter à cela le fait que le champ de mantisse tronquée associé doive coder, dans les limites du possible, un nombre réel de l'intervalle $\left]0;1\right[$.
 
 En outre, il a été fait mention ci-dessus que : les nombres __dénormaux__ interprètent différemment des nombres __normaux__ la valeur que codent les champs de mantisse tronquée.
-Il s'avère que les champs de mantisse tronquée des nombres __dénormaux__ codent et interprètent à la fois un nombre réel qui est supérieur à $0$ et inférieur à $1$, comme le formalise la plage de codage figurant ci-dessus ; ce qui insinue que la partie entière de ces nombres est toujours composée d'un seul et unique bit à $0$.
+Il s'avère que les champs de mantisse tronquée des nombres __dénormaux__ codent et interprètent à la fois un nombre réel de l'intervalle $\left]0;1\right[$ ; ce qui insinue que la partie entière d'un tel nombre est toujours composée d'un seul et unique bit à $0$.
+Le standard IEEE-754 a donc fait le choix de ne pas coder ce bit dans le champ de mantisse tronquée des nombres __dénormaux__, cela permet un gain de précision sur le codage des nombres interprétés.
+
+// de la manière la plus formelle un champ de mantisse tronquée T vaut (0 + T).
+
 Le standard IEEE-754 a fait le choix de ne pas coder la partie entière de ces nombres dans les champs de mantisse tronquée des __dénormaux__, cela permettant un gain de précision d'un bit sur le codage dudit nombre dans le champ.
 
 // reprendre ici
