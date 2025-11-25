@@ -98,21 +98,16 @@ Cela permet un gain de précision sur le codage ainsi que l'interprétation de c
 Formellement, la valeur qu'interprète le champ de mantisse tronquée $T$ d'un nombre __dénormalisé__ est de $\left(0 + T\right)$, avec le terme $0$ qui représente la valeur du bit de la partie entière du nombre qui est codée.
 Cela concerne bien évidemment tout les nombres __dénormaux__ de tout les formats définis par le standard IEEE-754.
 
-N'oublions pas que cette interprétation du champ de mantisse tronquée des nombres __dénormaux__ est la raison pour laquelle ces nombres codent des valeurs plus proche de $0$ que ne le permettent les nombres __normaux__.
-Tâchons de comprendre pourquoi avec les lignes suivantes.
+Voyons désormais en quoi l'interprétation des champs de mantisse tronquée des nombres __dénormaux__ permet à ces nombres de coder des valeurs plus proche de $0$ que ne le
+peuvent les nombres __normaux__.
 
-Rappelez-vous du fait que le FPS Configuration Unit n'utilise que la valeur absolue de ses opérandes
+Pour commencer, rappelons que tout les formats définis par le standard IEEE-754 représentent la valeur absolue d'un nombre __normalisé__ par le biais de la formule $\left(\left(1 + T\right) \times 2^E\right)$, nous en parlions vers le début du document.
+La représentation de la valeur absolue d'un nombre __dénormalisé__ s'obtient, quant à elle, par le biais de cet autre formule $\left(\left(0 + T\right) \times 2^E\right)$.
 
 
-Dans le chapitre "_Les points terminaux et non terminaux_" en début de document nous expliquions que les nombres, alors implicitement considéré comme __normaux__, étaient représentés par le biais du calcul suivant $\pm \left(\left(1 + T\right) \times 2^E\right)$.
 
-///
 
-Ladite comparaison est une évaluation de supériorité stricte de la valeur absolu de l'un des deux opérandes envers la valeur absolu de l'autre.
-Le FPS Configuration Unit n'utilise que la valeur absolu de ses opérandes $\alpha$ et $\beta$, le bit de signe des opérandes (bit de poids $15$) n'est pas transmis au circuit.
-Je vous renvoie vers le chapitre "_Le standard IEEE-754_", si vous souhaitez visualiser l'illustration du codage Half Precision d'un nombre.
 
-///
 
 
 // interprétation d'un nombre normalisé par le standard IEEE-754 (1 + T) * 2^E et d'un nombre dénormalisé T * 2^E, expliquer pourquoi (T * 2^E < (1 + T) * 2^E).
