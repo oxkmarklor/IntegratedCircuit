@@ -96,10 +96,13 @@ En outre, il a été fait mention ci-dessus que : les nombres __dénormaux__ int
 Il s'avère que les champs de mantisse tronquée des nombres __dénormaux__ interprètent tel quel la valeur qu'ils codent ; compte tenu du fait que ces valeurs auront toujours une partie entière composée d'un seul et unique bit à $0$, ce bit n'est alors pas codé dans le champs de mantisse tronquée.
 Cela permet un gain de précision sur le codage ainsi que l'interprétation de ces nombres.
 Formellement, la valeur qu'interprète le champ de mantisse tronquée $T$ d'un nombre __dénormalisé__ est de $\left(0 + T\right)$, avec le terme $0$ qui représente la valeur du bit de la partie entière du nombre qui est codée.
-Cela concerne bien évidemment tout les nombres __dénormaux__, de tout format IEEE-754.
+Cela concerne bien évidemment tout les nombres __dénormaux__, pour tout format IEEE-754.
+
+N'oublions pas que cette interprétation du champ de mantisse tronquée des nombres __dénormaux__ est la raison pour laquelle ces nombres codent des valeurs plus proche de $0$ que ne le permettent les nombres __normaux__.
+Dans le chapitre "_Les points terminaux et non terminaux_" en début de document nous expliquions que les nombres, alors implicitement considéré comme __normaux__, étaient représentés par le biais du calcul suivant $\pm \left(\left(1 + T\right) \times 2^E\right)$.
 
 
-interprétation d'un nombre normalisé par le standard IEEE-754 (1 + T) * 2^E et d'un nombre dénormalisé T * 2^E, expliquer pourquoi (T * 2^E < (1 + T) * 2^E).
+// interprétation d'un nombre normalisé par le standard IEEE-754 (1 + T) * 2^E et d'un nombre dénormalisé T * 2^E, expliquer pourquoi (T * 2^E < (1 + T) * 2^E).
 
 
 /* ré-introduire au fonctionnement du standard IEEE-754 pour justifier l'interprétation spéciale du champ de mantisse tronquée des nombres dénormaux (raisonnement : le champ de mantisse tronquée code des valeurs plus petite que ne le permet un significande ...) */
