@@ -103,13 +103,13 @@ peuvent les nombres __normaux__.
 
 Pour commencer, rappelons que tout les formats définis par le standard IEEE-754 représentent la valeur absolue d'un nombre __normalisé__ par le biais de la formule $\left(\left(1 + T\right) \times 2^E\right)$, nous en parlions au début du document.
 La valeur absolue d'un nombre __dénormalisé__ est représentée, quant à elle, par le biais de cette autre formule $\left(\left(0 + T\right) \times 2^E\right)$.
-Au point où nous en sommes dans le document, nous savons que les valeurs qu'interprètent les champs de mantisse tronquée des nombres __normaux__ $\left(1 + T\right)$, sont strictement supérieur aux valeurs qu'interprètent ces même champs dans les cas des nombres __dénormaux__ $\left(0 + T\right)$.
+Au point où nous en sommes dans le document, nous savons que les valeurs qu'interprètent les champs de mantisse tronquée des nombres __normaux__ $\left(1 + T\right)$, sont strictement supérieurs aux valeurs qu'interprètent ces même champs dans les cas des nombres __dénormaux__ $\left(0 + T\right)$.
+Ceci est dû fait que la plage de codage du champ de mantisse tronquée $T$ des nombres __normaux__ est de $\left[0;1\right[$, tandis que celle du champ de mantisse tronquée $T$ des nombres __dénormaux__ est de $\left]0;1\right[$.
+Enfin, rappelez-vous du fait que le champ d'exposant $E$ des nombres __dénormaux__ interprète le plus petit exposant pouvant être interprété par le champ d'exposant $E$ des nombres __normaux__.
+Pour le dire autrement, nous comprenons que le champ d'exposant des nombres __dénormaux__ interprète un exposant qui est inférieur ou égale à celui qu'interprète le champ d'exposant des nombres __normaux__.
+Par conséquent, avec tout ce que nous avons vu, nous savons dès lors que quoiqu'il arrive $\left(\left(1 + T\right) \times 2^E\right) \gt \left(\left(0 + T\right) \times 2^E\right)$.
 
-//reprendre ici
-
-Souvenez-vous du fait que la plage de codage du champ de mantisse tronquée $T$ d'un nombre __normalisé__ est de $\left[0;1\right[$, tandis que celle du champ de mantisse tronquée $T$ d'un nombre __dénormalisé__ est à $\left]0;1\right[$.
-De surcroît, nous savons que le champ d'exposant $E$ de tout nombre __dénormalisé__ interprète le plus petit exposant pouvant être interprété par le champ d'exposant des nombres __normaux__.
-Pour le dire autrement, dans le meilleur des cas la puissance $2^E$ d'un nombre __dénormalisé__ est égale à celle des nombres __normaux__, ce qui nous fait dire que quoi qu'il advienne $\left(\left(1 + T\right) \times 2^E\right) \gt \left(\left(0 + T\right) \times 2^E\right)$.
+//
 
 Voilà en quoi l'interprétation de la valeur du champ de mantisse tronquée des nombres __dénormaux__ impacte les valeurs que codent ces nombres.
 
