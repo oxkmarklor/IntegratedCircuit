@@ -103,6 +103,14 @@ peuvent les nombres __normaux__.
 Pour commencer, rappelons que tout les formats définis par le standard IEEE-754 représentent la valeur absolue d'un nombre __normalisé__ par le biais de la formule $\left(\left(1 + T\right) \times 2^E\right)$, nous en parlions au début du document.
 La valeur absolue d'un nombre __dénormalisé__ est représentée, quant à elle, par le biais de cette autre formule $\left(\left(0 + T\right) \times 2^E\right)$.
 
+Rappelez-vous du fait que le champ de mantisse tronquée $T$ des nombres __normaux__ a une plage de codage de $\left[0;1\right[$, mais aussi du fait que la valeur qu'interprète un tel champ soit de $\left(1 + T\right)$, ou autrement dit qu'elle soit comprise dans l'intervalle $\left[1;2\right[$.
+De plus, nous venons de voir que le champ de mantisse tronquée $T$ des nombres __dénormaux__ a une plage de codage de $\left]0;1\right[$, et que la valeur qu'interprète ledit champ est exactement celle qu'il code soit $\left(0 + T\right)$, ce qui veut dire que la valeur interprétée par le champ est comprise dans l'intervalle $\left]0;1\right[$.
+
+
+
+
+// v1
+
 Au point où nous en sommes dans le document, nous savons que les valeurs qu'interprètent les champs de mantisse tronquée des nombres __normaux__ $\left(1 + T\right)$, sont strictement supérieurs aux valeurs qu'interprètent ces même champs dans le cas des nombres __dénormaux__ $\left(0 + T\right)$.
 Effectivement, la plage de codage du champ de mantisse tronquée $T$ des nombres __normaux__ est de $\left[0;1\right[$, tandis que celle du champ de mantisse tronquée $T$ des nombres __dénormaux__ est de $\left]0;1\right[$.
 Enfin, rappelez-vous du fait que le champ d'exposant $E$ des nombres __dénormaux__ interprète le plus petit exposant pouvant être interprété par le champ d'exposant $E$ des nombres __normaux__.
@@ -111,10 +119,7 @@ Par conséquent, nous en déduisons que les nombres __normaux__ sont quoi qu'il 
 
 // parler du cas des nombres négatifs?
 
-// support des nombres dénormaux par le circuit, méthodologie de traitement
-
-
-// interprétation d'un nombre normalisé par le standard IEEE-754 (1 + T) * 2^E et d'un nombre dénormalisé T * 2^E, expliquer pourquoi (T * 2^E < (1 + T) * 2^E).
+/// support des nombres dénormaux par le circuit, méthodologie de traitement
 
 ## La continuité de codage entre les nombres normaux et dénormaux
 
