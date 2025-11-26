@@ -93,19 +93,20 @@ Nous verrons pourquoi plus tard.
 A ce stade, nous savons ce que le codage des nombres __dénormaux__ requière d'un champ d'exposant, mais il faut ajouter à cela le fait que le champ de mantisse tronquée associé doive coder, dans les limites du possible, un nombre réel de l'intervalle $\left]0;1\right[$.
 
 En outre, il a été fait mention ci-dessus que : les nombres __dénormaux__ interprètent différemment des nombres __normaux__ la valeur que codent les champs de mantisse tronquée.
-Il s'avère que les champs de mantisse tronquée des nombres __dénormaux__ interprètent tel quel la valeur qu'ils codent ; compte tenu du fait que ces valeurs auront toujours une partie entière composée d'un seul et unique bit à $0$, ce bit n'est alors pas codé dans le champs de mantisse tronquée.
+Il s'avère que les champs de mantisse tronquée des nombres __dénormaux__ interprètent tel quel la valeur qu'ils codent ; compte tenu du fait que ces valeurs ont toujours une partie entière composée d'un seul et unique bit à $0$, ce bit n'est alors pas codé dans le champs de mantisse tronquée.
 Cela permet un gain de précision sur le codage ainsi que l'interprétation de ces nombres.
-Formellement, la valeur qu'interprète le champ de mantisse tronquée $T$ d'un nombre __dénormalisé__ est de $\left(0 + T\right)$, avec le terme $0$ qui représente la valeur du bit de la partie entière du nombre qui est codée.
+Formellement, la valeur qu'interprète le champ de mantisse tronquée $T$ d'un nombre __dénormalisé__ est de $\left(0 + T\right)$, avec le terme $0$ qui représente la valeur du bit de la partie entière du nombre qui est codé.
 Cela concerne bien évidemment tout les nombres __dénormaux__ de tout les formats définis par le standard IEEE-754.
 
-Voyons désormais en quoi l'interprétation des champs de mantisse tronquée des nombres __dénormaux__ permet à ces nombres de coder des valeurs plus proche de $0$ que ne le
+Voyons désormais en quoi cette interprétation du champ de mantisse tronquée des nombres __dénormaux__ permet à ces nombres de coder des valeurs plus proche de $0$ que ne le
 peuvent les nombres __normaux__.
 
-// reprendre ici
+Pour commencer, rappelons que tout les formats définis par le standard IEEE-754 représentent la valeur absolue d'un nombre __normalisé__ par le biais de la formule $\left(\left(1 + T\right) \times 2^E\right)$, nous en parlions au début du document.
+La valeur absolue d'un nombre __dénormalisé__ est représentée, quant à elle, par le biais de cette autre formule $\left(\left(0 + T\right) \times 2^E\right)$.
+Au point où nous en sommes dans le document, nous savons que les valeurs qu'interprètent les champs de mantisse tronquée des nombres __normaux__ $\left(1 + T\right)$, sont strictement supérieur aux valeurs qu'interprètent ces même champs dans les cas des nombres __dénormaux__ $\left(0 + T\right)$.
 
-Pour commencer, rappelons que tout les formats définis par le standard IEEE-754 représentent la valeur absolue d'un nombre __normalisé__ par le biais de la formule $\left(\left(1 + T\right) \times 2^E\right)$, nous en parlions vers le début du document.
-La valeur absolue d'un nombre __dénormalisé__ est représentée, quant à elle, par le biais de cet autre formule $\left(\left(0 + T\right) \times 2^E\right)$.
-Au stade où nous en sommes dans le document, nous savons que la valeur qu'interprète le champ de mantisse tronquée d'un nombre __normalisé__ $\left(1 + T\right)$, est strictement supérieur à la valeur qu'interprète le champ de mantisse tronquée d'un nombre __dénormalisé__ $\left(0 + T\right)$.
+//reprendre ici
+
 Souvenez-vous du fait que la plage de codage du champ de mantisse tronquée $T$ d'un nombre __normalisé__ est de $\left[0;1\right[$, tandis que celle du champ de mantisse tronquée $T$ d'un nombre __dénormalisé__ est à $\left]0;1\right[$.
 De surcroît, nous savons que le champ d'exposant $E$ de tout nombre __dénormalisé__ interprète le plus petit exposant pouvant être interprété par le champ d'exposant des nombres __normaux__.
 Pour le dire autrement, dans le meilleur des cas la puissance $2^E$ d'un nombre __dénormalisé__ est égale à celle des nombres __normaux__, ce qui nous fait dire que quoi qu'il advienne $\left(\left(1 + T\right) \times 2^E\right) \gt \left(\left(0 + T\right) \times 2^E\right)$.
