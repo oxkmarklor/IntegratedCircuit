@@ -96,7 +96,7 @@ En outre, il a été fait mention ci-dessus que : les nombres __dénormaux__ int
 Il s'avère que les champs de mantisse tronquée des nombres __dénormaux__ interprètent tel quel la valeur qu'ils codent ; compte tenu du fait que ces valeurs ont toujours une partie entière composée d'un seul et unique bit à $0$, ce bit n'est alors pas codé dans le champs de mantisse tronquée.
 Cela permet un gain de précision sur le codage ainsi que l'interprétation de ces nombres.
 Formellement, la valeur qu'interprète le champ de mantisse tronquée $T$ d'un nombre __dénormalisé__ est de $\left(0 + T\right)$, avec le terme $0$ qui représente la valeur du bit de la partie entière du nombre qui est codé.
-Cela concerne bien évidemment tout les nombres __dénormaux__ de tout les formats définis par le standard IEEE-754.
+Tout cela concerne bien évidemment les nombres __dénormaux__ de l'ensemble des formats définis par le standard IEEE-754.
 
 Voyons désormais en quoi cette interprétation du champ de mantisse tronquée des nombres __dénormaux__ permet à ces nombres de coder des valeurs plus proche de $0$ que ne le
 peuvent les nombres __normaux__.
@@ -109,9 +109,11 @@ Nous comprenons donc que la valeur qu'interprète le champ de mantisse tronquée
 
 Enfin, rappelez-vous du fait que le champ d'exposant $E$ des nombres __dénormaux__ interprète le plus petit exposant pouvant être interprété par le champ d'exposant $E$ des nombres __normaux__.
 Pour le dire autrement, nous comprenons que le champ d'exposant des nombres __normaux__ interprète un exposant qui est supérieur ou égale à celui qu'interprète le champ d'exposant des nombres __dénormaux__.
-Pour conclure, nous en déduisons que la valeur absolue de tout nombre __dénormalisé__ est plus proche de $0$ que la valeur absolue de tout nombre __normalisé__ ; ceci est dû au fait que $\left(\left(1 + T\right) \times 2^E\right) \gt \left(\left(0 + T\right) \times 2^E\right)$.
+Pour conclure, nous en déduisons que la valeur absolue de tout nombre __dénormalisé__ est plus proche de $0$ que la valeur absolue de tout nombre __normalisé__ ; ce que nous remarquons par le fait que $\left(\left(1 + T\right) \times 2^E\right) \gt \left(\left(0 + T\right) \times 2^E\right)$.
 
-// parler du cas des nombres négatifs?
+Vous noterez que ce qui a été dit ci-dessus est valable pour tout les nombres __normalisés__ ainsi que __dénormalisés__, qu'ils soient positifs ou négatifs.
+
+### La prise en charge des nombres dénormaux par le Floating Point Substractor Configuration Unit
 
 /// support des nombres dénormaux par le circuit, méthodologie de traitement
 
