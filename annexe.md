@@ -100,21 +100,18 @@ Cela concerne bien évidemment tout les nombres __dénormaux__ de tout les forma
 
 Voyons désormais en quoi cette interprétation du champ de mantisse tronquée des nombres __dénormaux__ permet à ces nombres de coder des valeurs plus proche de $0$ que ne le
 peuvent les nombres __normaux__.
-
 Pour commencer, rappelons que tout les formats définis par le standard IEEE-754 représentent la valeur absolue d'un nombre __normalisé__ par le biais de la formule $\left(\left(1 + T\right) \times 2^E\right)$, nous en parlions au début du document.
 La valeur absolue d'un nombre __dénormalisé__ est représentée, quant à elle, par le biais de cette autre formule $\left(\left(0 + T\right) \times 2^E\right)$.
-Au point où nous en sommes dans le document, nous savons que les valeurs qu'interprètent les champs de mantisse tronquée des nombres __normaux__ $\left(1 + T\right)$, sont strictement supérieurs aux valeurs qu'interprètent ces même champs dans les cas des nombres __dénormaux__ $\left(0 + T\right)$.
-Ceci est dû fait que la plage de codage du champ de mantisse tronquée $T$ des nombres __normaux__ est de $\left[0;1\right[$, tandis que celle du champ de mantisse tronquée $T$ des nombres __dénormaux__ est de $\left]0;1\right[$.
+
+Au point où nous en sommes dans le document, nous savons que les valeurs qu'interprètent les champs de mantisse tronquée des nombres __normaux__ $\left(1 + T\right)$, sont strictement supérieurs aux valeurs qu'interprètent ces même champs dans le cas des nombres __dénormaux__ $\left(0 + T\right)$.
+Effectivement, la plage de codage du champ de mantisse tronquée $T$ des nombres __normaux__ est de $\left[0;1\right[$, tandis que celle du champ de mantisse tronquée $T$ des nombres __dénormaux__ est de $\left]0;1\right[$.
 Enfin, rappelez-vous du fait que le champ d'exposant $E$ des nombres __dénormaux__ interprète le plus petit exposant pouvant être interprété par le champ d'exposant $E$ des nombres __normaux__.
-Pour le dire autrement, nous comprenons que le champ d'exposant des nombres __dénormaux__ interprète un exposant qui est inférieur ou égale à celui qu'interprète le champ d'exposant des nombres __normaux__.
-Par conséquent, avec tout ce que nous avons vu, nous savons dès lors que quoiqu'il arrive $\left(\left(1 + T\right) \times 2^E\right) \gt \left(\left(0 + T\right) \times 2^E\right)$.
-
-//
-
-Voilà en quoi l'interprétation de la valeur du champ de mantisse tronquée des nombres __dénormaux__ impacte les valeurs que codent ces nombres.
+Pour le dire autrement, nous comprenons que le champ d'exposant des nombres __normaux__ interprète un exposant qui est supérieur ou égale à celui qu'interprète le champ d'exposant des nombres __dénormaux__.
+Par conséquent, nous en déduisons que les nombres __normaux__ sont quoi qu'il arrive plus éloignés de $0$ que ne le sont les nombres __dénormaux__ car $\left(\left(1 + T\right) \times 2^E\right) \gt \left(\left(0 + T\right) \times 2^E\right)$.
 
 // parler du cas des nombres négatifs?
 
+// support des nombres dénormaux par le circuit, méthodologie de traitement
 
 
 // interprétation d'un nombre normalisé par le standard IEEE-754 (1 + T) * 2^E et d'un nombre dénormalisé T * 2^E, expliquer pourquoi (T * 2^E < (1 + T) * 2^E).
