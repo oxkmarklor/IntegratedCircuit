@@ -115,7 +115,9 @@ Vous noterez que ce qui a été dit ci-dessus est valable pour tout les nombres 
 
 ### La prise en charge des nombres dénormaux par le Floating Point Substractor Configuration Unit
 
-/// support des nombres dénormaux par le circuit, méthodologie de traitement
+Il s'avère que les nombres __dénormaux__ peuvent être utilisés dans des calculs arithmétique, à l'instar des nombres __normaux__, ce qui insinue que (entre autre) les circuits soustracteurs de nombre flottant prennent en charge le traitement de ces derniers.
+Cela pousse le FPS Configuration Unit, qui rappelons-le contrôle ces circuits de calculs, à en faire de même.
+
 
 ## La continuité de codage entre les nombres normaux et dénormaux
 
