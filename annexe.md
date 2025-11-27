@@ -113,10 +113,11 @@ Pour conclure, nous en déduisons que la valeur absolue de tout nombre __dénorm
 
 Vous noterez que ce qui a été dit ci-dessus est valable pour tout les nombres __normalisés__ ainsi que __dénormalisés__, qu'ils soient positifs ou négatifs.
 
-### La prise en charge des nombres dénormaux par le Floating Point Substractor Configuration Unit
+## La prise en charge des nombres dénormaux par le FPS Configuration Unit
 
-Il s'avère que les nombres __dénormaux__ peuvent être utilisés dans des calculs arithmétique, à l'instar des nombres __normaux__, ce qui insinue que (entre autre) les circuits soustracteurs de nombre flottant prennent en charge le traitement de ces derniers.
-Cela pousse le FPS Configuration Unit, qui rappelons-le contrôle ces circuits de calculs, à en faire de même.
+Il s'avère que les nombres __dénormaux__ peuvent être utilisés dans des calculs arithmétique, à l'instar des nombres __normaux__, ce qui implique (entre autre) le fait que les circuits soustracteurs flottants prennent en charge ces derniers.
+Cela force donc le Floating Point Substractor Configuration Unit, qui rappelons-le contrôle ces unités de calculs, à en faire de même.
+
 
 
 ## La continuité de codage entre les nombres normaux et dénormaux
