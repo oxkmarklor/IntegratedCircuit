@@ -115,11 +115,9 @@ Vous noterez que ce qui a été dit ci-dessus est valable pour tout les nombres 
 
 ## La prise en charge des nombres dénormaux par le FPS Configuration Unit
 
-Dans les grandes lignes, sachez que l'une des fonctionnalités du FPS Configuration Unit est d'acheminer convenablement les opérandes d'un calcul arithmétique flottant, sur les bonnes entrées d'un soustracteur flottant.
-Je vous redirige vers la documentation dédiée au circuit si vous souhaitez plus d'information.
-
-Quoi qu'il en soit, l'unité de calcul que prend en charge le FPS Confirguration Unit permet bien évidemment d'effectuer des calculs sur des opérandes __normalisés__ d'une part, mais aussi sur des opérandes __dénormalisés__ d'une autre ; rappelons que les nombres __normaux__ et __dénormaux__ codent simplement des valeurs distinctes.
-Par conséquent, cela force également le Floating Point Substractor Configuration Unit à prendre en charge les nombres __dénormaux__.
+Sachez que le Floating Point Substractor Configuration Unit conditionne l'exécution des calculs qu'effectue un circuit soustracteur flottant, je vous redirige vers la documentation dédiée au circuit si vous souhaitez plus d'information à ce sujet.
+En bref, ledit soustracteur flottant permet bien évidemment d'effectuer des calculs sur des opérandes __normalisés__ d'une part, ainsi que __dénormalisés__ d'une autre.
+Ce qui de ce fait, force le FPS Configuration Unit à prendre en charge les nombres __normaux__, ce que nous savons déjà, mais également les nombres __dénormaux__.
 
 
 
