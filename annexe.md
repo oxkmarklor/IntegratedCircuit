@@ -115,11 +115,12 @@ Vous noterez que ce qui a été dit ci-dessus est valable pour tout les nombres 
 
 ## La prise en charge des nombres dénormaux par le FPS Configuration Unit
 
-Sachez que le Floating Point Substractor Configuration Unit conditionne l'exécution des calculs qu'effectue un circuit soustracteur flottant, je vous redirige vers la documentation dédiée au circuit si vous souhaitez plus d'information à ce sujet.
+Sachez que le Floating Point Substractor Configuration Unit conditionne les calculs qu'effectue un circuit soustracteur flottant, je vous redirige vers la documentation dédiée au circuit si vous souhaitez plus d'information à ce sujet.
 En bref, ledit soustracteur flottant permet bien évidemment d'effectuer des calculs sur des opérandes __normalisés__ d'une part, ainsi que __dénormalisés__ d'une autre.
-Ce qui de ce fait, force le FPS Configuration Unit à prendre en charge les nombres __normaux__, ce que nous savons déjà, mais également les nombres __dénormaux__.
+De ce fait, cela force le FPS Configuration Unit à prendre en charge les nombres __normaux__, ce que nous savons déjà, mais également les nombres __dénormaux__.
 
-
+Les soustracteurs flottants supportent les nombres __dénormaux__ car ce sont tout simplement des nombres, certes différents de ceux que codent les nombres __normaux__, mais ce sont des nombres comme les autres.
+Nous verrons ultérieurement que ce n'est cependant pas le cas de certaines des valeurs exceptionnelles que peuvent coder les divers formats définis par le standard IEEE-754, ces dernières n'étant pas perçu comme des nombres à part entière.
 
 ## La continuité de codage entre les nombres normaux et dénormaux
 
