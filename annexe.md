@@ -115,12 +115,13 @@ Vous noterez que ce qui a été dit ci-dessus est valable pour tout les nombres 
 
 ## La prise en charge des nombres dénormaux par le FPS Configuration Unit
 
-Sachez que le Floating Point Substractor Configuration Unit conditionne les calculs qu'effectue un circuit soustracteur flottant, je vous redirige vers la documentation dédiée au circuit si vous souhaitez plus d'information à ce sujet.
-En bref, ledit soustracteur flottant permet bien évidemment d'effectuer des calculs sur des opérandes __normalisés__ d'une part, ainsi que __dénormalisés__ d'une autre.
-De ce fait, cela force le FPS Configuration Unit à prendre en charge les nombres __normaux__, ce que nous savons déjà, mais également les nombres __dénormaux__.
+Comme son nom l'indique, le Floating Point Substractor Configuration Unit paramètre les calculs qu'effectue un soustracteur flottant, je vous renvoie vers la documentation dédiée au circuit si vous souhaitez plus d'information à ce sujet.
+Pour ce faire, le FPS Configuration Unit doit avoir accès aux opérandes du soustracteur flottant dont il est le tuteur.
+En l'occurrence, il s'avère que les soustracteurs flottants prennent en charge des opérandes __normalisés__ d'une part, ainsi que __dénormalisés__ d'une autre ; ce qui veut dire que le FPS Configuration Unit doit supporter des opérandes __normalisés__, ce que nous savons déjà, mais aussi __dénormalisés__. 
 
-Les soustracteurs flottants supportent les nombres __dénormaux__ car ce sont tout simplement des nombres, certes différents de ceux que codent les nombres __normaux__, mais ce sont des nombres comme les autres.
-Nous verrons ultérieurement que ce n'est cependant pas le cas de certaines des valeurs exceptionnelles que peuvent coder les divers formats définis par le standard IEEE-754, ces dernières n'étant pas perçu comme des nombres à part entière.
+Par ailleurs, les soustracteurs flottants supportent les nombres __dénormaux__ car ce sont tout simplement des nombres, certes différents de ceux que codent les nombres __normaux__, mais ce sont des nombres tout de même.
+Plus tard, nous verrons que certaines des valeurs exceptionnelles que peuvent coder les formats IEEE-754 ne sont pas considérés comme des nombres à part entière.
+Il se trouve que les unités de calculs gèrent ces valeurs là de façon standardisé grâce à l'IEEE-754, de sorte à ce que le FPS Configuration Unit n'ait pas besoin de prendre en charge ces dernières.
 
 ## La continuité de codage entre les nombres normaux et dénormaux
 
