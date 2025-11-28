@@ -123,12 +123,14 @@ Par ailleurs, les soustracteurs flottants supportent les nombres __dénormaux__ 
 Plus tard, nous verrons que certaines des valeurs exceptionnelles que peuvent coder les formats IEEE-754 ne sont pas considérés comme des nombres à part entière.
 Il se trouve que les unités de calculs gèrent ces valeurs là de façon standardisé grâce à l'IEEE-754, de sorte à ce que le FPS Configuration Unit n'ait pas besoin de prendre en charge ces dernières.
 
-Précisons que les soustracteurs flottants supportent les calculs sur deux opérandes __dénormalisés__, mais également sur un opérande __normalisé__ ainsi qu'un autre __dénormalisé__.
+Précisons que les soustracteurs flottants supportent les calculs sur deux opérandes __dénormalisés__, mais également sur un opérande __normalisé__ ainsi qu'un second __dénormalisé__.
 Les sections suivantes expliquent comment est-ce que le FPS Configuration Unit gère ces divers cas, cela vient en complément de la démonstration mathématique.
 
-### La gestion d'un opérande normalisé ainsi que dénormalisé
+### Gestion d'un opérande normalisé ainsi que dénormalisé
 
 
+
+### Gestion de deux opérandes dénormalisés
 
 ## La continuité de codage entre les nombres normaux et dénormaux
 
