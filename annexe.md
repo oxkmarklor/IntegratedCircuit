@@ -96,7 +96,7 @@ En outre, il a été fait mention ci-dessus que : les nombres __dénormaux__ int
 Il s'avère que les champs de mantisse tronquée des nombres __dénormaux__ interprètent tel quel la valeur qu'ils codent ; compte tenu du fait que ces valeurs ont toujours une partie entière composée d'un seul et unique bit à $0$, ce bit n'est alors pas codé dans le champs de mantisse tronquée.
 Cela permet un gain de précision sur le codage ainsi que l'interprétation de ces nombres.
 Formellement, la valeur qu'interprète le champ de mantisse tronquée $T$ d'un nombre __dénormalisé__ est de $\left(0 + T\right)$, avec le terme $0$ qui représente la valeur du bit de la partie entière du nombre qui est codé.
-Tout cela concerne bien évidemment les nombres __dénormaux__ de l'ensemble des formats définis par le standard IEEE-754.
+Ce qui vient d'être dit concerne les nombres __dénormaux__ de l'ensemble des formats définis par le standard IEEE-754.
 
 Voyons désormais en quoi cette interprétation du champ de mantisse tronquée des nombres __dénormaux__ permet à ces nombres de coder des valeurs plus proche de $0$ que ne le
 peuvent les nombres __normaux__.
@@ -123,7 +123,12 @@ Par ailleurs, les soustracteurs flottants supportent les nombres __dénormaux__ 
 Plus tard, nous verrons que certaines des valeurs exceptionnelles que peuvent coder les formats IEEE-754 ne sont pas considérés comme des nombres à part entière.
 Il se trouve que les unités de calculs gèrent ces valeurs là de façon standardisé grâce à l'IEEE-754, de sorte à ce que le FPS Configuration Unit n'ait pas besoin de prendre en charge ces dernières.
 
-Précisons que les soustracteurs flottants peuvent traiter  
+Précisons que les soustracteurs flottants supportent les calculs sur deux opérandes __dénormalisés__, mais également sur un opérande __normalisé__ ainsi qu'un autre __dénormalisé__.
+Les sections suivantes expliquent comment est-ce que le FPS Configuration Unit gère ces divers cas, cela vient en complément de la démonstration mathématique.
+
+### La gestion d'un opérande normalisé ainsi que dénormalisé
+
+
 
 ## La continuité de codage entre les nombres normaux et dénormaux
 
