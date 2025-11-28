@@ -98,13 +98,13 @@ Cela permet un gain de précision sur le codage ainsi que l'interprétation de c
 Formellement, la valeur qu'interprète le champ de mantisse tronquée $T$ d'un nombre __dénormalisé__ est de $\left(0 + T\right)$, avec le terme $0$ qui représente la valeur du bit de la partie entière du nombre qui est codé.
 Ce qui vient d'être dit concerne les nombres __dénormaux__ de l'ensemble des formats définis par le standard IEEE-754.
 
-Voyons désormais en quoi cette interprétation du champ de mantisse tronquée des nombres __dénormaux__ permet à ces nombres de coder des valeurs plus proche de $0$ que ne le
-peuvent les nombres __normaux__.
+Dans les faits, comme le mentionne l'introduction de cet annexe, c'est grâce à cette interprétation du champ de mantisse tronquée des nombres __dénormaux__ que ces nombres codent des valeurs plus proche de $0$ que ne le permettent les nombres __normaux__.
+Voyons en quoi l'interprétation du champ de mantisse tronquée des nombres __dénormaux__ joue un rôle dans tout cela.
 Pour commencer, rappelons que tout les formats définis par le standard IEEE-754 représentent la valeur absolue d'un nombre __normalisé__ par le biais de la formule $\left(\left(1 + T\right) \times 2^E\right)$, nous en parlions au début du document.
 La valeur absolue d'un nombre __dénormalisé__ est représentée, quant à elle, par le biais de cette autre formule $\left(\left(0 + T\right) \times 2^E\right)$.
 
-Rappelez-vous du fait que le champ de mantisse tronquée $T$ des nombres __normaux__ a une plage de codage de $\left[0;1\right[$, mais aussi du fait que la valeur qu'interprète un tel champ soit de $\left(1 + T\right)$, ou autrement dit qu'elle soit comprise dans l'intervalle $\left[1;2\right[$.
-De plus, nous venons de voir que le champ de mantisse tronquée $T$ des nombres __dénormaux__ a une plage de codage de $\left]0;1\right[$, et que la valeur qu'interprète ledit champ est exactement celle qu'il code soit $\left(0 + T\right)$, ce qui veut dire que la valeur interprétée par le champ est comprise dans l'intervalle $\left]0;1\right[$.
+Rappelez-vous du fait que le champ de mantisse tronquée $T$ d'un nombre __normalisé__ a une plage de codage de $\left[0;1\right[$, mais aussi du fait que la valeur qu'interprète un tel champ soit de $\left(1 + T\right)$, ou autrement dit qu'elle soit comprise dans l'intervalle $\left[1;2\right[$.
+De plus, nous venons de voir que le champ de mantisse tronquée $T$ d'un nombre __dénormalisé__ a une plage de codage de $\left]0;1\right[$, et que la valeur qu'interprète ledit champ est exactement celle qu'il code soit $\left(0 + T\right)$, ainsi la valeur interprétée par le champ est comprise dans l'intervalle $\left]0;1\right[$.
 Nous comprenons donc que la valeur qu'interprète le champ de mantisse tronquée d'un nombre __normalisé__, c'est à dire $\left(1 + T\right)$, est supérieur à celle qu'interprète le champ de mantisse tronquée d'un nombre __dénormalisé__ $\left(0 + T\right)$.
 
 Enfin, rappelez-vous du fait que le champ d'exposant $E$ des nombres __dénormaux__ interprète le plus petit exposant pouvant être interprété par le champ d'exposant $E$ des nombres __normaux__.
