@@ -98,10 +98,12 @@ Cela permet un gain de précision sur le codage ainsi que l'interprétation de c
 Formellement, la valeur qu'interprète le champ de mantisse tronquée $T$ d'un nombre __dénormalisé__ est de $\left(0 + T\right)$, avec le terme $0$ qui représente la valeur du bit de la partie entière du nombre qui est codé.
 Ce qui vient d'être dit concerne les nombres __dénormaux__ de l'ensemble des formats définis par le standard IEEE-754.
 
+// retourner ici après avoir relu la démonstration
+
 Dans les faits, comme le mentionne l'introduction de cet annexe, c'est grâce à cette interprétation du champ de mantisse tronquée des nombres __dénormaux__ que ces nombres codent des valeurs plus proche de $0$ que ne le permettent les nombres __normaux__.
 Voyons en quoi l'interprétation du champ de mantisse tronquée des nombres __dénormaux__ joue un rôle dans tout cela.
-Pour commencer, rappelons que tout les formats définis par le standard IEEE-754 représentent la valeur absolue d'un nombre __normalisé__ $\alpha$ par le biais de la formule $\left(\left(1 + T_{\alpha}\right) \times 2^{E_{\alpha}}\right)$, nous en parlions au début du document.
-La valeur absolue d'un nombre __dénormalisé__ $\beta$ est représentée, quant à elle, par le biais de cette autre formule $\left(\left(0 + T_{\beta}\right) \times 2^{E_{\beta}}\right)$.
+Pour commencer, sachez que tout format défini par le standard IEEE-754 représente la valeur absolue d'un nombre __normalisé__ $\alpha$ par le biais de la formule $\left(\left(1 + T_{\alpha}\right) \times 2^{\left(E_{\alpha} - B\right)}\right)$.
+La valeur absolue d'un nombre __dénormalisé__ $\beta$ est représentée, quant à elle, par le biais de cette autre formule $\left(\left(0 + T_{\beta}\right) \times 2^{\left(1 - B\right)}\right)$.
 
 Rappelez-vous du fait que le champ de mantisse tronquée $T_{\alpha}$ d'un nombre __normalisé__ $\alpha$ a une plage de codage de $\left[0;1\right[$, mais aussi du fait que la valeur qu'interprète un tel champ soit de $\left(1 + T_{\alpha}\right)$, ou autrement dit qu'elle soit comprise dans l'intervalle $\left[1;2\right[$.
 De plus, nous venons de voir que le champ de mantisse tronquée $T_{\beta}$ d'un nombre __dénormalisé__ $\beta$ a une plage de codage de $\left]0;1\right[$, et que la valeur qu'interprète ledit champ est exactement celle qu'il code soit $\left(0 + T_{\beta}\right)$, ainsi la valeur interprétée par le champ est comprise dans l'intervalle $\left]0;1\right[$.
@@ -110,7 +112,7 @@ Nous comprenons donc que la valeur $\left(1 + T_{\alpha}\right)$ qu'interprète 
 // à relire
 
 Enfin, rappelez-vous du fait que le champ d'exposant d'un nombre __dénormalisé__ interprète la valeur $\left(1 - B\right)$, ce qui est la valeur du plus petit exposant pouvant être interprété par le champ d'exposant d'un nombre __normalisé__ ; le terme $B$ représente le biais $\left(2^{\left(N - 1\right)} - 1\right)$ d'un champ d'exposant de $N$ bits.
-Autrement dit, cela insinue que le champ d'exposant $E_{\alpha}$ d'un nombre __normalisé__ $\alpha$ interprète un exposant qui est supérieur ou égale à celui qu'interprète le champ d'exposant $E_{\beta}$ d'un nombre __dénormalisé__ $\beta$, soit $\left(E_{\alpha} - B\right) \ge \left(1 - B\right)$.
+Pour le dire autrement, cela insinue que le champ d'exposant $E_{\alpha}$ d'un nombre __normalisé__ $\alpha$ interprète un exposant qui est supérieur ou égale à celui qu'interprète le champ d'exposant $E_{\beta}$ d'un nombre __dénormalisé__ $\beta$, soit $\left(E_{\alpha} - B\right) \ge \left(1 - B\right)$.
 Pour conclure, nous en déduisons que la valeur absolue de tout nombre __dénormalisé__ $\beta$ est plus proche de $0$ que la valeur absolue de tout nombre __normalisé__ $\alpha$, ce que nous remarquons par le fait que $\left(\left(1 + T_{\alpha}\right) \times 2^{\left(E_{\alpha} - B\right)}\right) \gt \left(\left(0 + T_{\beta}\right) \times 2^{\left(1 - B\right)}\right)$.
 
 Vous noterez que ce qui a été dit ci-dessus est valable pour tout les nombres __normalisés__ ainsi que __dénormalisés__, qu'ils soient positifs ou négatifs.
