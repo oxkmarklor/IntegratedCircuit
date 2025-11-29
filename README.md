@@ -459,6 +459,7 @@ En effet, la valeur de l'exposant $-c$ croît de façon linéaire tandis que la 
 Ce qui insinue que le champ d'exposant devrait être composé de (beaucoup) plus de bits en moyenne pour coder la valeur de la puissance $2^{-c}$, que pour coder l'exposant $-c$ lui-même.
 Aussi, situation assez paradoxale, il faudrait que les puissances de $2$ soient codées sous la forme de nombre à virgule dans le champ d'exposant, afin de pouvoir prendre en charge les puissances de $2$ négatives que peut interpréter le multiplicande.
 Enfin, pour finir, la gestion des opérandes dans les unités de calcul arithmétique flottantes (FPUs) serait probablement plus complexe avec un champ d'exposant codant une puissance de $2$ : l'alignement des virgules de deux opérandes à soustraire serait plus complexe par exemple.
+D'où le fait que le champ d'exposant ne code que l'exposant $-c$ du multiplicande.
 
 # Introduction au Floating Point Substractor Configuration Unit
 
