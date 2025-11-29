@@ -4,9 +4,9 @@ Ce document est une preuve mathématique du bon fonctionnement d'un circuit éle
 J'ai conceptualisé ce circuit dans le but de résoudre un problème concernant le traitement des nombres flottants dans les unités de calculs flottantes (FPUs) d'un ordinateur.
 La micro-architecture du circuit électronique ainsi que les compromis de conceptualisation, le problème que cherche à résoudre le FPS Configuration Unit ou encore la solution qu'il apporte, sont autant de sujets dont je parle dans une documentation dédiée au circuit.
 
-Pour les curieux, si vous souhaitez voir à quoi ressemble le circuit, sachez qu'il y a un fichier du nom de _16-bit_FPU_configuration_unit_ qui le schématise.
+Pour les curieux, sachez que dans ce repo figure un fichier du nom de _16-bit_floating_point_substractor_configuration_unit_ qui schématise le circuit.
 Le circuit a été directement schématisé à base de transisor, principalement en technologie CMOS (Complementary Metal Oxide Semi-conductor), permettant ainsi de mettre en évidence certains compromis sur le choix des portes logiques.
-Disons que l'apparence abrupte du schéma rend hommage à la (relative) complexité algorithmique du Floating Point Configuartion Unit.
+Disons que l'apparence abrupte du schéma rend hommage à la (relative) complexité algorithmique du Floating Point Substractor Configuration Unit.
 
 Le document va même au-delà de la démonstration mathématique du circuit ; il parle des sujets fondamentaux sur lesquels la démonstration mathématique ainsi que le circuit reposent.
 Ce qui explique la présence de la table des matières suivante:
