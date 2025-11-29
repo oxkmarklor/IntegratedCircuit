@@ -542,7 +542,7 @@ L'opération logique __Not__ $\left(\overline{x}\right)$, ne prend quant à elle
 Pour finir, passons à l'opération logique __Nimply__.
 Cette opération est défini en tant que fonction car elle n'est pas très connu et ne possède pas son propre symbole calculatoire.
 Ladite fonction a deux paramètres $x$ et $y$, et retourne un bit de résultat. 
-Selon le corps de la fonction, nous en déduisons qu'elle ne retourne un bit à $1$ que lorsque le bit sur son paramètre $x$ vaut $1$ quand celui sur $y$ est à $0$, sinon le bit retourné vaut $0$.
+Selon le corps de la fonction, nous en déduisons qu'elle ne retourne un bit à $1$ que lorsque le bit sur son paramètre $x$ vaut $1$ et celui sur $y$ est à $0$, sinon le bit retourné vaut $0$.
 
 $$Nimply \ \left(x, \ y\right) \rightarrow \ x \ \wedge \ \overline{y}$$
 
@@ -566,7 +566,7 @@ Avec ce que nous avons vu de l'opération logique $Nimply$ dans la section préc
 Pour exprimer les choses différemment $\left(E_{\beta i} \times 2^i\right) \gt \left(E_{\alpha i} \times 2^i\right)$.
 En plus de cela, rappelez vous de la section "_L'encodage par biais du champs d'exposant_".
 Cette section explique entre autre que, je cite "_la valeur de n'importe quel bit à_ $1$ _de poids_ $i$ _dans un champs d'exposant, est strictement supérieur à la somme des valeurs des bits de poids inférieur à_ $i$".
-Cela traduit l'idée que du moment où $\left(\tau_i = 1\right)$ pour tout $i \in \left[11;14\right]$, nous pouvons être sûrs que $\left(E_{\beta i} \times 2^i\right) \gt \sum_{\sigma = i - 1}^{10} \left(E_{\alpha\sigma} \times 2^{\sigma}\right)$.
+Cela traduit l'idée que du moment où $\left(\tau_i = 1\right)$, pour tout $i \in \left[11;14\right]$, nous pouvons être sûrs que $\left(E_{\beta i} \times 2^i\right) \gt \sum_{\sigma = i - 1}^{10} \left(E_{\alpha\sigma} \times 2^{\sigma}\right)$.
 
 Pour conclure, nous pouvons être certains que du moment où $\left(\tau_i = 1\right)$ pour tout $i \in \left[10;14\right]$, alors $\left(E_{\beta i} \times 2^i\right) \gt \sum_i^{10} \left(E_{\alpha i} \times 2^i\right)$.
 Pour le dire autrement, du bit de poids $i$ jusqu'au bit de poids $10$ le champs d'exposant $E_{\beta}$ est supérieur au champs d'exposant $E_{\alpha}$.
