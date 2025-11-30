@@ -560,7 +560,7 @@ $$\forall \ i \in \left[10;14\right], \quad Write \ \left(\tau_i, \ Nimply \ \le
 
 Nous effectuons l'opération logique $Nimply$ sur chaque bit de même poids des champs d'exposant $E_{\alpha}$ et $E_{\beta}$.
 La variable $\tau$ (tau) représente un champs binaire de $15$ bits, dont les poids vont de $0$ à $14$.
-Chaque bit de résultat d'une opération $Nimply$ sur $E_{\beta i}$ et $E_{\alpha i}$ pour $i \in \left[10;14\right]$, est inscrit dans $\tau_i$.
+Chaque bit de résultat d'une opération $Nimply$ sur $E_{\beta i}$ et $E_{\alpha i}$, pour $i \in \left[10;14\right]$, est inscrit dans $\tau_i$.
 
 Avec ce que nous avons vu de l'opération logique $Nimply$ dans la section précédente, nous comprenons que du moment où $\left(\tau_i = 1\right)$ pour tout poids $i \in \left[10;14\right]$ alors $\left(E_{\beta i} = 1\right)$ tandis que $\left(E_{\alpha i} = 0\right)$.
 Pour exprimer les choses différemment $\left(E_{\beta i} \times 2^i\right) \gt \left(E_{\alpha i} \times 2^i\right)$.
