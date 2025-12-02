@@ -62,23 +62,22 @@ Néanmoins, parmi les multiples encodages existants, le plus connu de tous porte
 
 ## L'encodage Binary Unsigned
 
-Le _Binary Unsigned_ est un encodage permettant de coder des nombres entiers naturels.
-Techniquement, cet encodage se base sur les même primitives mathématiques que la base décimale pour représenter des nombres.
-En décimale, chaque chiffre qui compose la valeur $103$ est le facteur d'une puissance de $10_{10}$, puis nous faisons la somme des produits pour représenter le nombre sous-jacent.
-Veuillez noter que l'indice $X_{10}$ représente la base numérique dans laquelle le nombre $X$ est écrit, $10$ pour la base décimale et $2$ pour la base binaire.
+Le __Binary Unsigned__ est un encodage permettant de coder des nombres entiers naturels, le codage de ces nombres n'inclus pas de signe $\pm$.
+Cet encodage utilise la notation positionnelle, exactement comme le fait la base décimale pour représenter des nombres.
+Par exemple, en décimale chacun des chiffres qui compose la valeur $103$ est le facteur d'une puissance de $10_{10}$, la représentation du nombre sous-jacent est alors issu de  la somme de ces produits.
+Veuillez noter que la syntaxe d'indexation $X_{10}$ représente la base numérique dans laquelle le nombre $X$ est écrit, $10$ pour la base décimale et $2$ pour la base binaire.
 Cette syntaxe ne sera utilisée que lorsqu'il y aura une ambiguïté dans l'écriture d'un nombre composé uniquement de $0$ et de $1$.
 
 $$103 \ = \left(1 \times 10^2 + 0 \times 10^1 + 3 \times 10^0\right)$$
 
 Le chiffre des unités $3$ est facteur de $10$ à la puissance $0$ ; le chiffre des dizaines $0$ est facteur de $10$ à la puissance $1$, tandis que le chiffre des centaines $1$ est le facteur de $10$ à la puissance $2$.
-Remarquons que la valeur des puissances commence à partir de $0$ pour le chiffre des unités et croît en fonction de la position du chiffre.
-Mais ceci n'est pas propre à la base décimale.
+Remarquez que le chiffre des unités (qui occupe une certaine position dans le nombre) est facteur d'une puissance de $10_{10}$ qui est dix fois inférieur à celle dont le chiffre des dizaines (le chiffre de la position suivante) est le facteur.
+D'une part cela se généralise à l'ensemble des chiffres d'un nombre décimale, et d'une autre ceci n'est pas propre à la base décimale elle-même.
 
 La base binaire (ou base $2$) permet également de représenter des nombres d'une façon équivalente, mais comme mentionné plus haut, qui dit représentation de nombre dit encodage de nombre.
-Vous l'aurez compris, l'encodage qui permet de représenter des nombres de la sorte est le __Binary Unsigned__.
-Chaque bit d'un nombre écrit en __Binary Unsigned__ est le facteur d'une puissance de $2$ positive ou nul.
-Le nombre ainsi représenté se calcule par la somme de chacun de ces produits.
-De plus, la représentation des nombres n'est pas "_signé_", ce qui veut dire qu'il n'y a pas de bit permettant le codage explicite d'un signe $\pm$, et ainsi les nombres codés sont naturellement positifs.
+Comme dit précédemment, l'encodage permettant de représenter des nombres de la sorte est le __Binary Unsigned__.
+Pour faire le parallèle avec ce que nous venons de voir de la base décimale, chaque bit d'un nombre codé en __Binary Unsigned__ est le facteur d'une puissance de $2$ positive ou nul ; la valeur ainsi représentée se calcule par le biais de la somme de ces produits.
+En outre, les nombres codés n'ont pas de signe $\pm$ représenté par un bit, d'où le fait que cet encodage ne permette que le codage de nombres naturels. 
 
 $$103 \ = \ 1100111_2 \ = \left(1 \times 2^6 + 1 \times 2^5 + 0 \times 2^4 + 0 \times 2^3 + 1 \times 2^2 + 1 \times 2^1 + 1 \times 2^0\right)$$
 
