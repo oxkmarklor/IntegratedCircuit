@@ -1,21 +1,21 @@
 Bonjour,
 
-Ce document est une preuve mathématique du bon fonctionnement d'un circuit électronique du nom de Floating Point Substractor Configuration Unit ou FPS Configuration Unit.
+Ce document est une preuve mathématique du fonctionnement d'un circuit électronique du nom de Floating Point Substractor Configuration Unit ou FPS Configuration Unit.
 J'ai conceptualisé ce circuit dans le but de résoudre un problème concernant le traitement des nombres flottants dans les unités de calculs flottantes (FPUs) d'un ordinateur.
 La micro-architecture du circuit électronique ainsi que les compromis de conceptualisation, le problème que cherche à résoudre le FPS Configuration Unit ou encore la solution qu'il apporte, sont autant de sujets dont je parle dans une documentation dédiée au circuit.
 
 Pour les curieux, sachez que dans ce repo figure un fichier du nom de _16-bit_floating_point_substractor_configuration_unit_ qui schématise le circuit.
-Le circuit a été directement schématisé à base de transisor, principalement en technologie CMOS (Complementary Metal Oxide Semi-conductor), permettant ainsi de mettre en évidence certains compromis sur le choix des portes logiques.
+Le circuit a été directement schématisé à base de transisor, principalement en technologie CMOS (Complementary Metal Oxide Semi-conductor), ceci permettant de mettre en évidence certains compromis sur le choix des portes logiques.
 Disons que l'apparence abrupte du schéma rend hommage à la (relative) complexité algorithmique du Floating Point Substractor Configuration Unit.
 
-Le document va même au-delà de la démonstration mathématique du circuit ; il parle des sujets fondamentaux sur lesquels la démonstration mathématique ainsi que le circuit reposent.
-Ce qui explique la présence de la table des matières suivante:
-  - Les encodages
+Le document va même au-delà de la démonstration mathématique du circuit ; il parle des sujets fondamentaux sur lesquels le circuit et sa démonstration mathématique reposent.
+Ce qui explique la présence de la table des matières suivante :
+  - __Les encodages__
     - L'encodage Binary Unsigned
       - Une propriété du Binary Unsigned qui est fondamentale à la démonstration
     - Les nombres à virgule flottante
       - L'étymologie du terme de nombre à virgule flottante
-  - L'écriture scientifique binaire
+  - __L'écriture scientifique binaire__
     - Le significande
       - La transformation d'un nombre à virgule flottante en un significande
       - Détail sur le fonctionnement de l'équation
@@ -23,27 +23,27 @@ Ce qui explique la présence de la table des matières suivante:
       - Lorsque le multiplicande multiplie la valeur du significande
       - Lorsque le multiplicande divise la valeur du significande
       - Un autre regard sur le multiplicande
-  - Le standard IEEE-754
+  - __Le standard IEEE-754__
     - Le champ de mantisse tronquée
       - L'encodage du champ de mantisse tronquée
       - Le codage du champ de mantisse tronquée
     - Le champ d'exposant
       - L'encodage par biais du champ d'exposant
       - Le codage du champ d'exposant
-  - Introduction au Floating Point Substractor Configuration Unit
+  - __Introduction au Floating Point Substractor Configuration Unit__
     - Les points terminaux et non terminaux
-  - Démonstration mathématique
+  - __Démonstration mathématique__
     - Définition de quelques opérations fondamentales à la démonstration
-  - Le traitement des champs d'exposant
+  - __Le traitement des champs d'exposant__
     - Les zéros anonymes
       - Les zéros anonymes non capitaux dus au traitement des champs d'exposant
       - Les zéros anonymes capitaux dus au traitement des champs d'exposant
     - L'obtention d'un point non terminal
-  - Le traitement des champs de mantisse tronquée
+  - __Le traitement des champs de mantisse tronquée__
     - Recontextualisation des zéros anonymes capitaux ainsi que non capitaux dus au traitement des champs de mantisse tronquée
       - Les zéros anonymes non capitaux dus au traitement des champs de mantisse tronquée
       - Les zéros anonymes capitaux dus au traitement des champs de mantisse tronquée
-  - Conclusion de la démonstration
+  - __Conclusion de la démonstration__
 
 ...
 
