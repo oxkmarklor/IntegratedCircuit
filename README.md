@@ -62,9 +62,8 @@ Néanmoins, parmi les multiples encodages existants, le plus connu de tous porte
 
 ## L'encodage Binary Unsigned
 
-Le __Binary Unsigned__ est un encodage permettant de coder des nombres entiers naturels, le codage de ces nombres n'inclus pas de signe $\pm$.
-Cet encodage utilise la notation positionnelle, exactement comme le fait la base décimale pour représenter des nombres.
-Par exemple, en décimale chacun des chiffres qui compose la valeur $103$ est le facteur d'une puissance de $10_{10}$, la représentation du nombre sous-jacent est alors issu de  la somme de ces produits.
+Le __Binary Unsigned__ est un encodage permettant de coder des nombres entiers naturels par le biais de la notation positionnelle, exactement comme le fait la base décimale pour représenter des nombres.
+Par exemple, en décimale chacun des chiffres qui compose la valeur $103$ est le facteur d'une puissance de $10_{10}$, la représentation du nombre sous-jacent se calcule comme la somme de ces produits.
 Veuillez noter que la syntaxe d'indexation $X_{10}$ représente la base numérique dans laquelle le nombre $X$ est écrit, $10$ pour la base décimale et $2$ pour la base binaire.
 Cette syntaxe ne sera utilisée que lorsqu'il y aura une ambiguïté dans l'écriture d'un nombre composé uniquement de $0$ et de $1$.
 
@@ -72,23 +71,23 @@ $$103 \ = \left(1 \times 10^2 + 0 \times 10^1 + 3 \times 10^0\right)$$
 
 Le chiffre des unités $3$ est facteur de $10$ à la puissance $0$ ; le chiffre des dizaines $0$ est facteur de $10$ à la puissance $1$, tandis que le chiffre des centaines $1$ est le facteur de $10$ à la puissance $2$.
 Remarquez que le chiffre des unités (qui occupe une certaine position dans le nombre) est facteur d'une puissance de $10_{10}$ qui est dix fois inférieur à celle dont le chiffre des dizaines (le chiffre de la position suivante) est le facteur.
-D'une part cela se généralise à l'ensemble des chiffres d'un nombre décimale, et d'une autre ceci n'est pas propre à la base décimale elle-même.
+Cependant, d'une part cela se généralise à l'ensemble des chiffres d'un nombre décimale, et d'une autre ceci n'est pas propre à la base décimale elle-même.
 
 La base binaire (ou base $2$) permet également de représenter des nombres d'une façon équivalente, mais comme mentionné plus haut, qui dit représentation de nombre dit encodage de nombre.
-Comme dit précédemment, l'encodage permettant de représenter des nombres de la sorte est le __Binary Unsigned__.
-Pour faire le parallèle avec ce que nous venons de voir de la base décimale, chaque bit d'un nombre codé en __Binary Unsigned__ est le facteur d'une puissance de $2$ positive ou nul ; la valeur ainsi représentée se calcule par le biais de la somme de ces produits.
+Vous l'aurez compris, l'encodage permettant de représenter des nombres de la sorte est le __Binary Unsigned__.
+Chaque bit d'un nombre codé en __Binary Unsigned__ est le facteur d'une puissance de $2$ positive ou nul ; le nombre ainsi représenté se calcule par le biais de la somme de ces produits.
 En outre, les nombres codés n'ont pas de signe $\pm$ représenté par un bit, d'où le fait que cet encodage ne permette que le codage de nombres naturels. 
 
 $$103 \ = \ 1100111_2 \ = \left(1 \times 2^6 + 1 \times 2^5 + 0 \times 2^4 + 0 \times 2^3 + 1 \times 2^2 + 1 \times 2^1 + 1 \times 2^0\right)$$
 
 Remarquez que les bits à $0$ n'affectent pas la valeur du nombre, c'est pourquoi vous entendrez souvent dire (y compris dans ce document) que la valeur d'un nombre codé en __Binary Unsigned__ se calcule comme la somme des puissances de $2$ dont le bit est à $1$.
 
-Chaque bit composant un champ binaire a un positionnement qui lui est propre mais il n'existe pas de nom pour ces positions, dans les faits nous ne parlons pas de bit des unités, des dizaines, et ainsi de suite mais plutôt du _poids_ d'un bit.
-Le poids d'un bit fait référence à la puissance de $2$ dont ce bit est facteur, plus un bit est facteur d'une grande puissance et plus son poids est élevé.
-Dans l'illustration ci-dessus, le bit qui multiplie la puissance $2^6$ est de poids $6$ ; la puissance dont est facteur un bit étant exclusive à ce dernier, nous en déduisons que le poids d'un bit peut servir d'identificateur. 
+Chaque bit au sein d'un champ binaire a un positionnement qui lui est propre mais il n'existe pas de nom pour ces positions, dans les faits nous ne parlons pas de bit des unités, des dizaines, et ainsi de suite mais plutôt du _poids_ d'un bit.
+Le poids d'un bit fait référence à la puissance de $2$ dont ce bit est facteur, plus un bit est facteur d'une grande puissance et plus son poids est fort (grand) tandis qu'à l'inverse plus il est facteur d'une petite puissance et plus son poids est faible (petit).
+Dans l'illustration ci-dessus, le bit qui multiplie la puissance $2^6$ est de poids $6$ ; un bit étant facteur d'une puissance $2$ qui lui est propre, nous en déduisons que le poids de ce dernier peut donc servir d'identificateur. 
 
 Par conséquent, il est très commun d'indexer les bits d'un champ par leurs poids ; le bit de poids $N$ fait référence au bit qui est facteur de la puissance $2^N$.
-Il y a cependant quelques termes qui sont rentrés dans le langage commun de l'informatique pour des raisons pratiques, ces termes font référence à des bits d'un poids précis ou ayant une particularité au sein du champ qu'il compose.
+Il y a cependant quelques termes qui sont rentrés dans le langage commun de l'informaticien pour des raisons pratiques, ces termes font référence à des bits d'un poids précis ou ayant une particularité au sein du champ qu'il compose.
 Pour ne citer que les principaux, le terme __Least Significant Bit__ de l'acronyme __LSB__ fait référence au bit de poids le plus faible d'un champ, c'est-à-dire au bit de poids $0$ d'un nombre codé en __Binary Unsigned__.
 A contrario, le terme __Most Significant Bit__ de l'acronyme __MSB__ fait référence au bit de poids le plus fort d'un champ.
 Aussi, il existe les acronymes __LSB1__ et __MSB1__ faisant respectivement référence au bit à $1$ de poids le plus faible et de poids le plus fort d'un champ.
