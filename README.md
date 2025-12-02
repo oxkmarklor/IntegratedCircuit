@@ -105,6 +105,18 @@ Premièrement, je précise que la syntaxe $F_{\sigma}$ permet d'indexer le bit d
 
 ## Les nombres à virgule flottante
 
+// relire
+
+Il existe en informatique de multiples façons de représenter des nombres entiers naturels (nous en avons vu une), et il en va de même pour les nombres à virgule ; la virgule fixe, la virgule flottante ou encore les formats définis par le standard IEEE-754 sont, à ma connaissance, les principaux encodages de nombres à virgule.
+
+A ce jour, en 2025, l'encodage en virgule fixe se fait rare, il s'avère que ce dernier est connu pour être utilisé par les systèmes informatiques bancaires.
+L'encodage en virgule flottante est, quant à lui, une version moins restrictive de l'encodage en virgule fixe, ceci permettant d'étendre la plage de codage d'un champ à nombre de bits équivalent.
+De plus, il se trouve que la virgule flottante est utilisée par la notation scientifique binaire, dont nous parlerons plus tard.
+Pour finir, le standard IEEE-754 défini des formats de nombres à virgule normalisés, ceux-ci ayant pour but d'unifier la représentation des nombres à virgule dans les ordinateurs.
+C'est un sujet absolument fondamental à ce document que nous aborderons plus tard également.
+
+// reprendre ici
+
 Il existe en informatique de multiples façons de représenter des nombres à virgule ; les nombres à virgule fixe, les nombres à virgule flottante ou encore le standard IEEE-754 sont, à ma connaissance, les principaux encodages.
 L'usage des nombres à virgule fixe se fait très rare de nos jours en 2025.
 Malgré tout, les systèmes informatiques bancaires utilisent souvent ces derniers pour représenter le solde des déposants et autres.
