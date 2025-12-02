@@ -81,20 +81,17 @@ En outre, les nombres codés n'ont pas de signe $\pm$ représenté par un bit, d
 
 $$103 \ = \ 1100111_2 \ = \left(1 \times 2^6 + 1 \times 2^5 + 0 \times 2^4 + 0 \times 2^3 + 1 \times 2^2 + 1 \times 2^1 + 1 \times 2^0\right)$$
 
-Nous ne parlons pas de bit des unités, des dizaines, centaines ou encore milliers dans un champ binaire, mais il y a ce que l'on appelle le "_poids_" d'un bit qui est à prendre en compte.
-Plus un bit est le facteur d'une grande puissance de $2$, plus le poids de ce bit est important dans le calcul de la valeur d'un nombre.
-Par exemple, le bit qui multiplie $2^6$ fait fluctuer la valeur du nombre représenté de $64$, contre une fluctuation de seulement $8$ pour le bit facteur de $2^3$.
-Le bit qui multiplie $2^6$ est donc d'un poids (d'une importance) supérieur à celui qui multiplie $2^3$.
+Remarquez que les bits à $0$ n'affectent pas la valeur du nombre, c'est pourquoi vous entendrez souvent dire (y compris dans ce document) que la valeur d'un nombre codé en __Binary Unsigned__ se calcule comme la somme des puissances de $2$ dont le bit est à $1$.
 
-Par conséquent, il est très commun d'indicer les bits d'un champ binaire par leurs poids ; le bit de poids $3$ fait référence au bit qui multiplie la puissance $2^3$.
-Il s'avère que certains termes sont rentrés dans le langage commun et représentent des bits d'un poids bien précis à l'intérieur d'un champ.
-Par exemple, le terme de __LSB__ pour __Least Significant Bit__ fait référence au bit de poids le plus faible d'un champs binaire, le bit de poids $0$ pour tout nombre écrit en __Binary Unsigned__.
-Il existe aussi le terme de __MSB__ pour __Most Significant Bit__ qui à contrario fait référence au bit de poids le plus fort d'un tel nombre.
-D'autres termes comme __LSB1__ pour le bit à $1$ de poids le plus faible, ou encore __MSB1__ pour le bit à $1$ de poids le plus fort, existent aussi.
+Chaque bit composant un champ binaire a un positionnement qui lui est propre mais il n'existe pas de nom pour ces positions, dans les faits nous ne parlons pas de bit des unités, des dizaines, et ainsi de suite mais plutôt du _poids_ d'un bit.
+Le poids d'un bit fait référence à la puissance de $2$ dont ce bit est facteur, plus un bit est facteur d'une grande puissance et plus son poids est élevé.
+Dans l'illustration ci-dessus, le bit qui multiplie la puissance $2^6$ est de poids $6$ ; la puissance dont est facteur un bit étant exclusive à ce dernier, nous en déduisons que le poids d'un bit peut servir d'identificateur. 
 
-Pour finir, comme cela a été dit plus haut, la valeur d'un nombre __Binary Unsigned__ se calcule par la somme des produits entre chaque bit et sa puissance de $2$ correspondante. 
-Ce qui donne lieu à des calculs inutiles car la valeur d'un bit étant de $0$ ou $1$, chaque produit génère alors un résultat qui est nul ou égal à la puissance de $2$ du bit en question.
-C'est pourquoi vous entendrez souvent dire (y compris dans ce document), que la valeur d'un nombre __Binary Unsigned__ se calcule comme la somme des puissances de $2$ dont le bit est à $1$.
+Par conséquent, il est très commun d'indexer les bits d'un champ par leurs poids ; le bit de poids $N$ fait référence au bit qui est facteur de la puissance $2^N$.
+Il y a cependant quelques termes qui sont rentrés dans le langage commun de l'informatique pour des raisons pratiques, ces termes font référence à des bits d'un poids précis ou ayant une particularité au sein du champ qu'il compose.
+Pour ne citer que les principaux, le terme __Least Significant Bit__ de l'acronyme __LSB__ fait référence au bit de poids le plus faible d'un champ, c'est-à-dire au bit de poids $0$ d'un nombre codé en __Binary Unsigned__.
+A contrario, le terme __Most Significant Bit__ de l'acronyme __MSB__ fait référence au bit de poids le plus fort d'un champ.
+Aussi, il existe les acronymes __LSB1__ et __MSB1__ faisant respectivement référence au bit à $1$ de poids le plus faible et de poids le plus fort d'un champ.
 
 ### Une propriété du Binary Unsigned qui est fondamentale à la démonstration
 
