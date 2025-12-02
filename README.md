@@ -12,7 +12,7 @@ Le document va même au-delà de la démonstration mathématique du circuit ; il
 Ce qui explique la présence de la table des matières suivante :
   - __Les encodages__
     - L'encodage Binary Unsigned
-      - Une propriété du Binary Unsigned qui est fondamentale à la démonstration
+      - Une propriété fondamentale à la démonstration
     - Les nombres à virgule flottante
       - L'étymologie du terme de nombre à virgule flottante
   - __L'écriture scientifique binaire__
@@ -92,17 +92,16 @@ Pour ne citer que les principaux, le terme __Least Significant Bit__ de l'acrony
 A contrario, le terme __Most Significant Bit__ de l'acronyme __MSB__ fait référence au bit de poids le plus fort d'un champ.
 Aussi, il existe les acronymes __LSB1__ et __MSB1__ faisant respectivement référence au bit à $1$ de poids le plus faible et de poids le plus fort d'un champ.
 
-### Une propriété du Binary Unsigned qui est fondamentale à la démonstration
+### Une propriété fondamentale à la démonstration
 
-Dans un champ binaire d'encodage __Binary Unsigned__, nous pouvons être certains qu'un bit à $1$ de poids $i$ ait une valeur $\left(1 \times 2^i\right)$ strictement supérieure à la somme des valeurs de chaque bit de poids inférieur à $i$.
-Prenons comme exemple le codage __Binary Unsigned__ du nombre $103$, c'est-à-dire $1100111_2$, que nous nommerons $N$.
-Si nous prêtons attention au bit de poids $5$ du champs $N$, nous remarquons que ce dernier a une valeur $\left(1 \times 2^5\right)$ qui est strictement supérieure à la somme des valeurs des bits de poids inférieur à $5$.
-De manière plus générale, nous trouvons que pour tout bit à $1$ de poids $i$ du nombre $N$ :
+Admettons qu'un champ $F$ code un nombre non nul en __Binary Unsigned__, cet encodage nous permet alors de savoir que tout bit à $1$ de poids $i$ dudit champ a une valeur $\left(1 \times 2^i\right)$ qui est strictement supérieur à la somme des valeurs des bits de poids inférieur à $i$.
+Partons du principe que le champ $F$ code le nombre $103$, c'est-à-dire $1100111_2$, alors nous savons que la valeur du bit de poids $5$, étant de $\left(1 \times 2^5\right)$, est strictement supérieur à la somme des valeurs des bits de poids $0, 1, 2, 3$ et $4$ ; indépendemment de la valeur de ces bits là.
 
-$$\left(1 \times 2^i\right) \gt \sum_{\sigma = i - 1}^0 \ \left(N_{\sigma} \times 2^{\sigma}\right)$$
+Autrement dit, de manière plus générale, nous trouvons que pour tout bit à $1$ de poids $\left(i \gt 0\right)$ du champ $F$ :
 
-Ce qui vient d'être dit ci-dessus est inconditionnel, qu'importe la valeur des bits de poids inférieurs à $i$.
-Par ailleurs, ceci n'est pas propre à la base binaire.
+$$\left(1 \times 2^i\right) \gt \sum_{\sigma = i - 1}^0 \ \left(F_{\sigma} \times 2^{\sigma}\right)$$
+
+Premièrement, je précise que la syntaxe $F_{\sigma}$ permet d'indexer le bit de poids $\sigma$ du champ $F$, et deuxièmement le fait que ce dont parle cette section n'est pas propre à la base binaire.
 
 ## Les nombres à virgule flottante
 
