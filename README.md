@@ -104,6 +104,8 @@ Premièrement, je précise que la syntaxe $F_{\sigma}$ permet d'indexer le bit d
 
 ## L'encodage à virgule flottante
 
+// à relire
+
 Il existe en informatique de multiples encodages pour représenter des nombres entiers naturels (nous venons d'en voir un), et il en va de même pour les nombres à virgule ; la virgule fixe, la virgule flottante ou encore les formats définis par le standard IEEE-754 sont, à ma connaissance, les principaux encodages de nombres à virgule.
 
 A ce jour, en 2025, les usages de l'encodage en virgule fixe se font rares, il s'avère que ce dernier est connu pour être utilisé dans les systèmes informatiques bancaires.
@@ -124,41 +126,16 @@ Cependant, d'une part cela se généralise à l'ensemble des chiffres composant 
 
 En effet, l'encodage en virgule flottante permet de coder des nombres à virgule en base binaire d'une façon équivalente à ce qui se fait en base décimale, modulo quelques changements que l'on doit au passage à la base binaire.
 Dans un premier temps, notons que nous ne parlons plus de la partie décimale mais désormais de la partie fractionnaire d'un nombre, car les nombres ne sont plus composés de chiffres décimaux.
-Dans un second temps, sachez que l'encodage en virgule flottante utilise la notation positionnelle pour le codage de la partie entière (l'encodage Binary Unsigned) ainsi que pour la partie fractionnaire des nombres à virgule flottante ; chaque bit de la partie fractionnaire est alors le facteur d'une puissance de $2$ négative.
-J'en profite pour précisé que, dû au fait que la partie entière ne peut coder que des nombres entiers naturels, il faut expliciter le signe $\pm$ des nombres à virgule flottante.
+Dans un second temps, sachez que l'encodage en virgule flottante utilise la notation positionnelle pour le codage de la partie entière (l'encodage Binary Unsigned), ainsi que pour la partie fractionnaire des nombres à virgule flottante ; chaque bit de la partie fractionnaire est alors le facteur d'une puissance de $2$ négative, et la partie fractionnaire a pour valeur la somme de ces produits.
 Ci-bas se trouve une illustration du codage de la partie fractionnaire du nombre à virgule flottante $+ 103.375$ :
 
 $$0.375 \ = \ 0.011_2 \ = \left(0 \times 2^{-1} + 1 \times 2^{-2} + 1 \times 2^{-3}\right)$$
 
-// expliquer l'illustration?
+Je précise qu'il faut expliciter le signe $\pm$ des nombres à virgule flottante, dû au fait que la partie entière de ces derniers ne peut coder que des nombres entiers naturels.
 
-
-//
-
-Je n'apprends rien à personne en disant qu'un nombre à virgule est scindé en deux parties, la partie entière composée des chiffres devant la virgule, et la partie fractionnaire composée des chiffres derrière la virgule.
-La partie entière d'un nombre à virgule flottante est écrite en Binary Unsigned ; par conséquent, pour pouvoir représenter des nombres à virgule flottante positif ou négatif il faut rajouté un signe $\pm$ à la partie entière du nombre.
-Ce qui explique l'ajout d'un bit de poids supérieur au MSB de la partie entière d'un nombre flottant, qui interprète le signe $-$ quand il est à $1$ ou $+$ lorsqu'il vaut $0$.
-Cependant, l'encodage de la partie fractionnaire est tout nouveau, malgré une ressemblance avec le Binary Unsigned.
-Chaque bit de la partie fractionnaire est le facteur d'une puissance de $2$ négative ; la partie fractionnaire a comme valeur la somme de ces produits.
-Il sera plus simple de comprendre tout cela au travers d'une illustration, regardez ci-bas.
-
-//
-
-$$+ \ 103.3125 = 0 \ 1100111.0101_2$$
-
-Dans la partie entière du nombre nous retrouvons le bit de poids le plus fort qui est à $0$ (ce dernier représente le signe $+$), ainsi que le codage Binary Unsigned du nombre $103$, qui commence à nous être familier.
-Rien d'étonnant pour la partie fractionnaire, nous avons des bits... mais regardons dans le détails ce que valent ces bits.
-
-$$ 0.0101_2 = Integer \ Part\left(0 \times 2^0\right) + Fractional \ Part\left(0 \times 2^{-1} + 1 \times 2^{-2} + 0 \times 2^{-3} + 1 \times 2^{-4}\right)$$
-
-Nous remarquons que le bit de poids le plus fort de la partie fractionnaire est celui de poids $-1$, et que la valeur des puissances de $2$ négatives vont décroissant en fonction de la position du bit correspondant dans le champs.
-
-Dans la section précédente nous parlions d'une propriété de l'encodage Binary Unsigned.
-Cette propriété peut être mise en oeuvre dans la partie entière d'un nombre à virgule flottante, car rappelons-le, cette partie est codée en Binary Unsigned.
-En outre, il s'avère que l'encodage de la partie fractionnaire permet lui aussi de faire usage de cette propriété.
-Pour rappel, cela veut dire que tout bit à $1$ de poids $i$ compris dans la partie fractionnaire a une valeur $\left(1 \times 2^i\right)$ strictement supérieure à la somme des valeurs des bits de poids inférieur à $i$.
-Ce qui insinue qu'il y a une continuité de cette propriété entre les bits de la partie entière et fractionnaire d'un nombre à virgule flottante.
-Autrement dit, un bit à $1$ de poids $i$ dans la partie entière a une valeur strictement supérieure à la somme des valeurs des bits de poids inférieur à $i$ compris dans la partie entière et fractionnaire.
+Pour finir, rappelez-vous du fait que l'encodage Binary Unsigned n'est qu'une simple application de la notation positionnelle.
+La section précédente parle d'une propriété de cet encodage mais en réalité cette propriété provient plutôt de la notation positionnelle, ce qui insinue que celle-ci s'applique, et à la partie entière, et à la partie fractionnaire des nombres à virgule flottante.
+Pour résumer, cela veut dire que dans un nombre à virgule flottante, tout bit à $1$ de poids $i$ a une valeur $\left(1 \times 2^i\right)$ strictement supérieure à la somme des valeurs des bits de poids inférieur à $i$.
 
 ### L'étymologie du terme de nombre à virgule flottante
 
