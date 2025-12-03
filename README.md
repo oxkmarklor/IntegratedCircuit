@@ -103,7 +103,7 @@ $$\left(1 \times 2^i\right) \gt \sum_{\sigma = i - 1}^0 \ \left(F_{\sigma} \time
 
 Premièrement, je précise que la syntaxe $F_{\sigma}$ permet d'indexer le bit de poids $\sigma$ du champ $F$, et deuxièmement le fait que ce dont parle cette section n'est pas propre à la base binaire.
 
-## La virgule flottante
+## L'encodage à virgule flottante
 
 Il existe en informatique de multiples encodages pour représenter des nombres entiers naturels (nous venons d'en voir un), et il en va de même pour les nombres à virgule ; la virgule fixe, la virgule flottante ou encore les formats définis par le standard IEEE-754 sont, à ma connaissance, les principaux encodages de nombres à virgule.
 
