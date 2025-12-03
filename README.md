@@ -67,11 +67,11 @@ Par exemple, en décimale chacun des chiffres qui compose la valeur $103$ est le
 Veuillez noter que la syntaxe d'indexation $X_{10}$ représente la base numérique dans laquelle le nombre $X$ est écrit, $10$ pour la base décimale et $2$ pour la base binaire.
 Cette syntaxe ne sera utilisée que lorsqu'il y aura une ambiguïté dans l'écriture d'un nombre composé uniquement de $0$ et de $1$.
 
-$$103 \ = \left(1 \times 10^2 + 0 \times 10^1 + 3 \times 10^0\right)$$
+$$103 \ = \left(1 \times 10_{10}^{\quad 2} + 0 \times 10_{10}^{\quad 1} + 3 \times 10_{10}^{\quad 0}\right)$$
 
-Le chiffre des unités $3$ est facteur de $10$ à la puissance $0$ ; le chiffre des dizaines $0$ est facteur de $10$ à la puissance $1$, tandis que le chiffre des centaines $1$ est le facteur de $10$ à la puissance $2$.
+Le chiffre des unités $3$ est facteur de $10_{10}$ à la puissance $0$ ; le chiffre des dizaines $0$ est facteur de $10_{10}$ à la puissance $1$, tandis que le chiffre des centaines $1$ est le facteur de $10_{10}$ à la puissance $2$.
 Remarquez que le chiffre des unités (qui occupe une certaine position dans le nombre) est facteur d'une puissance de $10_{10}$ qui est dix fois inférieur à celle dont le chiffre des dizaines (le chiffre de la position suivante) est le facteur.
-Cependant, d'une part cela se généralise à l'ensemble des chiffres d'un nombre décimale, et d'une autre ceci n'est pas propre à la base décimale elle-même.
+Cependant, d'une part cela se généralise à l'ensemble des chiffres d'un nombre décimale, et d'autre part je dois préciser que tout ceci (la notation positionnelle) n'est pas propre à la base décimale elle-même.
 
 La base binaire (ou base $2$) permet également de représenter des nombres d'une façon équivalente, mais comme mentionné plus haut, qui dit représentation de nombre dit encodage de nombre.
 Vous l'aurez compris, l'encodage permettant de représenter des nombres de la sorte est le __Binary Unsigned__.
@@ -113,12 +113,26 @@ En outre, la virgule flottante est utilisée par la notation scientifique binair
 Pour finir, le standard IEEE-754 défini des formats normalisés de nombres à virgule, ceux-ci ayant pour but d'unifier la représentation des nombres à virgule dans les ordinateurs.
 C'est un sujet absolument fondamental à ce document que nous aborderons plus tard également, pour le moment, intéressons-nous à l'encodage des nombres à virgule flottante.
 
+Je ne vous apprends rien en disant qu'un nombre à virgule écrit en base $10_{10}$ est scindé en deux parties : la partie entière composée des chiffres devant la virgule, et la partie décimale composée des chiffres derrière la virgule.
+Nous savons d'ores et déjà que la partie entière d'un nombre utilise la notation positionnelle, ce qui dans les faits est aussi le cas de la partie décimale ; chaque chiffre de la partie décimale est facteur d'une puissance de $10_{10}$ négative, la somme de ces produits résulte en la valeur de la partie décimale.
+Voici une illustration de la façon dont se calcule la valeur de la partie décimale du nombre $103.3125$ :
+
+$$0.375 \ = \left(3 \times 10_{10}^{\quad -1} + 7 \times 10_{10}^{\quad -2} + 5 \times 10_{10}^{\quad -3}\right)$$
+
+Le chiffre des dizièmes $3$ est facteur de $10_{10}$ à la puissance $-1$ ; le chiffre des centièmes $7$ est facteur de $10_{10}$ à la puissance $-2$, tandis que le chiffre des millièmes $5$ est le facteur de $10_{10}$ à la puissance $-3$.
+Remarquez que le chiffre des dizièmes (qui occupe une certaine position dans le nombre) est facteur d'une puissance de $10_{10}$ qui est dix fois supérieur à celle dont le chiffre des centièmes (le chiffre de la position précédente) est le facteur.
+Néanmoins, d'une part cela se généralise à l'ensemble des chiffres composant la partie décimale d'un nombre écrit en base $10_{10}$, et d'autre part je dois préciser que tout ceci (la notation positionnelle) n'est pas propre à la base décimale elle-même.
+
+//
+
 Je n'apprends rien à personne en disant qu'un nombre à virgule est scindé en deux parties, la partie entière composée des chiffres devant la virgule, et la partie fractionnaire composée des chiffres derrière la virgule.
 La partie entière d'un nombre à virgule flottante est écrite en Binary Unsigned ; par conséquent, pour pouvoir représenter des nombres à virgule flottante positif ou négatif il faut rajouté un signe $\pm$ à la partie entière du nombre.
 Ce qui explique l'ajout d'un bit de poids supérieur au MSB de la partie entière d'un nombre flottant, qui interprète le signe $-$ quand il est à $1$ ou $+$ lorsqu'il vaut $0$.
 Cependant, l'encodage de la partie fractionnaire est tout nouveau, malgré une ressemblance avec le Binary Unsigned.
 Chaque bit de la partie fractionnaire est le facteur d'une puissance de $2$ négative ; la partie fractionnaire a comme valeur la somme de ces produits.
 Il sera plus simple de comprendre tout cela au travers d'une illustration, regardez ci-bas.
+
+//
 
 $$+ \ 103.3125 = 0 \ 1100111.0101_2$$
 
