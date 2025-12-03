@@ -103,29 +103,17 @@ $$\left(1 \times 2^i\right) \gt \sum_{\sigma = i - 1}^0 \ \left(F_{\sigma} \time
 
 Premièrement, je précise que la syntaxe $F_{\sigma}$ permet d'indexer le bit de poids $\sigma$ du champ $F$, et deuxièmement le fait que ce dont parle cette section n'est pas propre à la base binaire.
 
-## Les nombres à virgule flottante
+## La virgule flottante
 
-// relire
+Il existe en informatique de multiples encodages pour représenter des nombres entiers naturels (nous venons d'en voir un), et il en va de même pour les nombres à virgule ; la virgule fixe, la virgule flottante ou encore les formats définis par le standard IEEE-754 sont, à ma connaissance, les principaux encodages de nombres à virgule.
 
-Il existe en informatique de multiples façons de représenter des nombres entiers naturels (nous en avons vu une), et il en va de même pour les nombres à virgule ; la virgule fixe, la virgule flottante ou encore les formats définis par le standard IEEE-754 sont, à ma connaissance, les principaux encodages de nombres à virgule.
+A ce jour, en 2025, les usages de l'encodage en virgule fixe se font rares, il s'avère que ce dernier est connu pour être utilisé dans les systèmes informatiques bancaires.
+L'encodage en virgule flottante est, quant à lui, une version moins restrictive de l'encodage en virgule fixe, permettant ainsi d'étendre la plage de codage d'un champ de même taille.
+En outre, la virgule flottante est utilisée par la notation scientifique binaire, dont nous parlerons plus tard.
+Pour finir, le standard IEEE-754 défini des formats normalisés de nombres à virgule, ceux-ci ayant pour but d'unifier la représentation des nombres à virgule dans les ordinateurs.
+C'est un sujet absolument fondamental à ce document que nous aborderons plus tard également, pour le moment, intéressons-nous à l'encodage des nombres à virgule flottante.
 
-A ce jour, en 2025, l'encodage en virgule fixe se fait rare, il s'avère que ce dernier est connu pour être utilisé par les systèmes informatiques bancaires.
-L'encodage en virgule flottante est, quant à lui, une version moins restrictive de l'encodage en virgule fixe, ceci permettant d'étendre la plage de codage d'un champ à nombre de bits équivalent.
-De plus, il se trouve que la virgule flottante est utilisée par la notation scientifique binaire, dont nous parlerons plus tard.
-Pour finir, le standard IEEE-754 défini des formats de nombres à virgule normalisés, ceux-ci ayant pour but d'unifier la représentation des nombres à virgule dans les ordinateurs.
-C'est un sujet absolument fondamental à ce document que nous aborderons plus tard également.
-
-// reprendre ici
-
-Il existe en informatique de multiples façons de représenter des nombres à virgule ; les nombres à virgule fixe, les nombres à virgule flottante ou encore le standard IEEE-754 sont, à ma connaissance, les principaux encodages.
-L'usage des nombres à virgule fixe se fait très rare de nos jours en 2025.
-Malgré tout, les systèmes informatiques bancaires utilisent souvent ces derniers pour représenter le solde des déposants et autres.
-Les nombres à virgule flottante sont, quant à eux, une adaptation des nombres à virgule fixe ; ces derniers permettent principalement aux humains de pouvoir écrire facilement des nombres à virgule en base binaire.
-De plus, ils sont utilisés indirectement par la notation scientifique binaire des nombres, dont nous parlerons plus tard.
-Pour finir, le standard IEEE-754 permet de normaliser la représentation des nombres à virgule dans un ordinateur, c'est un sujet absolument fondamental à ce document que nous aborderons plus tard également.
-
-Pour le moment, intéressons-nous à l'encodage des nombres à virgule flottante.
-Je n'apprends rien à personne en disant qu'un nombre à virgule est scindé en deux parties, la partie entière composée des chiffres derrière la virgule, et la partie fractionnaire composée des chiffres devant la virgule.
+Je n'apprends rien à personne en disant qu'un nombre à virgule est scindé en deux parties, la partie entière composée des chiffres devant la virgule, et la partie fractionnaire composée des chiffres derrière la virgule.
 La partie entière d'un nombre à virgule flottante est écrite en Binary Unsigned ; par conséquent, pour pouvoir représenter des nombres à virgule flottante positif ou négatif il faut rajouté un signe $\pm$ à la partie entière du nombre.
 Ce qui explique l'ajout d'un bit de poids supérieur au MSB de la partie entière d'un nombre flottant, qui interprète le signe $-$ quand il est à $1$ ou $+$ lorsqu'il vaut $0$.
 Cependant, l'encodage de la partie fractionnaire est tout nouveau, malgré une ressemblance avec le Binary Unsigned.
