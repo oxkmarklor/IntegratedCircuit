@@ -64,25 +64,24 @@ Néanmoins, parmi les multiples encodages existants, le plus connu de tous porte
 
 Le __Binary Unsigned__ est un encodage permettant de coder des nombres entiers naturels par le biais de la notation positionnelle, exactement comme le fait la base décimale pour représenter des nombres.
 Par exemple, en décimale chacun des chiffres qui compose la valeur $103$ est le facteur d'une puissance de $10_{10}$, la représentation du nombre sous-jacent se calcule comme la somme de ces produits.
-Veuillez noter que la syntaxe d'indexation $X_{10}$ représente la base numérique dans laquelle le nombre $X$ est écrit, $10$ pour la base décimale et $2$ pour la base binaire.
-Cette syntaxe ne sera utilisée que lorsqu'il y aura une ambiguïté dans l'écriture d'un nombre composé uniquement de $0$ et de $1$.
+Veuillez noter que la syntaxe suivante $X_{10}$ représente la base numérique dans laquelle le nombre $X$ est écrit, $10$ pour la base décimale et $2$ pour la base binaire.
+Cette syntaxe ne sera utilisée que lorsqu'il y aura une ambiguïté dans l'interprétation d'un nombre composé uniquement de $0$ et de $1$.
 
 $$103 \ = \left(1 \times 10_{10}^{\quad 2} + 0 \times 10_{10}^{\quad 1} + 3 \times 10_{10}^{\quad 0}\right)$$
 
 Le chiffre des unités $3$ est facteur de $10_{10}$ à la puissance $0$ ; le chiffre des dizaines $0$ est facteur de $10_{10}$ à la puissance $1$, tandis que le chiffre des centaines $1$ est le facteur de $10_{10}$ à la puissance $2$.
-Remarquez que le chiffre des unités (qui occupe une certaine position dans le nombre) est facteur d'une puissance de $10_{10}$ qui est dix fois inférieur à celle dont le chiffre des dizaines (le chiffre de la position suivante) est le facteur.
-Cependant, d'une part cela se généralise à l'ensemble des chiffres d'un nombre décimale, et d'autre part je dois préciser que tout ceci (la notation positionnelle) n'est pas propre à la base décimale elle-même.
+Remarquez que le chiffre des unités (qui occupe une certaine position dans le nombre) est facteur d'une puissance de $10_{10}$ qui est dix fois inférieur à celle dont le chiffre des dizaines (le chiffre de la position suivante) est le facteur, ce qui se généralise à l'ensemble des chiffres d'un nombre écrit en base décimale.
 
 La base binaire (ou base $2$) permet également de représenter des nombres d'une façon équivalente, mais comme mentionné plus haut, qui dit représentation de nombre dit encodage de nombre.
 Vous l'aurez compris, l'encodage permettant de représenter des nombres de la sorte est le __Binary Unsigned__.
 Chaque bit d'un nombre codé en __Binary Unsigned__ est le facteur d'une puissance de $2$ positive ou nul ; le nombre ainsi représenté se calcule par le biais de la somme de ces produits.
-En outre, les nombres codés n'ont pas de signe $\pm$ représenté par un bit, d'où le fait que cet encodage ne permette que le codage de nombres naturels. 
+En outre, les nombres codés n'ont pas de signe $\pm$ représenté par un bit, d'où le fait que cet encodage ne permette que le codage d'entiers naturels. 
 
 $$103 \ = \ 1100111_2 \ = \left(1 \times 2^6 + 1 \times 2^5 + 0 \times 2^4 + 0 \times 2^3 + 1 \times 2^2 + 1 \times 2^1 + 1 \times 2^0\right)$$
 
 Remarquez que les bits à $0$ n'affectent pas la valeur du nombre, c'est pourquoi vous entendrez souvent dire (y compris dans ce document) que la valeur d'un nombre codé en __Binary Unsigned__ se calcule comme la somme des puissances de $2$ dont le bit est à $1$.
 
-Chaque bit au sein d'un champ binaire a un positionnement qui lui est propre mais il n'existe pas de nom pour ces positions, dans les faits nous ne parlons pas de bit des unités, des dizaines, et ainsi de suite mais plutôt du _poids_ d'un bit.
+Il s'avère que chaque bit au sein d'un champ binaire a un positionnement qui lui est propre mais il n'existe pas de nom pour ces positions, dans les faits nous ne parlons pas de bit des unités, des dizaines, et ainsi de suite mais plutôt du _poids_ d'un bit.
 Le poids d'un bit fait référence à la puissance de $2$ dont ce bit est facteur, plus un bit est facteur d'une grande puissance et plus son poids est fort (grand) tandis qu'à l'inverse plus il est facteur d'une petite puissance et plus son poids est faible (petit).
 Dans l'illustration ci-dessus, le bit qui multiplie la puissance $2^6$ est de poids $6$ ; un bit étant facteur d'une puissance $2$ qui lui est propre, nous en déduisons que le poids de ce dernier peut donc servir d'identificateur. 
 
@@ -121,7 +120,7 @@ $$0.375 \ = \left(3 \times 10_{10}^{\quad -1} + 7 \times 10_{10}^{\quad -2} + 5 
 
 Le chiffre des dizièmes $3$ est facteur de $10_{10}$ à la puissance $-1$ ; le chiffre des centièmes $7$ est facteur de $10_{10}$ à la puissance $-2$, tandis que le chiffre des millièmes $5$ est le facteur de $10_{10}$ à la puissance $-3$.
 Remarquez que le chiffre des dizièmes (qui occupe une certaine position dans le nombre) est facteur d'une puissance de $10_{10}$ qui est dix fois supérieur à celle dont le chiffre des centièmes (le chiffre de la position précédente) est le facteur.
-Néanmoins, d'une part cela se généralise à l'ensemble des chiffres composant la partie décimale d'un nombre écrit en base $10_{10}$, et d'autre part je dois préciser que tout ceci (la notation positionnelle) n'est pas propre à la base décimale elle-même.
+Cependant, d'une part cela se généralise à l'ensemble des chiffres composant la partie décimale d'un nombre écrit en base $10_{10}$, et d'une autre part je dois préciser que tout ceci (la notation positionnelle) n'est pas propre à la base décimale elle-même.
 
 En effet, l'encodage en virgule flottante permet de coder des nombres à virgule de façon identique à ce que nous venons de voir, modulo les changements qui sont dus à la base numérique comme la nommenclature ; nous ne parlerons plus de la partie décimale d'un nombre mais de sa partie fractionnaire, base binaire oblige.
 L'encodage en virgule flottante utilise le Binary Unsigned (la notation positionnelle) pour le codage de la partie entière d'un nombre à virgule, mais aussi pour le codage de la partie fractionnaire de ce même nombre.
