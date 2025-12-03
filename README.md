@@ -109,10 +109,10 @@ Il existe en informatique de multiples encodages pour représenter des nombres e
 A ce jour, en 2025, les usages de l'encodage en virgule fixe se font rares, il s'avère que ce dernier est connu pour être utilisé dans les systèmes informatiques bancaires.
 L'encodage en virgule flottante est, quant à lui, une version moins restrictive de l'encodage en virgule fixe, permettant ainsi aux champs d'avoir une plage de codage plus étendue qu'avec un encodage à virgule fixe.
 En outre, la virgule flottante est utilisée par la notation scientifique binaire, dont nous parlerons plus tard.
-Pour finir, le standard IEEE-754 défini des formats normalisés de nombres à virgule, ceux-ci ayant pour but d'unifier la représentation des nombres à virgule dans les ordinateurs.
+Pour finir, le standard IEEE-754 définit des formats normalisés de nombres à virgule, ceux-ci ayant pour but d'unifier la représentation des nombres à virgule dans les ordinateurs.
 C'est un sujet absolument fondamental à ce document que nous aborderons plus tard également, pour le moment, intéressons-nous à l'encodage des nombres à virgule flottante.
 
-Je ne vous apprends rien en disant qu'un nombre à virgule écrit en base $10_{10}$ est scindé en deux parties : la partie entière composée des chiffres devant la virgule, et la partie décimale composée des chiffres derrière la virgule.
+Pour commencer, je ne vous apprends rien en disant qu'un nombre à virgule écrit en base décimale est scindé en deux parties : la partie entière composée des chiffres devant la virgule, et la partie décimale composée des chiffres derrière la virgule.
 Nous savons d'ores et déjà que la partie entière d'un tel nombre utilise la notation positionnelle, ce qui dans les faits est aussi le cas de la partie décimale ; chaque chiffre de la partie décimale est facteur d'une puissance de $10_{10}$ négative, la somme de ces produits résulte en la valeur de la partie décimale elle-même.
 Voici une illustration de la façon dont se calcule la valeur de la partie décimale du nombre $+ 103.375$ :
 
@@ -120,7 +120,13 @@ $$0.375 \ = \left(3 \times 10_{10}^{\quad -1} + 7 \times 10_{10}^{\quad -2} + 5 
 
 Le chiffre des dizièmes $3$ est facteur de $10_{10}$ à la puissance $-1$ ; le chiffre des centièmes $7$ est facteur de $10_{10}$ à la puissance $-2$, tandis que le chiffre des millièmes $5$ est le facteur de $10_{10}$ à la puissance $-3$.
 Remarquez que le chiffre des dizièmes (qui occupe une certaine position dans le nombre) est facteur d'une puissance de $10_{10}$ qui est dix fois supérieur à celle dont le chiffre des centièmes (le chiffre de la position précédente) est le facteur.
-Cependant, d'une part cela se généralise à l'ensemble des chiffres composant la partie décimale d'un nombre écrit en base $10_{10}$, et d'une autre part je dois préciser que tout ceci (la notation positionnelle) n'est pas propre à la base décimale elle-même.
+Cependant, d'une part cela se généralise à l'ensemble des chiffres composant la partie décimale d'un nombre écrit en base $10_{10}$, et d'autre part je dois préciser que tout ceci n'est pas propre à la base décimale elle-même.
+
+En effet, l'encodage en virgule flottante permet de coder des nombres à virgule en base binaire d'une façon équivalente à ce qui se fait en base décimale, modulo quelques changements que l'on doit au passage à la base binaire.
+Dans un premier temps, notons que nous ne parlons plus de la partie décimale mais désormais de la partie fractionnaire d'un nombre, car les nombres ne sont plus composés de chiffres décimaux ; qui plus est, il n'existe pas vraiment d'autres termes plus adaptés que _partie fractionnaire_.
+Dans un second temps, sachez que l'encodage en virgule flottante utilise l'encodage Binary Unsigned (la notation positionnelle) pour le codage de la partie entière d'un nombre à virgule, je vous invite à relire les chapitres précédent si nécessaire. 
+A l'instar de la partie entière d'un nombre à virgule, la notation positionnelle est aussi utilisée pour le codage de la partie fractionnaire, ce qui veut dire que chaque bit de la partie fractionnaire est le facteur d'une puissance de $2$...
+
 
 En effet, l'encodage en virgule flottante permet de coder des nombres à virgule de façon identique à ce que nous venons de voir, modulo les changements qui sont dus à la base numérique comme la nommenclature ; nous ne parlerons plus de la partie décimale d'un nombre mais de sa partie fractionnaire, base binaire oblige.
 L'encodage en virgule flottante utilise le Binary Unsigned (la notation positionnelle) pour le codage de la partie entière d'un nombre à virgule, mais aussi pour le codage de la partie fractionnaire de ce même nombre.
