@@ -12,9 +12,9 @@ Le document va même au-delà de la démonstration mathématique du circuit ; il
 Ce qui explique la présence de la table des matières suivante :
   - __Les encodages__
     - L'encodage Binary Unsigned
-      - Une propriété fondamentale à la démonstration
-    - Les nombres à virgule flottante
+    - L'encodage des nombres à virgule flottante
       - L'étymologie du terme de nombre à virgule flottante
+    - Une propriété élémentaire de la notation positionnelle
   - __L'écriture scientifique binaire__
     - Le significande
       - La transformation d'un nombre à virgule flottante en un significande
@@ -91,20 +91,7 @@ Pour ne citer que les principaux, le terme __Least Significant Bit__ de l'acrony
 A contrario, le terme __Most Significant Bit__ de l'acronyme __MSB__ fait référence au bit de poids le plus fort d'un champ.
 Aussi, il existe les acronymes __LSB1__ et __MSB1__ faisant respectivement référence au bit à $1$ de poids le plus faible et de poids le plus fort d'un champ.
 
-### Une propriété fondamentale à la démonstration
-
-Admettons qu'un champ $F$ code un nombre non nul en __Binary Unsigned__, cet encodage nous permet alors de savoir que tout bit à $1$ de poids $i$ dudit champ a une valeur $\left(1 \times 2^i\right)$ qui est strictement supérieur à la somme des valeurs des bits de poids inférieur à $i$.
-Partons du principe que le champ $F$ code le nombre $103$, c'est-à-dire $1100111_2$, alors nous savons que la valeur du bit de poids $5$, étant de $\left(1 \times 2^5\right)$, est strictement supérieur à la somme des valeurs des bits de poids $0, 1, 2, 3$ et $4$ ; indépendemment de la valeur de ces bits là.
-
-Autrement dit, de manière plus générale, nous trouvons que pour tout bit à $1$ de poids $\left(i \gt 0\right)$ du champ $F$ :
-
-$$\left(1 \times 2^i\right) \gt \sum_{\sigma = i - 1}^0 \ \left(F_{\sigma} \times 2^{\sigma}\right)$$
-
-Premièrement, je précise que la syntaxe $F_{\sigma}$ permet d'indexer le bit de poids $\sigma$ du champ $F$, et deuxièmement le fait que ce dont parle cette section n'est pas propre à la base binaire.
-
-## L'encodage à virgule flottante
-
-// à relire
+## L'encodage des nombres à virgule flottante
 
 Il existe en informatique de multiples encodages pour représenter des nombres entiers naturels (nous venons d'en voir un), et il en va de même pour les nombres à virgule ; la virgule fixe, la virgule flottante ou encore les formats définis par le standard IEEE-754 sont, à ma connaissance, les principaux encodages de nombres à virgule.
 
@@ -116,7 +103,7 @@ C'est un sujet absolument fondamental à ce document que nous aborderons plus ta
 
 Pour commencer, je ne vous apprends rien en disant qu'un nombre à virgule écrit en base décimale est scindé en deux parties : la partie entière composée des chiffres devant la virgule, et la partie décimale composée des chiffres derrière la virgule.
 Nous savons d'ores et déjà que la partie entière d'un tel nombre utilise la notation positionnelle, ce qui dans les faits est aussi le cas de la partie décimale ; chaque chiffre de la partie décimale est facteur d'une puissance de $10_{10}$ négative, la somme de ces produits résulte en la valeur de la partie décimale elle-même.
-Voici une illustration de la façon dont se calcule la valeur de la partie décimale du nombre $+ 103.375$ :
+Voici une illustration de la façon dont se calcule la valeur de la partie décimale du nombre $103.375$ :
 
 $$0.375 \ = \left(3 \times 10_{10}^{\quad -1} + 7 \times 10_{10}^{\quad -2} + 5 \times 10_{10}^{\quad -3}\right)$$
 
@@ -133,9 +120,11 @@ $$0.375 \ = \ 0.011_2 \ = \left(0 \times 2^{-1} + 1 \times 2^{-2} + 1 \times 2^{
 
 Je précise qu'il faut expliciter le signe $\pm$ des nombres à virgule flottante, dû au fait que la partie entière de ces derniers ne peut coder que des nombres entiers naturels.
 
+// supp?
+
 Pour finir, rappelez-vous du fait que l'encodage Binary Unsigned n'est qu'une simple application de la notation positionnelle.
-La section précédente parle d'une propriété de cet encodage mais en réalité cette propriété provient plutôt de la notation positionnelle, ce qui insinue que celle-ci s'applique, et à la partie entière, et à la partie fractionnaire des nombres à virgule flottante.
-Pour résumer, cela veut dire que dans un nombre à virgule flottante, tout bit à $1$ de poids $i$ a une valeur $\left(1 \times 2^i\right)$ strictement supérieure à la somme des valeurs des bits de poids inférieur à $i$.
+La section précédente parle d'une propriété de cet encodage mais en réalité cette propriété provient plutôt de la notation positionnelle elle-même, ce qui insinue que celle-ci s'applique, et à la partie entière, et à la partie fractionnaire des nombres à virgule flottante.
+Pour résumer, cela veut dire que dans un nombre à virgule flottante, tout bit à $1$ de poids $i$ a une valeur $\left(1 \times 2^i\right)$ strictement supérieur à la somme des valeurs des bits de poids inférieur à $i$.
 
 ### L'étymologie du terme de nombre à virgule flottante
 
@@ -148,6 +137,19 @@ De surcroît, la précision de codage d'un tel nombre est pré-fixée par la qua
 En effet, il est tout à fait plausible que la précision d'affichage du solde d'un compte courant soit de l'ordre du centième de centime près, mais qu'il n'y ait pas besoin de plus de précision.
 L'avantage des nombres à virgule fixe est que la précision de codage reste donc constante, et ce, indépendamment de la valeur du solde ; ce qui ne serait pas le cas si les soldes étaient codés en virgule flottante.
 Votre seul ennui est alors d'avoir trop d'argent dans votre compte en banque, de sorte à ce que la précision de codage de votre solde devienne limitante et ne permette plus de quantifier votre fortune.
+
+## Une propriété élémentaire de la notation positionnelle
+
+// tout revoir
+
+Admettons qu'un champ $F$ code un nombre non nul en __Binary Unsigned__, cet encodage nous permet alors de savoir que tout bit à $1$ de poids $i$ dudit champ a une valeur $\left(1 \times 2^i\right)$ qui est strictement supérieur à la somme des valeurs des bits de poids inférieur à $i$.
+Partons du principe que le champ $F$ code le nombre $103$, c'est-à-dire $1100111_2$, alors nous savons que la valeur du bit de poids $5$, étant de $\left(1 \times 2^5\right)$, est strictement supérieur à la somme des valeurs des bits de poids $0, 1, 2, 3$ et $4$ ; indépendemment de la valeur de ces bits là.
+
+Autrement dit, de manière plus générale, nous trouvons que pour tout bit à $1$ de poids $\left(i \gt 0\right)$ du champ $F$ :
+
+$$\left(1 \times 2^i\right) \gt \sum_{\sigma = i - 1}^0 \ \left(F_{\sigma} \times 2^{\sigma}\right)$$
+
+Premièrement, je précise que la syntaxe $F_{\sigma}$ permet d'indexer le bit de poids $\sigma$ du champ $F$, et deuxièmement le fait que ce dont parle cette section n'est pas propre à la base binaire.
 
 # L'écriture scientifique binaire
 
