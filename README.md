@@ -141,25 +141,34 @@ Votre seul ennui est alors d'avoir trop d'argent dans votre compte en banque, de
 ## Une propriété élémentaire de la notation positionnelle
 
 Rappelez-vous des chapitres précédent sur l'encodage __Binary Unsigned__ ainsi que sur l'encodage des nombres à __virgule flottante__, ces chapitres expliquent (entre autre) que ces encodages s'appuient pleinement sur la __notation positionnelle__.
-Naturellement, cela confère à ces encodages toutes les propriétés de la __notation positionnelle__, dont l'une qui est le sujet de ce chapitre.
+Naturellement, cela confère à ces encodages toutes les propriétés de la __notation positionnelle__, c'est l'une de ces propriétés dont parle ce chapitre.
 
 Cette propriété de la __notation positionnelle__ nous dit que la valeur $\left(1 \times 2^i\right)$ de tout bit à $1$ de poids $i$ d'un nombre codé en __Binary Unsigned__, est strictement supérieur à la somme des valeurs des bits de poids inférieur à $i$.
 Prenons une nouvelle fois le cas du nombre $103$ qui, je vous le rappelle, s'écrit $1100111_2$ en __Binary Unsigned__.
 Selon ce qui vient d'être dit, nous en déduisons par exemple que la valeur $\left(1 \times 2^5\right)$ du bit à $1$ de poids $5$, est strictement supérieur à la somme des valeurs des bits de poids $0$, $1$, $2$, $3$ et $4$ ; indépendemment de la valeur de ces bits.
 
-En outre, comme le mentionne le chapitre "_L'encodage des nombres à virgule flottante_" : la partie entière ainsi que la partie fractionnaire des nombres à __virgule flottante__ utilisent la notation positionnelle, le __Binary Unsigned__ dans le cas de la partie entière.
-De facto, le paragraphe figurant ci-dessus concerne directement la partie entière des nombres à __virgule flottante__.
+L'encodage __Binary Unsigned__ ne doit cette propriété qu'à la __notation positionnelle__, ce qui insinue que cette dernière s'applique également à la partie entière ainsi qu'à la partie fractionnaire des nombres à virgule flottante.
+Admettons qu'un champ $F$ code le nombre $+ 103.375$, c'est-à-dire $+ 1100111.011_2$ en __virgule flottante__, alors nous trouvons que pour tout bit à $1$ de poids $\left(i \gt -3\right)$ du champ $F$ :
+
+$$\left(1 \times 2^i\right) \gt \sum_{\sigma = i - 1}^{-3} \ \left(F_{\sigma} \times 2^{\sigma}\right)$$
 
 
 
-Souvenez-vous du fait que l'encodage utilisé par la partie entière des nombres à __virgule flottante__ est le __Binary Unsigned__, de facto la propriété dont parle le paragraphe ci-dessus concerne directement la partie entière des nombres à __virgule flottante__.
-Cependant, 
 
-Cependant, cette propriété concerne aussi la partie fractionnaire des nombres à __virgule flottante__ car cette dernière utilise la notation positionnelle
-
+Prenons par exemple le nombre $+ 103.375$ qui s'écrit $+ 1100111.011_2$ en __virgule flottante__.
+Nous savons que la valeur de tout bit à $1$ de poids $i$, venant de la partie entière ou fractionnaire, est strictement supérieur à la somme des valeurs des bits de poids inférieur à $i$.
 
 
-// nbr flottant (partie entière binary unsigned)
+
+
+La section précédente parle d'une propriété de cet encodage mais en réalité cette propriété provient plutôt de la notation positionnelle elle-même, ce qui insinue que celle-ci s'applique, et à la partie entière, et à la partie fractionnaire des nombres à virgule flottante.
+Pour résumer, cela veut dire que dans un nombre à virgule flottante, tout bit à $1$ de poids $i$ a une valeur $\left(1 \times 2^i\right)$ strictement supérieur à la somme des valeurs des bits de poids inférieur à $i$.
+
+En outre, rappelez-vous du fait que l'encodage en __virgule flottante__ utilise l'encodage __Binary Unsigned__ pour le codage de la partie entière des nombres à __virgule flottante__.
+Ce qui, de facto, permet de dire que le paragraphe précédent est valable pour la partie entière des nombres à __virgule flottante__.
+Quant à la partie fractionnaire, cette dernière utilise aussi la __notation positionnelle__ lui conférent ainsi les même propriétés
+
+
 
 
 
