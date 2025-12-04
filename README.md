@@ -145,7 +145,19 @@ Naturellement, cela confère à ces encodages toutes les propriétés de la __no
 
 Cette propriété de la __notation positionnelle__ nous dit que la valeur $\left(1 \times 2^i\right)$ de tout bit à $1$ de poids $i$ d'un nombre codé en __Binary Unsigned__, est strictement supérieur à la somme des valeurs des bits de poids inférieur à $i$.
 Prenons une nouvelle fois le cas du nombre $103$ qui, je vous le rappelle, s'écrit $1100111_2$ en __Binary Unsigned__.
-Selon ce qui vient d'être dit, nous en déduisons par exemple que la valeur $\left(1 \times 2^5\right)$ du bit à $1$ de poids $5$ est strictement supérieur à la somme des valeurs des bits de poids $0$, $1$, $2$, $3$ et $4$ ; indépendemment de la valeur des bits sous-jacent.
+Selon ce qui vient d'être dit, nous en déduisons par exemple que la valeur $\left(1 \times 2^5\right)$ du bit à $1$ de poids $5$, est strictement supérieur à la somme des valeurs des bits de poids $0$, $1$, $2$, $3$ et $4$ ; indépendemment de la valeur de ces bits.
+
+En outre, comme le mentionne le chapitre "_L'encodage des nombres à virgule flottante_" : la partie entière ainsi que la partie fractionnaire des nombres à __virgule flottante__ utilisent la notation positionnelle, le __Binary Unsigned__ dans le cas de la partie entière.
+De facto, le paragraphe figurant ci-dessus concerne directement la partie entière des nombres à __virgule flottante__.
+
+
+
+Souvenez-vous du fait que l'encodage utilisé par la partie entière des nombres à __virgule flottante__ est le __Binary Unsigned__, de facto la propriété dont parle le paragraphe ci-dessus concerne directement la partie entière des nombres à __virgule flottante__.
+Cependant, 
+
+Cependant, cette propriété concerne aussi la partie fractionnaire des nombres à __virgule flottante__ car cette dernière utilise la notation positionnelle
+
+
 
 // nbr flottant (partie entière binary unsigned)
 
