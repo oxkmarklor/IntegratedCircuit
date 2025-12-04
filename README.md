@@ -140,6 +140,27 @@ Votre seul ennui est alors d'avoir trop d'argent dans votre compte en banque, de
 
 ## Une propriété élémentaire de la notation positionnelle
 
+La __notation positionnelle__ confère une propriété intéressante à toute les bases numérique : dans tout nombre, la valeur d'un chiffre non nul de poids $i$ est strictement supérieur à la somme des valeurs des chiffres de poids inférieur à $i$.
+Prenons comme exemple le nombre $11.75$ écrit en base décimale :
+
+$$11.75 \ = \left(1 \times 10_{10}^{\quad 1} + 1 \times 10_{10}^{\quad 0} + 7 \times 10_{10}^{\quad -1} + 5 \times 10_{10}^{\quad -2}\right)$$
+
+Remarquons que le chiffre $1$ des dizaines est non nul, alors nous savons que la valeur de ce chiffre $\left(1 \times 10_{10}^{\quad 1}\right)$ est strictement supérieur à la somme des valeurs des chiffres inférieurs au rang des dizaines ; et ce, indépendemment de la valeur des chiffres sous-jacent.
+
+$$\left(1 \times 10_{10}^{\quad 1}\right) \gt \left(1 \times 10_{10}^{\quad 0} + 7 \times 10_{10}^{\quad -1} + 5 \times 10_{10}^{\quad -2}\right)$$
+
+Bien évidemment, cela fonctionne pour la base décimale (entre autre) mais aussi pour la base binaire, à la seule différence que nous ne parlons dès lors plus de chiffres décimaux mais de bits.
+De facto, vu qu'un bit non nul est à $1$, il est préférable de dire que : dans tout nombre binaire, la valeur d'un bit à $1$ de poids $i$ est strictement supérieur à la somme des valeurs des bits de poids inférieur à $i$. 
+Voici une illustration du codage en __virgule flottante__ du nombre $+ 11.75$ :
+
+$$+ \ 11.75 \ = \ + 1011.11_2 \ = \left(1 \times 2^3 + 0 \times 2^2 + 1 \times 2^1 + 1 \times 2^0 + 1 \times 2^{-1} + 1 \times 2^{-2}\right)$$
+
+De par ce qui vient d'être dit, nous en déduisons par exemple que la valeur $\left(1 \times 2^1\right)$ du bit à $1$ de poids $1$, est strictement supérieur à la somme des valeurs des bits de poids $0$, $-1$ et $-2$ ; nonobstant la valeur sous-jacente de ces bits.
+
+$$\left(1 \times 2^1\right) \gt \left(1 \times 2^0 + 1 \times 2^{-1} + 1 \times 2^{-2}\right)$$
+
+//
+
 Rappelez-vous des chapitres précédent sur l'encodage __Binary Unsigned__ ainsi que sur l'encodage des nombres à __virgule flottante__, ces chapitres expliquent (entre autre) que ces encodages s'appuient pleinement sur la __notation positionnelle__.
 Naturellement, cela confère à ces encodages toutes les propriétés de la __notation positionnelle__, c'est l'une de ces propriétés dont parle ce chapitre.
 
