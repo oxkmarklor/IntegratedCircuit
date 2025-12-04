@@ -159,52 +159,17 @@ De par ce qui vient d'être dit, nous en déduisons par exemple que la valeur $\
 
 $$\left(1 \times 2^1\right) \gt \left(1 \times 2^0 + 1 \times 2^{-1} + 1 \times 2^{-2}\right)$$
 
-//
+// relire à partir d'ici
 
 Rappelez-vous des chapitres précédent sur l'encodage __Binary Unsigned__ ainsi que sur l'encodage des nombres à __virgule flottante__, ces chapitres expliquent (entre autre) que ces encodages s'appuient pleinement sur la __notation positionnelle__.
-Naturellement, cela confère à ces encodages toutes les propriétés de la __notation positionnelle__, c'est l'une de ces propriétés dont parle ce chapitre.
+Naturellement, cela confère à ces encodages toutes les propriétés de la __notation positionnelle__, dont celle évoquée ci-dessus.
+Cela insinue que les encodages à __virgule flottante__ ainsi que __Binary Unsigned__ ont cette même propriété en commun, et pas des moindres... car cette dernière va jusqu'à affecter le traitement des données par le FPS Configuration Unit. 
 
-Cette propriété de la __notation positionnelle__ nous dit que la valeur $\left(1 \times 2^i\right)$ de tout bit à $1$ de poids $i$ d'un nombre codé en __Binary Unsigned__, est strictement supérieur à la somme des valeurs des bits de poids inférieur à $i$.
-Prenons une nouvelle fois le cas du nombre $103$ qui, je vous le rappelle, s'écrit $1100111_2$ en __Binary Unsigned__.
-Selon ce qui vient d'être dit, nous en déduisons par exemple que la valeur $\left(1 \times 2^5\right)$ du bit à $1$ de poids $5$, est strictement supérieur à la somme des valeurs des bits de poids $0$, $1$, $2$, $3$ et $4$ ; indépendemment de la valeur de ces bits.
+En bref, pour un champ $F$ qui code un nombre en __Binary Unsigned__ ou en __virgule flottante__, la valeur de tout bit à $1$ de poids $\left(i \gt lsb\left(F\right)\right)$ est strictement supérieur à la somme des valeurs des bits de poids inférieur à $i$ :
 
-L'encodage __Binary Unsigned__ ne doit cette propriété qu'à la __notation positionnelle__, ce qui insinue que cette dernière s'applique également à la partie entière ainsi qu'à la partie fractionnaire des nombres à virgule flottante.
-Admettons qu'un champ $F$ code le nombre $+ 103.375$, c'est-à-dire $+ 1100111.011_2$ en __virgule flottante__, alors nous trouvons que pour tout bit à $1$ de poids $\left(i \gt -3\right)$ du champ $F$ :
+$$\left(1 \times 2^i\right) \gt \sum_{\sigma = i - 1}^{lsb\left(F\right)} \left(F_{\sigma} \times 2^{\sigma}\right)$$
 
-$$\left(1 \times 2^i\right) \gt \sum_{\sigma = i - 1}^{-3} \ \left(F_{\sigma} \times 2^{\sigma}\right)$$
-
-
-
-
-Prenons par exemple le nombre $+ 103.375$ qui s'écrit $+ 1100111.011_2$ en __virgule flottante__.
-Nous savons que la valeur de tout bit à $1$ de poids $i$, venant de la partie entière ou fractionnaire, est strictement supérieur à la somme des valeurs des bits de poids inférieur à $i$.
-
-
-
-
-La section précédente parle d'une propriété de cet encodage mais en réalité cette propriété provient plutôt de la notation positionnelle elle-même, ce qui insinue que celle-ci s'applique, et à la partie entière, et à la partie fractionnaire des nombres à virgule flottante.
-Pour résumer, cela veut dire que dans un nombre à virgule flottante, tout bit à $1$ de poids $i$ a une valeur $\left(1 \times 2^i\right)$ strictement supérieur à la somme des valeurs des bits de poids inférieur à $i$.
-
-En outre, rappelez-vous du fait que l'encodage en __virgule flottante__ utilise l'encodage __Binary Unsigned__ pour le codage de la partie entière des nombres à __virgule flottante__.
-Ce qui, de facto, permet de dire que le paragraphe précédent est valable pour la partie entière des nombres à __virgule flottante__.
-Quant à la partie fractionnaire, cette dernière utilise aussi la __notation positionnelle__ lui conférent ainsi les même propriétés
-
-
-
-
-
-
-
-// tout revoir
-
-Admettons qu'un champ $F$ code un nombre non nul en __Binary Unsigned__, cet encodage nous permet alors de savoir que tout bit à $1$ de poids $i$ dudit champ a une valeur $\left(1 \times 2^i\right)$ qui est strictement supérieur à la somme des valeurs des bits de poids inférieur à $i$.
-Partons du principe que le champ $F$ code le nombre $103$, c'est-à-dire $1100111_2$, alors nous savons que la valeur du bit de poids $5$, étant de $\left(1 \times 2^5\right)$, est strictement supérieur à la somme des valeurs des bits de poids $0, 1, 2, 3$ et $4$ ; indépendemment de la valeur de ces bits là.
-
-Autrement dit, de manière plus générale, nous trouvons que pour tout bit à $1$ de poids $\left(i \gt 0\right)$ du champ $F$ :
-
-$$\left(1 \times 2^i\right) \gt \sum_{\sigma = i - 1}^0 \ \left(F_{\sigma} \times 2^{\sigma}\right)$$
-
-Premièrement, je précise que la syntaxe $F_{\sigma}$ permet d'indexer le bit de poids $\sigma$ du champ $F$, et deuxièmement le fait que ce dont parle cette section n'est pas propre à la base binaire.
+Je précise que la fonction $lsb\left(\right)$ retourne simplement le poids le plus faible du nombre passé en argument, ici $F$.
 
 # L'écriture scientifique binaire
 
