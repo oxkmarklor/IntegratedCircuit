@@ -147,8 +147,7 @@ Cette propriété de la __notation positionnelle__ nous dit que la valeur $\left
 Prenons une nouvelle fois le cas du nombre $103$ qui, je vous le rappelle, s'écrit $1100111_2$ en __Binary Unsigned__.
 Selon ce qui vient d'être dit, nous en déduisons par exemple que la valeur $\left(1 \times 2^5\right)$ du bit à $1$ de poids $5$ est strictement supérieur à la somme des valeurs des bits de poids $0$, $1$, $2$, $3$ et $4$ ; indépendemment de la valeur des bits sous-jacent.
 
-// traiter du cas des nombres à virgule (partie entière codé en Binary Unsigned)
-
+// nbr flottant (partie entière binary unsigned)
 
 
 
