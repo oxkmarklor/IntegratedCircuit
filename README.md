@@ -70,12 +70,11 @@ Cette syntaxe ne sera utilisée que lorsqu'il y aura une ambiguïté dans l'inte
 $$103 \ = \left(1 \times 10_{10}^{\quad 2} + 0 \times 10_{10}^{\quad 1} + 3 \times 10_{10}^{\quad 0}\right)$$
 
 Le chiffre des unités $3$ est facteur de $10_{10}$ à la puissance $0$ ; le chiffre des dizaines $0$ est facteur de $10_{10}$ à la puissance $1$, tandis que le chiffre des centaines $1$ est le facteur de $10_{10}$ à la puissance $2$.
-Remarquez que le chiffre des unités (qui occupe une certaine position dans le nombre) est facteur d'une puissance de $10_{10}$ qui est dix fois inférieur à celle dont le chiffre des dizaines (le chiffre de la position suivante) est le facteur, ce qui se généralise à l'ensemble des chiffres d'un nombre écrit en base décimale.
+Remarquez que les puissances de $10_{10}$ dont les chiffres sont facteurs, multiplient leurs valeurs par dix en passant du chiffre des unités, aux dizaines, puis des dizaines, aux centaines, etc. ; cependant, sachez que tout ce que nous venons de voir n'est pas propre à la base décimale.
 
-La base binaire (ou base $2$) permet également de représenter des nombres d'une façon équivalente, mais comme mentionné plus haut, qui dit représentation de nombre dit encodage de nombre.
-Vous l'aurez compris, l'encodage permettant de représenter des nombres de la sorte est le __Binary Unsigned__.
-Chaque bit d'un nombre codé en __Binary Unsigned__ est le facteur d'une puissance de $2$ positive ou nul ; le nombre ainsi représenté se calcule par le biais de la somme de ces produits.
-En outre, les nombres codés n'ont pas de signe $\pm$ représenté par un bit, d'où le fait que cet encodage ne permette que le codage d'entiers naturels. 
+La base binaire permet également de représenter des nombres d'une façon équivalente, et ce, grâce à l'encodage __Binary Unsigned__.
+Avec cet encodage, chaque bit d'un nombre est le facteur d'une puissance de $2$ qui est positive ou nul, la valeur du nombre ainsi représenté se calcule par le biais de la somme de ces produits.
+En outre, ces nombres ne codent pas de signe $\pm$ sur un bit, ce qui explique le fait que l'encodage __Binary Unsigned__ ne permette que le codage d'entiers naturels. 
 
 $$103 \ = \ 1100111_2 \ = \left(1 \times 2^6 + 1 \times 2^5 + 0 \times 2^4 + 0 \times 2^3 + 1 \times 2^2 + 1 \times 2^1 + 1 \times 2^0\right)$$
 
@@ -108,7 +107,7 @@ Voici une illustration de la façon dont se calcule la valeur de la partie déci
 
 $$0.375 \ = \left(3 \times 10_{10}^{\quad -1} + 7 \times 10_{10}^{\quad -2} + 5 \times 10_{10}^{\quad -3}\right)$$
 
-// *10
+// 
 
 Le chiffre des dizièmes $3$ est facteur de $10_{10}$ à la puissance $-1$ ; le chiffre des centièmes $7$ est facteur de $10_{10}$ à la puissance $-2$, tandis que le chiffre des millièmes $5$ est le facteur de $10_{10}$ à la puissance $-3$.
 Remarquez que le chiffre des dizièmes (qui occupe une certaine position dans le nombre) est facteur d'une puissance de $10_{10}$ qui est dix fois supérieur à celle dont le chiffre des centièmes (le chiffre de la position précédente) est le facteur.
