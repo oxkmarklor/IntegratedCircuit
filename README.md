@@ -155,13 +155,11 @@ Voici une illustration du codage en __virgule flottante__ du nombre $+ 11.75$ :
 
 $$+ \ 11.75 \ = \ + 1011.11_2 \ = \left(1 \times 2^3 + 0 \times 2^2 + 1 \times 2^1 + 1 \times 2^0 + 1 \times 2^{-1} + 1 \times 2^{-2}\right)$$
 
-De par ce qui vient d'être dit, nous en déduisons par exemple que la valeur $\left(1 \times 2^1\right)$ du bit à $1$ de poids $1$, est strictement supérieur à la somme des valeurs des bits de poids $0$, $-1$ et $-2$ ; nonobstant la valeur sous-jacente de ces bits.
+Avec ce qui vient d'être dit, nous en déduisons par exemple que la valeur $\left(1 \times 2^1\right)$ du bit à $1$ de poids $1$, est strictement supérieur à la somme des valeurs des bits de poids $0$, $-1$ et $-2$ ; nonobstant la valeur sous-jacente de ces bits.
 
 $$\left(1 \times 2^1\right) \gt \left(1 \times 2^0 + 1 \times 2^{-1} + 1 \times 2^{-2}\right)$$
 
-// relire à partir d'ici
-
-Rappelez-vous des chapitres précédent sur l'encodage __Binary Unsigned__ ainsi que sur l'encodage des nombres à __virgule flottante__, ces chapitres expliquent (entre autre) que ces encodages s'appuient pleinement sur la __notation positionnelle__.
+En outre, rappelez-vous des chapitres précédent sur l'encodage __Binary Unsigned__ ainsi que sur l'encodage des nombres à __virgule flottante__, ces chapitres expliquent (entre autre) que ces encodages s'appuient pleinement sur la __notation positionnelle__.
 Naturellement, cela confère à ces encodages toutes les propriétés de la __notation positionnelle__, dont celle évoquée ci-dessus.
 Cela insinue que les encodages à __virgule flottante__ ainsi que __Binary Unsigned__ ont cette même propriété en commun, et pas des moindres... car cette dernière va jusqu'à affecter le traitement des données par le FPS Configuration Unit. 
 
@@ -169,7 +167,7 @@ En bref, pour un champ $F$ qui code un nombre en __Binary Unsigned__ ou en __vir
 
 $$\left(1 \times 2^i\right) \gt \sum_{\sigma = i - 1}^{lsb\left(F\right)} \left(F_{\sigma} \times 2^{\sigma}\right)$$
 
-Je précise que la fonction $lsb\left(\right)$ retourne simplement le poids le plus faible du nombre passé en argument, ici $F$.
+Je précise que la syntaxe $F_{\sigma}$ permet d'indexer le bit de poids $\sigma$ du champ $F$, de plus, ajoutez à cela le fait que la fonction $lsb\left(\right)$ retourne simplement le poids le plus faible du nombre $F$ passé en argument.
 
 # L'écriture scientifique binaire
 
