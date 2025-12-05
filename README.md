@@ -120,11 +120,19 @@ $$0.375 \ = \ 0.011_2 \ = \left(0 \times 2^{-1} + 1 \times 2^{-2} + 1 \times 2^{
 
 Je précise qu'il faut expliciter le signe $\pm$ des nombres à __virgule flottante__, dû au fait que la partie entière de ces derniers ne peut coder que des nombres entiers naturels.
 
-// supp?
+### Les différences entre virgule fixe et virgule flottante
 
-Pour finir, rappelez-vous du fait que l'encodage Binary Unsigned n'est qu'une simple application de la notation positionnelle.
-La section précédente parle d'une propriété de cet encodage mais en réalité cette propriété provient plutôt de la notation positionnelle elle-même, ce qui insinue que celle-ci s'applique, et à la partie entière, et à la partie fractionnaire des nombres à virgule flottante.
-Pour résumer, cela veut dire que dans un nombre à virgule flottante, tout bit à $1$ de poids $i$ a une valeur $\left(1 \times 2^i\right)$ strictement supérieur à la somme des valeurs des bits de poids inférieur à $i$.
+L'encodage à __virgule fixe__ permet de coder des nombres avec une précision constante, un nombre codé en __virgule fixe__ a un quanta fixe de bits qui compose sa partie entière ainsi que sa partie fractionnaire.
+Pour le dire autrement, cela insinue que la virgule de ces nombres ne peut pas être déplacée, d'où le nom de cet encodage '__virgule fixe__'.
+
+Il se trouve que l'encodage à __virgule flottante__ permet, quant à lui, de coder des nombres avec une précision variable.
+Comme le mentionne le chapitre précédent, l'encodage en __virgule flottante__ est une version moins restrictive de l'encodage en __virgule fixe__.
+La précision dans le codage des nombres à __virgule flottante__ est variable grâce au fait qu'il n'y ait pas de quanta fixe de bits composant la partie entière ainsi que la partie fractionnaire de ces nombres ; la virgule peut être déplacée, ou autrement dit, un bit peut passé de la partie entière à la partie fractionnaire et vice versa.
+Ceci explique une nouvelle fois le nom de cet encodage '__virgule flottante__', c'est effectivement comme si la virgule flottait dans le nombre.
+
+Mis à part une gestion différente de la virgule entre ces deux encodages, je dois préciser que l'encodage en __virgule fixe__ s'appuie sur la notation positionnelle, à l'instar de l'encodage à __virgule flottante__.
+
+
 
 ### L'étymologie du terme de nombre à virgule flottante
 
