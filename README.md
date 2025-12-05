@@ -113,8 +113,8 @@ Cependant, d'une part cela se généralise à l'ensemble des chiffres composant 
 
 En effet, l'encodage en __virgule flottante__ permet de coder des nombres à virgule en base binaire d'une façon équivalente à ce qui se fait en base décimale, modulo quelques changements que l'on doit au passage à la base binaire.
 Dans un premier temps, notons que nous ne parlons plus de la partie décimale mais désormais de la partie fractionnaire d'un nombre, car les nombres ne sont plus composés de chiffres décimaux.
-Dans un second temps, sachez que l'encodage en __virgule flottante__ utilise la notation positionnelle pour le codage de la partie entière (l'encodage Binary Unsigned), ainsi que pour la partie fractionnaire des nombres à __virgule flottante__ ; chaque bit de la partie fractionnaire est alors le facteur d'une puissance de $2$ négative, et la partie fractionnaire a pour valeur la somme de ces produits.
-Ci-bas se trouve une illustration du codage de la partie fractionnaire du nombre à __virgule flottante__ $+ 103.375$ :
+Dans un second temps, sachez que l'encodage en __virgule flottante__ utilise la notation positionnelle pour le codage de la partie entière des nombres à __virgule flottante__  (l'encodage Binary Unsigned), ainsi que pour la partie fractionnaire de ces derniers ; chaque bit de la partie fractionnaire est alors le facteur d'une puissance de $2$ négative, la partie fractionnaire ayant pour valeur la somme de ces produits.
+Voici une illustration du codage de la partie fractionnaire du nombre à __virgule flottante__ $+ 103.375$ :
 
 $$0.375 \ = \ 0.011_2 \ = \left(0 \times 2^{-1} + 1 \times 2^{-2} + 1 \times 2^{-3}\right)$$
 
@@ -130,7 +130,9 @@ Comme le mentionne le chapitre précédent, l'encodage en __virgule flottante__ 
 La précision dans le codage des nombres à __virgule flottante__ est variable grâce au fait qu'il n'y ait pas de quanta fixe de bits composant la partie entière et fractionnaire de ces nombres ; la virgule peut être déplacée, ou autrement dit, un bit peut passé de la partie entière à la partie fractionnaire et vice versa.
 Ce qui, au passage, affecte la plage de codage des nombres à __virgule flottante__.
 
-Pour résumer, mis à part le fait qu'ils gérent la virgule différemment, ces encodages sont identiques (ils s'appuient tout les deux sur la notation positionnelle).
+Pour résumer, mis à part le fait qu'ils gérent la virgule différemment, ces encodages sont identiques (ils s'appuient, entre autre, tout les deux sur la notation positionnelle).
+Cependant, 
+
 
 
 //
