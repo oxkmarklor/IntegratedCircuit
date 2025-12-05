@@ -91,6 +91,39 @@ Pour ne citer que les principaux, le terme __Least Significant Bit__ de l'acrony
 A contrario, le terme __Most Significant Bit__ de l'acronyme __MSB__ fait référence au bit de poids le plus fort d'un champ.
 Aussi, il existe les acronymes __LSB1__ et __MSB1__ faisant respectivement référence au bit à $1$ de poids le plus faible et de poids le plus fort d'un champ.
 
+## L'encodage des nombres à virgule fixe
+
+Il existe en informatique de multiples encodages pour représenter des nombres entiers naturels (nous venons d'en voir un), et il en va de même pour les nombres à virgule ; la __virgule fixe__, la virgule flottante ou encore les formats définis par le standard IEEE-754 sont, à ma connaissance, les principaux encodages de nombres à virgule.
+
+A ce jour, en 2025, les usages de l'encodage en __virgule fixe__ se font rares, il s'avère que ce dernier est connu pour être utilisé dans les systèmes informatiques bancaires.
+L'encodage en virgule flottante est, quant à lui, une version moins restrictive de l'encodage en __virgule fixe__, permettant ainsi aux champs d'avoir une plage de codage plus étendue qu'avec un encodage à __virgule fixe__.
+En outre, la virgule flottante est utilisée par la notation scientifique binaire, dont nous parlerons plus tard.
+Pour finir, le standard IEEE-754 définit des formats normalisés de nombres à virgule, ceux-ci ayant pour but d'unifier la représentation des nombres à virgule dans les ordinateurs.
+C'est un sujet absolument fondamental à ce document que nous aborderons plus tard également, pour le moment, intéressons-nous à l'encodage des nombres à __virgule fixe__.
+
+Pour commencer, je ne vous apprends rien en disant qu'un nombre à virgule écrit en base décimale est scindé en deux parties : la partie entière composée des chiffres devant la virgule, et la partie décimale composée des chiffres derrière la virgule.
+Nous savons d'ores et déjà que la partie entière d'un tel nombre utilise la notation positionnelle, je vous renvoie vers le chapitre précédent si nécessaire.
+Il s'avère que la partie décimale utilise elle aussi la notation positionnelle, en l'occurrence, chaque chiffre de la partie décimale est le facteur d'une puissance de $10_{10}$ négative et la somme de ces produits résulte en la valeur de la partie décimale elle-même.
+Voici une illustration de la façon dont se calcule la valeur de la partie décimale du nombre $103.375$ :
+
+$$0.375 \ = \left(3 \times 10_{10}^{\quad -1} + 7 \times 10_{10}^{\quad -2} + 5 \times 10_{10}^{\quad -3}\right)$$
+
+// *10
+
+Le chiffre des dizièmes $3$ est facteur de $10_{10}$ à la puissance $-1$ ; le chiffre des centièmes $7$ est facteur de $10_{10}$ à la puissance $-2$, tandis que le chiffre des millièmes $5$ est le facteur de $10_{10}$ à la puissance $-3$.
+Remarquez que le chiffre des dizièmes (qui occupe une certaine position dans le nombre) est facteur d'une puissance de $10_{10}$ qui est dix fois supérieur à celle dont le chiffre des centièmes (le chiffre de la position précédente) est le facteur.
+Cependant, d'une part cela se généralise à l'ensemble des chiffres adjacents qui composent la partie décimale d'un nombre écrit en base $10_{10}$, et d'autre part je dois préciser que tout ceci n'est pas propre à la base décimale elle-même.
+
+En effet, l'encodage en __virgule fixe__ permet de coder des nombres à virgule en base binaire d'une façon équivalente à ce qui se fait en base décimale, modulo quelques changements que l'on doit au passage à la base binaire.
+Dans un premier temps, notons que nous ne parlons plus de la partie décimale mais désormais de la partie fractionnaire d'un nombre, car les nombres ne sont plus composés de chiffres décimaux.
+Dans un second temps, sachez que l'encodage en __virgule fixe__ utilise la notation positionnelle pour le codage de la partie entière des nombres à __virgule fixe__  (l'encodage Binary Unsigned), ainsi que pour la partie fractionnaire de ces derniers ; chaque bit de la partie fractionnaire est alors le facteur d'une puissance de $2$ négative, la partie fractionnaire ayant pour valeur la somme de ces produits.
+Voici une illustration du codage de la partie fractionnaire du nombre à __virgule fixe__ $+ 103.375$ :
+
+$$0.375 \ = \ 0.011_2 \ = \left(0 \times 2^{-1} + 1 \times 2^{-2} + 1 \times 2^{-3}\right)$$
+
+Je précise qu'il faut expliciter le signe $\pm$ des nombres à __virgule fixe__, dû au fait que la partie entière de ces derniers ne peut coder que des nombres entiers naturels.
+
+
 ## L'encodage des nombres à virgule flottante
 
 Il existe en informatique de multiples encodages pour représenter des nombres entiers naturels (nous venons d'en voir un), et il en va de même pour les nombres à virgule ; la virgule fixe, la __virgule flottante__ ou encore les formats définis par le standard IEEE-754 sont, à ma connaissance, les principaux encodages de nombres à virgule.
@@ -120,7 +153,7 @@ $$0.375 \ = \ 0.011_2 \ = \left(0 \times 2^{-1} + 1 \times 2^{-2} + 1 \times 2^{
 
 Je précise qu'il faut expliciter le signe $\pm$ des nombres à __virgule flottante__, dû au fait que la partie entière de ces derniers ne peut coder que des nombres entiers naturels.
 
-### Les différences entre virgule fixe et virgule flottante
+### Les différences entre virgule fixe et virgule flottante (save)
 
 L'encodage à __virgule fixe__ permet de coder des nombres avec une précision constante, un nombre codé en __virgule fixe__ a un quanta fixe de bits qui compose sa partie entière ainsi que sa partie fractionnaire.
 Pour le dire autrement, cela insinue que la virgule de ces nombres ne peut pas être déplacée, d'où le nom de cet encodage '__virgule fixe__'.
@@ -144,7 +177,7 @@ $$+ \ 3.25 \ = + 11.01_2 \ = \left(1 \times 2^1 + 1 \times 2^0 + 0 \times 2^{-1}
 
 La partie entière comme fractionnaire sont toutes les deux composées de $2$ bits, alors nous en déduisons de fait que la plage de codage (des nombres naturels) de ce champ est de $\left[3.75;0\right]$
 
-### L'étymologie du terme de nombre à virgule flottante
+### L'étymologie du terme de nombre à virgule flottante (save)
 
 Ces nombres sont dits à virgule flottante parce que la virgule du nombre peut être déplacée sans que cela ne pose de problème.
 C'est la solution qui à ce jour, pour l'Homme, est la plus intuitive ainsi que la plus flexible pour l'écriture des nombres à virgule en binaire.
