@@ -128,11 +128,14 @@ Pour le dire autrement, cela insinue que la virgule de ces nombres ne peut pas �
 Il se trouve que l'encodage à __virgule flottante__ permet, quant à lui, de coder des nombres avec une précision variable.
 Comme le mentionne le chapitre précédent, l'encodage en __virgule flottante__ est une version moins restrictive de l'encodage en __virgule fixe__.
 La précision dans le codage des nombres à __virgule flottante__ est variable grâce au fait qu'il n'y ait pas de quanta fixe de bits composant la partie entière ainsi que la partie fractionnaire de ces nombres ; la virgule peut être déplacée, ou autrement dit, un bit peut passé de la partie entière à la partie fractionnaire et vice versa.
-Ceci explique une nouvelle fois le nom de cet encodage '__virgule flottante__', c'est effectivement comme si la virgule flottait dans le nombre.
+Au passage, ceci affecte la plage de codage des nombres à __virgule flottante__ en plus d'expliquer la raison derrière le nom de cet encodage '__virgule flottante__', c'est effectivement comme si la virgule flottait dans le nombre.
 
 Mis à part une gestion différente de la virgule entre ces deux encodages, je dois préciser que l'encodage en __virgule fixe__ s'appuie sur la notation positionnelle, à l'instar de l'encodage à __virgule flottante__.
+Venons-en au fait désormais, la précision constante du codage des nombres à __virgule fixe__ est limitante dans la plupart des cas d'usage, prenons pour exemple le codage en __virgule fixe__ du nombre $+3.25$ :
 
+$$+ \ 3.25 \ = + 11.01_2 \ = \left(1 \times 2^1 + 1 \times 2^0 + 0 \times 2^{-1} + 1 \times 2^{-2}\right)$$
 
+La partie entière comme fractionnaire sont toutes les deux composées de $2$ bits, alors nous en déduisons de fait que la plage de codage (des nombres naturels) de ce champ est de $\left[3.75;0\right]$
 
 ### L'étymologie du terme de nombre à virgule flottante
 
