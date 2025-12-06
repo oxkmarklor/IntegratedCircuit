@@ -1,6 +1,6 @@
 Bonjour,
 
-Ce document est une preuve mathématique du fonctionnement d'un circuit électronique du nom de Floating Point Substractor Configuration Unit ou FPS Configuration Unit.
+Ce document est une preuve mathématique du fonctionnement d'un circuit électronique du nom de Floating Point Substractor Configuration Unit, ou FPS Configuration Unit.
 J'ai conceptualisé ce circuit dans le but de résoudre un problème concernant le traitement des nombres flottants dans les unités de calculs flottantes (FPUs) d'un ordinateur.
 La micro-architecture du circuit électronique ainsi que les compromis de conceptualisation, le problème que cherche à résoudre le FPS Configuration Unit ou encore la solution qu'il apporte, sont autant de sujets dont je parle dans une documentation dédiée au circuit.
 
@@ -55,10 +55,10 @@ Un bit est symboliquement représenté par un $0$ ou un $1$, pour la culture, je
 Un champ binaire est quant à lui composé d'un ensemble de bit, c'est-à-dire d'un ensemble de $0$ et de $1$.
 Ce sont ces champs binaires qui nous permettent de représenter des nombres dans un ordinateur, par extension de faire des calculs ainsi que de mémoriser des résultats.
 
-Il y a cependant de nombreuses façons de représenter des nombres dans un champ binaire, nous parlons alors de l'_encodage_ des nombres.
-Tous les encodages ne se valent pas car il y en a des plus adaptés/efficaces que d'autres en fonction des besoins ; prenons un exemple : pour un champ de $16$ bits, nous pourrions calculer la somme des bits pour représenter un nombre.
-Avec cet encodage nous ne pourrions coder que des valeurs entre $0$ et $16$ inclus, ce qui n'est pas optimal pour bien des situations.
-Néanmoins, parmi les multiples encodages existants, le plus connu de tous porte le nom de __Binary Unsigned__.
+Il y a cependant de nombreuses façons de représenter des nombres dans un champ binaire, nous parlons alors de l'__encodage__ des nombres.
+Tous les __encodages__ ne se valent pas car il y en a des plus adaptés/efficaces que d'autres en fonction des besoins ; prenons un exemple : pour un champ de $16$ bits, nous pourrions calculer la somme des bits pour représenter un nombre.
+Avec cet __encodage__ nous ne pourrions coder que des valeurs entre $0$ et $16$ inclus, ce qui n'est pas optimal pour bien des situations.
+Néanmoins, parmi les multiples __encodages__ existants, le plus connu de tous porte le nom de __Binary Unsigned__.
 
 ## L'encodage Binary Unsigned
 
