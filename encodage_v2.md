@@ -16,17 +16,20 @@ Ces __encodages__ sont néanmoins intrinséquement liés au concept de la __nota
 
 ## La notation positionnelle
 
-La __notation positionnelle__ est une sorte d'__encodage__ qui permet de représenter les nombres de façon générique sous n'importe quel base numérique, comme en base décimale par exemple.
-Veuillez noté que la __notation positionnelle__ n'est pas la seule manière qui nous est donné pour représenter des nombres, il existe aussi la __notation scientifique__ qui, comme son nom l'indique, est principalement utilisée dans le monde des sciences ; cette dernière notation a elle aussi son propre chapitre dans le document.
+La __notation positionnelle__ est une sorte d'__encodage__ qui permet de représenter les nombres de façon générique sous n'importe quel base numérique.
+Veuillez noté que la __notation positionnelle__ n'est pas la seule manière qui nous est donné pour représenter des nombres, il existe aussi la __notation scientifique__ qui, comme son nom l'indique, est principalement utilisée dans le monde des sciences ; le document consacre plus loin un chapitre entier à la __notation scientifique__. 
+
+Dans notre quotidien, lorsque nous manipulons des nombres (en base décimale) nous les représentons communément en __notation positionnelle__, c'est-à-dire de la sorte : $11.75$.
+En l'occurrence, il s'avère que chacun des chiffres qui compose ce nombre est le facteur d'une puissance $10_{10}$, le nombre sous-jacent ayant pour valeur la somme de ces produits.
+
+// illu ou explication indice
 
 
-Nous représentons usuellement un nombre comme ceci : $103$, en __notation positionnelle__, mais il est aussi possible de représenter ce nombre en __notation scientifique__ comme cela : $1.03 \times 10^2$ ; bref, tout cela pour dire que la __notation positionnelle__ n'est pas la seule manière qui nous est donné pour représenter des nombres.
-Veuillez noté que nous parlerons plus tard de la __notation scientifique__ en base binaire.
+
 
 
 
 /*
- 1- au sens de ce qu'est un encodage (représentation de nombre)... la notation positionnelle en est un
  2- la notation positionnelle dans le cas d'un nombre entier naturel (103, admettons) écrit en base 10
  3- illustration de la façon dont s'écrit un nombre en base 10
  4- la notation positionnelle dans les cas des nombres à virgule (103.375, par exemple) écrit en base 10 + référence pour la partie entière
