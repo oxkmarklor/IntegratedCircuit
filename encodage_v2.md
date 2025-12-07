@@ -30,28 +30,14 @@ Notez que la syntaxe suivante $X_{10}$ spécifie la base numérique dans laquell
 Cette syntaxe ne sera utilisée que lorsqu'il y aura une ambiguïté dans l'interprétation d'un nombre composé uniquement de $0$ et de $1$, permettant ainsi de dissocier les nombres écrits en base décimale de ceux écrits en base binaire.
 
 Dans l'illustration qui figure ci-dessus, remarquez que les chiffres de la partie entière du nombre multiplient des puissances de $10_{10}$ positives ou nul, tandis que les chiffres de la partie décimale multiplient des puissances de $10_{10}$ négatives.
-Ajoutons à cela le fait que la valeur des puissances de $N$ que multiplient deux chiffres successifs constituant un nombre écrit en base $N$, sont séparées d'un facteur $N$.
-Par exemple, dans notre cas le nombre $11.75$ est écrit en base décimale, ce qui insinue que le chiffre des unités est facteur d'une puissance de $10_{10}$ qui est dix fois plus grande que celle dont le chiffre des dizièmes est le facteur.
-
-
-//
-
-
-Le chiffre des unités $3$ est facteur de $10_{10}$ à la puissance $0$ ; le chiffre des dizaines $0$ est facteur de $10_{10}$ à la puissance $1$, tandis que le chiffre des centaines $1$ est le facteur de $10_{10}$ à la puissance $2$.
-Remarquez que les puissances de $10_{10}$ dont les chiffres sont facteurs, multiplient leurs valeurs par dix en passant du chiffre des unités, aux dizaines, puis des dizaines, aux centaines, etc. ; cependant, sachez que tout ce que nous venons de voir n'est pas propre à la base décimale.
-
-expliquer la relation d'une puissance de dix à une autre
+A cela, ajoutons que la valeur des puissances de $10_{10}$ multipliées par deux chiffres successifs sont séparés d'un facteur $10_{10}$ ; pour généralisé, la valeur des puissances de $N$ multipliées par deux chiffres successifs constituant un nombre écrit en base $N$, sont alors séparées d'un facteur $N$.
 
 
 
 /*
- 2- la notation positionnelle dans le cas d'un nombre entier naturel (103, admettons) écrit en base 10
- 3- illustration de la façon dont s'écrit un nombre en base 10
- 4- la notation positionnelle dans les cas des nombres à virgule (103.375, par exemple) écrit en base 10 + référence pour la partie entière
- 5- illustration de la façon dont s'écrit la partie décimale d'un tel nombre (inclure explication/illustration pour la partie entière, comme vu précédemment?)
  6- la propriété élémentaire que confère la notation positionnelle à l'ensemble des bases numériques
- 7- exemple de cette propriété rattacher au cas des nombres écrits en base 10 (103, 103.375, ou les deux?)
  
+ 7- exemple de cette propriété rattacher au cas des nombres écrits en base 10 (103, 103.375, ou les deux?)
 */
 
 //
