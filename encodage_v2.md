@@ -20,7 +20,7 @@ La __notation positionnelle__ est une sorte d'__encodage__ qui permet de représ
 Veuillez noté que la __notation positionnelle__ n'est pas la seule manière qui nous est donné pour représenter des nombres, il existe aussi la __notation scientifique__ qui, comme son nom l'indique, est principalement utilisée dans le monde des sciences ; le document consacre plus loin un chapitre entier à la __notation scientifique__. 
 
 Dans notre quotidien, lorsque nous manipulons des nombres (en base décimale) nous les représentons communément en __notation positionnelle__, c'est-à-dire de la sorte : $11.75$ .
-Il s'avère que chaque chiffre constituant le nombre $11.75$ est facteur d'une puissance de $10_{10}$ car ledit nombre est écrit en base décimale, en base $10_{10}$ ; les chiffres constitutifs d'un nombre écrit en base $N$ étant facteurs d'une puissance de $N$.
+Il s'avère qu'en __notation positionnelle__ chaque chiffre constituant le nombre $11.75$ est facteur d'une puissance de $10_{10}$ car ledit nombre est écrit en base décimale, en base $10_{10}$ ; les chiffres constitutifs d'un nombre écrit en base $N$ étant facteurs d'une puissance de $N$.
 Enfin, le nombre sous-jacent a pour valeur la somme des produits entre chiffres et puissances.
 Voici l'illustration de la façon dont la valeur du nombre $11.75$ se calcul en base décimale :
 
@@ -30,7 +30,7 @@ Notez que la syntaxe suivante $X_{10}$ spécifie la base numérique dans laquell
 Cette syntaxe ne sera utilisée que lorsqu'il y aura une ambiguïté dans l'interprétation d'un nombre composé uniquement de $0$ et de $1$, permettant ainsi de dissocier les nombres écrits en base décimale de ceux écrits en base binaire.
 
 Dans l'illustration qui figure ci-dessus, remarquez que les chiffres de la partie entière du nombre multiplient des puissances de $10_{10}$ positives ou nul, tandis que les chiffres de la partie décimale multiplient des puissances de $10_{10}$ négatives.
-A cela, ajoutons que la valeur des puissances de $10_{10}$ multipliées par deux chiffres successifs sont séparés d'un facteur $10_{10}$ ; pour généralisé, la valeur des puissances de $N$ multipliées par deux chiffres successifs constituant un nombre écrit en base $N$, sont alors séparées d'un facteur $N$.
+A cela, ajoutons que la valeur des puissances de $10_{10}$ multipliées par deux chiffres successifs est séparé d'un facteur $10_{10}$ ; pour généralisé, la valeur des puissances de $N$ multipliées par deux chiffres successifs constituant un nombre écrit en base $N$, sont alors séparées d'un facteur $N$.
 
 
 
