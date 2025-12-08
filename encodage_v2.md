@@ -30,8 +30,11 @@ Notez que la syntaxe suivante $X_{10}$ spécifie la base numérique dans laquell
 Cette syntaxe ne sera utilisée que lorsqu'il y aura une ambiguïté dans l'interprétation d'un nombre composé uniquement de $0$ et de $1$, permettant ainsi de dissocier les nombres écrits en base décimale de ceux écrits en base binaire.
 
 Dans l'illustration qui figure ci-dessus, remarquez que les chiffres de la partie entière du nombre multiplient des puissances de $10_{10}$ positives ou nul, tandis que les chiffres de la partie décimale multiplient des puissances de $10_{10}$ négatives.
-A cela, ajoutons que la valeur des puissances de $10_{10}$ multipliées par deux chiffres successifs est séparé d'un facteur $10_{10}$ ; pour généralisé, la valeur des puissances de $N$ multipliées par deux chiffres successifs constituant un nombre écrit en base $N$, sont alors séparées d'un facteur $N$.
+A cela, ajoutons que la valeur des puissances de $10_{10}$ multipliées par deux chiffres successifs est séparé d'un facteur $10_{10}$ ; pour généralisé, la valeur des puissances de $N$ multipliées par deux chiffres successifs constituant un nombre écrit en base $N$, est alors séparée d'un facteur $N$.
 
+En outre, rappelez-vous du fait que la __notation positionnelle__ s'applique à toutes les bases numériques, car ses propiétés en font autant.
+
+// réfléchir à la façon dont je peux expliquer la propriété (par le biais d'un exemple sur la base décimale exclusivement?) 
 
 
 /*
@@ -40,7 +43,38 @@ A cela, ajoutons que la valeur des puissances de $10_{10}$ multipliées par deux
  7- exemple de cette propriété rattacher au cas des nombres écrits en base 10 (103, 103.375, ou les deux?)
 */
 
-//
+
+La __notation positionnelle__ confère une propriété intéressante à toute les bases numérique : dans tout nombre, la valeur d'un chiffre non nul de poids $i$ est strictement supérieur à la somme des valeurs des chiffres de poids inférieur à $i$.
+Prenons comme exemple le nombre $11.75$ écrit en base décimale :
+
+$$11.75 \ = \left(1 \times 10_{10}^{\quad 1} + 1 \times 10_{10}^{\quad 0} + 7 \times 10_{10}^{\quad -1} + 5 \times 10_{10}^{\quad -2}\right)$$
+
+Remarquons que le chiffre $1$ des dizaines est non nul, alors nous savons que la valeur de ce chiffre $\left(1 \times 10_{10}^{\quad 1}\right)$ est strictement supérieur à la somme des valeurs des chiffres inférieurs au rang des dizaines ; et ce, indépendemment de la valeur des chiffres sous-jacent.
+
+$$\left(1 \times 10_{10}^{\quad 1}\right) \gt \left(1 \times 10_{10}^{\quad 0} + 7 \times 10_{10}^{\quad -1} + 5 \times 10_{10}^{\quad -2}\right)$$
+
+Bien évidemment, cela fonctionne pour la base décimale (entre autre) mais aussi pour la base binaire, à la seule différence que nous ne parlons dès lors plus de chiffres décimaux mais de bits.
+De facto, vu qu'un bit non nul est à $1$, il est préférable de dire que : dans tout nombre binaire, la valeur d'un bit à $1$ de poids $i$ est strictement supérieur à la somme des valeurs des bits de poids inférieur à $i$. 
+Voici une illustration du codage en __virgule flottante__ du nombre $+ 11.75$ :
+
+$$+ \ 11.75 \ = \ + 1011.11_2 \ = \left(1 \times 2^3 + 0 \times 2^2 + 1 \times 2^1 + 1 \times 2^0 + 1 \times 2^{-1} + 1 \times 2^{-2}\right)$$
+
+Avec ce qui vient d'être dit, nous en déduisons par exemple que la valeur $\left(1 \times 2^1\right)$ du bit à $1$ de poids $1$, est strictement supérieur à la somme des valeurs des bits de poids $0$, $-1$ et $-2$ ; nonobstant la valeur sous-jacente de ces bits.
+
+$$\left(1 \times 2^1\right) \gt \left(1 \times 2^0 + 1 \times 2^{-1} + 1 \times 2^{-2}\right)$$
+
+En outre, rappelez-vous des chapitres précédent sur l'encodage __Binary Unsigned__ ainsi que sur l'encodage des nombres à __virgule flottante__, ces chapitres expliquent (entre autre) que ces encodages s'appuient pleinement sur la __notation positionnelle__.
+Naturellement, cela confère à ces encodages toutes les propriétés de la __notation positionnelle__, dont celle évoquée ci-dessus.
+Cela insinue que les encodages à __virgule flottante__ ainsi que __Binary Unsigned__ ont cette même propriété en commun, et pas des moindres... car cette dernière va jusqu'à affecter le traitement des données par le FPS Configuration Unit. 
+
+En bref, pour un champ $F$ qui code un nombre en __Binary Unsigned__ ou en __virgule flottante__, la valeur de tout bit à $1$ de poids $\left(i \gt lsb\left(F\right)\right)$ est strictement supérieur à la somme des valeurs des bits de poids inférieur à $i$ :
+
+$$\left(1 \times 2^i\right) \gt \sum_{\sigma = i - 1}^{lsb\left(F\right)} \left(F_{\sigma} \times 2^{\sigma}\right)$$
+
+Je précise que la syntaxe $F_{\sigma}$ permet d'indexer le bit de poids $\sigma$ du champ $F$, de plus, ajoutez à cela le fait que la fonction $lsb\left(\right)$ retourne simplement le poids le plus faible du nombre $F$ passé en argument.
+
+
+/// 
 
 ## L'encodage Binary Unsigned
 
