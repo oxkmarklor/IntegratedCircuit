@@ -32,8 +32,23 @@ Cette syntaxe ne sera utilisée que lorsqu'il y aura une ambiguïté dans l'inte
 Dans l'illustration qui figure ci-dessus, remarquez que les chiffres de la partie entière du nombre multiplient des puissances de $10_{10}$ positives ou nul, tandis que les chiffres de la partie décimale multiplient des puissances de $10_{10}$ négatives.
 A cela, ajoutons que la valeur des puissances de $10_{10}$ multipliées par deux chiffres successifs est séparé d'un facteur $10_{10}$ ; pour généralisé, la valeur des puissances de $N$ multipliées par deux chiffres successifs constituant un nombre écrit en base $N$, est alors séparée d'un facteur $N$.
 
-Par ailleurs, en plus d'expliquer le fonctionnement de la __notation positionnelle__, ce chapitre explique aussi celui de l'une de ses propriétés.
-Ladite propriété dont nous parlerons dans le reste de ce chapitre est commune à tout les bases numériques, car rappelez-vous en, la __notation positionnelle__ l'est elle même.
+// revoir cette intro?
+
+Par ailleurs, en plus d'expliquer le fonctionnement de la __notation positionnelle__, ce chapitre parle également de l'une de ses propriétés.
+Ladite propriété dont nous parlerons dans le reste de ce chapitre est commune à tout les bases numériques car, rappelez-vous en, la __notation positionnelle__ l'est elle même.
+
+// ajout d'un exemple avec le nombre décimale illustré plus haut
+
+Concrètement, cette propriété nous dit que la valeur d'un chiffre non nul de poids $i$ est strictement supérieur à la somme des valeurs des chiffres de poids inférieur à $i$.
+En décimale, le poids d'un chiffre fait référence à la puissance de $10_{10}$ dont ce chiffre est facteur, plus cette puissance est grande et plus le poids du chiffre est fort (ou grand), tandis que plus la puissance est petite et plus le poids du chiffre est faible (ou petit).
+
+// faire un exemple avec un nombre en base 10 comme 11.75 pour clotûrer
+
+
+En outre, chaque bit au sein d'un champ binaire a un positionnement qui lui est propre mais il n'existe pas de nom pour ces positions, dans les faits nous ne parlons pas de bit des unités, des dizaines, et ainsi de suite mais plutôt du _poids_ d'un bit.
+Le poids d'un bit fait référence à la puissance de $2$ dont ce bit est facteur, plus un bit est facteur d'une grande puissance et plus son poids est fort (grand) tandis qu'à l'inverse plus il est facteur d'une petite puissance et plus son poids est faible (petit).
+Dans l'illustration qui figure ci-dessus, le bit qui multiplie la puissance $2^6$ est de poids $6$ par exemple.
+Par conséquent, il est très commun d'indexer les bits des champs par leurs poids ; le bit de poids $N$ fait référence au bit qui est facteur de la puissance $2^N$.
 
 // réfléchir à la façon dont je peux expliquer la propriété (par le biais d'un exemple sur la base décimale exclusivement?) 
 
