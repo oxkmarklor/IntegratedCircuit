@@ -32,10 +32,8 @@ Cette syntaxe ne sera utilisée que lorsqu'il y aura une ambiguïté dans l'inte
 Dans l'illustration qui figure ci-dessus, remarquez que les chiffres de la partie entière du nombre multiplient des puissances de $10_{10}$ positives ou nul, tandis que les chiffres de la partie décimale multiplient des puissances de $10_{10}$ négatives.
 A cela, ajoutons que la valeur des puissances de $10_{10}$ multipliées par deux chiffres successifs est séparé d'un facteur $10_{10}$ ; pour généralisé, la valeur des puissances de $N$ multipliées par deux chiffres successifs constituant un nombre écrit en base $N$, est alors séparée d'un facteur $N$.
 
-// revoir cette intro?
-
 Par ailleurs, en plus d'expliquer le fonctionnement de la __notation positionnelle__, ce chapitre parle également de l'une de ses propriétés.
-Ladite propriété dont nous parlerons dans le reste de ce chapitre est commune à tout les bases numériques car, rappelez-vous en, la __notation positionnelle__ l'est elle même.
+Ladite propriété dont nous parlerons dans le reste de ce chapitre est commune à toutes les bases numériques car la __notation positionnelle__ l'est elle même.
 
 // ajout d'un exemple avec le nombre décimale illustré plus haut
 
