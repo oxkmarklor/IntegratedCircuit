@@ -32,10 +32,13 @@ Cette syntaxe ne sera utilisée que lorsqu'il y aura une ambiguïté dans l'inte
 Dans l'illustration qui figure ci-dessus, remarquez que les chiffres de la partie entière du nombre multiplient des puissances de $10_{10}$ positives ou nul, tandis que les chiffres de la partie décimale multiplient des puissances de $10_{10}$ négatives.
 A cela, ajoutons que la valeur des puissances de $10_{10}$ multipliées par deux chiffres successifs est séparé d'un facteur $10_{10}$ ; pour généralisé, la valeur des puissances de $N$ multipliées par deux chiffres successifs constituant un nombre écrit en base $N$, est alors séparée d'un facteur $N$.
 
-Par ailleurs, en plus d'expliquer le fonctionnement de la __notation positionnelle__, ce chapitre parle également de l'une de ses propriétés.
-Ladite propriété dont nous parlerons dans le reste de ce chapitre est commune à toutes les bases numériques car, rappelez-vous en, la __notation positionnelle__ s'applique elle même à toutes les bases numériques.
+Par ailleurs, en plus d'expliquer le fonctionnement de la __notation positionnelle__, ce chapitre parle également de l'une des propriétés de cette notation.
+La propriété dont il est question s'applique à toutes les bases numériques car, rappelez-vous-en, la __notation positionnelle__ permet de représenter tout nombre dans n'importe quel base numérique.
+En l'occurence, ladite propriété nous dit que pour tout nombre en base $N$ : la valeur d'un chiffre non nul de poids $i$ est strictement supérieur à la somme des valeurs des chiffres de poids inférieur à $i$.
 
-En l'occurence, cette propriété nous dit que pour tout nombre de n'importe quel base numérique : la valeur d'un chiffre non nul de poids $i$ est strictement supérieur à la somme des valeurs des chiffres de poids inférieur à $i$.
+// parler du poids puis après de la valeur d'un chiffre
+
+Précédemment, nous avons vu que chaque chiffre constitutif d'un nombre écrit en base $N$ est facteur d'une puissance de $N$, ce qui se traduit en base décimale par
 
 // qu'est ce que la valeur d'un chiffre + le poids d'un chiffre?
 
