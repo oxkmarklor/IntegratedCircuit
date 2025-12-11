@@ -36,7 +36,16 @@ Par ailleurs, en plus d'expliquer le fonctionnement de la __notation positionnel
 Rappelez-vous du fait que la __notation positionnelle__ s'applique à toutes les bases numériques, ce qui insinue que ladite propriété s'applique elle aussi à l'ensemble des bases numériques.
 En l'occurence, la propriété dont il est question nous dit que dans tout nombre : la valeur d'un chiffre non nul de poids $i$ est strictement supérieur à la somme des valeurs des chiffres de poids inférieur à $i$.
 
-Prenons pour exemple 
+Reprenons le nombre $11.75$ écrit en base décimale comme exemple...
+
+Prenons à nouveau pour exemple le nombre $11.75$ en base décimale.
+La valeur du chiffre des unités de ce nombre est équivalente au produit $\left(1 \times 10_{10}^{\quad 0}\right)$ entre le chiffre lui-même et la puissance de $10_{10}$ dont-il est le facteur.
+
+Prenons à nouveau pour exemple le nombre $11.75$ en base décimale.
+La valeur du chiffre des unités de ce nombre est équivalent au produit entre le chiffre et la puissance de $10_{10}$ dont-il est le facteur, autrement dit $\left(1 \times 10_{10}^{\quad 0}\right)$.
+
+
+Dans le cas du nombre $11.75$ que nous avons illustré ci-dessus, la valeur du chiffre des unités $1$ est le produit entre ce chiffre et la puissance de $10_{10}$ dont ce chiffre est facteur.
 
 // parler du poids puis après de la valeur d'un chiffre
 
