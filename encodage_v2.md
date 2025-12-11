@@ -36,9 +36,25 @@ Par ailleurs, en plus d'expliquer le fonctionnement de la __notation positionnel
 Souvenez-vous du fait que la __notation positionnelle__ s'applique à toutes les bases numériques, car cela insinue que ladite propriété s'applique elle aussi à l'ensemble des bases numériques.
 En l'occurrence, la propriété dont il est question nous dit que dans tout nombre écrit en base $N$ : la valeur d'un chiffre non nul de poids $i$ est strictement supérieur à la somme des valeurs des chiffres de poids inférieur à $i$.
 
-Nous savons d'ores et déjà que chaque chiffre constitutif d'un nombre écrit en base $N$ est facteur d'une puissance de $N$, il s'avère que la valeur d'un chiffre n'est autre que le produit entre ce chiffre et la puissance de $N$ dont il est lui-même le facteur.
-A titre d'exemple, le chiffre des unités du nombre décimale $11.75$ a pour valeur $\left(1 \times 10_{10}^{\quad 0}\right)$.
+// reprendre ici
 
+Nous savons d'ores et déjà que chaque chiffre constitutif d'un nombre écrit en base $N$ est facteur d'une puissance de $N$, il s'avère que la valeur d'un chiffre n'est autre que le produit entre ce chiffre et la puissance de $N$ dont il est le facteur.
+A titre d'exemple, le chiffre des unités du nombre décimale $11.75$ a pour valeur $\left(1 \times 10_{10}^{\quad 0}\right)$.
+Quant au poids d'un chiffre, ce dernier permet d'identifier un chiffre dans un nombre écrit sous n'importe quel base numérique.
+Le poids d'un chiffre fait référence à la puissance dont ledit chiffre est le facteur, plus cette puissance est grande et plus le poids du chiffre est fort (ou grand), tandis que plus la puissance est petite et plus le poids du chiffre est faible (ou petit).
+Toujours à titre d'exemple, nous en déduisons que le chiffre des unités du nombre $11.75$ est donc de poids $0$.
+Pour conclure, selon la définition de la propriété figurant dans le paragraphe ci-dessus, nous trouvons que le chiffre de poids $0$ du nombre décimale $11.75$ (étant non nul) a une valeur qui est strictement supérieur à la somme des valeurs des chiffres de poids $-1$ et $-2$.
+
+//
+
+Le poids d'un chiffre permet quant à lui d'identifier un chiffre parmis d'autres dans un nombre, à l'instar des termes comme chiffres des unités, dizaines, centaines, etc. qui ne sont valable que pour la base décimale. 
+
+Le poids d'un chiffre, quant à lui, fait directement référence à la puissance dont ce chiffre est facteur, plus cette puissance est grande et plus le poids du chiffre est fort, tandis que plus la puissance est petite et plus le poids du chiffre est faible.
+
+Toujours à titre d'exemple, nous en déduisons que le chiffre des unités du nombre $11.75$ est donc de poids $0$.
+Pour conclure, en suivant la définition de la propriété figurant dans le paragraphe ci-dessus, nous trouvons que le chiffre de poids $0$ du nombre décimale $11.75$ (étant non nul) a une valeur qui est strictement supérieur à la somme des valeurs des chiffres de poids $-1$ et $-2$.
+
+Pour conclure, en suivant la définition formelle de la propriété se situant dans le paragraphe ci-dessus, nous en déduisons par exemple que le chiffre des unités du nombre décimale $11.75$ a une valeur 
 
 // parler du poids
 
