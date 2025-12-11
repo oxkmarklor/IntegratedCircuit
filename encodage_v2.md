@@ -20,7 +20,7 @@ La __notation positionnelle__ est une sorte d'__encodage__ qui permet de représ
 Veuillez noté que la __notation positionnelle__ n'est pas la seule manière qui nous est donné pour représenter des nombres, il existe aussi la __notation scientifique__ qui, comme son nom l'indique, est principalement utilisée dans le monde des sciences ; le document consacre plus loin un chapitre entier à la __notation scientifique__. 
 
 Dans notre quotidien, lorsque nous manipulons des nombres (en base décimale) nous les représentons communément en __notation positionnelle__, c'est-à-dire de la sorte : $11.75$ .
-Il s'avère qu'en __notation positionnelle__ chaque chiffre constituant le nombre $11.75$ est facteur d'une puissance de $10_{10}$ car ledit nombre est écrit en base décimale, en base $10_{10}$ ; les chiffres constitutifs d'un nombre écrit en base $N$ étant facteurs d'une puissance de $N$.
+Il s'avère qu'en __notation positionnelle__ : chaque chiffre constituant le nombre $11.75$ est facteur d'une puissance de $10_{10}$ car ledit nombre est écrit en base décimale, en base $10_{10}$ ; les chiffres constitutifs d'un nombre écrit en base $N$ étant facteurs d'une puissance de $N$.
 Enfin, le nombre sous-jacent a pour valeur la somme des produits entre chiffres et puissances.
 Voici l'illustration de la façon dont la valeur du nombre $11.75$ se calcul en base décimale :
 
@@ -33,8 +33,10 @@ Dans l'illustration qui figure ci-dessus, remarquez que les chiffres de la parti
 A cela, ajoutons que la valeur des puissances de $10_{10}$ multipliées par deux chiffres successifs est séparé d'un facteur $10_{10}$ ; pour généralisé, la valeur des puissances de $N$ multipliées par deux chiffres successifs constituant un nombre écrit en base $N$, est alors séparée d'un facteur $N$.
 
 Par ailleurs, en plus d'expliquer le fonctionnement de la __notation positionnelle__, ce chapitre parle également de l'une des propriétés de cette notation.
-La propriété dont il est question s'applique à toutes les bases numériques car, rappelez-vous-en, la __notation positionnelle__ permet de représenter tout nombre dans n'importe quel base numérique.
-En l'occurence, ladite propriété nous dit que pour tout nombre en base $N$ : la valeur d'un chiffre non nul de poids $i$ est strictement supérieur à la somme des valeurs des chiffres de poids inférieur à $i$.
+Rappelez-vous du fait que la __notation positionnelle__ s'applique à toutes les bases numériques, ce qui insinue que ladite propriété s'applique elle aussi à l'ensemble des bases numériques.
+En l'occurence, la propriété dont il est question nous dit que dans tout nombre : la valeur d'un chiffre non nul de poids $i$ est strictement supérieur à la somme des valeurs des chiffres de poids inférieur à $i$.
+
+Prenons pour exemple 
 
 // parler du poids puis après de la valeur d'un chiffre
 
