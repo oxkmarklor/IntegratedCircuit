@@ -33,25 +33,16 @@ Dans l'illustration qui figure ci-dessus, remarquez que les chiffres de la parti
 A cela, ajoutons que la valeur des puissances de $10_{10}$ multipliées par deux chiffres successifs est séparé d'un facteur $10_{10}$ ; pour généralisé, la valeur des puissances de $N$ multipliées par deux chiffres successifs constituant un nombre écrit en base $N$, est alors séparée d'un facteur $N$.
 
 Par ailleurs, en plus d'expliquer le fonctionnement de la __notation positionnelle__, ce chapitre parle également de l'une des propriétés de cette notation.
-Rappelez-vous du fait que la __notation positionnelle__ s'applique à toutes les bases numériques, ce qui insinue que ladite propriété s'applique elle aussi à l'ensemble des bases numériques.
-En l'occurence, la propriété dont il est question nous dit que dans tout nombre : la valeur d'un chiffre non nul de poids $i$ est strictement supérieur à la somme des valeurs des chiffres de poids inférieur à $i$.
+Souvenez-vous du fait que la __notation positionnelle__ s'applique à toutes les bases numériques, car cela insinue que ladite propriété s'applique elle aussi à l'ensemble des bases numériques.
+En l'occurrence, la propriété dont il est question nous dit que dans tout nombre écrit en base $N$ : la valeur d'un chiffre non nul de poids $i$ est strictement supérieur à la somme des valeurs des chiffres de poids inférieur à $i$.
 
-Reprenons le nombre $11.75$ écrit en base décimale comme exemple...
-
-Prenons à nouveau pour exemple le nombre $11.75$ en base décimale.
-La valeur du chiffre des unités de ce nombre est équivalente au produit $\left(1 \times 10_{10}^{\quad 0}\right)$ entre le chiffre lui-même et la puissance de $10_{10}$ dont-il est le facteur.
-
-Prenons à nouveau pour exemple le nombre $11.75$ en base décimale.
-La valeur du chiffre des unités de ce nombre est équivalent au produit entre le chiffre et la puissance de $10_{10}$ dont-il est le facteur, autrement dit $\left(1 \times 10_{10}^{\quad 0}\right)$.
+Nous savons d'ores et déjà que chaque chiffre constitutif d'un nombre écrit en base $N$ est facteur d'une puissance de $N$, il s'avère que la valeur d'un chiffre n'est autre que le produit entre ce chiffre et la puissance de $N$ dont il est lui-même le facteur.
+A titre d'exemple, le chiffre des unités du nombre décimale $11.75$ a pour valeur $\left(1 \times 10_{10}^{\quad 0}\right)$.
 
 
-Dans le cas du nombre $11.75$ que nous avons illustré ci-dessus, la valeur du chiffre des unités $1$ est le produit entre ce chiffre et la puissance de $10_{10}$ dont ce chiffre est facteur.
+// parler du poids
 
-// parler du poids puis après de la valeur d'un chiffre
 
-Précédemment, nous avons vu que chaque chiffre constitutif d'un nombre écrit en base $N$ est facteur d'une puissance de $N$, ce qui se traduit en base décimale par
-
-// qu'est ce que la valeur d'un chiffre + le poids d'un chiffre?
 
 En l'occurrence, il s'avère que cette propriété nous dit que la valeur d'un chiffre non nul de poids $i$ est strictement supérieur à la somme des valeurs des chiffres de poids inférieur à $i$.
 En décimale, le poids d'un chiffre fait référence à la puissance de $10_{10}$ dont ce chiffre est facteur, plus cette puissance est grande et plus le poids du chiffre est fort (ou grand), tandis que plus la puissance est petite et plus le poids du chiffre est faible (ou petit).
