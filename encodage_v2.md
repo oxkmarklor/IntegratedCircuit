@@ -35,6 +35,10 @@ A cela, ajoutons que la valeur des puissances de $10_{10}$ multipliées par deux
 Par ailleurs, en plus d'expliquer le fonctionnement de la __notation positionnelle__, ce chapitre parle également de l'une de ses propriétés.
 Ladite propriété dont nous parlerons dans le reste de ce chapitre est commune à toutes les bases numériques car, rappelez-vous en, la __notation positionnelle__ s'applique elle même à toutes les bases numériques.
 
+En l'occurence, cette propriété nous dit que pour tout nombre de n'importe quel base numérique : la valeur d'un chiffre non nul de poids $i$ est strictement supérieur à la somme des valeurs des chiffres de poids inférieur à $i$.
+
+// qu'est ce que la valeur d'un chiffre + le poids d'un chiffre?
+
 En l'occurrence, il s'avère que cette propriété nous dit que la valeur d'un chiffre non nul de poids $i$ est strictement supérieur à la somme des valeurs des chiffres de poids inférieur à $i$.
 En décimale, le poids d'un chiffre fait référence à la puissance de $10_{10}$ dont ce chiffre est facteur, plus cette puissance est grande et plus le poids du chiffre est fort (ou grand), tandis que plus la puissance est petite et plus le poids du chiffre est faible (ou petit).
 
