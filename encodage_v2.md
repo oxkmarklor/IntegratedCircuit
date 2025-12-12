@@ -12,15 +12,15 @@ Par exemple, pour représenter des nombres entiers naturels dans un champ de $N$
 Cet __encodage__ ne remplit cependant aucun cahier des charges et risque d'être sous optimal pour bien des situations.
 
 Dans ce premier chapitre, nous allons expliqués comment fonctionnent deux des __encodages__ les plus connus : le __binary unsigned__ ainsi que la __virgule flottante__.
-Ces __encodages__ sont néanmoins intrinséquement liés au concept de la __notation positionnelle__, d'où le fait que ce sujet soit abordé dans le chapitre suivant.
+Ces __encodages__ sont néanmoins intrinséquement liés au concept de la __notation positionnelle__, d'où le fait que ce sujet soit abordé dans ce qui suit.
 
 ## La notation positionnelle
 
 La __notation positionnelle__ est une sorte d'__encodage__ qui permet de représenter les nombres de façon générique sous n'importe quel base numérique.
 Veuillez noté que la __notation positionnelle__ n'est pas la seule manière qui nous est donné pour représenter des nombres, il existe aussi la __notation scientifique__ qui, comme son nom l'indique, est principalement utilisée dans le monde des sciences ; le document consacre plus loin un chapitre entier à la __notation scientifique__. 
 
-Dans notre quotidien, lorsque nous manipulons des nombres (en base décimale) nous les représentons communément en __notation positionnelle__, c'est-à-dire de la sorte : $11.75$ .
-Il s'avère qu'en __notation positionnelle__ : chaque chiffre constituant le nombre $11.75$ est facteur d'une puissance de $10_{10}$ car ledit nombre est écrit en base décimale, en base $10_{10}$ ; les chiffres constitutifs d'un nombre écrit en base $N$ étant facteurs d'une puissance de $N$.
+Dans notre quotidien, lorsque nous manipulons des nombres (en base décimale) nous les représentons usuellement en __notation positionnelle__, comme ceci avec le nombre $11.75$ par exemple.
+Il s'avère qu'en __notation positionnelle__, chaque chiffre constituant le nombre $11.75$ est facteur d'une puissance de $10_{10}$ car ledit nombre est écrit en base décimale, en base $10_{10}$ ; les chiffres constitutifs d'un nombre écrit en base $N$ étant facteurs d'une puissance de $N$.
 Enfin, le nombre sous-jacent a pour valeur la somme des produits entre chiffres et puissances.
 Voici l'illustration de la façon dont la valeur du nombre $11.75$ se calcul en base décimale :
 
