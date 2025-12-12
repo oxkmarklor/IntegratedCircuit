@@ -40,12 +40,9 @@ Nous savons d'ores et déjà que chaque chiffre constitutif d'un nombre écrit e
 A titre d'exemple, la valeur du chiffre des unités du nombre décimale $11.75$ est de $\left(1 \times 10_{10}^{\quad 0}\right)$.
 En outre, la __notation positionnelle__ définit le poids des chiffres comme un moyen universel d'identifier un chiffre dans un nombre, indépendamment de la base numérique.
 Il s'avère que le poids d'un chiffre fait référence à la puissance dont ledit chiffre est facteur : plus cette puissance est grande et plus le poids du chiffre est fort, tandis que plus cette puissance est petite et plus le poids dudit chiffre est faible.
-En guise d'exemple, le chiffre des unités du nombre décimale $11.75$ est dit de poids $0$ parce que ce dernier est facteur de $10_{10}$ à la puissance $0$.
+En guise d'exemple, le chiffre des unités du nombre décimale $11.75$ est de poids $0$ parce que ce dernier est facteur de $10_{10}$ à la puissance $0$.
 
-
-
-
-Pour conclure, grâce à cette propriété nous trouvons que le chiffre non nul de poids $0$ du nombre décimale $11.75$, a une valeur strictement supérieur à la somme des valeurs des chiffres de poids $-1$ et $-2$ :
+Avec cela en tête, nous observons par exemple que la valeur du chiffre non nul de poids $0$ du nombre décimale $11.75$ est bel et bien strictement supérieur à la somme des valeurs des chiffres de poids $-1$ et $-2$ :
 
 $$\left(1 \times 10_{10}^{\quad 0}\right) \gt \left(7 \times 10_{10}^{\quad -1} + 5 \times 10_{10}^{\quad -2}\right)$$
 
