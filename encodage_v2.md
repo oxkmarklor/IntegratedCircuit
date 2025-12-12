@@ -36,93 +36,17 @@ Par ailleurs, en plus d'expliquer le fonctionnement de la __notation positionnel
 Souvenez-vous du fait que la __notation positionnelle__ s'applique à toutes les bases numériques, car cela insinue que ladite propriété s'applique elle aussi à l'ensemble des bases numériques.
 En l'occurrence, la propriété dont il est question nous dit que dans tout nombre écrit en base $N$ : la valeur d'un chiffre non nul de poids $i$ est strictement supérieur à la somme des valeurs des chiffres de poids inférieur à $i$.
 
-// reprendre ici
-
 Nous savons d'ores et déjà que chaque chiffre constitutif d'un nombre écrit en base $N$ est facteur d'une puissance de $N$, il s'avère que la valeur d'un chiffre n'est autre que le produit entre ce chiffre et la puissance de $N$ dont il est le facteur.
 A titre d'exemple, la valeur du chiffre des unités du nombre décimale $11.75$ est de $\left(1 \times 10_{10}^{\quad 0}\right)$.
-En outre, veuillez remarqué que les termes de chiffre des unités, des dizaines, centaines, etc. qui permettent d'identifier un chiffre précis dans un nombre, ne sont valable que pour la base décimale.
+En outre, la __notation positionnelle__ définit le poids des chiffres comme un moyen universel d'identifier un chiffre dans un nombre, indépendamment de la base numérique.
+Il s'avère que le poids d'un chiffre fait référence à la puissance dont ledit chiffre est facteur : plus cette puissance est grande et plus le poids du chiffre est fort, tandis que plus cette puissance est petite et plus le poids dudit chiffre est faible.
+En guise d'exemple, le chiffre des unités du nombre décimale $11.75$ est dit de poids $0$ parce que ce dernier est facteur de $10_{10}$ à la puissance $0$.
 
+Pour conclure, grâce à cette propriété nous trouvons que le chiffre non nul de poids $0$ du nombre décimale $11.75$, a une valeur strictement supérieur à la somme des valeurs des chiffres de poids $-1$ et $-2$ :
 
+$$\left(1 \times 10_{10}^{\quad 0}\right) \gt \left(7 \times 10_{10}^{\quad -1} + 5 \times 10_{10}^{\quad -2}\right)$$
 
-
-Quant au poids d'un chiffre, ce dernier permet d'identifier un chiffre dans un nombre écrit sous n'importe quel base numérique.
-Le poids d'un chiffre fait référence à la puissance dont ledit chiffre est le facteur, plus cette puissance est grande et plus le poids du chiffre est fort (ou grand), tandis que plus la puissance est petite et plus le poids du chiffre est faible (ou petit).
-Toujours à titre d'exemple, nous en déduisons que le chiffre des unités du nombre $11.75$ est donc de poids $0$.
-Pour conclure, selon la définition de la propriété figurant dans le paragraphe ci-dessus, nous trouvons que le chiffre de poids $0$ du nombre décimale $11.75$ (étant non nul) a une valeur qui est strictement supérieur à la somme des valeurs des chiffres de poids $-1$ et $-2$.
-
-//
-
-Le poids d'un chiffre permet quant à lui d'identifier un chiffre parmis d'autres dans un nombre, à l'instar des termes comme chiffres des unités, dizaines, centaines, etc. qui ne sont valable que pour la base décimale. 
-
-Le poids d'un chiffre, quant à lui, fait directement référence à la puissance dont ce chiffre est facteur, plus cette puissance est grande et plus le poids du chiffre est fort, tandis que plus la puissance est petite et plus le poids du chiffre est faible.
-
-Toujours à titre d'exemple, nous en déduisons que le chiffre des unités du nombre $11.75$ est donc de poids $0$.
-Pour conclure, en suivant la définition de la propriété figurant dans le paragraphe ci-dessus, nous trouvons que le chiffre de poids $0$ du nombre décimale $11.75$ (étant non nul) a une valeur qui est strictement supérieur à la somme des valeurs des chiffres de poids $-1$ et $-2$.
-
-Pour conclure, en suivant la définition formelle de la propriété se situant dans le paragraphe ci-dessus, nous en déduisons par exemple que le chiffre des unités du nombre décimale $11.75$ a une valeur 
-
-// parler du poids
-
-
-
-En l'occurrence, il s'avère que cette propriété nous dit que la valeur d'un chiffre non nul de poids $i$ est strictement supérieur à la somme des valeurs des chiffres de poids inférieur à $i$.
-En décimale, le poids d'un chiffre fait référence à la puissance de $10_{10}$ dont ce chiffre est facteur, plus cette puissance est grande et plus le poids du chiffre est fort (ou grand), tandis que plus la puissance est petite et plus le poids du chiffre est faible (ou petit).
-
-// ajout d'un exemple avec le nombre décimale illustré plus haut
-
-
-
-// faire un exemple avec un nombre en base 10 comme 11.75 pour clotûrer
-
-
-En outre, chaque bit au sein d'un champ binaire a un positionnement qui lui est propre mais il n'existe pas de nom pour ces positions, dans les faits nous ne parlons pas de bit des unités, des dizaines, et ainsi de suite mais plutôt du _poids_ d'un bit.
-Le poids d'un bit fait référence à la puissance de $2$ dont ce bit est facteur, plus un bit est facteur d'une grande puissance et plus son poids est fort (grand) tandis qu'à l'inverse plus il est facteur d'une petite puissance et plus son poids est faible (petit).
-Dans l'illustration qui figure ci-dessus, le bit qui multiplie la puissance $2^6$ est de poids $6$ par exemple.
-Par conséquent, il est très commun d'indexer les bits des champs par leurs poids ; le bit de poids $N$ fait référence au bit qui est facteur de la puissance $2^N$.
-
-// réfléchir à la façon dont je peux expliquer la propriété (par le biais d'un exemple sur la base décimale exclusivement?) 
-
-
-/*
- 6- la propriété élémentaire que confère la notation positionnelle à l'ensemble des bases numériques
- 
- 7- exemple de cette propriété rattacher au cas des nombres écrits en base 10 (103, 103.375, ou les deux?)
-*/
-
-
-La __notation positionnelle__ confère une propriété intéressante à toute les bases numérique : dans tout nombre, la valeur d'un chiffre non nul de poids $i$ est strictement supérieur à la somme des valeurs des chiffres de poids inférieur à $i$.
-Prenons comme exemple le nombre $11.75$ écrit en base décimale :
-
-$$11.75 \ = \left(1 \times 10_{10}^{\quad 1} + 1 \times 10_{10}^{\quad 0} + 7 \times 10_{10}^{\quad -1} + 5 \times 10_{10}^{\quad -2}\right)$$
-
-Remarquons que le chiffre $1$ des dizaines est non nul, alors nous savons que la valeur de ce chiffre $\left(1 \times 10_{10}^{\quad 1}\right)$ est strictement supérieur à la somme des valeurs des chiffres inférieurs au rang des dizaines ; et ce, indépendemment de la valeur des chiffres sous-jacent.
-
-$$\left(1 \times 10_{10}^{\quad 1}\right) \gt \left(1 \times 10_{10}^{\quad 0} + 7 \times 10_{10}^{\quad -1} + 5 \times 10_{10}^{\quad -2}\right)$$
-
-Bien évidemment, cela fonctionne pour la base décimale (entre autre) mais aussi pour la base binaire, à la seule différence que nous ne parlons dès lors plus de chiffres décimaux mais de bits.
-De facto, vu qu'un bit non nul est à $1$, il est préférable de dire que : dans tout nombre binaire, la valeur d'un bit à $1$ de poids $i$ est strictement supérieur à la somme des valeurs des bits de poids inférieur à $i$. 
-Voici une illustration du codage en __virgule flottante__ du nombre $+ 11.75$ :
-
-$$+ \ 11.75 \ = \ + 1011.11_2 \ = \left(1 \times 2^3 + 0 \times 2^2 + 1 \times 2^1 + 1 \times 2^0 + 1 \times 2^{-1} + 1 \times 2^{-2}\right)$$
-
-Avec ce qui vient d'être dit, nous en déduisons par exemple que la valeur $\left(1 \times 2^1\right)$ du bit à $1$ de poids $1$, est strictement supérieur à la somme des valeurs des bits de poids $0$, $-1$ et $-2$ ; nonobstant la valeur sous-jacente de ces bits.
-
-$$\left(1 \times 2^1\right) \gt \left(1 \times 2^0 + 1 \times 2^{-1} + 1 \times 2^{-2}\right)$$
-
-En outre, rappelez-vous des chapitres précédent sur l'encodage __Binary Unsigned__ ainsi que sur l'encodage des nombres à __virgule flottante__, ces chapitres expliquent (entre autre) que ces encodages s'appuient pleinement sur la __notation positionnelle__.
-Naturellement, cela confère à ces encodages toutes les propriétés de la __notation positionnelle__, dont celle évoquée ci-dessus.
-Cela insinue que les encodages à __virgule flottante__ ainsi que __Binary Unsigned__ ont cette même propriété en commun, et pas des moindres... car cette dernière va jusqu'à affecter le traitement des données par le FPS Configuration Unit. 
-
-En bref, pour un champ $F$ qui code un nombre en __Binary Unsigned__ ou en __virgule flottante__, la valeur de tout bit à $1$ de poids $\left(i \gt lsb\left(F\right)\right)$ est strictement supérieur à la somme des valeurs des bits de poids inférieur à $i$ :
-
-$$\left(1 \times 2^i\right) \gt \sum_{\sigma = i - 1}^{lsb\left(F\right)} \left(F_{\sigma} \times 2^{\sigma}\right)$$
-
-Je précise que la syntaxe $F_{\sigma}$ permet d'indexer le bit de poids $\sigma$ du champ $F$, de plus, ajoutez à cela le fait que la fonction $lsb\left(\right)$ retourne simplement le poids le plus faible du nombre $F$ passé en argument.
-
-
-/// 
-
-## L'encodage Binary Unsigned
+## L'encodage Binary Unsigned (à faire)
 
 Le __Binary Unsigned__ est un encodage permettant de coder des nombres entiers naturels par le biais de la notation positionnelle, exactement comme le fait la base décimale pour représenter des nombres.
 Par exemple, en décimale chacun des chiffres qui compose la valeur $103$ est le facteur d'une puissance de $10_{10}$, la représentation du nombre sous-jacent se calcule comme la somme de ces produits.
