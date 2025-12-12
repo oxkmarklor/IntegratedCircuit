@@ -39,7 +39,12 @@ En l'occurrence, la propriété dont il est question nous dit que dans tout nomb
 // reprendre ici
 
 Nous savons d'ores et déjà que chaque chiffre constitutif d'un nombre écrit en base $N$ est facteur d'une puissance de $N$, il s'avère que la valeur d'un chiffre n'est autre que le produit entre ce chiffre et la puissance de $N$ dont il est le facteur.
-A titre d'exemple, le chiffre des unités du nombre décimale $11.75$ a pour valeur $\left(1 \times 10_{10}^{\quad 0}\right)$.
+A titre d'exemple, la valeur du chiffre des unités du nombre décimale $11.75$ est de $\left(1 \times 10_{10}^{\quad 0}\right)$.
+En outre, veuillez remarqué que les termes de chiffre des unités, des dizaines, centaines, etc. qui permettent d'identifier un chiffre précis dans un nombre, ne sont valable que pour la base décimale.
+
+
+
+
 Quant au poids d'un chiffre, ce dernier permet d'identifier un chiffre dans un nombre écrit sous n'importe quel base numérique.
 Le poids d'un chiffre fait référence à la puissance dont ledit chiffre est le facteur, plus cette puissance est grande et plus le poids du chiffre est fort (ou grand), tandis que plus la puissance est petite et plus le poids du chiffre est faible (ou petit).
 Toujours à titre d'exemple, nous en déduisons que le chiffre des unités du nombre $11.75$ est donc de poids $0$.
