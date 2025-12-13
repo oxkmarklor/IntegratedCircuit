@@ -46,6 +46,10 @@ Avec cela en tête, nous observons par exemple que la valeur du chiffre non nul 
 
 $$\left(1 \times 10_{10}^{\quad 0}\right) \gt \left(7 \times 10_{10}^{\quad -1} + 5 \times 10_{10}^{\quad -2}\right)$$
 
+### L'encodage binary unsigned
+
+
+
 ## L'encodage Binary Unsigned (à faire)
 
 Le __Binary Unsigned__ est un encodage permettant de coder des nombres entiers naturels par le biais de la notation positionnelle, exactement comme le fait la base décimale pour représenter des nombres.
