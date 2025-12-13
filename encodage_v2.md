@@ -48,19 +48,9 @@ $$\left(1 \times 10_{10}^{\quad 0}\right) \gt \left(7 \times 10_{10}^{\quad -1} 
 
 ### L'encodage binary unsigned
 
-Comme tout encodage, le __binary unsigned__ permet de représenter des nombres, qui plus est, des nombres entiers naturels dans son cas.
-Le codage dedits nombres s'effectue en __notation positionnelle__, ce qui de facto explique qu'il ait été fait antérieurement mention d'un lien entre cet encodage et la __notation positionnelle__.
-De plus, sachez que le nom __binary unsigned__ de cet encodage (__binaire non signé__ en français) vient du fait que le signe $\pm$ des nombres ne soit pas codé, les nombres finalement codés ne peuvent donc être que positif ou nul. 
-
-De plus, nous devons le nom __binary unsigned__ de cet encodage au fait que le codage sur un bit du signe $\pm$ d'un nombre ne soit pas permis.
-
-De plus, nous devons le nom __binary unsigned__ de cet encodage au fait que ce dernier ne code pas le signe $\pm$ d'un nombre sur un bit.
-
-
-De plus, le __binary unsigned__ n'offre pas la possibilité de coder un signe $\pm$ au travers d'un bit, d'où le nom de l'encodage qui se traduit en français par __binaire non signé__
-
-
-
+A l'instar de tout encodage le __binary unsigned__ permet de représenter des nombres, qui plus est, des nombres entiers naturels dans son cas.
+Le codage desdits nombres s'effectue en __notation positionnelle__, ce qui explique au passage qu'il ait été fait antérieurement mention d'un lien entre cet encodage et la __notation positionnelle__.
+Par ailleurs, remarquez que le nom __binary unsigned__ de cet encodage se traduit en français par __binaire non signé__, ceci est dû au fait que les nombres pouvant être codés le sont sans leur signe.
 
 //
 
