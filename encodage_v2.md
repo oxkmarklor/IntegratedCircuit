@@ -6,13 +6,13 @@ Un bit est symboliquement représenté par un $0$ ou un $1$, pour la culture, je
 Un champ binaire est quant à lui composé d'un ensemble de bit, c'est-à-dire d'un ensemble de $0$ et de $1$.
 Ce sont ces champs binaires qui nous permettent de représenter des nombres dans un ordinateur, et par extension de faire des calculs ainsi que de mémoriser des résultats.
 
-Il y a cependant de nombreuses façons de représenter des nombres dans un champ binaire, nous parlons alors de l'__encodage__ des nombres.
+Il y a cependant de nombreuses façons de représenter des nombres dans un champ binaire, nous parlons de l'__encodage__ des nombres.
 Tous les __encodages__ ne se valent pas car il y en a des plus adaptés/efficaces que d'autres en fonction des besoins.
 Par exemple, pour représenter des nombres entiers naturels dans un champ de $N$ bits, nous pourrions simplement calculer la somme des bits qui compose le champ.
-Cet __encodage__ ne remplit cependant aucun cahier des charges et risque d'être sous optimal pour bien des situations.
+Cependant, cet __encodage__ ne remplit aucun cahier des charges et risque d'être sous optimal pour bien des situations.
 
-Dans ce premier chapitre, nous allons expliqués comment fonctionnent deux des __encodages__ les plus connus : le __binary unsigned__ ainsi que la __virgule flottante__.
-Ces __encodages__ sont néanmoins intrinséquement liés au concept de la __notation positionnelle__, d'où le fait que ce sujet soit abordé dans ce qui suit.
+Dans un premier temps, nous allons expliqués comment fonctionnent deux des __encodages__ les plus connus : le __binary unsigned__ ainsi que la __virgule flottante__.
+Ces __encodages__ sont néanmoins intrinséquement liés au concept de la __notation positionnelle__, ce qui nous pousse à évoquer ce sujet avant même celui desdits __encodages__.
 
 ## La notation positionnelle
 
