@@ -48,7 +48,29 @@ $$\left(1 \times 10_{10}^{\quad 0}\right) \gt \left(7 \times 10_{10}^{\quad -1} 
 
 ### L'encodage binary unsigned
 
+Comme tout encodage, le __binary unsigned__ permet de représenter des nombres, qui plus est, des nombres entiers naturels dans son cas.
+Le codage dedits nombres s'effectue en __notation positionnelle__, ce qui de facto explique qu'il ait été fait antérieurement mention d'un lien entre cet encodage et la __notation positionnelle__.
+De plus, sachez que le nom __binary unsigned__ de cet encodage (__binaire non signé__ en français) vient du fait que le signe $\pm$ des nombres ne soit pas codé, les nombres finalement codés ne peuvent donc être que positif ou nul. 
 
+De plus, nous devons le nom __binary unsigned__ de cet encodage au fait que le codage sur un bit du signe $\pm$ d'un nombre ne soit pas permis.
+
+De plus, nous devons le nom __binary unsigned__ de cet encodage au fait que ce dernier ne code pas le signe $\pm$ d'un nombre sur un bit.
+
+
+De plus, le __binary unsigned__ n'offre pas la possibilité de coder un signe $\pm$ au travers d'un bit, d'où le nom de l'encodage qui se traduit en français par __binaire non signé__
+
+
+
+
+//
+
+Rappelez-vous du fait qu'il a été mentionné (plus en amont) que l'encodage __binary unsigned__ est intrinséquement lié à la __notation positionnelle__, nous allons d'abord essayer de comprendre comment.
+
+Rappelez-vous du fait que, plus en amont, il a été mentionné que l'encodage __binary unsigned__ est intrinséquement lié à la __notation positionnelle__, nous allons d'abord essayer de comprendre comment.
+
+Plus en amont, il a été mentionné que l'encodage __binary unsigned__ est intrinséquement lié à la __notation positionnelle__, nous allons d'abord essayer de comprendre comment.
+
+Ces __encodages__ sont néanmoins intrinséquement liés au concept de la __notation positionnelle__, ce qui nous pousse à évoquer ce sujet avant même celui desdits __encodages__.
 
 ## L'encodage Binary Unsigned (à faire)
 
