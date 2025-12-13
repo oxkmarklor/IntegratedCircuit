@@ -48,19 +48,18 @@ $$\left(1 \times 10_{10}^{\quad 0}\right) \gt \left(7 \times 10_{10}^{\quad -1} 
 
 ### L'encodage binary unsigned
 
-A l'instar de tout encodage le __binary unsigned__ permet de représenter des nombres, qui plus est, des nombres entiers naturels dans son cas.
-Le codage desdits nombres s'effectue en __notation positionnelle__, ce qui explique au passage qu'il ait été fait antérieurement mention d'un lien entre cet encodage et la __notation positionnelle__.
-Par ailleurs, remarquez que le nom __binary unsigned__ de cet encodage se traduit en français par __binaire non signé__, ceci est dû au fait que les nombres pouvant être codés le sont sans leur signe.
+A l'instar de tout encodage, le __binary unsigned__ permet de représenter des nombres, qui plus est, des nombres entiers naturels.
+L'encodage desdits nombres s'effectue en __notation positionnelle__, d'où le fait qu'il ait été fait antérieurement mention d'un lien entre cet encodage et la __notation positionnelle__, nous y reviendrons.
+Par ailleurs, nous devons le nom __binary unsigned__ de cet encodage, traduit en français par __binaire non signé__, au fait que les nombres pouvant être codés le sont sans leur signe.
+
+Comme nous l'avons vu avec le chapitre précédent, la __notation positionnelle__ s'applique à toutes les bases numériques dont la base binaire.
+Il est dit dans ce chapitre que les chiffres constitutifs d'un nombre écrit sous une base $N$ en __notation positionnelle__ sont facteurs d'une puissance de $N$, ce qui veut dire que tout bit d'un nombre codé en __binary unsigned__ est facteur d'une puissance de $2$.
+Observons comment est-ce-qu'il est possible de coder la partie entière $11$ en __binary unsigned__ du nombre $11.75$ pris pour exemple dans le chapitre qui précède.
+
+// expliquer d'abord le fonctionnement de la notation positionnelle en binaire pour la représentation du nombre $11$, puis faire le "lien" avec le binary unsigned?
+
 
 //
-
-Rappelez-vous du fait qu'il a été mentionné (plus en amont) que l'encodage __binary unsigned__ est intrinséquement lié à la __notation positionnelle__, nous allons d'abord essayer de comprendre comment.
-
-Rappelez-vous du fait que, plus en amont, il a été mentionné que l'encodage __binary unsigned__ est intrinséquement lié à la __notation positionnelle__, nous allons d'abord essayer de comprendre comment.
-
-Plus en amont, il a été mentionné que l'encodage __binary unsigned__ est intrinséquement lié à la __notation positionnelle__, nous allons d'abord essayer de comprendre comment.
-
-Ces __encodages__ sont néanmoins intrinséquement liés au concept de la __notation positionnelle__, ce qui nous pousse à évoquer ce sujet avant même celui desdits __encodages__.
 
 ## L'encodage Binary Unsigned (à faire)
 
