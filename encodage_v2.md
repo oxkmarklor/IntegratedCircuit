@@ -52,6 +52,11 @@ Grâce au chapitre précédent, nous savons désormais ce qu'est la __notation p
 Le terme __binary unsigned__ n'est quant à lui que le nom d'un encodage permettant de représenter des nombres entiers naturels en base binaire, et ce, justement par le biais de la __notation positionnelle__.
 D'où le fait qu'il ait été fait antérieurement mention d'un lien entre l'encodage __binary unsigned__ et la __notation positionnelle__.
 
+Ce qui suit va expliquer le fonctionnement de la __notation positionnelle__ en base binaire, pour ce faire nous allons entre autre prendre le nombre entier naturel $11$ pour exemple ; ce nombre faisant référence à la partie entière du nombre $11.75$ utilisé comme exemple dans le chapitre précédent.
+
+Il va être fait plusieurs fois référence au chapitre précédent dans ce qui suit parce que nous allons expliquer le fonctionnement de la __notation positionnelle__ en base binaire.
+
+
 // comment fonctionne la notation positionnelle en base binaire?
 
 
