@@ -48,6 +48,19 @@ $$\left(1 \times 10_{10}^{\quad 0}\right) \gt \left(7 \times 10_{10}^{\quad -1} 
 
 ### L'encodage binary unsigned
 
+Nous venons tout juste de voir ce qu'est la __notation positionnelle__ et entre autre le fait qu'elle s'applique à n'importe quel base numérique, dont la base binaire.
+Le terme __binary unsigned__ est le nom d'un encodage dont le cahier des charges est simple : permettre le codage de nombres entiers naturels, et ce, avec la plus grande plage de codage possible.
+Pour information, la plage de codage d'un encodage formalise une intervalle de nombre incluant l'ensemble des nombres pouvant être codés.
+
+/* le binary unsigned permet de coder des nombres entiers naturels par le biais de la notation positionnelle */
+
+//
+
+Le terme __binary unsigned__ est le nom d'un encodage dont le but est de permettre le codage de nombres entiers naturels, qui plus est, sur la plus grande plage de codage possible.
+Techniquement, cet encodage 
+
+//
+
 A l'instar de tout encodage, le __binary unsigned__ permet de représenter des nombres, qui plus est, des nombres entiers naturels.
 L'encodage desdits nombres s'effectue en __notation positionnelle__, d'où le fait qu'il ait été fait antérieurement mention d'un lien entre cet encodage et la __notation positionnelle__, nous y reviendrons.
 Par ailleurs, nous devons le nom __binary unsigned__ de cet encodage, traduit en français par __binaire non signé__, au fait que les nombres pouvant être codés le sont sans leur signe.
