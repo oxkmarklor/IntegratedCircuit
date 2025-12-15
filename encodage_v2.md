@@ -52,15 +52,18 @@ Grâce au chapitre précédent, nous savons désormais ce qu'est la __notation p
 Le terme __binary unsigned__ n'est quant à lui que le nom d'un encodage permettant de représenter des nombres entiers naturels en base binaire, et ce, justement par le biais de la __notation positionnelle__.
 D'où le fait qu'il ait été fait antérieurement mention d'un lien entre l'encodage __binary unsigned__ et la __notation positionnelle__.
 
-Vous l'aurez compris, pour comprendre comment fonctionne l'encodage __binary unsigned__ il va nous falloir comprendre le fonctionnement de la __notation positionnelle__ en base binaire, ce qui s'annonce relativement simple car nous allons faire référence au chapitre précédent.
-Rappelez-vous-en, ledit chapitre évoque le fait que tout chiffre constitutif d'un nombre écrit en base $N$ est facteur d'une puissance de $N$, ceci sous-entend alors les bits composant tout nombre binaire représenté en __notation positionnelle__ est le facteur d'une puissance de $2$.
+Vous l'aurez compris, comprendre l'encodage __binary unsigned__ demande de comprendre le fonctionnement de la __notation positionnelle__ en base binaire, ce qui s'annonce relativement simple car nous nous contenterons de faire référence au chapitre précédent.
+En l'occurrence, ledit chapitre mentionne qu'en __notation positionnelle__ : tout chiffre constitutif d'un nombre écrit en base $N$ est le facteur d'une puissance de $N$, ce qui dans le cas de la base binaire (la base $2$) insinue que tout bit d'un nombre est facteur d'une puissance de $2$.
+Voici ci-bas l'illustration de la façon dont la valeur du nombre entier naturel $11_{10}$, arbitrairement choisit pour cet exemple, se calcul en base binaire :
 
-Il est dit dans ce chapitre qu'en __notation positionnelle__ tout chiffre constitutif d'un nombre écrit en base $N$ est le facteur d'une puissance de $N$, ce qui dans le cas des nombres écrit en base binaire (en base $2$) veut dire que les bits sont facteurs de puissances de $2$.
+$$11_{10} \ \Leftrightarrow \ 1011_2 \ = \left(1 \times 2^3 + 0 \times 2^2 + 1 \times 2^1 + 1 \times 2^0\right)$$
 
 
+Voici l'illustration de la façon dont la valeur du nombre $11.75$ se calcul en base décimale :
 
+Ci-bas se trouve une illustration de la façon dont la valeur du nombre entier naturel $11_{10}$ se calcul en base binaire :
 
-Il est dit dans ce chapitre que les chiffres constitutifs d'un nombre écrit sous une base $N$ en __notation positionnelle__ sont facteurs d'une puissance de $N$, ce qui veut dire que tout bit d'un nombre codé en __binary unsigned__ est facteur d'une puissance de $2$.
+$$11_{10} \ \Leftrightarrow \ 1011_2 \ = \left(1 \times 2^3 + 0 \times 2^2 + 1 \times 2^1 + 1 \times 2^0\right)$$
 
 
 
