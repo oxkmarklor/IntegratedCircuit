@@ -55,21 +55,11 @@ D'où le fait qu'il ait été fait antérieurement mention d'un lien entre l'enc
 Vous l'aurez compris, comprendre l'encodage __binary unsigned__ demande de comprendre le fonctionnement de la __notation positionnelle__ en base binaire, ce qui s'annonce relativement simple car nous nous contenterons de faire référence au chapitre précédent.
 En l'occurrence, ledit chapitre mentionne qu'en __notation positionnelle__ : tout chiffre constitutif d'un nombre écrit en base $N$ est le facteur d'une puissance de $N$, ce qui dans le cas d'un nombre binaire, écrit en base $2$, insinue que tout bit constituant le nombre est facteur d'une puissance de $2$.
 Enfin, le nombre binaire sous-jacent a pour valeur la somme des produits entre bits et puissances.
-Pour illustrer ces propos, prenons le cas du nombre entier naturel $15$ et montrons comment est-ce-que sa valeur est calculée sous __notation positionnelle__ en base binaire :
 
-$$15 \ \Leftrightarrow \ 1111_2 \ = \left(1 \times 2^3 + 1 \times 2^2 + 1 \times 2^1 + 1 \times 2^0\right)$$
+Pour y voir plus clair, prenons le nombre entier naturel $23$ comme exemple, nombre qui sous l'impulsion de la __notation positionnelle__ s'écrit $10111_2$ en base binaire.
+Voici ci-bas une illustration de la façon dont la valeur de ce nombre est réelement calculée :
 
-
-
-Enfin, le nombre sous-jacent a pour valeur la somme des produits entre chiffres et puissances.
-
-Voici une illustration de la façon dont la valeur du nombre entier naturel $11_{10}$ se calcul  
-
-Pour illustrer ces propos, prenons le cas du nombre entier naturel $11_{10}$
-
-Prenons pour exemple le cas du nombre entier naturel $11_{10}$ afin d'illustrer en __notation positionnelle__, ainsi qu'en base binaire, la façon dont se calcul la valeur dudit nombre :
-
-$$11_{10} \ \Leftrightarrow \ 1011_2 \ = \left(1 \times 2^3 + 0 \times 2^2 + 1 \times 2^1 + 1 \times 2^0\right)$$
+$$10111_2 \ = \left(1 \times 2^4 + 0 \times 2^3 + 1 \times 2^2 + 1 \times 2^1 + 1 \times 2^0\right)$$
 
 
 //
