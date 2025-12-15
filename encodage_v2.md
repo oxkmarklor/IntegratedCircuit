@@ -53,7 +53,19 @@ Le terme __binary unsigned__ n'est quant à lui que le nom d'un encodage permett
 D'où le fait qu'il ait été fait antérieurement mention d'un lien entre l'encodage __binary unsigned__ et la __notation positionnelle__.
 
 Vous l'aurez compris, comprendre l'encodage __binary unsigned__ demande de comprendre le fonctionnement de la __notation positionnelle__ en base binaire, ce qui s'annonce relativement simple car nous nous contenterons de faire référence au chapitre précédent.
-En l'occurrence, ledit chapitre mentionne qu'en __notation positionnelle__ : tout chiffre constitutif d'un nombre écrit en base $N$ est le facteur d'une puissance de $N$, ce qui dans le cas d'un nombre binaire (écrit en base $2$) insinue que tout bit le constituant est facteur d'une puissance de $2$.
+En l'occurrence, ledit chapitre mentionne qu'en __notation positionnelle__ : tout chiffre constitutif d'un nombre écrit en base $N$ est le facteur d'une puissance de $N$, ce qui dans le cas d'un nombre binaire, écrit en base $2$, insinue que tout bit constituant le nombre est facteur d'une puissance de $2$.
+La valeur dudit nombre binaire est alors la somme des produits entre bits et puissances.
+Gardez cependant à l'esprit le fait que l'encodage __binary unsigned__ ne permette que le codage de nombre entier naturel, c'est pourquoi nous illustrons ci-bas la façon dont se représente le nombre $11_{10}$ en __binary unsigned/notation positionnelle__ :
+
+$$11_{10} \ \Leftrightarrow \ 1011_2 \ = \left(1 \times 2^3 + 0 \times 2^2 + 1 \times 2^1 + 1 \times 2^0\right)$$
+
+
+
+Enfin, le nombre sous-jacent a pour valeur la somme des produits entre chiffres et puissances.
+
+Voici une illustration de la façon dont la valeur du nombre entier naturel $11_{10}$ se calcul  
+
+Pour illustrer ces propos, prenons le cas du nombre entier naturel $11_{10}$
 
 Prenons pour exemple le cas du nombre entier naturel $11_{10}$ afin d'illustrer en __notation positionnelle__, ainsi qu'en base binaire, la façon dont se calcul la valeur dudit nombre :
 
