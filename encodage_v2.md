@@ -40,7 +40,7 @@ Nous savons d'ores et déjà que chaque chiffre constitutif d'un nombre écrit e
 A titre d'exemple, la valeur du chiffre des unités du nombre décimale $11.75$ est de $\left(1 \times 10_{10}^{\quad 0}\right)$.
 En outre, la __notation positionnelle__ définit le poids des chiffres comme un moyen universel d'identifier un chiffre dans un nombre, indépendamment de la base numérique.
 Il s'avère que le poids d'un chiffre fait référence à la puissance dont ledit chiffre est facteur : plus cette puissance est grande et plus le poids du chiffre est fort, tandis que plus cette puissance est petite et plus le poids dudit chiffre est faible.
-En guise d'exemple, le chiffre des unités du nombre décimale $11.75$ est de poids $0$ parce que ce dernier est facteur de $10_{10}$ à la puissance $0$.
+En guise d'exemple, le chiffre des unités du nombre décimale $11.75$ est de poids $0$, parce que ce dernier est le facteur de $10_{10}$ à la puissance $0$.
 
 Avec cela en tête, nous observons par exemple que la valeur du chiffre non nul de poids $0$ du nombre décimale $11.75$ est bel et bien strictement supérieur à la somme des valeurs des chiffres de poids $-1$ et $-2$ :
 
@@ -60,6 +60,10 @@ Pour y voir plus clair, prenons le nombre entier naturel $23$ comme exemple, nom
 Voici ci-bas une illustration de la façon dont la valeur de ce nombre est réelement calculée :
 
 $$10111_2 \ = \left(1 \times 2^4 + 0 \times 2^3 + 1 \times 2^2 + 1 \times 2^1 + 1 \times 2^0\right)$$
+
+Remarquez que les bits du nombre multiplient bel et bien des puissances de $2$, qui plus est, des puissances positives ou nul, à l'image des puissances que multiplient les chiffres qui composent la partie entière du nombre décimale $11.75$ pris pour exemple dans le chapitre précédent.
+
+A cela, ajoutons que la valeur des puissances de $10_{10}$ multipliées par deux chiffres successifs est séparé d'un facteur $10_{10}$ ; pour généralisé, la valeur des puissances de $N$ multipliées par deux chiffres successifs constituant un nombre écrit en base $N$, est alors séparée d'un facteur $N$.
 
 
 //
