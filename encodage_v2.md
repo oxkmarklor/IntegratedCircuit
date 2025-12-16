@@ -61,8 +61,25 @@ Voici ci-bas une illustration de la façon dont la valeur de ce nombre est réel
 
 $$10111_2 \ = \left(1 \times 2^4 + 0 \times 2^3 + 1 \times 2^2 + 1 \times 2^1 + 1 \times 2^0\right)$$
 
+Veuillez remarquer que chacun des bits qui compose ledit nombre entier naturel multiplie une puissance de $2$, et que cette puissance est positive ou nul.
+Ce dernier point se généralise cependant à l'ensemble des bases numériques, tout chiffre constitutif d'un nombre entier relatif écrit en base $N$ est le facteur d'une puissance de $N$ positive ou nul.
+Par exemple, les chiffres de la partie entière du nombre décimale $11.75$ pris pour exemple dans le chapitre précédent, multiplient des puissances de $10_{10}$ positives ou nul.
+
+//
+
+Ceci n'est cependant pas propre à la base binaire ou que sais-je encore, mais bel et bien généralisé à tout chiffre constitutif d'un nombre entier écrit en base $N$, ledit chiffre est certes facteur d'une puissance de $N$ mais plus particulièrement d'une puissance de $N$ positive ou nul.
+
+Cependant, précisons que dans les faits : tout chiffre constitutif d'un nombre _entier_ écrit en base $N$ est le facteur d'une puissance de $N$ _positive ou nul_.
+
+Précisons ce qui a été dit plus haut, de manière général tout chiffre constitutif d'un nombre entier écrit en base $N$ est le facteur d'une puissance de $N$ positive ou nul
+
+De manière plus général cependant, tout chiffre constitutif d'un nombre entier écrit en base $N$ est le facteur d'une puissance de $N$ positive ou nul, à l'image des puissances que multiplient les chiffres de la partie entière du nombre décimale $11.75$ pris pour exemple dans le chapitre précédent.
+
+
 Remarquez que chacun des bits du nombre multiplie bel et bien une puissance de $2$, qui plus est, ces puissances sont positives ou nul, à l'image des puissances que multiplient les chiffres de la partie entière du nombre décimale $11.75$ pris pour exemple dans le chapitre précédent.
 De manière plus général, tout chiffre constitutif d'un nombre entier écrit en base $N$ est le facteur d'une puissance de $N$ positive ou nul.
+
+// après
 
 A cela, ajoutons que la valeur des puissances de $10_{10}$ multipliées par deux chiffres successifs est séparé d'un facteur $10_{10}$ ; pour généralisé, la valeur des puissances de $N$ multipliées par deux chiffres successifs constituant un nombre écrit en base $N$, est alors séparée d'un facteur $N$.
 
