@@ -57,13 +57,16 @@ En l'occurrence, ledit chapitre mentionne qu'en __notation positionnelle__ : tou
 Enfin, le nombre binaire sous-jacent a pour valeur la somme des produits entre bits et puissances.
 
 Pour y voir plus clair, prenons le nombre entier naturel $23$ comme exemple, nombre qui sous l'impulsion de la __notation positionnelle__ s'écrit $10111_2$ en base binaire.
-Voici ci-bas une illustration de la façon dont la valeur de ce nombre est réelement calculée :
+Voici une illustration de la façon dont la valeur de ce nombre est réelement calculée :
 
 $$10111_2 \ = \left(1 \times 2^4 + 0 \times 2^3 + 1 \times 2^2 + 1 \times 2^1 + 1 \times 2^0\right)$$
 
-Veuillez remarquer que chacun des bits qui compose ledit nombre entier naturel multiplie une puissance de $2$, et que cette puissance est positive ou nul.
+Remarquez que chaque bit dudit nombre entier naturel est bel et bien le facteur d'une puissance de $2$, chacune de ces puissances étant positive ou nul.
+Cependant, cela se généralise à l'ensemble des bases numériques car les chiffres de la partie entière du nombre $11.75$ pris pour exemple dans le chapitre précédent, multiplient eux aussi des puissances de $10_{10}$ positives ou nul.
+
+Veuillez remarquer que chacun des bits qui composent le nombre entier naturel multiplie une puissance de $2$, et que cette puissance est soit positive, soit nul.
 Ce dernier point se généralise cependant à l'ensemble des bases numériques, tout chiffre constitutif d'un nombre entier relatif écrit en base $N$ est le facteur d'une puissance de $N$ positive ou nul.
-Par exemple, les chiffres de la partie entière du nombre décimale $11.75$ pris pour exemple dans le chapitre précédent, multiplient des puissances de $10_{10}$ positives ou nul.
+Par exemple, les chiffres de la partie entière du nombre décimale $11.75$, pris pour exemple dans le chapitre précédent, multiplient des puissances de $10_{10}$ positives ou nul.
 
 //
 
