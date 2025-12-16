@@ -53,17 +53,30 @@ Le terme __binary unsigned__ n'est quant à lui que le nom d'un encodage permett
 D'où le fait qu'il ait été fait antérieurement mention d'un lien entre l'encodage __binary unsigned__ et la __notation positionnelle__.
 
 Vous l'aurez compris, comprendre l'encodage __binary unsigned__ demande de comprendre le fonctionnement de la __notation positionnelle__ en base binaire, ce qui s'annonce relativement simple car nous nous contenterons de faire référence au chapitre précédent.
-En l'occurrence, ledit chapitre mentionne qu'en __notation positionnelle__ : tout chiffre constitutif d'un nombre écrit en base $N$ est le facteur d'une puissance de $N$, ce qui dans le cas d'un nombre binaire, écrit en base $2$, insinue que tout bit constituant le nombre est facteur d'une puissance de $2$.
+En l'occurrence, ledit chapitre mentionne qu'en __notation positionnelle__ : tout chiffre constitutif d'un nombre écrit en base $N$ est le facteur d'une puissance de $N$, ce qui insinue dans le cas d'un nombre binaire, écrit en base $2$, que tout bit constituant le nombre est facteur d'une puissance de $2$.
 Enfin, le nombre binaire sous-jacent a pour valeur la somme des produits entre bits et puissances.
 
 Pour y voir plus clair, prenons le nombre entier naturel $23$ comme exemple, nombre qui sous l'impulsion de la __notation positionnelle__ s'écrit $10111_2$ en base binaire.
-Voici une illustration de la façon dont la valeur de ce nombre est réelement calculée :
+Voici une illustration qui montre comment est-ce-que la valeur de ce nombre est réelement calculée :
 
 $$10111_2 \ = \left(1 \times 2^4 + 0 \times 2^3 + 1 \times 2^2 + 1 \times 2^1 + 1 \times 2^0\right)$$
 
-Remarquez que chaque bit dudit nombre entier naturel est bel et bien le facteur d'une puissance de $2$.
-Au-delà, précisions que tout chiffre constitutif d'un nombre entier relatif, positif dans notre cas, écrit en base $N$ est le facteur d'une puissance de $N$ positive ou nul.
-Cela se verifie avec cet exemple mais aussi avec celui du chapitre précédent, où les chiffres de la partie entière du nombre décimale $11.75$ multiplient des puissances de $10_{10}$ qui sont positives ou nul.
+Remarquez que chaque bit dudit nombre entier est bel et bien le facteur d'une puissance de $2$, chacune de ces puissances étant positive ou nul.
+Cependant, précisons que tout chiffre constitutif d'un nombre entier relatif écrit en base $N$, d'un nombre entier naturel dans notre cas, est le facteur d'une puissance de $N$ positive ou nul, ce qui n'est donc pas propre à la base binaire ou que sais-je encore.
+Pour vous en convaincre, les chiffres de la partie entière du nombre décimale $11.75$ utilisé comme exemple par le chapitre précédent, multiplient des puissances de $10_{10}$ bel et bien positive ou nul.
+
+chose qui se verifie avec le nombre décimale $11.75$ pris pour exemple dans le chapitre précédent.
+Ceci n'est donc pas propre à la base binaire.
+
+
+//
+
+Remarquez que chaque bit dudit nombre est bel et bien le facteur d'une puissance de $2$.
+A cela, apportons quelques précision à ce qui a pu être dit précédemment : tout chiffre constitutif d'un nombre entier écrit en base $N$, nombre positif dans notre cas, est le facteur d'une puissance de $N$ positive ou nul.
+
+//
+
+Ceci se verifie avec cet exemple mais aussi avec celui du chapitre précédent, où les chiffres de la partie entière du nombre décimale $11.75$ multiplient des puissances de $10_{10}$ qui sont positives ou nul.
 
 Remarquez que chaque bit dudit nombre entier naturel est bel et bien le facteur d'une puissance de $2$, chacune de ces puissances étant positive ou nul.
 
