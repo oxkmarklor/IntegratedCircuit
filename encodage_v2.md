@@ -61,7 +61,8 @@ Voici ci-bas une illustration de la façon dont la valeur de ce nombre est réel
 
 $$10111_2 \ = \left(1 \times 2^4 + 0 \times 2^3 + 1 \times 2^2 + 1 \times 2^1 + 1 \times 2^0\right)$$
 
-Remarquez que les bits du nombre multiplient bel et bien des puissances de $2$, qui plus est, des puissances positives ou nul, à l'image des puissances que multiplient les chiffres qui composent la partie entière du nombre décimale $11.75$ pris pour exemple dans le chapitre précédent.
+Remarquez que chacun des bits du nombre multiplie bel et bien une puissance de $2$, qui plus est, ces puissances sont positives ou nul, à l'image des puissances que multiplient les chiffres de la partie entière du nombre décimale $11.75$ pris pour exemple dans le chapitre précédent.
+De manière plus général, tout chiffre constitutif d'un nombre entier écrit en base $N$ est le facteur d'une puissance de $N$ positive ou nul.
 
 A cela, ajoutons que la valeur des puissances de $10_{10}$ multipliées par deux chiffres successifs est séparé d'un facteur $10_{10}$ ; pour généralisé, la valeur des puissances de $N$ multipliées par deux chiffres successifs constituant un nombre écrit en base $N$, est alors séparée d'un facteur $N$.
 
