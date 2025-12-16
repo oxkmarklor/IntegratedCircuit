@@ -61,8 +61,12 @@ Voici une illustration de la façon dont la valeur de ce nombre est réelement c
 
 $$10111_2 \ = \left(1 \times 2^4 + 0 \times 2^3 + 1 \times 2^2 + 1 \times 2^1 + 1 \times 2^0\right)$$
 
+Remarquez que chaque bit dudit nombre entier naturel est bel et bien le facteur d'une puissance de $2$.
+Au-delà, précisions que tout chiffre constitutif d'un nombre entier relatif, positif dans notre cas, écrit en base $N$ est le facteur d'une puissance de $N$ positive ou nul.
+Cela se verifie avec cet exemple mais aussi avec celui du chapitre précédent, où les chiffres de la partie entière du nombre décimale $11.75$ multiplient des puissances de $10_{10}$ qui sont positives ou nul.
+
 Remarquez que chaque bit dudit nombre entier naturel est bel et bien le facteur d'une puissance de $2$, chacune de ces puissances étant positive ou nul.
-Cependant, cela se généralise à l'ensemble des bases numériques car les chiffres de la partie entière du nombre $11.75$ pris pour exemple dans le chapitre précédent, multiplient eux aussi des puissances de $10_{10}$ positives ou nul.
+
 
 Veuillez remarquer que chacun des bits qui composent le nombre entier naturel multiplie une puissance de $2$, et que cette puissance est soit positive, soit nul.
 Ce dernier point se généralise cependant à l'ensemble des bases numériques, tout chiffre constitutif d'un nombre entier relatif écrit en base $N$ est le facteur d'une puissance de $N$ positive ou nul.
