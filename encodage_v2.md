@@ -61,12 +61,15 @@ Voici une illustration qui montre comment est-ce-que la valeur de ce nombre est 
 
 $$10111_2 \ = \left(1 \times 2^4 + 0 \times 2^3 + 1 \times 2^2 + 1 \times 2^1 + 1 \times 2^0\right)$$
 
-Remarquez que chaque bit dudit nombre entier est bel et bien le facteur d'une puissance de $2$, chacune de ces puissances étant positive ou nul.
+Remarquez que chaque bit constituant le nombre entier est bel et bien le facteur d'une puissance de $2$, ces puissances sont positives ou nul qui plus est, ce qui n'a rien d'une exception.
+Rappelez-vous du nombre décimale $11.75$ pris pour exemple dans le chapitre précédent, les chiffres de la partie entière de ce nombre multiplient eux même des puissances de $10_{10}$ positives ou nul ; je vous invite à relire tout ou partie dudit chapitre si nécessaire.
+En bref, de manière général nous pouvons dire que tout chiffre constitutif d'un nombre entier écrit en base $N$ est facteur d'une puissance positive ou nul de $N$.
+
+
+
 Cependant, précisons que tout chiffre constitutif d'un nombre entier relatif écrit en base $N$, d'un nombre entier naturel dans notre cas, est le facteur d'une puissance de $N$ positive ou nul, ce qui n'est donc pas propre à la base binaire ou que sais-je encore.
 Pour vous en convaincre, les chiffres de la partie entière du nombre décimale $11.75$ utilisé comme exemple par le chapitre précédent, multiplient des puissances de $10_{10}$ bel et bien positive ou nul.
 
-chose qui se verifie avec le nombre décimale $11.75$ pris pour exemple dans le chapitre précédent.
-Ceci n'est donc pas propre à la base binaire.
 
 
 //
