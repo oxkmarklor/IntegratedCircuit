@@ -61,46 +61,21 @@ Voici une illustration qui montre comment est-ce-que la valeur de ce nombre est 
 
 $$10111_2 \ = \left(1 \times 2^4 + 0 \times 2^3 + 1 \times 2^2 + 1 \times 2^1 + 1 \times 2^0\right)$$
 
-Remarquez que chaque bit constituant le nombre entier est bel et bien le facteur d'une puissance de $2$, ces puissances sont positives ou nul qui plus est, ce qui n'a rien d'une exception.
-Rappelez-vous du nombre décimale $11.75$ pris pour exemple dans le chapitre précédent, les chiffres de la partie entière de ce nombre multiplient eux même des puissances de $10_{10}$ positives ou nul ; je vous invite à relire tout ou partie dudit chapitre si nécessaire.
-En bref, de manière général nous pouvons dire que tout chiffre constitutif d'un nombre entier écrit en base $N$ est facteur d'une puissance positive ou nul de $N$.
+Pour commencer, remarquons que l'ensemble des bits du nombre multiplient une puissance de $2$, qui plus est, une puissance positive ou nul.
+Gardons à l'esprit que le nombre sous-jacent est un entier, les bits qui le compose ne peuvent pas être facteur d'une puissance de $2$ négative car ces dernières interprètent des nombres fractionnaire compris dans l'intervalle $\left]0;1\right[$.
+Cependant, ceci n'est pas propre à la base binaire, faisons un rapide aparté pour parler du cas du chapitre précédent "_La notation positionnelle_".
+Il s'avère que ledit chapitre utilise le nombre décimale $11.75$ pour expliquer le fonctionnement de la __notation positionnelle__ en base décimale, ce dernier mentionne entre autre le fait que les chiffres de la partie entière dudit nombre multiplient des puissances de $10_{10}$ positives ou nul.
 
 
 
-Cependant, précisons que tout chiffre constitutif d'un nombre entier relatif écrit en base $N$, d'un nombre entier naturel dans notre cas, est le facteur d'une puissance de $N$ positive ou nul, ce qui n'est donc pas propre à la base binaire ou que sais-je encore.
-Pour vous en convaincre, les chiffres de la partie entière du nombre décimale $11.75$ utilisé comme exemple par le chapitre précédent, multiplient des puissances de $10_{10}$ bel et bien positive ou nul.
 
 
+// autre exemple avec ref
 
-//
-
-Remarquez que chaque bit dudit nombre est bel et bien le facteur d'une puissance de $2$.
-A cela, apportons quelques précision à ce qui a pu être dit précédemment : tout chiffre constitutif d'un nombre entier écrit en base $N$, nombre positif dans notre cas, est le facteur d'une puissance de $N$ positive ou nul.
-
-//
-
-Ceci se verifie avec cet exemple mais aussi avec celui du chapitre précédent, où les chiffres de la partie entière du nombre décimale $11.75$ multiplient des puissances de $10_{10}$ qui sont positives ou nul.
-
-Remarquez que chaque bit dudit nombre entier naturel est bel et bien le facteur d'une puissance de $2$, chacune de ces puissances étant positive ou nul.
+Faisons un rapide aparté pour revenir au chapitre "_La notation positionnelle_", ce qui nous intéresse c'est plus particulièrement le nombre décimale $11.75$ ayant été choisit pour expliquer le fonctionnement de la __notation positionnelle__ en base $10_{10}$.
+Dans ce chapitre il est expliqué que les chiffres de la partie entière dudit nombre multiplient des puissances de $10_{10}$ qui sont exclusivement positives ou nul.
 
 
-Veuillez remarquer que chacun des bits qui composent le nombre entier naturel multiplie une puissance de $2$, et que cette puissance est soit positive, soit nul.
-Ce dernier point se généralise cependant à l'ensemble des bases numériques, tout chiffre constitutif d'un nombre entier relatif écrit en base $N$ est le facteur d'une puissance de $N$ positive ou nul.
-Par exemple, les chiffres de la partie entière du nombre décimale $11.75$, pris pour exemple dans le chapitre précédent, multiplient des puissances de $10_{10}$ positives ou nul.
-
-//
-
-Ceci n'est cependant pas propre à la base binaire ou que sais-je encore, mais bel et bien généralisé à tout chiffre constitutif d'un nombre entier écrit en base $N$, ledit chiffre est certes facteur d'une puissance de $N$ mais plus particulièrement d'une puissance de $N$ positive ou nul.
-
-Cependant, précisons que dans les faits : tout chiffre constitutif d'un nombre _entier_ écrit en base $N$ est le facteur d'une puissance de $N$ _positive ou nul_.
-
-Précisons ce qui a été dit plus haut, de manière général tout chiffre constitutif d'un nombre entier écrit en base $N$ est le facteur d'une puissance de $N$ positive ou nul
-
-De manière plus général cependant, tout chiffre constitutif d'un nombre entier écrit en base $N$ est le facteur d'une puissance de $N$ positive ou nul, à l'image des puissances que multiplient les chiffres de la partie entière du nombre décimale $11.75$ pris pour exemple dans le chapitre précédent.
-
-
-Remarquez que chacun des bits du nombre multiplie bel et bien une puissance de $2$, qui plus est, ces puissances sont positives ou nul, à l'image des puissances que multiplient les chiffres de la partie entière du nombre décimale $11.75$ pris pour exemple dans le chapitre précédent.
-De manière plus général, tout chiffre constitutif d'un nombre entier écrit en base $N$ est le facteur d'une puissance de $N$ positive ou nul.
 
 // après
 
