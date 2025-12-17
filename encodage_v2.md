@@ -26,7 +26,30 @@ Voici l'illustration de la façon dont la valeur du nombre $11.75$ se calcul en 
 
 $$11.75 \ = \left(1 \times 10_{10}^{\quad 1} + 1 \times 10_{10}^{\quad 0} + 7 \times 10_{10}^{\quad -1} + 5 \times 10_{10}^{\quad -2}\right)$$
 
-/// try
+Notez que la syntaxe suivante $X_{10}$ spécifie la base numérique dans laquelle le nombre $X$ est écrit, $10$ pour la base décimale et $2$ pour la base binaire.
+Cette syntaxe ne sera utilisée que lorsqu'il y aura une ambiguïté dans l'interprétation d'un nombre composé uniquement de $0$ et de $1$, permettant ainsi de dissocier les nombres écrits en base décimale de ceux écrits en base binaire.
+
+Dans l'illustration qui figure ci-dessus, remarquez que les chiffres de la partie entière du nombre multiplient des puissances de $10_{10}$ positives ou nul, tandis que les chiffres de la partie décimale multiplient des puissances de $10_{10}$ négatives.
+A cela, ajoutons que la valeur des puissances de $10_{10}$ multipliées par deux chiffres successifs est séparé d'un facteur $10_{10}$ ; pour généralisé, la valeur des puissances de $N$ multipliées par deux chiffres successifs constituant un nombre écrit en base $N$, est alors séparée d'un facteur $N$.
+
+Par ailleurs, en plus d'expliquer le fonctionnement de la __notation positionnelle__, ce chapitre parle également de l'une des propriétés de cette notation.
+Souvenez-vous du fait que la __notation positionnelle__ s'applique à toutes les bases numériques, ce qui insinue que ladite propriété s'applique elle aussi à l'ensemble des bases numériques.
+En l'occurrence, cette propriété nous dit que dans tout nombre écrit en base $N$ : la valeur d'un chiffre non nul de poids $i$ est strictement supérieur à la somme des valeurs des chiffres de poids inférieur à $i$.
+
+Nous savons d'ores et déjà que chaque chiffre constitutif d'un nombre écrit en base $N$ est facteur d'une puissance de $N$, il s'avère que la valeur d'un chiffre n'est autre que le produit entre ce chiffre et la puissance de $N$ dont il est le facteur.
+A titre d'exemple, la valeur du chiffre des unités du nombre décimale $11.75$ est de $\left(1 \times 10_{10}^{\quad 0}\right)$.
+En outre, la __notation positionnelle__ définit le poids des chiffres comme un moyen universel d'identifier un chiffre dans un nombre, indépendamment de la base numérique.
+Il s'avère que le poids d'un chiffre fait référence à la puissance dont ledit chiffre est facteur : plus cette puissance est grande et plus le poids du chiffre est fort, tandis que plus cette puissance est petite et plus le poids dudit chiffre est faible.
+En guise d'exemple, le chiffre des unités du nombre décimale $11.75$ est de poids $0$, parce que ce dernier est le facteur de $10_{10}$ à la puissance $0$.
+
+Avec cela en tête, nous observons par exemple que la valeur du chiffre non nul de poids $0$ du nombre décimale $11.75$ est bel et bien strictement supérieur à la somme des valeurs des chiffres de poids $-1$ et $-2$ :
+
+$$\left(1 \times 10_{10}^{\quad 0}\right) \gt \left(7 \times 10_{10}^{\quad -1} + 5 \times 10_{10}^{\quad -2}\right)$$
+
+## La notation positionnelle (new)
+
+La __notation positionnelle__ est une sorte d'__encodage__ qui permet de représenter les nombres de façon générique sous n'importe quel base numérique.
+Veuillez noté que la __notation positionnelle__ n'est pas la seule manière qui nous est donné pour représenter des nombres, il existe aussi la __notation scientifique__ qui, comme son nom l'indique, est principalement utilisée dans le monde des sciences ; le document consacre plus loin un chapitre entier à la __notation scientifique__. 
 
 Dans notre quotidien, lorsque nous manipulons des nombres (en base décimale) nous les représentons usuellement en __notation positionnelle__, comme ceci avec le nombre $11.75$ par exemple.
 Il s'avère qu'en __notation positionnelle__, chaque chiffre constituant le nombre $11.75$ est facteur d'une puissance de $10_{10}$ car ledit nombre est écrit en base décimale, en base $10_{10}$ ; les chiffres constitutifs d'un nombre écrit en base $N$ étant facteurs d'une puissance de $N$.
@@ -44,25 +67,7 @@ Cela s'explique par le fait que les chiffres de la partie entière du nombre $11
 Dans la même veine, les chiffres de la partie décimale du nombre nécessitent quant à eux de multiplier des nombres fractionnaires compris dans l'intervalle $\left]0;1\right[$, des puissances de $10_{10}$ négatives en l'occurrence.
 Ce qui précède nous fait comprendre que de manière plus général, tout chiffre constituant la partie entière d'un nombre écrit en base $N$ est facteur d'une puissance de $N$ positive ou nulle, tandis que tout chiffre constituant la partie fractionnaire est facteur d'une puissance de $N$ négative. 
 
-A cela, ajoutons que la valeur des puissances de $10_{10}$ multipliées par deux chiffres successifs est séparé d'un facteur $10_{10}$ ; pour généralisé, la valeur des puissances de $N$ multipliées par deux chiffres successifs constituant un nombre écrit en base $N$, est alors séparée d'un facteur $N$.
-
-///
-
-Notez que la syntaxe suivante $X_{10}$ spécifie la base numérique dans laquelle le nombre $X$ est écrit, $10$ pour la base décimale et $2$ pour la base binaire.
-Cette syntaxe ne sera utilisée que lorsqu'il y aura une ambiguïté dans l'interprétation d'un nombre composé uniquement de $0$ et de $1$, permettant ainsi de dissocier les nombres écrits en base décimale de ceux écrits en base binaire.
-
-Dans l'illustration qui figure ci-dessus, remarquez que les chiffres de la partie entière du nombre multiplient des puissances de $10_{10}$ positives ou nul, tandis que les chiffres de la partie décimale multiplient des puissances de $10_{10}$ négatives.
-A cela, ajoutons que la valeur des puissances de $10_{10}$ multipliées par deux chiffres successifs est séparé d'un facteur $10_{10}$ ; pour généralisé, la valeur des puissances de $N$ multipliées par deux chiffres successifs constituant un nombre écrit en base $N$, est alors séparée d'un facteur $N$.
-
-/// save
-
-Concernant les chiffres constitutifs de la partie fractionnaire d'un nombre écrit en base $N$, ces derniers sont facteurs d'une puissance négative de $N$ car ces puissances là interprètent des valeurs fractionnaire de l'intervalle $\left]0;1\right[$.
-A contrario, les chiffres constitutifs de la partie entière d'un nombre écrit en base $N$ sont, quant à eux, facteurs d'une puissance positive ou nulle de $N$.
-
-Veuillez prendre note du fait que les chiffres de la partie fractionnaire d'un nombre écrit en base $N$ sont facteurs d'une puissance négative de $N$, les puissances négatives interprétant des valeurs fractionnaire comprises dans l'intervalle $\left]0;1\right[$.
-A contrario des chiffres de la partie entière d'un nombre écrit en base $N$ qui sont, quant à eux, facteurs d'une puissance positive ou nul de $N$.
-
-///
+A cela, ajoutons que les valeurs des puissances de $10_{10}$ multipliées par deux chiffres successifs composant le nombre $11.75$, sont séparées d'un facteur $10_{10}$ ; pour généralisé, les valeurs des puissances de $N$ multipliées par deux chiffres successifs constituant un nombre écrit en base $N$, sont séparées d'un facteur $N$.
 
 Par ailleurs, en plus d'expliquer le fonctionnement de la __notation positionnelle__, ce chapitre parle également de l'une des propriétés de cette notation.
 Souvenez-vous du fait que la __notation positionnelle__ s'applique à toutes les bases numériques, ce qui insinue que ladite propriété s'applique elle aussi à l'ensemble des bases numériques.
