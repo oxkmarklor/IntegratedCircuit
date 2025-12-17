@@ -42,9 +42,7 @@ Cette syntaxe ne sera utilisée que lorsqu'il y aura une ambiguïté dans l'inte
 Dans l'illustration qui figure ci-dessus, remarquez que les chiffres de la partie entière du nombre multiplient des puissances de $10_{10}$ positives ou nulles, tandis que les chiffres de la partie décimale multiplient exclusivement des puissances de $10_{10}$ négatives.
 Cela s'explique par le fait que les chiffres de la partie entière du nombre $11.75$ requièrent de multiplier des nombres entiers, comme ceux résultants des puissances de $10_{10}$ positives et nulles.
 Dans la même veine, les chiffres de la partie décimale du nombre nécessitent quant à eux de multiplier des nombres fractionnaires compris dans l'intervalle $\left]0;1\right[$, des puissances de $10_{10}$ négatives en l'occurrence.
-
-
-D'une manière plus générale, nous en déduisons que tout chiffre constituant la partie entière d'un nombre écrit en base $N$ est facteur d'une puissance positive ou nulle de $N$, tandis que les chiffres qui constituent la partie décimale de ce même nombre sont facteurs d'une puissance négative de $N$.
+Ce qui précède nous fait comprendre que de manière plus général, tout chiffre constituant la partie entière d'un nombre écrit en base $N$ est facteur d'une puissance de $N$ positive ou nulle, tandis que tout chiffre constituant la partie fractionnaire est facteur d'une puissance de $N$ négative. 
 
 A cela, ajoutons que la valeur des puissances de $10_{10}$ multipliées par deux chiffres successifs est séparé d'un facteur $10_{10}$ ; pour généralisé, la valeur des puissances de $N$ multipliées par deux chiffres successifs constituant un nombre écrit en base $N$, est alors séparée d'un facteur $N$.
 
