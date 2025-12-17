@@ -61,6 +61,13 @@ Voici une illustration qui montre comment est-ce-que la valeur de ce nombre est 
 
 $$10111_2 \ = \left(1 \times 2^4 + 0 \times 2^3 + 1 \times 2^2 + 1 \times 2^1 + 1 \times 2^0\right)$$
 
+Pour commencer, remarquons que l'ensemble des bits du nombre multiplient une puissance de $2$, qui plus est, une puissance positive ou nul à l'image des puissances que multiplie les chiffres de la partie entière du nombre décimale $11.75$ pris pour exemple dans le chapitre précédent.
+Autrement dit de façon plus général, tout chiffre constitutif d'un nombre entier relatif écrit en base $N$ est le facteur d'une puissance positive ou nul de $N$.
+Il est simple de comprendre pourquoi, les puissances de $N$ négatives interprètent des nombres fractionnaire compris dans l'intervalle $\left]0;1\right[$, ce qui explique le fait que les chiffres constituant tout nombre entier ne multiplient que des puissances positives ou nul.
+
+
+//
+
 Pour commencer, remarquons que l'ensemble des bits du nombre multiplient une puissance de $2$, qui plus est, une puissance positive ou nul.
 Gardons à l'esprit que le nombre sous-jacent est un entier, les bits qui le compose ne peuvent pas être facteur d'une puissance de $2$ négative car ces dernières interprètent des nombres fractionnaire compris dans l'intervalle $\left]0;1\right[$.
 Cependant, ceci n'est pas propre à la base binaire, faisons un rapide aparté pour parler du cas du chapitre précédent "_La notation positionnelle_".
