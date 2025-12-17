@@ -26,6 +26,19 @@ Voici l'illustration de la façon dont la valeur du nombre $11.75$ se calcul en 
 
 $$11.75 \ = \left(1 \times 10_{10}^{\quad 1} + 1 \times 10_{10}^{\quad 0} + 7 \times 10_{10}^{\quad -1} + 5 \times 10_{10}^{\quad -2}\right)$$
 
+/// try
+
+Dans notre quotidien, lorsque nous manipulons des nombres (en base décimale) nous les représentons usuellement en __notation positionnelle__, comme ceci avec le nombre $11.75$ par exemple.
+Il s'avère qu'en __notation positionnelle__, chaque chiffre constituant le nombre $11.75$ est facteur d'une puissance de $10_{10}$ car ledit nombre est écrit en base décimale, en base $10_{10}$ ; les chiffres constitutifs d'un nombre écrit en base $N$ étant facteurs d'une puissance de $N$.
+Veuillez prendre note du fait que les chiffres de la partie fractionnaire d'un nombre écrit en base $N$ sont facteurs d'une puissance négative de $N$, les puissances négatives interprétant des valeurs fractionnaire comprises dans l'intervalle $\left]0;1\right[$.
+A contrario des chiffres de la partie entière d'un nombre écrit en base $N$ qui sont, quant à eux, facteurs d'une puissance positive ou nul de $N$.
+Enfin, le nombre sous-jacent a pour valeur la somme des produits entre chiffres et puissances.
+Voici l'illustration de la façon dont la valeur du nombre $11.75$ se calcul en base décimale :
+
+$$11.75 \ = \left(1 \times 10_{10}^{\quad 1} + 1 \times 10_{10}^{\quad 0} + 7 \times 10_{10}^{\quad -1} + 5 \times 10_{10}^{\quad -2}\right)$$
+
+///
+
 Notez que la syntaxe suivante $X_{10}$ spécifie la base numérique dans laquelle le nombre $X$ est écrit, $10$ pour la base décimale et $2$ pour la base binaire.
 Cette syntaxe ne sera utilisée que lorsqu'il y aura une ambiguïté dans l'interprétation d'un nombre composé uniquement de $0$ et de $1$, permettant ainsi de dissocier les nombres écrits en base décimale de ceux écrits en base binaire.
 
