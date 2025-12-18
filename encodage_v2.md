@@ -79,7 +79,7 @@ En outre, la __notation positionnelle__ définit le poids des chiffres comme un 
 Il s'avère que le poids d'un chiffre fait référence à la puissance dont ledit chiffre est facteur : plus cette puissance est grande et plus le poids du chiffre est fort, tandis que plus cette puissance est petite et plus le poids dudit chiffre est faible.
 En guise d'exemple, le chiffre des unités du nombre décimale $11.75$ est de poids $0$, parce que ce dernier est le facteur de $10_{10}$ à la puissance $0$.
 
-Avec cela en tête, nous observons par exemple que la valeur du chiffre non nul de poids $0$ du nombre décimale $11.75$ est bel et bien strictement supérieur à la somme des valeurs des chiffres de poids $-1$ et $-2$ :
+Avec tout cela en tête, nous observons (par exemple) que la valeur du chiffre non nul de poids $0$ du nombre décimale $11.75$ est bel et bien strictement supérieur à la somme des valeurs des chiffres de poids inférieur à $0$ :
 
 $$\left(1 \times 10_{10}^{\quad 0}\right) \gt \left(7 \times 10_{10}^{\quad -1} + 5 \times 10_{10}^{\quad -2}\right)$$
 
