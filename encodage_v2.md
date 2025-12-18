@@ -81,10 +81,9 @@ Par exemple, la valeur du chiffre de poids $0$ du nombre décimale $11.75$ est d
 
 //
 
-Pour commencer, en __notation positionnelle__ le poids est un moyen universel d'indexer un chiffre dans un nombre, et ce, indépendamment de la base numérique utilisée.
-Dans un nombre écrit en base $N$, il se trouve que tout chiffre a un poids qui fait référence à la puissance qui élève la base $N$ dont est facteur ledit chiffre.
-A titre d'exemple, le chiffre des unités du nombre décimale $11.75$ est de poids $0$ parcqu'il est le facteur de $10_{10}$ à la puissance $0$.
-
+En __notation positionnelle__, le poids est un moyen universel d'indexer un chiffre dans un nombre, et ce, indépendamment de la base numérique.
+A ce stade, nous savons que tout chiffre constitutif d'un nombre écrit en base $N$ est facteur d'une puissance de $N$, cependant nous apprenons que le poids de chacun de ces chiffres n'est autre que la puissance à laquelle la base $N$ est élevée.
+Par exemple, le chiffre des unités du nombre décimale $11.75$ est de poids $0$ parcqu'il est le facteur de $10_{10}$ à la puissance $0$.
 
 
 Quant à la valeur d'un chiffre, ce n'est rien d'autre que le produit entre ledit chiffre et la puissance dont il est le facteur, la valeur du chiffre de poids $0$ du nombre décimale $11.75$ est de $\left(1 \times 10_{10}^{\quad 0}\right)$.
