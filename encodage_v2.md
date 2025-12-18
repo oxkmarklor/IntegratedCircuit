@@ -73,23 +73,10 @@ Par ailleurs, en plus d'expliquer le fonctionnement de la __notation positionnel
 Souvenez-vous du fait que la __notation positionnelle__ s'applique à toutes les bases numériques, ce qui insinue que ladite propriété s'applique elle aussi à l'ensemble des bases numériques.
 En l'occurrence, cette propriété nous dit que dans tout nombre écrit en base $N$ : la valeur d'un chiffre non nul de poids $i$ est strictement supérieur à la somme des valeurs des chiffres de poids inférieur à $i$.
 
-Pour commencer, en __notation positionnelle__ le poids est un moyen universel d'indexer un chiffre dans un nombre, et ce, indépendamment de la base numérique utilisée.
-Il s'avère que tout chiffre a un poids, celui-ci faisant référence à la puissance dont est facteur ledit chiffre ; plus cette puissance est grande et plus le poids du chiffre est proportionnellement grand (ou fort), et à l'inverse plus elle est petite et plus le poids dudit chiffre est proportionnellement petit (ou faible).
-A titre d'exemple, le chiffre des unités du nombre décimale $11.75$ est de poids $0$ parcqu'il est le facteur de $10_{10}$ à la puissance $0$.
-Quant à la valeur d'un chiffre, ce n'est rien d'autre que le produit entre ledit chiffre et la puissance dont il est le facteur.
-Par exemple, la valeur du chiffre de poids $0$ du nombre décimale $11.75$ est de $\left(1 \times 10_{10}^{\quad 0}\right)$.
-
-//
-
 En __notation positionnelle__, le poids est un moyen universel d'indexer un chiffre dans un nombre, et ce, indépendamment de la base numérique.
-A ce stade, nous savons que tout chiffre constitutif d'un nombre écrit en base $N$ est facteur d'une puissance de $N$, cependant nous apprenons que le poids de chacun de ces chiffres n'est autre que la puissance à laquelle la base $N$ est élevée.
+A ce stade nous savons que tout chiffre constitutif d'un nombre écrit en base $N$ est facteur d'une puissance de $N$, cependant nous apprenons que le poids de chacun de ces chiffres n'est autre que la puissance à laquelle la base $N$ est élevée.
 Par exemple, le chiffre des unités du nombre décimale $11.75$ est de poids $0$ parcqu'il est le facteur de $10_{10}$ à la puissance $0$.
-Quant à la valeur d'un chiffre, ce n'est rien d'autre que le produit entre ledit chiffre et la puissance de $N$ dont il est le facteur, nous en déduisons alors que la valeur du chiffre de poids $0$ du nombre décimale $11.75$ est de $\left(1 \times 10_{10}^{\quad 0}\right)$.
-
-
-
-
-//
+Quant à la valeur d'un chiffre, elle n'est que le produit entre ledit chiffre et la puissance dont il est le facteur, nous en déduisons par exemple que la valeur du chiffre de poids $0$ du nombre décimale $11.75$ est de $\left(1 \times 10_{10}^{\quad 0}\right)$.
 
 Avec tout cela en tête, nous observons (par exemple) que la valeur du chiffre non nul de poids $0$ du nombre décimale $11.75$ est bel et bien strictement supérieur à la somme des valeurs des chiffres de poids inférieur à $0$ :
 
