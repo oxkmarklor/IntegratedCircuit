@@ -76,9 +76,9 @@ En l'occurrence, cette propriété nous dit que dans tout nombre écrit en base 
 En __notation positionnelle__, le poids est un moyen universel d'indexer un chiffre dans un nombre, et ce, indépendamment de la base numérique.
 A ce stade nous savons que tout chiffre constitutif d'un nombre écrit en base $N$ est facteur d'une puissance de $N$, cependant nous apprenons que le poids de chacun de ces chiffres n'est autre que la puissance à laquelle la base $N$ est élevée.
 Par exemple, le chiffre des unités du nombre décimale $11.75$ est de poids $0$ parcqu'il est le facteur de $10_{10}$ à la puissance $0$.
-Quant à la valeur d'un chiffre, elle n'est que le produit entre ledit chiffre et la puissance dont il est le facteur, nous en déduisons par exemple que la valeur du chiffre de poids $0$ du nombre décimale $11.75$ est de $\left(1 \times 10_{10}^{\quad 0}\right)$.
+Quant à la valeur d'un chiffre, ce n'est rien d'autre que le produit entre ledit chiffre et la puissance dont il est le facteur, par exemple il s'avère que la valeur du chiffre de poids $0$ du nombre décimale $11.75$ est de $\left(1 \times 10_{10}^{\quad 0}\right)$.
 
-Avec tout cela en tête, nous observons (par exemple) que la valeur du chiffre non nul de poids $0$ du nombre décimale $11.75$ est bel et bien strictement supérieur à la somme des valeurs des chiffres de poids inférieur à $0$ :
+Avec tout cela en tête, constatons que la valeur du chiffre non nul de poids $0$ du nombre décimale $11.75$ est bel et bien strictement supérieur à la somme des valeurs des chiffres de poids inférieur à $0$ :
 
 $$\left(1 \times 10_{10}^{\quad 0}\right) \gt \left(7 \times 10_{10}^{\quad -1} + 5 \times 10_{10}^{\quad -2}\right)$$
 
