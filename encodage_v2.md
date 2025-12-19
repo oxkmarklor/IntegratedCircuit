@@ -17,7 +17,7 @@ Ces __encodages__ sont néanmoins intrinséquement liés au concept de la __nota
 ## La notation positionnelle
 
 La __notation positionnelle__ est une sorte d'__encodage__ qui permet de représenter les nombres de façon générique sous n'importe quel base numérique.
-Veuillez noté que la __notation positionnelle__ n'est pas la seule manière qui nous est donné pour représenter des nombres, il existe aussi la __notation scientifique__ qui, comme son nom l'indique, est principalement utilisée dans le monde des sciences ; le document consacre plus loin un chapitre entier à la __notation scientifique__. 
+Veuillez noté que la __notation positionnelle__ n'est pas la seule manière qui nous est donné pour représenter des nombres, il existe aussi la __notation scientifique__ qui, comme son nom l'indique, est principalement utilisée dans le monde des sciences ; le document consacre plus loin un chapitre entier à la __notation scientifique__.
 
 Dans notre quotidien, lorsque nous manipulons des nombres (en base décimale) nous les représentons usuellement en __notation positionnelle__, comme ceci avec le nombre $23.75$ par exemple.
 Il s'avère qu'en __notation positionnelle__, chaque chiffre constituant le nombre $23.75$ est facteur d'une puissance de $10_{10}$ car ledit nombre est écrit en base décimale, en base $10_{10}$ ; les chiffres constitutifs d'un nombre écrit en base $N$ étant facteurs d'une puissance de $N$.
@@ -51,13 +51,20 @@ $$\left(3 \times 10_{10}^{\quad 0}\right) \gt \left(7 \times 10_{10}^{\quad -1} 
 
 ### L'encodage binary unsigned
 
-Grâce au chapitre précédent, nous savons désormais ce qu'est la __notation positionnelle__ mais aussi le fait qu'elle s'applique à n'importe quel base numérique, dont celle qui nous importe la base binaire.
-Le terme __binary unsigned__ n'est quant à lui que le nom d'un encodage permettant de représenter des nombres entiers naturels en base binaire, et ce, justement par le biais de la __notation positionnelle__.
+Grâce au chapitre précédent, nous savons désormais ce qu'est la __notation positionnelle__ mais aussi le fait qu'elle s'applique à n'importe quel base numérique, dont celle qui nous importe, la base binaire.
+En l'occurrence, le __binary unsigned__ est un encodage qui représente des nombres entiers naturels en base binaire, et ce, justement par le biais de la __notation positionnelle__.
 D'où le fait qu'il ait été fait antérieurement mention d'un lien entre l'encodage __binary unsigned__ et la __notation positionnelle__.
+
+//
+
+Vous l'aurez compris, appréhender l'encodage __binary unsigned__ demande de comprendre le fonctionnement de la __notation positionnelle__ en base binaire, ce qui s'annonce relativement simple car pour cela nous allons nous contentés de faire référence aux divers notions qu'aborde le chapitre précédent.
+
 
 Vous l'aurez compris, comprendre l'encodage __binary unsigned__ demande de comprendre le fonctionnement de la __notation positionnelle__ en base binaire, ce qui s'annonce relativement simple car nous nous contenterons de faire référence au chapitre précédent.
 En l'occurrence, ledit chapitre mentionne qu'en __notation positionnelle__ : tout chiffre constitutif d'un nombre écrit en base $N$ est le facteur d'une puissance de $N$, ce qui insinue dans le cas d'un nombre binaire, écrit en base $2$, que tout bit constituant le nombre est facteur d'une puissance de $2$.
 Enfin, le nombre binaire sous-jacent a pour valeur la somme des produits entre bits et puissances.
+
+//
 
 Pour y voir plus clair, prenons le nombre entier naturel $23$ comme exemple, nombre qui sous l'impulsion de la __notation positionnelle__ s'écrit $10111_2$ en base binaire.
 Voici une illustration qui montre comment est-ce-que la valeur de ce nombre est réelement calculée :
