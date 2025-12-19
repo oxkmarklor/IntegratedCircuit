@@ -57,8 +57,16 @@ D'où le fait qu'il ait été fait antérieurement mention d'un lien entre l'enc
 
 //
 
-Vous l'aurez compris, appréhender l'encodage __binary unsigned__ demande de comprendre le fonctionnement de la __notation positionnelle__ en base binaire, ce qui s'annonce relativement simple car pour cela nous allons nous contentés de faire référence aux divers notions qu'aborde le chapitre précédent.
+Vous l'aurez compris, appréhender l'encodage __binary unsigned__ demande de comprendre comment est-ce-que la __notation positionnelle__ représente des nombres entiers naturel en base binaire.
+Cela s'annonce relativement simple car à cette fin, nous allons nous contentés de faire référence aux divers notions qu'aborde le chapitre précédent.
+En l'occurrence, ledit chapitre mentionne qu'en __notation positionnelle__ : tout chiffre constituant la partie entière d'un nombre écrit en base $N$ est facteur d'une puissance de $N$ positive ou nulle, ce qui insinue dans le cas d'un nombre binaire, écrit en base $2$, que tout bit constituant le nombre est le facteur d'une puissance de $2$.
 
+
+Vous l'aurez compris, appréhender l'encodage __binary unsigned__ demande de comprendre comment est-ce-que la __notation positionnelle__ représente des nombres entiers naturel en base binaire.
+Cela s'annonce relativement simple car à cette fin, nous allons nous contentés de faire référence aux divers notions qu'aborde le chapitre précédent.
+En l'occurrence, ledit chapitre nous fait comprendre qu'en __notation positionnelle__ : tout chiffre constituant un nombre entier écrit en base $N$ est facteur d'une puissance de $N$ positive ou nulle, ce qui insinue dans le cas d'un nombre entier écrit en base $2$, que tout bit constituant le nombre est facteur d'une puissance de $2$ positive ou nulle.
+
+///
 
 Vous l'aurez compris, comprendre l'encodage __binary unsigned__ demande de comprendre le fonctionnement de la __notation positionnelle__ en base binaire, ce qui s'annonce relativement simple car nous nous contenterons de faire référence au chapitre précédent.
 En l'occurrence, ledit chapitre mentionne qu'en __notation positionnelle__ : tout chiffre constitutif d'un nombre écrit en base $N$ est le facteur d'une puissance de $N$, ce qui insinue dans le cas d'un nombre binaire, écrit en base $2$, que tout bit constituant le nombre est facteur d'une puissance de $2$.
