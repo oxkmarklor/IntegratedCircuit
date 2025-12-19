@@ -78,6 +78,14 @@ A ce stade nous savons que tout chiffre constitutif d'un nombre écrit en base $
 Par exemple, le chiffre des unités du nombre décimale $11.75$ est de poids $0$ parcqu'il est le facteur de $10_{10}$ à la puissance $0$.
 Quant à la valeur d'un chiffre, ce n'est rien d'autre que le produit entre ledit chiffre et la puissance dont il est le facteur, par exemple il s'avère que la valeur du chiffre de poids $0$ du nombre décimale $11.75$ est de $\left(1 \times 10_{10}^{\quad 0}\right)$.
 
+//
+
+A ce stade nous savons que tout chiffre constitutif d'un nombre écrit en base $N$ est le facteur d'une puissance de $N$, la valeur d'un chiffre n'est rien de plus que le produit entre ledit chiffre et la puissance de $N$ dont il est le facteur.
+Quant au poids d'un chiffre, celui-ci fait référence à l'exposant de la puissance de $N$ dont ledit chiffre est facteur, en __notation positionnelle__ le poids est un moyen universel d'indexer un chiffre dans un nombre, nonobstant la base numérique utilisée.
+Prenons pour exemple le chiffre des unités du nombre décimale $11.75$, il se trouve que la valeur de ce chiffre est de $\left(1 \times 10_{10}^{\quad 0}\right)$ tandis que le poids de ce dernier est $0$.
+
+//
+
 Avec tout cela en tête, constatons que la valeur du chiffre non nul de poids $0$ du nombre décimale $11.75$ est bel et bien strictement supérieur à la somme des valeurs des chiffres de poids inférieur à $0$ :
 
 $$\left(1 \times 10_{10}^{\quad 0}\right) \gt \left(7 \times 10_{10}^{\quad -1} + 5 \times 10_{10}^{\quad -2}\right)$$
