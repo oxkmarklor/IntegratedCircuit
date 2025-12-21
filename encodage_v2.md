@@ -51,14 +51,15 @@ $$\left(3 \times 10_{10}^{\quad 0}\right) \gt \left(7 \times 10_{10}^{\quad -1} 
 
 ### L'encodage binary unsigned
 
-Grâce au chapitre précédent, nous savons désormais ce qu'est la __notation positionnelle__ mais aussi le fait qu'elle s'applique à n'importe quel base numérique, dont celle qui nous importe la base binaire.
+Grâce au chapitre précédent nous savons désormais ce qu'est la __notation positionnelle__, notation qui s'applique à n'importe quel base numérique dont celle qui nous importe : la base binaire.
 En l'occurrence, le __binary unsigned__ est un encodage qui représente des nombres entiers naturel en base binaire, et ce, justement par le biais de la __notation positionnelle__.
 D'où le fait qu'il ait été fait antérieurement mention d'un lien entre l'encodage __binary unsigned__ et la __notation positionnelle__.
 
 Vous l'aurez compris, pour appréhender l'encodage __binary unsigned__ nous devons comprendre comment est-ce-que la __notation positionnelle__ représente des nombres entiers naturel en base binaire.
-Il s'avère que le chapitre précédent nous fait comprendre qu'en __notation positionnelle__, tout chiffre constitutif d'un nombre entier écrit en base $N$ est le facteur d'une puissance de $N$ positive ou nulle.
-En reportant ceci à tout nombre entier naturel écrit en base $2$, nous en déduisons que l'ensemble des bits dudit nombre sont facteurs d'une puissance de $2$ positive ou nulle.
+Le chapitre précédent nous fait comprendre qu'en __notation positionnelle__ : tout chiffre constitutif d'un nombre entier écrit en base $N$ est le facteur d'une puissance de $N$ positive ou nulle.
+En reportant ceci à tout nombre entier naturel écrit en base $2$, nous en déduisons que l'ensemble des bits qui composent un tel nombre sont facteurs d'une puissance de $2$ positive ou nulle.
 
+// intro illu puis rappel somme des produits, ou rappel somme des produits etc...
 
 
 ///
