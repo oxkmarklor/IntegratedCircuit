@@ -23,7 +23,7 @@ Dans notre quotidien, lorsque nous manipulons des nombres (en base décimale) no
 Il s'avère qu'en __notation positionnelle__, chaque chiffre constituant le nombre $23.75$ est facteur d'une puissance de $10_{10}$ car ledit nombre est écrit en base décimale, en base $10_{10}$ ; les chiffres constitutifs d'un nombre écrit en base $N$ étant facteurs d'une puissance de $N$.
 Plus bas, nous verrons que ces puissances là peuvent être positives, nulles, ou bien négatives, tout ne dépend que du chiffre facteur de ladite puissance.
 Enfin, le nombre sous-jacent a pour valeur la somme des produits entre chiffres et puissances.
-Voici une illustration qui montre comment est-ce-que la valeur du nombre $23.75$ se calcule en base décimale :
+Voici une illustration qui montre comment est-ce-que la valeur du nombre $23.75$ se déduit en base décimale :
 
 $$23.75 \ = \left(2 \times 10_{10}^{\quad 1} + 3 \times 10_{10}^{\quad 0} + 7 \times 10_{10}^{\quad -1} + 5 \times 10_{10}^{\quad -2}\right)$$
 
@@ -52,14 +52,19 @@ $$\left(3 \times 10_{10}^{\quad 0}\right) \gt \left(7 \times 10_{10}^{\quad -1} 
 ### L'encodage binary unsigned
 
 Grâce au chapitre précédent nous savons désormais ce qu'est la __notation positionnelle__, notation qui s'applique à n'importe quel base numérique dont celle qui nous importe : la base binaire.
-En l'occurrence, le __binary unsigned__ est un encodage qui représente des nombres entiers naturel en base binaire, et ce, justement par le biais de la __notation positionnelle__.
+En l'occurrence, il s'avère que le __binary unsigned__ est un encodage qui représente des nombres entiers naturel en base binaire, et ce, justement par le biais de la __notation positionnelle__.
 D'où le fait qu'il ait été fait antérieurement mention d'un lien entre l'encodage __binary unsigned__ et la __notation positionnelle__.
 
 Vous l'aurez compris, pour appréhender l'encodage __binary unsigned__ nous devons comprendre comment est-ce-que la __notation positionnelle__ représente des nombres entiers naturel en base binaire.
-Le chapitre précédent nous fait comprendre qu'en __notation positionnelle__ : tout chiffre constitutif d'un nombre entier écrit en base $N$ est le facteur d'une puissance de $N$ positive ou nulle.
+Le chapitre précédent nous fait comprendre qu'en __notation positionnelle__ : tout chiffre constitutif d'un nombre entier écrit en base $N$ est facteur d'une puissance de $N$ positive ou nulle.
 En reportant ceci à tout nombre entier naturel écrit en base $2$, nous en déduisons que l'ensemble des bits qui composent un tel nombre sont facteurs d'une puissance de $2$ positive ou nulle.
+La valeur d'un nombre entier naturel écrit en base $2$ n'est alors plus que la somme des produits entre bits et puissance.
+Voici une illustration qui montre comment est-ce-que la valeur du nombre $23$ se déduit en base binaire :
 
-// intro illu puis rappel somme des produits, ou rappel somme des produits etc...
+$$23 \ = \ 10111_2 \ = \left(1 \times 2^4 + 0 \times 2^3 + 1 \times 2^2 + 1 \times 2^1 + 1 \times 2^0\right)$$
+
+
+
 
 
 ///
