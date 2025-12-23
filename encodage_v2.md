@@ -63,6 +63,12 @@ Voici une illustration qui montre comment est-ce-que la valeur du nombre $23$ se
 
 $$23 \ = \ 10111_2 \ = \left(1 \times 2^4 + 0 \times 2^3 + 1 \times 2^2 + 1 \times 2^1 + 1 \times 2^0\right)$$
 
+De plus, rappelez-vous du système de poids dont il est le sujet dans le chapitre précédent.
+Ce dernier sert à l'indexation de tout chiffre dans tout nombre peu importe la base numérique, je vous rappelle le poids d'un chiffre constitutif d'un nombre écrit en base $N$ n'est rien dautre que l'exposant de la puissance de $N$ que multiplie ledit chiffre.
+Seulement, veuillez prendre note du fait que pour des raisons pratiques, quelques termes sont rentrés dans le langage commun de l'informaticien, ces termes font référence à des bits d'un poids précis ou ayant une particularité au sein du champ qu'il compose.
+Pour ne citer que les principaux, le terme __Least Significant Bit__ de l'acronyme __LSB__ fait référence au bit de poids le plus faible d'un champ, ou autrement dit au bit de poids $0$ d'un nombre codé en __Binary Unsigned__.
+A contrario, le terme __Most Significant Bit__ de l'acronyme __MSB__ fait référence au bit de poids le plus fort d'un champ.
+Aussi, il existe les acronymes __LSB1__ et __MSB1__ faisant respectivement référence au bit à $1$ de poids le plus faible et de poids le plus fort d'un champ.
 
 
 
