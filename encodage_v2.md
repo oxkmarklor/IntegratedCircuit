@@ -55,7 +55,7 @@ Grâce au chapitre précédent nous savons désormais ce qu'est la __notation po
 En l'occurrence, il s'avère que le __binary unsigned__ est un encodage qui représente des nombres entiers naturel en base binaire, et ce, justement par le biais de la __notation positionnelle__.
 D'où le fait qu'il ait été fait antérieurement mention d'un lien entre l'encodage __binary unsigned__ et la __notation positionnelle__.
 
-Vous l'aurez compris, pour appréhender l'encodage __binary unsigned__ nous devons comprendre comment est-ce-que la __notation positionnelle__ représente des nombres entiers naturel en base binaire.
+En toute logique, comprendre l'encodage __binary unsigned__ demande donc de comprendre comment est-ce-que la __notation positionnelle__ représente des nombres entiers naturel en base binaire.
 Le chapitre précédent nous fait comprendre qu'en __notation positionnelle__ : tout chiffre constitutif d'un nombre entier écrit en base $N$ est facteur d'une puissance de $N$ positive ou nulle.
 En reportant ceci à tout nombre entier naturel écrit en base $2$, nous en déduisons que l'ensemble des bits qui composent un tel nombre sont facteurs d'une puissance de $2$ positive ou nulle.
 La valeur d'un nombre entier naturel écrit en base $2$ n'est alors plus que la somme des produits entre bits et puissance.
