@@ -52,7 +52,7 @@ $$\left(3 \times 10_{10}^{\quad 0}\right) \gt \left(7 \times 10_{10}^{\quad -1} 
 ### L'encodage binary unsigned
 
 Grâce au chapitre précédent nous savons désormais ce qu'est la __notation positionnelle__, et qui plus est, qu'elle s'applique à n'importe quel base numérique.
-En l'occurrence, il s'avère que le __binary unsigned__ est un encodage qui représente des nombres entiers naturel en base binaire, et ce, justement par le biais de la __notation positionnelle__.
+En l'occurrence, il s'avère que le __binary unsigned__ est un encodage qui représente des nombres entiers naturel en base binaire, et ce, par le biais de la __notation positionnelle__.
 Comprendre l'encodage __binary unsigned__ demande donc de comprendre comment est-ce-que la __notation positionnelle__ représente des nombres entiers naturel en base binaire.
 
 Le chapitre précédent nous fait comprendre qu'en __notation positionnelle__ : tout chiffre constitutif d'un nombre entier écrit en base $N$ est facteur d'une puissance de $N$ positive ou nulle.
