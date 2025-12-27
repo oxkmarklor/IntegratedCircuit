@@ -62,6 +62,20 @@ Voici une illustration qui montre en __notation positionnelle__ comment s'écrit
 
 $$10111_2 \ = \left(1 \times 2^4 + 0 \times 2^3 + 1 \times 2^2 + 1 \times 2^1 + 1 \times 2^0\right)$$
 
+Au-delà, je vous rappelle qu'en __notation positionnelle__ il existe un système d'indexation par poids, ce dernier permettant l'indexation de tout chiffre dans tout nombre qu'importe la base numérique.
+Il y a dans ce système un poids qui est attribué à tout chiffre constituant un nombre écrit en base $N$, le poids d'un chiffre n'est autre que l'exposant de la puissance de $N$ dont ledit chiffre est facteur.
+En informatique ....
+
+Cependant, pour des raisons pratiques, les informaticiens emploient aussi des termes qui font référence à des bits d'un certain poids ou ayant une particularité au sein du champ qu'ils composent.
+
+Au-delà, je vous rappelle qu'en __notation positionnelle__ il existe un système d'indexation par poids, ce dernier permettant l'indexation de tout chiffre dans tout nombre qu'importe la base numérique.
+Cependant, pour des raisons pratiques, les informaticiens emploient aussi des termes qui font référence à des bits d'un certain poids ou ayant une particularité au sein du champ qu'ils composent.
+
+
+
+Pour ne citer que les principaux, le terme __Least Significant Bit__ de l'acronyme __LSB__ fait référence au bit de poids le plus faible d'un champ, tandis que le terme __Most Significant Bit__ de l'acronyme __MSB__ fait quant à lui référence au bit de poids le plus fort d'un champ.
+Aussi, il existe les acronymes __LSB1__ et __MSB1__ faisant respectivement référence au bit à $1$ de poids le plus faible et de poids le plus fort d'un champ.
+
 De plus, je vous rappelle qu'il existe un système d'indexation par poids en __notation positionnelle__, ce dernier permettant l'indexation de tout chiffre dans tout nombre qu'importe la base numérique.
 Cependant, pour des raisons pratiques, il existe également des termes qui sont rentrés dans le langage commun de l'informaticien, ces termes là font références à des bits d'un poids précis ou ayant une spécificité au sein du champ qu'ils composent.
 Pour ne citer que les principaux, le terme __Least Significant Bit__ de l'acronyme __LSB__ fait référence au bit de poids le plus faible d'un champ, tandis que le terme __Most Significant Bit__ de l'acronyme __MSB__ fait quant à lui référence au bit de poids le plus fort d'un champ.
