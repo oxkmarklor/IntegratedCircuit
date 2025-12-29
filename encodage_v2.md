@@ -58,11 +58,11 @@ Comprendre l'encodage __binary unsigned__ demande donc de comprendre comment est
 Le chapitre précédent nous fait comprendre qu'en __notation positionnelle__ : tout chiffre constitutif d'un nombre entier écrit en base $N$ est facteur d'une puissance de $N$ positive ou nulle.
 En reportant ceci à tout nombre entier naturel écrit en base $2$, nous en déduisons que l'ensemble des bits qui composent un tel nombre sont facteurs d'une puissance de $2$ positive ou nulle.
 La valeur d'un nombre entier naturel écrit en base $2$ n'est alors plus que la somme des produits entre bits et puissance.
-Par exemple, voici une illustration qui montre comment est-ce qu'en __notation positionnelle__ le nombre $23$ se déduit en base binaire :
+Par exemple, voici ci-bas une illustration qui montre comment est-ce que se déduit en __notation positionnelle__ le nombre $23$ sous la base binaire :
 
 $$10111_2 \ = \left({\color{LightGreen} 1} \times 2^4 + {\color{LightGreen} 0} \times 2^3 + {\color{LightGreen} 1} \times 2^2 + {\color{LightGreen} 1} \times 2^1 + {\color{LightGreen} 1} \times 2^0\right)$$
 
-En outre, je vous rappelle qu'en __notation positionnelle__ il existe un système d'indexation par poids, ce dernier permettant l'indexation de tout chiffre dans tout nombre qu'importe la base numérique.
+En outre, je vous rappelle qu'en __notation positionnelle__ il existe un système de poids, ce dernier permettant l'indexation de tout chiffre dans tout nombre peu importe la base numérique.
 Il y a dans ce système un poids qui est attribué à tout chiffre constituant un nombre écrit en base $N$, le poids d'un chiffre n'est alors que l'exposant de la puissance de $N$ dont ledit chiffre est facteur.
 Néanmoins, il existe en base binaire certains termes qui font référence à des bits d'un poids précis ou ayant une certaine particularité dans le nombre qu'ils composent.
 Pour ne citer que les principaux, le terme __Least Significant Bit__ de l'acronyme __LSB__ fait référence au bit de poids le plus faible d'un nombre, tandis que le terme __Most Significant Bit__ de l'acronyme __MSB__ fait quant à lui référence au bit de poids le plus fort d'un nombre.
@@ -103,7 +103,7 @@ Enfin, le nombre binaire sous-jacent a pour valeur la somme des produits entre b
 //
 
 Pour y voir plus clair, prenons le nombre entier naturel $23$ comme exemple, nombre qui sous l'impulsion de la __notation positionnelle__ s'écrit $10111_2$ en base binaire.
-Voici une illustration qui montre comment est-ce-que la valeur de ce nombre est réelement calculée :
+Voici une illustration qui montre comment est-ce que la valeur de ce nombre est réelement calculée :
 
 $$10111_2 \ = \left(1 \times 2^4 + 0 \times 2^3 + 1 \times 2^2 + 1 \times 2^1 + 1 \times 2^0\right)$$
 
