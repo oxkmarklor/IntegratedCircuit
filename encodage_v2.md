@@ -58,7 +58,7 @@ Comprendre l'encodage __binary unsigned__ demande donc de comprendre comment est
 Le chapitre précédent nous fait comprendre qu'en __notation positionnelle__ : tout chiffre constitutif d'un nombre entier écrit en base $N$ est facteur d'une puissance de $N$ positive ou nulle.
 En reportant ceci à tout nombre entier naturel écrit en base $2$, nous en déduisons que l'ensemble des bits qui composent un tel nombre sont facteurs d'une puissance de $2$ positive ou nulle.
 La valeur d'un nombre entier naturel écrit en base $2$ n'est alors plus que la somme des produits entre bits et puissance.
-Par exemple, voici une illustration qui montre comment est-ce que s'écrit en __notation positionnelle__ le nombre $23$ sous la base binaire :
+Voici une illustration qui montre comment est-ce que le nombre $23$, sous l'impulsion de la __notation positionnelle__, s'écrit en base binaire :
 
 $$10111_2 \ = \left({\color{LightGreen} 1} \times 2^4 + {\color{LightGreen} 0} \times 2^3 + {\color{LightGreen} 1} \times 2^2 + {\color{LightGreen} 1} \times 2^1 + {\color{LightGreen} 1} \times 2^0\right)$$
 
@@ -68,72 +68,7 @@ En plus de ce système de poids, il existe en base binaire des termes qui font r
 Parmis les plus connus, le terme __Least Significant Bit__ de l'acronyme __LSB__ fait référence au bit de poids le plus faible d'un nombre, tandis que le terme __Most Significant Bit__ de l'acronyme __MSB__ fait référence au bit de poids le plus fort d'un nombre.
 Dans la lignée des termes précédent, les acronymes __LSB1__ et __MSB1__ font respectivement référence au bit à $1$ de poids le plus faible ainsi que de poids le plus fort d'un nombre.
 
-
-///
-
-Vous l'aurez compris, comprendre l'encodage __binary unsigned__ demande de comprendre le fonctionnement de la __notation positionnelle__ en base binaire, ce qui s'annonce relativement simple car nous nous contenterons de faire référence au chapitre précédent.
-En l'occurrence, ledit chapitre mentionne qu'en __notation positionnelle__ : tout chiffre constitutif d'un nombre écrit en base $N$ est le facteur d'une puissance de $N$, ce qui insinue dans le cas d'un nombre binaire, écrit en base $2$, que tout bit constituant le nombre est facteur d'une puissance de $2$.
-Enfin, le nombre binaire sous-jacent a pour valeur la somme des produits entre bits et puissances.
-
-//
-
-Pour y voir plus clair, prenons le nombre entier naturel $23$ comme exemple, nombre qui sous l'impulsion de la __notation positionnelle__ s'écrit $10111_2$ en base binaire.
-Voici une illustration qui montre comment est-ce que la valeur de ce nombre est réelement calculée :
-
-$$10111_2 \ = \left(1 \times 2^4 + 0 \times 2^3 + 1 \times 2^2 + 1 \times 2^1 + 1 \times 2^0\right)$$
-
-Pour commencer, remarquons que l'ensemble des bits du nombre multiplient une puissance de $2$, qui plus est, une puissance positive ou nul à l'image des puissances que multiplie les chiffres de la partie entière du nombre décimale $11.75$ pris pour exemple dans le chapitre précédent.
-Autrement dit de façon plus général, tout chiffre constitutif d'un nombre entier relatif écrit en base $N$ est le facteur d'une puissance positive ou nul de $N$.
-Il est simple de comprendre pourquoi, les puissances de $N$ négatives interprètent des nombres fractionnaire compris dans l'intervalle $\left]0;1\right[$, ce qui explique le fait que les chiffres constituant tout nombre entier ne multiplient que des puissances positives ou nul.
-
-
-//
-
-Pour commencer, remarquons que l'ensemble des bits du nombre multiplient une puissance de $2$, qui plus est, une puissance positive ou nul.
-Gardons à l'esprit que le nombre sous-jacent est un entier, les bits qui le compose ne peuvent pas être facteur d'une puissance de $2$ négative car ces dernières interprètent des nombres fractionnaire compris dans l'intervalle $\left]0;1\right[$.
-Cependant, ceci n'est pas propre à la base binaire, faisons un rapide aparté pour parler du cas du chapitre précédent "_La notation positionnelle_".
-Il s'avère que ledit chapitre utilise le nombre décimale $11.75$ pour expliquer le fonctionnement de la __notation positionnelle__ en base décimale, ce dernier mentionne entre autre le fait que les chiffres de la partie entière dudit nombre multiplient des puissances de $10_{10}$ positives ou nul.
-
-
-
-
-
-// autre exemple avec ref
-
-Faisons un rapide aparté pour revenir au chapitre "_La notation positionnelle_", ce qui nous intéresse c'est plus particulièrement le nombre décimale $11.75$ ayant été choisit pour expliquer le fonctionnement de la __notation positionnelle__ en base $10_{10}$.
-Dans ce chapitre il est expliqué que les chiffres de la partie entière dudit nombre multiplient des puissances de $10_{10}$ qui sont exclusivement positives ou nul.
-
-
-
-// après
-
-A cela, ajoutons que la valeur des puissances de $10_{10}$ multipliées par deux chiffres successifs est séparé d'un facteur $10_{10}$ ; pour généralisé, la valeur des puissances de $N$ multipliées par deux chiffres successifs constituant un nombre écrit en base $N$, est alors séparée d'un facteur $N$.
-
-
-//
-
-Ce qui suit va expliquer le fonctionnement de la __notation positionnelle__ en base binaire, pour ce faire nous allons entre autre prendre le nombre entier naturel $11$ pour exemple ; ce nombre faisant référence à la partie entière du nombre $11.75$ utilisé comme exemple dans le chapitre précédent.
-
-Il va être fait plusieurs fois référence au chapitre précédent dans ce qui suit parce que nous allons expliquer le fonctionnement de la __notation positionnelle__ en base binaire.
-
-
-// comment fonctionne la notation positionnelle en base binaire?
-
-
-//
-
-A l'instar de tout encodage, le __binary unsigned__ permet de représenter des nombres, qui plus est, des nombres entiers naturels.
-L'encodage desdits nombres s'effectue en __notation positionnelle__, d'où le fait qu'il ait été fait antérieurement mention d'un lien entre cet encodage et la __notation positionnelle__, nous y reviendrons.
-Par ailleurs, nous devons le nom __binary unsigned__ de cet encodage, traduit en français par __binaire non signé__, au fait que les nombres pouvant être codés le sont sans leur signe.
-
-Comme nous l'avons vu avec le chapitre précédent, la __notation positionnelle__ s'applique à toutes les bases numériques dont la base binaire.
-Il est dit dans ce chapitre que les chiffres constitutifs d'un nombre écrit sous une base $N$ en __notation positionnelle__ sont facteurs d'une puissance de $N$, ce qui veut dire que tout bit d'un nombre codé en __binary unsigned__ est facteur d'une puissance de $2$.
-Observons comment est-ce-qu'il est possible de coder la partie entière $11$ en __binary unsigned__ du nombre $11.75$ pris pour exemple dans le chapitre qui précède.
-
-// expliquer d'abord le fonctionnement de la notation positionnelle en binaire pour la représentation du nombre $11$, puis faire le "lien" avec le binary unsigned?
-
-
-//
+// parler du cas de la propriété de la notation positionnelle qui s'applique également au binary unsigned.
 
 ## L'encodage Binary Unsigned (à faire)
 
