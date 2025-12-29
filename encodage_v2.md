@@ -25,7 +25,7 @@ Plus bas, nous verrons que ces puissances là peuvent être positives, nulles, o
 Enfin, le nombre sous-jacent a pour valeur la somme des produits entre chiffres et puissances.
 Voici une illustration qui montre comment est-ce-que la valeur du nombre $23.75$ se déduit en base décimale :
 
-$$23.75 \ = \left({\color{LightGreen} 2} \times 10_{10}^{\quad 1} + {\color{LightGreen} 3} \times 10_{10}^{\quad 0} + {\color{LightGreen} 7} \times 10_{10}^{\quad -1} + {\color{LightGreen} 5} \times 10_{10}^{\quad -2}\right)$$
+$$23.75 \ = \left(\underline{2} \times 10_{10}^{\quad 1} + \underline{3} \times 10_{10}^{\quad 0} + \underline{7} \times 10_{10}^{\quad -1} + \underline{5} \times 10_{10}^{\quad -2}\right)$$
 
 Notez que la syntaxe suivante $X_{10}$ spécifie la base numérique dans laquelle le nombre $X$ est écrit, $10$ pour la base décimale et $2$ pour la base binaire.
 Cette syntaxe ne sera utilisée que lorsqu'il y aura une ambiguïté dans l'interprétation d'un nombre composé uniquement de $0$ et de $1$, permettant ainsi de dissocier les nombres écrits en base décimale de ceux écrits en base binaire.
@@ -60,13 +60,13 @@ En reportant ceci à tout nombre entier naturel écrit en base $2$, nous en déd
 La valeur d'un nombre entier naturel écrit en base $2$ n'est alors plus que la somme des produits entre bits et puissance.
 Voici une illustration qui montre comment est-ce que le nombre $23$, sous l'impulsion de la __notation positionnelle__, s'écrit en base binaire :
 
-$$10111_2 \ = \left({\color{LightGreen} 1} \times 2^4 + {\color{LightGreen} 0} \times 2^3 + {\color{LightGreen} 1} \times 2^2 + {\color{LightGreen} 1} \times 2^1 + {\color{LightGreen} 1} \times 2^0\right)$$
+$$10111_2 \ = \left(\underline{1} \times 2^4 + \underline{0} \times 2^3 + \underline{1} \times 2^2 + \underline{1} \times 2^1 + \underline{1} \times 2^0\right)$$
 
 En outre, je vous rappelle qu'en __notation positionnelle__ il existe un système de poids, ce dernier permettant l'indexation de tout chiffre dans tout nombre, peu importe la base numérique.
 Il y a dans ce système un poids qui est attribué à tout chiffre constituant un nombre écrit en base $N$, dans un tel nombre le poids d'un chiffre n'est autre que l'exposant de la puissance de $N$ dont ledit chiffre est facteur.
-En plus de ce système de poids, il existe en base binaire des termes qui font référence à certains des bits qui composent un nombre.
-Parmis les plus connus, le terme __Least Significant Bit__ de l'acronyme __LSB__ fait référence au bit de poids le plus faible d'un nombre, tandis que le terme __Most Significant Bit__ de l'acronyme __MSB__ fait référence au bit de poids le plus fort d'un nombre.
-Dans la lignée des termes précédent, les acronymes __LSB1__ et __MSB1__ font respectivement référence au bit à $1$ de poids le plus faible ainsi que de poids le plus fort d'un nombre.
+En complément du système de poids, il existe en base binaire des termes qui font référence à certains des bits constituant un nombre.
+Parmis les plus connus d'entre eux figure le terme __Least Significant Bit__ (de l'acronyme __LSB__) qui fait référence au bit de poids le plus faible d'un nombre, mais aussi le terme __Most Significant Bit__ (de l'acronyme __MSB__) qui fait quant à lui référence au bit de poids le plus fort d'un nombre.
+Dans la lignée des termes précédent, l'acronyme __LSB1__ fait référence au bit à $1$ de poids le plus faible d'un nombre, tandis que l'acronyme __MSB1__ fait référence au bit à $1$ de poids le plus fort.
 
 // parler du cas de la propriété de la notation positionnelle qui s'applique également au binary unsigned.
 
