@@ -65,7 +65,7 @@ $$10111_2 \ = \left({\color{LightGreen} 1} \times 2^4 + {\color{LightGreen} 0} \
 En outre, je vous rappelle qu'en __notation positionnelle__ il existe un système de poids, ce dernier permettant l'indexation de tout chiffre dans tout nombre peu importe la base numérique.
 Il y a dans ce système un poids qui est attribué à tout chiffre constituant un nombre écrit en base $N$, le poids d'un chiffre n'est alors que l'exposant de la puissance de $N$ dont ledit chiffre est facteur.
 En plus de ce système de poids, il existe en base binaire des termes qui font référence à certains des bits qui composent un nombre.
-Parmis les principaux termes figure l'acronyme __LSB__ de __Least Significant Bit__ qui fait référence au bit de poids le plus faible d'un nombre, tandis que l'acronyme __MSB__ du terme __Most Significant Bit__ fait référence au bit de poids le plus fort d'un nombre.
+Parmis les termes les plus connus figure l'acronyme __LSB__ de __Least Significant Bit__ qui fait référence au bit de poids le plus faible d'un nombre, tandis que l'acronyme __MSB__ du terme __Most Significant Bit__ fait référence au bit de poids le plus fort d'un nombre.
 Dans la lignée de ces termes, les acronymes __LSB1__ et __MSB1__ font respectivement référence au bit à $1$ de poids le plus faible et de poids le plus fort d'un nombre.
 
 
