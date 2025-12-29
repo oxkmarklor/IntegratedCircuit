@@ -58,40 +58,15 @@ Comprendre l'encodage __binary unsigned__ demande donc de comprendre comment est
 Le chapitre précédent nous fait comprendre qu'en __notation positionnelle__ : tout chiffre constitutif d'un nombre entier écrit en base $N$ est facteur d'une puissance de $N$ positive ou nulle.
 En reportant ceci à tout nombre entier naturel écrit en base $2$, nous en déduisons que l'ensemble des bits qui composent un tel nombre sont facteurs d'une puissance de $2$ positive ou nulle.
 La valeur d'un nombre entier naturel écrit en base $2$ n'est alors plus que la somme des produits entre bits et puissance.
-Par exemple, voici ci-bas une illustration qui montre comment est-ce que se déduit en __notation positionnelle__ le nombre $23$ sous la base binaire :
+Par exemple, voici une illustration qui montre comment est-ce que s'écrit en __notation positionnelle__ le nombre $23$ sous la base binaire :
 
 $$10111_2 \ = \left({\color{LightGreen} 1} \times 2^4 + {\color{LightGreen} 0} \times 2^3 + {\color{LightGreen} 1} \times 2^2 + {\color{LightGreen} 1} \times 2^1 + {\color{LightGreen} 1} \times 2^0\right)$$
 
 En outre, je vous rappelle qu'en __notation positionnelle__ il existe un système de poids, ce dernier permettant l'indexation de tout chiffre dans tout nombre peu importe la base numérique.
 Il y a dans ce système un poids qui est attribué à tout chiffre constituant un nombre écrit en base $N$, le poids d'un chiffre n'est alors que l'exposant de la puissance de $N$ dont ledit chiffre est facteur.
-Néanmoins, il existe en base binaire certains termes qui font référence à des bits d'un poids précis ou ayant une certaine particularité dans le nombre qu'ils composent.
-Pour ne citer que les principaux, le terme __Least Significant Bit__ de l'acronyme __LSB__ fait référence au bit de poids le plus faible d'un nombre, tandis que le terme __Most Significant Bit__ de l'acronyme __MSB__ fait quant à lui référence au bit de poids le plus fort d'un nombre.
-En plus de ceux-ci, il existe également les acronymes __LSB1__ et __MSB1__ qui font respectivement référence au bit à $1$ de poids le plus faible et de poids le plus fort d'un nombre.
-
-
-
-
-Pour ne citer que les principaux, le terme __Least Significant Bit__ de l'acronyme __LSB__ fait référence au bit de poids le plus faible d'un champ, tandis que le terme __Most Significant Bit__ de l'acronyme __MSB__ fait quant à lui référence au bit de poids le plus fort d'un champ.
-Aussi, il existe les acronymes __LSB1__ et __MSB1__ faisant respectivement référence au bit à $1$ de poids le plus faible et de poids le plus fort d'un champ.
-
-De plus, je vous rappelle qu'il existe un système d'indexation par poids en __notation positionnelle__, ce dernier permettant l'indexation de tout chiffre dans tout nombre qu'importe la base numérique.
-Cependant, pour des raisons pratiques, il existe également des termes qui sont rentrés dans le langage commun de l'informaticien, ces termes là font références à des bits d'un poids précis ou ayant une spécificité au sein du champ qu'ils composent.
-Pour ne citer que les principaux, le terme __Least Significant Bit__ de l'acronyme __LSB__ fait référence au bit de poids le plus faible d'un champ, tandis que le terme __Most Significant Bit__ de l'acronyme __MSB__ fait quant à lui référence au bit de poids le plus fort d'un champ.
-Aussi, il existe les acronymes __LSB1__ et __MSB1__ faisant respectivement référence au bit à $1$ de poids le plus faible et de poids le plus fort d'un champ.
-
-
-De plus, je vous rappelle qu'il existe un système d'indexation par poids en __notation positionnelle__, ce dernier permettant l'indexation de tout chiffre dans tout nombre qu'importe la base numérique.
-Plus précisément, il s'avère que le poids d'un chiffre constitutif d'un nombre écrit en base $N$ n'est autre que l'exposant de la puissance de $N$ dont ledit chiffre est facteur.
-Cependant, pour des raisons pratiques, il existe également des termes qui sont rentrés dans le langage commun de l'informaticien ; ces termes là font référence à des bits d'un poids précis ou ayant une spécificité au sein du champ qu'il compose.
-
-De plus, rappelez-vous du système de poids dont il est le sujet dans le chapitre précédent.
-Ce dernier sert à l'indexation de tout chiffre dans tout nombre peu importe la base numérique, je vous rappelle le poids d'un chiffre constitutif d'un nombre écrit en base $N$ n'est rien dautre que l'exposant de la puissance de $N$ que multiplie ledit chiffre.
-Seulement, veuillez prendre note du fait que pour des raisons pratiques, quelques termes sont rentrés dans le langage commun de l'informaticien, ces termes font référence à des bits d'un poids précis ou ayant une particularité au sein du champ qu'il compose.
-Pour ne citer que les principaux, le terme __Least Significant Bit__ de l'acronyme __LSB__ fait référence au bit de poids le plus faible d'un champ, ou autrement dit au bit de poids $0$ d'un nombre codé en __Binary Unsigned__.
-A contrario, le terme __Most Significant Bit__ de l'acronyme __MSB__ fait référence au bit de poids le plus fort d'un champ.
-Aussi, il existe les acronymes __LSB1__ et __MSB1__ faisant respectivement référence au bit à $1$ de poids le plus faible et de poids le plus fort d'un champ.
-
-
+En plus de ce système de poids, il existe en base binaire des termes qui font référence à certains des bits qui composent un nombre.
+Parmis les principaux termes figure l'acronyme __LSB__ de __Least Significant Bit__ qui fait référence au bit de poids le plus faible d'un nombre, tandis que l'acronyme __MSB__ du terme __Most Significant Bit__ fait référence au bit de poids le plus fort d'un nombre.
+Dans la lignée de ces termes, les acronymes __LSB1__ et __MSB1__ font respectivement référence au bit à $1$ de poids le plus faible et de poids le plus fort d'un nombre.
 
 
 ///
