@@ -68,29 +68,8 @@ En complément du système de poids, il existe en base binaire des termes qui fo
 Parmis les plus connus d'entre eux figure le terme __Least Significant Bit__ (de l'acronyme __LSB__) qui fait référence au bit de poids le plus faible d'un nombre, mais aussi le terme __Most Significant Bit__ (de l'acronyme __MSB__) qui fait quant à lui référence au bit de poids le plus fort d'un nombre.
 Dans la lignée des termes précédent, l'acronyme __LSB1__ fait référence au bit à $1$ de poids le plus faible d'un nombre, tandis que l'acronyme __MSB1__ fait référence au bit à $1$ de poids le plus fort.
 
-Enfin, n'oublions pas que le chapitre précédent parle de l'une des propriétés de la __notation positionnelle__, une propriété qui s'applique à l'ensemble des bases numériques, dont la base binaire.
-De facto, ladite propriété s'applique aux nombres entiers naturel (en base binaire) que l'encodage __binary unsigned__ représente par le biais de la __notation positionnelle__.
-
-
-Ce qui nous permet d'en déduire que l'encodage __binary unsigned__ représente des nombres entiers naturel en base binaire, par le biais de la __notation positionnelle__, auxquels s'applique ladite propriété.
-
-Ce qui nous permet d'en déduire que les nombres entiers naturel en base binaire que l'encodage __binary unsigned__ représente par le biais de la __notation positionnelle__, peuvent appliquer ladite propriété.
-
-De facto, ladite propriété s'applique aux nombres entiers naturel (en base binaire) que l'encodage __binary unsigned__ représente par le biais de la __notation positionnelle__.
-
-
-De facto, sachant que l'encodage __binary unsigned__ représente des nombres entiers naturel en base binaire par le biais de la __notation positionnelle__, nous en déduisons 
-
-
-De fait, nous en déduisons cette propriété s'applique (entre autre) aux nombres entiers naturel codés en __binary unsigned__, car rappelons-le, cet encodage s'appuie sur la __notation positionnelle__.
-
-
-
-De fait, cette propriété s'applique (entre autre) aux nombres entiers naturel écrit en base binaire, et donc aux nombres codés en __binary unsigned__.
-
-
-
-
+Enfin, n'oublions pas que l'une des propriétés importantes de la __notation positionnelle__ s'applique à n'importe quel base numérique, ce sujet ayant été abordé dans le chapitre précédent.
+Cela nous permet d'en déduire que ladite propriété s'applique à l'encodage __binary unsigned__, car ce dernier encodage représente des nombres entiers naturel en base binaire par le biais de la __notation positionnelle__.
 
 
 Pour finir, souvenez-vous du fait que la __notation positionnelle__ a une propriété qui s'applique à toutes les bases numériques dont la base binaire, ce qui insinue que ladite propriété s'applique également à l'encodage __binary unsigned__.
