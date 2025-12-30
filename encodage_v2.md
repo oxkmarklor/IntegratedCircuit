@@ -68,12 +68,9 @@ En complément du système de poids, il existe en base binaire des termes qui fo
 Parmis les plus connus d'entre eux figure le terme __Least Significant Bit__ (de l'acronyme __LSB__) qui fait référence au bit de poids le plus faible d'un nombre, mais aussi le terme __Most Significant Bit__ (de l'acronyme __MSB__) qui fait quant à lui référence au bit de poids le plus fort d'un nombre.
 Dans la lignée des termes précédent, l'acronyme __LSB1__ fait référence au bit à $1$ de poids le plus faible d'un nombre, tandis que l'acronyme __MSB1__ fait référence au bit à $1$ de poids le plus fort.
 
-Enfin, n'oublions pas que l'une des propriétés de la __notation positionnelle__ (dont nous avons déjà parlé dans le chapitre précédent) s'applique à n'importe quel base numérique.
+Enfin, n'oublions pas que l'une des propriétés de la __notation positionnelle__ (propriété dont nous avons déjà parlé précédemment) s'applique à n'importe quel base numérique.
 Par conséquent, nous en déduisons que ladite propriété s'applique aussi à l'encodage __binary unsigned__, car ce dernier encodage représente des nombres entiers naturel en base binaire par le biais de la __notation positionnelle__.
 
-
-Enfin, n'oublions pas que l'une des propriétés importantes de la __notation positionnelle__ s'applique à n'importe quel base numérique, ce sujet ayant été abordé dans le chapitre précédent.
-Par conséquent, nous en déduisons que ladite propriété s'applique à l'encodage __binary unsigned__, car ce dernier encodage représente des nombres entiers naturel en base binaire par le biais de la __notation positionnelle__.
 
 
 Pour finir, souvenez-vous du fait que la __notation positionnelle__ a une propriété qui s'applique à toutes les bases numériques dont la base binaire, ce qui insinue que ladite propriété s'applique également à l'encodage __binary unsigned__.
