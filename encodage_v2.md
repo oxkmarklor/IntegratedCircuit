@@ -68,13 +68,15 @@ En complément du système de poids, il existe en base binaire des termes qui fo
 Parmis les plus connus d'entre eux figure le terme __Least Significant Bit__ (de l'acronyme __LSB__) qui fait référence au bit de poids le plus faible d'un nombre, mais aussi le terme __Most Significant Bit__ (de l'acronyme __MSB__) qui fait quant à lui référence au bit de poids le plus fort d'un nombre.
 Dans la lignée des termes précédent, l'acronyme __LSB1__ fait référence au bit à $1$ de poids le plus faible d'un nombre, tandis que l'acronyme __MSB1__ fait référence au bit à $1$ de poids le plus fort.
 
-Enfin, n'oublions pas que l'une des propriétés de la __notation positionnelle__ (propriété dont nous avons déjà parlé précédemment) s'applique à n'importe quel base numérique.
-Cela nous permet d'en déduire que ladite propriété s'applique aussi aux nombres __binary unsigned__, car je vous rappelle que cet encodage représente des nombres entiers naturel en base binaire par le biais de la __notation positionnelle__.
-Appliqué à la base binaire, cette propriété nous dit que dans tout nombre binaire, et entre autre tout nombre entier naturel écrit en base $2$ : la valeur d'un bit à $1$ de poids $i$ est strictement supérieur à la somme des valeurs des bits de poids inférieur à $i$. 
 
 Enfin, n'oublions pas que l'une des propriétés de la __notation positionnelle__ (propriété dont nous avons déjà parlé précédemment) s'applique à n'importe quel base numérique.
 Cela nous permet d'en déduire que ladite propriété s'applique aussi aux nombres __binary unsigned__, car je vous rappelle que cet encodage représente des nombres entiers naturel en base binaire par le biais de la __notation positionnelle__.
-Cette propriété appliquée à la base binaire nous dit que dans tout nombre binaire, et entre autre, tout nombre entier naturel : la valeur d'un bit à $1$ de poids $i$ est strictement supérieur à la somme des valeurs des bits de poids inférieur à $i$.
+Appliqué à la base binaire, cette propriété nous dit que dans tout nombre binaire, et entre autre, dans tout nombre __binary unsigned__ (tout entier naturel écrit en base $2$) : la valeur d'un bit à $1$ de poids $i$ est strictement supérieur à la somme des valeurs des bits de poids inférieur à $i$. 
+
+Enfin, n'oublions pas que l'une des propriétés de la __notation positionnelle__ (propriété dont nous avons déjà parlé précédemment) s'applique à n'importe quel base numérique.
+Cela nous permet d'en déduire que ladite propriété s'applique aussi aux nombres __binary unsigned__, car je vous rappelle que cet encodage représente des nombres entiers naturel en base binaire par le biais de la __notation positionnelle__.
+Appliqué à la base binaire, cette propriété nous dit que dans tout nombre binaire, et entre autre, dans tout nombre entier naturel écrit en base $2$ : la valeur d'un bit à $1$ de poids $i$ est strictement supérieur à la somme des valeurs des bits de poids inférieur à $i$. 
+
 
 
 
