@@ -72,9 +72,10 @@ Enfin, n'oublions pas que la __notation positionnelle__ a une propriété dont n
 Il s'avère que cette propriété s'applique à l'encodage __binary unsigned__, car je vous rappelle que c'est par le biais de la __notation positionnelle__ que cet encodage représente des nombres entiers naturel en base binaire.
 Lorsqu'elle est appliquée à la base binaire, cette propriété nous dit (entre autre) que dans tout nombre entiers naturel binaire, ou autrement dit dans tout nombre __binary unsigned__ : la valeur d'un bit à $1$ de poids $i$ est strictement supérieur à la somme des valeurs des bits de poids inférieur à $i$.
 
-Par conséquent, en suivant ladite propriété, nous en déduisons que la valeur du bit de poids $4$ du nombre entier naturel binaire $\underline{1}0111_2$ est strictement supérieur à la somme des valeurs des bits de poids inférieur à $4$ :
+Selon cette propriété, la valeur du bit à $1$ de poids $4$ du nombre entier naturel binaire $10111_2$ est strictement supérieur à la somme des valeurs des bits de poids inférieur à $4$, ce qui se vérifie :
 
-$$\left(\underline{1} \times 2^4\right) \gt \left(0 \times 2^3 + 1 \times 2^2 + 1 \times 2^1 + 1 \times 2^0\right)$$
+$$\left(1 \times 2^4\right) \gt \left(0 \times 2^3 + 1 \times 2^2 + 1 \times 2^1 + 1 \times 2^0\right)$$
+
 
 
 Pour finir, souvenez-vous du fait que la __notation positionnelle__ a une propriété qui s'applique à toutes les bases numériques dont la base binaire, ce qui insinue que ladite propriété s'applique également à l'encodage __binary unsigned__.
