@@ -76,17 +76,21 @@ Selon cette propriété, la valeur du bit à $1$ de poids $4$ du nombre entier n
 
 $$\left(1 \times 2^4\right) \gt \left(0 \times 2^3 + 1 \times 2^2 + 1 \times 2^1 + 1 \times 2^0\right)$$
 
-Je ne peux que vous conseillez de relire tout ou partie du chapitre précédent si, à ce stade, vous avez du mal à comprendre la propriété en question, car les explications du chapitre dernier sont volontairement plus détaillés.
+A ce stade, si vous avez du mal à comprendre cette section, je vous conseille de relire tout ou partie du précédent chapitre qui rentre plus dans le détails sur certains sujets, dont celui de ladite propriété.
 
-Pour finir, souvenez-vous du fait que la __notation positionnelle__ a une propriété qui s'applique à toutes les bases numériques dont la base binaire, ce qui insinue que ladite propriété s'applique également à l'encodage __binary unsigned__.
-En l'occurrence, appliqué à la base binaire cette propriété dit (entre autre) que dans un nombre entier naturel écrit en base $2$ : la valeur d'un bit à $1$ de poids $i$ est strictement supérieur à la somme des valeurs des bits de poids inférieur à $i$.
-Dans un premier temps je vous redirige vers le chapitre précédent si vous souhaitez plus de détails, secondement, je vous invite à vérifier cette propriété par le biais du nombre $23$ utilisé comme exemple plus haut.
-Prenons pour exemple le bit à $1$ de poids $4$ de ce nombre, grâce à ladite propriété nous en déduisons la chose suivante :
-
-$$\left(1 \times 2^4\right) \gt \left(0 \times 2^3 + 1 \times 2^2 + 1 \times 2^1 + 1 \times 2^0\right)$$
+Terminons cette section par un petit point de culture général.
+Le nom __binary unsigned__ de l'encodage à l'étude dans cette section (__binaire non signé__ en français), vient du fait que cet encodage ne permette pas la représentation des signes $\pm$.
+Cela explique pourquoi ledit encodage ne représente que des nombres entiers naturel, et non relatif.
 
 
-// dire pourquoi est-ce que "binary unsigned" = "binaire non signé" sous la forme d'une anecdote qui commence par quelque chose comme "Par ailleurs, pour la culture général sachez que ..."
+La plupart du temps, les nombres entiers relatif utilisent quant à eux l'encodage en complément à deux, dont nous ne parlerons pas dans ce document.
+
+
+
+
+Terminons par un petit point de culture général.
+Le nom de l'encodage __binary unsigned__, traduit en français par __binaire non signé__, vient du fait que cet encodage ne représente pas de signe $\pm$ dans le codage des nombres.
+Cela a pour effet de rendre implicitement positif ou nulle l'ensemble des nombres que ledit encodage est capable de représenter, ces nombres sont alors "non signés" ; les nombres "signés" utilisent la plupart du temps un encodage en complément à deux.
 
 ## L'encodage Binary Unsigned (à faire)
 
