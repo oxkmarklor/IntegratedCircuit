@@ -72,6 +72,8 @@ Enfin, n'oublions pas que la __notation positionnelle__ a une propriété dont n
 Il s'avère que cette propriété s'applique à l'encodage __binary unsigned__, car je vous rappelle que c'est par le biais de la __notation positionnelle__ que cet encodage représente des nombres entiers naturel en base binaire.
 Lorsqu'elle est appliquée à la base binaire, cette propriété nous dit (entre autre) que dans tout nombre entiers naturel binaire, ou autrement dit dans tout nombre __binary unsigned__ : la valeur d'un bit à $1$ de poids $i$ est strictement supérieur à la somme des valeurs des bits de poids inférieur à $i$.
 
+
+
 Pour finir, souvenez-vous du fait que la __notation positionnelle__ a une propriété qui s'applique à toutes les bases numériques dont la base binaire, ce qui insinue que ladite propriété s'applique également à l'encodage __binary unsigned__.
 En l'occurrence, appliqué à la base binaire cette propriété dit (entre autre) que dans un nombre entier naturel écrit en base $2$ : la valeur d'un bit à $1$ de poids $i$ est strictement supérieur à la somme des valeurs des bits de poids inférieur à $i$.
 Dans un premier temps je vous redirige vers le chapitre précédent si vous souhaitez plus de détails, secondement, je vous invite à vérifier cette propriété par le biais du nombre $23$ utilisé comme exemple plus haut.
