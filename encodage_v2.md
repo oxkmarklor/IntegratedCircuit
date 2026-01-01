@@ -76,7 +76,7 @@ Selon cette propriété, la valeur du bit à $1$ de poids $4$ du nombre entier n
 
 $$\left(1 \times 2^4\right) \gt \left(0 \times 2^3 + 1 \times 2^2 + 1 \times 2^1 + 1 \times 2^0\right)$$
 
-
+Je ne peux que vous conseillez de relire tout ou partie du chapitre précédent si, à ce stade, vous avez du mal à comprendre la propriété en question, car les explications du chapitre dernier sont volontairement plus détaillés.
 
 Pour finir, souvenez-vous du fait que la __notation positionnelle__ a une propriété qui s'applique à toutes les bases numériques dont la base binaire, ce qui insinue que ladite propriété s'applique également à l'encodage __binary unsigned__.
 En l'occurrence, appliqué à la base binaire cette propriété dit (entre autre) que dans un nombre entier naturel écrit en base $2$ : la valeur d'un bit à $1$ de poids $i$ est strictement supérieur à la somme des valeurs des bits de poids inférieur à $i$.
@@ -85,7 +85,6 @@ Prenons pour exemple le bit à $1$ de poids $4$ de ce nombre, grâce à ladite p
 
 $$\left(1 \times 2^4\right) \gt \left(0 \times 2^3 + 1 \times 2^2 + 1 \times 2^1 + 1 \times 2^0\right)$$
 
-// parler du cas de la propriété de la notation positionnelle qui s'applique également au binary unsigned.
 
 // dire pourquoi est-ce que "binary unsigned" = "binaire non signé" sous la forme d'une anecdote qui commence par quelque chose comme "Par ailleurs, pour la culture général sachez que ..."
 
