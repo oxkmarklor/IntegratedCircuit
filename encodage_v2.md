@@ -79,18 +79,9 @@ $$\left(1 \times 2^4\right) \gt \left(0 \times 2^3 + 1 \times 2^2 + 1 \times 2^1
 A ce stade, si vous avez du mal à comprendre cette section, je vous conseille de relire tout ou partie du précédent chapitre qui rentre plus dans le détails sur certains sujets, dont celui de ladite propriété.
 
 Terminons cette section par un petit point de culture général.
-Le nom __binary unsigned__ de l'encodage à l'étude dans cette section (__binaire non signé__ en français), vient du fait que cet encodage ne permette pas la représentation des signes $\pm$.
-Cela explique pourquoi ledit encodage ne représente que des nombres entiers naturel, et non relatif.
-
-
-La plupart du temps, les nombres entiers relatif utilisent quant à eux l'encodage en complément à deux, dont nous ne parlerons pas dans ce document.
-
-
-
-
-Terminons par un petit point de culture général.
-Le nom de l'encodage __binary unsigned__, traduit en français par __binaire non signé__, vient du fait que cet encodage ne représente pas de signe $\pm$ dans le codage des nombres.
-Cela a pour effet de rendre implicitement positif ou nulle l'ensemble des nombres que ledit encodage est capable de représenter, ces nombres sont alors "non signés" ; les nombres "signés" utilisent la plupart du temps un encodage en complément à deux.
+Le nom __binary unsigned__ de l'encodage à l'étude dans cette section (__binaire non signé__ en français), vient du fait que ledit encodage ne permette pas la représentation des signes $\pm$.
+Cette absence de signe explique pourquoi est-ce que cet encodage ne représente que des nombres entiers naturel, et non relatif.
+A propos des nombres relatifs, ces derniers utilisent la plupart du temps un encodage en complément à deux, dont nous ne parlerons pas dans ce document.
 
 ## L'encodage Binary Unsigned (à faire)
 
