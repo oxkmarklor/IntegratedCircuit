@@ -1,16 +1,11 @@
 # Les encodages
 
-Commençons par la base.
+Commençons par la base : les nombres sont les seuls choses que manipule un ordinateur.
 
-Les nombres sont la seule chose que comprend un ordinateur, ce qui explique pourquoi tout traitement informatique n'est qu'une suite de calcul, mais aussi la nécessité de numeriser toute information devant être inscrite dans la mémoire d'un système.
+Cela explique pourquoi tout traitement informatique n'est qu'une suite de calcul plus ou moins complexe, ainsi que la nécessité de numeriser toute information (son, image, document) devant être inscrite dans la mémoire d'un ordinateur.
+Il s'avère que pour des raisons de sécurité et de fiabilité, les nombres que manipule un ordinateur sont forcés d'être représenté en numération binaire, lesdits nombres sont alors composés de __bit__, terme issu de la contraction de __binary digit__ (__chiffre binaire__ en français).
 
-
-
-Tout traitement informatique s'effectue par le biais de calcul car les ordinateurs sont incapables de mémoriser d'autres informations que des nombres, alors les informations que renferme la mémoire d'un ordinateur sont dites numérisées.
-
-
-Tout traitement informatique s'effectue par le biais de calcul car les ordinateurs sont incapables de mémoriser d'autres informations que des nombres, toute information inscrite dans un ordinateur est alors numérisé en système binaire.
-
+// qu'est ce qu'un bit etc.
 
 
 
