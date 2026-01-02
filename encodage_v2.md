@@ -2,8 +2,23 @@
 
 Commençons par la base : les nombres sont les seuls choses que manipule un ordinateur.
 
-Cela explique pourquoi tout traitement informatique n'est qu'une suite de calcul plus ou moins complexe, ainsi que la nécessité de numeriser toute information (son, image, document) devant être inscrite dans la mémoire d'un ordinateur.
-Il s'avère que pour des raisons de sécurité et de fiabilité, les nombres que manipule un ordinateur sont forcés d'être représenté en numération binaire, lesdits nombres sont alors composés de __bit__, terme issu de la contraction de __binary digit__ (__chiffre binaire__ en français).
+Cela explique pourquoi tout traitement informatique n'est qu'une suite de calcul plus ou moins complexe, ainsi que la nécessité de numériser toute information (son, image, document) devant être inscrite dans la mémoire d'un ordinateur.
+Il s'avère que pour des raisons de sécurité et de fiabilité les nombres que manipule un ordinateur sont forcés d'être représenté en numération binaire, lesdits nombres sont alors composés d'un ensemble de __bit__ (acronyme de __binary digit__, __chiffre binaire__ en français).
+En électronique, un bit représente une plage de tension électrique, mais dans ce document nous nous contenterons de la représentation conventionnelle d'un bit interprétant un $0$ ou un $1$.
+
+// parler des champ binaire
+
+
+
+Commençons par la base : les nombres sont les seuls choses que manipule un ordinateur.
+
+Cela explique pourquoi tout traitement informatique n'est qu'une suite de calcul plus ou moins complexe, ainsi que la nécessité de numériser toute information (son, image, document) devant être inscrite dans la mémoire d'un ordinateur.
+Il s'avère que pour des raisons de sécurité et de fiabilité les nombres que manipule un ordinateur sont forcés d'être représenté en numération binaire, lesdits nombres sont alors composés de ce que l'on appelle communément des __bit__ (acronyme de __binary digit__, __chiffre binaire__ en français).
+
+Un bit est symboliquement représenté par un $0$ ou un $1$, ce qui nous permet d'en déduire que les nombres 
+
+En informatique, un bit est symboliquement représenté par un $0$ ou un $1$, tandis qu'un nombre est quant à lui représenté par un ensemble de bit ou autrement dit par un ensemble de $0$ et de $1$.
+Ces ensembles de bit portent le nom de __champ binaire__ ou simplement de __champ__.
 
 // qu'est ce qu'un bit etc.
 
