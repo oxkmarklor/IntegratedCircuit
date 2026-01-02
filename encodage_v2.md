@@ -4,10 +4,17 @@ Commençons par la base.
 
 En informatique, un bit est symboliquement représenté par un $0$ ou un $1$, de plus, sachez pour votre culture que le terme __bit__ est l'acronyme de __binary digit__ (__chiffre binaire__ en français).
 Dans le fond, quoi qu'il fasse un ordinateur ne manipule jamais plus que des nombres composés d'un ensemble de bit, des nombres binaires, ces ensembles de bit portent le nom de __champs binaires__ ou simplement de __champs__.
+Seulement, au travers de ces __champs binaire__ il y a d'innombrable façons de représenter des nombres, cela s'appelle l'__encodage des champs__ ou l'__encodage des nombres__, si ce n'est l'__encodage__ tout court.
+
+Tous les __encodages__ ne se valent pas par essence, car tous représentent des nombres spécifiques comme des entiers naturel pour certains, relatif pour d'autre, ou encore des nombres à virgule pour les plus polyvalents, cette polyvalence n'est cependant qu'une question de compromis technique.
+
+Par essence, tous les __encodages__ ne se valent pas car tous représentent des nombres spécifiques.
+En guise d'exemple, certains __encodages__ permettent la représentation de nombres entiers naturel, tandis que d'autre (plus polyvalent) permettent la représentation de nombres entiers relatif ou encore de nombres à virgule, tout n'est souvent qu'une question de compromis technique.
 
 
-Dans les faits, quoi que fasse un ordinateur il ne manipule jamais plus que des nombres binaire composés d'un ensemble de bit, ces ensembles de bit sont ce que l'on appelle des champs binaire ou simplement des champs.
-Il y a cependant de nombreuses façons de représenter des nombres dans un champ binaire, cela s'appelle l'__encodage des champs__ ou l'__encodage des nombres__, si ce n'est l'__encodage__ tout court.
+
+
+
 
 
 Il s'avère néanmoins qu'un bit seul ne peut que difficilement servir à quelque chose, 
