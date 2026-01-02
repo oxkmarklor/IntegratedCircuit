@@ -3,7 +3,14 @@
 Commençons par la base.
 
 En informatique, un bit est symboliquement représenté par un $0$ ou un $1$, de plus, sachez pour votre culture que le terme __bit__ est l'acronyme de __binary digit__ (__chiffre binaire__ en français).
-Dans le fond, quoi qu'il fasse un ordinateur ne manipule jamais plus que des nombres composés d'un ensemble de bit, des nombres binaires, ces ensembles de bit portent le nom de __champs binaires__ ou simplement de __champs__.
+Fondamentalement, toute tâche effectuée par un ordinateur revient à une suite de calcul plus ou moins complexe, car un ordinateur ne peut mémoriser des informations que sous une forme numérisée.
+
+Dans le fond, quoi que fasse un ordinateur, il ne manipule jamais plus que des nombres composés d'un ensemble de bit, des nombres binaires, ces ensembles de bit portent le nom de __champs binaires__ ou simplement de __champs__.
+
+
+
+
+
 Seulement, au travers de ces __champs binaire__ il y a d'innombrable façons de représenter des nombres, cela s'appelle l'__encodage des champs__ ou l'__encodage des nombres__, si ce n'est l'__encodage__ tout court.
 
 Par essence, tout les __encodages__ ne se valent pas, car tous se spécialisent dans la représentation de nombres entiers naturel, relatif, ou dans les nombres à virgule pour les plus polyvalents.
