@@ -2,44 +2,34 @@
 
 Commençons par la base.
 
-En informatique, un bit est symboliquement représenté par un $0$ ou un $1$, de plus, sachez pour votre culture que le terme __bit__ est l'acronyme de __binary digit__ (__chiffre binaire__ en français).
+Les nombres sont la seule chose que comprend un ordinateur, ce qui explique pourquoi tout traitement informatique n'est qu'une suite de calcul, mais aussi la nécessité de numeriser toute information devant être inscrite dans la mémoire d'un système.
+
+
+
+Tout traitement informatique s'effectue par le biais de calcul car les ordinateurs sont incapables de mémoriser d'autres informations que des nombres, alors les informations que renferme la mémoire d'un ordinateur sont dites numérisées.
+
+
+Tout traitement informatique s'effectue par le biais de calcul car les ordinateurs sont incapables de mémoriser d'autres informations que des nombres, toute information inscrite dans un ordinateur est alors numérisé en système binaire.
+
+
+
+
+// try 1
+
+Commençons par la base.
+
 Fondamentalement, toute tâche effectuée par un ordinateur revient à une suite de calcul plus ou moins complexe, car un ordinateur ne peut mémoriser des informations que sous une forme numérisée.
 
+En informatique, un bit est symboliquement représenté par un $0$ ou un $1$, de plus, sachez pour votre culture que le terme __bit__ est l'acronyme de __binary digit__ (__chiffre binaire__ en français).
 Dans le fond, quoi que fasse un ordinateur, il ne manipule jamais plus que des nombres composés d'un ensemble de bit, des nombres binaires, ces ensembles de bit portent le nom de __champs binaires__ ou simplement de __champs__.
-
-
-
-
-
 Seulement, au travers de ces __champs binaire__ il y a d'innombrable façons de représenter des nombres, cela s'appelle l'__encodage des champs__ ou l'__encodage des nombres__, si ce n'est l'__encodage__ tout court.
 
 Par essence, tout les __encodages__ ne se valent pas, car tous se spécialisent dans la représentation de nombres entiers naturel, relatif, ou dans les nombres à virgule pour les plus polyvalents.
 Veuillez cependant noter que la ployvalence desdits __encodages__ est à l'origine même de certains compromis.
 
-Par essence, tout les __encodages__ ne se valent pas, car tous permettent la représentation de nombres spécifiques comme des nombres entiers naturels, relatifs, ou encore des nombres à virgule.
-Veuillez cependant noter que la ployvalence des __encodages__ est à l'origine même de certains compromis.
+//
 
-
-
-Tous les __encodages__ ne se valent pas par essence, car tous se spécialisent dans la représentation de nombres spécifiques.
-Certains __encodages__ représentent des nombres entiers naturel par exemple, relatif pour d'autre ou encore des nombres à virgule pour les plus polyvalents, il doit être néanmoins souligné que cette polyvalence est à l'origine de compromis technique. 
-
-Par essence, tous les __encodages__ ne se valent pas car tous représentent des nombres spécifiques.
-Certains __encodages__ permettent la représentation de nombres entiers naturel par exemple, tandis que d'autre (plus polyvalent) permettent la représentation de nombres entiers relatif ou encore de nombres à virgule, il est a souligné que cette polyvalence est cependant à l'origine de compromis technique.
-
-Tous les __encodages__ ne se valent pas par essence, car tous représentent des nombres spécifiques comme des entiers naturel pour certains, relatif pour d'autre, ou encore des nombres à virgule pour les plus polyvalents, cette polyvalence n'est cependant qu'une question de compromis technique.
-
-
-
-
-
-
-
-
-
-Il s'avère néanmoins qu'un bit seul ne peut que difficilement servir à quelque chose, 
-
-Cependant, un bit seul ne peut que difficilement se rendre utile et il faut utiliser des ensembles de bits (des champs binaire de leur nom) pour pouvoir prétendre répondre à des cas d'usage concret.
+Commençons par la base.
 
 Un bit est symboliquement représenté par un $0$ ou un $1$, pour la culture, je précise que le terme __bit__ vient de la contraction de __binary digit__ (__chiffre binaire__ en français).
 Un champ binaire est quant à lui composé d'un ensemble de bit, c'est-à-dire d'un ensemble de $0$ et de $1$.
