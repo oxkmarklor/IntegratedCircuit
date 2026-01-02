@@ -6,10 +6,23 @@ En informatique, un bit est symboliquement représenté par un $0$ ou un $1$, de
 Dans le fond, quoi qu'il fasse un ordinateur ne manipule jamais plus que des nombres composés d'un ensemble de bit, des nombres binaires, ces ensembles de bit portent le nom de __champs binaires__ ou simplement de __champs__.
 Seulement, au travers de ces __champs binaire__ il y a d'innombrable façons de représenter des nombres, cela s'appelle l'__encodage des champs__ ou l'__encodage des nombres__, si ce n'est l'__encodage__ tout court.
 
-Tous les __encodages__ ne se valent pas par essence, car tous représentent des nombres spécifiques comme des entiers naturel pour certains, relatif pour d'autre, ou encore des nombres à virgule pour les plus polyvalents, cette polyvalence n'est cependant qu'une question de compromis technique.
+Par essence, tout les __encodages__ ne se valent pas, car tous se spécialisent dans la représentation de nombres entiers naturel, relatif, ou dans les nombres à virgule pour les plus polyvalents.
+Veuillez cependant noter que la ployvalence desdits __encodages__ est à l'origine même de certains compromis.
+
+Par essence, tout les __encodages__ ne se valent pas, car tous permettent la représentation de nombres spécifiques comme des nombres entiers naturels, relatifs, ou encore des nombres à virgule.
+Veuillez cependant noter que la ployvalence des __encodages__ est à l'origine même de certains compromis.
+
+
+
+Tous les __encodages__ ne se valent pas par essence, car tous se spécialisent dans la représentation de nombres spécifiques.
+Certains __encodages__ représentent des nombres entiers naturel par exemple, relatif pour d'autre ou encore des nombres à virgule pour les plus polyvalents, il doit être néanmoins souligné que cette polyvalence est à l'origine de compromis technique. 
 
 Par essence, tous les __encodages__ ne se valent pas car tous représentent des nombres spécifiques.
-En guise d'exemple, certains __encodages__ permettent la représentation de nombres entiers naturel, tandis que d'autre (plus polyvalent) permettent la représentation de nombres entiers relatif ou encore de nombres à virgule, tout n'est souvent qu'une question de compromis technique.
+Certains __encodages__ permettent la représentation de nombres entiers naturel par exemple, tandis que d'autre (plus polyvalent) permettent la représentation de nombres entiers relatif ou encore de nombres à virgule, il est a souligné que cette polyvalence est cependant à l'origine de compromis technique.
+
+Tous les __encodages__ ne se valent pas par essence, car tous représentent des nombres spécifiques comme des entiers naturel pour certains, relatif pour d'autre, ou encore des nombres à virgule pour les plus polyvalents, cette polyvalence n'est cependant qu'une question de compromis technique.
+
+
 
 
 
