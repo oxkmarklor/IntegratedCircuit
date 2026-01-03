@@ -3,6 +3,25 @@
 Commençons par la base : les nombres sont les seuls choses que manipule un ordinateur.
 
 Cela explique pourquoi tout traitement informatique n'est qu'une suite de calcul plus ou moins complexe, ainsi que la nécessité de numériser toute information (son, image, document) devant être inscrite dans la mémoire d'un ordinateur.
+De plus, sachez que les ordinateurs utilisent la numération binaire pour représenté les nombres qu'ils manipulent, et ce, à cause de raisons métaphysiques engendrant un manque de fiabilité concernant les états des chiffres qui compose lesdits nombres.
+Les nombres sont alors composés d'un *__champ binaire__
+
+*__champ binaire__ : ensemble/groupe de bit, certains ensembles sont standardisé comme l'octet qui est un groupe de $8$ bits.
+
+//
+
+Commençons par la base : les nombres sont les seuls choses que manipule un ordinateur.
+
+Cela explique pourquoi tout traitement informatique n'est qu'une suite de calcul plus ou moins complexe, ainsi que la nécessité de numériser toute information (son, image, document) devant être inscrite dans la mémoire d'un ordinateur.
+En raison de contrainte physique, les nombres que manipule un ordinateur sont composés de ce que l'on appelle des __bit__ (acronyme de __binary digit__, __chiffre binaire__ en français) qui représente symboliquement un $0$ ou un $1$.
+
+Cependant, en raison de contrainte physique, les ordinateurs 
+
+// try 2
+
+Commençons par la base : les nombres sont les seuls choses que manipule un ordinateur.
+
+Cela explique pourquoi tout traitement informatique n'est qu'une suite de calcul plus ou moins complexe, ainsi que la nécessité de numériser toute information (son, image, document) devant être inscrite dans la mémoire d'un ordinateur.
 Il s'avère que pour des raisons de sécurité et de fiabilité, les nombres que manipule un ordinateur sont forcés d'être représenté en numération binaire, lesdits nombres sont alors composés d'un ensemble de __bit__ (acronyme de __binary digit__, __chiffre binaire__ en français).
 En électronique, un bit représente une plage de tension électrique, mais dans ce document nous nous contenterons de la représentation conventionnelle et abstraite d'un bit interprétant un $0$ ou un $1$.
 
