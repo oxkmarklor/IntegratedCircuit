@@ -3,19 +3,17 @@
 Commençons par la base : les nombres sont les seuls choses que manipule un ordinateur.
 
 Cela explique pourquoi tout traitement informatique n'est qu'une suite de calcul plus ou moins complexe, ainsi que la nécessité de numériser toute information (son, image, document) devant être inscrite dans la mémoire d'un ordinateur.
-De plus, certaines contraintes métaphysiques forcent les ordinateurs à représenter en numération binaire les nombres qu'ils manipulent, ce qui est à l'origine du fait que les chiffres desdits nombres portent le nom de __bit__ (l'acronyme de __binary digit__, __chiffre binaire__ en français).
+De plus, certaines contraintes métaphysiques forcent les ordinateurs à représenter en numération binaire les nombres qu'ils manipulent, ce qui est à l'origine du fait que les chiffres desdits nombres portent le nom de __bit__ (acronyme de __binary digit__, __chiffre binaire__ en français).
 En électronique, un bit représente une plage de tension électrique, mais dans ce document nous nous contenterons de la représentation conventionnelle et abstraite d'un bit interprétant un $0$ ou un $1$.
-Cela dit, les nombres eux même sont composés d'un ensemble de bit, ce qui porte le nom de __champ binaire__ ou plus simplement de __champ__.
+Enfin, compte tenu de la taille limitée des mémoires, le nombre de bit qu'utilise un ordinateur pour représenter les nombres qu'il manipule est alors lui même limité.
 
-// revoir la phrase ci-dessus et développer avec les encodages
+// ces ensembles de bit utilisés pour représenter des nombres portent le nom de champ binaire, les champs binaire ayant des tailles standardisé (octet, doublet, quadlet, octlet).
 
 
 
-De plus, sachez que les ordinateurs utilisent la numération binaire pour représenté les nombres qu'ils manipulent, et ce, à cause de raisons métaphysiques engendrant un manque de fiabilité concernant les états des chiffres qui compose lesdits nombres.
 
-Les nombres sont alors formés par des *__champs binaire__
 
-*__champ binaire__ : ensemble/groupe de bit, certains ensembles sont standardisé comme l'octet qui est un groupe de $8$ bits.
+*__champ binaire__ : Ensemble de bit.
 
 //
 
