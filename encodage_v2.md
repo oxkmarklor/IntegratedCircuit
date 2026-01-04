@@ -3,11 +3,11 @@
 Commençons par la base : les nombres sont les seuls choses que manipule un ordinateur.
 
 Cela explique pourquoi tout traitement informatique n'est qu'une suite de calcul plus ou moins complexe, ainsi que la nécessité de numériser toute information (son, image, document) devant être inscrite dans la mémoire d'un ordinateur.
-De plus, certaines contraintes métaphysiques forcent les ordinateurs à représenter en numération binaire les nombres qu'ils manipulent, ce qui est à l'origine du fait que les chiffres desdits nombres portent le nom de __bit__ (acronyme de __binary digit__, __chiffre binaire__ en français).
+En outre, certaines contraintes métaphysiques forcent les ordinateurs à représenter en numération binaire les nombres qu'ils manipulent, ce qui est à l'origine du fait que les chiffres desdits nombres portent le nom de __bit__ (acronyme de __binary digit__, __chiffre binaire__ en français).
 En électronique, un bit représente une plage de tension électrique, mais dans ce document nous nous contenterons de la représentation conventionnelle et abstraite d'un bit interprétant un $0$ ou un $1$.
-Enfin, le nombre de bit qu'utilise un ordinateur pour représenter les nombres qu'il manipule est variable mais limité, compte tenu de la taille fini des mémoires.
+Enfin, le nombre de bit qu'utilise un ordinateur pour représenter les nombres qu'il manipule est limité, compte tenu de la taille fini des mémoires.
 
-Enfin, le nombre de bit qu'utilise un ordinateur pour représenter les nombres qu'il manipule est variable mais standardisé, compte tenu de la taille limité des mémoires.
+Enfin, le nombre de bit qu'utilise un ordinateur pour représenter les nombres qu'il manipule est standardisé compte tenu de la taille limité des mémoires.
 
 
 // ces ensembles de bit utilisés pour représenter des nombres portent le nom de champ binaire, les champs binaire ayant des tailles standardisé (octet, doublet, quadlet, octlet).
