@@ -5,7 +5,26 @@ Commençons par la base : les nombres sont les seuls choses que manipule un ordi
 Cela explique pourquoi tout traitement informatique n'est qu'une suite de calcul plus ou moins complexe, ainsi que la nécessité de numériser toute information (son, image, document) devant être inscrite dans la mémoire d'un ordinateur.
 En outre, certaines contraintes métaphysiques forcent les ordinateurs à représenter en numération binaire les nombres qu'ils manipulent, ce qui est à l'origine du fait que les chiffres desdits nombres portent le nom de __bit__ (acronyme de __binary digit__, __chiffre binaire__ en français).
 En électronique, un bit représente une plage de tension électrique, mais dans ce document nous nous contenterons de la représentation conventionnelle et abstraite d'un bit interprétant un $0$ ou un $1$.
+Les nombres ainsi inscrits dans la mémoire d'un ordinateur sont représentés dans des __champs binaire__* de taille variable mais standardisé (ces derniers ayant généralement la taille d'un octet, doublet, quadlet ou octlet).
+
+Les nombres ainsi codés dans un ordinateur le sont par le biais d'un __champ binaire__* de taille variable mais standardisé.
+
+
+champ binaire* : Ensemble de bit.
+
+Ainsi, les nombres codés dans un ordinateur le sont par le biais de __champ binaire
+
+Ainsi, le codage* des nombres dans un ordinateur s'effectue dans des __champs binaire__* de taille variable mais standardisé.
+
+
+Les nombres sont alors codés dans des __champs binaire__ (ensemble de bit) d'une taille variable et standardisé compte tenu de la taille limité des mémoires, ainsi que des autres circuits.
+
+Ainsi, le *codage des nombres dans un ordinateur s'effectue dans des *__champs binaire__ de taille variable mais standardisé.
+
+
 Dans l'absolu, la quantité de bit qui constitue les nombres que manipule un ordinateur est limité compte tenu de la taille fini des mémoires, de plus, sachez que du point de vue de la nommenclature un tel ensemble de bit a pour nom __champ binaire__.
+
+
 
 C'est dans ce contexte que je vous  
 
