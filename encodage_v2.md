@@ -5,7 +5,19 @@ Commençons par la base : les nombres sont les seuls choses que manipule un ordi
 Cela explique pourquoi tout traitement informatique n'est qu'une suite de calcul plus ou moins complexe, ainsi que la nécessité de numériser toute information (son, image, document) devant être inscrite dans la mémoire d'un ordinateur.
 En outre, certaines contraintes métaphysiques forcent les ordinateurs à représenter en numération binaire les nombres qu'ils manipulent, ce qui est à l'origine du fait que les chiffres desdits nombres portent le nom de __bit__ (acronyme de __binary digit__, __chiffre binaire__ en français).
 En électronique, un bit représente une plage de tension électrique, mais dans ce document nous nous contenterons de la représentation conventionnelle et abstraite d'un bit interprétant un $0$ ou un $1$.
-Les nombres alors inscrits dans un ordinateur sont ainsi représentés par le biais d'un ensemble fini de bit, du nom de __champ binaire__, dont les tailles varient entre $8$, $16$, $32$ et $64$ bits dans le cas général.
+Tout nombre que manipule un ordinateur n'est ainsi qu'un ensemble fini de bit, du nom de __champ binaire__, dont les tailles standardisés varient entre $8$, $16$, $32$ et $64$ bits dans le cas général.
+
+Les nombres que manipule un ordinateur ne forment en soit qu'un ensemble fini de bit, du nom de __champ binaire__, et d'une taille standardisé qui varie entre $8$, $16$, $32$ et $64$ bits dans le cas général.
+
+
+Les nombres que manipule un ordinateur ne sont ainsi plus qu'un ensemble fini de bit, du nom de __champ binaire__, et dont les tailles varient entre $8$, $16$, $32$ et $64$ bits dans le cas général.
+
+Les nombres ainsi inscrits dans la mémoire d'un ordinateur ne sont alors qu'un ensemble fini de bit, du nom de __champ binaire__, dont les tailles varient entre $8$, $16$, $32$ et $64$ bits dans le cas général.
+
+
+Dans un ordinateur, les nombres sont ainsi représentés par le biais d'un ensemble fini de bit, du nom de __champ binaire__, dont les tailles varient entre $8$, $16$, $32$ et $64$ bits dans le cas général.
+
+Les nombres ainsi inscrits dans un ordinateur sont représentés par le biais d'un ensemble fini de bit, du nom de __champ binaire__, dont les tailles varient entre $8$, $16$, $32$ et $64$ bits dans le cas général.
 
 Seulement, sachez qu'il y a d'innombrable façons de représenter des nombres au travers d'un unique __champ binaire__, cela s'appelle l'__encodage des champs__ ou l'__encodage des nombres__ et pour faire plus simple nous appellerons cela l'__encodage__.
 
