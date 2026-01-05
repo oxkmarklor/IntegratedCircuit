@@ -5,6 +5,15 @@ Commençons par la base : les nombres sont les seuls choses que manipule un ordi
 Cela explique pourquoi tout traitement informatique n'est qu'une suite de calcul plus ou moins complexe, ainsi que la nécessité de numériser toute information (son, image, document) devant être inscrite dans la mémoire d'un ordinateur.
 En outre, certaines contraintes métaphysiques forcent les ordinateurs à représenter en numération binaire les nombres qu'ils manipulent, ce qui est à l'origine du fait que les chiffres desdits nombres portent le nom de __bit__ (acronyme de __binary digit__, __chiffre binaire__ en français).
 En électronique, un bit représente une plage de tension électrique, mais dans ce document nous nous contenterons de la représentation conventionnelle et abstraite d'un bit interprétant un $0$ ou un $1$.
+Tout nombre que manipule un ordinateur est formé d'un ensemble fini de bit, du nom de __champ binaire__, néanmoins la taille des __champs binaires__ a suivit l'évolution de la taille des registres entiers des processeurs et varie ainsi entre $8$, $16$, $32$ et $64$ bits.
+
+Tout nombre que manipule un ordinateur est formé d'un ensemble fini de bit, du nom de __champ binaire__, néanmoins pour des raisons techniques la taille des __champs binaires__ varie entre $8$, $16$, $32$ et $64$ bits.
+
+
+
+
+Tout nombre que manipule un ordinateur n'est ainsi qu'un ensemble fini de bit, du nom de __champ binaire__, et d'une taille standardisé qui varie entre $8$, $16$, $32$ et $64$ bits dans le cas général.
+
 Tout nombre que manipule un ordinateur n'est ainsi qu'un ensemble fini de bit, du nom de __champ binaire__, dont les tailles standardisés varient entre $8$, $16$, $32$ et $64$ bits dans le cas général.
 
 Les nombres que manipule un ordinateur ne forment en soit qu'un ensemble fini de bit, du nom de __champ binaire__, et d'une taille standardisé qui varie entre $8$, $16$, $32$ et $64$ bits dans le cas général.
