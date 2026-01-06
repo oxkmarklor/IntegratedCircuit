@@ -7,6 +7,8 @@ En outre, certaines contraintes métaphysiques forcent les ordinateurs à repré
 En électronique, un bit représente une plage de tension électrique, mais dans ce document nous nous contenterons de la représentation conventionnelle et abstraite d'un bit interprétant un $0$ ou un $1$.
 Tout nombre que manipule un ordinateur est ainsi formé d'un ensemble fini de bit, du nom de __champ binaire__, dont la taille se limite à celle des mémoires (des registres) qui barde les microprocesseurs de toute époque.
 
+// mieux introduire ce paragraphe 
+
 Seulement, sachez qu'il y a d'innombrable façons de représenter des nombres au travers d'un unique __champ binaire__, cela s'appelle l'__encodage des champs__ ou l'__encodage des nombres__ et pour faire plus simple nous appellerons cela l'__encodage__.
 
 
