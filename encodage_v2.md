@@ -1,11 +1,10 @@
 # Les encodages
 
-Commençons par la base : les nombres sont les seuls choses que manipule un ordinateur.
+Commençons par la base : les nombres sont les seuls choses qu'est capable de manipuler un ordinateur.
 
-Cela explique pourquoi tout traitement informatique n'est qu'une suite de calcul plus ou moins complexe, ainsi que la nécessité de numériser toute information (son, image, document) devant être inscrite dans la mémoire d'un ordinateur.
-En outre, certaines contraintes métaphysiques forcent les ordinateurs à représenter en numération binaire les nombres qu'ils manipulent, ce qui est à l'origine du fait que les chiffres desdits nombres portent le nom de __bit__ (acronyme de __binary digit__, __chiffre binaire__ en français).
+En l'occurrence, il y a certaines contraintes métaphysiques forcent les ordinateurs à représentés en numération binaire les nombres qu'ils manipulent, ce qui est à l'origine du fait que les chiffres desdits nombres portent le nom de __bit__ (acronyme de __binary digit__, __chiffre binaire__ en français).
 En électronique, un bit représente une plage de tension électrique, mais dans ce document nous nous contenterons de la représentation conventionnelle et abstraite d'un bit interprétant un $0$ ou un $1$.
-Tout nombre que manipule un ordinateur est ainsi formé d'un ensemble fini de bit, du nom de __champ binaire__, dont la taille se limite à celle des mémoires (des registres) qui barde les microprocesseurs de toute époque.
+Tout nombre que manipule un ordinateur est ainsi formé d'un ensemble fini de bit, du nom de __champ binaire__, dont la taille se limite à celle des mémoires (des registres) dont dipose les microprocesseurs d'antan et moderne.
 
 // mieux introduire ce paragraphe 
 
