@@ -1,15 +1,18 @@
 # Les encodages
 
-Commençons par la toute base : les nombres sont les seuls choses avec lesquels un ordinateur travaille.
+Commençons par la toute base : les nombres sont les seuls choses que puissent "comprendre" les ordinateurs.
 
 Il s'avère qu'en raison de contraintes métaphysiques, les nombres que manipule les ordinateurs sont forcés d'être représentés en numération binaire, ce qui explique pourquoi les chiffres desdits nombres portent le nom de __bit__ (acronyme de __binary digit__, ou __chiffre binaire__ en français).
-En électronique, un bit représente une plage de tension électrique, mais dans ce document nous nous contenterons de la représentation aussi conventionnelle qu'abstraite d'un bit à $0$ ou à $1$.
-Tout nombre que manipule un ordinateur est ainsi constitué d'un ensemble fini de bit, du nom de __champ binaire__, dont la taille se limite aux divers capacités de stockage des registres d'un microprocesseur (aliasing compris).
+En électronique, un bit représente une plage de tension électrique, mais dans ce document nous nous contenterons de la représentation aussi conventionnelle qu'abstraite d'un bit à $0$ ou $1$.
+Tout nombre que manipule un ordinateur est ainsi constitué d'un ensemble fini de bit, du nom de __champ binaire__, dont la taille se limite aux divers capacités de stockage des __registres*__ d'un microprocesseur (en référence à l'__aliasing de registre*__).
 
 Seulement, sachez qu'il y a d'innombrable façons de représenter des nombres au travers d'un unique __champ binaire__, cela s'appelle l'__encodage des champs__ ou l'__encodage des nombres__ et pour faire plus simple nous appellerons cela l'__encodage__.
 
+// faire les déf
 
+__registre__ : bla bla bla
 
+__aliasing de registre__ : bla bla
 
 ///
 
