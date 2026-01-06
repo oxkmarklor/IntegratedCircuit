@@ -1,10 +1,28 @@
 # Les encodages
 
-Commençons par la base : les nombres sont les seuls choses qu'est capable de manipuler un ordinateur.
+Commençons par la toute base : les nombres sont les seuls choses avec lesquels travaille un ordinateur.
+
+Il s'avère qu'en raison de contraintes métaphysiques, les nombres que manipule les ordinateurs sont forcés d'être représentés en numération binaire, ce qui explique pourquoi les chiffres desdits nombres portent le nom de __bit__ (acronyme de __binary digit__, ou __chiffre binaire__ en français).
+En électronique, un bit représente une plage de tension électrique, mais dans ce document nous nous contenterons de la représentation aussi conventionnelle qu'abstraite d'un bit à $0$ ou $1$.
+Tout nombre que manipule un ordinateur est ainsi formé d'un ensemble fini de bit, du nom de __champ binaire__, dont la taille se limite à celle des mémoires (des registres) dont dipose les microprocesseurs d'antan et moderne.
+
+
+Il s'avère qu'en raison de contraintes métaphysiques, les nombres que manipule les ordinateurs sont forcés d'être représentés en numération binaire, ce qui explique pourquoi les chiffres desdits nombres portent le nom de __bit__ (acronyme de __binary digit__, __chiffre binaire__ en français).
+
+En raison des contraintes métaphysiques s'appliquant aux circuits des ordinateurs, les nombres ainsi qu'ils manipulent sont forcés d'être représentés en numération binaire, ce qui est à l'origine du fait que les chiffres desdits nombres portent le nom de __bit__ (acronyme de __binary digit__, __chiffre binaire__ en français).
+
+
+d'où le fait que les chiffres des nombres avec lesquels travaillent les machines porte le nom de __bit__ de la contraction de __binary digit__ (__chiffre binaire__ en français)
+
+ce qui explique pourquoi les chiffres desdits nombres portent le nom de __bit__ (acronyme de __binary digit__, __chiffre binaire__ en français).
+
+Il s'avère qu'en raison de contraintes métaphysiques, les nombres que manipule les ordinateurs sont forcés d'être représentés en numération binaire, ce qui explique pourquoi les chiffres desdits nombres portent le nom de __bit__ (acronyme de __binary digit__, __chiffre binaire__ en français).
+
+
+
 
 En l'occurrence, il y a certaines contraintes métaphysiques forcent les ordinateurs à représentés en numération binaire les nombres qu'ils manipulent, ce qui est à l'origine du fait que les chiffres desdits nombres portent le nom de __bit__ (acronyme de __binary digit__, __chiffre binaire__ en français).
-En électronique, un bit représente une plage de tension électrique, mais dans ce document nous nous contenterons de la représentation conventionnelle et abstraite d'un bit interprétant un $0$ ou un $1$.
-Tout nombre que manipule un ordinateur est ainsi formé d'un ensemble fini de bit, du nom de __champ binaire__, dont la taille se limite à celle des mémoires (des registres) dont dipose les microprocesseurs d'antan et moderne.
+
 
 // mieux introduire ce paragraphe 
 
