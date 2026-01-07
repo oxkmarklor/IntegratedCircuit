@@ -4,39 +4,17 @@ Commençons par la toute base : les nombres sont les seuls choses que puissent "
 
 Il s'avère qu'en raison de contraintes métaphysiques, les nombres que manipule les ordinateurs sont forcés d'être représentés en numération binaire, ce qui explique pourquoi les chiffres desdits nombres portent le nom de __bit__ (acronyme de __binary digit__, ou __chiffre binaire__ en français).
 En électronique, un bit représente une plage de tension électrique, mais dans ce document nous nous contenterons de la représentation aussi conventionnelle qu'abstraite d'un bit à $0$ ou $1$.
-Tout nombre que manipule un ordinateur est ainsi constitué d'un ensemble fini de bit, du nom de __champ binaire__, dont la taille se limite aux divers capacités de stockage des __registres*__ d'un microprocesseur (en référence à l'__aliasing de registre*__).
+Tout nombre que manipule un ordinateur est ainsi constitué d'un ensemble fini de bit, du nom de __champ binaire__, dont la taille se limite aux divers capacités de stockage des __registres*__ d'un microprocesseur (en référence à l'__aliasing de registres*__).
 
 Seulement, sachez qu'il y a d'innombrable façons de représenter des nombres au travers d'un unique __champ binaire__, cela s'appelle l'__encodage des champs__ ou l'__encodage des nombres__ et pour faire plus simple nous appellerons cela l'__encodage__.
 
 // faire les déf
 
-__registre__ : Mémoire de très faible capacité aux temps d'accès extrêmement court qui est intégré à l'architecture des microprocesseurs.
-Compte tenu de leurs faible temps d'accès, les registres sont les supports de mémorisation les plus sollicités par les instructions machines des interfaces externes des microprocesseurs, et même les seuls sollicités dans le cas des architectures Load-Store.
+__Registre(s)__ : Mémoire de très faible capacité aux temps d'accès extrêmement court qui est intégré à l'architecture des microprocesseurs.
+Compte tenu de leurs faible temps d'accès, les registres sont les supports de mémorisation les plus sollicités par les instructions machines de l'interface externe des microprocesseurs, et même les seuls sollicités dans le cas des architectures Load-Store.
 
 
-__aliasing de registre__ : bla bla
-
-///
-
-Il s'avère qu'en raison de contraintes métaphysiques, les nombres que manipule les ordinateurs sont forcés d'être représentés en numération binaire, ce qui explique pourquoi les chiffres desdits nombres portent le nom de __bit__ (acronyme de __binary digit__, __chiffre binaire__ en français).
-
-En raison des contraintes métaphysiques s'appliquant aux circuits des ordinateurs, les nombres ainsi qu'ils manipulent sont forcés d'être représentés en numération binaire, ce qui est à l'origine du fait que les chiffres desdits nombres portent le nom de __bit__ (acronyme de __binary digit__, __chiffre binaire__ en français).
-
-
-d'où le fait que les chiffres des nombres avec lesquels travaillent les machines porte le nom de __bit__ de la contraction de __binary digit__ (__chiffre binaire__ en français)
-
-ce qui explique pourquoi les chiffres desdits nombres portent le nom de __bit__ (acronyme de __binary digit__, __chiffre binaire__ en français).
-
-Il s'avère qu'en raison de contraintes métaphysiques, les nombres que manipule les ordinateurs sont forcés d'être représentés en numération binaire, ce qui explique pourquoi les chiffres desdits nombres portent le nom de __bit__ (acronyme de __binary digit__, __chiffre binaire__ en français).
-
-
-
-
-En l'occurrence, il y a certaines contraintes métaphysiques forcent les ordinateurs à représentés en numération binaire les nombres qu'ils manipulent, ce qui est à l'origine du fait que les chiffres desdits nombres portent le nom de __bit__ (acronyme de __binary digit__, __chiffre binaire__ en français).
-
-
-// mieux introduire ce paragraphe 
-
+__Aliasing de registres__ :
 
 
 //
