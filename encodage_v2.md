@@ -8,13 +8,35 @@ Tout nombre que manipule un ordinateur est ainsi constitué d'un ensemble fini d
 
 Seulement, sachez qu'il y a d'innombrable façons de représenter des nombres au travers d'un unique __champ binaire__, cela s'appelle l'__encodage des champs__ ou l'__encodage des nombres__ et pour faire plus simple nous appellerons cela l'__encodage__.
 
-// faire les déf
-
-__Registre(s)__ : Mémoire de très faible capacité aux temps d'accès extrêmement court qui est intégré à l'architecture des microprocesseurs.
-Compte tenu de leurs faible temps d'accès, les registres sont les supports de mémorisation les plus sollicités par les instructions machines de l'interface externe des microprocesseurs, et même les seuls sollicités dans le cas des architectures Load-Store.
+___Registre(s)__ : Mémoire de très faible capacité aux temps d'accès extrêmement court qui est intégré à l'architecture des microprocesseurs.
+Compte tenu de leurs faible temps d'accès, les registres sont les supports de mémorisation les plus sollicités par les instructions machines de l'interface externe des microprocesseurs, et même les seuls sollicités dans le cas des architectures Load-Store._
 
 
-__Aliasing de registres__ :
+__Aliasing de registres__: Système assurant la rétrocompatibilité matériel des microprocesseurs de toute génération en ... par la présence immuable des registres de microprocesseur d'ancienne génération dans ceux de nouvelle génération.
+
+
+
+Système participant à la rétrocompatibilité matériel ascendante des microprocesseurs en assurant une présence immuable des registres de microprocesseur d'ancienne génération dans ceux de nouvelle génération.
+
+
+Système participant à la rétrocompatibilité matériel ascendante des microprocesseurs en assurant une présence immuable des registres des anciens microprocesseurs dans les microprocesseurs de nouvelle génération.
+
+
+Système participant à la rétrocompatibilité matériel ascendante des microprocesseurs en assurant une présence immuable des registres de microprocesseurs antérieur vers les microprocesseurs de nouvelle génération.
+
+
+
+
+Système participant à la rétrocompatibilité matériel ascendante des microprocesseurs en assurant une présence immuable des registres des anciens microprocesseurs dans ceux de nouvelle génération.
+
+
+
+Système participant à la rétrocompatibilité matériel ascendante des microprocesseurs par l'immuabilité des registres déjà existant dans les plans de fabrication des nouvelles puces électroniques.
+
+
+
+
+
 
 
 //
