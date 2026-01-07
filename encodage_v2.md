@@ -10,7 +10,17 @@ Seulement, sachez qu'il y a d'innombrable façons de représenter des nombres au
 
 // faire les déf
 
-__registre__ : bla bla bla
+__registre__ : Mémoire de très faible capacité aux temps d'accès extrêmement court qui est intégré aux microprocesseurs et avec lesquels ces derniers interagissent directement.
+
+__registre__ : Mémoire de très faible capacité aux temps d'accès extrêmement court qui est intégré à l'architecture des microprocesseurs.
+Compte tenu de leurs temps d'accès, les registres sont les supports de mémorisation avec lesquels les microprocesseurs interagissent le plus fréquemment, dans certaines architecture de microprocesseur (Load-Store) ce sont même les seuls supports de mémorisation avec lesquels il est possible d'interagir.
+
+Compte tenu de leurs temps d'accès, les registres sont les supports de mémorisation avec lesquels les microprocesseurs interagissent le plus fréquemment (si ce ne sont pas les seuls, architecture Load-Store).
+
+
+Compte tenu de leurs temps d'accès, les registres sont souvent les seuls supports de mémorisation avec lesquels les microprocesseurs interagissent directement.
+
+__registre__ : Les registres sont des mémoires de très faible capacité aux temps d'accès extrêmement court, intégré à l'architecture des microprocesseurs les registres sont souvent les seuls support de mémorisation avec lesquels un microprocesseur interagit directement.
 
 __aliasing de registre__ : bla bla
 
