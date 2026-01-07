@@ -11,8 +11,25 @@ Seulement, sachez qu'il y a d'innombrable façons de représenter des nombres au
 ___Registre(s)__ : Mémoire de très faible capacité aux temps d'accès extrêmement court qui est intégré à l'architecture des microprocesseurs.
 Compte tenu de leurs faible temps d'accès, les registres sont les supports de mémorisation les plus sollicités par les instructions machines de l'interface externe des microprocesseurs, et même les seuls sollicités dans le cas des architectures Load-Store._
 
+__Aliasing de registres__ : Système contribuant à la rétrocompatibilité des microprocesseurs en assurant la compatibilité descendante des registres.
+En d'autres termes, les nouvelles architectures de microprocesseur intègrent les registres des microprocesseurs de génération antérieur, ce qui permet à un programme d'utiliser des registres quand il s'exécute sur une génération de microprocesseur pour laquelle il a été conçu, qui sont les même registres que lorsqu'il s'exécute sur une génération ultérieur de microprocesseur.
+
+// ne pas oublier de parler de la manière dont est mis en place l'aliasing
+
+ce qui permet à un programme d'utiliser les même registres quand il s'exécute sur une génération de microprocesseur pour laquelle il a été conçu, que pour une génération ultérieur.
+
+
+
+__Aliasing de registres__ : Système contribuant à la rétrocompatibilité des microprocesseurs en assurant la compatibilité descendante des registres.
+En d'autres termes, les nouvelles architectures de microprocesseur intègrent les registres des microprocesseurs de génération antérieur, ce qui permet à un programme d'utiliser les même registres quand il s'exécute sur une génération de microprocesseur pour laquelle il a été conçu, que lorsqu'il s'exécute sur une génération de microprocesseur ultérieur.
+
+ce qui permet à un programme de faire usage des même registres lorsqu'il s'exécute sur une génération de microprocesseur pour laquelle il a été conçu que lorsqu'il s'exécute sur une génération de microprocesseur ultérieur à celle pour laquelle il a été conçu.
+
 __Aliasing de registres__ : Système contribuant à la rétrocompatibilité des microprocesseurs en assurant une compatibilité descendante des registres.
-L'architecture des microprocesseurs modernes intègre ainsi les registres des microprocesseurs de générations antérieur par le biais d'une extension de ces derniers.
+L'architecture des nouveaux microprocesseurs intègre ainsi les registres présents dans les microprocesseurs de générations antérieur, ce qui permet à une programme de faire usage des même registres lorsqu'il s'exécute sur une génération de microprocesseur pour laquelle il a été conçu que lorsqu'il s'exécute sur une génération de microprocesseur ultérieur à celle pour laquelle il a été conçu.
+
+
+
 
 __Aliasing de registres__ : Système contribuant à la rétrocompatibilité des microprocesseurs en assurant une compatibilité descendante des registres.
 L'architecture des microprocesseurs modernes intègre ainsi les registres des microprocesseurs de générations antérieur par le biais d'une extension desdits registres.
