@@ -12,27 +12,14 @@ ___Registre(s)__ : Mémoire de très faible capacité aux temps d'accès extrêm
 Compte tenu de leurs faible temps d'accès, les registres sont les supports de mémorisation les plus sollicités par les instructions machines de l'interface externe des microprocesseurs, et même les seuls sollicités dans le cas des architectures Load-Store._
 
 __Aliasing de registres__ : Système contribuant à la rétrocompatibilité des microprocesseurs en assurant la compatibilité descendante des registres.
-En d'autres termes, les nouvelles architectures de microprocesseur intègrent les registres des microprocesseurs de génération antérieur, ce qui permet à un programme d'utiliser des registres quand il s'exécute sur une génération de microprocesseur pour laquelle il a été conçu, qui sont les même registres que lorsqu'il s'exécute sur une génération ultérieur de microprocesseur.
-
-// ne pas oublier de parler de la manière dont est mis en place l'aliasing
-
-ce qui permet à un programme d'utiliser les même registres quand il s'exécute sur une génération de microprocesseur pour laquelle il a été conçu, que pour une génération ultérieur.
-
-
+Ce système veut que les nouvelles architectures de microprocesseur intègrent les registres des microprocesseurs de génération antérieur, ceci permet à tout programme d'utiliser les même registres quand il s'exécute sur une génération de microprocesseur pour laquelle il a été conçu, que lorsqu'il s'exécute sur une génération de microprocesseur ultérieur.
 
 __Aliasing de registres__ : Système contribuant à la rétrocompatibilité des microprocesseurs en assurant la compatibilité descendante des registres.
-En d'autres termes, les nouvelles architectures de microprocesseur intègrent les registres des microprocesseurs de génération antérieur, ce qui permet à un programme d'utiliser les même registres quand il s'exécute sur une génération de microprocesseur pour laquelle il a été conçu, que lorsqu'il s'exécute sur une génération de microprocesseur ultérieur.
+Les nouvelles architectures de microprocesseur intègrent les registres des microprocesseurs de génération antérieur par l'extension de la taille de ces derniers, un registre étendu peut ainsi être sollicité via un nouvel alias lorsqu'il s'agit d'utiliser l'entièreté de sa capacité de stockage, ou via l'alias du registre ayant été étendu afin de ne faire usage que de la capacité de cet ancien registre.
 
-ce qui permet à un programme de faire usage des même registres lorsqu'il s'exécute sur une génération de microprocesseur pour laquelle il a été conçu que lorsqu'il s'exécute sur une génération de microprocesseur ultérieur à celle pour laquelle il a été conçu.
+sur toute leur capacité de stockage via un nouvel alias ou sur seulement une partie le cas échéant 
 
-__Aliasing de registres__ : Système contribuant à la rétrocompatibilité des microprocesseurs en assurant une compatibilité descendante des registres.
-L'architecture des nouveaux microprocesseurs intègre ainsi les registres présents dans les microprocesseurs de générations antérieur, ce qui permet à une programme de faire usage des même registres lorsqu'il s'exécute sur une génération de microprocesseur pour laquelle il a été conçu que lorsqu'il s'exécute sur une génération de microprocesseur ultérieur à celle pour laquelle il a été conçu.
-
-
-
-
-__Aliasing de registres__ : Système contribuant à la rétrocompatibilité des microprocesseurs en assurant une compatibilité descendante des registres.
-L'architecture des microprocesseurs modernes intègre ainsi les registres des microprocesseurs de générations antérieur par le biais d'une extension desdits registres.
+l'intégration en elle-même de ces registres se fait par 
 
 
 
