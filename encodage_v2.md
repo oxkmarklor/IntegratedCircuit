@@ -8,17 +8,13 @@ Tout nombre que manipule un ordinateur est ainsi constitué d'un ensemble fini d
 
 Seulement, sachez qu'il y a d'innombrable façons de représenter des nombres au travers d'un unique __champ binaire__, cela s'appelle l'__encodage des champs__ ou l'__encodage des nombres__ et pour faire plus simple nous appellerons cela l'__encodage__.
 
-___Registre(s)__ : Mémoire de très faible capacité aux temps d'accès extrêmement court qui est intégré à l'architecture des microprocesseurs.
-Compte tenu de leurs faible temps d'accès, les registres sont les supports de mémorisation les plus sollicités par les instructions machines de l'interface externe des microprocesseurs, et même les seuls sollicités dans le cas des architectures Load-Store._
+___Registre(s) : Mémoire de très faible capacité aux temps d'accès extrêmement court qui est intégré à l'architecture des microprocesseurs.
+Compte tenu de leurs faible temps d'accès, les registres sont les supports de mémorisation les plus sollicités par les instructions machines de l'interface externe des microprocesseurs, et même les seuls sollicités dans le cas des architectures Load-Store.___
 
 __Aliasing de registres__ : Système contribuant à la rétrocompatibilité des microprocesseurs en assurant la compatibilité descendante des registres.
-Les nouvelles architectures de microprocesseur intègrent les registres des microprocesseurs de génération antérieur par l'extension de la taille de ces derniers, ainsi un registre étendu peut être sollicité via un nouvel alias lorsqu'il s'agit d'utiliser l'entièreté de sa capacité de stockage, ou via l'alias du registre d'origine ayant été étendu pour ne faire usage que de la capacité de stockage cet ancien registre.
+Les nouvelles architectures de microprocesseur intègrent les registres des microprocesseurs de génération antérieur en étendant la taille de ces derniers ; dès lors, un registre étendu peut être sollicité via un nouvel alias lorsqu'il s'agit d'utiliser l'entièreté de sa capacité de stockage, ou via l'alias du registre ayant été étendu pour ne faire usage que de la capacité de stockage de cet ancien registre.
 
-__Aliasing de registres__ : Système contribuant à la rétrocompatibilité des microprocesseurs en assurant la compatibilité descendante des registres.
-Les nouvelles architectures de microprocesseur intègrent les registres des microprocesseurs de génération antérieur par l'extension de la taille de ces derniers, un registre étendu peut ainsi être sollicité via un nouvel alias lorsqu'il s'agit d'utiliser l'entièreté de sa capacité de stockage, ou via l'alias du registre ayant été étendu afin de ne faire usage que de la capacité de cet ancien registre.
 
-__Aliasing de registres__ : Système contribuant à la rétrocompatibilité des microprocesseurs en assurant la compatibilité descendante des registres.
-Ce système veut que les nouvelles architectures de microprocesseur intègrent les registres des microprocesseurs de génération antérieur, ceci permet à tout programme d'utiliser les même registres quand il s'exécute sur une génération de microprocesseur pour laquelle il a été conçu, que lorsqu'il s'exécute sur une génération de microprocesseur ultérieur.
 
 
 
