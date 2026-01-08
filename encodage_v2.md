@@ -8,71 +8,13 @@ Tout nombre que manipule un ordinateur est ainsi constitué d'un ensemble fini d
 
 Seulement, sachez qu'il y a d'innombrable façons de représenter des nombres au travers d'un unique __champ binaire__, cela s'appelle l'__encodage des champs__ ou l'__encodage des nombres__ et pour faire plus simple nous appellerons cela l'__encodage__.
 
+___Définitions :___
+
 ___Registre(s)__ : Mémoire de très faible capacité aux temps d'accès extrêmement court qui est intégré à l'architecture des microprocesseurs.
 Compte tenu de leurs faible temps d'accès, les registres sont les supports de mémorisation les plus sollicités par les instructions machines de l'interface externe des microprocesseurs, et même les seuls sollicités dans le cas des architectures Load-Store._
 
-
-__Aliasing de registres__ : Système contribuant à la rétrocompatibilité des microprocesseurs en assurant la compatibilité descendante des registres.
-En d'autres termes, ce système d'aliasing permet (entre autre) aux registres des microprocesseurs $64$ bits d'être aliasé pour ce qu'ils sont, ou de l'être comme s'ils étaient des registres de microprocesseurs de $32, 16$ ou $8$ bits.
-Par exemple, dans un microprocesseur de $64$ bits, l'alias RAX fait référence aux $64$ bits d'un registre entier architectural tandis que l'alias EAX ne fait référence qu'à $32$ des bits du même registre, AX ne fait quant à lui référence qu'à $16$ de ces bits et seulement $8$ dans les cas des alias AH et AL.
-
-
-En guise d'exemple, l'alias RAX fait référence aux $64$ bits d'un registre architectural de nombre entier intégré aux microprocesseurs $64$ bits ; l'alias EAX ne fait cependant référence qu'à $32$ des bits de ce même registre et seulement $16$ dans le cas de l'alias AX, les alias AH et AL ne font quant à eux référence qu'à $8$ de ces bits. 
-
-
-///
-
-
-Tenez, dans un microprocesseur $64$ bits l'alias RAX fait référence à un registre architectural d'entier de $64$ bits alors que l'alias EAX fait seulement référence à $32$ des bits qui compose ce même registre, l'alias AX ne référence quant à lui que $16$ des bits dudit registre tandis que AH et AL références chacun un octet.
-
-Par exemple, l'alias RAX dans un microprocesseur $64$ bits fait référence à un registre architectural d'entier de $64$ bits, tandis que EAX fait référence à $32$ des bits qui compose ce même registre, AX fait pareil avec $16$ bits lorsque les alias AH, AL font tout deux références à deux octets distincts dudit registre.
-
-
-
-
-__Aliasing de registres__ : Système contribuant à la rétrocompatibilité des microprocesseurs en assurant la compatibilité descendante des registres.
-En d'autres termes, ce système permet aux registres des microprocesseurs $64$ bits d'être aliasé pour ce qu'ils sont, ou d'être aliasé comme s'ils étaient des registres de microprocesseurs $32, 16$ ou $8$ bits.
-
-
-
-
-
-L'intégration en elle-même de l'aliasing n'est cependant pas intuitive.
-Les registres des microprocesseurs $32$ bits, plus grand que ceux des microprocesseurs $16$ bits, peuvent être aliasé dans le but de faire référence à tout ou partie des bits qui les composes : l'alias EAX fait référence aux $32$ bits d'un registre d'entier de microprocesseur $32$ bits tandis que l'alias AX ne fait référence qu'à $16$ des bits qui compose ledit registre. 
-
-L'intégration en elle-même de l'aliasing n'est cependant pas intuitive, les registres des microprocesseurs $32$ bits intègrent en leurs seins les registres des microprocesseurs $16$ bits étant donné qu'ils sont plus grand que ces derniers.
-
-
-
-
-__Aliasing de registres__ : Système contribuant à la rétrocompatibilité des microprocesseurs en assurant la compatibilité descendante des registres.
-En d'autres termes, les registres des microprocesseurs de $16$ bits sont intégrés aux registres des microprocesseurs $32$ bits, qui ces derniers sont à leurs tours intégrés aux registres des microprocesseurs $64$ bits.
-Les programmes $16$ bits utilisent ainsi les même registres lorsqu'ils s'exécutent sur un microprocesseur $16$ bits, que lorsqu'ils s'exécutent sur des microprocesseurs de $32$ ou $64$ bits par exemple.
-
-
-__Aliasing de registres__ : Système contribuant à la rétrocompatibilité des microprocesseurs en assurant la compatibilité descendante des registres.
-En d'autres termes, pour les trois microprocesseurs $A, B, C$ allant du plus anciens au plus modernes, les registres $R$ du microprocesseur $A$ sont inclus dans les registres $R$ du microprocesseur $B$, autrement dit $\left(R_A \subset R_B\right)$ et par effet rétroactif nous en déduisons que $\left(R_B \subset R_C\right)$.
-
-
-
-///
-
-__Aliasing de registres__ : Système contribuant à la rétrocompatibilité des microprocesseurs en assurant la compatibilité descendante des registres.
-Les nouvelles architectures de microprocesseurs intègrent ainsi les registres des microprocesseurs d'architectures antérieur, en étendant la taille desdits registres ; dès lors, les registres étendus peuvent être sollicités via de nouveaux alias lorsqu'il s'agit d'utiliser l'entièreté des capacités de stockage, ou via l'alias des registres ayant été étendus pour ne faire usage que des capacités de stockage de ces anciens registres.
-
-
-
-__Aliasing de registres__ : Système contribuant à la rétrocompatibilité des microprocesseurs en assurant la compatibilité descendante des registres.
-Les nouvelles architectures de microprocesseurs intègrent ainsi les registres des microprocesseurs d'architectures antérieur, en étendant la taille desdits registres ; dès lors, un registre étendu peut être sollicité via un nouvel alias lorsqu'il s'agit d'utiliser l'entièreté de sa capacité de stockage, ou via l'alias du registre ayant été étendu pour ne faire usage que de la capacité de stockage de cet ancien registre.
-
-
-
-__Aliasing de registres__ : Système contribuant à la rétrocompatibilité des microprocesseurs en assurant la compatibilité descendante des registres.
-Les nouvelles architectures de microprocesseurs intègrent les registres des microprocesseurs d'architectures antérieur en étendant la taille de ces registres ; dès lors, un registre étendu peut être sollicité via un nouvel alias lorsqu'il s'agit d'utiliser l'entièreté de sa capacité de stockage, ou via l'alias du registre ayant été étendu pour ne faire usage que de la capacité de stockage de cet ancien registre.
-
-
-
-
+___Aliasing de registres__ : Système contribuant à la rétrocompatibilité des microprocesseurs en assurant la compatibilité descendante des registres.
+En d'autres termes, ce système d'aliasing permet (entre autre) aux registres des microprocesseurs_ $64$ _bits d'être aliasé pour ce qu'ils sont, ou de l'être comme s'ils étaient des registres de microprocesseurs de_ $32, 16$ _ou_ $8$ _bits._
 
 
 
