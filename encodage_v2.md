@@ -12,6 +12,21 @@ ___Registre(s)__ : Mémoire de très faible capacité aux temps d'accès extrêm
 Compte tenu de leurs faible temps d'accès, les registres sont les supports de mémorisation les plus sollicités par les instructions machines de l'interface externe des microprocesseurs, et même les seuls sollicités dans le cas des architectures Load-Store._
 
 __Aliasing de registres__ : Système contribuant à la rétrocompatibilité des microprocesseurs en assurant la compatibilité descendante des registres.
+En d'autres termes, les registres des microprocesseurs de $16$ bits sont intégrés aux registres des microprocesseurs $32$ bits, qui ces derniers sont à leurs tours intégrés aux registres des microprocesseurs $64$ bits.
+Les programmes $16$ bits utilisent ainsi les même registres lorsqu'ils s'exécutent sur un microprocesseur $16$ bits, que lorsqu'ils s'exécutent sur des microprocesseurs de $32$ ou $64$ bits par exemple.
+
+
+
+
+
+__Aliasing de registres__ : Système contribuant à la rétrocompatibilité des microprocesseurs en assurant la compatibilité descendante des registres.
+En d'autres termes, pour les trois microprocesseurs $A, B, C$ allant du plus anciens au plus modernes, les registres $R$ du microprocesseur $A$ sont inclus dans les registres $R$ du microprocesseur $B$, autrement dit $\left(R_A \subset R_B\right)$ et par effet rétroactif nous en déduisons que $\left(R_B \subset R_C\right)$.
+
+
+
+///
+
+__Aliasing de registres__ : Système contribuant à la rétrocompatibilité des microprocesseurs en assurant la compatibilité descendante des registres.
 Les nouvelles architectures de microprocesseurs intègrent ainsi les registres des microprocesseurs d'architectures antérieur, en étendant la taille desdits registres ; dès lors, les registres étendus peuvent être sollicités via de nouveaux alias lorsqu'il s'agit d'utiliser l'entièreté des capacités de stockage, ou via l'alias des registres ayant été étendus pour ne faire usage que des capacités de stockage de ces anciens registres.
 
 
