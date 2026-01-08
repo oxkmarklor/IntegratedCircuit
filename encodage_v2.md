@@ -12,6 +12,16 @@ ___Registre(s)__ : Mémoire de très faible capacité aux temps d'accès extrêm
 Compte tenu de leurs faible temps d'accès, les registres sont les supports de mémorisation les plus sollicités par les instructions machines de l'interface externe des microprocesseurs, et même les seuls sollicités dans le cas des architectures Load-Store._
 
 __Aliasing de registres__ : Système contribuant à la rétrocompatibilité des microprocesseurs en assurant la compatibilité descendante des registres.
+Les nouvelles architectures de microprocesseurs intègrent ainsi les registres des microprocesseurs d'architectures antérieur, en étendant la taille desdits registres ; dès lors, les registres étendus peuvent être sollicités via de nouveaux alias lorsqu'il s'agit d'utiliser l'entièreté des capacités de stockage, ou via l'alias des registres ayant été étendus pour ne faire usage que des capacités de stockage de ces anciens registres.
+
+
+
+__Aliasing de registres__ : Système contribuant à la rétrocompatibilité des microprocesseurs en assurant la compatibilité descendante des registres.
+Les nouvelles architectures de microprocesseurs intègrent ainsi les registres des microprocesseurs d'architectures antérieur, en étendant la taille desdits registres ; dès lors, un registre étendu peut être sollicité via un nouvel alias lorsqu'il s'agit d'utiliser l'entièreté de sa capacité de stockage, ou via l'alias du registre ayant été étendu pour ne faire usage que de la capacité de stockage de cet ancien registre.
+
+
+
+__Aliasing de registres__ : Système contribuant à la rétrocompatibilité des microprocesseurs en assurant la compatibilité descendante des registres.
 Les nouvelles architectures de microprocesseurs intègrent les registres des microprocesseurs d'architectures antérieur en étendant la taille de ces registres ; dès lors, un registre étendu peut être sollicité via un nouvel alias lorsqu'il s'agit d'utiliser l'entièreté de sa capacité de stockage, ou via l'alias du registre ayant été étendu pour ne faire usage que de la capacité de stockage de cet ancien registre.
 
 
