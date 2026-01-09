@@ -6,32 +6,20 @@ Il s'avère qu'en raison de contraintes métaphysiques, les nombres que manipule
 En électronique, un bit représente une plage de tension électrique, mais dans ce document nous nous contenterons de la représentation aussi conventionnelle qu'abstraite d'un bit à $0$ ou $1$.
 Tout nombre que manipule un ordinateur est ainsi constitué d'un ensemble fini de bit, ce qui s'appelle un __champ binaire__, dont la taille se limite aux divers capacités de stockage des _registres*_ d'un microprocesseur (ces propos prennent en compte l'_aliasing de registres*_).
 
-Sachez cependant qu'il y a d'innombrable façons de représenter des nombres au travers d'un __champ binaire__, cela s'appelle l'__encodage des champs__ ou l'__encodage des nombres__ et par la suite nous appellerons fréquemment cela l'__encodage__.
-Les __encodages__ normalisent la représentation des nombres par la formalisation des calculs nécessaires à l'attribution de la valeur des chiffres composants lesdits nombres.
+Sachez cependant qu'il y a d'innombrable façons de représenter des nombres au travers d'un __champ binaire__, cela s'appelle l'__encodage des champs__ ou l'__encodage des nombres__ et nous appellerons fréquemment cela l'__encodage__ par la suite.
+Un __encodage__ normalise notre façon de représenté des nombres en formalisant une méthodologie de calcul qui attribue une valeur à tout chiffre composant un nombre, ainsi que le lien calculatoire entre la valeur de chacun de ces chiffres.
 
 
-Un __encodage__ normalise la représentation des nombres par la formalisation des calculs nécessaires à l'attribution de la valeur des chiffres composants lesdits nombres.
+Un __encodage__ normalise notre façon de représenté des nombres en formalisant une méthodologie de calcul attribuant une valeur à tout chiffre composant un nombre, ainsi que le lien calculatoire entre la valeur de chacun de ces chiffres.
 
 
-Un __encodage__ normalise la représentation des nombres par la formalisation des calculs nécessaires à l'attribution de la valeur de tout chiffre composant un nombre.
-
-
-Un __encodage__ normalise la représentation des nombres en formalisant une méthodologie calculatoire visant à attribué une valeur à tout chiffre composant un nombre.
-
-
-Un __encodage__ normalise la représentation des nombres en définissant formellement la méthodologie calculatoire visant à attribué une valeur à tout chiffre composant un nombre.
+Un __encodage__ normalise la façon dont ont représente des nombres en formalisant une méthodologie de calcul attribuant une valeur à tout chiffre composant un nombre, et  le lien calculatoire entre chacune de ces valeurs.
 
 
 
-Un __encodage__ normalise la représentation de nombre selon une formalisation de la signification attribuée aux chiffres qui composent lesdits nombres.
-
-Un __encodage__ normalise la représentation des nombres selon une attribution formelle d'une signification aux chiffres composants lesdits nombres.
-
-Un __encodage__ est une formalisation de la représentation des nombres selon l'attribuation d'une signification aux chiffres qui composes lesdits nombres.
-
-Un __encodage__ est une méthodologie qui normalise la représentation de la valeur des nombres par l'attribution d'une signification formelle de la valeur de chacun des chiffres composant lesdits nombres.
 
 
+Un __encodage__ normalise la façon avec laquelle représenté des nombres en formalisant une méthodologie de calcul attribuant une valeur à tout chiffre composant un nombre, et  le lien calculatoire entre chacune de ces valeurs.
 
 
 ___Définitions___
