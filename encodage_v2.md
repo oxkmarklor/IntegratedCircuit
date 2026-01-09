@@ -4,17 +4,17 @@ Commençons par la toute base : les nombres sont les seuls choses que puissent "
 
 Il s'avère qu'en raison de contraintes métaphysiques, les nombres que manipule les ordinateurs sont forcés d'être représentés en numération binaire, ce qui explique pourquoi les chiffres desdits nombres portent le nom de __bit__ (acronyme de __binary digit__, ou __chiffre binaire__ en français).
 En électronique, un bit représente une plage de tension électrique, mais dans ce document nous nous contenterons de la représentation aussi conventionnelle qu'abstraite d'un bit à $0$ ou $1$.
-Tout nombre que manipule un ordinateur est ainsi constitué d'un ensemble fini de bit, du nom de __champ binaire__, dont la taille se limite aux divers capacités de stockage des __registres*__ d'un microprocesseur (en référence à l'__aliasing de registres*__).
+Tout nombre que manipule un ordinateur est ainsi constitué d'un ensemble fini de bit, ce qui s'appelle un __champ binaire__, dont la taille se limite aux divers capacités de stockage des _registres*_ d'un microprocesseur (ces propos prennent en compte l'_aliasing de registres*_).
 
 Seulement, sachez qu'il y a d'innombrable façons de représenter des nombres au travers d'un unique __champ binaire__, cela s'appelle l'__encodage des champs__ ou l'__encodage des nombres__ et pour faire plus simple nous appellerons cela l'__encodage__.
 
-___Définitions :___
+___Définitions___
 
-___Registre(s)__ : Mémoire de très faible capacité aux temps d'accès extrêmement court qui est intégré à l'architecture des microprocesseurs.
+___Registre__ : Mémoire de très faible capacité aux temps d'accès extrêmement court qui est intégré à l'architecture des microprocesseurs.
 Compte tenu de leurs faible temps d'accès, les registres sont les supports de mémorisation les plus sollicités par les instructions machines de l'interface externe des microprocesseurs, et même les seuls sollicités dans le cas des architectures Load-Store._
 
 ___Aliasing de registres__ : Système contribuant à la rétrocompatibilité des microprocesseurs en assurant la compatibilité descendante des registres.
-En d'autres termes, ce système d'aliasing permet (entre autre) aux registres des microprocesseurs_ $64$ _bits d'être aliasé pour ce qu'ils sont, ou de l'être comme s'ils étaient des registres de microprocesseurs de_ $32, 16$ _ou_ $8$ _bits._
+En d'autres termes, ce système d'aliasing permet (entre autre) aux registres des microprocesseurs 64 bits d'être aliasé pour ce qu'ils sont, ou de l'être comme s'ils étaient des registres de microprocesseurs de 32, 16 ou 8 bits._
 
 
 
