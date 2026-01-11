@@ -2,12 +2,19 @@
 
 Commençons par la toute base : les nombres sont les seuls choses que puissent "comprendre" les ordinateurs.
 
-Il s'avère qu'en raison de contraintes métaphysiques, les nombres que manipule les ordinateurs sont forcés d'être représentés en numération binaire, ce qui explique pourquoi les chiffres desdits nombres portent le nom de __bit__ (acronyme de __binary digit__, ou __chiffre binaire__ en français).
+Il s'avère qu'en raison de contraintes métaphysiques les nombres que manipule les ordinateurs sont forcés d'être représentés en numération binaire, ce qui explique pourquoi les chiffres desdits nombres portent le nom de __bit__ (acronyme de __binary digit__, ou __chiffre binaire__ en français).
 En électronique, un bit représente une plage de tension électrique, mais dans ce document nous nous contenterons de la représentation aussi conventionnelle qu'abstraite d'un bit à $0$ ou $1$.
 Tout nombre que manipule un ordinateur est ainsi constitué d'un ensemble fini de bit, du nom de __champ binaire__, dont la taille se limite aux divers capacités de stockage des _registres*_ d'un microprocesseur (ce qui prend en compte l'_aliasing de registres*_).
 
+Toutefois, sachez que les nombres manipulés par un ordinateur, constitué d'un __champ binaire__, ont une valeur ainsi qu'une représentation qui est dictée par ce que l'on appelle un __encodage des champs__ ou un __encodage des nombres__, ce que nous appelerons fréquemment un __encodage__ par simple soucis de concision.
+Dans les faits, l'__encodage__ n'est qu'une méthodologie de calcul qui attribue une valeur aux bits qui composent le __champ binaire__ d'un nombre, en plus d'établir un calcul à réalisé entre la valeur de chacun desdits bits.
+
 Toutefois, sachez que les nombres manipulés par un ordinateur, constitué d'un __champ binaire__, ont une valeur ainsi qu'une représentation qui est dictée par ce que l'on appelle l'__encodage des champs__ ou l'__encodage des nombres__, ce que nous appelerons fréquemment l'__encodage__ par simple soucis de concision.
-Dans les faits, l'__encodage__ définit les méthodes de calcul qui attribuent une valeur aux bits qui composent les __champs binaire__, en plus de définir les calculs à réalisés entre la valeur de ces bits afin d'obtenir la valeur d'un nombre.
+Dans les faits, l'__encodage__ n'est qu'une méthodologie de calcul qui attribue une valeur aux bits qui composent le __champ binaire__ d'un nombre, en plus d'établir un calcul à réalisé entre la valeur de chacun desdits bits.
+
+
+
+///
 
 Dans les faits, l'__encodage__ définit les méthodes de calcul avec lesquels nous attribuons une valeur aux bits qui composent un __champ binaire__, en plus des calculs à réalisés entre les valeurs des bits eux même afin d'obtenir la valeur d'un nombre.
 
