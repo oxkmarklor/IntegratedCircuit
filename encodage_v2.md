@@ -6,26 +6,13 @@ Il s'avère qu'en raison de contraintes métaphysiques les nombres que manipule 
 En électronique, un bit représente une plage de tension électrique, mais dans ce document nous nous contenterons de la représentation aussi conventionnelle qu'abstraite d'un bit à $0$ ou $1$.
 Tout nombre que manipule un ordinateur est ainsi constitué d'un ensemble fini de bit, du nom de __champ binaire__, dont la taille se limite aux divers capacités de stockage des _registres*_ d'un microprocesseur (ce qui prend en compte l'_aliasing de registres*_).
 
-Toutefois, sachez que la représentation des nombres dans un ordinateur est dictée par ce que l'on appelle des __encodages__, chacun d'entre eux étant cependant contraint de ne représenter des nombres soit naturels, soit relatifs, soit réels.
+Toutefois, sachez que la représentation des nombres dans un ordinateur est définit par ce que l'on appelle des __encodages__, qui ne peuvent que représenter des nombres réels, relatifs ou naturels.
 
-ne pouvant représenter des nombres ne provenant que d'un seul et unique ensemble, 
+veuillez prendre note du fait que chacun d'entre eux ne peut cependant représenter que des nombres réels, relatifs ou naturels.
 
+ces derniers ne permettant la représentation que de nombre soit réel, soit relatif, soit naturel. 
 
-certains d'entre eux n'ayant la capacité de représenter que des nombres naturels, d'autres des nombres relatifs ou encore réels.
-
-chacun d'entre eux n'ayant la capacité de représenter que des nombres soit naturels, soit relatifs ou soit réels.
-
-chacun d'entre eux ne pouvant représenter que des nombres provenent d'un seul des ensembles naturels, relatifs ou réels.
-
-
-chaque __encodage__ ne pouvant représenter soit que des nombres naturels, relatifs ou encore réels. 
-
-ces derniers n'étant capable de représenter que des nombres faisant partis d'un unique ensemble tel que les réels, les relatifs ou les naturels.
-
-Toutefois, sachez que la représentation des nombres dans un ordinateur est dictée par ce que l'on appelle un __encodage__.
-Il s'avère que tout __encodage__ n'est cependant capable de représenter que des nombres faisant partis d'un ensemble tel que les réels, les relatifs ou les naturels.
-
-Dans la pratique, un __encodage__ ne permet de représenter que des nombres faisant partis de l'ensemble des réels, de l'ensemble des relatifs ou des naturels.
+Chaque encodage ne permet cependant de représenter qu'un ensemble de nombres parmis les réels, les relatifs ou encore les naturels.
 
 
 
