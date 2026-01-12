@@ -6,11 +6,10 @@ Il s'avère qu'en raison de contraintes métaphysiques les nombres que manipule 
 En électronique, un bit représente une plage de tension électrique, mais dans ce document nous nous contenterons de la représentation aussi conventionnelle qu'abstraite d'un bit à $0$ ou $1$.
 Tout nombre que manipule un ordinateur est ainsi constitué d'un ensemble fini de bit, du nom de __champ binaire__, dont la taille se limite aux divers capacités de stockage des _registres*_ d'un microprocesseur (ce qui prend en compte l'_aliasing de registres*_).
 
-Toutefois, sachez que les nombres manipulés par un ordinateur, constitué d'un __champ binaire__, ont une valeur ainsi qu'une représentation qui est dictée par ce que l'on appelle un __encodage des champs__ ou un __encodage des nombres__, ce que nous appelerons fréquemment un __encodage__ par simple soucis de concision.
-Dans les faits, l'__encodage__ n'est qu'une méthodologie de calcul qui attribue une valeur aux bits qui composent le __champ binaire__ d'un nombre, en plus d'établir un calcul à réalisé entre la valeur de chacun desdits bits.
+Toutefois, sachez que les nombres manipulés par un ordinateur, constitué d'un __champ binaire__, ont une représentation qui est dictée par ce que l'on appelle un __encodage__.
+Dans les faits, un __encodage__ ne fait que définir par une méthodologie de calcul la valeur des bits qui composent le __champ binaire__ d'un nombre, en plus d'établir les calculs à réalisé entre les valeurs de chacun desdits bits.
 
-Toutefois, sachez que les nombres manipulés par un ordinateur, constitué d'un __champ binaire__, ont une valeur ainsi qu'une représentation qui est dictée par ce que l'on appelle l'__encodage des champs__ ou l'__encodage des nombres__, ce que nous appelerons fréquemment l'__encodage__ par simple soucis de concision.
-Dans les faits, l'__encodage__ n'est qu'une méthodologie de calcul qui attribue une valeur aux bits qui composent le __champ binaire__ d'un nombre, en plus d'établir un calcul à réalisé entre la valeur de chacun desdits bits.
+
 
 
 
