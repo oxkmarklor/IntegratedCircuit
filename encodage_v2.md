@@ -7,7 +7,14 @@ En électronique, un bit représente une plage de tension électrique, mais dans
 Tout nombre que manipule un ordinateur est ainsi constitué d'un ensemble fini de bit, du nom de __champ binaire__, dont la taille se limite aux divers capacités de stockage des _registres*_ d'un microprocesseur (ce qui prend en compte l'_aliasing de registres*_).
 
 Toutefois, sachez que les nombres manipulés par un ordinateur, constitué d'un __champ binaire__, ont une représentation qui est dictée par ce que l'on appelle un __encodage__.
-Dans les faits, un __encodage__ ne fait que définir par une méthodologie de calcul la valeur des bits qui composent le __champ binaire__ d'un nombre, en plus d'établir les calculs à réalisé entre les valeurs de chacun desdits bits.
+Il s'avère qu'un __encodage__ ne fait que définir la valeur des bits qui composent le __champ binaire__ d'un nombre, en plus d'établir les calculs à réalisé entre les valeurs de chacun desdits bits.
+Veuillez prendre note du fait que les __encodages__ ne représentent qu'un ensemble de nombre bien précis, certains des nombres réels tandis que d'autre des entiers relatifs ou encore naturels.
+
+De plus, notez que certains __encodages__ ne permettent de représenter que certains ensembles de nombres comme des entiers naturels, ou des entiers relatifs.
+
+
+
+
 
 
 
