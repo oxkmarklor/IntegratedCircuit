@@ -4,13 +4,14 @@ Commençons par la toute base : les nombres sont les seuls choses que puissent "
 
 Il s'avère qu'en raison de contraintes métaphysiques, les nombres que manipule les ordinateurs sont forcés d'être représentés en numération binaire, ce qui explique pourquoi les chiffres desdits nombres portent le nom de __bit__ (acronyme de __binary digit__, ou __chiffre binaire__ en français).
 En électronique, un bit représente une plage de tension électrique, mais dans ce document nous nous contenterons de la représentation aussi conventionnelle qu'abstraite d'un bit à $0$ ou $1$.
-Tout nombre que manipule un ordinateur est ainsi constitué d'un ensemble fini de bit, du nom de __champ binaire__, dont la taille se limite aux divers capacités de stockage des _registres*_ d'un microprocesseur (nous faisons ici référence à l'_aliasing de registres*_).
+Tout nombre que manipule un ordinateur est ainsi constitué d'un ensemble fini de bit, du nom de __champ binaire__, et dont la taille se limite aux divers capacités de stockage des _registres*_ d'un microprocesseur (en référence à l'_aliasing de registres*_).
 
-Toutefois, sachez que les nombres que manipule les ordinateurs, alors constitués d'un __champ binaire__, suivent un formatage ce que nous appellons plus communément un __encodage__.
+Toutefois, sachez que les nombres manipulés par un ordinateur, alors constitués de __champ binaire__, sont formatés par ce que l'on appelle des __encodages__.
+Dans les faits, les __encodages__ ne font que définir la valeur ou la signification des bits qui composent les __champs binaires__ desdits nombres, en plus d'établir les calculs à réalisés entre les valeurs de chacun des bits eux même.
 
-Toutefois, sachez que les nombres que manipule les ordinateurs, alors constitués d'un __champ binaire__, suivent un formatage qui est dictée par ce que l'on appelle des __encodages__.
-Le formatage desdits nombres n'est en soit que la représentation que l'on peut se faire du codage de ces derniers dans un __champ binaire__.
-Dans les faits, les __encodages__ ne font que définir la valeur de chacun des bits qui composent le __champ binaire__ d'un nombre, en plus d'établir les calculs à réalisés entre les valeurs de chacun desdits bits.
+
+Toutefois, sachez que les nombres que manipule un ordinateur, alors constitués de __champ binaire__, sont formatés par ce que l'on appelle des __encodages__.
+Dans les faits, ces __encodages__ ne font que définir la valeur/signification des bits qui composent les __champs binaires__ desdits nombres, en plus d'établir les calculs à réalisés entre les valeurs de chacun des bits eux même.
 
 
 
