@@ -2,13 +2,13 @@
 
 Commençons par la toute base : les nombres sont les seuls choses que puissent "comprendre" les ordinateurs.
 
-Il s'avère qu'en raison de contraintes métaphysiques les nombres que manipule les ordinateurs sont forcés d'être représentés en numération binaire, ce qui explique pourquoi les chiffres desdits nombres portent le nom de __bit__ (acronyme de __binary digit__, ou __chiffre binaire__ en français).
+Il s'avère qu'en raison de contraintes métaphysiques, les nombres que manipule les ordinateurs sont forcés d'être représentés en numération binaire, ce qui explique pourquoi les chiffres desdits nombres portent le nom de __bit__ (acronyme de __binary digit__, ou __chiffre binaire__ en français).
 En électronique, un bit représente une plage de tension électrique, mais dans ce document nous nous contenterons de la représentation aussi conventionnelle qu'abstraite d'un bit à $0$ ou $1$.
-Tout nombre que manipule un ordinateur est ainsi constitué d'un ensemble fini de bit, du nom de __champ binaire__, dont la taille se limite aux divers capacités de stockage des _registres*_ d'un microprocesseur (ce qui prend en compte l'_aliasing de registres*_).
+Tout nombre que manipule un ordinateur est ainsi constitué d'un ensemble fini de bit, du nom de __champ binaire__, dont la taille se limite aux divers capacités de stockage des _registres*_ d'un microprocesseur (avec une prise en compte de l'_aliasing de registres*_).
 
-Toutefois, les nombres manipulés par des ordinateurs, constitués de __champ binaire__, ont des notations qui sont définis par ce que l'on appelle des __encodages__.
-
-
+Toutefois, sachez que les nombres que manipule les ordinateurs, constitués de __champ binaire__, ont des représentations qui sont définis par ce que l'on appelle des __encodages__.
+Chacun de ces __encodages__ est cependant restreint à ne pouvoir représenter soit que des nombres réels, soit que des nombres relatifs, soit que des nombres naturels.
+D'un point de vue théorique il existe un grand nombre d'__encodage__ permettant de représenter des même nombres, même si dans la pratique seul les __encodages__ les plus optimaux sont réelement utilisés.
 
 
 
