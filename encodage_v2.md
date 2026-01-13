@@ -6,17 +6,14 @@ Il s'avère qu'en raison de contraintes métaphysiques, les nombres que manipule
 En électronique, un bit représente une plage de tension électrique, mais dans ce document nous nous contenterons de la représentation aussi conventionnelle qu'abstraite d'un bit à $0$ ou $1$.
 Tout nombre que manipule un ordinateur est ainsi constitué d'un ensemble fini de bit, du nom de __champ binaire__, et dont la taille se limite aux divers capacités de stockage des _registres*_ d'un microprocesseur (en référence à l'_aliasing de registres*_).
 
-Toutefois, sachez que les nombres manipulés par un ordinateur, alors constitués de __champ binaire__, sont formatés par ce que l'on appelle des __encodages__.
+Toutefois, sachez que les nombres manipulés par un ordinateur, constitués de __champ binaire__, ont une représentation qui est dictée par ce que l'on appelle des __encodages__.
+Dans les faits, un __encodage__ ne fait que définir la valeur ou la signification des bits qui composent le __champ binaire__ d'un nombre, en plus d'établir les calculs à réalisés entre les valeurs de chacun des bits eux même.
+
+
+
 Dans les faits, les __encodages__ ne font que définir la valeur ou la signification des bits qui composent les __champs binaires__ desdits nombres, en plus d'établir les calculs à réalisés entre les valeurs de chacun des bits eux même.
 
 
-Toutefois, sachez que les nombres que manipule un ordinateur, alors constitués de __champ binaire__, sont formatés par ce que l'on appelle des __encodages__.
-Dans les faits, ces __encodages__ ne font que définir la valeur/signification des bits qui composent les __champs binaires__ desdits nombres, en plus d'établir les calculs à réalisés entre les valeurs de chacun des bits eux même.
-
-
-
-Chacun de ces __encodages__ est cependant restreint à ne pouvoir représenter soit que des nombres réels, soit que des nombres relatifs, soit que des nombres naturels.
-D'un point de vue théorique il existe un grand nombre d'__encodage__ permettant de représenter des même nombres, même si dans la pratique seul les __encodages__ les plus optimaux sont réelement utilisés.
 
 //
 
