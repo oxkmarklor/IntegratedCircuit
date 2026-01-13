@@ -6,8 +6,12 @@ Il s'avère qu'en raison de contraintes métaphysiques, les nombres que manipule
 En électronique, un bit représente une plage de tension électrique, mais dans ce document nous nous contenterons de la représentation aussi conventionnelle qu'abstraite d'un bit à $0$ ou $1$.
 Tout nombre que manipule un ordinateur est ainsi constitué d'un ensemble fini de bit, du nom de __champ binaire__, dont la taille se limite aux divers capacités de stockage des _registres*_ d'un microprocesseur (nous faisons ici référence à l'_aliasing de registres*_).
 
-Toutefois, sachez que les nombres que manipule les ordinateurs, constitués de __champ binaire__, ont des représentations qui sont définis par ce que l'on appelle des __encodages__.
-Dans les faits, les __encodages__ ne font que définir la valeur de chacun des bits qui composent le __champ binaire__ d'un nombre, et établissent les calculs à réalisés entre les valeurs de chacun desdits bits.
+Toutefois, sachez que les nombres que manipule les ordinateurs, alors constitués d'un __champ binaire__, suivent un formatage ce que nous appellons plus communément un __encodage__.
+
+Toutefois, sachez que les nombres que manipule les ordinateurs, alors constitués d'un __champ binaire__, suivent un formatage qui est dictée par ce que l'on appelle des __encodages__.
+Le formatage desdits nombres n'est en soit que la représentation que l'on peut se faire du codage de ces derniers dans un __champ binaire__.
+Dans les faits, les __encodages__ ne font que définir la valeur de chacun des bits qui composent le __champ binaire__ d'un nombre, en plus d'établir les calculs à réalisés entre les valeurs de chacun desdits bits.
+
 
 
 Chacun de ces __encodages__ est cependant restreint à ne pouvoir représenter soit que des nombres réels, soit que des nombres relatifs, soit que des nombres naturels.
