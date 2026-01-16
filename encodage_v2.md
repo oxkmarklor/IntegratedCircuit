@@ -8,12 +8,10 @@ Tout nombre que manipule un ordinateur est ainsi constitué d'un ensemble fini d
 
 Toutefois, sachez que les nombres manipulés par un ordinateur, constitués de __champ binaire__, sont formatés par ce que l'on appelle des __encodages__.
 Le rôle des __encodages__ est en soit de normaliser la représentation des nombres dans un ordinateur en attribuant une valeur ou une signification aux bits qui composent les __champs binaires__ desdits nombres, ainsi qu'en effectuant d'autres calculs dans la plupart des cas.
+Dans les ordinateurs, les __encodages__ normalisent la représentation des nombres entiers naturels et relatifs ainsi que des nombres réels, mais chaque __encodage__ ne permet cependant de ne représenter des nombres ne venant que d'un seul de ces trois ensembles.
+
 Dans les faits, ils normalisent dans un ordinateur la représentation des nombres entiers naturels et relatifs ainsi que des nombres réels, mais chaque __encodage__ ne permet cependant de ne représenter des nombres ne venant que d'un seul de ces ensembles.
 
-Dans les faits, ils normalisent la représentation des nombres entiers naturels et relatifs ainsi que des nombres réels dans un ordinateur, mais chaque __encodage__ ne permet cependant de ne représenter des nombres ne venant que d'un seul de ces ensembles.
-
-
-Dans les faits, les ordinateurs sont capables de manipuler des nombres entiers naturels et relatifs ainsi que des nombres réels ; néanmoins pour des raisons d'efficacité, chaque encodage ne normalise la représentation de nombres ne provenant que d'un seul de ces ensembles (naturel, relatif ou réel).
 
 
 // good vers
