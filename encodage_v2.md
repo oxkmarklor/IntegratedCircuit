@@ -7,19 +7,12 @@ En électronique, un bit représente une plage de tension électrique, mais dans
 Tout nombre que manipule un ordinateur est ainsi constitué d'un ensemble fini de bit du nom de __champ binaire__, et dont la taille se limite aux divers capacités de stockage des _registres*_ d'un microprocesseur (en référence au concept d'_aliasing de registres*_).
 
 Toutefois, sachez que les nombres manipulés par un ordinateur, constitués de __champ binaire__, sont formatés par ce que l'on appelle des __encodages__.
-Le rôle des __encodages__ est en soit de normaliser la représentation des nombres dans un ordinateur en attribuant une valeur ou une signification aux bits qui composent les __champs binaires__ desdits nombres, ainsi qu'en effectuant d'autres calculs dans la plupart des cas.
-Dans les ordinateurs, les __encodages__ normalisent la représentation des nombres entiers naturels et relatifs ainsi que des nombres réels, mais chaque __encodage__ ne permet cependant de représenter des nombres ne venant que d'un seul de ces trois ensembles, pour des raisons d'optimisations.
-
-Dans les faits, ils normalisent dans un ordinateur la représentation des nombres entiers naturels et relatifs ainsi que des nombres réels, mais chaque __encodage__ ne permet cependant de ne représenter des nombres ne venant que d'un seul de ces ensembles.
+En soit, le rôle des __encodages__ est de normaliser la représentation des nombres dans un ordinateur en attribuant une valeur ou une signification aux bits qui composent les __champs binaires__ desdits nombres, ainsi qu'en effectuant d'autres calculs dans la plupart des cas.
+Dans les ordinateurs, les __encodages__ normalisent la représentation des nombres entiers naturels et relatifs ainsi que des nombres réels, mais pour des raisons d'optimisation, chaque __encodage__ ne représente des nombres ne pouvant venir que d'un seul de ces trois ensembles.
 
 
 
-// good vers
 
-Dans les ordinateurs, les __encodages__ normalisent la représentation des nombres entiers naturels et relatifs ainsi que des nombres réels, mais pour des raisons d'optimisations, chaque __encodage__ ne représente des nombres ne venant que d'un seul de ces trois ensembles.
-
-
-Dans les faits, ils normalisent dans un ordinateur la représentation des nombres entiers naturels et relatifs ainsi que des nombres réels, mais chaque __encodage__ ne permet cependant de ne représenter des nombres ne venant que d'un seul de ces ensembles.
 
 // try 1
 
