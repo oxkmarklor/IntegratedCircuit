@@ -9,9 +9,16 @@ Tout nombre que manipule un ordinateur est ainsi constitué d'un ensemble fini d
 Toutefois, sachez que les nombres manipulés par un ordinateur, constitués de __champ binaire__, sont formatés par ce que l'on appelle des __encodages__.
 En soit, le rôle des __encodages__ est de normaliser la représentation des nombres dans un ordinateur en attribuant une valeur ou une signification aux bits qui composent les __champs binaires__ desdits nombres, ainsi qu'en effectuant d'autres calculs dans la plupart des cas.
 Dans un ordinateur, les __encodages__ normalisent la représentation des nombres entiers naturels et relatifs ainsi que des nombres réels, mais il s'avère que pour des raisons d'optimisation, chaque __encodage__ ne représente des nombres ne venant que d'un seul de ces trois ensembles.
+En d'autres termes, certains __encodages__ tel que le __binary unsigned__, l'__encodage par biais__ ou l'__encodage one-hot__, ne se focalisent que sur la représentation des nombres entiers naturels, tandis que d'autres __encodages__ en font de même vis à vis des nombres relatifs ou réels.
+
+Etudions le fonctionnement de l'__encodage one-hot__ afin de concrétiser les propos de ce paragraphe.
+
+///
+
+cela veut dire que certains __encodages__ se focalisent sur la représentation des nombres entiers naturels tel que 
+
 Au fil du document nous expliquerons le fonctionnement des __encodages par biais__, __binary unsigned__ et __one shot__ qui normalisent la représentation des nombres entiers naturels, par ailleurs, commençons dès maintenant par le dernier de la liste.
 
-/// approter plus de liant avec la fin de phrase précédente, par une conclusion de ce qu'elle veut dire par exemple
 
 // try 2
 
