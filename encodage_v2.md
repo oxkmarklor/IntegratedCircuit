@@ -8,8 +8,21 @@ Tout nombre que manipule un ordinateur est ainsi constitué d'un ensemble fini d
 
 Toutefois, sachez que les nombres manipulés par un ordinateur, constitués de __champ binaire__, sont formatés par ce que l'on appelle des __encodages__.
 En soit, le rôle des __encodages__ est de normaliser la représentation des nombres dans un ordinateur en attribuant une valeur ou une signification aux bits qui composent les __champs binaires__ desdits nombres, ainsi qu'en effectuant d'autres calculs dans la plupart des cas.
-Dans un ordinateur, les __encodages__ normalisent la représentation des nombres entiers naturels et relatifs ainsi que des nombres réels, mais pour des raisons d'optimisation, chaque __encodage__ ne représente des nombres ne venant que d'un seul de ces trois ensembles.
+Dans un ordinateur, les __encodages__ normalisent la représentation des nombres entiers naturels et relatifs ainsi que des nombres réels, mais il s'avère que pour des raisons d'optimisation, chaque __encodage__ ne représente des nombres ne venant que d'un seul de ces trois ensembles.
+Au fil du document nous expliquerons le fonctionnement des __encodages par biais__, __binary unsigned__ et __one shot__ qui normalisent la représentation des nombres entiers naturels, par ailleurs, commençons dès maintenant par le dernier de la liste.
 
+/// approter plus de liant avec la fin de phrase précédente, par une conclusion de ce qu'elle veut dire par exemple
+
+// try 2
+
+Entre autre, il existe de multiples __encodages__ qui normalisent la représentation des nombres entiers naturels tel que :
+  - l'__encodage par biais__ dont nous parlerons plus tard dans ce document
+  - l'__encodage binary unsigned__ dont nous parlerons sous peu
+  - et l'__encodage one shot__ que je vais prendre pour exemple afin d'apporter des explications plus concrète
+
+// try 1
+
+Il existe de multiple __encodage__ qui, entre autre, normalisent la représentation des nombres entiers naturels tel que, le __binary unsigned__ dont nous parlerons prochainement, l'__encodage__ par biais dont nous parlerons plus loin dans le document ou encore l'__encodage One Shot__ que nous allons prendre pour exemple.
 
 ___Définitions___
 
